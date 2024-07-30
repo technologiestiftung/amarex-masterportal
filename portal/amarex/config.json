@@ -255,34 +255,62 @@
   },
   "layerConfig": {
     "baselayer": {
-      "elements": [
-        {
-          "id": "hintergrund_default_grau",
-          "visibility": true
-        },
-        {
-          "id": "klimamodell_berlin_wfs",
-          "visibility": true
-        }
-      ]
+      "elements": []
     },
     "subjectlayer": {
       "elements": [
         {
-          "id": "delta_w_wfs",
-          "visibility": false
+          "name": "Abimo",
+          "type": "folder",
+          "elements": [
+            {
+              "id": "delta_w_wfs",
+              "visibility": false
+            },
+            {
+              "id": "planung_abimo",
+              "visibility": false
+            },
+            {
+              "id": "rabimo_input_2020",
+              "visibility": false
+            }
+          ]
         },
         {
-          "id": "planung_abimo",
-          "visibility": false
+          "name": "Potentialkarten",
+          "type": "folder",
+          "elements": [
+            {
+              "id": "klimamodell_berlin_wfs",
+              "visibility": false
+            }
+          ]
         },
         {
-          "id": "rabimo_input_2020",
-          "visibility": false
+          "name": "Hintergrundkarten",
+          "type": "folder",
+          "elements": [
+            {
+              "id": "hintergrund_default_grau",
+              "visibility": true
+            }
+          ]
         },
         {
-          "id": "abimo_2020_wfs",
-          "visibility": false
+          "name": "Themenkarten",
+          "type": "folder",
+          "elements": [
+            {
+              "id": "klimamodell_berlin_wfs",
+              "visibility": false
+            }
+          ]
+        },
+        {
+          "name": "Maßnahmenpotentiale",
+          "type": "folder",
+          "elements": []
         }
       ]
     }
