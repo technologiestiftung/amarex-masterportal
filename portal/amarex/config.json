@@ -246,6 +246,13 @@
             }
           },
           {
+            "type": "projectDownloader"
+          },
+          {
+            "type": "projectUploader"
+          },
+          { "type": "reportPrinter" },
+          {
             "type": "shadow",
             "isShadowEnabled": true
           }

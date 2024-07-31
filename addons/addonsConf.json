@@ -1,0 +1,15 @@
+{
+  "projectUploader": {
+    "type": "tool",
+    "vue": true
+  },
+  "projectDownloader": {
+    "type": "tool",
+    "vue": true
+  },
+  "reportPrinter": {
+    "type": "tool",
+    "vue": true
+  }
+}
+

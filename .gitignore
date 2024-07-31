@@ -14,7 +14,7 @@
 styleguide
 .history
 
-addons/*
+# addons/*
 !addons/readme.txt
 
 bowerupdate.log

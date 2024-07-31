@@ -5,6 +5,7 @@ import mutations from "./mutations";
 import state from "./state";
 import actions from "./actions";
 
+import Addons from "../../addons/addons-store/indexAddons";
 import Alerting from "../modules/alerting/store/indexAlerting";
 import Controls from "../modules/controls/controls-store/indexControls";
 import Maps from "../core/maps/store/indexMaps";
@@ -21,7 +22,8 @@ const store = createStore({
         Controls,
         Maps,
         Menu,
-        Modules
+        Modules,
+        Addons
     }
 });
 
