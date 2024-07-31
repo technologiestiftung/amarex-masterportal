@@ -10,5 +10,3 @@ export default {
   name: "Project Downloader",
   icon: "bi-box-arrow-in-down",
 };
-
-

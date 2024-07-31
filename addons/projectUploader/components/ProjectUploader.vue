@@ -76,24 +76,25 @@ export default {
     async processFiles(files) {
       for (let i = 0; i < files.length; i++) {
         const file = files[i];
+
         if (file.type.includes("zip")) {
           await this.processZipFile(file);
-        } else {
-          if (this.checkValid(file)) {
-            this.filesToUpload.push(file);
-            this.fileUploaded = true;
-          }
+        } else if (this.checkValid(file)) {
+          this.filesToUpload.push(file);
+          this.fileUploaded = true;
         }
       }
       this.fileUploaded = true;
     },
     async processZipFile(file) {
-      const zip = await JSZip.loadAsync(file);
-      const filesInZip = Object.values(zip.files).filter(
-        (file) => !file.dir && file.name.indexOf("__") !== 0,
-      );
+      const zip = await JSZip.loadAsync(file),
+        filesInZip = Object.values(zip.files).filter(
+          (file) => !file.dir && file.name.indexOf("__") !== 0,
+        );
+
       for (const fileInZip of filesInZip) {
         const fileContent = await fileInZip.async("blob");
+
         this.filesToUpload.push(
           new File([fileContent], fileInZip.name, {
             type: fileInZip.contentType,
@@ -125,6 +126,7 @@ export default {
      */
     checkValid(file) {
       const validExtensions = [".json", ".geojson", ".kml", ".gpx"];
+
       if (validExtensions.some((ext) => file.name.includes(ext))) {
         return true;
       }
@@ -140,14 +142,14 @@ export default {
 
     async isValidConfigFile(file) {
       try {
-        let fileContent = await file.text();
-        const parsedJson = JSON.parse(fileContent);
+        const fileContent = await file.text(),
+          parsedJson = JSON.parse(fileContent),
+          isValid =
+            typeof parsedJson === "object" &&
+            parsedJson !== null &&
+            "portalConfig" in parsedJson &&
+            "layerConfig" in parsedJson;
 
-        const isValid =
-          typeof parsedJson === "object" &&
-          parsedJson !== null &&
-          "portalConfig" in parsedJson &&
-          "layerConfig" in parsedJson;
         return isValid;
       } catch (error) {
         console.error("Error parsing JSON file:", error);
@@ -163,9 +165,11 @@ export default {
       const validConfigFiles = await Promise.all(
         this.filesToUpload.map(async (file) => {
           const isValid = await this.isValidConfigFile(file);
+
           return isValid ? file : null;
         }),
       );
+
       return validConfigFiles.find((file) => file !== null) || null;
     },
 
@@ -202,7 +206,9 @@ export default {
       const configFile = await this.findFirstConfigFile();
 
       if (configFile) {
-        if (!this.checkValid(configFile)) return;
+        if (!this.checkValid(configFile)) {
+          return;
+        }
         const reader = new FileReader();
 
         reader.onload = (evt) => {
@@ -218,22 +224,24 @@ export default {
      */
     async addFiles() {
       this.filesToUpload.forEach(async (file) => {
-        if (!this.checkValid(file)) return;
+        if (!this.checkValid(file)) {
+          return;
+        }
 
-        const isValidConfig = await this.isValidConfigFile(file);
-        const reader = new FileReader();
+        const isValidConfig = await this.isValidConfigFile(file),
+          reader = new FileReader();
 
         if (!isValidConfig) {
-          const fileName = file.name.split(".")[0];
-          const layer = await layerCollection.getLayerById(fileName);
+          const fileName = file.name.split(".")[0],
+            layer = await layerCollection.getLayerById(fileName);
 
           reader.onload = async (event) => {
             if (layer) {
-              const raw = event.target.result;
-              const importAction =
-                layer.attributes.typ.toUpperCase() === "GEOJSON"
-                  ? this.importGeoJSON
-                  : this.importFile;
+              const raw = event.target.result,
+                importAction =
+                  layer.attributes.typ.toUpperCase() === "GEOJSON"
+                    ? this.importGeoJSON
+                    : this.importFile;
 
               importAction({
                 raw,
@@ -398,4 +406,3 @@ li {
   }
 }
 </style>
-

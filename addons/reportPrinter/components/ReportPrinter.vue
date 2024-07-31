@@ -57,14 +57,15 @@ export default {
     splitTextToFit(doc, text, maxWidth, fontSize) {
       doc.setFontSize(fontSize);
       const words = text.split(" ");
-      let lines = [];
-      let currentLine = words[0];
+      let lines = [],
+        currentLine = words[0];
 
       for (let i = 1; i < words.length; i++) {
-        const word = words[i];
-        const width =
-          (doc.getStringUnitWidth(currentLine + " " + word) * fontSize) /
-          doc.internal.scaleFactor;
+        const word = words[i],
+          width =
+            (doc.getStringUnitWidth(currentLine + " " + word) * fontSize) /
+            doc.internal.scaleFactor;
+
         if (width < maxWidth) {
           currentLine += " " + word;
         } else {
@@ -77,6 +78,7 @@ export default {
     },
     addTextWithWordWrap(doc, text, x, y, maxWidth, fontSize, lineHeight) {
       const lines = this.splitTextToFit(doc, text, maxWidth, fontSize);
+
       lines.forEach((line, index) => {
         doc.text(line, x, y + index * lineHeight);
       });
@@ -84,11 +86,13 @@ export default {
     },
     async takeScreenshot() {
       const mapElement = document.getElementById("map");
+
       if (!mapElement) {
         throw new Error("Kartencontainer nicht gefunden");
       }
 
       const canvas = mapElement.querySelector("canvas");
+
       if (!canvas) {
         throw new Error("Canvas-Element in der Karte nicht gefunden");
       }
@@ -102,8 +106,9 @@ export default {
     },
 
     addHeader(doc) {
-      let y = 1;
-      let x = 0;
+      let y = 1,
+        x = 0;
+
       doc.setFillColor("#29A992");
       // rect: x, y, w, h, style
       doc.rect(x, y, this.pdf.max.width, 8, "F");
@@ -119,16 +124,18 @@ export default {
     },
     getData() {
       const mapView = mapCollection.getMapView("2D");
+
       this.map.center = mapView.getCenter();
     },
 
     async generatePDF() {
       const doc = new jsPDF();
+
       this.getData();
 
       // start at x = 10, y = 10
-      let x = 10;
-      let y = 10;
+      let x = 10,
+        y = 10;
 
       const addNewPageIfNeeded = (yPosition, doc) => {
         if (yPosition > this.pdf.max.width - this.pdf.margin.bottom) {
@@ -181,8 +188,8 @@ export default {
 <template lang="html">
   <div
     id="report-printer"
-    class="ReportPrinter-root mb-3"
     ref="test"
+    class="ReportPrinter-root mb-3"
   >
     <div class="mb-3">
       <label
@@ -191,11 +198,11 @@ export default {
         >Reporttitel:</label
       >
       <textarea
-        v-model="report.title"
         id="reportTitle"
+        v-model="report.title"
         class="form-control"
         rows="2"
-      ></textarea>
+      />
     </div>
     <div class="mb-3">
       <label
@@ -204,11 +211,11 @@ export default {
         >Projektbeschreibung:</label
       >
       <textarea
-        v-model="report.description"
         id="projectDescription"
+        v-model="report.description"
         class="form-control"
         rows="3"
-      ></textarea>
+      />
     </div>
     <button
       class="btn btn-primary"
@@ -225,4 +232,3 @@ export default {
   height: 100px;
 }
 </style>
-

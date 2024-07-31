@@ -5,13 +5,13 @@
         "active": true
       },
       "controls": {
-        "rotation":  {
+        "rotation": {
           "showResetRotationAlways": true,
           "showResetRotation": true,
           "rotationIcons": true,
           "moveDistance": 2500,
           "compass2d": true
-          } ,
+        },
         "zoom": true,
         "tiltView": true,
         "startModule": {
@@ -27,11 +27,7 @@
           "backForward": true,
           "orientation": {
             "zoomMode": "once",
-            "poiDistances": [
-              500,
-              1000,
-              2000
-            ]
+            "poiDistances": [500, 1000, 2000]
           },
           "freeze": true,
           "fullScreen": true
@@ -68,24 +64,14 @@
         },
         "highlightVectorRules": {
           "fill": {
-            "color": [
-              215,
-              102,
-              41,
-              0.9
-            ]
+            "color": [215, 102, 41, 0.9]
           },
           "image": {
             "scale": 1.5
           },
           "stroke": {
             "width": 4,
-            "color": [
-              215,
-              102,
-              41,
-              0.9
-            ]
+            "color": [215, 102, 41, 0.9]
           },
           "text": {
             "scale": 2
@@ -115,10 +101,7 @@
       "mapView": {
         "backgroundImage": "https://geodienste.hamburg.de/lgv-config/img/backgroundCanvas.jpeg",
         "startZoomLevel": 4,
-        "startCenter": [
-          565874,
-          5934140
-        ],
+        "startCenter": [565874, 5934140],
         "mapInteractions": {
           "interactionModes": {
             "altShiftDragRotate": true,
@@ -173,10 +156,7 @@
               "id": "query",
               "params": {
                 "query_string": "",
-                "typ": [
-                  "sensorthings",
-                  "wms"
-                ],
+                "typ": ["sensorthings", "wms"],
                 "size": 30
               }
             },
@@ -187,19 +167,11 @@
               "id": "_source.id",
               "source": "_source",
               "layerId": "_source.id",
-              "toolTip": [
-                "_source.name",
-                "_source.datasets.md_name"
-              ]
+              "toolTip": ["_source.name", "_source.datasets.md_name"]
             },
             "resultEvents": {
-              "onClick": [
-                "addLayerToTopicTree"
-              ],
-              "buttons": [
-                "showInTree",
-                "showLayerInfo"
-              ]
+              "onClick": ["addLayerToTopicTree"],
+              "buttons": ["showInTree", "showLayerInfo"]
             }
           },
           {
@@ -222,18 +194,9 @@
               "coordinate": "_source.geometry.coordinates"
             },
             "resultEvents": {
-              "onClick": [
-                "setMarker",
-                "zoomToResult"
-              ],
-              "onHover": [
-                "setMarker"
-              ],
-              "buttons": [
-                "startRouting",
-                "setMarker",
-                "zoomToResult"
-              ]
+              "onClick": ["setMarker", "zoomToResult"],
+              "onHover": ["setMarker"],
+              "buttons": ["startRouting", "setMarker", "zoomToResult"]
             }
           },
           {
@@ -246,16 +209,9 @@
             "searchParcels": true,
             "searchStreetKey": true,
             "resultEvents": {
-              "onClick": [
-                "setMarker",
-                "zoomToResult"
-              ],
-              "onHover": [
-                "setMarker"
-              ],
-              "buttons": [
-                "startRouting"
-              ]
+              "onClick": ["setMarker", "zoomToResult"],
+              "onHover": ["setMarker"],
+              "buttons": ["startRouting"]
             }
           },
           {
@@ -295,17 +251,9 @@
           {
             "type": "visibleVector",
             "resultEvents": {
-              "onClick": [
-                "openGetFeatureInfo",
-                "setMarker",
-                "zoomToResult"
-              ],
-              "onHover": [
-                "setMarker"
-              ],
-              "buttons": [
-                "startRouting"
-              ]
+              "onClick": ["openGetFeatureInfo", "setMarker", "zoomToResult"],
+              "onHover": ["setMarker"],
+              "buttons": ["startRouting"]
             }
           },
           {
@@ -319,15 +267,13 @@
                 "typeName": "de.hh.up:gesundheit_krankenhaeuser",
                 "propertyNames": ["de.hh.up:name"],
                 "geometryName": "de.hh.up:geom",
-                        "name": "Krankenhaus123",
-                        "namespaces": "xmlns:de.hh.up='https://registry.gdi-de.org/id/de.hh.up'"
+                "name": "Krankenhaus123",
+                "namespaces": "xmlns:de.hh.up='https://registry.gdi-de.org/id/de.hh.up'"
               },
               {
                 "url": "https://geodienste.hamburg.de/HH_WFS_Bebauungsplaene",
                 "typeName": "app:hh_hh_festgestellt",
-                "propertyNames": [
-                  "app:geltendes_planrecht"
-                ],
+                "propertyNames": ["app:geltendes_planrecht"],
                 "geometryName": "app:geom",
                 "name": "common:modules.searchBar.specialWFS.terminated",
                 "namespaces": "xmlns:app='http://www.deegree.org/app'"
@@ -335,9 +281,7 @@
               {
                 "url": "https://geodienste.hamburg.de/HH_WFS_Bebauungsplaene",
                 "typeName": "app:prosin_imverfahren",
-                "propertyNames": [
-                  "app:plan"
-                ],
+                "propertyNames": ["app:plan"],
                 "geometryName": "app:the_geom",
                 "name": "common:modules.searchBar.specialWFS.ongoing",
                 "namespaces": "xmlns:app='http://www.deegree.org/app'"
@@ -345,18 +289,14 @@
               {
                 "url": "https://geodienste.hamburg.de/HH_WFS_KitaEinrichtung",
                 "typeName": "app:KitaEinrichtungen",
-                "propertyNames": [
-                  "app:Name"
-                ],
+                "propertyNames": ["app:Name"],
 
                 "namespaces": "xmlns:app='http://www.deegree.org/app'"
               },
               {
                 "url": "https://geodienste.hamburg.de/HH_WFS_Stoerfallbetriebe",
                 "typeName": "app:stoerfallbetrieb",
-                "propertyNames": [
-                  "app:standort"
-                ],
+                "propertyNames": ["app:standort"],
                 "name": "common:modules.searchBar.specialWFS.hazardous",
                 "namespaces": "xmlns:app='http://www.deegree.org/app'"
               }
@@ -511,32 +451,17 @@
             "maxFeatures": 10,
             "highlightVectorRulesPolygon": {
               "fill": {
-                "color": [
-                  255,
-                  0,
-                  127,
-                  0.9
-                ]
+                "color": [255, 0, 127, 0.9]
               },
               "stroke": {
                 "width": 3,
-                "color": [
-                  0,
-                  204,
-                  204,
-                  0.9
-                ]
+                "color": [0, 204, 204, 0.9]
               }
             },
             "highlightVectorRulesPointLine": {
               "stroke": {
                 "width": 7,
-                "color": [
-                  0,
-                  153,
-                  0,
-                  0.9
-                ]
+                "color": [0, 153, 0, 0.9]
               },
               "image": {
                 "scale": 2
@@ -776,32 +701,14 @@
           "gfiAttributes": "showAll",
           "url": "https://test.geoportal-hamburg.de/vt/esri/tile/{z}/{y}/{x}.pbf",
           "epsg": "EPSG:25832",
-          "extent": [
-            441336.2209999999,
-            5915995,
-            594002,
-            5986767.56699999981
-          ],
-          "origin": [
-            -9497963.94293634221,
-            9997963.94293634221
-          ],
+          "extent": [441336.2209999999, 5915995, 594002, 5986767.56699999981],
+          "origin": [-9497963.94293634221, 9997963.94293634221],
           "resolutions": [
-            39054.5466520950868,
-            19527.2733260475434,
-            9763.63666302377169,
-            4881.81833151188584,
-            2440.90916575594292,
-            1220.45458287797146,
-            610.227291438985731,
-            305.113645719492865,
-            152.556822859746433,
-            76.2784114298732163,
-            38.1392057149366082,
-            19.0696028574683041,
-            9.534801428734152,
-            4.767400714367076,
-            2.383700357183538,
+            39054.5466520950868, 19527.2733260475434, 9763.63666302377169,
+            4881.81833151188584, 2440.90916575594292, 1220.45458287797146,
+            610.227291438985731, 305.113645719492865, 152.556822859746433,
+            76.2784114298732163, 38.1392057149366082, 19.0696028574683041,
+            9.534801428734152, 4.767400714367076, 2.383700357183538,
             1.191850178591769
           ],
           "tileSize": 512,
@@ -826,25 +733,12 @@
           "legendURL": "https://geodienste.hamburg.de/HH_WMS_Geobasiskarten?language=ger&version=1.3.0&service=WMS&request=GetLegendGraphic&sld_version=1.1.0&layer=WMS_Geobasiskarten_Hamburg_N&format=image/png&STYLE=default",
           "url": "https://dev.adv-smart.de/tiles/smarttiles_de_UTM32_dev/{z}/{x}/{y}.pbf",
           "epsg": "EPSG:25832",
-          "extent": [
-            -46133.17,
-            5048875.26857567,
-            1206211.10142433,
-            6301219.54000000
-          ],
+          "extent": [-46133.17, 5048875.26857567, 1206211.10142433, 6301219.54],
           "resolutions": [
-            4891.96981025128,
-            2445.98490512564,
-            1222.99245256282,
-            611.496226281410,
-            305.748113140705,
-            152.874056570353,
-            76.4370282851763,
-            38.2185141425881,
-            19.1092570712941,
-            9.55462853564703,
-            4.77731426782352,
-            2.38865713391176
+            4891.96981025128, 2445.98490512564, 1222.99245256282,
+            611.49622628141, 305.748113140705, 152.874056570353,
+            76.4370282851763, 38.2185141425881, 19.1092570712941,
+            9.55462853564703, 4.77731426782352, 2.38865713391176
           ],
           "tileSize": 256,
           "zDirection": -1,
@@ -876,8 +770,8 @@
     },
     "subjectlayer": {
       "elements": [
-        { 
-          "id": [ "20501", "20502", "20503", "20504" ], 
+        {
+          "id": ["20501", "20502", "20503", "20504"],
           "name": "Gruppe Freizeitrouten und Radfernwege (4 WFS Layer)",
           "styleId": "4515",
           "visibility": true,
@@ -888,7 +782,7 @@
           "styleId": "47",
           "name": "##O+++O## Ich sollte NIEMALS im Themenbaum sichtbar sein (isNeverVisibleInTree)!",
           "isNeverVisibleInTree": true
-       },
+        },
         {
           "id": "10220",
           "name": "Dauerzählstellen (Rad) Hamburg",
@@ -953,10 +847,7 @@
           "styleId": "22078",
           "styleField": "bewirtschaftungsart",
           "searchField": "bwp_name",
-          "mouseHoverField": [
-            "bwp_name",
-            "bewirtschaftungsart"
-          ]
+          "mouseHoverField": ["bwp_name", "bewirtschaftungsart"]
         },
         {
           "name": "Emissionen",
@@ -991,17 +882,13 @@
             }
           ]
         },
-       {
+        {
           "id": "1933",
           "typ": "WMS",
           "visibility": false,
           "showInLayerTree": true,
-          "styles": [
-            "geofox_stations"
-          ],
-          "name": [
-            "HVV Haltestellen"
-          ]
+          "styles": ["geofox_stations"],
+          "name": ["HVV Haltestellen"]
         },
         {
           "id": "1711",
@@ -1011,10 +898,7 @@
           "visibility": false,
           "loadingStrategy": "all",
           "searchField": "name",
-          "mouseHoverField": [
-            "name",
-            "adresse"
-          ],
+          "mouseHoverField": ["name", "adresse"],
           "featurePrefix": "de.hh.up:",
           "wildCard": "%",
           "singleChar": "#",
@@ -1048,10 +932,7 @@
           "visibility": false,
           "gfiTheme": "schulinfo",
           "showInLayerTree": true,
-          "mouseHoverField": [
-            "schulname",
-            "kapitelbezeichnung"
-          ],
+          "mouseHoverField": ["schulname", "kapitelbezeichnung"],
           "searchField": "schulname",
           "additionalInfoField": "adresse_strasse_hausnr",
           "featurePrefix": "de.hh.up:",
@@ -1173,12 +1054,7 @@
         {
           "id": "StaticImage",
           "name": "Lärmberechnung",
-          "extent": [
-            568426.27,
-            5931985.58,
-            569614.86,
-            5933174.11
-          ],
+          "extent": [568426.27, 5931985.58, 569614.86, 5933174.11],
           "typ": "StaticImage",
           "visibility": false,
           "url": "https://geodienste.hamburg.de/lgv-config/img/Laerm-Test_300dpi.png",
@@ -1207,10 +1083,7 @@
           "gfiAttributes": "showAll",
           "legendURL": "",
           "loadingStrategy": "all",
-          "mouseHoverField": [
-            "belegenheit",
-            "nutzung"
-          ]
+          "mouseHoverField": ["belegenheit", "nutzung"]
         },
         {
           "id": "webgl_dipas",
@@ -1227,16 +1100,8 @@
           "loadingStrategy": "all",
           "hitTolerance": 20,
           "isPointLayer": true,
-          "bboxGeometry": [
-            568426.27,
-            5931985.58,
-            569614.86,
-            5933174.11
-          ],
-          "mouseHoverField": [
-            "Category",
-            "Value"
-          ],
+          "bboxGeometry": [568426.27, 5931985.58, 569614.86, 5933174.11],
+          "mouseHoverField": ["Category", "Value"],
           "style": {
             "circle-rotate-with-view": false,
             "circle-radius": [
@@ -1253,22 +1118,11 @@
               ["linear"],
               ["get", "compound"],
               -1,
-              [
-                240,
-                40,
-                30
-              ],
+              [240, 40, 30],
               1,
-              [
-                0,
-                200,
-                60
-              ]
+              [0, 200, 60]
             ],
-            "circle-displacement": [
-              0,
-              0
-            ],
+            "circle-displacement": [0, 0],
             "circle-opacity": [
               "interpolate",
               ["linear"],
@@ -1337,7 +1191,7 @@
                         "name": "Einfaches Haus in Planten und Blomen"
                       },
                       "latitude": 53.5631,
-                      "longitude": 9.9800,
+                      "longitude": 9.98,
                       "height": 12,
                       "heading": 0,
                       "pitch": 0,
