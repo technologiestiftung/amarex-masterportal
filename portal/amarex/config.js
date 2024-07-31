@@ -68,5 +68,3 @@ const Config = {
   },
   addons: ["projectDownloader", "projectUploader", "reportPrinter"],
 };
-
-

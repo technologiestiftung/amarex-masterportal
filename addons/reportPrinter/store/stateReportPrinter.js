@@ -10,5 +10,3 @@ export default {
   name: "Report Printer",
   icon: "bi-box-arrow-in-down",
 };
-
-

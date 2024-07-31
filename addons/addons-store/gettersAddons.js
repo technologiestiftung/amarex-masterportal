@@ -1,5 +1,5 @@
-import ProjectUploader from "../projectUploader/components/ProjectUploader.vue";
 import ProjectDownloader from "../projectDownloader/components/ProjectDownloader.vue";
+import ProjectUploader from "../projectUploader/components/ProjectUploader.vue";
 import ReportPrinter from "../reportPrinter/components/ReportPrinter.vue";
 
 const getters = {
@@ -16,4 +16,3 @@ const getters = {
 };
 
 export default getters;
-

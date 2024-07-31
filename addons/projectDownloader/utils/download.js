@@ -17,9 +17,8 @@ function reprojectCoordinates(coordinates, sourceProj, destProj) {
     return coordinates.map((coord) =>
       reprojectCoordinates(coord, sourceProj, destProj),
     );
-  } else {
-    return coordinates.map((coord) => transform(coord, sourceProj, destProj));
   }
+  return coordinates.map((coord) => transform(coord, sourceProj, destProj));
 }
 
 /**
@@ -29,11 +28,10 @@ function reprojectCoordinates(coordinates, sourceProj, destProj) {
  * @returns {string} - The GeoJSON string
  */
 function exportLayerAsGeoJSON(layer, sourceProjectionCode) {
-  const source = layer.getSource();
-  const features = source.getFeatures();
-
-  const geoJSONFormatter = new GeoJSON();
-  let geoJSONData = geoJSONFormatter.writeFeaturesObject(features);
+  const source = layer.getSource(),
+    features = source.getFeatures(),
+    geoJSONFormatter = new GeoJSON(),
+    geoJSONData = geoJSONFormatter.writeFeaturesObject(features);
 
   // Reproject the coordinates to EPSG:4326
   // todo: check if EPSG:4326 is the correct EPSG code
@@ -52,4 +50,3 @@ function exportLayerAsGeoJSON(layer, sourceProjectionCode) {
 }
 
 export { exportLayerAsGeoJSON };
-
