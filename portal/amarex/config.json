@@ -252,6 +252,7 @@
             "type": "projectUploader"
           },
           { "type": "reportPrinter" },
+          { "type": "fileImporter" },
           {
             "type": "shadow",
             "isShadowEnabled": true

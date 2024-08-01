@@ -10,5 +10,9 @@
   "reportPrinter": {
     "type": "tool",
     "vue": true
+  },
+  "fileImporter": {
+    "type": "tool",
+    "vue": true
   }
 }
