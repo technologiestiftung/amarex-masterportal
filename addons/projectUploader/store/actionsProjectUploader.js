@@ -7,7 +7,6 @@ import Icon from "ol/style/Icon";
 import Stroke from "ol/style/Stroke";
 import Style from "ol/style/Style";
 import Text from "ol/style/Text";
-import sanitizeSelector from "../../utils/sanitizeSelector.js";
 import layerCollection from "../../../src/core/layers/js/layerCollection.js";
 import { createDrawStyle } from "../../../src/modules/draw_old/js/style/createDrawStyle.js";
 import {
@@ -17,6 +16,7 @@ import {
 import isObject from "../../../src/shared/js/utils/isObject.js";
 import { uniqueId } from "../../../src/shared/js/utils/uniqueId.js";
 import getRandomRGB from "../../utils/getRandomRGB.js";
+import sanitizeSelector from "../../utils/sanitizeSelector.js";
 
 const defaultFont = "16px Arial",
   supportedFormats = {
@@ -146,6 +146,7 @@ function getCrsPropertyName(rawSource) {
     }
   } catch (e) {
     // no JSON input
+    console.warn("File import tool: Failed to parse JSON", e);
   }
 
   return result;
@@ -740,9 +741,7 @@ export default {
 
         feature.setGeometry(new Circle(circleCenter, circleRadius));
       }
-
       if (feature.getGeometry() === null) {
-        featureError = true;
         alertingMessage = {
           category: "error",
           content: i18next.t(
@@ -753,6 +752,7 @@ export default {
           root: true,
         });
       } else {
+        let geometries;
         if (feature.getGeometry().getType() === "GeometryCollection") {
           geometries = feature.getGeometry().getGeometries();
         } else {
@@ -829,7 +829,7 @@ export default {
    * @param {Object} param.state the state
    * @returns {ol/layer} The created layer.
    */
-  async addLayerConfig({ dispatch, state }, fileName) {
+  async addLayerConfig({ dispatch, _state }, fileName) {
     const fileId = `${sanitizeSelector(fileName)}_${uniqueId("importedFile_")}`,
       fileNameSplit = fileName.split("."),
       fileExtension =
