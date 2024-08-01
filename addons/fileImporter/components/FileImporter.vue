@@ -109,7 +109,6 @@ export default {
 
         reader.onload = async (f) => {
           this.addLayerConfig(file.name).then((layer) => {
-
             if (layer) {
               if (layer.attributes.typ === "GeoJSON") {
                 this.importGeoJSON({
@@ -313,4 +312,3 @@ li {
   }
 }
 </style>
-
