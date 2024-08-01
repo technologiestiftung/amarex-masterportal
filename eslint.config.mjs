@@ -27,6 +27,8 @@ export default [
       globals: {
         ...globals.browser,
         ...globals.node,
+        ...globals.mocha,
+        ...globals.amd,
         $: true,
         _: true,
         Config: true,
