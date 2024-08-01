@@ -66,5 +66,11 @@ const Config = {
     fallbackLanguage: "de",
     changeLanguageOnStartWhen: ["querystring", "localStorage", "htmlTag"],
   },
-  addons: ["projectDownloader", "projectUploader", "reportPrinter", "fileImporter"],
+  addons: [
+    "projectDownloader",
+    "projectUploader",
+    "reportPrinter",
+    "fileImporter",
+    "abimoHandler",
+  ],
 };
