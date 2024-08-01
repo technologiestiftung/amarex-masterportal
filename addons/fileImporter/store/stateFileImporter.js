@@ -17,7 +17,7 @@
 
 export default {
   description: "Importiere Geodaten aus verschiedenen Formaten",
-  name: "File Importer",
+  name: "Datei-Import",
   icon: "bi-box-arrow-in-up",
   supportedDevices: ["Desktop", "Mobile", "Table"],
   supportedMapModes: ["2D"],
