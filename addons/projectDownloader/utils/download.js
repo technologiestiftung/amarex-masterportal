@@ -1,5 +1,5 @@
 import GeoJSON from "ol/format/GeoJSON";
-import VectorLayer from "ol/layer/Vector";
+// import VectorLayer from "ol/layer/Vector";
 import { transform } from "ol/proj";
 
 /**

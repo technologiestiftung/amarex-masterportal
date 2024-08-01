@@ -1,10 +1,7 @@
 <script>
 import { mapGetters } from "vuex";
 import { jsPDF } from "jspdf";
-import html2canvas from "html2canvas";
-import layerCollection from "../../../src/core/layers/js/layerCollection";
 import mapCollection from "../../../src/core/maps/js/mapCollection";
-import { getArea, getLength } from "ol/sphere.js";
 
 /**
  * ReportPrinter
@@ -137,13 +134,14 @@ export default {
       let x = 10,
         y = 10;
 
-      const addNewPageIfNeeded = (yPosition, doc) => {
-        if (yPosition > this.pdf.max.width - this.pdf.margin.bottom) {
-          doc.addPage();
-          yPosition = this.addHeader(doc);
-        }
-        return yPosition;
-      };
+      // INFO: add new page if needed
+      // const addNewPageIfNeeded = (yPosition, doc) => {
+      //   if (yPosition > this.pdf.max.width - this.pdf.margin.bottom) {
+      //     doc.addPage();
+      //     yPosition = this.addHeader(doc);
+      //   }
+      //   return yPosition;
+      // };
 
       y = this.addHeader(doc);
 

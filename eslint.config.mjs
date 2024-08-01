@@ -4,11 +4,29 @@ import pluginVue from "eslint-plugin-vue";
 import globals from "globals";
 
 export default [
+  {
+    ignores: [
+      "node_modules/",
+      "build/",
+      "dist/",
+      "portalconfigs/",
+      "scripte/",
+      "src/",
+      "/addons/*",
+      "!addons/addons_3_0_0",
+      "jsdoc/",
+      "lib/",
+      "examples/",
+      "/portal/*",
+      "!/portal/amarex",
+    ],
+  },
   { files: ["**/*.{js,mjs,cjs,vue}"] },
   {
     languageOptions: {
       globals: {
         ...globals.browser,
+        ...globals.node,
         $: true,
         _: true,
         Config: true,
@@ -23,31 +41,10 @@ export default [
   },
   {
     rules: {
-      "no-console": "off",
-      "no-unused-vars": "off",
-      "no-undef": "off",
-      "backbone/no-collection-models": "off",
-      "vue/no-deprecated-destroyed-lifecycle": "off",
-      "vue/no-v-for-template-key-on-child": "off",
-      "vue/no-deprecated-events-api": "off",
-      "vue/no-deprecated-slot-attribute": "off",
-      "vue/no-deprecated-slot-scope-attribute": "off",
-      "vue/no-deprecated-v-on-native-modifier": "off",
-      "no-control-regex": "off",
+      "no-unused-vars": ["error", { argsIgnorePattern: "^_" }], // This allows unused variables prefixed with underscore
     },
   },
   pluginJs.configs.recommended,
   ...pluginVue.configs["flat/essential"],
-  {
-    ignores: [
-      "node_modules",
-      "dist",
-      "public",
-      "devtools",
-      "portal/master",
-      "portal/basic",
-      "portal/auto",
-    ],
-  },
   eslintConfigPrettier,
 ];
