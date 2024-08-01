@@ -253,6 +253,7 @@
           },
           { "type": "reportPrinter" },
           { "type": "fileImporter" },
+          { "type": "abimoHandler" },
           {
             "type": "shadow",
             "isShadowEnabled": true
