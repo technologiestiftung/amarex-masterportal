@@ -1,5 +1,6 @@
 import getters from "./gettersAddons";
 
+import AbimoHandler from "../abimoHandler/store/indexAbimoHandler";
 import FileImporter from "../fileImporter/store/indexFileImporter";
 import ProjectDownloader from "../projectDownloader/store/indexProjectDownloader";
 import ProjectUploader from "../projectUploader/store/indexProjectUploader";
@@ -14,5 +15,6 @@ export default {
     ProjectDownloader: { ...ProjectDownloader },
     ReportPrinter: { ...ReportPrinter },
     FileImporter: { ...FileImporter },
+    AbimoHandler: { ...AbimoHandler },
   },
 };
