@@ -14,5 +14,9 @@
   "fileImporter": {
     "type": "tool",
     "vue": true
+  },
+  "abimoHandler": {
+    "type": "tool",
+    "vue": true
   }
 }
