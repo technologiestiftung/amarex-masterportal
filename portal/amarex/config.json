@@ -215,45 +215,20 @@
       "sections": [
         [
           {
-            "type": "selectFeatures"
+            "type": "projectUploader"
           },
+          { "type": "abimoHandler" },
+          { "type": "fileImporter" },
           {
-            "type": "fileImport"
+            "type": "selectFeatures"
           },
           {
             "type": "addWMS"
           },
-          {
-            "type": "featureLister",
-            "maxFeatures": 10,
-            "highlightVectorRulesPolygon": {
-              "fill": {
-                "color": [255, 0, 127, 0.9]
-              },
-              "stroke": {
-                "width": 3,
-                "color": [0, 204, 204, 0.9]
-              }
-            },
-            "highlightVectorRulesPointLine": {
-              "stroke": {
-                "width": 7,
-                "color": [0, 153, 0, 0.9]
-              },
-              "image": {
-                "scale": 2
-              }
-            }
-          },
+          { "type": "reportPrinter" },
           {
             "type": "projectDownloader"
           },
-          {
-            "type": "projectUploader"
-          },
-          { "type": "reportPrinter" },
-          { "type": "fileImporter" },
-          { "type": "abimoHandler" },
           {
             "type": "shadow",
             "isShadowEnabled": true
