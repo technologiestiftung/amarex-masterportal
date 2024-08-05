@@ -9,4 +9,7 @@ export default {
   description: "Abimo Berechnen.",
   name: "Abimo",
   icon: "bi-geo-fill",
+  hasMouseMapInteractions: true,
+  supportedMapModes: ["2D"],
 };
+
