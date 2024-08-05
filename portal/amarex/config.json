@@ -81,31 +81,31 @@
         "mapInteractions": {
           "interactionModes": {
             "altShiftDragRotate": true,
-            "twoFingerPan": true
+            "twoFingerPan": false
           }
+        },
+        "getFeatureInfo": {
+          "coloredHighlighting3D": {
+            "enabled": true,
+            "color": "PURPLE"
+          },
+          "highlightVectorRules": {
+            "fill": {
+              "color": [215, 102, 41, 0.9]
+            },
+            "image": {
+              "scale": 1.5
+            },
+            "stroke": {
+              "width": 4,
+              "color": [215, 102, 41, 0.9]
+            },
+            "text": {
+              "scale": 2
+            }
+          },
+          "hideMapMarkerOnVectorHighlight": false
         }
-      },
-      "getFeatureInfo": {
-        "coloredHighlighting3D": {
-          "enabled": true,
-          "color": "PURPLE"
-        },
-        "highlightVectorRules": {
-          "fill": {
-            "color": [215, 102, 41, 0.9]
-          },
-          "image": {
-            "scale": 1.5
-          },
-          "stroke": {
-            "width": 4,
-            "color": [215, 102, 41, 0.9]
-          },
-          "text": {
-            "scale": 2
-          }
-        },
-        "hideMapMarkerOnVectorHighlight": false
       },
       "layerPills": {
         "active": true
@@ -125,7 +125,7 @@
         }
       },
       "highlightedFeatures": {
-        "active": true
+        "active": false
       }
     },
     "mainMenu": {
@@ -228,10 +228,6 @@
           { "type": "reportPrinter" },
           {
             "type": "projectDownloader"
-          },
-          {
-            "type": "shadow",
-            "isShadowEnabled": true
           }
         ]
       ]
@@ -253,23 +249,22 @@
             },
             {
               "id": "planung_abimo",
-              "visibility": false
+              "visibility": true
             },
             {
               "id": "rabimo_input_2020",
-              "visibility": false
+              "visibility": true
+            },
+            {
+              "id": "abimo_2020_wfs",
+              "visibility": true
             }
           ]
         },
         {
           "name": "Potentialkarten",
           "type": "folder",
-          "elements": [
-            {
-              "id": "klimamodell_berlin_wfs",
-              "visibility": false
-            }
-          ]
+          "elements": []
         },
         {
           "name": "Hintergrundkarten",
@@ -277,19 +272,14 @@
           "elements": [
             {
               "id": "hintergrund_default_grau",
-              "visibility": true
+              "visibility": false
             }
           ]
         },
         {
           "name": "Themenkarten",
           "type": "folder",
-          "elements": [
-            {
-              "id": "klimamodell_berlin_wfs",
-              "visibility": false
-            }
-          ]
+          "elements": []
         },
         {
           "name": "Maßnahmenpotentiale",
@@ -300,3 +290,4 @@
     }
   }
 }
+

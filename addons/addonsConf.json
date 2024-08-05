@@ -1,22 +1,18 @@
 {
   "projectUploader": {
-    "type": "tool",
-    "vue": true
+    "type": "tool"
   },
   "projectDownloader": {
-    "type": "tool",
-    "vue": true
+    "type": "tool"
   },
   "reportPrinter": {
-    "type": "tool",
-    "vue": true
+    "type": "tool"
   },
   "fileImporter": {
-    "type": "tool",
-    "vue": true
+    "type": "tool"
   },
   "abimoHandler": {
-    "type": "tool",
-    "vue": true
+    "type": "tool"
   }
 }
+
