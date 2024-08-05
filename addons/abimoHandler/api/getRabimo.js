@@ -1,5 +1,5 @@
 // TODO: add url from env
-const apiUrl = "https://0.0.0.0:443";
+const apiUrl = "https://localhost:443";
 
 /**
  * Fetches data from Rabimo API asynchronously
@@ -27,17 +27,19 @@ async function getMultiblock(payload) {
  * @param {*} endpoint
  */
 async function getTest() {
-  await fetch(`${apiUrl}/calculate_all`, {
-    method: "GET",
-    headers: {
-      "Content-Type": "application/json",
-    },
-  })
-    .then((response) => response.json())
-    .then((data) => {
-      console.log("[getRabimo] :: data::", data);
-      return data;
+  try {
+    const response = await fetch(`${apiUrl}/calculate_all`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
     });
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error("Error fetching data from Rabimo API:", error);
+    throw error;
+  }
 }
 
 /**
@@ -63,3 +65,4 @@ async function getMultiblockDeltaW(payload) {
 }
 
 export default { getMultiblock, getTest, getMultiblockDeltaW };
+
