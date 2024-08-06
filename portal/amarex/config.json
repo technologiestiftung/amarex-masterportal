@@ -235,7 +235,12 @@
   },
   "layerConfig": {
     "baselayer": {
-      "elements": []
+      "elements": [
+        {
+          "id": "hintergrund_default_grau",
+          "visibility": true
+        }
+      ]
     },
     "subjectlayer": {
       "elements": [
@@ -269,12 +274,7 @@
         {
           "name": "Hintergrundkarten",
           "type": "folder",
-          "elements": [
-            {
-              "id": "hintergrund_default_grau",
-              "visibility": false
-            }
-          ]
+          "elements": []
         },
         {
           "name": "Themenkarten",
