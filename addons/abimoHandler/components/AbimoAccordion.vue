@@ -12,7 +12,7 @@ export default {
 
 <template>
   <div
-    class="accordion"
+    class="accordion h-100 overflow-scroll"
     id="accordionExample"
   >
     <div
