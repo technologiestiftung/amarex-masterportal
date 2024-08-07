@@ -173,6 +173,10 @@
         {
           "id": "hintergrund_default_grau",
           "visibility": true
+        },
+        {
+          "id": "base_layer_002",
+          "visibility": false
         }
       ]
     },
@@ -188,15 +192,15 @@
             },
             {
               "id": "planung_abimo",
-              "visibility": true
+              "visibility": false
             },
             {
               "id": "rabimo_input_2020",
-              "visibility": true
+              "visibility": false
             },
             {
               "id": "abimo_2020_wfs",
-              "visibility": true
+              "visibility": false
             }
           ]
         },

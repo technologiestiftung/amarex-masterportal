@@ -1,6 +1,7 @@
 import getters from "./gettersAddons";
 
 import AbimoHandler from "../abimoHandler/store/indexAbimoHandler";
+import BaseMaps from "../baseMaps/store/indexBaseMaps";
 import FileImporter from "../fileImporter/store/indexFileImporter";
 import ProjectDownloader from "../projectDownloader/store/indexProjectDownloader";
 import ProjectStarter from "../projectStarter/store/indexProjectStarter";
@@ -18,6 +19,7 @@ export default {
     FileImporter: { ...FileImporter },
     AbimoHandler: { ...AbimoHandler },
     ProjectStarter: { ...ProjectStarter },
+    BaseMaps: { ...BaseMaps },
   },
 };
 

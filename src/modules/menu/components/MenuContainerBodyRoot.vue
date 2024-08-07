@@ -92,7 +92,7 @@ export default {
     <div
         :id="'mp-body-root-'+side"
     >       
-        <div class="stepper-root mb-5 d-flex flex-column" v-if="side === 'mainMenu'">
+        <div class="stepper-root mb-5 d-flex flex-column gap-2" v-if="side === 'mainMenu'">
         <button 
             v-for="(step, index) in steps" 
             :key="index"

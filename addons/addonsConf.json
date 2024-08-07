@@ -16,6 +16,9 @@
   },
   "projectStarter": {
     "type": "tool"
+  },
+  "baseMaps": {
+    "type": "tool"
   }
 }
 

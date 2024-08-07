@@ -73,5 +73,7 @@ const Config = {
     "fileImporter",
     "abimoHandler",
     "projectStarter",
+    "baseMaps",
   ],
 };
+
