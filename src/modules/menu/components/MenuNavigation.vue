@@ -42,7 +42,7 @@ export default {
         :id="'mp-menu-navigation-' + side"
     >
         <!-- Masterportal origin Menu Navigation -->
-        <!-- <div
+        <div
             class="mp-menu-navigation"
         >
             <a
@@ -62,7 +62,7 @@ export default {
                 :aria-label="$t('common:modules.menu.ariaLabelClose')"
                 @click="resetMenu(side)"
             />
-        </div> -->
+        </div>
         <h4
             v-if="currentTitle !== 'none'"
             class="mp-menu-navigation-moduletitle mb-4"

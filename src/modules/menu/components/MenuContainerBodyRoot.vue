@@ -16,11 +16,12 @@ export default {
     },
     data() {
     return {
+        // Menu Steps
       steps: [
-        { label: '1. Projekt Starten', component: 'projectUploader' },
-        { label: '2. Hintergrundkarten', component: 'BackgroundMaps' },
-        { label: '3. Themenkarten', component: 'ThemeMaps' },
-        { label: '4. Maßnahmenpotentiale', component: 'ActionPotentials' },
+        { label: '1. Projekt Starten', component: 'projectStarter' },
+        { label: '2. Hintergrundkarten', component: 'baseMaps' },
+        { label: '3. Themenkarten', component: 'themeMaps' },
+        { label: '4. Maßnahmenpotentiale', component: 'actionPotentials' },
         { label: '5. Wasserhaushalt berechnen', component: 'abimoHandler' },
         { label: '6. Eigene Notizen', component: 'reportPrinter' },
         { label: 'X. ESB Tool', component: 'esbTool' },
