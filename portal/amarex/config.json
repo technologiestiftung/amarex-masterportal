@@ -108,7 +108,7 @@
         }
       },
       "layerPills": {
-        "active": true
+        "active": false
       },
       "startingMapMode": "2D"
     },
