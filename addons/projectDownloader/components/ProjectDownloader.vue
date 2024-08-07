@@ -44,25 +44,9 @@ export default {
         portalConfig.map.mapView.startZoomLevel = mapView.getZoom();
         portalConfig.map.mapView.startCenter = mapView.getCenter();
 
-        // Filter layers with showInLayerTree: true
-        const filteredBaselayer = {
-            elements: layerConfig.baselayer.elements.filter(
-              (layer) => layer.showInLayerTree === true,
-            ),
-          },
-          filteredSubjectlayer = {
-            elements: layerConfig.subjectlayer.elements.filter(
-              (layer) => layer.showInLayerTree === true,
-            ),
-          },
-          filteredLayerConfig = {
-            baselayer: filteredBaselayer,
-            subjectlayer: filteredSubjectlayer,
-          };
-
         this.configToExport = {
           portalConfig,
-          layerConfig: filteredLayerConfig,
+          layerConfig,
         };
       } catch (error) {
         console.error(error);
@@ -181,3 +165,4 @@ export default {
   height: 100px;
 }
 </style>
+
