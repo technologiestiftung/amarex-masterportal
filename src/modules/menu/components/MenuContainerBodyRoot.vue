@@ -14,6 +14,24 @@ export default {
         LayerTree,
         MenuContainerBodyRootItems
     },
+    data() {
+    return {
+      steps: [
+        { label: '1. Projekt Starten', component: 'projectUploader' },
+        { label: '2. Hintergrundkarten', component: 'BackgroundMaps' },
+        { label: '3. Themenkarten', component: 'ThemeMaps' },
+        { label: '4. Maßnahmenpotentiale', component: 'ActionPotentials' },
+        { label: '5. Wasserhaushalt berechnen', component: 'abimoHandler' },
+        { label: '6. Eigene Notizen', component: 'reportPrinter' },
+        { label: 'X. ESB Tool', component: 'esbTool' },
+        { label: 'X. Multikriterien Analyse', component: 'multiCriteria' },
+        { label: 'X. Report zusammenstellen', component: 'reportPrinter' },
+        { label: 'XX. Projekt speichern/exportieren', component: 'projectDownloader' }
+      ],
+      currentStepIndex: 0,
+      
+    }
+  },
     props: {
         /** Defines in which menu the component is being rendered */
         side: {
@@ -28,12 +46,19 @@ export default {
             "secondaryMenu",
             "titleBySide"
         ]),
-
         /**
          * @returns {Object} Menu configuration for the given menu.
          */
         menu () {
             return this.side === "mainMenu" ? this.mainMenu : this.secondaryMenu;
+        },
+        currentTitle () {
+            return this.currentComponentName(this.side);
+        }
+    },
+    mounted() {
+        if (this.side === 'mainMenu' && this.steps.length > 0) {
+            this.selectStep(this.steps[0], 0);
         }
     },
     methods: {
@@ -44,6 +69,19 @@ export default {
          */
         path (sectionIndex) {
             return [this.side, "sections", sectionIndex];
+        },
+        /**
+         * Selects a step in the menu.
+         * @param {Object} step The step to select.
+         * @returns {void}
+         */
+        selectStep(step, index) {
+            this.currentStepIndex = index;
+            this.$store.dispatch('Menu/changeCurrentComponent', {
+            type: step.component,
+            side: 'secondaryMenu',
+            props: { name: step.label }
+            });
         }
     }
 };
@@ -52,8 +90,21 @@ export default {
 <template>
     <div
         :id="'mp-body-root-'+side"
-    >
-        <LayerTree v-if="side === 'mainMenu'" />
+    >       
+        <div class="stepper-root mb-5 d-flex flex-column" v-if="side === 'mainMenu'">
+        <button 
+            v-for="(step, index) in steps" 
+            :key="index"
+            class="btn"
+            :class="{ 'btn-primary': index === currentStepIndex, 'btn-secondary': index !== currentStepIndex }"
+            @click="selectStep(step, index)"
+        >
+            {{ step.label }}
+        </button>
+        </div>
+
+        <!-- Masterportal origin Layer Tree  -->
+        <!-- <LayerTree v-if="side === 'mainMenu'" /> -->
         <template
             v-for="(_, key) in menu.sections"
             :key="key"

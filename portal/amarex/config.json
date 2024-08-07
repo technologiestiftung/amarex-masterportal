@@ -160,77 +160,11 @@
           }
         ]
       },
-      "sections": [
-        [
-          {
-            "type": "legend"
-          },
-          {
-            "type": "draw"
-          },
-          {
-            "type": "selectFeatures"
-          },
-          {
-            "name": "folder1",
-            "icon": "bi-folder-plus",
-            "type": "folder",
-            "elements": [
-              {
-                "name": "folder1_1",
-                "icon": "bi-folder-plus",
-                "type": "folder",
-                "elements": [
-                  {
-                    "name": "folder1_1_1",
-                    "icon": "bi-folder-plus",
-                    "type": "folder",
-                    "elements": [
-                      {
-                        "type": "bufferAnalysis"
-                      }
-                    ]
-                  },
-                  {
-                    "name": "folder1_1_2",
-                    "icon": "bi-folder-plus",
-                    "type": "folder",
-                    "elements": []
-                  }
-                ]
-              },
-              {
-                "name": "folder1_2",
-                "icon": "bi-folder-plus",
-                "type": "folder",
-                "elements": []
-              }
-            ]
-          }
-        ]
-      ]
+      "sections": []
     },
     "secondaryMenu": {
       "expanded": true,
-      "sections": [
-        [
-          {
-            "type": "projectUploader"
-          },
-          { "type": "abimoHandler" },
-          { "type": "fileImporter" },
-          {
-            "type": "selectFeatures"
-          },
-          {
-            "type": "addWMS"
-          },
-          { "type": "reportPrinter" },
-          {
-            "type": "projectDownloader"
-          }
-        ]
-      ]
+      "sections": [[]]
     }
   },
   "layerConfig": {

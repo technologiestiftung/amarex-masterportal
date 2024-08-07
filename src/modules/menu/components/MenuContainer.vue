@@ -161,9 +161,10 @@ export default {
                     class="mb-5 mt-4"
                     v-bind="titleBySide(side)"
                 />
-                <SearchBar
+                <!-- Masterportal Search Bar origin -->
+                <!-- <SearchBar
                     :click-action="openSearchBar"
-                />
+                /> -->
             </div>
         </div>
         <MenuContainerBody
