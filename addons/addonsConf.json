@@ -13,6 +13,9 @@
   },
   "abimoHandler": {
     "type": "tool"
+  },
+  "projectStarter": {
+    "type": "tool"
   }
 }
 
