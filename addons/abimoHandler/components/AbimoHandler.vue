@@ -21,6 +21,7 @@ export default {
   },
   data() {
     return {
+      isLoading: false,
       selectedFeatures: [],
       accumulatedAbimoStats: {
         featuresSelected: 0,
@@ -146,6 +147,7 @@ export default {
   },
   mounted() {
     this.createInteractions();
+    // this.addInteractions();
     this.layer_abimo_altered = mapCollection
       .getMap("2D")
       .getLayers()
@@ -341,8 +343,10 @@ export default {
       };
     },
     async testRabimoAPI() {
+      this.isLoading = true;
       const data = await getRabimo.getTest();
-      console.log("[AbimoMeasure] data::", data);
+      this.isLoading = false;
+      await console.log("[AbimoMeasure] data::", data);
     },
     async fetchCalculateMultiblock() {
       // get multiblock data
@@ -354,7 +358,88 @@ export default {
         const properties = feature.getProperties();
         payload.push(properties);
       }
+
+      console.log("[AbimoHandler] payload::", payload);
+      
       try {
+        payload = [
+          {
+            code: "0000000001000016",
+            prec_yr: 632,
+            prec_s: 333,
+            epot_yr: 660,
+            epot_s: 530,
+            district: "1",
+            total_area: 4951.8538,
+            area_main: 4951.8538,
+            area_road: 0,
+            main_frac: 1,
+            roof: 0.009,
+            green_roof: 0,
+            swg_roof: 1,
+            pvd: 0.9736,
+            swg_pvd: 1,
+            srf1_pvd: 0.33,
+            srf2_pvd: 0.15,
+            srf3_pvd: 0.16,
+            srf4_pvd: 0,
+            srf5_pvd: 0.36,
+            road_frac: 0,
+            pvd_r: 0,
+            swg_pvd_r: 1,
+            srf1_pvd_r: 0,
+            srf2_pvd_r: 0,
+            srf3_pvd_r: 0,
+            srf4_pvd_r: 0,
+            sealed: 0.9826,
+            to_swale: 0,
+            gw_dist: 2.8,
+            ufc30: 12,
+            ufc150: 10,
+            land_type: "urban",
+            veg_class: 35,
+            irrigation: 0,
+            block_type: "300_road",
+          },
+          {
+            code: "0000000001000017",
+            prec_yr: 631,
+            prec_s: 332,
+            epot_yr: 660,
+            epot_s: 530,
+            district: "1",
+            total_area: 3406.4166,
+            area_main: 3406.4166,
+            area_road: 0,
+            main_frac: 1,
+            roof: 0.0038,
+            green_roof: 0,
+            swg_roof: 1,
+            pvd: 0.9769,
+            swg_pvd: 1,
+            srf1_pvd: 0.36,
+            srf2_pvd: 0.17,
+            srf3_pvd: 0.13,
+            srf4_pvd: 0,
+            srf5_pvd: 0.34,
+            road_frac: 0,
+            pvd_r: 0,
+            swg_pvd_r: 1,
+            srf1_pvd_r: 0,
+            srf2_pvd_r: 0,
+            srf3_pvd_r: 0,
+            srf4_pvd_r: 0,
+            sealed: 0.9807,
+            to_swale: 0,
+            gw_dist: 2.7,
+            ufc30: 11,
+            ufc150: 10,
+            land_type: "urban",
+            veg_class: 35,
+            irrigation: 0,
+            block_type: "300_road",
+          },
+        ];
         const data = await getRabimo.getMultiblock(payload);
         console.log("[AbimoMeasure] data::", data);
       } catch (error) {
@@ -363,19 +448,104 @@ export default {
 
       this.addToLayer(olFeatures);
     },
-    async fetchCalculateMultiblockDeltaW() {
+    async calculateDeltaW() {
       const olFeatures = this.mapToolFeatures(this.selectedFeatures);
+      let payload = [];
 
       for (const feature of olFeatures) {
         const properties = feature.getProperties();
-        const payload = { ...properties };
-
+        payload.push(properties);
+      }
+      try {
+        payload = [
+          {
+            code: "0000000001000016",
+            prec_yr: 632,
+            prec_s: 333,
+            epot_yr: 660,
+            epot_s: 530,
+            district: "1",
+            total_area: 4951.8538,
+            area_main: 4951.8538,
+            area_road: 0,
+            main_frac: 1,
+            roof: 0.009,
+            green_roof: 0,
+            swg_roof: 1,
+            pvd: 0.9736,
+            swg_pvd: 1,
+            srf1_pvd: 0.33,
+            srf2_pvd: 0.15,
+            srf3_pvd: 0.16,
+            srf4_pvd: 0,
+            srf5_pvd: 0.36,
+            road_frac: 0,
+            pvd_r: 0,
+            swg_pvd_r: 1,
+            srf1_pvd_r: 0,
+            srf2_pvd_r: 0,
+            srf3_pvd_r: 0,
+            srf4_pvd_r: 0,
+            sealed: 0.9826,
+            to_swale: 0,
+            gw_dist: 2.8,
+            ufc30: 12,
+            ufc150: 10,
+            land_type: "urban",
+            veg_class: 35,
+            irrigation: 0,
+            block_type: "300_road",
+          },
+          {
+            code: "0000000001000017",
+            prec_yr: 631,
+            prec_s: 332,
+            epot_yr: 660,
+            epot_s: 530,
+            district: "1",
+            total_area: 3406.4166,
+            area_main: 3406.4166,
+            area_road: 0,
+            main_frac: 1,
+            roof: 0.0038,
+            green_roof: 0,
+            swg_roof: 1,
+            pvd: 0.9769,
+            swg_pvd: 1,
+            srf1_pvd: 0.36,
+            srf2_pvd: 0.17,
+            srf3_pvd: 0.13,
+            srf4_pvd: 0,
+            srf5_pvd: 0.34,
+            road_frac: 0,
+            pvd_r: 0,
+            swg_pvd_r: 1,
+            srf1_pvd_r: 0,
+            srf2_pvd_r: 0,
+            srf3_pvd_r: 0,
+            srf4_pvd_r: 0,
+            sealed: 0.9807,
+            to_swale: 0,
+            gw_dist: 2.7,
+            ufc30: 11,
+            ufc150: 10,
+            land_type: "urban",
+            veg_class: 35,
+            irrigation: 0,
+            block_type: "300_road",
+          },
+        ];
         const data = await getRabimo.getMultiblockDeltaW(payload);
-        feature.setProperties(data);
-        feature.setStyle(this.createStyle(data));
+        console.log("[AbimoMeasure] data::", data);
+      } catch (error) {
+        console.error("Fehler beim Abrufen der Daten:", error);
       }
 
-      this.addToLayer(olFeatures);
+      // const data = await getRabimo.getMultiblockDeltaW(payload);
+      // feature.setProperties(data);
+      // feature.setStyle(this.createStyle(data));
+
+      // this.addToLayer(olFeatures);
     },
     handleStepOneClick() {
       // Does not work need to add watch function in accordion
@@ -393,7 +563,14 @@ export default {
 </script>
 
 <template lang="html">
-  <div id="abimo">
+  <div
+    id="abimo"
+    class="d-flex flex-column h-100 gap-3"
+  >
+    <div class="d-flex flex-column h-100 overflow-scroll">
+      <h1>Berechnete Layer</h1>
+    </div>
+    <hr />
     <AbimoAccordion :steps="steps">
       <template v-slot:default="slotProps">
         <div v-if="slotProps.step.id === 1">
@@ -454,6 +631,12 @@ export default {
             class="btn btn-primary"
             @click="testRabimoAPI"
           >
+            <span
+              v-if="isLoading"
+              class="spinner-border spinner-border-sm"
+              role="status"
+              aria-hidden="true"
+            ></span>
             test API
           </button>
 
@@ -559,6 +742,7 @@ export default {
             class="btn btn-primary"
             @click="calculateDeltaW"
           >
+            <!-- <span class="sr-only">Loading...</span> -->
             DeltaW Berechnen
           </button>
         </div>
@@ -614,3 +798,4 @@ ul {
   margin-right: 8px;
 }
 </style>
+
