@@ -72,5 +72,6 @@ const Config = {
     "reportPrinter",
     "fileImporter",
     "abimoHandler",
+    "projectStarter",
   ],
 };
