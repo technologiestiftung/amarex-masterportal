@@ -2,7 +2,7 @@
   "portalConfig": {
     "map": {
       "baselayerSwitcher": {
-        "active": true
+        "active": false
       },
       "controls": {
         "zoom": true,
@@ -164,18 +164,32 @@
     },
     "secondaryMenu": {
       "expanded": true,
-      "sections": [[]]
+      "sections": [
+        [
+          {
+            "type": "projectStarter"
+          }
+        ]
+      ]
     }
   },
   "layerConfig": {
     "baselayer": {
       "elements": [
         {
-          "id": "hintergrund_default_grau",
+          "id": "basemap_default_grau",
           "visibility": true
         },
         {
-          "id": "base_layer_002",
+          "id": "basemap_raster_color",
+          "visibility": false
+        },
+        {
+          "id": "webatlas_wms_color",
+          "visibility": false
+        },
+        {
+          "id": "hg_openlayer_wmts",
           "visibility": false
         }
       ]
