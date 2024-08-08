@@ -1,5 +1,6 @@
 import actions from "./actionsBaseMaps";
 import getters from "./gettersBaseMaps";
+import mutations from "./mutationsBaseMaps";
 import state from "./stateBaseMaps";
 
 export default {
@@ -7,5 +8,6 @@ export default {
   state,
   getters,
   actions,
+  mutations,
 };
 
