@@ -114,7 +114,7 @@ export default {
         :key="index"
         class="base-layer-item d-flex flex-column gap-3"
       >
-        <div class="mb-3">
+        <div>
           <img
             :src="`https://picsum.photos/id/237/200/300`"
             :alt="layer.name"
@@ -122,26 +122,12 @@ export default {
           />
           <span class="base-layer-name pl-3">{{ layer.name }}</span>
         </div>
-
-        <label
-          :for="'base-layer-' + layer.id"
-          class="base-layer-label"
+        <button
+          class="btn btn-primary"
+          @click="switchActiveBaselayer(layer.id)"
         >
-          <button
-            class="btn btn-primary"
-            @click="switchActiveBaselayer(layer.id)"
-          >
-            <input
-              :id="'base-layer-' + layer.id"
-              v-model="selectedBaseLayer"
-              :value="layer.id"
-              type="radio"
-              name="base-layer"
-              class="align-self-center"
-            />
-            <span class="pl-2">Diese Karte wählen</span>
-          </button>
-        </label>
+          <span class="pl-2">Diese Karte wählen</span>
+        </button>
       </div>
     </div>
   </div>
@@ -151,7 +137,7 @@ export default {
 @import "~variables";
 
 .base-layer-selection {
-  padding: 16px;
+  padding: 4px;
 }
 
 .base-layer-list {
@@ -163,8 +149,6 @@ export default {
 .base-layer-item {
   padding: 12px;
   background-color: #ececed;
-  margin-bottom: 12px;
-  border-radius: 4px;
   border: solid 1px #e4e4e4;
 }
 
