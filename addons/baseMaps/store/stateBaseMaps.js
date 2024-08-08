@@ -9,5 +9,9 @@ export default {
   description: "Base Maps",
   name: "Base Maps",
   icon: "bi-geo-fill",
+
+  active: false,
+  baselayerIds: [],
+  topBaselayerId: null,
 };
 

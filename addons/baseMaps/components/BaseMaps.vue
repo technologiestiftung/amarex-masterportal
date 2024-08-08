@@ -1,19 +1,8 @@
 <script>
-import SearchBar from "../../../src/modules/searchBar/components/SearchBar.vue";
-import LayerTree from "../../../src/modules/layerTree/components/LayerTree.vue";
-import { mapGetters } from "vuex";
-import layerFactory from "../../../src/core/layers/js/layerFactory";
+import { mapGetters, mapMutations, mapActions } from "vuex";
 
-/**
- * BaseMaps
- * @module modules/BaseMaps
- */
 export default {
   name: "BaseMaps",
-  components: {
-    SearchBar,
-    LayerTree,
-  },
   data() {
     return {
       selectedBaseLayer: null,
@@ -21,23 +10,97 @@ export default {
   },
   computed: {
     ...mapGetters("Maps", ["mode"]),
-    ...mapGetters("Modules/LayerSelection", ["baselayerConfs"]),
-    filteredBaseLayers() {
-      return this.filterBaseLayer();
+    ...mapGetters("Modules/LayerSelection", ["visible", "baselayerConfs"]),
+    ...mapGetters([
+      "allBaselayerConfigs",
+      "isMobile",
+      "visibleBaselayerConfigs",
+      "allBaselayerConfigs",
+      "layerConfigsByAttributes",
+    ]),
+    ...mapGetters("Modules/BaseMaps", [
+      "active",
+      "baselayerIds",
+      "topBaselayerId",
+    ]),
+  },
+  watch: {
+    visibleBaselayerConfigs: {
+      handler(newVal) {
+        const baselayerConfigIds = Object.values(this.allBaselayerConfigs).map(
+          (layer) => layer.id,
+        );
+        let maxZIndex = null,
+          topLayer = null;
+
+        newVal.forEach((val) => {
+          maxZIndex = Math.max(maxZIndex, val.zIndex);
+          if (val.zIndex === maxZIndex) {
+            topLayer = val;
+          }
+        });
+
+        if (topLayer?.id !== undefined) {
+          const baselayerIds = baselayerConfigIds.filter(
+            (layerId) => layerId !== topLayer.id,
+          );
+          this.setTopBaselayerId(topLayer.id);
+          this.setBaselayerIds(baselayerIds);
+        } else {
+          this.setTopBaselayerId(null);
+          this.setBaselayerIds(baselayerConfigIds);
+        }
+      },
+      deep: true,
     },
   },
+  created() {
+    const baselayerConfigIds = [],
+      baselayers = this.layerConfigsByAttributes({
+        baselayer: true,
+        showInLayerTree: true,
+      });
+
+    if (baselayers.length > 1) {
+      const maxZIndexLayer = baselayers.reduce((max, layer) =>
+        layer.zIndex > max.zIndex ? layer : max,
+      );
+      this.setTopBaselayerId(maxZIndexLayer.id);
+    } else if (baselayers.length === 0) {
+      this.setTopBaselayerId(null);
+    } else {
+      this.setTopBaselayerId(baselayers[0].id);
+    }
+
+    baselayerConfigIds.push(
+      ...Object.values(this.allBaselayerConfigs)
+        .filter((layer) => layer.id !== this.topBaselayerId)
+        .map((layer) => layer.id),
+    );
+    this.setBaselayerIds(baselayerConfigIds);
+  },
   methods: {
-    filterBaseLayer() {
-      if (this.mode === "3D") {
-        return this.baselayerConfs.filter(
-          (conf) =>
-            !layerFactory
-              .getLayerTypesNotVisibleIn3d()
-              .includes(conf.typ?.toUpperCase()),
-        );
+    ...mapMutations("Modules/BaseMaps", [
+      "setBaselayerIds",
+      "setTopBaselayerId",
+    ]),
+    ...mapMutations(["setBaselayerVisibility"]),
+    ...mapActions("Modules/BaseMaps", ["updateLayerVisibilityAndZIndex"]),
+
+    switchActiveBaselayer(layerId) {
+      this.updateLayerVisibilityAndZIndex(layerId);
+
+      const selectableBackroundLayerIds = this.baselayerIds;
+      selectableBackroundLayerIds.splice(
+        selectableBackroundLayerIds.indexOf(layerId),
+        1,
+      );
+      if (this.topBaselayerId !== null) {
+        selectableBackroundLayerIds.push(this.topBaselayerId);
       }
-      console.log('[BaseMaps] this.baselayerConfs::', this.baselayerConfs);
-      return this.baselayerConfs;
+      this.setBaselayerIds(selectableBackroundLayerIds);
+
+      this.setTopBaselayerId(layerId);
     },
   },
 };
@@ -47,27 +110,37 @@ export default {
   <div class="base-layer-selection">
     <div class="base-layer-list">
       <div
-        v-for="(layer, index) in filteredBaseLayers"
+        v-for="(layer, index) in this.allBaselayerConfigs"
         :key="index"
-        class="base-layer-item"
+        class="base-layer-item d-flex flex-column gap-3"
       >
-        <input
-          :id="'base-layer-' + layer.id"
-          v-model="selectedBaseLayer"
-          :value="layer.id"
-          type="radio"
-          name="base-layer"
-        />
+        <div class="mb-3">
+          <img
+            :src="`https://picsum.photos/id/237/200/300`"
+            :alt="layer.name"
+            class="base-layer-thumbnail"
+          />
+          <span class="base-layer-name pl-3">{{ layer.name }}</span>
+        </div>
+
         <label
           :for="'base-layer-' + layer.id"
           class="base-layer-label"
         >
-          <img
-            :src="layer.thumbnail"
-            :alt="layer.name"
-            class="base-layer-thumbnail"
-          />
-          <span class="base-layer-name">{{ layer.name }}</span>
+          <button
+            class="btn btn-primary"
+            @click="switchActiveBaselayer(layer.id)"
+          >
+            <input
+              :id="'base-layer-' + layer.id"
+              v-model="selectedBaseLayer"
+              :value="layer.id"
+              type="radio"
+              name="base-layer"
+              class="align-self-center"
+            />
+            <span class="pl-2">Diese Karte wählen</span>
+          </button>
         </label>
       </div>
     </div>
@@ -78,21 +151,21 @@ export default {
 @import "~variables";
 
 .base-layer-selection {
-  background-color: #f8f9fa;
-  padding: 15px;
-}
-
-.base-layer-selection-headline {
-  margin-bottom: 15px;
+  padding: 16px;
 }
 
 .base-layer-list {
   display: flex;
   flex-direction: column;
+  gap: 4px;
 }
 
 .base-layer-item {
-  margin-bottom: 10px;
+  padding: 12px;
+  background-color: #ececed;
+  margin-bottom: 12px;
+  border-radius: 4px;
+  border: solid 1px #e4e4e4;
 }
 
 .base-layer-label {
@@ -102,10 +175,12 @@ export default {
 }
 
 .base-layer-thumbnail {
-  width: 50px;
-  height: 50px;
+  width: 35px;
+  height: 30px;
   margin-right: 10px;
-  border: 1px solid #ddd;
+  overflow: hidden;
+  border-radius: 4px;
+  object-fit: cover;
 }
 
 .base-layer-name {
@@ -116,3 +191,4 @@ input[type="radio"] {
   margin-right: 10px;
 }
 </style>
+
