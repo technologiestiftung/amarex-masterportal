@@ -221,22 +221,78 @@
         {
           "name": "Potentialkarten",
           "type": "folder",
-          "elements": []
+          "elements": [
+            {
+              "id": "planung_abimo",
+              "visibility": false
+            }
+          ]
         },
         {
           "name": "Hintergrundkarten",
           "type": "folder",
-          "elements": []
+          "elements": [
+            {
+              "id": "rabimo_input_2020",
+              "visibility": false
+            }
+          ]
         },
         {
           "name": "Themenkarten",
           "type": "folder",
-          "elements": []
-        },
-        {
-          "name": "Maßnahmenpotentiale",
-          "type": "folder",
-          "elements": []
+          "elements": [
+            {
+              "name": "Maßnahmenpotentiale",
+              "type": "folder",
+              "elements": [
+                {
+                  "id": "abimo_2020_wfs",
+                  "visibility": false
+                }
+              ]
+            },
+            {
+              "name": "Starkregen",
+              "type": "folder",
+              "elements": [
+                {
+                  "id": "abimo_2020_wfs",
+                  "visibility": false
+                }
+              ]
+            },
+            {
+              "name": "Grundwasser",
+              "type": "folder",
+              "elements": [
+                {
+                  "id": "abimo_2020_wfs",
+                  "visibility": false
+                }
+              ]
+            },
+            {
+              "name": "Wasserhaushalt",
+              "type": "folder",
+              "elements": [
+                {
+                  "id": "abimo_2020_wfs",
+                  "visibility": false
+                }
+              ]
+            },
+            {
+              "name": "Hitze",
+              "type": "folder",
+              "elements": [
+                {
+                  "id": "abimo_2020_wfs",
+                  "visibility": false
+                }
+              ]
+            }
+          ]
         }
       ]
     }

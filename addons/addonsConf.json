@@ -19,6 +19,9 @@
   },
   "baseMaps": {
     "type": "tool"
+  },
+  "themeMaps": {
+    "type": "tool"
   }
 }
 

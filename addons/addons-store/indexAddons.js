@@ -7,6 +7,7 @@ import ProjectDownloader from "../projectDownloader/store/indexProjectDownloader
 import ProjectStarter from "../projectStarter/store/indexProjectStarter";
 import ProjectUploader from "../projectUploader/store/indexProjectUploader";
 import ReportPrinter from "../reportPrinter/store/indexReportPrinter";
+import ThemeMaps from "../themeMaps/store/indexThemeMaps"
 
 export default {
   namespaced: true,
@@ -20,6 +21,7 @@ export default {
     AbimoHandler: { ...AbimoHandler },
     ProjectStarter: { ...ProjectStarter },
     BaseMaps: { ...BaseMaps },
+    ThemeMaps: { ...ThemeMaps },
   },
 };
 

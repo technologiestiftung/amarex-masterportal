@@ -5,6 +5,7 @@ import ProjectDownloader from "../projectDownloader/components/ProjectDownloader
 import ProjectStarter from "../projectStarter/components/ProjectStarter.vue";
 import ProjectUploader from "../projectUploader/components/ProjectUploader.vue";
 import ReportPrinter from "../reportPrinter/components/ReportPrinter.vue";
+import ThemeMaps from "../themeMaps/components/ThemeMaps.vue";
 
 const getters = {
   componentMap: () => {
@@ -16,6 +17,7 @@ const getters = {
       abimoHandler: AbimoHandler,
       projectStarter: ProjectStarter,
       baseMaps: BaseMaps,
+      themeMaps: ThemeMaps,
     };
 
     moduleCollection = { ...coreModules, ...moduleCollection };
