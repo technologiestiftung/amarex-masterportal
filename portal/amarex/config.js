@@ -74,6 +74,7 @@ const Config = {
     "abimoHandler",
     "projectStarter",
     "baseMaps",
+    "themeMaps",
   ],
 };
 
