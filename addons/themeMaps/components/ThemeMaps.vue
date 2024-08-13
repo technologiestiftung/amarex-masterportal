@@ -39,22 +39,11 @@ export default {
     ]),
     ...mapGetters("Modules/ThemeMaps", [
       "themeMapsConfs",
-      "baselayerConfs",
       "lastThemeMapsFolderNames",
       "layerInfoVisible",
     ]),
     categorySwitcher() {
       return this.portalConfig?.tree?.categories;
-    },
-    filteredBaseLayers() {
-      return this.mode === "3D"
-        ? this.baselayerConfs.filter(
-            (conf) =>
-              !layerFactory
-                .getLayerTypesNotVisibleIn3d()
-                .includes(conf.typ?.toUpperCase()),
-          )
-        : this.baselayerConfs;
     },
   },
   created() {
@@ -69,11 +58,11 @@ export default {
       "navigateBack",
       "navigateForward",
       "reset",
-    ]),
-    ...mapMutations("Modules/ThemeMaps", [
       "setLayerInfoVisible",
       "setHighlightLayerId",
+      "changeVisibility",
     ]),
+    ...mapMutations("Modules/ThemeMaps", []),
     initializeComponent() {
       this.activeCategory = this.activeOrFirstCategory?.key;
       this.provideSelectAllProps();
@@ -81,6 +70,10 @@ export default {
     },
     cleanupComponent() {
       if (!this.layerInfoVisible) {
+        // reset layer selection
+        this.themeMapsConfs.forEach((conf) => {
+          this.changeVisibility({ layerId: conf.id, value: false });
+        });
         this.reset();
       }
       this.setHighlightLayerId(null);
