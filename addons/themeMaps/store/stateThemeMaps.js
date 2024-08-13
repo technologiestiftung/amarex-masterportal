@@ -9,17 +9,14 @@ export default {
   description: "Theme Maps",
   name: "Theme Maps",
   icon: "bi-geo-fill",
-  
+
   visible: true,
-  subjectDataLayerConfs: [],
-  baselayerConfs: [],
-  lastFolderNames: [],
-  lastSubjectDataLayerConfs: [],
-  lastBaselayerConfs: [],
+  themeMapsConfs: [],
+  lastThemeMapsFolderNames: [],
+  lastThemeMapsConfs: [],
+
   layerInfoVisible: true,
   highlightLayerId: null,
   encompassingBoundingBox: [Infinity, Infinity, -Infinity, -Infinity],
 };
-
-
 

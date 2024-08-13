@@ -4,11 +4,9 @@ import SearchBar from "../../../src/modules/searchBar/components/SearchBar.vue";
 import LayerCheckBox from "../../../src/modules/layerTree/components/LayerCheckBox.vue";
 import LayerSelectionTreeNode from "../../../src/modules/layerSelection/components/LayerSelectionTreeNode.vue";
 import LayerTree from "../../../src/modules/layerTree/components/LayerTree.vue";
-import {
-  treeBaselayersKey,
-  treeSubjectsKey,
-} from "../../../src/shared/js/utils/constants";
+import { treeSubjectsKey } from "../../../src/shared/js/utils/constants";
 import sortBy from "../../../src/shared/js/utils/sortBy";
+import layerFactory from "../../../src/core/layers/js/layerFactory";
 
 export default {
   name: "ThemeMaps",
@@ -42,21 +40,15 @@ export default {
     ]),
     ...mapGetters("Modules/ThemeMaps", [
       "visible",
-      "subjectDataLayerConfs",
+      "themeMapsConfs",
       "baselayerConfs",
-      "lastFolderNames",
+      "lastThemeMapsFolderNames",
       "layerInfoVisible",
       "highlightLayerId",
     ]),
 
     categorySwitcher() {
       return this.portalConfig?.tree?.categories;
-    },
-    subjectDataLayerConfs() {
-      const configs = this.allLayerConfigsStructured(treeSubjectsKey);
-      const themeMaps = configs.filter((conf) => conf.name === "Themenkarten");
-
-      return themeMaps;
     },
   },
   unmounted() {
@@ -68,9 +60,13 @@ export default {
   created() {
     this.activeCategory = this.activeOrFirstCategory?.key;
     this.provideSelectAllProps();
-    this.subjectDataLayerConfs = this.allLayerConfigsStructured(
-      treeSubjectsKey,
-    ).filter((conf) => conf.name === "Themenkarten");
+
+    const configs = this.allLayerConfigsStructured(treeSubjectsKey);
+    const themeMapsConfs = configs.filter(
+      (conf) => conf.name === "Themenkarten",
+    );
+
+    this.navigateForward({ lastFolderName: "root", themeMapsConfs });
   },
   methods: {
     ...mapActions(["changeCategory"]),
@@ -97,7 +93,7 @@ export default {
      * @returns {void}
      */
     navigateStepsBack(level) {
-      const end = this.lastFolderNames.length - level - 1;
+      const end = this.lastThemeMapsFolderNames.length - level - 1;
 
       for (let index = 0; index < end; index++) {
         this.navigateBack();
@@ -111,13 +107,13 @@ export default {
     /**
      * Listener for click on folder.
      * @param {String} lastFolderName name to show in menu to navigate back to
-     * @param {Array} subjectDataLayerConfs configs to show
+     * @param {Array} themeMapsConfs configs to show
      * @returns {void}
      */
-    folderClicked(lastFolderName, subjectDataLayerConfs) {
+    folderClicked(lastFolderName, themeMapsConfs) {
       this.navigateForward({
         lastFolderName,
-        subjectDataLayerConfs: this.sort(subjectDataLayerConfs),
+        themeMapsConfs: this.sort(themeMapsConfs),
       });
 
       this.$nextTick(() => {
@@ -144,9 +140,9 @@ export default {
      * @returns {void}
      */
     provideSelectAllProps() {
-      this.subjectDataLayerConfs.forEach((conf) => {
+      this.themeMapsConfs.forEach((conf) => {
         if (this.isControlledBySelectAll(conf) && this.selectAllConfId === -1) {
-          this.selectAllConfigs = this.subjectDataLayerConfs.filter((config) =>
+          this.selectAllConfigs = this.themeMapsConfs.filter((config) =>
             this.isControlledBySelectAll(config),
           );
           this.selectAllConfId = conf.id;
@@ -204,7 +200,7 @@ export default {
           v-if="
             activeOrFirstCategory &&
             categorySwitcher &&
-            lastFolderNames.length === 1
+            lastThemeMapsFolderNames.length === 1
           "
           class="form-floating mb-3 mt-3"
         >
@@ -231,27 +227,27 @@ export default {
         >
           <!-- INFO: Navigation -->
           <h5
-            v-if="lastFolderNames.length === 1"
+            v-if="lastThemeMapsFolderNames.length === 1"
             class="layer-selection-subheadline"
           >
             {{ $t("common:modules.layerSelection.datalayer") }}
           </h5>
           <nav
-            v-if="lastFolderNames.length > 1"
+            v-if="lastThemeMapsFolderNames.length > 1"
             aria-label="breadcrumb"
             class="position-sticky top-0 bg-white py-3"
           >
             <ol class="breadcrumb mb-0">
               <li
-                v-for="(lastFolderName, index) in lastFolderNames"
+                v-for="(lastFolderName, index) in lastThemeMapsFolderNames"
                 :key="index"
                 :class="[
                   'breadcrumb-item',
-                  index === lastFolderNames.length - 1 ? 'active' : '',
+                  index === lastThemeMapsFolderNames.length - 1 ? 'active' : '',
                 ]"
               >
                 <a
-                  v-if="index < lastFolderNames.length - 1"
+                  v-if="index < lastThemeMapsFolderNames.length - 1"
                   class="mp-menu-navigation"
                   href="#"
                   @click="navigateStepsBack(index)"
@@ -277,7 +273,7 @@ export default {
           <!-- END Navigation -->
 
           <template
-            v-for="(conf, idx) in subjectDataLayerConfs"
+            v-for="(conf, idx) in themeMapsConfs"
             :key="idx"
           >
             <LayerSelectionTreeNode

@@ -75,9 +75,8 @@ const actions = {
       rootGetters,
     );
 
-    commit("setLastFolderNames", data.lastFolderNames);
-    commit("setLastBaselayerConfs", data.lastBaselayerConfs);
-    commit("setLastSubjectDataLayerConfs", data.lastSubjectDataLayerConfs);
+    commit("setlastThemeMapsFolderNames", data.lastThemeMapsFolderNames);
+    commit("setLastThemeMapsConfs", data.lastThemeMapsConfs);
   },
 
   /**
@@ -86,21 +85,15 @@ const actions = {
    * @param {Object} param.state the state
    * @param {Object} payload the payload
    * @param {String} payload.lastFolderName name of the previous folder configuration name
-   * @param {Array} payload.subjectDataLayerConfs subject data layer configurations to show in layerSelection
-   * @param {Array} payload.baselayerConfs baselayer configurations to show in layerSelection
+   * @param {Array} payload.themeMapsConfs themeMap configurations to show in layerSelection
    * @returns {void}
    */
-  navigateForward(
-    { commit },
-    { lastFolderName, subjectDataLayerConfs, baselayerConfs = [] },
-  ) {
-    commit("addToLayerSelection", {
+  navigateForward({ commit }, { lastFolderName, themeMapsConfs }) {
+    commit("addToThemeMaps", {
       lastFolderName,
-      subjectDataLayerConfs,
-      baselayerConfs,
+      themeMapsConfs,
     });
-    commit("setBaselayerConfs", baselayerConfs);
-    commit("setSubjectDataLayerConfs", subjectDataLayerConfs);
+    commit("setThemeMapsConfs", themeMapsConfs);
   },
 
   /**
@@ -113,14 +106,8 @@ const actions = {
   navigateBack({ commit, getters }) {
     commit("reduceToPreviousLayerSelection");
     commit(
-      "setSubjectDataLayerConfs",
-      getters.lastSubjectDataLayerConfs[
-        getters.lastSubjectDataLayerConfs.length - 1
-      ],
-    );
-    commit(
-      "setBaselayerConfs",
-      getters.lastBaselayerConfs[getters.lastBaselayerConfs.length - 1],
+      "setThemeMapsConfs",
+      getters.lastThemeMapsConfs[getters.lastThemeMapsConfs.length - 1],
     );
   },
 
@@ -132,8 +119,7 @@ const actions = {
    */
   reset({ commit }) {
     commit("clearLayerSelection");
-    commit("setSubjectDataLayerConfs", []);
-    commit("setBaselayerConfs", []);
+    commit("setThemeMapsConfs", []);
   },
 
   /**
@@ -153,8 +139,7 @@ const actions = {
 
     if (layerConfig) {
       let lastFolderName = "",
-        subjectDataLayerConfs,
-        baselayerConfs,
+        themeMapsConfs,
         folder = null;
 
       if (layerConfig.parentId) {
@@ -162,11 +147,10 @@ const actions = {
 
         if (folder) {
           lastFolderName = folder.name;
-          subjectDataLayerConfs = sortBy(
+          themeMapsConfs = sortBy(
             folder.elements,
             (conf) => conf.type !== "folder",
           );
-          baselayerConfs = [];
           dispatch("setNavigationByFolder", { folder });
         } else {
           console.warn(
@@ -177,17 +161,15 @@ const actions = {
           );
         }
       } else {
-        subjectDataLayerConfs = sortBy(
+        themeMapsConfs = sortBy(
           rootGetters.allLayerConfigsStructured(treeSubjectsKey),
           (conf) => conf.type !== "folder",
         );
-        baselayerConfs = rootGetters.allBaselayerConfigs;
       }
-      if (subjectDataLayerConfs) {
+      if (themeMapsConfs) {
         dispatch("navigateForward", {
           lastFolderName,
-          subjectDataLayerConfs,
-          baselayerConfs,
+          themeMapsConfs,
         });
         commit("setHighlightLayerId", layerId);
         commit("setVisible", true);
