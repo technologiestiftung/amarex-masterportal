@@ -147,9 +147,9 @@ export default {
 <template>
   <div class="theme-layer-selection">
     <LayerTree />
-    <SearchBar v-if="addLayerButtonSearchActive === true" />
-    <hr />
-    <div class="layer-selection-navigation d-flex">
+    <!-- <SearchBar v-if="addLayerButtonSearchActive === true" /> -->
+    <!-- <hr /> -->
+    <div class="layer-selection-navigation d-flex pt-3">
       <div
         v-if="showAllResults === false"
         class="layer-selection-navigation"

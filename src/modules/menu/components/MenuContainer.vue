@@ -161,7 +161,7 @@ export default {
                     class="mb-5 mt-4"
                     v-bind="titleBySide(side)"
                 />
-                <!-- Masterportal Search Bar origin -->
+                <!-- Masterportal origin Search Bar -->
                 <!-- <SearchBar
                     :click-action="openSearchBar"
                 /> -->

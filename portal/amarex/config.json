@@ -8,11 +8,7 @@
         "zoom": true,
         "tiltView": true,
         "startModule": {
-          "secondaryMenu": [
-            {
-              "type": "addWMS"
-            }
-          ]
+          "secondaryMenu": []
         },
         "totalView": true,
         "expandable": {
@@ -221,22 +217,12 @@
         {
           "name": "Potentialkarten",
           "type": "folder",
-          "elements": [
-            {
-              "id": "planung_abimo",
-              "visibility": false
-            }
-          ]
+          "elements": []
         },
         {
           "name": "Hintergrundkarten",
           "type": "folder",
-          "elements": [
-            {
-              "id": "rabimo_input_2020",
-              "visibility": false
-            }
-          ]
+          "elements": []
         },
         {
           "name": "Themenkarten",
@@ -245,29 +231,19 @@
             {
               "name": "Maßnahmenpotentiale",
               "type": "folder",
-              "elements": [
-                {
-                  "id": "abimo_2020_wfs",
-                  "visibility": false
-                }
-              ]
+              "elements": []
             },
             {
               "name": "Starkregen",
               "type": "folder",
-              "elements": [
-                {
-                  "id": "abimo_2020_wfs",
-                  "visibility": false
-                }
-              ]
+              "elements": []
             },
             {
               "name": "Grundwasser",
               "type": "folder",
               "elements": [
                 {
-                  "id": "abimo_2020_wfs",
+                  "id": "wfs_02_07flurab2009",
                   "visibility": false
                 }
               ]
@@ -277,7 +253,7 @@
               "type": "folder",
               "elements": [
                 {
-                  "id": "abimo_2020_wfs",
+                  "id": "ua_boden_regelfkt_2020:wfs:regel2020",
                   "visibility": false
                 }
               ]
@@ -287,7 +263,11 @@
               "type": "folder",
               "elements": [
                 {
-                  "id": "abimo_2020_wfs",
+                  "id": "wmsk_04106_kenntage2015:5",
+                  "visibility": false
+                },
+                {
+                  "id": "wmsk_04106_kenntage2015:3",
                   "visibility": false
                 }
               ]

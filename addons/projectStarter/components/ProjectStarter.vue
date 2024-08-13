@@ -1,6 +1,7 @@
 <script>
 import SearchBar from "../../../src/modules/searchBar/components/SearchBar.vue";
 import ProjectUploader from "../../projectUploader/components/ProjectUploader.vue";
+import { mapActions } from "vuex";
 
 /**
  * Project Starter
@@ -17,11 +18,31 @@ export default {
       fileUploaded: false,
       filesToUpload: [],
       selectedFiles: {},
+      project: {
+        title:
+          "",
+        description: "",
+        date: new Date().toDateString(),
+      },
     };
   },
   computed: {},
   mounted() {},
-  methods: {},
+  methods: {
+    ...mapActions("Menu", ["clickedMenuElement", "toggleMenu", "closeMenu"]),
+
+    /**
+     * Opens the searchbar module.
+     * @returns {void}
+     */
+    openSearchBar() {
+      // this.clickedMenuElement({
+      //   name: "common:modules.searchBar.searchResultList",
+      //   side: 'secondaryMenu',
+      //   type: "searchbar",
+      // });
+    },
+  },
 };
 </script>
 
@@ -84,8 +105,37 @@ export default {
           data-bs-parent="#accordionExample"
         >
           <div class="accordion-body">
-            <p>Project Starter Intro</p>
-            <SearchBar />
+            <p>Neues Projekt Anlegen</p>
+
+            <div class="mb-3">
+              <label
+                for="reportTitle"
+                class="form-label"
+                >Projektname:</label
+              >
+              <textarea
+                id="reportTitle"
+                v-model="project.title"
+                class="form-control"
+                rows="2"
+              />
+            </div>
+            <div class="mb-3">
+              <label
+                for="projectDescription"
+                class="form-label"
+                >Projektbeschreibung:</label
+              >
+              <textarea
+                id="projectDescription"
+                v-model="project.description"
+                class="form-control"
+                rows="3"
+              />
+            </div>
+
+            <SearchBar :click-action="openSearchBar" />
+
           </div>
         </div>
       </div>
