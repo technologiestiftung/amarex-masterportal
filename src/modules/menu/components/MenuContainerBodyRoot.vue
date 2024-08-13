@@ -23,7 +23,8 @@ export default {
         { label: '3. Themenkarten', component: 'themeMaps' },
         { label: '4. Maßnahmenpotentiale', component: 'actionPotentials' },
         { label: '5. Wasserhaushalt berechnen', component: 'abimoHandler' },
-        { label: '6. Eigene Notizen', component: 'reportPrinter' },
+        { label: '6. Eigene Notizen', component: 'draw' },
+        { label: '7. Eigene Notizen', component: 'draw_old' },
         { label: 'X. ESB Tool', component: 'esbTool' },
         { label: 'X. Multikriterien Analyse', component: 'multiCriteria' },
         { label: 'X. Report zusammenstellen', component: 'reportPrinter' },
@@ -59,7 +60,7 @@ export default {
     },
     mounted() {
         if (this.side === 'mainMenu' && this.steps.length > 0) {
-            this.selectStep(this.steps[0], 0);
+            this.selectStep(this.steps[2], 2);
         }
     },
     methods: {
@@ -93,19 +94,20 @@ export default {
         :id="'mp-body-root-'+side"
     >       
         <div class="stepper-root mb-5 d-flex flex-column gap-2" v-if="side === 'mainMenu'">
-        <button 
-            v-for="(step, index) in steps" 
-            :key="index"
-            class="btn"
-            :class="{ 'btn-primary': index === currentStepIndex, 'btn-secondary': index !== currentStepIndex }"
-            @click="selectStep(step, index)"
-        >
-            {{ step.label }}
-        </button>
+            <button 
+                v-for="(step, index) in steps" 
+                :key="index"
+                class="btn"
+                :class="{ 'btn-primary': index === currentStepIndex, 'btn-secondary': index !== currentStepIndex }"
+                @click="selectStep(step, index)"
+            >
+                {{ step.label }}
+            </button>
         </div>
 
         <!-- Masterportal origin Layer Tree  -->
         <!-- <LayerTree v-if="side === 'mainMenu'" /> -->
+        
         <template
             v-for="(_, key) in menu.sections"
             :key="key"
