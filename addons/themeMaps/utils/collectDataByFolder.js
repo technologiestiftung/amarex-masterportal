@@ -8,21 +8,18 @@ import sortBy from "../../../src/shared/js/utils/sortBy";
  * @returns {Object} baselayerConfs, subjectDataLayerConfs and folderNames
  */
 function collectDataByFolder(folder, rootGetters) {
-  const lastBaselayerConfs = [],
-    lastFolderNames = [],
-    lastSubjectDataLayerConfs = [];
+  const lastThemeMapsFolderNames = [],
+    lastThemeMapsConfs = [];
 
   inspectParentFolder(
     folder,
     rootGetters,
-    lastBaselayerConfs,
-    lastFolderNames,
-    lastSubjectDataLayerConfs,
+    lastThemeMapsFolderNames,
+    lastThemeMapsConfs,
   );
   return {
-    lastBaselayerConfs: lastBaselayerConfs.reverse(),
-    lastSubjectDataLayerConfs: lastSubjectDataLayerConfs.reverse(),
-    lastFolderNames: lastFolderNames.reverse(),
+    lastThemeMapsConfs: lastThemeMapsConfs.reverse(),
+    lastThemeMapsFolderNames: lastThemeMapsFolderNames.reverse(),
   };
 }
 
@@ -30,37 +27,32 @@ function collectDataByFolder(folder, rootGetters) {
  * Collects baselayerConfs, subjectDataLayerConfs and folderNames from given folder up to root.
  * @param {Object} folder folder of layerConfig
  * @param {Object} rootGetters the vuex rootGetters
- * @param {Array} lastBaselayerConfs to fill with baselayerConfs from given folder up to root
- * @param {Array} lastFolderNames to fill with folderNames from given folder up to root
- * @param {Array} lastSubjectDataLayerConfs to fill with subjectDataLayerConfs from given folder up to root
+ * @param {Array} lastThemeMapsFolderNames to fill with folderNames from given folder up to root
+ * @param {Array} lastThemeMapsConfs to fill with subjectDataLayerConfs from given folder up to root
  * @returns {void}
  */
 function inspectParentFolder(
   folder,
   rootGetters,
-  lastBaselayerConfs,
-  lastFolderNames,
-  lastSubjectDataLayerConfs,
+  lastThemeMapsFolderNames,
+  lastThemeMapsConfs,
 ) {
   if (folder.parentId !== undefined) {
     const parentFolder = rootGetters.folderById(folder.parentId);
 
-    lastBaselayerConfs.push([]);
-    lastFolderNames.push(parentFolder.name);
-    lastSubjectDataLayerConfs.push(
+    lastThemeMapsFolderNames.push(parentFolder.name);
+    lastThemeMapsConfs.push(
       sortBy(parentFolder.elements, (conf) => conf.type !== "folder"),
     );
     inspectParentFolder(
       parentFolder,
       rootGetters,
-      lastBaselayerConfs,
-      lastFolderNames,
-      lastSubjectDataLayerConfs,
+      lastThemeMapsFolderNames,
+      lastThemeMapsConfs,
     );
   } else {
-    lastBaselayerConfs.push(rootGetters.allBaselayerConfigs);
-    lastFolderNames.push("root");
-    lastSubjectDataLayerConfs.push(
+    lastThemeMapsFolderNames.push("themeMaps");
+    lastThemeMapsConfs.push(
       sortBy(
         rootGetters.allLayerConfigsStructured(treeSubjectsKey),
         (conf) => conf.type !== "folder",
