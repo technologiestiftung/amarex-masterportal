@@ -26,7 +26,6 @@ export default {
   computed: {
     ...mapGetters([
       "allLayerConfigsStructured",
-      "showLayerAddButton",
       "activeOrFirstCategory",
       "allCategories",
       "portalConfig",
@@ -39,34 +38,30 @@ export default {
       "showAllResults",
     ]),
     ...mapGetters("Modules/ThemeMaps", [
-      "visible",
       "themeMapsConfs",
       "baselayerConfs",
       "lastThemeMapsFolderNames",
       "layerInfoVisible",
-      "highlightLayerId",
     ]),
-
     categorySwitcher() {
       return this.portalConfig?.tree?.categories;
     },
-  },
-  unmounted() {
-    if (!this.layerInfoVisible) {
-      this.reset();
-    }
-    this.setHighlightLayerId(null);
+    filteredBaseLayers() {
+      return this.mode === "3D"
+        ? this.baselayerConfs.filter(
+            (conf) =>
+              !layerFactory
+                .getLayerTypesNotVisibleIn3d()
+                .includes(conf.typ?.toUpperCase()),
+          )
+        : this.baselayerConfs;
+    },
   },
   created() {
-    this.activeCategory = this.activeOrFirstCategory?.key;
-    this.provideSelectAllProps();
-
-    const configs = this.allLayerConfigsStructured(treeSubjectsKey);
-    const themeMapsConfs = configs.filter(
-      (conf) => conf.name === "Themenkarten",
-    );
-
-    this.navigateForward({ lastFolderName: "root", themeMapsConfs });
+    this.initializeComponent();
+  },
+  unmounted() {
+    this.cleanupComponent();
   },
   methods: {
     ...mapActions(["changeCategory"]),
@@ -79,108 +74,71 @@ export default {
       "setLayerInfoVisible",
       "setHighlightLayerId",
     ]),
-    /**
-     * Sorts the configs by type: first folder, then layer.
-     * @param {Array} configs list of layer and folder configs
-     * @returns {Array} the sorted configs
-     */
-    sort(configs) {
+    initializeComponent() {
+      this.activeCategory = this.activeOrFirstCategory?.key;
+      this.provideSelectAllProps();
+      this.initializeThemeMapsConfs();
+    },
+    cleanupComponent() {
+      if (!this.layerInfoVisible) {
+        this.reset();
+      }
+      this.setHighlightLayerId(null);
+    },
+    initializeThemeMapsConfs() {
+      const configs = this.allLayerConfigsStructured(treeSubjectsKey);
+      const themeMapsConfs = configs.filter(
+        (conf) => conf.name === "Themenkarten",
+      );
+      this.navigateForward({ lastFolderName: "root", themeMapsConfs });
+    },
+    sortConfigs(configs) {
       return sortBy(configs, (conf) => conf.type !== "folder");
     },
-    /**
-     * Navigates backwards in folder-menu.
-     * @param {Number} level level to go back to
-     * @returns {void}
-     */
     navigateStepsBack(level) {
-      const end = this.lastThemeMapsFolderNames.length - level - 1;
-
-      for (let index = 0; index < end; index++) {
+      const stepsToGoBack = this.lastThemeMapsFolderNames.length - level - 1;
+      for (let i = 0; i < stepsToGoBack; i++) {
         this.navigateBack();
       }
-      this.$nextTick(() => {
-        this.selectAllConfId = -1;
-        this.selectAllConfigs = [];
-        this.provideSelectAllProps();
-      });
+      this.$nextTick(this.resetSelectAllProps);
     },
-    /**
-     * Listener for click on folder.
-     * @param {String} lastFolderName name to show in menu to navigate back to
-     * @param {Array} themeMapsConfs configs to show
-     * @returns {void}
-     */
     folderClicked(lastFolderName, themeMapsConfs) {
       this.navigateForward({
         lastFolderName,
-        themeMapsConfs: this.sort(themeMapsConfs),
+        themeMapsConfs: this.sortConfigs(themeMapsConfs),
       });
-
-      this.$nextTick(() => {
-        this.selectAllConfId = -1;
-        this.selectAllConfigs = [];
-        this.provideSelectAllProps();
-      });
+      this.$nextTick(this.resetSelectAllProps);
     },
-    /**
-     * Returns true, if configuration shall be controlled by SelectAllCheckBox.
-     * @param {Object} conf layer or folder configuration
-     * @returns {Boolean} true, if configuration shall be controlled by SelectAllCheckBox
-     */
+    resetSelectAllProps() {
+      this.selectAllConfId = -1;
+      this.selectAllConfigs = [];
+      this.provideSelectAllProps();
+    },
     isControlledBySelectAll(conf) {
       return (
         conf.type === "layer" &&
-        (this.mode === "2D"
-          ? !layerFactory.getLayerTypes3d().includes(conf.typ?.toUpperCase())
-          : true)
+        (this.mode === "2D" ||
+          !layerFactory.getLayerTypes3d().includes(conf.typ?.toUpperCase()))
       );
     },
-    /**
-     * Provides data for SelectAllCheckBox props.
-     * @returns {void}
-     */
     provideSelectAllProps() {
-      this.themeMapsConfs.forEach((conf) => {
-        if (this.isControlledBySelectAll(conf) && this.selectAllConfId === -1) {
-          this.selectAllConfigs = this.themeMapsConfs.filter((config) =>
-            this.isControlledBySelectAll(config),
-          );
-          this.selectAllConfId = conf.id;
-        }
-      });
+      const controlledConfigs = this.themeMapsConfs.filter(
+        this.isControlledBySelectAll,
+      );
+      if (controlledConfigs.length > 0) {
+        this.selectAllConfigs = controlledConfigs;
+        this.selectAllConfId = controlledConfigs[0].id;
+      }
     },
-    /**
-     * Changes category after selection.
-     * @param {String} value key of the category
-     * @returns {void}
-     */
     categorySelected(value) {
       if (typeof value === "string") {
         const category = this.allCategories.find(
           (aCategory) => aCategory.key === value,
         );
-
-        this.allCategories.forEach((aCategory) => {
-          aCategory.active = false;
-        });
+        this.allCategories.forEach((aCategory) => (aCategory.active = false));
         category.active = true;
         this.changeCategory(category);
       }
-    },
-    /**
-     * Filters baselayers for mode '2D' or '3D'.
-     * @returns {Array} list of filtered baselayers
-     */
-    filterBaseLayer() {
-      if (this.mode === "3D") {
-        return this.baselayerConfs.filter(
-          (conf) =>
-            !layerFactory
-              .getLayerTypesNotVisibleIn3d()
-              .includes(conf.typ?.toUpperCase()),
-        );
-      }
-      return this.baselayerConfs;
     },
   },
 };
