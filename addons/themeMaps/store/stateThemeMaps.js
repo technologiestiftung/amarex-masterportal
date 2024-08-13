@@ -15,7 +15,7 @@ export default {
   lastThemeMapsFolderNames: [],
   lastThemeMapsConfs: [],
 
-  layerInfoVisible: true,
+  layerInfoVisible: false,
   highlightLayerId: null,
   encompassingBoundingBox: [Infinity, Infinity, -Infinity, -Infinity],
 };
