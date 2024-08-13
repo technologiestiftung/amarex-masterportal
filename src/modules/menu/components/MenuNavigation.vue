@@ -63,12 +63,14 @@ export default {
                 @click="resetMenu(side)"
             />
         </div>
-        <h4
+
+        <!-- Masterportal origin Menu Title -->
+        <!-- <h4
             v-if="currentTitle !== 'none'"
             class="mp-menu-navigation-moduletitle mb-4"
         >
             {{ currentTitle }}
-        </h4>
+        </h4> -->
     </div>
 </template>
 
