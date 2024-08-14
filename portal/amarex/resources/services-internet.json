@@ -24,7 +24,7 @@
     ],
     "notSupportedIn3D": false,
     "preview": {
-      "src": "./resources/img/backgroundCanvas.jpeg"
+      "src": "./resources/img/basemap_default_grau.png"
     }
   },
   {
@@ -70,7 +70,10 @@
         "md_id": "3361473d-79cb-3a8b-8a3f-2b4f5751b58d",
         "rs_id": "https://registry.gdi-de.org/id/de.be.csw/e18fd30d-8891-3cf3-81ca-02ba25adee17"
       }
-    ]
+    ],
+    "preview": {
+      "src": "./resources/img/truedop_2024.png"
+    }
   },
   {
     "id": "basemap_raster_color",
@@ -92,7 +95,10 @@
         "csw_url": "https://gdk.gdi-de.org/gdi-de/srv/ger/csw",
         "show_doc_url": "https://gdz.bkg.bund.de/index.php/default/wmts-basemapde-webraster-wmts-basemapde-webraster.html#"
       }
-    ]
+    ],
+    "preview": {
+      "src": "./resources/img/basemap_raster_color.png"
+    }
   },
   {
     "id": "webatlas_wms_color",
@@ -125,7 +131,10 @@
         "csw_url": "https://gdk.gdi-de.org/gdi-de/srv/ger/csw",
         "show_doc_url": "https://geobroker.geobasis-bb.de/gbss.php?MODE=GetProductInformation&PRODUCTID=d2eaa212-f68d-4e2d-a7e7-8e8063d1b855#"
       }
-    ]
+    ],
+    "preview": {
+      "src": "./resources/img/webatlas_wms_color.png"
+    }
   },
   {
     "id": "hg_openlayer_wmts",
@@ -135,7 +144,10 @@
     "typ": "WMTS",
     "tileMatrixSet": "gdi_be_25833",
     "layers": "hg_openlayer_farbig",
-    "optionsFromCapabilities": true
+    "optionsFromCapabilities": true,
+    "preview": {
+      "src": "./resources/img/hg_openlayer_wmts.png"
+    }
   },
   {
     "id": "hintergrund_default_farbe",
@@ -159,7 +171,10 @@
         "csw_url": "https://gdk.gdi-de.org/gdi-de/srv/ger/csw",
         "show_doc_url": "https://gdz.bkg.bund.de/index.php/default/wmts-basemapde-webraster-wmts-basemapde-webraster.html#"
       }
-    ]
+    ],
+    "preview": {
+      "src": "./resources/img/backgroundCanvas.jpeg"
+    }
   },
   {
     "id": "hintergrund_orthophoto",
@@ -177,7 +192,10 @@
       }
     ],
     "optionsFromCapabilities": true,
-    "layerAttribution": "Für die Nutzung der Daten ist die Datenlizenz Deutschland - Namensnennung - Version 2.0 anzuwenden. Die Lizenz ist über https://www.govdata.de/dl-de/by-2-0 abrufbar. Der Quellenvermerk gemäß (2) der Lizenz lautet \"Geoportal Berlin / [Titel des Datensatzes]\""
+    "layerAttribution": "Für die Nutzung der Daten ist die Datenlizenz Deutschland - Namensnennung - Version 2.0 anzuwenden. Die Lizenz ist über https://www.govdata.de/dl-de/by-2-0 abrufbar. Der Quellenvermerk gemäß (2) der Lizenz lautet \"Geoportal Berlin / [Titel des Datensatzes]\"",
+    "preview": {
+      "src": "./resources/img/backgroundCanvas.jpeg"
+    }
   },
   {
     "id": "hintergrund_k5_farbe",
@@ -196,7 +214,10 @@
       }
     ],
     "optionsFromCapabilities": true,
-    "layerAttribution": "Für die Nutzung der Daten ist die Datenlizenz Deutschland - Namensnennung - Version 2.0 anzuwenden. Die Lizenz ist über https://www.govdata.de/dl-de/by-2-0 abrufbar. Der Quellenvermerk gemäß (2) der Lizenz lautet \"Geoportal Berlin / [Titel des Datensatzes]\""
+    "layerAttribution": "Für die Nutzung der Daten ist die Datenlizenz Deutschland - Namensnennung - Version 2.0 anzuwenden. Die Lizenz ist über https://www.govdata.de/dl-de/by-2-0 abrufbar. Der Quellenvermerk gemäß (2) der Lizenz lautet \"Geoportal Berlin / [Titel des Datensatzes]\"",
+    "preview": {
+      "src": "./resources/img/backgroundCanvas.jpeg"
+    }
   },
   {
     "id": "hintergrund_k5_grau",
@@ -215,7 +236,10 @@
       }
     ],
     "optionsFromCapabilities": true,
-    "layerAttribution": "Für die Nutzung der Daten ist die Datenlizenz Deutschland - Namensnennung - Version 2.0 anzuwenden. Die Lizenz ist über https://www.govdata.de/dl-de/by-2-0 abrufbar. Der Quellenvermerk gemäß (2) der Lizenz lautet \"Geoportal Berlin / [Titel des Datensatzes]\""
+    "layerAttribution": "Für die Nutzung der Daten ist die Datenlizenz Deutschland - Namensnennung - Version 2.0 anzuwenden. Die Lizenz ist über https://www.govdata.de/dl-de/by-2-0 abrufbar. Der Quellenvermerk gemäß (2) der Lizenz lautet \"Geoportal Berlin / [Titel des Datensatzes]\"",
+    "preview": {
+      "src": "./resources/img/backgroundCanvas.jpeg"
+    }
   },
   {
     "id": "k_alkis_land:1",
@@ -239,34 +263,9 @@
     "featureCount": "5",
     "gfiTheme": "default",
     "transparent": true,
-    "singleTile": true
-  },
-  {
-    "id": "base_layer_002",
-    "name": "Hintergrund Berlin 002",
-    "name_lang": "basemap.de Web Raster Grau",
-    "capabilitiesUrl": "https://sgx.geodatenzentrum.de/wmts_basemapde/1.0.0/WMTSCapabilities.xml",
-    "url": "https://sgx.geodatenzentrum.de/wmts_basemapde/1.0.0/",
-    "typ": "WMTS",
-    "tileMatrixSet": "DE_EPSG_25833_ADV",
-    "layers": "de_basemapde_web_raster_grau",
-    "optionsFromCapabilities": true,
-    "crs": "http://www.opengis.net/def/crs/EPSG/0/25833",
-    "legend": [
-      "https://sgx.geodatenzentrum.de/wms_basemapde?format=image/png&layer=de_basemapde_web_raster_grau&sld_version=1.1.0&request=GetLegendGraphic&service=WMS&version=1.1.1&styles="
-    ],
-    "layerAttribution": "© basemap.de / BKG (Monat) (Jahr)",
-    "datasets": [
-      {
-        "md_id": "FE1D2837-ABE0-46B5-9821-BB11BAF22531",
-        "rs_id": "https://registry.gdi-de.org/id/de.bund.bkg.csw/68f48957-a20f-3d93-bd62-e59ce6bd99fa",
-        "csw_url": "https://gdk.gdi-de.org/gdi-de/srv/ger/csw",
-        "show_doc_url": "https://gdz.bkg.bund.de/index.php/default/wmts-basemapde-webraster-wmts-basemapde-webraster.html#"
-      }
-    ],
-    "notSupportedIn3D": false,
+    "singleTile": true,
     "preview": {
-      "src": "./resources/img/backgroundCanvas,jpeg"
+      "src": "./resources/img/backgroundCanvas.jpeg"
     }
   },
   {
@@ -286,7 +285,10 @@
         "csw_url": "https://gdi.berlin.de/geonetwork/srv/ger/csw"
       }
     ],
-    "gfiAttributes": "showAll"
+    "gfiAttributes": "showAll",
+    "preview": {
+      "src": "./resources/img/backgroundCanvas.jpeg"
+    }
   },
 
   {
@@ -1033,4 +1035,9 @@
     "layerAttribution": "Für die Nutzung der Daten ist die Datenlizenz Deutschland - Namensnennung - Version 2.0 anzuwenden. Die Lizenz ist über https://www.govdata.de/dl-de/by-2-0 abrufbar. Der Quellenvermerk gemäß (2) der Lizenz lautet \"Umweltatlas Berlin / [Titel des Datensatzes]\"."
   }
 ]
+
+
+
+
+
 

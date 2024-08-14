@@ -10,13 +10,12 @@ export default {
   },
   computed: {
     ...mapGetters("Maps", ["mode"]),
-    ...mapGetters("Modules/LayerSelection", ["visible", "baselayerConfs"]),
     ...mapGetters([
-      "allBaselayerConfigs",
       "isMobile",
       "visibleBaselayerConfigs",
       "allBaselayerConfigs",
       "layerConfigsByAttributes",
+      "allLayerConfigs",
     ]),
     ...mapGetters("Modules/BaseMaps", [
       "active",
@@ -60,6 +59,8 @@ export default {
         baselayer: true,
         showInLayerTree: true,
       });
+
+    console.log("[BaseMaps] baselayers::", baselayers);
 
     if (baselayers.length > 1) {
       const maxZIndexLayer = baselayers.reduce((max, layer) =>
@@ -116,7 +117,11 @@ export default {
       >
         <div>
           <img
-            :src="`https://picsum.photos/id/237/200/300`"
+            :src="
+              layer.preview.src
+                ? layer.preview.src
+                : `https://picsum.photos/id/237/200/300`
+            "
             :alt="layer.name"
             class="base-layer-thumbnail"
           />
@@ -159,12 +164,13 @@ export default {
 }
 
 .base-layer-thumbnail {
-  width: 35px;
-  height: 30px;
+  width: 45px;
+  height: 40px;
   margin-right: 10px;
   overflow: hidden;
   border-radius: 4px;
   object-fit: cover;
+  border: 1px solid #e4e4e4;
 }
 
 .base-layer-name {
