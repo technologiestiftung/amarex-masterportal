@@ -187,6 +187,14 @@
         {
           "id": "hg_openlayer_wmts",
           "visibility": false
+        },
+        {
+          "id": "truedop_2024",
+          "visibility": false
+        },
+        {
+          "id": "s_wfs_alkis",
+          "visibility": false
         }
       ]
     },
@@ -236,7 +244,84 @@
             {
               "name": "Starkregen",
               "type": "folder",
-              "elements": []
+              "elements": [
+                {
+                  "id": "ua_srgk:a_modellgebiete",
+                  "visibility": false
+                },
+                {
+                  "id": "ua_srgk:ba_fliessgeschwindigkeit_selten",
+                  "visibility": false
+                },
+                {
+                  "id": "ua_srgk:bb_fliessgeschwindigkeit_aussergewoehnlich",
+                  "visibility": false
+                },
+                {
+                  "id": "ua_srgk:bc_fliessgeschwindigkeit_extrem",
+                  "visibility": false
+                },
+                {
+                  "id": "ua_srgk:ca_wasserstand_selten",
+                  "visibility": false
+                },
+                {
+                  "id": "ua_srgk:cb_wasserstand_aussergewoehnlich",
+                  "visibility": false
+                },
+                {
+                  "id": "ua_srgk:cc_wassersand_extrem",
+                  "visibility": false
+                },
+                {
+                  "id": "ua_srgk:da_baumscheibe",
+                  "visibility": false
+                },
+                {
+                  "id": "ua_srgk:db_bordstein",
+                  "visibility": false
+                },
+                {
+                  "id": "ua_srgk:dc_fahrbahn",
+                  "visibility": false
+                },
+                {
+                  "id": "ua_srgk:dd_gebaeudefunktion",
+                  "visibility": false
+                },
+                {
+                  "id": "ua_srgk:de_gehweg",
+                  "visibility": false
+                },
+                {
+                  "id": "ua_srgk:df_gehwegueberfahrt",
+                  "visibility": false
+                },
+                {
+                  "id": "ua_srgk:dg_gleiskoerper",
+                  "visibility": false
+                },
+                {
+                  "id": "ua_srgk:dh_parkflaeche",
+                  "visibility": false
+                },
+                {
+                  "id": "ua_srgk:di_sonstigebefestfl",
+                  "visibility": false
+                },
+                {
+                  "id": "ua_srgk:dj_trennstreifen",
+                  "visibility": false
+                },
+                {
+                  "id": "ua_srgk:dk_vegetationsflaechen",
+                  "visibility": false
+                },
+                {
+                  "id": "ua_srhk:a_srhk_starkregengefahrenkarten_vorhanden",
+                  "visibility": false
+                }
+              ]
             },
             {
               "name": "Grundwasser",
@@ -268,6 +353,22 @@
                 },
                 {
                   "id": "wmsk_04106_kenntage2015:3",
+                  "visibility": false
+                },
+                {
+                  "id": "wmsk_04106_kenntage2015:4",
+                  "visibility": false
+                },
+                {
+                  "id": "wmsk_04106_kenntage2015:12",
+                  "visibility": false
+                },
+                {
+                  "id": "wmsk_04106_kenntage2015:13",
+                  "visibility": false
+                },
+                {
+                  "id": "wmsk_04106_kenntage2015:11",
                   "visibility": false
                 }
               ]
