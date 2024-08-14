@@ -295,5 +295,18 @@
         }
       }
     ]
+  },
+  {
+    "styleId": "default",
+    "rules": [
+      {
+        "style": {
+          "polygonStrokeWidth": 2,
+          "polygonStrokeColor": [84, 187, 168, 1],
+          "polygonFillColor": [0, 0, 0, 0]
+        }
+      }
+    ]
   }
 ]
+
