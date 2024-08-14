@@ -237,11 +237,6 @@
           "type": "folder",
           "elements": [
             {
-              "name": "Maßnahmenpotentiale",
-              "type": "folder",
-              "elements": []
-            },
-            {
               "name": "Starkregen",
               "type": "folder",
               "elements": [
@@ -319,26 +314,6 @@
                 },
                 {
                   "id": "ua_srhk:a_srhk_starkregengefahrenkarten_vorhanden",
-                  "visibility": false
-                }
-              ]
-            },
-            {
-              "name": "Grundwasser",
-              "type": "folder",
-              "elements": [
-                {
-                  "id": "wfs_02_07flurab2009",
-                  "visibility": false
-                }
-              ]
-            },
-            {
-              "name": "Wasserhaushalt",
-              "type": "folder",
-              "elements": [
-                {
-                  "id": "ua_boden_regelfkt_2020:wfs:regel2020",
                   "visibility": false
                 }
               ]
