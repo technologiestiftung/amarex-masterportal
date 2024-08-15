@@ -125,8 +125,6 @@ export default {
           data-bs-parent="#accordionExample"
         >
           <div class="accordion-body">
-            <p>Neues Projekt Anlegen</p>
-
             <div class="mb-3">
               <label
                 for="reportTitle"
