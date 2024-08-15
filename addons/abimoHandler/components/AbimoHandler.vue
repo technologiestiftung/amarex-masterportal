@@ -1,14 +1,14 @@
 <script>
-import { mapActions, mapGetters } from "vuex";
+import { mapActions, mapGetters, mapMutations } from "vuex";
 import Feature from "ol/Feature";
 import Style from "ol/style/Style";
 import Fill from "ol/style/Fill";
 import Stroke from "ol/style/Stroke";
 import { Select } from "ol/interaction";
 import AbimoAccordion from "./AbimoAccordion.vue";
+import AbimoInfoBox from "./AbimoInfoBox.vue";
 import getRabimo from "../api/getRabimo";
 import helper from "../utils/helper";
-import areaCalc from "../utils/areaCalculations";
 
 /**
  * Abimo
@@ -18,18 +18,12 @@ export default {
   name: "AbimoHandler",
   components: {
     AbimoAccordion,
+    AbimoInfoBox,
   },
   data() {
     return {
       isLoading: false,
       selectedFeatures: [],
-      accumulatedAbimoStats: {
-        featuresSelected: 0,
-        totalArea: 0,
-        averageEvaporation: 0,
-        averageSwale: 0,
-        averageRinse: 0,
-      },
       sliders: [
         {
           id: "green_roof",
@@ -144,6 +138,7 @@ export default {
   },
   computed: {
     ...mapGetters(["configJs"]),
+    ...mapGetters("Modules/AbimoHandler", ["selectedFeatures"]),
   },
   mounted() {
     this.createInteractions();
@@ -159,12 +154,18 @@ export default {
       .getLayers()
       .getArray()
       .find((layer) => layer.get("id") === "rabimo_input_2020");
+    this.featureKeys = Object.keys(
+      this.layer_rabimo_input.values_.source.featuresRtree_.items_,
+    );
   },
   methods: {
     ...mapActions("Maps", {
       addInteractionToMap: "addInteraction",
       removeInteractionFromMap: "removeInteraction",
     }),
+    ...mapActions("Modules/AbimoHandler", ["updateAccumulatedStats"]),
+
+    ...mapMutations("Modules/AbimoHandler", ["setSelectedFeatures"]),
     /**
      * Creates the interactions for selecting features.
      * @returns {void}
@@ -194,6 +195,7 @@ export default {
             ...inputFeature,
           });
           this.selectedFeatures.push(mergedFeature);
+          this.setSelectedFeatures(this.selectedFeatures);
         });
 
         event.deselected.forEach((feature) => {
@@ -201,13 +203,20 @@ export default {
           this.selectedFeatures = this.selectedFeatures.filter(
             (f) => f.values_.code !== featureCode,
           );
+          console.log(
+            "[AbimoHandler] this.selectedFeatures::",
+            this.selectedFeatures,
+          );
+          this.setSelectedFeatures(this.selectedFeatures);
         });
+
         this.updateAccumulatedStats();
       });
       // registers interaction in module - check masterportal docu
       this.addInteractionToMap(selectInteraction);
     },
     getInputFeature(featureCode) {
+      // TODO: fix timing issue
       // features are stored in an Object IDed with numbers. This function returns each ID in an array to iterate over them
       const featureKeys = Object.keys(
         this.layer_rabimo_input.values_.source.featuresRtree_.items_,
@@ -229,30 +238,6 @@ export default {
       this.sliders[0].value = Number(feature.green_roof).toFixed(2) * 100;
       this.sliders[1].value = Number(feature.to_swale).toFixed(2) * 100;
       this.sliders[2].value = Number((1 - feature.pvd).toFixed(2) * 100);
-    },
-    updateAccumulatedStats() {
-      const totalFeatures = this.selectedFeatures.length;
-      const totalArea = areaCalc.getTotalArea(this.selectedFeatures);
-      const averageEvaporation = areaCalc.calculateAttributeAverage(
-        this.selectedFeatures,
-        "evaporatio",
-      );
-      const averageSwale = areaCalc.calculateAttributeAverage(
-        this.selectedFeatures,
-        "infiltrati",
-      );
-      const averageRinse = areaCalc.calculateAttributeAverage(
-        this.selectedFeatures,
-        "surface_ru",
-      );
-
-      this.accumulatedAbimoStats = {
-        featuresSelected: totalFeatures,
-        totalArea: totalArea,
-        averageEvaporation: averageEvaporation,
-        averageSwale: averageSwale,
-        averageRinse: averageRinse,
-      };
     },
     createStyle(properties) {
       // This function transform importet geodata, in this case our Evaporatio to a hard coded colour code.
@@ -325,23 +310,22 @@ export default {
       console.warn(properties);
       console.warn(JSON.stringify(obj));
     },
-    calculatePercentages(feature) {
-      const evaporation = Math.floor(parseFloat(feature.values_.evaporatio));
-      const rinse = Math.floor(parseFloat(feature.values_.ri));
-      const runoff = Math.floor(parseFloat(feature.values_.row));
+    //   const evaporation = Math.floor(parseFloat(feature.values_.evaporatio));
+    //   const rinse = Math.floor(parseFloat(feature.values_.ri));
+    //   const runoff = Math.floor(parseFloat(feature.values_.row));
 
-      const total = evaporation + rinse + runoff;
+    //   const total = evaporation + rinse + runoff;
 
-      const evaporationPercentage = (evaporation / total) * 100 - 0.5;
-      const rinsePercentage = (rinse / total) * 100 - 0.5;
-      const runoffPercentage = (runoff / total) * 100 - 0.5;
+    //   const evaporationPercentage = (evaporation / total) * 100 - 0.5;
+    //   const rinsePercentage = (rinse / total) * 100 - 0.5;
+    //   const runoffPercentage = (runoff / total) * 100 - 0.5;
 
-      return {
-        evaporationPercentage,
-        rinsePercentage,
-        runoffPercentage,
-      };
-    },
+    //   return {
+    //     evaporationPercentage,
+    //     rinsePercentage,
+    //     runoffPercentage,
+    //   };
+    // },
     async testRabimoAPI() {
       this.isLoading = true;
       const data = await getRabimo.getTest();
@@ -358,88 +342,7 @@ export default {
         const properties = feature.getProperties();
         payload.push(properties);
       }
-
-      console.log("[AbimoHandler] payload::", payload);
-      
       try {
-        payload = [
-          {
-            code: "0000000001000016",
-            prec_yr: 632,
-            prec_s: 333,
-            epot_yr: 660,
-            epot_s: 530,
-            district: "1",
-            total_area: 4951.8538,
-            area_main: 4951.8538,
-            area_road: 0,
-            main_frac: 1,
-            roof: 0.009,
-            green_roof: 0,
-            swg_roof: 1,
-            pvd: 0.9736,
-            swg_pvd: 1,
-            srf1_pvd: 0.33,
-            srf2_pvd: 0.15,
-            srf3_pvd: 0.16,
-            srf4_pvd: 0,
-            srf5_pvd: 0.36,
-            road_frac: 0,
-            pvd_r: 0,
-            swg_pvd_r: 1,
-            srf1_pvd_r: 0,
-            srf2_pvd_r: 0,
-            srf3_pvd_r: 0,
-            srf4_pvd_r: 0,
-            sealed: 0.9826,
-            to_swale: 0,
-            gw_dist: 2.8,
-            ufc30: 12,
-            ufc150: 10,
-            land_type: "urban",
-            veg_class: 35,
-            irrigation: 0,
-            block_type: "300_road",
-          },
-          {
-            code: "0000000001000017",
-            prec_yr: 631,
-            prec_s: 332,
-            epot_yr: 660,
-            epot_s: 530,
-            district: "1",
-            total_area: 3406.4166,
-            area_main: 3406.4166,
-            area_road: 0,
-            main_frac: 1,
-            roof: 0.0038,
-            green_roof: 0,
-            swg_roof: 1,
-            pvd: 0.9769,
-            swg_pvd: 1,
-            srf1_pvd: 0.36,
-            srf2_pvd: 0.17,
-            srf3_pvd: 0.13,
-            srf4_pvd: 0,
-            srf5_pvd: 0.34,
-            road_frac: 0,
-            pvd_r: 0,
-            swg_pvd_r: 1,
-            srf1_pvd_r: 0,
-            srf2_pvd_r: 0,
-            srf3_pvd_r: 0,
-            srf4_pvd_r: 0,
-            sealed: 0.9807,
-            to_swale: 0,
-            gw_dist: 2.7,
-            ufc30: 11,
-            ufc150: 10,
-            land_type: "urban",
-            veg_class: 35,
-            irrigation: 0,
-            block_type: "300_road",
-          },
-        ];
         const data = await getRabimo.getMultiblock(payload);
         console.log("[AbimoMeasure] data::", data);
       } catch (error) {
@@ -457,84 +360,6 @@ export default {
         payload.push(properties);
       }
       try {
-        payload = [
-          {
-            code: "0000000001000016",
-            prec_yr: 632,
-            prec_s: 333,
-            epot_yr: 660,
-            epot_s: 530,
-            district: "1",
-            total_area: 4951.8538,
-            area_main: 4951.8538,
-            area_road: 0,
-            main_frac: 1,
-            roof: 0.009,
-            green_roof: 0,
-            swg_roof: 1,
-            pvd: 0.9736,
-            swg_pvd: 1,
-            srf1_pvd: 0.33,
-            srf2_pvd: 0.15,
-            srf3_pvd: 0.16,
-            srf4_pvd: 0,
-            srf5_pvd: 0.36,
-            road_frac: 0,
-            pvd_r: 0,
-            swg_pvd_r: 1,
-            srf1_pvd_r: 0,
-            srf2_pvd_r: 0,
-            srf3_pvd_r: 0,
-            srf4_pvd_r: 0,
-            sealed: 0.9826,
-            to_swale: 0,
-            gw_dist: 2.8,
-            ufc30: 12,
-            ufc150: 10,
-            land_type: "urban",
-            veg_class: 35,
-            irrigation: 0,
-            block_type: "300_road",
-          },
-          {
-            code: "0000000001000017",
-            prec_yr: 631,
-            prec_s: 332,
-            epot_yr: 660,
-            epot_s: 530,
-            district: "1",
-            total_area: 3406.4166,
-            area_main: 3406.4166,
-            area_road: 0,
-            main_frac: 1,
-            roof: 0.0038,
-            green_roof: 0,
-            swg_roof: 1,
-            pvd: 0.9769,
-            swg_pvd: 1,
-            srf1_pvd: 0.36,
-            srf2_pvd: 0.17,
-            srf3_pvd: 0.13,
-            srf4_pvd: 0,
-            srf5_pvd: 0.34,
-            road_frac: 0,
-            pvd_r: 0,
-            swg_pvd_r: 1,
-            srf1_pvd_r: 0,
-            srf2_pvd_r: 0,
-            srf3_pvd_r: 0,
-            srf4_pvd_r: 0,
-            sealed: 0.9807,
-            to_swale: 0,
-            gw_dist: 2.7,
-            ufc30: 11,
-            ufc150: 10,
-            land_type: "urban",
-            veg_class: 35,
-            irrigation: 0,
-            block_type: "300_road",
-          },
-        ];
         const data = await getRabimo.getMultiblockDeltaW(payload);
         console.log("[AbimoMeasure] data::", data);
       } catch (error) {
@@ -565,194 +390,103 @@ export default {
 <template lang="html">
   <div
     id="abimo"
-    class="d-flex flex-column h-100 gap-3"
+    class="d-flex flex-column gap-3"
   >
     <div class="d-flex flex-column h-100 overflow-scroll">
       <h1>Berechnete Layer</h1>
     </div>
     <hr />
-    <AbimoAccordion :steps="steps">
-      <template v-slot:default="slotProps">
-        <div v-if="slotProps.step.id === 1">
-          <button
-            class="btn btn-primary"
-            @click="handleStepOneClick"
-          >
-            Bestätigen
-          </button>
-        </div>
-        <div v-if="slotProps.step.id === 2">
-          <div
-            v-for="button in slotProps.step.buttons"
-            :key="button.id"
-          >
+    <div class="flex-grow-1">
+      <AbimoAccordion :steps="steps">
+        <template v-slot:default="slotProps">
+          <div v-if="slotProps.step.id === 1">
             <button
               class="btn btn-primary"
-              :disabled="button.isDisabled"
+              @click="handleStepOneClick"
             >
-              {{ button.label }}
+              Zum Katalog
             </button>
+            <button class="btn btn-secondary">Überspringen</button>
           </div>
-        </div>
-
-        <div v-else-if="slotProps.step.id === 4">
-          <div class="mb-4">
+          <div v-if="slotProps.step.id === 2">
             <div
-              v-for="slider in sliders"
-              :key="slider.id"
+              v-for="button in slotProps.step.buttons"
+              :key="button.id"
             >
-              <label
-                class="pr-5"
-                :for="slider.id"
-                >{{ slider.label }}</label
+              <button
+                class="btn btn-primary"
+                :disabled="button.isDisabled"
               >
-              <input
-                :id="slider.id"
-                v-model="slider.value"
-                type="range"
-                min="0"
-                max="100"
-                class="bg-secondary"
-              />
-
-              <span>{{ slider.value }}</span>
+                {{ button.label }}
+              </button>
             </div>
           </div>
 
-          <button
-            class="btn btn-primary"
-            @click="fetchCalculateMultiblock"
-          >
-            Blockteilflächen berechnen
-          </button>
+          <div v-else-if="slotProps.step.id === 4">
+            <div class="mb-4">
+              <div
+                v-for="slider in sliders"
+                :key="slider.id"
+              >
+                <label
+                  class="pr-5"
+                  :for="slider.id"
+                  >{{ slider.label }}</label
+                >
+                <input
+                  :id="slider.id"
+                  v-model="slider.value"
+                  type="range"
+                  min="0"
+                  max="100"
+                  class="bg-secondary"
+                />
 
-          <!-- TODO: only display for testing API -->
-          <button
-            class="btn btn-primary"
-            @click="testRabimoAPI"
-          >
-            <span
-              v-if="isLoading"
-              class="spinner-border spinner-border-sm"
-              role="status"
-              aria-hidden="true"
-            ></span>
-            test API
-          </button>
+                <span>{{ slider.value }}</span>
+              </div>
+            </div>
 
-          <ul class="list-group">
-            <li
-              class="list-group-item"
-              v-if="selectedFeatures.length"
+            <button
+              class="btn btn-primary"
+              @click="fetchCalculateMultiblock"
             >
-              <strong
-                >Ausgewählte Flächen:
-                {{ accumulatedAbimoStats.featuresSelected }}</strong
-              >
-              <br />
-              <strong
-                >Gesamtfläche:
-                {{ (accumulatedAbimoStats.totalArea / 1000000).toFixed(2) }}
-                km2</strong
-              >
-              <br />
-              <strong
-                >Durchschnittliche Verdunstung:
-                {{ accumulatedAbimoStats.averageEvaporation.toFixed(2) }}
-                mm</strong
-              >
-              <br />
-              <strong
-                >Durchschnittliche Versickerung:
-                {{ accumulatedAbimoStats.averageSwale.toFixed(2) }} mm</strong
-              >
-              <br />
-              <strong
-                >Durchschnittlicher Ablauf:
-                {{ accumulatedAbimoStats.averageRinse.toFixed(2) }} mm</strong
-              >
-            </li>
-            <li
-              v-for="feature in selectedFeatures"
-              :key="feature.code"
-              class="feature-details"
+              Blockteilflächen berechnen
+            </button>
+
+            <!-- TODO: only display for testing API -->
+            <button
+              class="btn btn-primary"
+              @click="testRabimoAPI"
             >
-              <ul class="list-group">
-                <li class="list-group-item">
-                  <strong>CODE: {{ feature.values_.code }}</strong>
-                </li>
-                <li class="list-group-item">
-                  Fläche:
-                  {{ Number(feature.values_.area).toFixed(2) }} m2
-                </li>
-                <li
-                  class="list-group-item"
-                  style="display: flex"
-                >
-                  <div class="bar-1 label" />
-                  Verdunstung:
-                  {{ Number(feature.values_.evaporatio).toFixed(2) }}mm
-                </li>
-                <li
-                  class="list-group-item"
-                  style="display: flex"
-                >
-                  <div class="bar-2 label" />
-                  Versickerung:
-                  {{ Number(feature.values_.infiltrati).toFixed(2) }}mm
-                </li>
-                <li
-                  class="list-group-item"
-                  style="display: flex"
-                >
-                  <div class="bar-3 label" />
-                  Oberflächenabfluss:
-                  {{ Number(feature.values_.surface_ru).toFixed(2) }}mm
-                </li>
-                <div class="bar-scale">
-                  <div
-                    class="bar bar-1"
-                    :style="{
-                      width:
-                        calculatePercentages(feature).verdunstunPercentage +
-                        '%',
-                    }"
-                  />
-                  <div
-                    class="bar bar-2"
-                    :style="{
-                      width: calculatePercentages(feature).riPercentage + '%',
-                    }"
-                  />
+              <span
+                v-if="isLoading"
+                class="spinner-border spinner-border-sm"
+                role="status"
+                aria-hidden="true"
+              ></span>
+              test API
+            </button>
 
-                  <div
-                    class="bar bar-3"
-                    :style="{
-                      width: calculatePercentages(feature).rowPercentage + '%',
-                    }"
-                  />
-                </div>
-              </ul>
-            </li>
-          </ul>
-        </div>
+            <AbimoInfoBox />
+          </div>
 
-        <div v-else-if="slotProps.step.id === 5">
-          <button
-            class="btn btn-primary"
-            @click="calculateDeltaW"
-          >
-            <!-- <span class="sr-only">Loading...</span> -->
-            DeltaW Berechnen
-          </button>
-        </div>
+          <div v-else-if="slotProps.step.id === 5">
+            <button
+              class="btn btn-primary"
+              @click="calculateDeltaW"
+            >
+              <!-- <span class="sr-only">Loading...</span> -->
+              DeltaW Berechnen
+            </button>
+          </div>
 
-        <div v-if="slotProps.step.id === 6">
-          <!-- TODO: add reset function -->
-          <button class="btn btn-primary">Neue Berechnung Starten</button>
-        </div>
-      </template>
-    </AbimoAccordion>
+          <div v-if="slotProps.step.id === 6">
+            <!-- TODO: add reset function -->
+            <button class="btn btn-primary">Neue Berechnung Starten</button>
+          </div>
+        </template>
+      </AbimoAccordion>
+    </div>
   </div>
 </template>
 
@@ -761,41 +495,6 @@ input[type="range"],
 ul {
   list-style: none;
   padding: 0;
-}
-
-.feature-details,
-.summary {
-  margin-top: 16px;
-  border-top: 1px solid #54bba8;
-  padding-top: 16px;
-}
-
-.bar-scale {
-  min-width: 290px;
-  height: 16px;
-  display: flex;
-}
-.bar {
-  position: relative;
-  height: 100%;
-}
-
-.bar-1 {
-  background-color: #ff0000;
-}
-
-.bar-2 {
-  background-color: #00ff00;
-}
-
-.bar-3 {
-  background-color: #0000ff;
-}
-
-.label {
-  width: 16px;
-  height: 16px;
-  margin-right: 8px;
 }
 </style>
 

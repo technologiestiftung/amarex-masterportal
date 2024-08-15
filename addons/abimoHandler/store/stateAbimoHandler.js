@@ -11,5 +11,14 @@ export default {
   icon: "bi-geo-fill",
   hasMouseMapInteractions: true,
   supportedMapModes: ["2D"],
+  selectedFeatures: [],
+  accumulatedAbimoStats: {
+    featuresSelected: 0,
+    totalArea: 0,
+    averageEvaporation: 0,
+    averageSwale: 0,
+    averageRinse: 0,
+  },
+  percentages: {},
 };
 
