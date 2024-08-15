@@ -1,7 +1,7 @@
 <script>
 import SearchBar from "../../../src/modules/searchBar/components/SearchBar.vue";
 import ProjectUploader from "../../projectUploader/components/ProjectUploader.vue";
-import { mapActions } from "vuex";
+import { mapActions, mapGetters, mapMutations } from "vuex";
 
 /**
  * Project Starter
@@ -18,19 +18,33 @@ export default {
       fileUploaded: false,
       filesToUpload: [],
       selectedFiles: {},
-      project: {
-        title:
-          "",
-        description: "",
-        date: new Date().toDateString(),
-      },
+      title: "",
+      description: "",
     };
   },
-  computed: {},
-  mounted() {},
+  computed: {
+    ...mapGetters("Modules/ProjectStarter", [
+      "projectTitle",
+      "projectDescription",
+    ]),
+    // Computed property to check if there are unsaved changes
+    hasUnsavedChanges() {
+      return (
+        this.title !== this.projectTitle ||
+        this.description !== this.projectDescription
+      );
+    },
+  },
+  created() {
+    this.title = this.projectTitle;
+    this.description = this.projectDescription;
+  },
   methods: {
     ...mapActions("Menu", ["clickedMenuElement", "toggleMenu", "closeMenu"]),
-
+    ...mapMutations("Modules/ProjectStarter", [
+      "setProjectTitle",
+      "setProjectDescription",
+    ]),
     /**
      * Opens the searchbar module.
      * @returns {void}
@@ -42,6 +56,13 @@ export default {
       //   type: "searchbar",
       // });
     },
+
+    saveProject() {
+      if (this.hasUnsavedChanges) {
+        this.setProjectTitle(this.title);
+        this.setProjectDescription(this.description);
+      }
+    },
   },
 };
 </script>
@@ -49,7 +70,6 @@ export default {
 <template lang="html">
   <div id="project-starter">
     <h2 class="mb-5 mt-3">Willkommen beim Amarex Webtool</h2>
-
     <div
       class="accordion h-100 overflow-scroll"
       id="accordionExample"
@@ -115,7 +135,7 @@ export default {
               >
               <textarea
                 id="reportTitle"
-                v-model="project.title"
+                v-model="title"
                 class="form-control"
                 rows="2"
               />
@@ -128,7 +148,7 @@ export default {
               >
               <textarea
                 id="projectDescription"
-                v-model="project.description"
+                v-model="description"
                 class="form-control"
                 rows="3"
               />
@@ -136,6 +156,13 @@ export default {
 
             <SearchBar :click-action="openSearchBar" />
 
+            <button
+              class="btn btn-secondary"
+              :disabled="!hasUnsavedChanges"
+              @click="saveProject"
+            >
+              Speichern
+            </button>
           </div>
         </div>
       </div>

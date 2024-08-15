@@ -1,5 +1,5 @@
 <script>
-import { mapGetters } from "vuex";
+import { mapGetters, mapMutations } from "vuex";
 import { jsPDF } from "jspdf";
 import mapCollection from "../../../src/core/maps/js/mapCollection";
 
@@ -18,9 +18,8 @@ export default {
         { name: "Projekt C", value: 300 },
       ],
       report: {
-        title:
-          "Report zur Analyse und Maßnahmenplanung der Maßnahme Entsiegelung (Log-Nr YY)",
-        description: "description test",
+        title: "",
+        description: "",
         editor: "Nachname, Vorname",
         date: new Date().toDateString(),
       },
@@ -49,8 +48,20 @@ export default {
       "layerConfig",
       "portalConfig",
     ]),
+    ...mapGetters("Modules/ProjectStarter", [
+      "projectTitle",
+      "projectDescription",
+    ]),
+  },
+  created() {
+    this.report.title = this.projectTitle;
+    this.report.description = this.projectDescription;
   },
   methods: {
+    ...mapMutations("Modules/ProjectStarter", [
+      "setProjectTitle",
+      "setProjectDescription",
+    ]),
     splitTextToFit(doc, text, maxWidth, fontSize) {
       doc.setFontSize(fontSize);
       const words = text.split(" ");
@@ -126,6 +137,11 @@ export default {
     },
 
     async generatePDF() {
+      // set state title and description
+      this.setProjectTitle(this.report.title);
+      this.setProjectDescription(this.report.description);
+
+
       const doc = new jsPDF();
 
       this.getData();
@@ -230,3 +246,4 @@ export default {
   height: 100px;
 }
 </style>
+
