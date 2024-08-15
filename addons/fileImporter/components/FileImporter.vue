@@ -223,11 +223,11 @@ export default {
   <div id="file-import">
     <p
       class="mb-3"
-      v-html="$t('common:modules.appFileImport.captions.introInfo')"
+      v-html="$t('common:modules.fileImport.captions.introInfo')"
     />
     <p
       class="mb-3"
-      v-html="$t('common:modules.appFileImport.captions.introFormats')"
+      v-html="$t('common:modules.fileImport.captions.introFormats')"
     />
     <FileUpload
       :id="'fileUpload'"
@@ -312,3 +312,4 @@ li {
   }
 }
 </style>
+

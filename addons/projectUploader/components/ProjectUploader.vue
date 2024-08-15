@@ -317,11 +317,11 @@ export default {
   <div id="file-import">
     <p
       class="mb-3"
-      v-html="$t('Project Uploader')"
-    />
-    <p
-      class="mb-3"
-      v-html="$t('Formats')"
+      v-html="
+        $t(
+          'Es können Projektdatein (.zip), und Config-Dateien (.json) importiert werden.',
+        )
+      "
     />
     <FileUpload
       :id="'fileUpload'"
@@ -340,7 +340,7 @@ export default {
             {{ file.name }}
           </span>
           <IconButton
-            :aria="$t('common:modules.appFileImport.removeAttachment')"
+            :aria="$t('common:modules.fileImport.removeAttachment')"
             :icon="'bi-trash'"
             :interaction="() => removeFile(file)"
             class="remove-btn col-3"
@@ -352,9 +352,9 @@ export default {
     <div class="d-flex justify-content-center">
       <FlatButton
         v-if="fileUploaded"
-        :aria-label="$t('common:modules.appFileImport.importFiles')"
+        :aria-label="$t('common:modules.fileImport.importFiles')"
         :interaction="() => addProject()"
-        :text="$t('common:modules.appFileImport.importFiles')"
+        :text="$t('common:modules.fileImport.importFiles')"
         :icon="'bi-upload'"
       />
     </div>
@@ -406,3 +406,4 @@ li {
   }
 }
 </style>
+
