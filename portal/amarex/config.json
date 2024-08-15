@@ -205,20 +205,24 @@
           "type": "folder",
           "elements": [
             {
+              "id": "rabimo_input_2020",
+              "visibility": true,
+              "showInLayerTree": true
+            },
+            {
               "id": "delta_w_wfs",
-              "visibility": false
+              "visibility": false,
+              "showInLayerTree": false
             },
             {
               "id": "planung_abimo",
-              "visibility": false
-            },
-            {
-              "id": "rabimo_input_2020",
-              "visibility": false
+              "visibility": true,
+              "showInLayerTree": true
             },
             {
               "id": "abimo_2020_wfs",
-              "visibility": false
+              "visibility": true,
+              "showInLayerTree": true
             }
           ]
         },
@@ -354,4 +358,7 @@
     }
   }
 }
+
+
+
 
