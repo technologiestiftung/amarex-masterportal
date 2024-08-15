@@ -305,13 +305,26 @@
     "maxScale": "25000"
   },
   {
-    "id": "rabimo_input_2020",
-    "styleId": "abimo",
+    "id": "rabimo_input_2020_old",
+    "styleId": "abimo_input",
     "name": "Rabimo Input 2020",
     "crs": "EPSG:25833",
     "url": "https://technologiestiftung-berlin.webgis1.com/geoserver/SmartWater/wfs",
     "typ": "WFS",
     "featureType": "SmartWater:rabimo_input_2020",
+    "featureNS": "http://geoserver.org",
+    "datasets": false,
+    "gfiAttributes": "showAll",
+    "maxScale": "25000"
+  },
+  {
+    "id": "rabimo_input_2020",
+    "styleId": "abimo_input",
+    "name": "Abimo vorberechnet 2020",
+    "crs": "EPSG:25833",
+    "url": "https://technologiestiftung-berlin.webgis1.com/geoserver/Amarex/wfs",
+    "typ": "WFS",
+    "featureType": "Amarex:rabimo_input_2020",
     "featureNS": "http://geoserver.org",
     "datasets": false,
     "gfiAttributes": "showAll",
@@ -1035,6 +1048,9 @@
     "layerAttribution": "Für die Nutzung der Daten ist die Datenlizenz Deutschland - Namensnennung - Version 2.0 anzuwenden. Die Lizenz ist über https://www.govdata.de/dl-de/by-2-0 abrufbar. Der Quellenvermerk gemäß (2) der Lizenz lautet \"Umweltatlas Berlin / [Titel des Datensatzes]\"."
   }
 ]
+
+
+
 
 
 
