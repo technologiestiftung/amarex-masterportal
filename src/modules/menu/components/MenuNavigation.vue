@@ -57,8 +57,10 @@ export default {
                 <h6 class="mp-menu-navigation-link-text mb-1"><p class="bi-chevron-left me-2" />Zurück</h6>
 
             </a>
+        
+            <!-- Masterportal origin update reset button logic (add  && side === 'mainMenu' to v-if) -->
             <button
-                v-if="!isMobile"
+                v-if="!isMobile && side === 'mainMenu'"
                 :id="'mp-menu-navigation-reset-button-' + side"
                 type="button"
                 class="btn-close mp-menu-navigation-reset-button"
