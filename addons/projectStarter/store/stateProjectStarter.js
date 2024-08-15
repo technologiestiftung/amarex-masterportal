@@ -9,5 +9,9 @@ export default {
   description: "Projekt Starten.",
   name: "Project Starter",
   icon: "bi-geo-fill",
+
+  projectTitle: "",
+  projectDescription: "",
+  projectDate: new Date().toDateString(),
 };
 
