@@ -12,18 +12,13 @@ export default {
     AbimoSlider,
   },
   data() {
-    return {
-      areaTypesData: [
-        { name: "UNVERSIEGELT", percentage: 0, color: "#4CAF50" },
-        { name: "BEBAUT VERSIEGELT", percentage: 0, color: "#F44336" },
-        { name: "UNBEBAUT VERSIEGELT", percentage: 0, color: "#FFC107" },
-      ],
-    };
+    return {};
   },
   computed: {
     ...mapGetters("Modules/AbimoHandler", [
       "selectedFeatures",
       "accumulatedAbimoStats",
+      "areaTypesData",
     ]),
   },
   mounted() {},
@@ -44,6 +39,9 @@ export default {
       <p class="area">
         GESAMTFLÄCHE: {{ accumulatedAbimoStats.totalArea.toFixed(0) }} m²
       </p>
+      <p class="area">
+        Anzahl Flächen: {{ accumulatedAbimoStats.featuresSelected }}
+      </p>
 
       <hr />
 
@@ -53,13 +51,10 @@ export default {
           :key="index"
           class="legend-item"
         >
-          <div
-            class="color-indicator mr-3"
-            :style="{ backgroundColor: areaType.color }"
-          ></div>
+          <div :class="['color-indicator mr-3', `${areaType.id}`]"></div>
           <div class="stats-display">
             <span>{{ areaType.name }}</span>
-            <strong>{{ areaType.percentage }} %</strong>
+            <strong>{{ areaType.percentage.toFixed(0) }} %</strong>
           </div>
         </div>
       </div>
@@ -73,7 +68,7 @@ export default {
           <span>% VON DACHFLÄCHE</span>
           <strong
             >{{
-              Math.floor(parseFloat(accumulatedAbimoStats.totalGreenRoofArea))
+              accumulatedAbimoStats.percentageGreenRoofToRoof.toFixed(0)
             }}
             %</strong
           >
@@ -82,7 +77,7 @@ export default {
           <span>% VON GESAMTFLÄCHE</span>
           <strong
             >{{
-              Math.floor(parseFloat(accumulatedAbimoStats.totalRoofArea))
+              accumulatedAbimoStats.percentageGreenRoofToTotalArea.toFixed(0)
             }}
             %</strong
           >
@@ -99,7 +94,7 @@ export default {
           <span>% VERSIEGELTER FLÄCHE</span>
           <strong
             >{{
-              Math.floor(parseFloat(accumulatedAbimoStats.totalSealedArea))
+              accumulatedAbimoStats.percentageSwaleConnectedToPvd.toFixed(0)
             }}
             %</strong
           >
@@ -108,7 +103,9 @@ export default {
           <span>% VON GESAMTFLÄCHE</span>
           <strong
             >{{
-              Math.floor(parseFloat(accumulatedAbimoStats.totalSealedArea))
+              accumulatedAbimoStats.percentageSwaleConnectedToTotalArea.toFixed(
+                0,
+              )
             }}
             %</strong
           >
@@ -141,6 +138,19 @@ export default {
   width: 20px;
   height: 20px;
   margin-right: 15px;
+  border: 2px solid;
+}
+.unpvd {
+  background-color: #53c486;
+  border-color: #2e9f61;
+}
+.roof {
+  background-color: #d17b7b;
+  border-color: #971f1f;
+}
+.pvd {
+  background-color: #dfdf6b;
+  border-color: #b4b446;
 }
 
 .stats-container {

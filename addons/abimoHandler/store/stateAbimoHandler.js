@@ -13,27 +13,46 @@ export default {
   supportedMapModes: ["2D"],
   selectedFeatures: [],
   accumulatedAbimoStats: {
-    featuresSelected: 0,
-    averageEvaporation: 0,
-    averageSwale: 0,
-    averageRinse: 0,
-
-    // NOTE: Abimo specific stats
     totalArea: 0,
-    // Summe bebaut versiegelt
-    totalSealedArea: 0,
-    // Summe unversiegelt -> unpvd
-    totalUnsealedArea: 0,
-    // Summe an mulde angegeschlossen
-    totalSwaleConnectedArea: 0,
-    // Summe unbebaut
-    totalUnpavedArea: 0,
-    // Summe Gründach
-    totalGreenRoofArea: 0,
+    featuresSelected: 0,
     // Summe Dachfläche (bebaut versiegelt -> roof)
     totalRoofArea: 0,
-    // Summe bebaut versiegelt -> pvd
+    // Summe  versiegelt -> pvd
+    totalPavedArea: 0,
+    // Summe unversiegelt -> unpvd
+    totalUnpavedArea: 0,
+
+    percentageGreenRoofToRoof: 0,
+    percentageGreenRoofToTotalArea: 0,
+    percentageSwaleConnectedToPvd: 0,
+    percentageSwaleConnectedToTotalArea: 0,
+
+    // Other Values
+    totalSealedArea: 0,
+    totalSwaleConnectedArea: 0,
+    totalUnsealedArea: 0,
+    totalGreenRoofArea: 0,
+    maxGreenRoof: 0,
+    maxUnpaved: 0,
+    maxSwaleConnected: 0,
   },
   percentages: {},
+  areaTypesData: [
+    {
+      id: "unpvd",
+      name: "UNVERSIEGELT",
+      percentage: 0,
+    },
+    {
+      id: "roof",
+      name: "BEBAUT VERSIEGELT",
+      percentage: 0,
+    },
+    {
+      id: "pvd",
+      name: "UNBEBAUT VERSIEGELT",
+      percentage: 0,
+    },
+  ],
 };
 

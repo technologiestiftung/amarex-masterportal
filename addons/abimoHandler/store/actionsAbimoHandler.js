@@ -4,24 +4,7 @@ const actions = {
   updateAccumulatedStats({ commit, state }) {
     const totalFeatures = state.selectedFeatures.length;
     const totalArea = areaCalc.getTotalArea(state.selectedFeatures);
-    const averageEvaporation = areaCalc.calculateAttributeAverage(
-      state.selectedFeatures,
-      "evaporatio",
-    );
-    const averageSwale = areaCalc.calculateAttributeAverage(
-      state.selectedFeatures,
-      "infiltrati",
-    );
-    const averageRinse = areaCalc.calculateAttributeAverage(
-      state.selectedFeatures,
-      "surface_ru",
-    );
 
-    // Calculations
-    const totalSealedArea = areaCalc.getTotalSealedArea(state.selectedFeatures);
-    const totalUnsealedArea = areaCalc.getTotalUnpavedArea(
-      state.selectedFeatures,
-    );
     const totalSwaleConnectedArea = areaCalc.getTotalSwaleConnectedArea(
       state.selectedFeatures,
     );
@@ -32,24 +15,51 @@ const actions = {
       state.selectedFeatures,
     );
     const totalRoofArea = areaCalc.getTotalRoofArea(state.selectedFeatures);
+    const totalPavedArea = areaCalc.getTotalPavedArea(state.selectedFeatures);
+
+    // Berechnung der Prozentwerte
+    const percentageGreenRoofToRoof = totalArea
+      ? (totalGreenRoofArea / totalRoofArea) * 100
+      : 0;
+    const percentageGreenRoofToTotalArea = totalArea
+      ? (totalGreenRoofArea / totalArea) * 100
+      : 0;
+    const percentageSwaleConnectedToPvd = totalArea
+      ? (totalSwaleConnectedArea / totalPavedArea) * 100
+      : 0;
+    const percentageSwaleConnectedToTotalArea = totalArea
+      ? (totalSwaleConnectedArea / totalArea) * 100
+      : 0;
 
     const stats = {
       featuresSelected: totalFeatures,
       totalArea: totalArea,
-      averageEvaporation: averageEvaporation,
-      averageSwale: averageSwale,
-      averageRinse: averageRinse,
 
-      // Neue Stats
-      totalSealedArea: totalSealedArea,
-      totalUnsealedArea: totalUnsealedArea,
-      totalSwaleConnectedArea: totalSwaleConnectedArea,
-      totalUnpavedArea: totalUnpavedArea,
-      totalGreenRoofArea: totalGreenRoofArea,
       totalRoofArea: totalRoofArea,
-    };
+      totalPavedArea: totalPavedArea,
+      totalUnpavedArea: totalUnpavedArea,
 
+      // percentages
+      percentageGreenRoofToRoof: percentageGreenRoofToRoof,
+      percentageGreenRoofToTotalArea: percentageGreenRoofToTotalArea,
+      percentageSwaleConnectedToPvd: percentageSwaleConnectedToPvd,
+      percentageSwaleConnectedToTotalArea: percentageSwaleConnectedToTotalArea,
+    };
     commit("setAccumulatedAbimoStats", stats);
+
+    // Update areaTypesData
+    const percentageUnpaved = totalArea
+      ? (totalUnpavedArea / totalArea) * 100
+      : 0;
+    const percentageRoof = totalArea ? (totalRoofArea / totalArea) * 100 : 0;
+    const percentagePaved = totalArea ? (totalPavedArea / totalArea) * 100 : 0;
+
+    state.areaTypesData.find((area) => area.id === "unpvd").percentage =
+      percentageUnpaved;
+    state.areaTypesData.find((area) => area.id === "roof").percentage =
+      percentageRoof;
+    state.areaTypesData.find((area) => area.id === "pvd").percentage =
+      percentagePaved;
   },
 
   calculatePercentages({ commit }, feature) {
