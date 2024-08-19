@@ -11,9 +11,6 @@ export default {
   components: {
     AbimoSlider,
   },
-  data() {
-    return {};
-  },
   computed: {
     ...mapGetters("Modules/AbimoHandler", [
       "selectedFeatures",
@@ -21,7 +18,6 @@ export default {
       "areaTypesData",
     ]),
   },
-  mounted() {},
   methods: {
     ...mapActions("Modules/AbimoHandler", ["calculatePercentages"]),
   },

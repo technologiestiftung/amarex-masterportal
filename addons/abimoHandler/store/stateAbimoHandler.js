@@ -28,15 +28,29 @@ export default {
     percentageSwaleConnectedToTotalArea: 0,
 
     // Other Values
+    totalGreenRoofArea: 0,
+
     totalSealedArea: 0,
     totalSwaleConnectedArea: 0,
     totalUnsealedArea: 0,
-    totalGreenRoofArea: 0,
     maxGreenRoof: 0,
     maxUnpaved: 0,
     maxSwaleConnected: 0,
   },
-  percentages: {},
+  roofSliderData: [
+    {
+      id: "roof",
+      percentage: 0,
+    },
+    {
+      id: "target",
+      percentage: 0,
+    },
+    {
+      id: "statusQuo",
+      percentage: 0,
+    },
+  ],
   areaTypesData: [
     {
       id: "unpvd",
