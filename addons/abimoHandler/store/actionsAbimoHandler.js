@@ -17,16 +17,41 @@ const actions = {
       "surface_ru",
     );
 
+    // Calculations
+    const totalSealedArea = areaCalc.getTotalSealedArea(state.selectedFeatures);
+    const totalUnsealedArea = areaCalc.getTotalUnpavedArea(
+      state.selectedFeatures,
+    );
+    const totalSwaleConnectedArea = areaCalc.getTotalSwaleConnectedArea(
+      state.selectedFeatures,
+    );
+    const totalUnpavedArea = areaCalc.getTotalUnpavedArea(
+      state.selectedFeatures,
+    );
+    const totalGreenRoofArea = areaCalc.getTotalGreenRoofArea(
+      state.selectedFeatures,
+    );
+    const totalRoofArea = areaCalc.getTotalRoofArea(state.selectedFeatures);
+
     const stats = {
       featuresSelected: totalFeatures,
       totalArea: totalArea,
       averageEvaporation: averageEvaporation,
       averageSwale: averageSwale,
       averageRinse: averageRinse,
+
+      // Neue Stats
+      totalSealedArea: totalSealedArea,
+      totalUnsealedArea: totalUnsealedArea,
+      totalSwaleConnectedArea: totalSwaleConnectedArea,
+      totalUnpavedArea: totalUnpavedArea,
+      totalGreenRoofArea: totalGreenRoofArea,
+      totalRoofArea: totalRoofArea,
     };
 
     commit("setAccumulatedAbimoStats", stats);
   },
+
   calculatePercentages({ commit }, feature) {
     const evaporation = Math.floor(parseFloat(feature.values_.evaporatio));
     const rinse = Math.floor(parseFloat(feature.values_.ri));

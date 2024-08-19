@@ -14,10 +14,25 @@ export default {
   selectedFeatures: [],
   accumulatedAbimoStats: {
     featuresSelected: 0,
-    totalArea: 0,
     averageEvaporation: 0,
     averageSwale: 0,
     averageRinse: 0,
+
+    // NOTE: Abimo specific stats
+    totalArea: 0,
+    // Summe bebaut versiegelt
+    totalSealedArea: 0,
+    // Summe unversiegelt -> unpvd
+    totalUnsealedArea: 0,
+    // Summe an mulde angegeschlossen
+    totalSwaleConnectedArea: 0,
+    // Summe unbebaut
+    totalUnpavedArea: 0,
+    // Summe Gründach
+    totalGreenRoofArea: 0,
+    // Summe Dachfläche (bebaut versiegelt -> roof)
+    totalRoofArea: 0,
+    // Summe bebaut versiegelt -> pvd
   },
   percentages: {},
 };
