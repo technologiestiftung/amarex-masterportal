@@ -6,7 +6,7 @@ import Fill from "ol/style/Fill";
 import Stroke from "ol/style/Stroke";
 import { Select } from "ol/interaction";
 import AbimoAccordion from "./AbimoAccordion.vue";
-import AbimoInfoBox from "./AbimoInfoBox.vue";
+import AbimoBlockAreaSelector from "./AbimoBlockAreaSelector.vue";
 import getRabimo from "../api/getRabimo";
 import helper from "../utils/helper";
 
@@ -18,7 +18,7 @@ export default {
   name: "AbimoHandler",
   components: {
     AbimoAccordion,
-    AbimoInfoBox,
+    AbimoBlockAreaSelector,
   },
   data() {
     return {
@@ -68,7 +68,7 @@ export default {
           label: "Untersuchungsgebiet Definieren",
           description:
             "Wählen Sie in der Karte die Blockteilflächen via Mausklick aus, die Sie untersuchen möchten.",
-          isActive: false,
+          isActive: true,
           buttons: [
             {
               id: 1,
@@ -96,7 +96,7 @@ export default {
           label: "Maßnahmen auswählen",
           description:
             "Wählen Sie anteilsmäßig die Maßnahmen, die Sie in die Berechnung einfließen lassen wollen.",
-          isActive: true,
+          isActive: false,
           buttons: [
             {
               id: 1,
@@ -310,22 +310,6 @@ export default {
       console.warn(properties);
       console.warn(JSON.stringify(obj));
     },
-    //   const evaporation = Math.floor(parseFloat(feature.values_.evaporatio));
-    //   const rinse = Math.floor(parseFloat(feature.values_.ri));
-    //   const runoff = Math.floor(parseFloat(feature.values_.row));
-
-    //   const total = evaporation + rinse + runoff;
-
-    //   const evaporationPercentage = (evaporation / total) * 100 - 0.5;
-    //   const rinsePercentage = (rinse / total) * 100 - 0.5;
-    //   const runoffPercentage = (runoff / total) * 100 - 0.5;
-
-    //   return {
-    //     evaporationPercentage,
-    //     rinsePercentage,
-    //     runoffPercentage,
-    //   };
-    // },
     async testRabimoAPI() {
       this.isLoading = true;
       const data = await getRabimo.getTest();
@@ -408,19 +392,25 @@ export default {
             </button>
             <button class="btn btn-secondary">Überspringen</button>
           </div>
+
+          <!-- NOTE: Step 2 -->
           <div v-if="slotProps.step.id === 2">
             <div
               v-for="button in slotProps.step.buttons"
               :key="button.id"
             >
+              <AbimoBlockAreaSelector />
+
               <button
-                class="btn btn-primary"
+                class="btn btn-primary mt-5"
                 :disabled="button.isDisabled"
               >
                 {{ button.label }}
               </button>
             </div>
           </div>
+
+          <!-- NOTE: Step 4 -->
 
           <div v-else-if="slotProps.step.id === 4">
             <div class="mb-4">
@@ -466,9 +456,9 @@ export default {
               ></span>
               test API
             </button>
-
-            <AbimoInfoBox />
           </div>
+
+          <!-- NOTE: Step 5 -->
 
           <div v-else-if="slotProps.step.id === 5">
             <button
@@ -479,6 +469,8 @@ export default {
               DeltaW Berechnen
             </button>
           </div>
+
+          <!-- NOTE: Step 6 -->
 
           <div v-if="slotProps.step.id === 6">
             <!-- TODO: add reset function -->

@@ -11,10 +11,9 @@ export default {
       required: true,
     },
   },
-  components: {},
   data() {
     return {
-      sliderTypes: []
+      sliderTypes: [],
     };
   },
   computed: {
@@ -22,8 +21,6 @@ export default {
       return this.sliderTypes;
     },
   },
-  mounted() {},
-  methods: {},
 };
 </script>
 
@@ -35,10 +32,9 @@ export default {
     <div
       v-for="(areaType, index) in areaTypes"
       :key="index"
-      class="abimo-slider-segment"
+      :class="['abimo-slider-segment', `${areaType.id}`]"
       :style="{
         width: `${areaType.percentage}%`,
-        backgroundColor: areaType.color,
       }"
       :title="`${areaType.name}: ${areaType.percentage}%`"
     ></div>
@@ -51,12 +47,25 @@ export default {
   height: 26px;
   width: 100%;
   background-color: #d9d9d9;
-  border: 2px solid #878786;
+  // border: 2px solid #878786;
   overflow: hidden;
 }
 
 .abimo-slider-segment {
   height: 100%;
+  // border: 2px solid;
+}
+.unpvd {
+  background-color: #53c486;
+  // border-color: #2e9f61;
+}
+.roof {
+  background-color: #d17b7b;
+  // border-color: #971f1f;
+}
+.pvd {
+  background-color: #dfdf6b;
+  // border-color: #b4b446;
 }
 </style>
 
