@@ -60,6 +60,9 @@ const actions = {
       percentageRoof;
     state.areaTypesData.find((area) => area.id === "pvd").percentage =
       percentagePaved;
+
+    state.roofSliderData.find((area) => area.id === "roof").percentage =
+      percentageRoof;
   },
 
   calculatePercentages({ commit }, feature) {

@@ -11,16 +11,6 @@ export default {
       required: true,
     },
   },
-  data() {
-    return {
-      sliderTypes: [],
-    };
-  },
-  computed: {
-    updateSliderTypes() {
-      return this.sliderTypes;
-    },
-  },
 };
 </script>
 
