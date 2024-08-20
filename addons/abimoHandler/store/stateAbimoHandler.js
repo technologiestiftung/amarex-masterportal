@@ -15,58 +15,56 @@ export default {
   accumulatedAbimoStats: {
     totalArea: 0,
     featuresSelected: 0,
-    // Summe Dachfläche (bebaut versiegelt -> roof)
+
+    // Summen bebaut versiegelt -> roof, versiegelt -> pvd, unversiegelt -> unpvd
     totalRoofArea: 0,
-    // Summe  versiegelt -> pvd
     totalPavedArea: 0,
-    // Summe unversiegelt -> unpvd
     totalUnpavedArea: 0,
 
     percentageGreenRoofToRoof: 0,
     percentageGreenRoofToTotalArea: 0,
     percentageSwaleConnectedToPvd: 0,
     percentageSwaleConnectedToTotalArea: 0,
+    percentageRoofToTotalArea: 0,
+    percentageSealedToTotalArea: 0,
+    percentagePavedAreaToTotalArea: 0,
 
     // Other Values
     totalGreenRoofArea: 0,
-
     totalSealedArea: 0,
+
+    // Not used yet
     totalSwaleConnectedArea: 0,
     totalUnsealedArea: 0,
     maxGreenRoof: 0,
     maxUnpaved: 0,
     maxSwaleConnected: 0,
   },
-  roofSliderData: [
-    {
-      id: "roof",
-      percentage: 0,
-    },
-    {
-      id: "target",
-      percentage: 0,
-    },
-    {
-      id: "statusQuo",
-      percentage: 0,
-    },
-  ],
   areaTypesData: [
     {
       id: "unpvd",
-      name: "UNVERSIEGELT",
+      name: "UNVERSIEGELT (unpvd)",
       percentage: 0,
     },
     {
       id: "roof",
-      name: "BEBAUT VERSIEGELT",
+      name: "BEBAUT VERSIEGELT (roof)",
       percentage: 0,
     },
     {
       id: "pvd",
-      name: "UNBEBAUT VERSIEGELT",
+      name: "UNBEBAUT VERSIEGELT (pvd)",
       percentage: 0,
     },
   ],
+
+  // abimo values for abimo calculation
+  abimoGreenRoof: 0,
+  abimoUnsealed: 0,
+  abimoSwaleConnected: 0,
+
+  new_green_roof: 0,
+  new_to_swale: 0,
+  new_unpvd: 0,
 };
 

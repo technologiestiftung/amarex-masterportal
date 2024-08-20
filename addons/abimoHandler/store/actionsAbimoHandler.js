@@ -16,6 +16,7 @@ const actions = {
     );
     const totalRoofArea = areaCalc.getTotalRoofArea(state.selectedFeatures);
     const totalPavedArea = areaCalc.getTotalPavedArea(state.selectedFeatures);
+    const totalSealedArea = areaCalc.getTotalSealedArea(state.selectedFeatures);
 
     // Berechnung der Prozentwerte
     const percentageGreenRoofToRoof = totalArea
@@ -30,6 +31,21 @@ const actions = {
     const percentageSwaleConnectedToTotalArea = totalArea
       ? (totalSwaleConnectedArea / totalArea) * 100
       : 0;
+    const percentagePavedAreaToTotalArea = totalArea
+      ? (totalPavedArea / totalArea) * 100
+      : 0;
+
+    // Update areaTypesData
+    const percentageUnpaved = totalArea
+      ? (totalUnpavedArea / totalArea) * 100
+      : 0;
+    const percentageRoofToTotalArea = totalArea
+      ? (totalRoofArea / totalArea) * 100
+      : 0;
+    const percentagePaved = totalArea ? (totalPavedArea / totalArea) * 100 : 0;
+    const percentageSealedToTotalArea = totalArea
+      ? (totalSealedArea / totalArea) * 100
+      : 0;
 
     const stats = {
       featuresSelected: totalFeatures,
@@ -40,50 +56,23 @@ const actions = {
       totalUnpavedArea: totalUnpavedArea,
 
       // percentages
+      percentageRoofToTotalArea: percentageRoofToTotalArea,
       percentageGreenRoofToRoof: percentageGreenRoofToRoof,
       percentageGreenRoofToTotalArea: percentageGreenRoofToTotalArea,
       percentageSwaleConnectedToPvd: percentageSwaleConnectedToPvd,
       percentageSwaleConnectedToTotalArea: percentageSwaleConnectedToTotalArea,
+      percentageSealedToTotalArea: percentageSealedToTotalArea,
+      percentagePavedAreaToTotalArea: percentagePavedAreaToTotalArea,
     };
-    commit("setAccumulatedAbimoStats", stats);
 
-    // Update areaTypesData
-    const percentageUnpaved = totalArea
-      ? (totalUnpavedArea / totalArea) * 100
-      : 0;
-    const percentageRoof = totalArea ? (totalRoofArea / totalArea) * 100 : 0;
-    const percentagePaved = totalArea ? (totalPavedArea / totalArea) * 100 : 0;
+    commit("setAccumulatedAbimoStats", stats);
 
     state.areaTypesData.find((area) => area.id === "unpvd").percentage =
       percentageUnpaved;
     state.areaTypesData.find((area) => area.id === "roof").percentage =
-      percentageRoof;
+      percentageRoofToTotalArea;
     state.areaTypesData.find((area) => area.id === "pvd").percentage =
       percentagePaved;
-
-    state.roofSliderData.find((area) => area.id === "roof").percentage =
-      percentageRoof;
-  },
-
-  calculatePercentages({ commit }, feature) {
-    const evaporation = Math.floor(parseFloat(feature.values_.evaporatio));
-    const rinse = Math.floor(parseFloat(feature.values_.ri));
-    const runoff = Math.floor(parseFloat(feature.values_.row));
-
-    const total = evaporation + rinse + runoff;
-
-    const evaporationPercentage = (evaporation / total) * 100 - 0.5;
-    const rinsePercentage = (rinse / total) * 100 - 0.5;
-    const runoffPercentage = (runoff / total) * 100 - 0.5;
-
-    const percentages = {
-      evaporationPercentage,
-      rinsePercentage,
-      runoffPercentage,
-    };
-
-    commit("setPercentages", percentages);
-    return percentages;
   },
 };
 

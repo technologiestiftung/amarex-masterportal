@@ -7,6 +7,7 @@ import Stroke from "ol/style/Stroke";
 import { Select } from "ol/interaction";
 import AbimoAccordion from "./AbimoAccordion.vue";
 import AbimoBlockAreaSelector from "./AbimoBlockAreaSelector.vue";
+import AbimoSelector from "./AbimoSelector.vue";
 import getRabimo from "../api/getRabimo";
 import helper from "../utils/helper";
 
@@ -19,28 +20,12 @@ export default {
   components: {
     AbimoAccordion,
     AbimoBlockAreaSelector,
+    AbimoSelector,
   },
   data() {
     return {
       isLoading: false,
       selectedFeatures: [],
-      sliders: [
-        {
-          id: "green_roof",
-          label: "Dachbegrünung (% der Dachfläche)",
-          value: 0,
-        },
-        {
-          id: "to_swale",
-          label: "Versickerungsmulde",
-          value: 0,
-        },
-        {
-          id: "not_pvd",
-          label: "Unversiegelte Fläche",
-          value: 0,
-        },
-      ],
       selectInteraction: null,
       layer: null,
       steps: [
@@ -68,7 +53,7 @@ export default {
           label: "Untersuchungsgebiet Definieren",
           description:
             "Wählen Sie in der Karte die Blockteilflächen via Mausklick aus, die Sie untersuchen möchten.",
-          isActive: true,
+          isActive: false,
           buttons: [
             {
               id: 1,
@@ -79,10 +64,10 @@ export default {
         },
         {
           id: 3,
-          label: "Klimaszenario wählen",
+          label: "Dachbegrünung",
           description:
-            "Wählen Sie das Referenyszenario für die Berechnungen aus, weitere Informationen zu den Referenzszenarios finden Sie in unserer Dokumentation.",
-          isActive: false,
+            "Bei den von Ihnen gewählten Flächen stehen xxxx m2 Dachflächen zur Verfügung. Welchen Anteil möchten Sie begrünen?",
+          isActive: true,
           buttons: [
             {
               id: 1,
@@ -93,34 +78,27 @@ export default {
         },
         {
           id: 4,
-          label: "Maßnahmen auswählen",
+          label: "Entsiegelung von Flächen",
           description:
             "Wählen Sie anteilsmäßig die Maßnahmen, die Sie in die Berechnung einfließen lassen wollen.",
           isActive: false,
-          buttons: [
-            {
-              id: 1,
-              label: "Bestätigen",
-              isDisabled: true,
-            },
-          ],
         },
         {
           id: 5,
-          label: "DeltaW Berechnung",
+          label: "Anschluss an Mulde",
           description:
-            "Fügen Sie nun den berechneten DeltaW-Layer hinzu. Des Weiteren stehen ihnen weitere Ergebnislayer zur Verfügung.",
+            "Wählen Sie anteilsmäßig die Maßnahmen, die Sie in die Berechnung einfließen lassen wollen.",
           isActive: false,
-          buttons: [
-            {
-              id: 1,
-              label: "Layer Einfügen",
-              isDisabled: true,
-            },
-          ],
         },
         {
           id: 6,
+          label: "Berechnung",
+          description:
+            "Fügen Sie nun den berechneten DeltaW-Layer hinzu. Des Weiteren stehen ihnen weitere Ergebnislayer zur Verfügung.",
+          isActive: false,
+        },
+        {
+          id: 7,
           label: "Weitere Berechnung",
           description:
             "Wenn Sie weitere Berchnungen mit veränderten Parametern vornehmen möchten, klicken Sie hier auf Neu Berechnen.",
@@ -142,7 +120,6 @@ export default {
   },
   mounted() {
     this.createInteractions();
-    // this.addInteractions();
     this.layer_abimo_altered = mapCollection
       .getMap("2D")
       .getLayers()
@@ -187,7 +164,6 @@ export default {
         event.selected.forEach((feature) => {
           const featureCode = feature.values_.code;
           const inputFeature = this.getInputFeature(featureCode);
-          this.adjustSliders(inputFeature);
 
           const mergedFeature = new Feature({
             geometry: feature.getGeometry(),
@@ -232,13 +208,6 @@ export default {
         equivalentFeatureKey
       ].value.values_;
     },
-    adjustSliders(feature) {
-      // TODO: check values
-      // console.log("adjustSliders(feature)", feature);
-      this.sliders[0].value = Number(feature.green_roof).toFixed(2) * 100;
-      this.sliders[1].value = Number(feature.to_swale).toFixed(2) * 100;
-      this.sliders[2].value = Number((1 - feature.pvd).toFixed(2) * 100);
-    },
     createStyle(properties) {
       // This function transform importet geodata, in this case our Evaporatio to a hard coded colour code.
       const rules = [
@@ -273,42 +242,8 @@ export default {
         }),
       });
     },
-    /*
-     * transform imported data to OpenLayers Feature maps based on slider values
-     * @param {Array} featuresArray - Array of imported features
-     * @returns {Array} - Array of OpenLayers Features
-     */
-    mapToolFeatures(selectedFeatures) {
-      // featuresArray === this.selectedFeatures === feature selection from this.layer_rabimo_input
-      const sliderValues = this.sliders.map((slider) => slider.value);
-
-      return selectedFeatures.map((featureData) => {
-        //copies the equivalent feature from the selection (data.features), creates a new Feature object from the OpenLayers class and adds further properties within the object
-        const olFeature = new Feature({
-          ...featureData.values_,
-          geometry: featureData.getGeometry(),
-          new_green_roof: sliderValues[0],
-          new_to_swale: sliderValues[1],
-          new_pvd: sliderValues[2],
-        });
-
-        return olFeature;
-      });
-    },
     addToLayer(calculatedFeatures) {
       this.layer_abimo_altered.values_.source.addFeatures(calculatedFeatures);
-    },
-    logFunctionsAndProperties(obj) {
-      const methods = Object.getOwnPropertyNames(obj).filter(
-          (key) => typeof obj[key] === "function",
-        ),
-        properties = Object.getOwnPropertyNames(obj).filter(
-          (key) => typeof obj[key] !== "function",
-        );
-
-      console.warn(methods);
-      console.warn(properties);
-      console.warn(JSON.stringify(obj));
     },
     async testRabimoAPI() {
       this.isLoading = true;
@@ -318,22 +253,29 @@ export default {
     },
     async fetchCalculateMultiblock() {
       // get multiblock data
-      let payload = [];
-      const olFeatures = this.mapToolFeatures(this.selectedFeatures);
+      let payload = {
+        features: [],
+        targets: {
+          new_green_roof: "",
+          new_to_swale: "",
+          new_unpvd: "",
+        },
+      };
 
-      // fetch data for each feature?
-      for (const feature of olFeatures) {
+      // add properties for each feature
+      for (const feature of this.selectedFeatures) {
         const properties = feature.getProperties();
-        payload.push(properties);
+        payload.features.push(properties);
       }
+
       try {
-        const data = await getRabimo.getMultiblock(payload);
-        console.log("[AbimoMeasure] data::", data);
+        console.log("[AbimoHandler] payload::", payload);
+        // const data = await getRabimo.getMultiblock(payload);
+        // console.log("[AbimoMeasure] data::", data);
       } catch (error) {
         console.error("Fehler beim Abrufen der Daten:", error);
       }
-
-      this.addToLayer(olFeatures);
+      // this.addToLayer(olFeatures);
     },
     async calculateDeltaW() {
       const olFeatures = this.mapToolFeatures(this.selectedFeatures);
@@ -344,8 +286,9 @@ export default {
         payload.push(properties);
       }
       try {
-        const data = await getRabimo.getMultiblockDeltaW(payload);
-        console.log("[AbimoMeasure] data::", data);
+        console.log("[AbimoHandler] payload::", payload);
+        // const data = await getRabimo.getMultiblockDeltaW(payload);
+        // console.log("[AbimoMeasure] data::", data);
       } catch (error) {
         console.error("Fehler beim Abrufen der Daten:", error);
       }
@@ -383,6 +326,7 @@ export default {
     <div class="flex-grow-1">
       <AbimoAccordion :steps="steps">
         <template v-slot:default="slotProps">
+          <!-- Step 1 -->
           <div v-if="slotProps.step.id === 1">
             <button
               class="btn btn-primary"
@@ -393,7 +337,7 @@ export default {
             <button class="btn btn-secondary">Überspringen</button>
           </div>
 
-          <!-- NOTE: Step 2 -->
+          <!-- Step 2 -->
           <div v-if="slotProps.step.id === 2">
             <div
               v-for="button in slotProps.step.buttons"
@@ -410,32 +354,23 @@ export default {
             </div>
           </div>
 
-          <!-- NOTE: Step 4 -->
+          <!-- Step 3 -->
+          <div v-if="slotProps.step.id === 3">
+            <AbimoSelector type="greenRoof" />
+          </div>
 
+          <!-- Step 4 -->
           <div v-else-if="slotProps.step.id === 4">
-            <div class="mb-4">
-              <div
-                v-for="slider in sliders"
-                :key="slider.id"
-              >
-                <label
-                  class="pr-5"
-                  :for="slider.id"
-                  >{{ slider.label }}</label
-                >
-                <input
-                  :id="slider.id"
-                  v-model="slider.value"
-                  type="range"
-                  min="0"
-                  max="100"
-                  class="bg-secondary"
-                />
+            <AbimoSelector type="unsealed" />
+          </div>
 
-                <span>{{ slider.value }}</span>
-              </div>
-            </div>
+          <!-- Step 5 -->
+          <div v-else-if="slotProps.step.id === 5">
+            <AbimoSelector type="swaleConnected" />
+          </div>
 
+          <!-- Step 6 -->
+          <div v-if="slotProps.step.id === 6">
             <button
               class="btn btn-primary"
               @click="fetchCalculateMultiblock"
@@ -443,7 +378,6 @@ export default {
               Blockteilflächen berechnen
             </button>
 
-            <!-- TODO: only display for testing API -->
             <button
               class="btn btn-primary"
               @click="testRabimoAPI"
@@ -458,22 +392,9 @@ export default {
             </button>
           </div>
 
-          <!-- NOTE: Step 5 -->
-
-          <div v-else-if="slotProps.step.id === 5">
-            <button
-              class="btn btn-primary"
-              @click="calculateDeltaW"
-            >
-              <!-- <span class="sr-only">Loading...</span> -->
-              DeltaW Berechnen
-            </button>
-          </div>
-
-          <!-- NOTE: Step 6 -->
-
-          <div v-if="slotProps.step.id === 6">
-            <!-- TODO: add reset function -->
+          <!-- Step 7 -->
+          <div v-if="slotProps.step.id === 7">
+            <!-- todo add reset function -->
             <button class="btn btn-primary">Neue Berechnung Starten</button>
           </div>
         </template>

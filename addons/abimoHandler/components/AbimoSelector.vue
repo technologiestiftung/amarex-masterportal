@@ -1,15 +1,23 @@
 <script>
-import GreenRoofSlider from "./GreenRoofSlider.vue";
+import AbimoSliderSelector from "./AbimoSliderSelector.vue";
 import { mapGetters } from "vuex";
 
 /**
- * AbimoGreenRoofSelector
- * @module modules/AbimoGreenRoofSelector
+ * AbimoSelector
+ * @module modules/AbimoSelector
  */
 export default {
-  name: "AbimoGreenRoofSelector",
+  name: "AbimoSelector",
+  props: {
+    type: {
+      type: String,
+      // greenRoof | unsealed | swaleConnected
+      default: "greenRoof",
+      required: true,
+    },
+  },
   components: {
-    GreenRoofSlider,
+    AbimoSliderSelector,
   },
   data() {
     return {
@@ -29,12 +37,12 @@ export default {
 
 <template lang="html">
   <div
-    id="AbimoGreenRoofSelector-root"
+    id="AbimoSelector-root"
     class="d-flex flex-column gap-3"
   >
     <div class="area-types-visualization w-100">
-      <GreenRoofSlider />
-      <hr />
+      <AbimoSliderSelector :type="type" />
+      <!-- <hr />
       <div class="legend-item">
         <div class="color-indicator mr-3"></div>
         <div class="stats-display">
@@ -42,15 +50,8 @@ export default {
             GESAMTFLÄCHE: {{ accumulatedAbimoStats.totalArea.toFixed(0) }} m²
           </p>
         </div>
-      </div>
+      </div> -->
     </div>
-
-    <button
-      class="btn btn-primary mt-5"
-      :disabled="ui.button.isDisabled"
-    >
-      {{ ui.button.label }}
-    </button>
   </div>
 </template>
 
