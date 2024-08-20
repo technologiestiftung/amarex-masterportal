@@ -1,6 +1,6 @@
 <script>
 import AbimoSlider from "./AbimoSlider.vue";
-import { mapActions, mapGetters } from "vuex";
+import { mapGetters } from "vuex";
 
 /**
  * AbimoBlockAreaSelector
@@ -18,9 +18,7 @@ export default {
       "areaTypesData",
     ]),
   },
-  methods: {
-    ...mapActions("Modules/AbimoHandler", ["calculatePercentages"]),
-  },
+  methods: {},
 };
 </script>
 
@@ -57,7 +55,7 @@ export default {
 
       <hr />
 
-      <!-- NOTE: Green Roofs -->
+      <!-- Green Roofs -->
       <div class="stats-container green-roofs">
         <h6>GRÜNDÄCHER</h6>
         <div class="stats-display">
@@ -82,7 +80,7 @@ export default {
 
       <hr />
 
-      <!-- NOTE: Disconnected -->
+      <!-- Disconnected -->
 
       <div class="stats-container disconnected-areas">
         <p>AN MULDE ANGESCHLOSSEN</p>
