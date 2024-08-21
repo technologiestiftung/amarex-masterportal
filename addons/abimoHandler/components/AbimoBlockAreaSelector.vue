@@ -48,7 +48,9 @@ export default {
           <div :class="['color-indicator mr-3', `${areaType.id}`]"></div>
           <div class="stats-display">
             <span>{{ areaType.name }}</span>
-            <strong>{{ areaType.percentage.toFixed(0) }} %</strong>
+            <strong
+              >{{ Math.round(areaType.percentage * 100).toFixed(0) }} %</strong
+            >
           </div>
         </div>
       </div>
@@ -62,7 +64,7 @@ export default {
           <span>% VON DACHFLÄCHE</span>
           <strong
             >{{
-              accumulatedAbimoStats.percentageGreenRoofToRoof.toFixed(0)
+              Math.round(accumulatedAbimoStats.meanGreenRoof * 100).toFixed(0)
             }}
             %</strong
           >
@@ -71,7 +73,7 @@ export default {
           <span>% VON GESAMTFLÄCHE</span>
           <strong
             >{{
-              accumulatedAbimoStats.percentageGreenRoofToTotalArea.toFixed(0)
+              accumulatedAbimoStats.percentageGreenRoof.toFixed(0)
             }}
             %</strong
           >
@@ -97,9 +99,7 @@ export default {
           <span>% VON GESAMTFLÄCHE</span>
           <strong
             >{{
-              accumulatedAbimoStats.percentageSwaleConnectedToTotalArea.toFixed(
-                0,
-              )
+              accumulatedAbimoStats.percentageSwaleConnected.toFixed(0)
             }}
             %</strong
           >

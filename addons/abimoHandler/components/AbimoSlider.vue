@@ -24,9 +24,9 @@ export default {
       :key="index"
       :class="['abimo-slider-segment', `${areaType.id}`]"
       :style="{
-        width: `${areaType.percentage}%`,
+        width: `${areaType.percentage * 100}%`,
       }"
-      :title="`${areaType.name}: ${areaType.percentage}%`"
+      :title="`${areaType.name}: ${areaType.percentage * 100}%`"
     ></div>
   </div>
 </template>
