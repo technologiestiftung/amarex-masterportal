@@ -21,24 +21,24 @@ export default {
     totalPavedArea: 0,
     totalUnpavedArea: 0,
 
-    percentageGreenRoofToRoof: 0,
-    percentageGreenRoofToTotalArea: 0,
-    percentageSwaleConnectedToPvd: 0,
-    percentageSwaleConnectedToTotalArea: 0,
-    percentageRoofToTotalArea: 0,
-    percentageSealedToTotalArea: 0,
-    percentagePavedAreaToTotalArea: 0,
-
     // Other Values
     totalGreenRoofArea: 0,
     totalSealedArea: 0,
 
-    // Not used yet
-    totalSwaleConnectedArea: 0,
-    totalUnsealedArea: 0,
+    meanRoof: 0,
+    meanUnpaved: 0,
+    meanPaved: 0,
+    meanGreenRoof: 0,
+    meanSwaleConnected: 0,
+
     maxGreenRoof: 0,
     maxUnpaved: 0,
     maxSwaleConnected: 0,
+
+    percentageGreenRoof: 0,
+    percentageSwaleConnected: 0,
+    percentageGreenRoofToRoof: 0,
+    percentageSwaleConnectedToPvd: 0,
   },
   areaTypesData: [
     {
@@ -58,13 +58,8 @@ export default {
     },
   ],
 
-  // abimo values for abimo calculation
-  abimoGreenRoof: 0,
-  abimoUnsealed: 0,
-  abimoSwaleConnected: 0,
-
-  new_green_roof: 0,
-  new_to_swale: 0,
-  new_unpvd: 0,
+  newGreenRoof: 0,
+  newUnpvd: 0,
+  newToSwale: 0,
 };
 

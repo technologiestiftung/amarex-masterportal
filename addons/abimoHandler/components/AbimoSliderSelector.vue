@@ -23,23 +23,25 @@ export default {
   computed: {
     ...mapGetters("Modules/AbimoHandler", [
       "accumulatedAbimoStats",
-      "abimoUnsealed",
+      "newUnpvd",
     ]),
 
     currentBaseData() {
       switch (this.type) {
         case "greenRoof":
-          return this.accumulatedAbimoStats.percentageRoofToTotalArea;
+          return Math.round(this.accumulatedAbimoStats.maxGreenRoof * 100);
         case "unsealed":
-          return this.accumulatedAbimoStats.percentagePavedAreaToTotalArea;
+          return Math.round(this.accumulatedAbimoStats.maxUnpaved * 100);
         case "swaleConnected":
-          if (this.abimoUnsealed > 0) {
-            return (
-              this.accumulatedAbimoStats.percentagePavedAreaToTotalArea -
-              this.abimoUnsealed
+          if (this.newUnpvd > 0) {
+            return Math.round(
+              (this.accumulatedAbimoStats.maxSwaleConnected - this.newUnpvd) *
+                100,
             );
           } else
-            return this.accumulatedAbimoStats.percentagePavedAreaToTotalArea;
+            return Math.round(
+              this.accumulatedAbimoStats.maxSwaleConnected * 100,
+            );
         default:
           return {};
       }
@@ -55,7 +57,7 @@ export default {
         case "unsealed":
           return {
             title: "Unversiegelte Flächen",
-            baseDataTitle: "Unversiegelte Flächen (unpvd / roof -1)",
+            baseDataTitle: "Unversiegelte Flächen (unpvd + pvd / roof -1)",
             baseDataSubTitle: "update pvd",
           };
         case "swaleConnected":
@@ -71,20 +73,20 @@ export default {
   },
   methods: {
     ...mapMutations("Modules/AbimoHandler", [
-      "setAbimoGreenRoof",
-      "setAbimoUnsealed",
-      "setAbimoSwaleConnected",
+      "setNewGreenRoof",
+      "setNewUnpvd",
+      "setNewToSwale",
     ]),
     updateAbimoData() {
       switch (this.type) {
         case "greenRoof":
-          this.setAbimoGreenRoof(this.targetValue);
+          this.setNewGreenRoof(this.targetValue);
           break;
         case "unsealed":
-          this.setAbimoUnsealed(this.targetValue);
+          this.setNewUnpvd(this.targetValue);
           break;
         case "swaleConnected":
-          this.setAbimoSwaleConnected(this.targetValue);
+          this.setNewToSwale(this.targetValue);
           break;
       }
     },
@@ -143,7 +145,6 @@ export default {
       <div class="stats-display d-flex justify-content-between">
         <div class="d-flex flex-column w-100">
           <strong>{{ sliderContent.baseDataTitle }}</strong>
-          <!-- <span>{{ sliderContent.baseDataSubTitle }}</span> -->
         </div>
         <span>{{ currentBaseData.toFixed(0) }} %</span>
       </div>
@@ -221,31 +222,36 @@ export default {
 
 .abimo-slider-segment {
   height: 100%;
-  // border: 2px solid;
+  border: 2px solid;
 }
 .greenRoof {
   background-color: #d17b7b;
-  // border-color: #971f1f;
+  border-color: #971f1f;
   z-index: 2;
 }
 .unsealed {
+  background-color: #53c486;
+  border-color: #2e9f61;
+  z-index: 2;
+}
+.sealed {
   background-color: #d59f5d;
-  // border-color: #B67A2F;
+  border-color: #b67a2f;
   z-index: 2;
 }
 .swaleConnected {
   background-color: #d59f5d;
-  // border-color: #B67A2F;
+  border-color: #b67a2f;
   z-index: 2;
 }
 
 .target {
   position: absolute;
-  height: 26px;
+  margin-top: 2px;
+  height: 22px;
   z-index: 3;
   left: 0;
-  top: 0;
-  // border: 2px solid;
+  border: 2px solid;
   background-color: #5d8bef;
   border-color: #2663e9;
 }

@@ -1,14 +1,6 @@
-/* eslint-disable no-unused-vars */
-
 function calculatePrecisely(value, precision = 9) {
   const factor = Math.pow(10, precision);
   return Math.round(value * factor) / factor;
-}
-
-function getDecimalPlaces(number) {
-  const str = number.toString();
-  const decimalIndex = str.indexOf(".");
-  return decimalIndex === -1 ? 0 : str.length - decimalIndex - 1;
 }
 
 function calculateAttributeSum(areas, attribute) {
