@@ -1,19 +1,19 @@
 <script>
+import { mapGetters } from "vuex";
+
 export default {
   name: "AbimoAccordion",
-  props: {
-    steps: {
-      type: Array,
-      required: true,
-    },
+  computed: {
+    ...mapGetters("Modules/AbimoHandler", ["steps"]),
   },
+  // TODO toggle isActive state onClick
 };
 </script>
 
 <template>
   <div
     class="accordion h-100 overflow-scroll"
-    id="accordionExample"
+    id="abimoAccordion"
   >
     <div
       v-for="step in steps"
@@ -26,6 +26,7 @@ export default {
       >
         <button
           class="accordion-button"
+          :class="{ collapsed: !step.isActive }"
           type="button"
           data-bs-toggle="collapse"
           :data-bs-target="`#collapse${step.id}`"
@@ -39,7 +40,7 @@ export default {
         :id="`collapse${step.id}`"
         :class="['accordion-collapse collapse', { show: step.isActive }]"
         :aria-labelledby="`heading${step.id}`"
-        data-bs-parent="#accordionExample"
+        data-bs-parent="#abimoAccordion"
       >
         <div class="accordion-body">
           <p>{{ step.description }}</p>
@@ -49,3 +50,4 @@ export default {
     </div>
   </div>
 </template>
+
