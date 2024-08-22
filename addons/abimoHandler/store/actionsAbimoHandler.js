@@ -14,7 +14,6 @@ const actions = {
     state.areaTypesData.find((area) => area.id === "pvd").max = stats.meanPaved;
   },
   updateMaxSwaleConnected({ commit, state }) {
-
     const maxSwaleConnected = areaCalc.getMaxSwaleConnected(
       state.selectedFeatures,
       state.newUnpvd,
@@ -23,6 +22,35 @@ const actions = {
       ...state.accumulatedAbimoStats,
       maxSwaleConnected,
     });
+  },
+  updateAccordionSteps({ commit, state }, stepToSetActive) {
+    if (!stepToSetActive) {
+      const resetSteps = state.steps.map((step) => ({
+        ...step,
+        isActive: false,
+      }));
+
+      commit("setSteps", resetSteps);
+    } else {
+      const stepToUpdate = state.steps.find(
+        (step) => step.id === stepToSetActive,
+      );
+
+      const steps = state.steps.map((step) => {
+        if (step.id === stepToUpdate.id) {
+          return {
+            ...step,
+            isActive: true,
+          };
+        }
+        return {
+          ...step,
+          isActive: false,
+        };
+      });
+
+      commit("setSteps", steps);
+    }
   },
 };
 
