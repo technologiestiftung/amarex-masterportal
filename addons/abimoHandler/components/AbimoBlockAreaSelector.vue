@@ -1,6 +1,12 @@
 <script>
+import { mapActions, mapGetters, mapMutations } from "vuex";
+import mapCollection from "../../../src/core/maps/js/mapCollection";
 import AbimoSlider from "./AbimoSlider.vue";
-import { mapGetters } from "vuex";
+import Feature from "ol/Feature";
+import { Select } from "ol/interaction";
+import Style from "ol/style/Style";
+import Fill from "ol/style/Fill";
+import Stroke from "ol/style/Stroke";
 
 /**
  * AbimoBlockAreaSelector
@@ -8,6 +14,14 @@ import { mapGetters } from "vuex";
  */
 export default {
   name: "AbimoBlockAreaSelector",
+
+  data() {
+    return {
+      selectedFeatures: [],
+      selectInteraction: null,
+      layer: null,
+    };
+  },
   components: {
     AbimoSlider,
   },
@@ -18,7 +32,109 @@ export default {
       "areaTypesData",
     ]),
   },
-  methods: {},
+  mounted() {
+    this.createInteractions();
+    this.layer_rabimo_input = mapCollection
+      .getMap("2D")
+      .getLayers()
+      .getArray()
+      .find((layer) => layer.get("id") === "rabimo_input_2020");
+
+    this.layer_abimo_calculated = mapCollection
+      .getMap("2D")
+      .getLayers()
+      .getArray()
+      .find((layer) => layer.get("id") === "planung_abimo");
+  },
+  methods: {
+    ...mapActions("Maps", {
+      addInteractionToMap: "addInteraction",
+      removeInteractionFromMap: "removeInteraction",
+    }),
+    ...mapActions("Modules/AbimoHandler", ["updateAccumulatedStats"]),
+    ...mapMutations("Modules/AbimoHandler", ["setSelectedFeatures"]),
+    createInteractions: function () {
+      // From open layers we imported the Select class. This adds the possibility to add "blocks" to our feature layer. For further info check OpenLayers Docs
+      const selectInteraction = new Select({
+        multi: true,
+        layers: function (layer) {
+          return layer.get("id") === "abimo_2020_wfs";
+        },
+      });
+
+      // Add the interaction to the components methods
+      this.selectInteraction = selectInteraction;
+
+      // Checks for condition "is selected" loads data from abimo and rabimo_input and creates a merged feature out of them
+      selectInteraction.on("select", (event) => {
+        event.selected.forEach((feature) => {
+          const featureCode = feature.values_.code;
+          const inputFeature = this.getInputFeature(featureCode);
+
+          const mergedFeature = new Feature({
+            geometry: feature.getGeometry(),
+            ...feature.getProperties(),
+            ...inputFeature,
+          });
+          this.selectedFeatures.push(mergedFeature);
+          this.setSelectedFeatures(this.selectedFeatures);
+        });
+
+        event.deselected.forEach((feature) => {
+          const featureCode = feature.values_.code;
+          this.selectedFeatures = this.selectedFeatures.filter(
+            (f) => f.values_.code !== featureCode,
+          );
+          this.setSelectedFeatures(this.selectedFeatures);
+        });
+
+        this.updateAccumulatedStats();
+      });
+      // registers interaction in module - check masterportal docu
+      this.addInteractionToMap(selectInteraction);
+    },
+    getInputFeature(featureCode) {
+      // TODO: fix timing issue
+      // features are stored in an Object IDed with numbers. This function returns each ID in an array to iterate over them
+      const featureKeys = Object.keys(
+        this.layer_rabimo_input.values_.source.featuresRtree_.items_,
+      );
+
+      // This function returns the featureKey with the same code
+      const equivalentFeatureKey = featureKeys.find(
+        (key) =>
+          this.layer_rabimo_input.values_.source.featuresRtree_.items_[key]
+            .value.values_.code === featureCode,
+      );
+      return this.layer_rabimo_input.values_.source.featuresRtree_.items_[
+        equivalentFeatureKey
+      ].value.values_;
+    },
+    handleBlockAreaConfirm() {
+      const olFeatures = this.selectedFeatures.map((featureData) => {
+        return new Feature({
+          ...featureData.values_,
+          geometry: featureData.getGeometry(),
+        });
+      });
+
+      for (const feature of olFeatures) {
+        feature.setStyle(
+          new Style({
+            stroke: new Stroke({
+              color: `rgba(255, 203, 31, 1)`,
+              width: 2,
+            }),
+            fill: new Fill({
+              color: `rgba(255, 203, 31, 0.8)`,
+            }),
+          }),
+        );
+      }
+      this.layer_abimo_calculated.values_.source.addFeatures(olFeatures);
+      this.removeInteractionFromMap(this.selectInteraction);
+    },
+  },
 };
 </script>
 
@@ -110,6 +226,12 @@ export default {
         </div>
       </div>
     </div>
+    <button
+      class="btn btn-primary mt-5"
+      @click="handleBlockAreaConfirm"
+    >
+      Bestätigen
+    </button>
   </div>
 </template>
 
