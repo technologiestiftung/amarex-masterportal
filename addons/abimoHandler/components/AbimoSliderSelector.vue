@@ -1,5 +1,5 @@
 <script>
-import { mapGetters, mapMutations } from "vuex";
+import { mapGetters, mapMutations, mapActions } from "vuex";
 
 /**
  * AbimoSliderSelector
@@ -12,7 +12,8 @@ export default {
       type: String,
       // greenRoof | unsealed | swaleConnected
       default: "greenRoof",
-      required: true,
+      validator: (value) =>
+        ["greenRoof", "unsealed", "swaleConnected"].includes(value),
     },
   },
   data() {
@@ -33,15 +34,21 @@ export default {
         case "unsealed":
           return Math.round(this.accumulatedAbimoStats.maxUnpaved * 100);
         case "swaleConnected":
-          if (this.newUnpvd > 0) {
-            return Math.round(
-              (this.accumulatedAbimoStats.maxSwaleConnected - this.newUnpvd) *
-                100,
-            );
-          } else
-            return Math.round(
-              this.accumulatedAbimoStats.maxSwaleConnected * 100,
-            );
+          return Math.round(this.accumulatedAbimoStats.maxSwaleConnected * 100);
+        default:
+          return {};
+      }
+    },
+    currentStatusQuo() {
+      switch (this.type) {
+        case "greenRoof":
+          return Math.round(this.accumulatedAbimoStats.meanGreenRoof * 100);
+        case "unsealed":
+          return Math.round(this.accumulatedAbimoStats.meanUnpaved * 100);
+        case "swaleConnected":
+          return Math.round(
+            this.accumulatedAbimoStats.meanSwaleConnected * 100,
+          );
         default:
           return {};
       }
@@ -58,7 +65,7 @@ export default {
           return {
             title: "Unversiegelte Flächen",
             baseDataTitle: "Unversiegelte Flächen (unpvd + pvd / roof -1)",
-            baseDataSubTitle: "update pvd",
+            baseDataSubTitle: "update unpvd",
           };
         case "swaleConnected":
           return {
@@ -77,16 +84,18 @@ export default {
       "setNewUnpvd",
       "setNewToSwale",
     ]),
+    ...mapActions("Modules/AbimoHandler", ["updateMaxSwaleConnected"]),
     updateAbimoData() {
       switch (this.type) {
         case "greenRoof":
-          this.setNewGreenRoof(this.targetValue);
+          this.setNewGreenRoof(this.targetValue / 100);
           break;
         case "unsealed":
-          this.setNewUnpvd(this.targetValue);
+          this.setNewUnpvd(this.targetValue / 100);
+          this.updateMaxSwaleConnected();
           break;
         case "swaleConnected":
-          this.setNewToSwale(this.targetValue);
+          this.setNewToSwale(this.targetValue / 100);
           break;
       }
     },
@@ -95,8 +104,16 @@ export default {
 </script>
 
 <template lang="html">
-  <div class="status-quo-bar">
-    <div class="status-quo"></div>
+  <div
+    class="status-quo-bar"
+    :style="{
+      width: `${currentStatusQuo.toFixed(0)}%`,
+    }"
+  >
+    <div
+      class="status-quo"
+      style=""
+    ></div>
   </div>
 
   <div
@@ -107,6 +124,7 @@ export default {
       :class="['abimo-slider-segment', `${type}`]"
       :style="{
         width: `${currentBaseData.toFixed(0)}%`,
+        borderWidth: this.currentBaseData > 0 ? '2px' : '0',
       }"
       :title="`${currentBaseData.toFixed(0)}%`"
     ></div>
@@ -115,13 +133,18 @@ export default {
       class="target"
       :style="{
         width: `${targetValue}%`,
+        borderWidth: this.targetValue > 0 ? '2px' : '0',
       }"
     ></div>
   </div>
 
-  <div class="area-types-legend d-flex flex-column w-100">
+  <div class="area-types-legend">
+    <div class="d-flex gap-3 align-items-center">
+      <div class="status-quo-legend-item"></div>
+      <strong>Status Quo</strong>
+    </div>
+
     <div class="legend-item">
-      <div class="color-indicator mr-3"></div>
       <div class="stats-display">
         <div class="d-flex flex-column w-100">
           <strong>ZIELWERT</strong>
@@ -141,7 +164,6 @@ export default {
     </div>
 
     <div class="legend-item">
-      <div class="color-indicator mr-3"></div>
       <div class="stats-display d-flex justify-content-between">
         <div class="d-flex flex-column w-100">
           <strong>{{ sliderContent.baseDataTitle }}</strong>
@@ -152,7 +174,6 @@ export default {
 
     <hr />
     <div class="legend-item">
-      <div class="color-indicator mr-3"></div>
       <div class="stats-display">
         <p class="area">
           GESAMTFLÄCHE: {{ accumulatedAbimoStats.totalArea.toFixed(0) }} m²
@@ -178,13 +199,17 @@ export default {
 }
 
 .area-types-legend {
+  width: 100%;
   display: flex;
+  gap: 8px;
+  flex-direction: column;
   justify-content: space-between;
-  margin-top: 10px;
+  margin-top: 20px;
 }
 
 .legend-item {
   display: flex;
+  gap: 8px;
   align-items: center;
 }
 
@@ -199,14 +224,30 @@ export default {
   margin-top: 10px;
 }
 .status-quo-bar {
-  width: 100%;
+  height: 12px;
+  margin-bottom: 4px;
+  position: relative;
 }
 .status-quo {
-  width: 12px;
-  height: 12px;
-  border: 1px solid #878786;
-  background-color: #d9d9d9;
-  margin-bottom: 4px;
+  margin-right: -5px;
+  position: absolute;
+  right: 0;
+  width: 0px;
+  height: 0px;
+  transform: rotate(360deg);
+  -webkit-transform: rotate(360deg);
+  border-style: solid;
+  border-width: 12px 6px 0 6px;
+  border-color: #878786 transparent transparent transparent;
+}
+.status-quo-legend-item {
+  width: 0px;
+  height: 0px;
+  transform: rotate(360deg);
+  -webkit-transform: rotate(360deg);
+  border-style: solid;
+  border-width: 12px 6px 0 6px;
+  border-color: #878786 transparent transparent transparent;
 }
 
 .abimo-slider-bar {
