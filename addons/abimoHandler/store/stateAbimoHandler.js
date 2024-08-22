@@ -24,6 +24,7 @@ export default {
     // Other Values
     totalGreenRoofArea: 0,
     totalSealedArea: 0,
+    totalSwaleConnectedArea: 0,
 
     meanRoof: 0,
     meanUnpaved: 0,
@@ -34,27 +35,24 @@ export default {
     maxGreenRoof: 0,
     maxUnpaved: 0,
     maxSwaleConnected: 0,
-
-    percentageGreenRoof: 0,
-    percentageSwaleConnected: 0,
-    percentageGreenRoofToRoof: 0,
-    percentageSwaleConnectedToPvd: 0,
+    maxGreenRoofToRoof: 0,
+    maxSwaleConnectedToPvd: 0,
   },
   areaTypesData: [
     {
       id: "unpvd",
       name: "UNVERSIEGELT (unpvd)",
-      percentage: 0,
+      max: 0,
     },
     {
       id: "roof",
       name: "BEBAUT VERSIEGELT (roof)",
-      percentage: 0,
+      max: 0,
     },
     {
       id: "pvd",
       name: "UNBEBAUT VERSIEGELT (pvd)",
-      percentage: 0,
+      max: 0,
     },
   ],
 
