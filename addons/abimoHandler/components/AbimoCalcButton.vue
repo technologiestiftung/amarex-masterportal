@@ -135,6 +135,17 @@ export default {
       }
     },
 
+    getColorWithOpacity(value, min = 0, max = 672) {
+      const normalized = (value - min) / (max - min);
+      const opacity = Math.max(0, Math.min(1, normalized));
+
+      return {
+        runoff: `rgba(255, 0, 0, ${opacity})`,
+        infiltration: `rgba(0, 255, 0, ${opacity})`,
+        evaporation: `rgba(0, 0, 255, ${opacity})`,
+      };
+    },
+
     /**
      * Transforms imported geodata into a style object based on predefined color rules.
      * @param {Object} properties - An object containing geodata properties.
@@ -150,9 +161,11 @@ export default {
       const evaporation = properties.new_evaporation;
 
       // Berechnete Farben für jeden Wert
-      const runoffColor = `rgba(255, 0, 0, ${surfaceRunoff / 680})`;
-      const infiltrationColor = `rgba(0, 255, 0, ${infiltration / 680})`;
-      const evaporationColor = `rgba(0, 0, 255, ${evaporation / 680})`;
+      const runoffColor = this.getColorWithOpacity(surfaceRunoff).runoff;
+      const infiltrationColor =
+        this.getColorWithOpacity(infiltration).infiltration;
+      const evaporationColor =
+        this.getColorWithOpacity(evaporation).evaporation;
 
       return [
         new Style({
