@@ -1,9 +1,6 @@
 <script>
 import { mapGetters, mapMutations, mapActions } from "vuex";
-import SearchBar from "../../../src/modules/searchBar/components/SearchBar.vue";
-import LayerCheckBox from "../../../src/modules/layerTree/components/LayerCheckBox.vue";
 import LayerSelectionTreeNode from "../../../src/modules/layerSelection/components/LayerSelectionTreeNode.vue";
-import LayerTree from "../../../src/modules/layerTree/components/LayerTree.vue";
 import { treeSubjectsKey } from "../../../src/shared/js/utils/constants";
 import sortBy from "../../../src/shared/js/utils/sortBy";
 import layerFactory from "../../../src/core/layers/js/layerFactory";
@@ -11,10 +8,7 @@ import layerFactory from "../../../src/core/layers/js/layerFactory";
 export default {
   name: "ThemeMaps",
   components: {
-    SearchBar,
-    LayerCheckBox,
     LayerSelectionTreeNode,
-    LayerTree,
   },
   data() {
     return {
@@ -47,6 +41,8 @@ export default {
     },
   },
   created() {
+    this.activeCategory = this.activeOrFirstCategory?.key;
+    this.provideSelectAllProps();
     this.initializeComponent();
   },
   unmounted() {
@@ -59,10 +55,9 @@ export default {
       "navigateForward",
       "reset",
       "setLayerInfoVisible",
-      "setHighlightLayerId",
       "changeVisibility",
     ]),
-    ...mapMutations("Modules/ThemeMaps", []),
+    ...mapMutations("Modules/ThemeMaps", ["setHighlightLayerId"]),
     initializeComponent() {
       this.activeCategory = this.activeOrFirstCategory?.key;
       this.provideSelectAllProps();
@@ -139,7 +134,7 @@ export default {
 
 <template>
   <div class="theme-layer-selection">
-    <LayerTree />
+    <!-- <LayerTree /> -->
     <!-- <SearchBar v-if="addLayerButtonSearchActive === true" /> -->
     <!-- <hr /> -->
     <div class="layer-selection-navigation d-flex pt-3">
@@ -237,6 +232,8 @@ export default {
         </div>
       </div>
     </div>
+
+    <!-- <LayerInformation /> -->
   </div>
 </template>
 

@@ -54,13 +54,11 @@ export default {
     },
   },
   created() {
-    const baselayerConfigIds = [],
-      baselayers = this.layerConfigsByAttributes({
-        baselayer: true,
-        showInLayerTree: true,
-      });
-
-    console.log("[BaseMaps] baselayers::", baselayers);
+    const baselayerConfigIds = [];
+    const baselayers = this.layerConfigsByAttributes({
+      baselayer: true,
+      showInLayerTree: true,
+    });
 
     if (baselayers.length > 1) {
       const maxZIndexLayer = baselayers.reduce((max, layer) =>
@@ -85,13 +83,18 @@ export default {
       "setBaselayerIds",
       "setTopBaselayerId",
     ]),
-    ...mapMutations(["setBaselayerVisibility"]),
     ...mapActions("Modules/BaseMaps", ["updateLayerVisibilityAndZIndex"]),
+    ...mapActions("Modules/LayerSelection", ["changeVisibility"]),
 
     switchActiveBaselayer(layerId) {
-      this.updateLayerVisibilityAndZIndex(layerId);
+      //
+      // TODO: fix baselayer display
+      //
 
       const selectableBackroundLayerIds = this.baselayerIds;
+
+      this.updateLayerVisibilityAndZIndex(layerId);
+
       selectableBackroundLayerIds.splice(
         selectableBackroundLayerIds.indexOf(layerId),
         1,
