@@ -3,6 +3,8 @@ import AbimoAccordion from "./AbimoAccordion.vue";
 import AbimoBlockAreaSelector from "./AbimoBlockAreaSelector.vue";
 import AbimoSelector from "./AbimoSelector.vue";
 import AbimoCalcButton from "./AbimoCalcButton.vue";
+import mapCollection from "../../../src/core/maps/js/mapCollection";
+import { mapActions } from "vuex";
 
 /**
  * Abimo
@@ -19,90 +21,51 @@ export default {
   data() {
     return {
       steps: [
+        // {
+        //   id: "1",
+        //   isActive: false,
+        // },
         {
-          id: 1,
-          label: "Vorberechnete Modelle",
-          description:
-            "Zur Status Quo Analyse können Sie mit den vorberechneten Karten aus dem Kartenkatalog starten",
-          isActive: false,
-          buttons: [
-            {
-              id: 1,
-              label: "Zum Katalog",
-              isDisabled: false,
-            },
-            {
-              id: 2,
-              label: "Überspringen",
-              isDisabled: false,
-            },
-          ],
-        },
-        {
-          id: 2,
-          label: "Untersuchungsgebiet Definieren",
-          description:
-            "Wählen Sie in der Karte die Blockteilflächen via Mausklick aus, die Sie untersuchen möchten.",
-          isActive: false,
-          buttons: [
-            {
-              id: 1,
-              label: "Bestätigen",
-              isDisabled: false,
-            },
-          ],
-        },
-        {
-          id: 3,
-          label: "Dachbegrünung",
-          description:
-            "Bei den von Ihnen gewählten Flächen stehen xxxx m2 Dachflächen zur Verfügung. Welchen Anteil möchten Sie begrünen?",
-          isActive: true,
-          buttons: [
-            {
-              id: 1,
-              label: "Bestätigen",
-              isDisabled: true,
-            },
-          ],
-        },
-        {
-          id: 4,
-          label: "Unversiegelte Flächen + nichtbebaut Versiegelte Flächen",
-          description:
-            "Wählen Sie anteilsmäßig die Maßnahmen, die Sie in die Berechnung einfließen lassen wollen.",
+          id: "2",
           isActive: false,
         },
         {
-          id: 5,
-          label: "Anschluss an Mulde",
-          description:
-            "Wählen Sie anteilsmäßig die Maßnahmen, die Sie in die Berechnung einfließen lassen wollen.",
+          id: "3",
           isActive: false,
         },
         {
-          id: 6,
-          label: "Berechnung",
-          description:
-            "Fügen Sie nun den berechneten DeltaW-Layer hinzu. Des Weiteren stehen ihnen weitere Ergebnislayer zur Verfügung.",
+          id: "4",
           isActive: false,
         },
         {
-          id: 7,
-          label: "Weitere Berechnung",
-          description:
-            "Wenn Sie weitere Berchnungen mit veränderten Parametern vornehmen möchten, klicken Sie hier auf Neu Berechnen.",
+          id: "5",
           isActive: false,
-          buttons: [
-            {
-              id: 1,
-              label: "Neu Berechnen",
-              isDisabled: true,
-            },
-          ],
+        },
+        {
+          id: "6",
+          isActive: false,
+        },
+        {
+          id: "7",
+          isActive: false,
         },
       ],
     };
+  },
+  methods: {
+    ...mapActions("Modules/AbimoHandler", ["updateAccordionSteps"]),
+
+    handleStepOneClick() {
+      this.updateAccordionSteps(2);
+    },
+    handleAbimoReset() {
+      mapCollection
+        .getMap("2D")
+        .getLayers()
+        .getArray()
+        .find((layer) => layer.get("id") === "planung_abimo")
+        .values_.source.clear();
+    },
   },
 };
 </script>
@@ -113,21 +76,21 @@ export default {
     class="d-flex flex-column gap-3"
   >
     <div class="d-flex flex-column h-100 overflow-scroll">
-      <h1>Berechnete Layer</h1>
+      <!-- <h1>Berechnete Layer</h1> -->
     </div>
     <hr />
     <div class="flex-grow-1">
-      <AbimoAccordion :steps="steps">
+      <AbimoAccordion>
         <template v-slot:default="slotProps">
           <!-- Step 1 -->
           <div v-if="slotProps.step.id === 1">
+            <button class="btn btn-primary">Zum Katalog</button>
             <button
-              class="btn btn-primary"
+              class="btn btn-secondary"
               @click="handleStepOneClick"
             >
-              Zum Katalog
+              Überspringen
             </button>
-            <button class="btn btn-secondary">Überspringen</button>
           </div>
 
           <!-- Step 2 -->
@@ -158,7 +121,12 @@ export default {
           <!-- Step 7 -->
           <div v-if="slotProps.step.id === 7">
             <!-- todo add reset function -->
-            <button class="btn btn-primary">Neue Berechnung Starten</button>
+            <button
+              class="btn btn-primary"
+              @click="handleAbimoReset"
+            >
+              Neue Berechnung Starten
+            </button>
           </div>
         </template>
       </AbimoAccordion>

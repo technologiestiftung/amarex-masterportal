@@ -61,13 +61,13 @@ export default {
   newToSwale: 0,
 
   steps: [
-    {
-      id: 1,
-      label: "Vorberechnete Modelle",
-      description:
-        "Zur Status Quo Analyse können Sie mit den vorberechneten Karten aus dem Kartenkatalog starten",
-      isActive: true,
-    },
+    // {
+    //   id: 1,
+    //   label: "Vorberechnete Modelle",
+    //   description:
+    //     "Zur Status Quo Analyse können Sie mit den vorberechneten Karten aus dem Kartenkatalog starten",
+    //   isActive: true,
+    // },
     {
       id: 2,
       label: "Untersuchungsgebiet Definieren",
