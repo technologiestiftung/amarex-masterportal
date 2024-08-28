@@ -207,7 +207,7 @@
             {
               "id": "rabimo_input_2020",
               "visibility": true,
-              "showInLayerTree": true
+              "showInLayerTree": false
             },
             {
               "id": "delta_w_wfs",
@@ -217,11 +217,36 @@
             {
               "id": "planung_abimo",
               "visibility": true,
+              "showInLayerTree": false
+            },
+            {
+              "id": "abimo_result_infiltration",
+              "visibility": true,
               "showInLayerTree": true
             },
             {
-              "id": "abimo_2020_wfs",
+              "id": "abimo_result_surface_run_off",
               "visibility": true,
+              "showInLayerTree": true
+            },
+            {
+              "id": "abimo_result_evaporation",
+              "visibility": true,
+              "showInLayerTree": true
+            },
+            {
+              "id": "abimo_2020_wfs:evaporatio",
+              "visibility": false,
+              "showInLayerTree": true
+            },
+            {
+              "id": "abimo_2020_wfs:surface_ru",
+              "visibility": false,
+              "showInLayerTree": true
+            },
+            {
+              "id": "abimo_2020_wfs:infiltrati",
+              "visibility": false,
               "showInLayerTree": true
             }
           ]
@@ -246,79 +271,98 @@
               "elements": [
                 {
                   "id": "ua_srgk:a_modellgebiete",
-                  "visibility": false
+                  "visibility": false,
+                  "showInLayerTree": false
                 },
                 {
                   "id": "ua_srgk:ba_fliessgeschwindigkeit_selten",
-                  "visibility": false
+                  "visibility": false,
+                  "showInLayerTree": false
                 },
                 {
                   "id": "ua_srgk:bb_fliessgeschwindigkeit_aussergewoehnlich",
-                  "visibility": false
+                  "visibility": false,
+                  "showInLayerTree": false
                 },
                 {
                   "id": "ua_srgk:bc_fliessgeschwindigkeit_extrem",
-                  "visibility": false
+                  "visibility": false,
+                  "showInLayerTree": false
                 },
                 {
                   "id": "ua_srgk:ca_wasserstand_selten",
-                  "visibility": false
+                  "visibility": false,
+                  "showInLayerTree": false
                 },
                 {
                   "id": "ua_srgk:cb_wasserstand_aussergewoehnlich",
-                  "visibility": false
+                  "visibility": false,
+                  "showInLayerTree": false
                 },
                 {
                   "id": "ua_srgk:cc_wassersand_extrem",
-                  "visibility": false
+                  "visibility": false,
+                  "showInLayerTree": false
                 },
                 {
                   "id": "ua_srgk:da_baumscheibe",
-                  "visibility": false
+                  "visibility": false,
+                  "showInLayerTree": false
                 },
                 {
                   "id": "ua_srgk:db_bordstein",
-                  "visibility": false
+                  "visibility": false,
+                  "showInLayerTree": false
                 },
                 {
                   "id": "ua_srgk:dc_fahrbahn",
-                  "visibility": false
+                  "visibility": false,
+                  "showInLayerTree": false
                 },
                 {
                   "id": "ua_srgk:dd_gebaeudefunktion",
-                  "visibility": false
+                  "visibility": false,
+                  "showInLayerTree": false
                 },
                 {
                   "id": "ua_srgk:de_gehweg",
-                  "visibility": false
+                  "visibility": false,
+                  "showInLayerTree": false
                 },
                 {
                   "id": "ua_srgk:df_gehwegueberfahrt",
-                  "visibility": false
+                  "visibility": false,
+                  "showInLayerTree": false
                 },
                 {
                   "id": "ua_srgk:dg_gleiskoerper",
-                  "visibility": false
+                  "visibility": false,
+                  "showInLayerTree": false
                 },
                 {
                   "id": "ua_srgk:dh_parkflaeche",
-                  "visibility": false
+                  "visibility": false,
+                  "showInLayerTree": false
                 },
                 {
                   "id": "ua_srgk:di_sonstigebefestfl",
-                  "visibility": false
+                  "visibility": false,
+                  "showInLayerTree": false
                 },
                 {
                   "id": "ua_srgk:dj_trennstreifen",
-                  "visibility": false
+                  "visibility": false,
+                  "showInLayerTree": false
                 },
                 {
                   "id": "ua_srgk:dk_vegetationsflaechen",
-                  "visibility": false
+                  "visibility": false,
+                  "showInLayerTree": false
                 },
                 {
                   "id": "ua_srhk:a_srhk_starkregengefahrenkarten_vorhanden",
-                  "visibility": false
+                  "visibility": false,
+                  "showInLayerTree": false
                 }
               ]
             },
@@ -328,27 +372,33 @@
               "elements": [
                 {
                   "id": "wmsk_04106_kenntage2015:5",
-                  "visibility": false
+                  "visibility": false,
+                  "showInLayerTree": false
                 },
                 {
                   "id": "wmsk_04106_kenntage2015:3",
-                  "visibility": false
+                  "visibility": false,
+                  "showInLayerTree": false
                 },
                 {
                   "id": "wmsk_04106_kenntage2015:4",
-                  "visibility": false
+                  "visibility": false,
+                  "showInLayerTree": false
                 },
                 {
                   "id": "wmsk_04106_kenntage2015:12",
-                  "visibility": false
+                  "visibility": false,
+                  "showInLayerTree": false
                 },
                 {
                   "id": "wmsk_04106_kenntage2015:13",
-                  "visibility": false
+                  "visibility": false,
+                  "showInLayerTree": false
                 },
                 {
                   "id": "wmsk_04106_kenntage2015:11",
-                  "visibility": false
+                  "visibility": false,
+                  "showInLayerTree": false
                 }
               ]
             }
@@ -358,7 +408,4 @@
     }
   }
 }
-
-
-
 
