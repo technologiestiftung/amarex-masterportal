@@ -292,13 +292,77 @@
   },
 
   {
-    "id": "abimo_2020_wfs",
-    "styleId": "abimo",
-    "name": "Wasserhaushalt 2020",
+    "id": "abimo_2020_wfs:evaporatio",
+    "styleId": "abimo_evaporatio",
+    "name": "Wasserhaushalt 2020 Evaporation",
     "crs": "EPSG:25833",
     "url": "https://technologiestiftung-berlin.webgis1.com/geoserver/SmartWater/wfs",
     "typ": "WFS",
     "featureType": "SmartWater:abimo_results_2020",
+    "featureNS": "http://geoserver.org",
+    "datasets": false,
+    "layers": "evaporatio",
+    "gfiAttributes": "showAll",
+    "maxScale": "25000"
+  },
+  {
+    "id": "abimo_2020_wfs:surface_ru",
+    "styleId": "abimo_surface_ru",
+    "name": "Wasserhaushalt 2020 Surface Runoff",
+    "crs": "EPSG:25833",
+    "url": "https://technologiestiftung-berlin.webgis1.com/geoserver/SmartWater/wfs",
+    "typ": "WFS",
+    "featureType": "SmartWater:abimo_results_2020",
+    "featureNS": "http://geoserver.org",
+    "datasets": false,
+    "layers": "surface_ru",
+    "gfiAttributes": "showAll",
+    "maxScale": "25000"
+  },
+  {
+    "id": "abimo_2020_wfs:infiltrati",
+    "styleId": "abimo_infiltrati",
+    "name": "Wasserhaushalt 2020 Infiltration",
+    "crs": "EPSG:25833",
+    "url": "https://technologiestiftung-berlin.webgis1.com/geoserver/SmartWater/wfs",
+    "typ": "WFS",
+    "featureType": "SmartWater:abimo_results_2020",
+    "featureNS": "http://geoserver.org",
+    "datasets": false,
+    "layers": "infiltrati",
+    "gfiAttributes": "showAll",
+    "maxScale": "25000"
+  },
+  {
+    "id": "abimo_2020_wmts_evaporatio",
+    "typ": "WMTS",
+    "styleId": "abimo_evaporatio",
+    "name": "Wasserhaushalt 2020 Evaporation",
+    "name_lang": "Wasserhaushalt 2020 Evaporation",
+    "crs": "EPSG:25833",
+    "url": "https://technologiestiftung-berlin.webgis1.com/geoserver/SmartWater/wmts",
+    "capabilitiesUrl": "https://technologiestiftung-berlin.webgis1.com/geoserver/SmartWater/wmts/request=getcapabilities&service=WMTS&version=1.0.0",
+
+    "featureType": "SmartWater:abimo_results_2020",
+    "layers": "evaporatio",
+    "format": "image/png",
+    "featureNS": "http://geoserver.org",
+    "datasets": false,
+    "gfiAttributes": "showAll",
+    "maxScale": "25000"
+  },
+  {
+    "id": "abimo_2020_wms_surface_ru",
+    "typ": "WMS",
+    "styleId": "abimo",
+    "name": "Wasserhaushalt 2020",
+    "crs": "EPSG:25833",
+    "url": "https://technologiestiftung-berlin.webgis1.com/geoserver/SmartWater/wms",
+    "capabilitiesUrl": "https://technologiestiftung-berlin.webgis1.com/geoserver/ows?service=WMS&version=1.3.0&request=GetCapabilities",
+
+    "featureType": "SmartWater:abimo_results_2020",
+    "layers": "surface_ru",
+    "format": "image/png",
     "featureNS": "http://geoserver.org",
     "datasets": false,
     "gfiAttributes": "showAll",
@@ -345,11 +409,40 @@
   },
   {
     "id": "planung_abimo",
-    "styleId": "abimo",
-    "name": "Planung Abimo",
+    "styleId": "abimo_selected",
+    "name": "Abimo ausgewählte Flächen",
     "crs": "urn:ogc:def:crs:EPSG::25833",
     "typ": "GEOJSON",
-    "gfiAttributes": "showAll"
+    "gfiAttributes": "showAll",
+    "maxScale": "25000"
+  },
+
+  {
+    "id": "abimo_result_surface_run_off",
+    "styleId": "abimo_new_surface_runoff",
+    "name": "Abimo Ergebnis Oberflächenabfluss",
+    "crs": "urn:ogc:def:crs:EPSG::25833",
+    "typ": "GEOJSON",
+    "gfiAttributes": "showAll",
+    "maxScale": "25000"
+  },
+  {
+    "id": "abimo_result_evaporation",
+    "styleId": "abimo_new_evaporation",
+    "name": "Abimo Ergebnis Evaporation",
+    "crs": "urn:ogc:def:crs:EPSG::25833",
+    "typ": "GEOJSON",
+    "gfiAttributes": "showAll",
+    "maxScale": "25000"
+  },
+  {
+    "id": "abimo_result_infiltration",
+    "styleId": "abimo_new_infiltration",
+    "name": "Abimo Ergebnis Infiltration",
+    "crs": "urn:ogc:def:crs:EPSG::25833",
+    "typ": "GEOJSON",
+    "gfiAttributes": "showAll",
+    "maxScale": "25000"
   },
 
   {
@@ -1048,12 +1141,4 @@
     "layerAttribution": "Für die Nutzung der Daten ist die Datenlizenz Deutschland - Namensnennung - Version 2.0 anzuwenden. Die Lizenz ist über https://www.govdata.de/dl-de/by-2-0 abrufbar. Der Quellenvermerk gemäß (2) der Lizenz lautet \"Umweltatlas Berlin / [Titel des Datensatzes]\"."
   }
 ]
-
-
-
-
-
-
-
-
 

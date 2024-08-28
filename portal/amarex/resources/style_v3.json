@@ -6,7 +6,31 @@
         "style": {
           "polygonStrokeWidth": 2,
           "polygonStrokeColor": [84, 187, 168, 1],
-          "polygonFillColor": [0, 0, 0, 0.3]
+          "polygonFillColor": [0, 0, 0, 0]
+        }
+      }
+    ]
+  },
+  {
+    "styleId": "abimo_selected",
+    "rules": [
+      {
+        "style": {
+          "polygonStrokeWidth": 2,
+          "polygonStrokeColor": [255, 203, 31, 1],
+          "polygonFillColor": [255, 203, 31, 0.65]
+        }
+      }
+    ]
+  },
+  {
+    "styleId": "abimo_input",
+    "rules": [
+      {
+        "style": {
+          "polygonStrokeWidth": 2,
+          "polygonStrokeColor": [0, 0, 0, 1],
+          "polygonFillColor": [0, 0, 0, 0]
         }
       }
     ]
@@ -187,12 +211,117 @@
     ]
   },
   {
-    "styleId": "abimo_evap",
+    "styleId": "abimo_evaporation",
     "rules": [
       {
         "conditions": {
           "properties": {
-            "Evaporatio": [631, 3000]
+            "evaporatio": [631, 3000]
+          }
+        },
+        "style": {
+          "polygonFillColor": [0, 0, 255, 1]
+        }
+      },
+      {
+        "conditions": {
+          "properties": {
+            "evaporatio": [560, 630]
+          }
+        },
+        "style": {
+          "polygonFillColor": [0, 28, 227, 1]
+        }
+      },
+      {
+        "conditions": {
+          "properties": {
+            "evaporatio": [490, 560]
+          }
+        },
+        "style": {
+          "polygonFillColor": [0, 56, 199, 1]
+        }
+      },
+      {
+        "conditions": {
+          "properties": {
+            "evaporatio": [420, 490]
+          }
+        },
+        "style": {
+          "polygonFillColor": [0, 85, 170, 1]
+        }
+      },
+      {
+        "conditions": {
+          "properties": {
+            "evaporatio": [350, 420]
+          }
+        },
+        "style": {
+          "polygonFillColor": [0, 113, 142, 1]
+        }
+      },
+      {
+        "conditions": {
+          "properties": {
+            "evaporatio": [280, 350]
+          }
+        },
+        "style": {
+          "polygonFillColor": [0, 141, 113, 1]
+        }
+      },
+      {
+        "conditions": {
+          "properties": {
+            "evaporatio": [210, 280]
+          }
+        },
+        "style": {
+          "polygonFillColor": [0, 170, 85, 1]
+        }
+      },
+      {
+        "conditions": {
+          "properties": {
+            "evaporatio": [140, 210]
+          }
+        },
+        "style": {
+          "polygonFillColor": [0, 198, 56, 1]
+        }
+      },
+      {
+        "conditions": {
+          "properties": {
+            "evaporatio": [70, 140]
+          }
+        },
+        "style": {
+          "polygonFillColor": [0, 226, 28, 1]
+        }
+      },
+      {
+        "conditions": {
+          "properties": {
+            "evaporatio": [0, 70]
+          }
+        },
+        "style": {
+          "polygonFillColor": [0, 255, 0, 1]
+        }
+      }
+    ]
+  },
+  {
+    "styleId": "abimo_infiltration",
+    "rules": [
+      {
+        "conditions": {
+          "properties": {
+            "infiltration": [631, 3000]
           }
         },
         "style": {
@@ -202,7 +331,7 @@
       {
         "conditions": {
           "properties": {
-            "Evaporatio": [560, 630]
+            "infiltration": [560, 630]
           }
         },
         "style": {
@@ -212,7 +341,7 @@
       {
         "conditions": {
           "properties": {
-            "Evaporatio": [490, 560]
+            "infiltration": [490, 560]
           }
         },
         "style": {
@@ -222,7 +351,7 @@
       {
         "conditions": {
           "properties": {
-            "Evaporatio": [420, 490]
+            "infiltration": [420, 490]
           }
         },
         "style": {
@@ -232,7 +361,7 @@
       {
         "conditions": {
           "properties": {
-            "Evaporatio": [350, 420]
+            "infiltration": [350, 420]
           }
         },
         "style": {
@@ -242,7 +371,7 @@
       {
         "conditions": {
           "properties": {
-            "Evaporatio": [280, 350]
+            "infiltration": [280, 350]
           }
         },
         "style": {
@@ -252,7 +381,7 @@
       {
         "conditions": {
           "properties": {
-            "Evaporatio": [210, 280]
+            "infiltration": [210, 280]
           }
         },
         "style": {
@@ -262,7 +391,7 @@
       {
         "conditions": {
           "properties": {
-            "Evaporatio": [140, 210]
+            "infiltration": [140, 210]
           }
         },
         "style": {
@@ -272,7 +401,7 @@
       {
         "conditions": {
           "properties": {
-            "Evaporatio": [70, 140]
+            "infiltration": [70, 140]
           }
         },
         "style": {
@@ -282,7 +411,22 @@
       {
         "conditions": {
           "properties": {
-            "Evaporatio": [0, 70]
+            "infiltration": [0, 70]
+          }
+        },
+        "style": {
+          "polygonFillColor": [255, 0, 0, 1]
+        }
+      }
+    ]
+  },
+  {
+    "styleId": "abimo_surface_run_off",
+    "rules": [
+      {
+        "conditions": {
+          "properties": {
+            "surface_run_off": [631, 3000]
           }
         },
         "style": {
@@ -290,8 +434,724 @@
         }
       },
       {
+        "conditions": {
+          "properties": {
+            "surface_run_off": [560, 630]
+          }
+        },
         "style": {
-          "polygonFillColor": [255, 14, 14, 1]
+          "polygonFillColor": [227, 28, 0, 1]
+        }
+      },
+      {
+        "conditions": {
+          "properties": {
+            "surface_run_off": [490, 560]
+          }
+        },
+        "style": {
+          "polygonFillColor": [199, 56, 0, 1]
+        }
+      },
+      {
+        "conditions": {
+          "properties": {
+            "surface_run_off": [420, 490]
+          }
+        },
+        "style": {
+          "polygonFillColor": [170, 85, 0, 1]
+        }
+      },
+      {
+        "conditions": {
+          "properties": {
+            "surface_run_off": [350, 420]
+          }
+        },
+        "style": {
+          "polygonFillColor": [142, 113, 0, 1]
+        }
+      },
+      {
+        "conditions": {
+          "properties": {
+            "surface_run_off": [280, 350]
+          }
+        },
+        "style": {
+          "polygonFillColor": [113, 142, 0, 1]
+        }
+      },
+      {
+        "conditions": {
+          "properties": {
+            "surface_run_off": [210, 280]
+          }
+        },
+        "style": {
+          "polygonFillColor": [85, 170, 0, 1]
+        }
+      },
+      {
+        "conditions": {
+          "properties": {
+            "surface_run_off": [140, 210]
+          }
+        },
+        "style": {
+          "polygonFillColor": [56, 199, 0, 1]
+        }
+      },
+      {
+        "conditions": {
+          "properties": {
+            "surface_run_off": [70, 140]
+          }
+        },
+        "style": {
+          "polygonFillColor": [28, 227, 0, 1]
+        }
+      },
+      {
+        "conditions": {
+          "properties": {
+            "surface_run_off": [0, 70]
+          }
+        },
+        "style": {
+          "polygonFillColor": [0, 255, 0, 1]
+        }
+      }
+    ]
+  },
+  {
+    "styleId": "abimo_evaporatio",
+    "rules": [
+      {
+        "conditions": {
+          "properties": {
+            "evaporatio": [631, 3000]
+          }
+        },
+        "style": {
+          "polygonFillColor": [0, 0, 255, 1]
+        }
+      },
+      {
+        "conditions": {
+          "properties": {
+            "evaporatio": [560, 630]
+          }
+        },
+        "style": {
+          "polygonFillColor": [0, 28, 227, 1]
+        }
+      },
+      {
+        "conditions": {
+          "properties": {
+            "evaporatio": [490, 560]
+          }
+        },
+        "style": {
+          "polygonFillColor": [0, 56, 199, 1]
+        }
+      },
+      {
+        "conditions": {
+          "properties": {
+            "evaporatio": [420, 490]
+          }
+        },
+        "style": {
+          "polygonFillColor": [0, 85, 170, 1]
+        }
+      },
+      {
+        "conditions": {
+          "properties": {
+            "evaporatio": [350, 420]
+          }
+        },
+        "style": {
+          "polygonFillColor": [0, 113, 142, 1]
+        }
+      },
+      {
+        "conditions": {
+          "properties": {
+            "evaporatio": [280, 350]
+          }
+        },
+        "style": {
+          "polygonFillColor": [0, 141, 113, 1]
+        }
+      },
+      {
+        "conditions": {
+          "properties": {
+            "evaporatio": [210, 280]
+          }
+        },
+        "style": {
+          "polygonFillColor": [0, 170, 85, 1]
+        }
+      },
+      {
+        "conditions": {
+          "properties": {
+            "evaporatio": [140, 210]
+          }
+        },
+        "style": {
+          "polygonFillColor": [0, 198, 56, 1]
+        }
+      },
+      {
+        "conditions": {
+          "properties": {
+            "evaporatio": [70, 140]
+          }
+        },
+        "style": {
+          "polygonFillColor": [0, 226, 28, 1]
+        }
+      },
+      {
+        "conditions": {
+          "properties": {
+            "evaporatio": [0, 70]
+          }
+        },
+        "style": {
+          "polygonFillColor": [0, 255, 0, 1]
+        }
+      }
+    ]
+  },
+  {
+    "styleId": "abimo_infiltrati",
+    "rules": [
+      {
+        "conditions": {
+          "properties": {
+            "infiltrati": [631, 3000]
+          }
+        },
+        "style": {
+          "polygonFillColor": [0, 255, 0, 1]
+        }
+      },
+      {
+        "conditions": {
+          "properties": {
+            "infiltrati": [560, 630]
+          }
+        },
+        "style": {
+          "polygonFillColor": [28, 227, 0, 1]
+        }
+      },
+      {
+        "conditions": {
+          "properties": {
+            "infiltrati": [490, 560]
+          }
+        },
+        "style": {
+          "polygonFillColor": [56, 199, 0, 1]
+        }
+      },
+      {
+        "conditions": {
+          "properties": {
+            "infiltrati": [420, 490]
+          }
+        },
+        "style": {
+          "polygonFillColor": [85, 170, 0, 1]
+        }
+      },
+      {
+        "conditions": {
+          "properties": {
+            "infiltrati": [350, 420]
+          }
+        },
+        "style": {
+          "polygonFillColor": [113, 142, 0, 1]
+        }
+      },
+      {
+        "conditions": {
+          "properties": {
+            "infiltrati": [280, 350]
+          }
+        },
+        "style": {
+          "polygonFillColor": [141, 113, 0, 1]
+        }
+      },
+      {
+        "conditions": {
+          "properties": {
+            "infiltrati": [210, 280]
+          }
+        },
+        "style": {
+          "polygonFillColor": [170, 85, 0, 1]
+        }
+      },
+      {
+        "conditions": {
+          "properties": {
+            "infiltrati": [140, 210]
+          }
+        },
+        "style": {
+          "polygonFillColor": [198, 56, 0, 1]
+        }
+      },
+      {
+        "conditions": {
+          "properties": {
+            "infiltrati": [70, 140]
+          }
+        },
+        "style": {
+          "polygonFillColor": [226, 28, 0, 1]
+        }
+      },
+      {
+        "conditions": {
+          "properties": {
+            "infiltrati": [0, 70]
+          }
+        },
+        "style": {
+          "polygonFillColor": [255, 0, 0, 1]
+        }
+      }
+    ]
+  },
+  {
+    "styleId": "abimo_surface_ru",
+    "rules": [
+      {
+        "conditions": {
+          "properties": {
+            "surface_ru": [631, 3000]
+          }
+        },
+        "style": {
+          "polygonFillColor": [255, 0, 0, 1]
+        }
+      },
+      {
+        "conditions": {
+          "properties": {
+            "surface_ru": [560, 630]
+          }
+        },
+        "style": {
+          "polygonFillColor": [227, 28, 0, 1]
+        }
+      },
+      {
+        "conditions": {
+          "properties": {
+            "surface_ru": [490, 560]
+          }
+        },
+        "style": {
+          "polygonFillColor": [199, 56, 0, 1]
+        }
+      },
+      {
+        "conditions": {
+          "properties": {
+            "surface_ru": [420, 490]
+          }
+        },
+        "style": {
+          "polygonFillColor": [170, 85, 0, 1]
+        }
+      },
+      {
+        "conditions": {
+          "properties": {
+            "surface_ru": [350, 420]
+          }
+        },
+        "style": {
+          "polygonFillColor": [142, 113, 0, 1]
+        }
+      },
+      {
+        "conditions": {
+          "properties": {
+            "surface_ru": [280, 350]
+          }
+        },
+        "style": {
+          "polygonFillColor": [113, 142, 0, 1]
+        }
+      },
+      {
+        "conditions": {
+          "properties": {
+            "surface_ru": [210, 280]
+          }
+        },
+        "style": {
+          "polygonFillColor": [85, 170, 0, 1]
+        }
+      },
+      {
+        "conditions": {
+          "properties": {
+            "surface_ru": [140, 210]
+          }
+        },
+        "style": {
+          "polygonFillColor": [56, 199, 0, 1]
+        }
+      },
+      {
+        "conditions": {
+          "properties": {
+            "surface_ru": [70, 140]
+          }
+        },
+        "style": {
+          "polygonFillColor": [28, 227, 0, 1]
+        }
+      },
+      {
+        "conditions": {
+          "properties": {
+            "surface_ru": [0, 70]
+          }
+        },
+        "style": {
+          "polygonFillColor": [0, 255, 0, 1]
+        }
+      }
+    ]
+  },
+
+  {
+    "styleId": "abimo_new_evaporation",
+    "rules": [
+      {
+        "conditions": {
+          "properties": {
+            "new_evaporation": [631, 3000]
+          }
+        },
+        "style": {
+          "polygonFillColor": [0, 0, 255, 1]
+        }
+      },
+      {
+        "conditions": {
+          "properties": {
+            "new_evaporation": [560, 630]
+          }
+        },
+        "style": {
+          "polygonFillColor": [0, 28, 227, 1]
+        }
+      },
+      {
+        "conditions": {
+          "properties": {
+            "new_evaporation": [490, 560]
+          }
+        },
+        "style": {
+          "polygonFillColor": [0, 56, 199, 1]
+        }
+      },
+      {
+        "conditions": {
+          "properties": {
+            "new_evaporation": [420, 490]
+          }
+        },
+        "style": {
+          "polygonFillColor": [0, 85, 170, 1]
+        }
+      },
+      {
+        "conditions": {
+          "properties": {
+            "new_evaporation": [350, 420]
+          }
+        },
+        "style": {
+          "polygonFillColor": [0, 113, 142, 1]
+        }
+      },
+      {
+        "conditions": {
+          "properties": {
+            "new_evaporation": [280, 350]
+          }
+        },
+        "style": {
+          "polygonFillColor": [0, 141, 113, 1]
+        }
+      },
+      {
+        "conditions": {
+          "properties": {
+            "new_evaporation": [210, 280]
+          }
+        },
+        "style": {
+          "polygonFillColor": [0, 170, 85, 1]
+        }
+      },
+      {
+        "conditions": {
+          "properties": {
+            "new_evaporation": [140, 210]
+          }
+        },
+        "style": {
+          "polygonFillColor": [0, 198, 56, 1]
+        }
+      },
+      {
+        "conditions": {
+          "properties": {
+            "new_evaporation": [70, 140]
+          }
+        },
+        "style": {
+          "polygonFillColor": [0, 226, 28, 1]
+        }
+      },
+      {
+        "conditions": {
+          "properties": {
+            "new_evaporation": [0, 70]
+          }
+        },
+        "style": {
+          "polygonFillColor": [0, 255, 0, 1]
+        }
+      }
+    ]
+  },
+  {
+    "styleId": "abimo_new_infiltration",
+    "rules": [
+      {
+        "conditions": {
+          "properties": {
+            "new_infiltration": [631, 3000]
+          }
+        },
+        "style": {
+          "polygonFillColor": [0, 255, 0, 1]
+        }
+      },
+      {
+        "conditions": {
+          "properties": {
+            "new_infiltration": [560, 630]
+          }
+        },
+        "style": {
+          "polygonFillColor": [28, 227, 0, 1]
+        }
+      },
+      {
+        "conditions": {
+          "properties": {
+            "new_infiltration": [490, 560]
+          }
+        },
+        "style": {
+          "polygonFillColor": [56, 199, 0, 1]
+        }
+      },
+      {
+        "conditions": {
+          "properties": {
+            "new_infiltration": [420, 490]
+          }
+        },
+        "style": {
+          "polygonFillColor": [85, 170, 0, 1]
+        }
+      },
+      {
+        "conditions": {
+          "properties": {
+            "new_infiltration": [350, 420]
+          }
+        },
+        "style": {
+          "polygonFillColor": [113, 142, 0, 1]
+        }
+      },
+      {
+        "conditions": {
+          "properties": {
+            "new_infiltration": [280, 350]
+          }
+        },
+        "style": {
+          "polygonFillColor": [141, 113, 0, 1]
+        }
+      },
+      {
+        "conditions": {
+          "properties": {
+            "new_infiltration": [210, 280]
+          }
+        },
+        "style": {
+          "polygonFillColor": [170, 85, 0, 1]
+        }
+      },
+      {
+        "conditions": {
+          "properties": {
+            "new_infiltration": [140, 210]
+          }
+        },
+        "style": {
+          "polygonFillColor": [198, 56, 0, 1]
+        }
+      },
+      {
+        "conditions": {
+          "properties": {
+            "new_infiltration": [70, 140]
+          }
+        },
+        "style": {
+          "polygonFillColor": [226, 28, 0, 1]
+        }
+      },
+      {
+        "conditions": {
+          "properties": {
+            "new_infiltration": [0, 70]
+          }
+        },
+        "style": {
+          "polygonFillColor": [255, 0, 0, 1]
+        }
+      }
+    ]
+  },
+  {
+    "styleId": "abimo_new_surface_runoff",
+    "rules": [
+      {
+        "conditions": {
+          "properties": {
+            "new_surface_runoff": [631, 3000]
+          }
+        },
+        "style": {
+          "polygonFillColor": [255, 0, 0, 1]
+        }
+      },
+      {
+        "conditions": {
+          "properties": {
+            "new_surface_runoff": [560, 630]
+          }
+        },
+        "style": {
+          "polygonFillColor": [227, 28, 0, 1]
+        }
+      },
+      {
+        "conditions": {
+          "properties": {
+            "new_surface_runoff": [490, 560]
+          }
+        },
+        "style": {
+          "polygonFillColor": [199, 56, 0, 1]
+        }
+      },
+      {
+        "conditions": {
+          "properties": {
+            "new_surface_runoff": [420, 490]
+          }
+        },
+        "style": {
+          "polygonFillColor": [170, 85, 0, 1]
+        }
+      },
+      {
+        "conditions": {
+          "properties": {
+            "new_surface_runoff": [350, 420]
+          }
+        },
+        "style": {
+          "polygonFillColor": [142, 113, 0, 1]
+        }
+      },
+      {
+        "conditions": {
+          "properties": {
+            "new_surface_runoff": [280, 350]
+          }
+        },
+        "style": {
+          "polygonFillColor": [113, 142, 0, 1]
+        }
+      },
+      {
+        "conditions": {
+          "properties": {
+            "new_surface_runoff": [210, 280]
+          }
+        },
+        "style": {
+          "polygonFillColor": [85, 170, 0, 1]
+        }
+      },
+      {
+        "conditions": {
+          "properties": {
+            "new_surface_runoff": [140, 210]
+          }
+        },
+        "style": {
+          "polygonFillColor": [56, 199, 0, 1]
+        }
+      },
+      {
+        "conditions": {
+          "properties": {
+            "new_surface_runoff": [70, 140]
+          }
+        },
+        "style": {
+          "polygonFillColor": [28, 227, 0, 1]
+        }
+      },
+      {
+        "conditions": {
+          "properties": {
+            "new_surface_runoff": [0, 70]
+          }
+        },
+        "style": {
+          "polygonFillColor": [0, 255, 0, 1]
         }
       }
     ]
@@ -309,4 +1169,7 @@
     ]
   }
 ]
+
+
+
 
