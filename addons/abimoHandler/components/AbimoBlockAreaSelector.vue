@@ -34,12 +34,6 @@ export default {
   },
   mounted() {
     this.createInteractions();
-    this.layer_rabimo_input = mapCollection
-      .getMap("2D")
-      .getLayers()
-      .getArray()
-      .find((layer) => layer.get("id") === "rabimo_input_2020");
-
     this.layer_abimo_calculated = mapCollection
       .getMap("2D")
       .getLayers()
@@ -58,7 +52,7 @@ export default {
       const selectInteraction = new Select({
         multi: true,
         layers: function (layer) {
-          return layer.get("id") === "abimo_2020_wfs";
+          return layer.get("id") === "rabimo_input_2020";
         },
       });
 
@@ -68,15 +62,11 @@ export default {
       // Checks for condition "is selected" loads data from abimo and rabimo_input and creates a merged feature out of them
       selectInteraction.on("select", (event) => {
         event.selected.forEach((feature) => {
-          const featureCode = feature.values_.code;
-          const inputFeature = this.getInputFeature(featureCode);
-
-          const mergedFeature = new Feature({
+          const inputFeature = new Feature({
             geometry: feature.getGeometry(),
             ...feature.getProperties(),
-            ...inputFeature,
           });
-          this.selectedFeatures.push(mergedFeature);
+          this.selectedFeatures.push(inputFeature);
           this.setSelectedFeatures(this.selectedFeatures);
         });
 
@@ -93,23 +83,6 @@ export default {
       // registers interaction in module - check masterportal docu
       this.addInteractionToMap(selectInteraction);
     },
-    getInputFeature(featureCode) {
-      // TODO: fix timing issue
-      // features are stored in an Object IDed with numbers. This function returns each ID in an array to iterate over them
-      const featureKeys = Object.keys(
-        this.layer_rabimo_input.values_.source.featuresRtree_.items_,
-      );
-
-      // This function returns the featureKey with the same code
-      const equivalentFeatureKey = featureKeys.find(
-        (key) =>
-          this.layer_rabimo_input.values_.source.featuresRtree_.items_[key]
-            .value.values_.code === featureCode,
-      );
-      return this.layer_rabimo_input.values_.source.featuresRtree_.items_[
-        equivalentFeatureKey
-      ].value.values_;
-    },
     handleBlockAreaConfirm() {
       const olFeatures = this.selectedFeatures.map((featureData) => {
         return new Feature({
@@ -117,6 +90,7 @@ export default {
           geometry: featureData.getGeometry(),
         });
       });
+
 
       for (const feature of olFeatures) {
         feature.setStyle(
