@@ -16,7 +16,7 @@ function createWeightedTotalCalculator(attributes) {
           sum +
           attributes.reduce(
             (prod, attr) => prod * Number(area.values_[attr]),
-            Number(area.values_.area),
+            Number(area.values_.total_area),
           ),
         0,
       ),
@@ -24,7 +24,7 @@ function createWeightedTotalCalculator(attributes) {
 }
 
 // Total
-const getTotalArea = createTotalCalculator("area");
+const getTotalArea = createTotalCalculator("total_area");
 const getTotalRoofArea = createWeightedTotalCalculator(["roof"]);
 const getTotalGreenRoofArea = createWeightedTotalCalculator([
   "roof",
