@@ -23,12 +23,15 @@ export default {
         { label: '3. Themenkarten', component: 'themeMaps' },
         { label: '4. Maßnahmenpotentiale', component: 'actionPotentials' },
         { label: '5. Wasserhaushalt berechnen', component: 'abimoHandler' },
-        { label: '6. Eigene Notizen', component: 'draw' },
-        { label: '7. Eigene Notizen', component: 'draw_old' },
-        { label: 'X. ESB Tool', component: 'esbTool' },
-        { label: 'X. Multikriterien Analyse', component: 'multiCriteria' },
+        // { label: '6. Geodaten importieren', component: 'fileImporter' },
+        // { label: '7. Features listen', component: 'featureLister' },
+        // { label: '8. Features untersuchen', component: 'getFeatureInfo' },
+        // { label: '9. Eigene Notizen', component: 'draw' },
+        { label: 'X. Eigene Notizen', component: 'draw_old' },
+        // { label: 'X. ESB Tool', component: 'esbTool' },
+        // { label: 'X. Multikriterien Analyse', component: 'multiCriteria' },
         { label: 'X. Report zusammenstellen', component: 'reportPrinter' },
-        { label: 'XX. Projekt speichern/exportieren', component: 'projectDownloader' }
+        { label: 'X. Projekt speichern/exportieren', component: 'projectDownloader' }
       ],
       currentStepIndex: 0,
       
@@ -60,7 +63,7 @@ export default {
     },
     mounted() {
         if (this.side === 'mainMenu' && this.steps.length > 0) {
-            this.selectStep(this.steps[2], 2);
+            this.selectStep(this.steps[4], 4);
         }
     },
     methods: {
@@ -106,7 +109,7 @@ export default {
         </div>
 
         <!-- Masterportal origin Layer Tree  -->
-        <!-- <LayerTree v-if="side === 'mainMenu'" /> -->
+        <LayerTree v-if="side === 'mainMenu'" />
         
         <template
             v-for="(_, key) in menu.sections"
