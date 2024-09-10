@@ -5,6 +5,7 @@ import Style from "ol/style/Style";
 import Fill from "ol/style/Fill";
 import Stroke from "ol/style/Stroke";
 import Feature from "ol/Feature";
+import getRabimo from "../api/getRabimo";
 
 /**
  * AbimoCalcButton
@@ -83,9 +84,9 @@ export default {
       };
 
       const layerData = [
-        { property: "new_infiltration", style: "abimo_new_infiltration" },
-        { property: "new_evaporation", style: "abimo_new_evaporation" },
-        { property: "new_surface_runoff", style: "abimo_new_surface_runoff" },
+        { property: "infiltration", style: "abimo_new_infiltration" },
+        { property: "evaporation", style: "abimo_new_evaporation" },
+        { property: "surface_runoff", style: "abimo_new_surface_runoff" },
       ];
 
       layerData.forEach((data, index) => {
@@ -117,56 +118,23 @@ export default {
         targets: {
           new_green_roof: this.newGreenRoof,
           new_to_swale: this.newToSwale,
-          new_unpvd: this.newUnpvd,
+          // new_unpvd: this.newUnpvd,
+          new_pvd: this.newUnpvd,
         },
       };
 
       // add properties for each feature
       for (const feature of mapFeatures) {
         const properties = feature.getProperties();
-        payload.features.push(properties);
+        const filteredProperties = { ...properties };
+        payload.features.push(filteredProperties);
       }
 
       try {
-        // console.log("[AbimoHandler] payload::", payload);
-
-        // const payload = {
-        //   features: [{ feature: 1 }, { feature: 2 }, { feature: 3 }],
-        //   targets: {
-        //     new_green_roof: 0.35,
-        //     new_to_swale: 0.2,
-        //     new_unpvd: 0.17,
-        //   },
-        // };
-
-        // const data = await getRabimo.getMultiblock(payload);
+        const data = await getRabimo.getMultiblock(payload);
         // console.log("[AbimoMeasure] data::", data);
 
-        const testResponse = [
-          {
-            code: "1100551151000000",
-            area: 4951.854,
-            new_surface_runoff: 291.224,
-            new_infiltration: 153.208,
-            new_evaporation: 187.569,
-          },
-          {
-            code: "1100551171000000",
-            area: 3406.417,
-            new_surface_runoff: 299.907,
-            new_infiltration: 146.991,
-            new_evaporation: 184.102,
-          },
-          {
-            code: "1100541281000000",
-            area: 4985.961,
-            new_surface_runoff: 403.332,
-            new_infiltration: 78.991,
-            new_evaporation: 145.677,
-          },
-        ];
-
-        await this.processAndAddFeatures(mapFeatures, testResponse);
+        await this.processAndAddFeatures(mapFeatures, data);
         this.isCalculated = true;
       } catch (error) {
         console.error("Fehler beim Abrufen der Daten:", error);
@@ -179,16 +147,24 @@ export default {
       const normalized = (value - min) / (max - min);
       return Math.max(0, Math.min(1, normalized));
     },
-
+    // Hilfsfunktion zur Berechnung der Intensität
+    getIntensity(value, min, max) {
+      return Math.max(0, Math.min(1, (value - min) / (max - min)));
+    },
     createStyleForProperty(propertyName, value) {
       const colorMap = {
-        new_infiltration: "rgba(0, 255, 0, ${opacity})",
-        new_evaporation: "rgba(0, 0, 255, ${opacity})",
-        new_surface_runoff: "rgba(255, 0, 0, ${opacity})",
+        infiltration: [0, 255, 0], // Green
+        evaporation: [0, 0, 255], // Blue
+        surface_runoff: [255, 0, 0], // Red
       };
 
-      const opacity = this.getOpacity(value || 0, 0, 672);
-      const color = colorMap[propertyName].replace("${opacity}", opacity);
+      const intensity = this.getIntensity(value || 0, 0, 672);
+      const baseColor = colorMap[propertyName];
+
+      // Berechne die Farbe basierend auf der Intensität
+      const color = baseColor.map((channel) =>
+        Math.round(channel + (255 - channel) * (1 - intensity)),
+      );
 
       return new Style({
         stroke: new Stroke({
@@ -196,7 +172,7 @@ export default {
           width: 2,
         }),
         fill: new Fill({
-          color: color,
+          color: `rgb(${color[0]}, ${color[1]}, ${color[2]})`,
         }),
       });
     },
@@ -219,19 +195,6 @@ export default {
       @click="fetchCalculateMultiblock"
     >
       Blockteilflächen berechnen
-    </button>
-
-    <button
-      class="btn btn-primary"
-      @click="testRabimoAPI"
-    >
-      <span
-        v-if="isLoading"
-        class="spinner-border spinner-border-sm"
-        role="status"
-        aria-hidden="true"
-      ></span>
-      test API
     </button>
     <span
       v-if="helperText"
