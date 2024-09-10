@@ -25,7 +25,7 @@ export default {
         { label: '5. Wasserhaushalt berechnen', component: 'abimoHandler' },
         // { label: '6. Geodaten importieren', component: 'fileImporter' },
         // { label: '7. Features listen', component: 'featureLister' },
-        // { label: '8. Features untersuchen', component: 'getFeatureInfo' },
+        { label: 'X. Features untersuchen', component: 'getFeatureInfo' },
         // { label: '9. Eigene Notizen', component: 'draw' },
         { label: 'X. Eigene Notizen', component: 'draw_old' },
         // { label: 'X. ESB Tool', component: 'esbTool' },
