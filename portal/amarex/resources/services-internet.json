@@ -310,7 +310,7 @@
   {
     "id": "abimo_2020_wfs:evaporatio",
     "styleId": "abimo_evaporatio",
-    "name": "Wasserhaushalt 2020 Evaporation V2",
+    "name": "Wasserhaushalt 2020 Verdunstung",
     "crs": "EPSG:25833",
     "url": "https://technologiestiftung-berlin.webgis1.com/geoserver/Amarex/wfs",
     "typ": "WFS",
@@ -324,7 +324,7 @@
   {
     "id": "abimo_2020_wfs:surface_ru",
     "styleId": "abimo_surface_ru",
-    "name": "Wasserhaushalt 2020 Surface Runoff V2",
+    "name": "Wasserhaushalt 2020 Oberflächenabfluss",
     "crs": "EPSG:25833",
     "url": "https://technologiestiftung-berlin.webgis1.com/geoserver/Amarex/wfs",
     "typ": "WFS",
@@ -337,8 +337,8 @@
   },
   {
     "id": "abimo_2020_wfs:infiltrati",
+    "name": "Wasserhaushalt 2020 Infiltration",
     "styleId": "abimo_infiltrati",
-    "name": "Wasserhaushalt 2020 Infiltration V2",
     "crs": "EPSG:25833",
     "url": "https://technologiestiftung-berlin.webgis1.com/geoserver/Amarex/wfs",
     "typ": "WFS",
@@ -383,7 +383,7 @@
   {
     "id": "abimo_result_evaporation",
     "styleId": "abimo_new_evaporation",
-    "name": "Abimo Ergebnis Evaporation",
+    "name": "Abimo Ergebnis Verdunstung",
     "crs": "urn:ogc:def:crs:EPSG::25833",
     "typ": "GEOJSON",
     "gfiAttributes": "showAll",
@@ -1094,9 +1094,4 @@
     "layerAttribution": "Für die Nutzung der Daten ist die Datenlizenz Deutschland - Namensnennung - Version 2.0 anzuwenden. Die Lizenz ist über https://www.govdata.de/dl-de/by-2-0 abrufbar. Der Quellenvermerk gemäß (2) der Lizenz lautet \"Umweltatlas Berlin / [Titel des Datensatzes]\"."
   }
 ]
-
-
-
-
-
 

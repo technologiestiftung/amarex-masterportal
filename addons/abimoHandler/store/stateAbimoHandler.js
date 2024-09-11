@@ -41,17 +41,17 @@ export default {
   areaTypesData: [
     {
       id: "unpvd",
-      name: "UNVERSIEGELT (unpvd)",
+      name: "UNVERSIEGELT",
       max: 0,
     },
     {
       id: "roof",
-      name: "BEBAUT VERSIEGELT (roof)",
+      name: "BEBAUT VERSIEGELT",
       max: 0,
     },
     {
       id: "pvd",
-      name: "UNBEBAUT VERSIEGELT (pvd)",
+      name: "UNBEBAUT VERSIEGELT",
       max: 0,
     },
   ],
