@@ -145,11 +145,13 @@ export default {
     </div>
 
     <div class="legend-item">
+      <div :class="['color-indicator mr-3 target-color']"></div>
       <div class="stats-display">
         <div class="d-flex flex-column w-100">
           <strong>ZIELWERT</strong>
+
           <span>{{ sliderContent.title }}</span>
-          <span>{{ sliderContent.baseDataSubTitle }}</span>
+          <!-- <span>{{ sliderContent.baseDataSubTitle }}</span> -->
         </div>
 
         <input
@@ -164,6 +166,8 @@ export default {
     </div>
 
     <div class="legend-item">
+      <div :class="['color-indicator mr-3', `${type}`]"></div>
+
       <div class="stats-display d-flex justify-content-between">
         <div class="d-flex flex-column w-100">
           <strong>{{ sliderContent.baseDataTitle }}</strong>
@@ -260,7 +264,12 @@ export default {
   overflow: hidden;
   z-index: 1;
 }
-
+.color-indicator {
+  width: 20px;
+  height: 20px;
+  margin-right: 4px;
+  border: 2px solid;
+}
 .abimo-slider-segment {
   height: 100%;
   border: 2px solid;
@@ -284,6 +293,10 @@ export default {
   background-color: #d59f5d;
   border-color: #b67a2f;
   z-index: 2;
+}
+.target-color {
+  background-color: #5d8bef;
+  border-color: #2663e9;
 }
 
 .target {
