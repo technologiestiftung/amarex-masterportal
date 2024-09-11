@@ -151,20 +151,71 @@ export default {
     getIntensity(value, min, max) {
       return Math.max(0, Math.min(1, (value - min) / (max - min)));
     },
+
     createStyleForProperty(propertyName, value) {
+      // Definiere die Farbbereiche für jede Eigenschaft basierend auf den erstellten Styling-Objekten
       const colorMap = {
-        infiltration: [0, 255, 0], // Green
-        evaporation: [0, 0, 255], // Blue
-        surface_runoff: [255, 0, 0], // Red
+        infiltration: [
+          { range: [-400, 0], color: [255, 255, 255] }, // Weiß
+          { range: [0, 60], color: [11, 228, 87] }, // Hellgrün (Ausgangsfarbe)
+          { range: [60, 80], color: [0, 200, 80] }, // Dunkleres Grün
+          { range: [80, 100], color: [0, 180, 70] }, // Dunkleres Grün
+          { range: [100, 120], color: [0, 160, 60] }, // Dunkleres Grün
+          { range: [120, 140], color: [0, 140, 50] }, // Dunkleres Grün
+          { range: [140, 160], color: [0, 120, 40] }, // Dunkleres Grün
+          { range: [160, 180], color: [0, 100, 30] }, // Dunkleres Grün
+          { range: [180, 200], color: [0, 80, 20] }, // Sehr dunkles Grün
+          { range: [200, 300], color: [0, 60, 10] }, // Sehr dunkles Grün
+          { range: [300, 400], color: [0, 40, 0] }, // Fast Schwarz
+          { range: [400, 500], color: [0, 0, 0] }, // Schwarz
+        ],
+        evaporation: [
+          { range: [0, 50], color: [255, 255, 255] }, // Weiß
+          { range: [50, 100], color: [220, 240, 255] }, // Sehr helles Blau
+          { range: [100, 120], color: [180, 210, 255] }, // Helleres Blau
+          { range: [120, 140], color: [140, 190, 255] }, // Mittelblau
+          { range: [140, 160], color: [100, 170, 255] }, // Dunkleres Blau
+          { range: [160, 180], color: [70, 150, 240] }, // Dunkleres Blau
+          { range: [180, 200], color: [50, 130, 220] }, // Dunkleres Blau
+          { range: [200, 220], color: [30, 110, 210] }, // Sehr dunkles Blau
+          { range: [220, 240], color: [20, 90, 200] }, // Sehr dunkles Blau
+          { range: [240, 260], color: [10, 70, 180] }, // Sehr dunkles Blau
+          { range: [260, 280], color: [10, 60, 160] }, // Sehr dunkles Blau
+          { range: [280, 300], color: [0, 50, 140] }, // Fast Schwarz
+          { range: [300, 400], color: [0, 40, 100] }, // Sehr dunkles Blau
+          { range: [400, 500], color: [0, 20, 80] }, // Noch dunkler
+          { range: [500, 600], color: [0, 0, 50] }, // Fast Schwarz
+        ],
+        surface_runoff: [
+          { range: [0, 50], color: [255, 255, 255] }, // Weiß
+          { range: [50, 100], color: [228, 25, 11] }, // Rot (Ausgangsfarbe)
+          { range: [100, 120], color: [240, 90, 60] }, // Helleres Rot
+          { range: [120, 140], color: [230, 70, 50] }, // Helleres Rot
+          { range: [140, 160], color: [220, 50, 40] }, // Helleres Rot
+          { range: [160, 180], color: [200, 30, 30] }, // Helleres Rot
+          { range: [180, 200], color: [180, 20, 20] }, // Dunkleres Rot
+          { range: [200, 220], color: [160, 10, 10] }, // Dunkleres Rot
+          { range: [220, 240], color: [140, 0, 0] }, // Dunkleres Rot
+          { range: [240, 260], color: [120, 0, 0] }, // Dunkleres Rot
+          { range: [260, 280], color: [100, 0, 0] }, // Sehr dunkles Rot
+          { range: [280, 300], color: [80, 0, 0] }, // Sehr dunkles Rot
+          { range: [300, 400], color: [60, 0, 0] }, // Sehr dunkles Rot
+          { range: [400, 500], color: [40, 0, 0] }, // Noch dunkler
+          { range: [500, 600], color: [0, 0, 0] }, // Schwarz
+        ],
       };
 
-      const intensity = this.getIntensity(value || 0, 0, 672);
-      const baseColor = colorMap[propertyName];
-
-      // Berechne die Farbe basierend auf der Intensität
-      const color = baseColor.map((channel) =>
-        Math.round(channel + (255 - channel) * (1 - intensity)),
-      );
+      function findColor(value, ranges) {
+        for (const rangeObj of ranges) {
+          const [min, max] = rangeObj.range;
+          if (value >= min && value < max) {
+            return rangeObj.color;
+          }
+        }
+        return ranges[ranges.length - 1].color;
+      }
+      const ranges = colorMap[propertyName] || [];
+      const color = findColor(value, ranges);
 
       return new Style({
         stroke: new Stroke({
