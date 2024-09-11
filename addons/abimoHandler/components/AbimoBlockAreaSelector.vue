@@ -96,11 +96,11 @@ export default {
         feature.setStyle(
           new Style({
             stroke: new Stroke({
-              color: `rgba(255, 203, 31, 1)`,
+              color: `rgba(84, 187, 168, 1)`,
               width: 2,
             }),
             fill: new Fill({
-              color: `rgba(255, 203, 31, 0.8)`,
+              color: `rgba(84, 187, 168, 0.4)`,
             }),
           }),
         );
