@@ -1,5 +1,6 @@
 // TODO: add url from env
-const apiUrl = "https://localhost:443";
+// const apiUrl = "https://localhost:443";
+const apiUrl = "https://rapimo.ds-apps.tsb-berlin.de";
 
 /**
  * Fetches data from Rabimo API asynchronously
