@@ -140,8 +140,13 @@ export default {
 
   <div class="area-types-legend">
     <div class="d-flex gap-3 align-items-center">
-      <div class="status-quo-legend-item"></div>
-      <strong>Status Quo</strong>
+      <div class="stats-display">
+        <div class="d-flex gap-3 align-items-center">
+          <div class="status-quo-legend-item"></div>
+          <strong>Status Quo</strong>
+        </div>
+        <p>{{ currentStatusQuo.toFixed(0) }} %</p>
+      </div>
     </div>
 
     <div class="legend-item">
@@ -169,10 +174,10 @@ export default {
       <div :class="['color-indicator mr-3', `${type}`]"></div>
 
       <div class="stats-display d-flex justify-content-between">
-        <div class="d-flex flex-column w-100">
+        <div class="d-flex flex-column">
           <strong>{{ sliderContent.baseDataTitle }}</strong>
         </div>
-        <span>{{ currentBaseData.toFixed(0) }} %</span>
+        <p>{{ currentBaseData.toFixed(0) }} %</p>
       </div>
     </div>
 
@@ -225,7 +230,8 @@ export default {
   width: 100%;
   display: flex;
   justify-content: space-between;
-  margin-top: 10px;
+  align-items: center;
+  gap: 8px;
 }
 .status-quo-bar {
   height: 12px;
