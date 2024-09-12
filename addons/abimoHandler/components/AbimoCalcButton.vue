@@ -84,9 +84,9 @@ export default {
       };
 
       const layerData = [
-        { property: "infiltration", style: "abimo_new_infiltration" },
-        { property: "evaporation", style: "abimo_new_evaporation" },
-        { property: "surface_runoff", style: "abimo_new_surface_runoff" },
+        { property: "infiltr", style: "abimo_new_infiltration" },
+        { property: "evapor", style: "abimo_new_evaporation" },
+        { property: "runoff", style: "abimo_new_surface_runoff" },
       ];
 
       layerData.forEach((data, index) => {
@@ -132,7 +132,7 @@ export default {
 
       try {
         const data = await getRabimo.getMultiblock(payload);
-        // console.log("[AbimoMeasure] data::", data);
+        console.log("[AbimoMeasure] data::", data);
 
         await this.processAndAddFeatures(mapFeatures, data);
         this.isCalculated = true;
@@ -153,9 +153,8 @@ export default {
     },
 
     createStyleForProperty(propertyName, value) {
-      // Definiere die Farbbereiche für jede Eigenschaft basierend auf den erstellten Styling-Objekten
       const colorMap = {
-        infiltration: [
+        infiltr: [
           { range: [-400, 0], color: [255, 255, 255] }, // Weiß
           { range: [0, 60], color: [11, 228, 87] }, // Hellgrün (Ausgangsfarbe)
           { range: [60, 80], color: [0, 200, 80] }, // Dunkleres Grün
@@ -169,7 +168,7 @@ export default {
           { range: [300, 400], color: [0, 40, 0] }, // Fast Schwarz
           { range: [400, 500], color: [0, 0, 0] }, // Schwarz
         ],
-        evaporation: [
+        evapor: [
           { range: [0, 50], color: [255, 255, 255] }, // Weiß
           { range: [50, 100], color: [220, 240, 255] }, // Sehr helles Blau
           { range: [100, 120], color: [180, 210, 255] }, // Helleres Blau
@@ -186,7 +185,7 @@ export default {
           { range: [400, 500], color: [0, 20, 80] }, // Noch dunkler
           { range: [500, 600], color: [0, 0, 50] }, // Fast Schwarz
         ],
-        surface_runoff: [
+        runoff: [
           { range: [0, 50], color: [255, 255, 255] }, // Weiß
           { range: [50, 100], color: [228, 25, 11] }, // Rot (Ausgangsfarbe)
           { range: [100, 120], color: [240, 90, 60] }, // Helleres Rot
