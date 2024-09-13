@@ -319,7 +319,8 @@
     "datasets": false,
     "layers": "evaporatio",
     "gfiAttributes": "showAll",
-    "maxScale": "25000"
+    "maxScale": "25000",
+    "legend": "./resources/img/legend_evaporation.svg"
   },
   {
     "id": "abimo_2020_wfs:surface_ru",
@@ -333,7 +334,8 @@
     "datasets": false,
     "layers": "surface_ru",
     "gfiAttributes": "showAll",
-    "maxScale": "25000"
+    "maxScale": "25000",
+    "legend": "./resources/img/legend_surface_runoff.svg"
   },
   {
     "id": "abimo_2020_wfs:infiltrati",
@@ -347,7 +349,8 @@
     "datasets": false,
     "layers": "infiltrati",
     "gfiAttributes": "showAll",
-    "maxScale": "25000"
+    "maxScale": "25000",
+    "legend": "./resources/img/legend_infiltration.svg"
   },
   {
     "id": "delta_w_wfs",
@@ -360,7 +363,8 @@
     "featureNS": "http://geoserver.org",
     "datasets": false,
     "gfiAttributes": "showAll",
-    "maxScale": "25000"
+    "maxScale": "25000",
+    "legend": "./resources/img/legend_delta_w.svg"
   },
   {
     "id": "planung_abimo",
@@ -378,7 +382,8 @@
     "crs": "urn:ogc:def:crs:EPSG::25833",
     "typ": "GEOJSON",
     "gfiAttributes": "showAll",
-    "maxScale": "25000"
+    "maxScale": "25000",
+    "legend": "./resources/img/legend_surface_runoff.svg"
   },
   {
     "id": "abimo_result_evaporation",
@@ -387,7 +392,8 @@
     "crs": "urn:ogc:def:crs:EPSG::25833",
     "typ": "GEOJSON",
     "gfiAttributes": "showAll",
-    "maxScale": "25000"
+    "maxScale": "25000",
+    "legend": "./resources/img/legend_evaporation.svg"
   },
   {
     "id": "abimo_result_infiltration",
@@ -396,7 +402,11 @@
     "crs": "urn:ogc:def:crs:EPSG::25833",
     "typ": "GEOJSON",
     "gfiAttributes": "showAll",
-    "maxScale": "25000"
+    "maxScale": "25000",
+    "legend": "./resources/img/legend_infiltration.svg"
+  },
+  {
+    "id": "Themenkarten:"
   },
   {
     "id": "wmsk_04106_kenntage2015:5",

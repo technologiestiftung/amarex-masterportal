@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 480">
+  <style>
+    text { font-family: Arial, sans-serif; font-size: 12px; }
+    .title { font-size: 16px; font-weight: bold; }
+  </style>
+  
+  <!-- Titel -->
+  <text x="10" y="20" class="title">Legende: Infiltrationswerte</text>
+  
+  <!-- Farbbalken und Beschriftungen -->
+  <g transform="translate(10, 40)">
+    <rect x="0" y="0" width="30" height="20" fill="rgb(255,255,255)" />
+    <text x="35" y="15">-400 bis 0</text>
+    
+    <rect x="0" y="25" width="30" height="20" fill="rgb(11,228,87)" />
+    <text x="35" y="40">0 bis 60</text>
+    
+    <rect x="0" y="50" width="30" height="20" fill="rgb(0,200,80)" />
+    <text x="35" y="65">60 bis 80</text>
+    
+    <rect x="0" y="75" width="30" height="20" fill="rgb(0,180,70)" />
+    <text x="35" y="90">80 bis 100</text>
+    
+    <rect x="0" y="100" width="30" height="20" fill="rgb(0,160,60)" />
+    <text x="35" y="115">100 bis 120</text>
+    
+    <rect x="0" y="125" width="30" height="20" fill="rgb(0,140,50)" />
+    <text x="35" y="140">120 bis 140</text>
+    
+    <rect x="0" y="150" width="30" height="20" fill="rgb(0,120,40)" />
+    <text x="35" y="165">140 bis 160</text>
+    
+    <rect x="0" y="175" width="30" height="20" fill="rgb(0,100,30)" />
+    <text x="35" y="190">160 bis 180</text>
+    
+    <rect x="0" y="200" width="30" height="20" fill="rgb(0,80,20)" />
+    <text x="35" y="215">180 bis 200</text>
+    
+    <rect x="0" y="225" width="30" height="20" fill="rgb(0,60,10)" />
+    <text x="35" y="240">200 bis 300</text>
+    
+    <rect x="0" y="250" width="30" height="20" fill="rgb(0,40,0)" />
+    <text x="35" y="265">300 bis 400</text>
+    
+    <rect x="0" y="275" width="30" height="20" fill="rgb(0,0,0)" />
+    <text x="35" y="290">400 bis 500</text>
+  </g>
+  
+  <!-- Einheit -->
+  <text x="10" y="370">Einheit: mm/Tag</text>
+</svg>
