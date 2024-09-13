@@ -32,7 +32,8 @@ export default {
           :data-bs-target="`#collapse${step.id}`"
           :aria-controls="`collapse${step.id}`"
         >
-          {{ step.id }}. {{ step.label }}
+          <!-- TODO: fix ids once the first step is integrated (remove -1) -->
+          {{ step.id - 1 }}. {{ step.label }}
         </button>
       </h5>
 
