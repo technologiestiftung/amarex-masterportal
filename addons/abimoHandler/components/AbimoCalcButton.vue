@@ -71,7 +71,7 @@ export default {
 
         const newFeature = new Feature({
           geometry: featureData.getGeometry(),
-          [propertyName]: values[propertyName] || 500,
+          [propertyName]: values[propertyName] || 0,
         });
 
         const style = this.createStyleForProperty(
@@ -218,7 +218,7 @@ export default {
 
       return new Style({
         stroke: new Stroke({
-          color: "rgba(0, 0, 0, 1)",
+          color: "rgba(84, 187, 168, 1)",
           width: 2,
         }),
         fill: new Fill({
