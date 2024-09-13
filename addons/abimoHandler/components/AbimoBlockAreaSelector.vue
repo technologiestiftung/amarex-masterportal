@@ -7,6 +7,7 @@ import { Select } from "ol/interaction";
 import Style from "ol/style/Style";
 import Fill from "ol/style/Fill";
 import Stroke from "ol/style/Stroke";
+import { singleClick, never } from "ol/events/condition.js";
 
 /**
  * AbimoBlockAreaSelector
@@ -51,6 +52,11 @@ export default {
       // From open layers we imported the Select class. This adds the possibility to add "blocks" to our feature layer. For further info check OpenLayers Docs
       const selectInteraction = new Select({
         multi: true,
+        condition: singleClick,
+        addCondition: singleClick,
+        removeCondition: singleClick,
+        // Disable the default toggle behavior
+        toggleCondition: never,
         layers: function (layer) {
           return layer.get("id") === "rabimo_input_2020";
         },
@@ -91,7 +97,6 @@ export default {
         });
       });
 
-
       for (const feature of olFeatures) {
         feature.setStyle(
           new Style({
@@ -123,9 +128,9 @@ export default {
       <p class="area">
         GESAMTFLÄCHE: {{ accumulatedAbimoStats.totalArea.toFixed(0) }} m²
       </p>
-      <p class="area">
+      <!-- <p class="area">
         Anzahl Flächen: {{ accumulatedAbimoStats.featuresSelected }}
-      </p>
+      </p> -->
 
       <hr />
 
@@ -191,9 +196,9 @@ export default {
           <span>% VON GESAMTFLÄCHE</span>
           <strong
             >{{
-              Math.round(accumulatedAbimoStats.maxSwaleConnected * 100).toFixed(
-                0,
-              )
+              Math.round(
+                accumulatedAbimoStats.meanSwaleConnected * 100,
+              ).toFixed(0)
             }}
             %</strong
           >
