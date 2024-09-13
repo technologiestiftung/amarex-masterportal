@@ -23,7 +23,7 @@
       },
       "mapView": {
         "backgroundImage": "",
-        "startCenter": [387481, 5816672],
+        "startCenter": [389920, 5819697],
         "extent": [310000, 5760000, 440000, 5865000],
         "epsg": "EPSG:25833",
         "startZoomLevel": 6,
@@ -212,7 +212,7 @@
             {
               "id": "delta_w_wfs",
               "visibility": false,
-              "showInLayerTree": false
+              "showInLayerTree": true
             },
             {
               "id": "planung_abimo",
