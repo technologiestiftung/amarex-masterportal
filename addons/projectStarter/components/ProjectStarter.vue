@@ -40,11 +40,14 @@ export default {
     this.description = this.projectDescription;
   },
   methods: {
+    ...mapActions("Maps", ["resetView"]),
+
     ...mapActions("Menu", ["clickedMenuElement", "toggleMenu", "closeMenu"]),
     ...mapMutations("Modules/ProjectStarter", [
       "setProjectTitle",
       "setProjectDescription",
     ]),
+
     /**
      * Opens the searchbar module.
      * @returns {void}
@@ -62,6 +65,12 @@ export default {
         this.setProjectTitle(this.title);
         this.setProjectDescription(this.description);
       }
+    },
+
+    resetProject() {
+      // this.title = "";
+      // this.description = "";
+      this.resetView();
     },
   },
 };
@@ -154,13 +163,22 @@ export default {
 
             <SearchBar :click-action="openSearchBar" />
 
-            <button
-              class="btn btn-secondary"
-              :disabled="!hasUnsavedChanges"
-              @click="saveProject"
-            >
-              Speichern
-            </button>
+            <div class="d-flex gap-3">
+              <button
+                class="btn btn-primary"
+                @click="resetProject"
+              >
+                Abbrechen
+              </button>
+
+              <button
+                class="btn btn-secondary"
+                :disabled="!hasUnsavedChanges"
+                @click="saveProject"
+              >
+                Standort wählen
+              </button>
+            </div>
           </div>
         </div>
       </div>
