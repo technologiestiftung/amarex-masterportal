@@ -1,12 +1,13 @@
-import axios from "axios";
-import {rawLayerList} from "@masterportal/masterportalapi/src";
+import { rawLayerList } from "@masterportal/masterportalapi/src";
 import styleList from "@masterportal/masterportalapi/src/vectorStyle/styleList";
+import axios from "axios";
 
+import abimoStyleList from "../../portal/amarex/resources/style";
+import { upperFirst } from "../shared/js/utils/changeCase";
+import { portalConfigKey, treeTopicConfigKey } from "../shared/js/utils/constants";
+import { fetchFirstModuleConfig } from "../shared/js/utils/fetchFirstModuleConfig";
 import actionsLayerConfig from "./actionsLayerConfig";
-import {fetchFirstModuleConfig} from "../shared/js/utils/fetchFirstModuleConfig";
-import {portalConfigKey, treeTopicConfigKey} from "../shared/js/utils/constants";
-import {updateProxyUrl} from "./js/getProxyUrl";
-import {upperFirst} from "../shared/js/utils/changeCase";
+import { updateProxyUrl } from "./js/getProxyUrl";
 
 /**
  * The root actions.
@@ -174,7 +175,9 @@ export default {
                 }
                 return initializedStyleList;
             }).then(() => {
-            commit("setStyleListLoaded", true);
+                // Masterportal origin add abimoStyleList to styleList
+                styleList.addToStyleList(abimoStyleList)
+                commit("setStyleListLoaded", true);
         }).catch(error => console.error(error));
     }
 };
