@@ -420,7 +420,7 @@
       {
         "conditions": {
           "properties": {
-            "surface_ru": [500, 600]
+            "surface_ru": [500, 800]
           }
         },
         "style": {
@@ -575,7 +575,7 @@
       {
         "conditions": {
           "properties": {
-            "evaporatio": [500, 600]
+            "evaporatio": [500, 800]
           }
         },
         "style": {
