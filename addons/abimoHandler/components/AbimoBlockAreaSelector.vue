@@ -18,7 +18,6 @@ export default {
 
   data() {
     return {
-      selectedFeatures: [],
       selectInteraction: null,
       layer: null,
     };
@@ -46,8 +45,12 @@ export default {
       addInteractionToMap: "addInteraction",
       removeInteractionFromMap: "removeInteraction",
     }),
-    ...mapActions("Modules/AbimoHandler", ["updateAccumulatedStats"]),
+    ...mapActions("Modules/AbimoHandler", [
+      "updateAccumulatedStats",
+      "updateAccordionSteps",
+    ]),
     ...mapMutations("Modules/AbimoHandler", ["setSelectedFeatures"]),
+
     createInteractions: function () {
       // From open layers we imported the Select class. This adds the possibility to add "blocks" to our feature layer. For further info check OpenLayers Docs
       const selectInteraction = new Select({
@@ -112,6 +115,7 @@ export default {
       }
       this.layer_abimo_calculated.values_.source.addFeatures(olFeatures);
       this.removeInteractionFromMap(this.selectInteraction);
+      this.updateAccordionSteps(3);
     },
   },
 };
