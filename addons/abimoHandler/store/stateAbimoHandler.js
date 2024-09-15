@@ -105,9 +105,9 @@ export default {
     },
     {
       id: 7,
-      label: "Weitere Berechnung",
+      label: "Berechnung zurücksetzen",
       description:
-        "Wenn Sie weitere Berchnungen mit veränderten Parametern vornehmen möchten, klicken Sie hier auf Neu Berechnen.",
+        "Wenn Sie Berechnungen mit veränderten Parametern vornehmen möchten, klicken Sie hier auf Neu Berechnen. Bitte beachten Sie, dass alle zuvor erstellten Daten zurückgesetzt werden.",
       isActive: false,
     },
   ],
