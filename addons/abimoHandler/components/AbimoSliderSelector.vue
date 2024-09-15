@@ -84,18 +84,24 @@ export default {
       "setNewUnpvd",
       "setNewToSwale",
     ]),
-    ...mapActions("Modules/AbimoHandler", ["updateMaxSwaleConnected"]),
+    ...mapActions("Modules/AbimoHandler", [
+      "updateMaxSwaleConnected",
+      "updateAccordionSteps",
+    ]),
     updateAbimoData() {
       switch (this.type) {
         case "greenRoof":
           this.setNewGreenRoof(this.targetValue / 100);
+          this.updateAccordionSteps(4);
           break;
         case "unsealed":
           this.setNewUnpvd(this.targetValue / 100);
           this.updateMaxSwaleConnected();
+          this.updateAccordionSteps(5);
           break;
         case "swaleConnected":
           this.setNewToSwale(this.targetValue / 100);
+          this.updateAccordionSteps(6);
           break;
       }
     },

@@ -1,12 +1,14 @@
 <script>
-import { mapGetters } from "vuex";
+import { mapActions, mapGetters } from "vuex";
 
 export default {
   name: "AbimoAccordion",
   computed: {
     ...mapGetters("Modules/AbimoHandler", ["steps"]),
   },
-  // TODO toggle isActive state onClick
+  methods: {
+    ...mapActions("Modules/AbimoHandler", ["toggleStep"]),
+  },
 };
 </script>
 
@@ -31,6 +33,7 @@ export default {
           data-bs-toggle="collapse"
           :data-bs-target="`#collapse${step.id}`"
           :aria-controls="`collapse${step.id}`"
+          @click="toggleStep(step)"
         >
           <!-- TODO: fix ids once the first step is integrated (remove -1) -->
           {{ step.id - 1 }}. {{ step.label }}

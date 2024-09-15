@@ -48,9 +48,16 @@ const actions = {
           isActive: false,
         };
       });
-
       commit("setSteps", steps);
     }
+  },
+  
+  toggleStep({ commit, state }, stepToToggle) {
+    const steps = state.steps.map((step) => ({
+      ...step,
+      isActive: step.id === stepToToggle.id ? !stepToToggle.isActive : false,
+    }));
+    commit("setSteps", steps);
   },
 };
 

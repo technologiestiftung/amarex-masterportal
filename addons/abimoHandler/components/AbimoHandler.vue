@@ -87,7 +87,7 @@ export default {
             <button class="btn btn-primary">Zum Katalog</button>
             <button
               class="btn btn-secondary"
-              @click="handleStepOneClick"
+              @click="updateAccordionSteps(2)"
             >
               Überspringen
             </button>
