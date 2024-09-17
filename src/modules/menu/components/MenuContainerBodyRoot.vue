@@ -16,7 +16,7 @@ export default {
     },
     data() {
     return {
-        // Menu Steps
+        // Masterportal origin Menu Steps
       steps: [
         { label: '1. Projekt Starten', component: 'projectStarter' },
         { label: '2. Hintergrundkarten', component: 'baseMaps' },
@@ -29,6 +29,7 @@ export default {
         // { label: '9. Eigene Notizen', component: 'draw' },
         { label: 'X. Eigene Notizen', component: 'draw_old' },
         // { label: 'X. ESB Tool', component: 'esbTool' },
+        // { label: 'X. Print', component: 'print' },
         // { label: 'X. Multikriterien Analyse', component: 'multiCriteria' },
         { label: 'X. Report zusammenstellen', component: 'reportPrinter' },
         { label: 'X. Projekt speichern/exportieren', component: 'projectDownloader' }
@@ -63,7 +64,7 @@ export default {
     },
     mounted() {
         if (this.side === 'mainMenu' && this.steps.length > 0) {
-            this.selectStep(this.steps[4], 4);
+            this.selectStep(this.steps[0], 0);
         }
     },
     methods: {
