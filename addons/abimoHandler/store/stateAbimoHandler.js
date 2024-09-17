@@ -12,6 +12,8 @@ export default {
   hasMouseMapInteractions: true,
   supportedMapModes: ["2D"],
   selectedFeatures: [],
+  selectInteraction: null,
+  resetTargetValues: false,
   accumulatedAbimoStats: {
     totalArea: 0,
     featuresSelected: 0,

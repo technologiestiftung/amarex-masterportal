@@ -18,7 +18,6 @@ export default {
 
   data() {
     return {
-      selectInteraction: null,
       layer: null,
     };
   },
@@ -30,6 +29,7 @@ export default {
       "selectedFeatures",
       "accumulatedAbimoStats",
       "areaTypesData",
+      "selectInteraction",
     ]),
   },
   mounted() {
@@ -49,7 +49,10 @@ export default {
       "updateAccumulatedStats",
       "updateAccordionSteps",
     ]),
-    ...mapMutations("Modules/AbimoHandler", ["setSelectedFeatures"]),
+    ...mapMutations("Modules/AbimoHandler", [
+      "setSelectedFeatures",
+      "setSelectInteraction",
+    ]),
 
     createInteractions: function () {
       // From open layers we imported the Select class. This adds the possibility to add "blocks" to our feature layer. For further info check OpenLayers Docs
@@ -66,7 +69,7 @@ export default {
       });
 
       // Add the interaction to the components methods
-      this.selectInteraction = selectInteraction;
+      this.setSelectInteraction(selectInteraction);
 
       // Checks for condition "is selected" loads data from abimo and rabimo_input and creates a merged feature out of them
       selectInteraction.on("select", (event) => {

@@ -25,8 +25,8 @@ export default {
     ...mapGetters("Modules/AbimoHandler", [
       "accumulatedAbimoStats",
       "newUnpvd",
+      "resetTargetValues",
     ]),
-
     currentBaseData() {
       switch (this.type) {
         case "greenRoof":
@@ -78,6 +78,13 @@ export default {
       }
     },
   },
+  watch: {
+    resetTargetValues(newValue) {
+      if (newValue) {
+        this.resetTargetValue();
+      }
+    },
+  },
   methods: {
     ...mapMutations("Modules/AbimoHandler", [
       "setNewGreenRoof",
@@ -104,6 +111,9 @@ export default {
           this.updateAccordionSteps(6);
           break;
       }
+    },
+    resetTargetValue() {
+      this.targetValue = 0;
     },
   },
 };
