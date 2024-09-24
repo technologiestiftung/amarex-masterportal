@@ -406,6 +406,16 @@
     "legend": "./resources/img/legend_infiltration.svg"
   },
   {
+    "id": "abimo_result_delta_w",
+    "styleId": "abimo_result_delta_w",
+    "name": "Abimo Ergebnis DeltaW",
+    "crs": "urn:ogc:def:crs:EPSG::25833",
+    "typ": "GEOJSON",
+    "gfiAttributes": "showAll",
+    "maxScale": "25000",
+    "legend": "./resources/img/legend_delta_w.svg"
+  },
+  {
     "id": "Themenkarten:"
   },
   {

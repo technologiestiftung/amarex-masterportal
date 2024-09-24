@@ -234,6 +234,11 @@
               "showInLayerTree": true
             },
             {
+              "id": "abimo_result_delta_w",
+              "visibility": true,
+              "showInLayerTree": true
+            },
+            {
               "id": "abimo_2020_wfs:evaporatio",
               "visibility": false,
               "showInLayerTree": true

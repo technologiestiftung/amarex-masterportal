@@ -571,6 +571,66 @@ const abimoStyleList = [
       },
     ],
   },
+  {
+    styleId: "abimo_result_delta_w",
+    rules: [
+      {
+        conditions: {
+          properties: {
+            delta_w: [0, 20],
+          },
+        },
+        style: {
+          ...abimoStroke,
+          polygonFillColor: [36, 65, 209, 1],
+        },
+      },
+      {
+        conditions: {
+          properties: {
+            delta_w: [20, 40],
+          },
+        },
+        style: {
+          ...abimoStroke,
+          polygonFillColor: [127, 148, 247, 1],
+        },
+      },
+      {
+        conditions: {
+          properties: {
+            delta_w: [40, 60],
+          },
+        },
+        style: {
+          ...abimoStroke,
+          polygonFillColor: [240, 151, 130, 1],
+        },
+      },
+      {
+        conditions: {
+          properties: {
+            delta_w: [60, 80],
+          },
+        },
+        style: {
+          ...abimoStroke,
+          polygonFillColor: [203, 78, 90, 1],
+        },
+      },
+      {
+        conditions: {
+          properties: {
+            delta_w: [80, 100],
+          },
+        },
+        style: {
+          ...abimoStroke,
+          polygonFillColor: [138, 26, 39, 1],
+        },
+      },
+    ],
+  },
 ];
 
 export default abimoStyleList;

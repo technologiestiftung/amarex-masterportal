@@ -49,6 +49,12 @@ export default {
       .getLayers()
       .getArray()
       .find((layer) => layer.get("id") === "abimo_result_surface_run_off");
+
+    this.layer_abimo_result_delta_w = mapCollection
+      .getMap("2D")
+      .getLayers()
+      .getArray()
+      .find((layer) => layer.get("id") === "abimo_result_delta_w");
   },
   methods: {
     async processAndAddFeatures(features, response) {
@@ -56,6 +62,7 @@ export default {
         this.layer_abimo_result_infiltration,
         this.layer_abimo_result_evaporation,
         this.layer_abimo_result_surface_run_off,
+        this.layer_abimo_result_delta_w,
       ];
 
       // Clear all layers
@@ -78,6 +85,7 @@ export default {
         { property: "infiltr", style: "abimo_result_infiltration" },
         { property: "evapor", style: "abimo_result_evaporation" },
         { property: "runoff", style: "abimo_result_surface_run_off" },
+        { property: "delta_w", style: "abimo_result_delta_w" },
       ];
 
       layerData.forEach((data, index) => {
@@ -123,7 +131,15 @@ export default {
 
       try {
         const data = await getRabimo.getMultiblock(payload);
-        await this.processAndAddFeatures(mapFeatures, data);
+        // TODO add real data
+        const dataWithDeltaW = data.map((item) => {
+          return {
+            ...item,
+            delta_w: Math.floor(Math.random() * 100),
+          };
+        });
+        // TODO add real data
+        await this.processAndAddFeatures(mapFeatures, dataWithDeltaW);
         this.isCalculated = true;
       } catch (error) {
         console.error("Fehler beim Abrufen der Daten:", error);
