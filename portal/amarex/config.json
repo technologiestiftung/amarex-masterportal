@@ -7,18 +7,18 @@
       "controls": {
         "zoom": true,
         "tiltView": true,
+        "totalView": true,
         "startModule": {
           "secondaryMenu": []
         },
-        "totalView": true,
         "expandable": {
           "backForward": true,
           "orientation": {
             "zoomMode": "once",
-            "poiDistances": [500, 1000, 2000]
+            "poiDistances": false
           },
-          "freeze": true,
-          "fullScreen": true
+          "freeze": false,
+          "fullScreen": false
         }
       },
       "mapView": {
@@ -26,7 +26,7 @@
         "startCenter": [389920, 5819697],
         "extent": [310000, 5760000, 440000, 5865000],
         "epsg": "EPSG:25833",
-        "startZoomLevel": 0,
+        "startZoomLevel": 6,
         "options": [
           {
             "resolution": 52.9,
