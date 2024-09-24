@@ -6,19 +6,10 @@
       },
       "controls": {
         "zoom": true,
-        "tiltView": true,
-        "totalView": true,
+        "tiltView": false,
+        "totalView": false,
         "startModule": {
           "secondaryMenu": []
-        },
-        "expandable": {
-          "backForward": true,
-          "orientation": {
-            "zoomMode": "once",
-            "poiDistances": false
-          },
-          "freeze": false,
-          "fullScreen": false
         }
       },
       "mapView": {
@@ -79,28 +70,6 @@
             "altShiftDragRotate": true,
             "twoFingerPan": false
           }
-        },
-        "getFeatureInfo": {
-          "coloredHighlighting3D": {
-            "enabled": true,
-            "color": "PURPLE"
-          },
-          "highlightVectorRules": {
-            "fill": {
-              "color": [215, 102, 41, 0.9]
-            },
-            "image": {
-              "scale": 1.5
-            },
-            "stroke": {
-              "width": 4,
-              "color": [215, 102, 41, 0.9]
-            },
-            "text": {
-              "scale": 2
-            }
-          },
-          "hideMapMarkerOnVectorHighlight": false
         }
       },
       "layerPills": {
