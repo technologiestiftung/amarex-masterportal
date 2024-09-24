@@ -117,7 +117,8 @@ export default {
             if (this.isGeolocationDenied === false) {
                 mapCollection.getMap("2D").addOverlay(this.marker);
                 if (this.geolocation === null) {
-                    geolocation = new Geolocation({tracking: true, projection: Proj.get("EPSG:4326")});
+                    // Masterportal origin change Projection
+                    geolocation = new Geolocation({tracking: true, projection: Proj.get("EPSG:25833")});
                     this.setGeolocation(geolocation);
                 }
                 else {
@@ -258,7 +259,8 @@ export default {
             const position = this.geolocation.getPosition(),
                 firstGeolocation = this.firstGeolocation,
                 zoomMode = this.zoomMode,
-                centerPosition = proj4(proj4("EPSG:4326"), proj4(this.projection.getCode()), position);
+                // Masterportal origin change Projection
+                centerPosition = proj4(proj4("EPSG:25833"), proj4(this.projection.getCode()), position);
 
             // setting the center position
             this.setPosition(centerPosition);
@@ -362,7 +364,8 @@ export default {
             if (!this.position) {
                 const geolocation = this.geolocation,
                     position = geolocation.getPosition(),
-                    centerPosition = proj4(proj4("EPSG:4326"), proj4(this.projection.getCode()), position);
+                    // Masterportal origin change Projection
+                    centerPosition = proj4(proj4("EPSG:25833"), proj4(this.projection.getCode()), position);
 
                 // setting the center position
                 this.setPosition(centerPosition);
