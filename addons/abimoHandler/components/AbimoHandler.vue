@@ -75,6 +75,13 @@ export default {
         .find((layer) => layer.get("id") === "abimo_result_surface_run_off")
         .values_.source.clear();
 
+      mapCollection
+        .getMap("2D")
+        .getLayers()
+        .getArray()
+        .find((layer) => layer.get("id") === "abimo_result_delta_w")
+        .values_.source.clear();
+
       this.addInteractionToMap(this.selectInteraction);
 
       this.setNewGreenRoof(0);
