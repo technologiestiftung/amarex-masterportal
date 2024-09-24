@@ -89,7 +89,7 @@ export default {
           :id="`heading1`"
         >
           <button
-            class="accordion-button"
+            class="accordion-button collapsed"
             type="button"
             data-bs-toggle="collapse"
             :data-bs-target="`#collapse1`"
@@ -117,7 +117,7 @@ export default {
           :id="`heading2`"
         >
           <button
-            class="accordion-button"
+            class="accordion-button collapsed"
             type="button"
             data-bs-toggle="collapse"
             :data-bs-target="`#collapse2`"
