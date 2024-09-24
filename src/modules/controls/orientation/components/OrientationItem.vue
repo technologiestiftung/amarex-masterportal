@@ -323,7 +323,8 @@ export default {
                 this.$store.dispatch("Maps/removePointMarker");
                 mapCollection.getMap("2D").addOverlay(this.marker);
                 if (this.geolocation === null) {
-                    geolocation = new Geolocation({tracking: true, projection: Proj.get("EPSG:4326")});
+                    // Masterportal origin change Projection
+                    geolocation = new Geolocation({tracking: true, projection: Proj.get("EPSG:25833")});
                     this.setGeolocation(geolocation);
                 }
                 else {
