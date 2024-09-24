@@ -129,7 +129,7 @@
       "title": {
         "text": "",
         "logo": "./resources/img/amarex_logo.png",
-        "link": "https://www.amarex-projekt.de/de",
+        "link": "./",
         "toolTip": "Anpassung des Managements von Regenwasser an Extremereignisse"
       },
       "searchBar": {
