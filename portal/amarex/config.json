@@ -128,13 +128,7 @@
     },
     "secondaryMenu": {
       "expanded": true,
-      "sections": [
-        [
-          {
-            "type": "projectStarter"
-          }
-        ]
-      ]
+      "sections": [[]]
     }
   },
   "layerConfig": {
