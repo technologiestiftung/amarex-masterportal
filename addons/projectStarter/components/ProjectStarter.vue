@@ -65,6 +65,12 @@ export default {
         this.setProjectTitle(this.title);
         this.setProjectDescription(this.description);
       }
+
+      this.$store.dispatch("Menu/changeCurrentComponent", {
+        type: "baseMaps",
+        side: "secondaryMenu",
+        props: { name: "2. Hintergrundkarten" },
+      });
     },
 
     resetProject() {
