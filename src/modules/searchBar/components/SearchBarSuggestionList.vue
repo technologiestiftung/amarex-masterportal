@@ -88,7 +88,8 @@ export default {
             id="search-bar-suggestion-list"
             :key="categoryItem"
         >
-            <h5
+        <!-- Masterportal origin search resultss suggestion header -->
+            <!-- <h5
                 id="search-bar-suggestion-heading"
                 class="bold mb-4 mt-4"
                 :title="$t('common:modules.searchBar.searchResultsFrom') + limitedSortedSearchResults.results.categoryProvider[categoryItem] + '-' + $t('common:modules.searchBar.search')"
@@ -104,7 +105,7 @@ export default {
                 />
 
                 {{ categoryItem +": " + limitedSortedSearchResults.results[categoryItem+"Count"] + "    " + $t("common:modules.searchBar.searchResults") }}
-            </h5>
+            </h5> -->
             <div
                 v-for="(item, index) in showAllResults===false ? limitedSortedSearchResults.results : limitedSortedSearchResults.currentShowAllList"
                 :key="item.id + '-' + index"
@@ -119,7 +120,8 @@ export default {
                     />
                 </p>
             </div>
-            <div class="showAllSection">
+            <!-- Masterportal origin show all button -->
+            <!-- <div class="showAllSection">
                 <button
                     type="button"
                     class="btn btn-light d-flex text-left"
@@ -129,7 +131,7 @@ export default {
                     {{ $t("common:modules.searchBar.showAll") }}
                     <span class="bi-chevron-right" />
                 </button>
-            </div>
+            </div> -->
         </div>
     </div>
 </template>
