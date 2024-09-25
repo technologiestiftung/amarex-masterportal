@@ -27,6 +27,7 @@ export default {
       "projectTitle",
       "projectDescription",
     ]),
+    ...mapGetters("Modules/SearchBar", ["currentSide"]),
     // Computed property to check if there are unsaved changes
     hasUnsavedChanges() {
       return (
@@ -38,6 +39,8 @@ export default {
   created() {
     this.title = this.projectTitle;
     this.description = this.projectDescription;
+    this.setCurrentSide("secondaryMenu");
+    console.log("[ProjectStarter] this.currentSide::", this.currentSide);
   },
   methods: {
     ...mapActions("Maps", ["resetView"]),
@@ -47,6 +50,7 @@ export default {
       "setProjectTitle",
       "setProjectDescription",
     ]),
+    ...mapMutations("Modules/SearchBar", ["setCurrentSide"]),
 
     /**
      * Opens the searchbar module.
@@ -179,7 +183,6 @@ export default {
 
               <button
                 class="btn btn-secondary"
-                :disabled="!hasUnsavedChanges"
                 @click="saveProject"
               >
                 Standort wählen
