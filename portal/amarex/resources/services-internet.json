@@ -383,7 +383,8 @@
     "typ": "GEOJSON",
     "gfiAttributes": "showAll",
     "maxScale": "25000",
-    "legend": "./resources/img/legend_surface_runoff.svg"
+    "legend": "./resources/img/legend_surface_runoff.svg",
+    "mouseHoverField": ["runoff"]
   },
   {
     "id": "abimo_result_evaporation",
@@ -393,7 +394,8 @@
     "typ": "GEOJSON",
     "gfiAttributes": "showAll",
     "maxScale": "25000",
-    "legend": "./resources/img/legend_evaporation.svg"
+    "legend": "./resources/img/legend_evaporation.svg",
+    "mouseHoverField": ["evapor"]
   },
   {
     "id": "abimo_result_infiltration",
@@ -403,7 +405,8 @@
     "typ": "GEOJSON",
     "gfiAttributes": "showAll",
     "maxScale": "25000",
-    "legend": "./resources/img/legend_infiltration.svg"
+    "legend": "./resources/img/legend_infiltration.svg",
+    "mouseHoverField": ["infiltr"]
   },
   {
     "id": "abimo_result_delta_w",
@@ -413,7 +416,9 @@
     "typ": "GEOJSON",
     "gfiAttributes": "showAll",
     "maxScale": "25000",
-    "legend": "./resources/img/legend_delta_w.svg"
+    "legend": "./resources/img/legend_delta_w.svg",
+    "mouseHoverField": ["delta_w"],
+    "searchField": "delta_w"
   },
   {
     "id": "Themenkarten:"
