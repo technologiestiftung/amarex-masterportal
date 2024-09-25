@@ -58,19 +58,19 @@ export default {
         case "greenRoof":
           return {
             title: "Dachbegrünung",
-            baseDataTitle: "Dachflächen (roof)",
+            baseDataTitle: "Dachflächen",
             baseDataSubTitle: "update green_roof",
           };
         case "unsealed":
           return {
             title: "Unversiegelte Flächen",
-            baseDataTitle: "Unversiegelte Flächen (unpvd + pvd / roof -1)",
+            baseDataTitle: "Unversiegelte Flächen",
             baseDataSubTitle: "update unpvd",
           };
         case "swaleConnected":
           return {
             title: "Anschluss an Mulden",
-            baseDataTitle: "Versiegelte Flächen (pvd)",
+            baseDataTitle: "Versiegelte Flächen",
             baseDataSubTitle: "update to_swale",
           };
         default:
