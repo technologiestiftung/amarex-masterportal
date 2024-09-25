@@ -172,7 +172,7 @@ export default {
 
             <SearchBar :click-action="openSearchBar" />
 
-            <div class="d-flex gap-3">
+            <div class="d-flex gap-3 mt-4">
               <button
                 class="btn btn-primary"
                 @click="resetProject"
