@@ -54,7 +54,7 @@ export default {
             >
                 <!-- Masterportal origin Menu Navigation -->
                 <!-- <h6 class="mp-menu-navigation-link-text mb-1"><p class="bi-chevron-left me-2" />{{ previousNavigation }}</h6> -->
-                <h6 class="mp-menu-navigation-link-text mb-1"><p class="bi-chevron-left me-2" />Zurück</h6>
+                <!-- <h6 class="mp-menu-navigation-link-text mb-1"><p class="bi-chevron-left me-2" />Zurück</h6> -->
 
             </a>
         
