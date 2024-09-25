@@ -40,7 +40,6 @@ export default {
     this.title = this.projectTitle;
     this.description = this.projectDescription;
     this.setCurrentSide("secondaryMenu");
-    console.log("[ProjectStarter] this.currentSide::", this.currentSide);
   },
   methods: {
     ...mapActions("Maps", ["resetView"]),
