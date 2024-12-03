@@ -1,67 +1,137 @@
-# Masterportal
+![](https://img.shields.io/badge/Built%20with%20%E2%9D%A4%EF%B8%8F-at%20Technologiestiftung%20Berlin-blue)
 
+<!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
+
+[![All Contributors](https://img.shields.io/badge/all_contributors-3-orange.svg?style=flat-square)](#contributors-)
+
+<!-- ALL-CONTRIBUTORS-BADGE:END -->
+
+# Amarex Masterportal
+
+Welcome to the **Amarex Masterportal** repository! This project is built with the Masterportal.
 The Masterportal is a tool-kit to create geo web applications based on [OpenLayers](https://openlayers.org), [Vue.js](https://vuejs.org/). The Masterportal is Open Source Software published under the [MIT License](https://bitbucket.org/geowerkstatt-hamburg/masterportal/src/dev_vue/License.txt).
 
-The Masterportal is a project by [Geowerkstatt Hamburg](https://www.hamburg.de/geowerkstatt/).
+Below are setup instructions for running the project locally and steps for deploying it to Netlify.
 
-## MasterPortal 3.0.0
+### Prerequisites
 
-After more than two years of refactorings we can proudly present the new major Release Masterportal 3.0.0! We completely removed backbonejs and jquery, moved to vue3 and vuex4 and rewrote the application-core. We redesigned the UI to match all the different usecases and usergroups. We have nearly all modules and tools working but still some work to do. Features still to be added/moved to the new version are the following:
+Ensure you have the following installed on your machine:
 
-* New Draw Module
-* Different AddOns
-* Theming
-* Touchtable-UI
-* Performance
-* etc.
+-   **Node.js** (v18 or higher)
+-   **npm** (usually included with Node.js)
 
-To try out the new version just checkout this tag and run "npm install" and "npm start". You'll find working configs under "portal" as usual.
+### Installation
 
-Please be aware of the following:
+1. **Clone the Repository**
 
-**We appreciate hints, feedback and communication of bugs! Please use the Issuetracker and tag your issue with "v3.0.0"**
+    ```bash
+    git clone <your-repo-url>
+    cd <your-repo-name>
+    ```
 
-## Roadmap
-Our further Roadmap is to work further on 3.0.0 and to release monthly minor releases. We will release a LTS version during the third quarter of 2024. We will support and fix bugs for V2.x until end of 2024.
-### Masterportal 3.x
-* 04.10.2023: Release MP 3.0 beta 1
-* 18.12.2023: Release MP 3.0 beta 2
-* 28.06.2024: Release MP 3.0 stable
-* During the third quarter of 2024: Release MP 3.0 LTS
+2. **Install Dependencies**
 
-### Support for MP 2.x and MP 3.x
-* Pull requests for function enhancements in core modules in version 2 are going to be reviewed from product maintenance until 30.06.2024. (The deadline is indicative for now and should be understood as a guideline)
-* Our recommendation is to start new developments on Masterportal 3.x basis as soon as possible.
-* Bugs are going to be fixed for V2.x until 31.12.2024.
+    Run the following command to install all necessary packages:
 
-## User section
+    ```bash
+    npm install
+    ```
 
-* [Download](https://bitbucket.org/geowerkstatt-hamburg/masterportal/downloads/)
-* [Quick start for users](https://bitbucket.org/geowerkstatt-hamburg/masterportal/src/dev_vue/doc/setup.md)
-* [Remote interface](https://bitbucket.org/geowerkstatt-hamburg/masterportal/src/dev_vue/doc/remoteInterface/remoteInterface.md)
-* [User documentation](https://bitbucket.org/geowerkstatt-hamburg/masterportal/src/dev_vue/doc/doc.md)
-* [User documentation online](https://www.masterportal.org/dokumentation)
-* [Community board (User forum and issue tracker)](https://trello.com/c/qajdXkMa/110-willkommen)
+## Running the Project
 
-## Developer section
-### Community
-* [Community board (Developer forum and issue tracker)](https://trello.com/c/qajdXkMa/110-willkommen)
-### Contributing
-* Contributors to the Masterportal are expected to act respectfully toward others in accordance with the [CODE_OF_CONDUCT.md](./CODE_OF_CONDUCT.md) for open source projects.
-* Follow our [Developer documentation](doc/devdoc.md)
-* First steps in the code: [Tutorial 01: Creating a new module (Scale switcher)](https://bitbucket.org/geowerkstatt-hamburg/masterportal/src/dev_vue/doc/tutorial.md)
+To start a local development server, use the following command:
 
-#### Pull requests
-* Your pull request must have:
-    * An understandable detailed description
-    * If necessary a test portal or test configurations
-    * A changelog entry
-    * A PrePushHook with no errors
-    * Hints if your contribution contains adopted external code
-    * Unit tests for new functions or updated tests for bugfixes
+```bash
+npm run start
+```
 
-#### Contributor License Agreement
-* Your contribution will be under [MIT License](https://bitbucket.org/geowerkstatt-hamburg/masterportal/src/dev_vue/License.txt)
+This will start the development server, usually accessible at `http://localhost:9001` (check the terminal output to confirm).
 
+## Building for Production
 
-[![Sauce Test Status](https://app.eu-central-1.saucelabs.com/buildstatus/geodatenanwendungen_gv.hamburg.de)](https://app.eu-central-1.saucelabs.com/builds/dfd7abc54af1493091fbeef1b6b48ca6)
+To build the project for production, run:
+
+```bash
+npm run buildPortal
+```
+
+## Deploying to Netlify
+
+### Steps to Deploy
+
+1. **Login to Netlify**: Go to [Netlify](https://www.netlify.com/) and log in to your account (or create one if you haven’t already).
+
+2. **Create a New Site**:
+
+    - Click **"New site from Git"** and connect your GitHub (or other Git provider) account.
+    - Select the repository for **Project Name**.
+
+3. **Configure Build Settings**:
+
+    - **Build Command**: `npm run buildPortal`
+    - **Publish Directory**: `dist`
+
+4. **Deploy**:
+    - Click **"Deploy Site"**. Netlify will automatically build and deploy your project.
+
+### Netlify Continuous Deployment
+
+After the initial setup, every push to the main branch will automatically trigger a redeployment on Netlify, ensuring your site stays up-to-date.
+
+---
+
+## Contributing
+
+Before you create a pull request, write an issue so we can discuss your changes.
+
+## Contributors
+
+Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
+
+<!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
+<!-- prettier-ignore-start -->
+<!-- markdownlint-disable -->
+<table>
+  <tbody>
+    <tr>
+      <td align="center" valign="top" width="14.28%"><a href="https:/github.com/LuiseBrandenburger"><img src="https://avatars.githubusercontent.com/u/61413319?s=?s=64" width="64px;" alt="Luise Brandenburger"/><br /><sub><b>Luise Brandenburger</b></sub></a><br /><a href="https://github.com/technologiestiftung/smartwater-masterportal/commits?author=LuiseBrandenburger" title="Code">💻</a> <a href="https://github.com/technologiestiftung/smartwater-masterportal/pulls?q=is%3Apr+reviewed-by%3ALuiseBrandenburger" title="Reviewed Pull Requests">👀</a> <a href="https://github.com/technologiestiftung/smartwater-masterportal/commits?author=LuiseBrandenburger" title="Documentation">📖</a></td>
+    </tr>
+  </tbody>
+</table>
+
+<!-- markdownlint-restore -->
+<!-- prettier-ignore-end -->
+
+<!-- ALL-CONTRIBUTORS-LIST:END -->
+
+This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification. Contributions of any kind welcome!
+
+## Content Licensing
+
+Texts and content available as [CC BY](https://creativecommons.org/licenses/by/3.0/de/).
+
+Illustrations by {MARIA_MUSTERFRAU}, all rights reserved.
+
+## Credits
+
+<table>
+  <tr>
+    <td>
+      Made by  <a href="https://www.technologiestiftung-berlin.de/">
+        <br />
+        <br />
+        <img width="150" src="https://logos.citylab-berlin.org/logo-technologiestiftung-berlin-de.svg" />
+      </a>
+    </td>
+    <td>
+      Supported by <a href="https://www.berlin.de/">
+        <br />
+        <br />
+        <img width="150" src="https://logos.citylab-berlin.org/logo-berlin.svg" />
+      </a>
+    </td>
+  </tr>
+</table>
+
+## Related Projects
+

@@ -6,7 +6,6 @@
 .DS_Store
 .env
 .idea
-.vscode
 .history
 /jsdoc
 /docHtml
