@@ -99,7 +99,23 @@ function getColorSchemeTrafficLights (alpha = 1.0) {
     ];
 }
 
+function getAmarexColors () {
+    return {
+        primary: "#fff",
+        secondary: "#173561",
+        secondary_light: "#CED5DD",
+        accent: "#29A992",
+        accent_light: "#CCECE7",
+        grey_light: "#DCDCDC",
+        grey_mid: "#A4A4A4",
+        grey_dark: "#5A5A5A",
+        green: "#00F456",
+        red: "#F40004"
+    }
+}
+
 export {
+    getAmarexColors,
     getPrimaryColor,
     getSecondaryColor,
     getColorUniversalDesign,
