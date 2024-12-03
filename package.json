@@ -95,6 +95,7 @@
     "chai": "^4.4.1",
     "child-process-promise": "^2.2.1",
     "css-loader": "4.3.0",
+    "dotenv": "^16.4.6",
     "esbuild-loader": "^4.1.0",
     "eslint": "^9.8.0",
     "eslint-config-prettier": "^9.1.0",

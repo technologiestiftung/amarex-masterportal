@@ -4,7 +4,6 @@
 
 *.sass-cache
 .DS_Store
-.env
 .idea
 .history
 /jsdoc
@@ -51,3 +50,8 @@ npm-debug.log
 !/portal/master
 !/portal/auto
 !/portal/amarex
+
+# env files
+.env
+.env.*
+!*.example
