@@ -37,7 +37,8 @@
     "prepare": "husky install",
     "lint": "eslint \"portal/**/*.{js,vue}\" \"addons/**/*.{js,vue}\"",
     "lint:fix": "eslint \"portal/**/*.{js,vue}\" \"addons/**/*.{js,vue}\" --fix",
-    "format": "prettier . --write"
+    "format": "prettier . --write",
+    "setup:env": "node devtools/tasks/setupEnv.js"
   },
   "@comment dependencies and devDependencies": [
     "These are the comments for the `dependencies` and for the `devDependencies` section.",
