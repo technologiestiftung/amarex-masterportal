@@ -1,12 +1,12 @@
 {
-    "primary": "#fff",
-    "secondary": "#173561",
-    "secondary_light": "#CED5DD",
-    "accent": "#29A992",
-    "accent_light": "#CCECE7",
-    "grey_light": "#DCDCDC",
-    "grey_mid": "#A4A4A4",
-    "grey_dark": "#5A5A5A",
-    "green": "#00F456",
-    "red": "#F40004"
+    "amarex_primary": "#fff",
+    "amarex_secondary": "#173561",
+    "amarex_secondary_light": "#CED5DD",
+    "amarex_accent": "#29A992",
+    "amarex_accent_light": "#CCECE7",
+    "amarex_grey_light": "#DCDCDC",
+    "amarex_grey_mid": "#A4A4A4",
+    "amarex_grey_dark": "#5A5A5A",
+    "amarex_green": "#00F456",
+    "amarex_red": "#F40004"
 }

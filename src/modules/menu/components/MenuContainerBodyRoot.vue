@@ -2,6 +2,8 @@
 import LayerTree from "../../layerTree/components/LayerTree.vue";
 import MenuContainerBodyRootItems from "./MenuContainerBodyRootItems.vue";
 import {mapGetters} from "vuex";
+import { CircleCheckBig, LoaderCircle } from 'lucide-vue-next';
+import colors from '../../../shared/js/utils/amarex-colors.json';
 
 /**
  * @module modules/MenuContainerBodyRoot
@@ -12,30 +14,33 @@ export default {
     name: "MenuContainerBodyRoot",
     components: {
         LayerTree,
-        MenuContainerBodyRootItems
+        MenuContainerBodyRootItems,
+        CircleCheckBig,
+        LoaderCircle
     },
     data() {
     return {
         // Masterportal origin Menu Steps
       steps: [
-        { label: '1. Projekt Starten', component: 'projectStarter' },
-        { label: '2. Hintergrundkarten', component: 'baseMaps' },
-        { label: '3. Themenkarten', component: 'themeMaps' },
-        { label: '4. Maßnahmenpotentiale', component: 'actionPotentials' },
-        { label: '5. Wasserhaushalt berechnen', component: 'abimoHandler' },
+        // { label: '1. Projekt Starten', component: 'projectStarter' },
+        { label: 'Hintergrundkarten', component: 'baseMaps' },
+        { label: 'Themenkarten', component: 'themeMaps' },
+        { label: 'Maßnahmenpotentiale', component: 'actionPotentials' },
+        { label: 'Wasserhaushalt berechnen', component: 'abimoHandler' },
+        { label: 'Eigene Ebenen', component: '?' },
         // { label: '6. Geodaten importieren', component: 'fileImporter' },
         // { label: '7. Features listen', component: 'featureLister' },
-        { label: 'X. Features untersuchen', component: 'getFeatureInfo' },
+        // { label: 'X. Features untersuchen', component: 'getFeatureInfo' },
         // { label: '9. Eigene Notizen', component: 'draw' },
-        { label: 'X. Eigene Notizen', component: 'draw_old' },
+        // { label: 'X. Eigene Notizen', component: 'draw_old' },
         // { label: 'X. ESB Tool', component: 'esbTool' },
         // { label: 'X. Print', component: 'print' },
         // { label: 'X. Multikriterien Analyse', component: 'multiCriteria' },
-        { label: 'X. Report zusammenstellen', component: 'reportPrinter' },
-        { label: 'X. Projekt speichern/exportieren', component: 'projectDownloader' }
+        // { label: 'X. Report zusammenstellen', component: 'reportPrinter' },
+        // { label: 'X. Projekt speichern/exportieren', component: 'projectDownloader' }
       ],
       currentStepIndex: 0,
-      
+      colors
     }
   },
     props: {
@@ -97,7 +102,7 @@ export default {
     <div
         :id="'mp-body-root-'+side"
     >       
-        <div class="stepper-root mb-5 d-flex flex-column gap-2" v-if="side === 'mainMenu'">
+        <!-- <div class="stepper-root mb-5 d-flex flex-column gap-2" v-if="side === 'mainMenu'">
             <button 
                 v-for="(step, index) in steps" 
                 :key="index"
@@ -107,12 +112,35 @@ export default {
             >
                 {{ step.label }}
             </button>
+        </div> -->
+        
+        <!-- JS Changed -->
+        <div class="stepper-root mb-5 d-flex flex-column gap-2" v-if="side === 'mainMenu'">
+            <button 
+                v-for="(step, index) in steps" 
+                :key="index"
+                class="step-indicator"
+                :class="{ 'active': index === currentStepIndex }"
+                @click="selectStep(step, index)"
+            >
+                <h5>{{ step.label }}</h5>
+                <CircleCheckBig
+                    v-if="index === currentStepIndex"
+                    :color="colors.amarex_primary"
+                    :size="20"
+                />
+                <LoaderCircle
+                    v-else
+                    :color="colors.amarex_primary"
+                    :size="20"
+                />
+            </button>
         </div>
 
         <!-- Masterportal origin Layer Tree  -->
-        <LayerTree v-if="side === 'mainMenu'" />
+        <!-- <LayerTree v-if="side === 'mainMenu'" /> -->
         
-        <template
+        <!-- <template
             v-for="(_, key) in menu.sections"
             :key="key"
         >
@@ -122,11 +150,35 @@ export default {
                 :path="path(key)"
             />
             <hr>
-        </template>
+        </template> -->
     </div>
 </template>
 
 <style lang="scss" scoped>
 @import "~variables";
+
+.step-indicator {
+    border: none;
+    box-shadow: 4px 4px 0px 0px $amarex_secondary_light;
+    border-radius: 4px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 10px;
+    background: $amarex_secondary;
+    &.active {
+        background: $amarex_accent;
+    }
+    &:not(.active):hover {
+        background: $amarex_grey_mid;
+    }
+    h5 {
+        margin: 0;
+        color: $amarex_primary;
+        transform: translateY(4px);
+        text-align: left;
+        user-select: none;
+    }
+}
 
 </style>
