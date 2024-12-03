@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 250">
+  <style>
+    text { font-family: Arial, sans-serif; font-size: 12px; }
+    .title { font-size: 16px; font-weight: bold; }
+  </style>
+  
+  <!-- Titel -->
+  <text x="10" y="20" class="title">Legende: delta_w Werte</text>
+  
+  <!-- Farbbalken und Beschriftungen -->
+  <g transform="translate(10, 40)">
+    <rect x="0" y="0" width="30" height="20" fill="rgb(36,65,209,0.1)" stroke="rgb(36,65,209)" stroke-width="3" />
+    <text x="35" y="15">0 bis 20</text>
+    
+    <rect x="0" y="25" width="30" height="20" fill="rgb(127,148,247,0.1)" stroke="rgb(127,148,247)" stroke-width="3" />
+    <text x="35" y="40">20 bis 40</text>
+    
+    <rect x="0" y="50" width="30" height="20" fill="rgb(240,151,130,0.1)" stroke="rgb(240,151,130)" stroke-width="3" />
+    <text x="35" y="65">40 bis 60</text>
+    
+    <rect x="0" y="75" width="30" height="20" fill="rgb(203,78,90,0.1)" stroke="rgb(203,78,90)" stroke-width="3" />
+    <text x="35" y="90">60 bis 80</text>
+    
+    <rect x="0" y="100" width="30" height="20" fill="rgb(138,26,39,0.1)" stroke="rgb(138,26,39)" stroke-width="3" />
+    <text x="35" y="115">80 bis 100</text>
+  </g>
+  
+  <!-- Erklärung -->
+  <text x="10" y="180">Hinweis: Die Farben zeigen sowohl die Füllfarbe (transparent)</text>
+  <text x="10" y="195">als auch die Umrissfarbe (Rahmen) der Polygone.</text>
+</svg>

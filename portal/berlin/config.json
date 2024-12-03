@@ -1,0 +1,381 @@
+{
+  "portalConfig": {
+    "map": {
+      "baselayerSwitcher": {
+        "active": false
+      },
+      "mouseHover": {
+        "numFeaturesToShow": 1,
+        "infoText": "Ergebnis"
+      },
+      "controls": {
+        "zoom": true,
+        "tiltView": false,
+        "totalView": false,
+        "startModule": {
+          "secondaryMenu": []
+        }
+      },
+      "mapView": {
+        "backgroundImage": "",
+        "startCenter": [389920, 5819697],
+        "extent": [310000, 5760000, 440000, 5865000],
+        "epsg": "EPSG:25833",
+        "startZoomLevel": 6,
+        "options": [
+          {
+            "resolution": 52.9,
+            "scale": 200000,
+            "zoomLevel": 0
+          },
+          {
+            "resolution": 28,
+            "scale": 100000,
+            "zoomLevel": 1
+          },
+          {
+            "resolution": 14,
+            "scale": 50000,
+            "zoomLevel": 2
+          },
+          {
+            "resolution": 7,
+            "scale": 25000,
+            "zoomLevel": 3
+          },
+          {
+            "resolution": 2.8,
+            "scale": 10000,
+            "zoomLevel": 4
+          },
+          {
+            "resolution": 1.4,
+            "scale": 5000,
+            "zoomLevel": 5
+          },
+          {
+            "resolution": 0.7,
+            "scale": 2500,
+            "zoomLevel": 6
+          },
+          {
+            "resolution": 0.28,
+            "scale": 1000,
+            "zoomLevel": 7
+          },
+          {
+            "resolution": 0.14,
+            "scale": 500,
+            "zoomLevel": 8
+          }
+        ],
+        "mapInteractions": {
+          "interactionModes": {
+            "altShiftDragRotate": true,
+            "twoFingerPan": false
+          }
+        }
+      },
+      "layerPills": {
+        "active": false
+      },
+      "startingMapMode": "2D"
+    },
+    "portalFooter": {
+      "urls": []
+    },
+    "tree": {
+      "addLayerButton": {
+        "active": true,
+        "searchBar": {
+          "active": true,
+          "searchInterfaceInstanceId": "elasticSearch_0",
+          "searchCategory": "Thema (externe Fachdaten)"
+        }
+      },
+      "highlightedFeatures": {
+        "active": false
+      }
+    },
+    "mainMenu": {
+      "expanded": true,
+      "title": {
+        "text": "",
+        "logo": "./resources/img/amarex_logo.png",
+        "toolTip": "Anpassung des Managements von Regenwasser an Extremereignisse"
+      },
+      "searchBar": {
+        "searchInterfaces": [
+          {
+            "type": "komootPhoton",
+            "minChars": 3,
+            "serviceId": "11",
+            "limit": 10,
+            "lang": "de",
+            "lat": 52.52,
+            "lon": 13.405,
+            "bbox": "13.0883,52.3382,13.7611,52.6755"
+          },
+          {
+            "type": "visibleVector",
+            "resultEvents": {
+              "onHover": ["setMarker"]
+            }
+          },
+          {
+            "type": "topicTree",
+            "hitTemplate": "layer"
+          }
+        ]
+      },
+      "sections": [[]]
+    },
+    "secondaryMenu": {
+      "expanded": true,
+      "sections": [[]]
+    }
+  },
+  "layerConfig": {
+    "baselayer": {
+      "elements": [
+        {
+          "id": "basemap_default_grau",
+          "visibility": true
+        },
+        {
+          "id": "basemap_raster_color",
+          "visibility": false
+        },
+        {
+          "id": "webatlas_wms_color",
+          "visibility": false
+        },
+        {
+          "id": "hg_openlayer_wmts",
+          "visibility": false
+        },
+        {
+          "id": "truedop_2024",
+          "visibility": false
+        },
+        {
+          "id": "s_wfs_alkis",
+          "visibility": false
+        }
+      ]
+    },
+    "subjectlayer": {
+      "elements": [
+        {
+          "name": "Abimo",
+          "type": "folder",
+          "elements": [
+            {
+              "id": "rabimo_input_2020",
+              "visibility": true,
+              "showInLayerTree": false
+            },
+            {
+              "id": "delta_w_wfs",
+              "visibility": false,
+              "showInLayerTree": true
+            },
+            {
+              "id": "planung_abimo",
+              "visibility": true,
+              "showInLayerTree": false
+            },
+            {
+              "id": "abimo_result_infiltration",
+              "visibility": true,
+              "showInLayerTree": true
+            },
+            {
+              "id": "abimo_result_surface_run_off",
+              "visibility": true,
+              "showInLayerTree": true
+            },
+            {
+              "id": "abimo_result_evaporation",
+              "visibility": true,
+              "showInLayerTree": true
+            },
+            {
+              "id": "abimo_result_delta_w",
+              "visibility": true,
+              "showInLayerTree": true
+            },
+            {
+              "id": "abimo_2020_wfs:evaporatio",
+              "visibility": false,
+              "showInLayerTree": true
+            },
+            {
+              "id": "abimo_2020_wfs:surface_ru",
+              "visibility": false,
+              "showInLayerTree": true
+            },
+            {
+              "id": "abimo_2020_wfs:infiltrati",
+              "visibility": false,
+              "showInLayerTree": true
+            }
+          ]
+        },
+        {
+          "name": "Potentialkarten",
+          "type": "folder",
+          "elements": []
+        },
+        {
+          "name": "Hintergrundkarten",
+          "type": "folder",
+          "elements": []
+        },
+        {
+          "name": "Themenkarten",
+          "type": "folder",
+          "elements": [
+            {
+              "name": "Starkregen",
+              "type": "folder",
+              "elements": [
+                {
+                  "id": "ua_srgk:a_modellgebiete",
+                  "visibility": false,
+                  "showInLayerTree": false
+                },
+                {
+                  "id": "ua_srgk:ba_fliessgeschwindigkeit_selten",
+                  "visibility": false,
+                  "showInLayerTree": false
+                },
+                {
+                  "id": "ua_srgk:bb_fliessgeschwindigkeit_aussergewoehnlich",
+                  "visibility": false,
+                  "showInLayerTree": false
+                },
+                {
+                  "id": "ua_srgk:bc_fliessgeschwindigkeit_extrem",
+                  "visibility": false,
+                  "showInLayerTree": false
+                },
+                {
+                  "id": "ua_srgk:ca_wasserstand_selten",
+                  "visibility": false,
+                  "showInLayerTree": false
+                },
+                {
+                  "id": "ua_srgk:cb_wasserstand_aussergewoehnlich",
+                  "visibility": false,
+                  "showInLayerTree": false
+                },
+                {
+                  "id": "ua_srgk:cc_wassersand_extrem",
+                  "visibility": false,
+                  "showInLayerTree": false
+                },
+                {
+                  "id": "ua_srgk:da_baumscheibe",
+                  "visibility": false,
+                  "showInLayerTree": false
+                },
+                {
+                  "id": "ua_srgk:db_bordstein",
+                  "visibility": false,
+                  "showInLayerTree": false
+                },
+                {
+                  "id": "ua_srgk:dc_fahrbahn",
+                  "visibility": false,
+                  "showInLayerTree": false
+                },
+                {
+                  "id": "ua_srgk:dd_gebaeudefunktion",
+                  "visibility": false,
+                  "showInLayerTree": false
+                },
+                {
+                  "id": "ua_srgk:de_gehweg",
+                  "visibility": false,
+                  "showInLayerTree": false
+                },
+                {
+                  "id": "ua_srgk:df_gehwegueberfahrt",
+                  "visibility": false,
+                  "showInLayerTree": false
+                },
+                {
+                  "id": "ua_srgk:dg_gleiskoerper",
+                  "visibility": false,
+                  "showInLayerTree": false
+                },
+                {
+                  "id": "ua_srgk:dh_parkflaeche",
+                  "visibility": false,
+                  "showInLayerTree": false
+                },
+                {
+                  "id": "ua_srgk:di_sonstigebefestfl",
+                  "visibility": false,
+                  "showInLayerTree": false
+                },
+                {
+                  "id": "ua_srgk:dj_trennstreifen",
+                  "visibility": false,
+                  "showInLayerTree": false
+                },
+                {
+                  "id": "ua_srgk:dk_vegetationsflaechen",
+                  "visibility": false,
+                  "showInLayerTree": false
+                },
+                {
+                  "id": "ua_srhk:a_srhk_starkregengefahrenkarten_vorhanden",
+                  "visibility": false,
+                  "showInLayerTree": false
+                }
+              ]
+            },
+            {
+              "name": "Hitze",
+              "type": "folder",
+              "elements": [
+                {
+                  "id": "wmsk_04106_kenntage2015:5",
+                  "visibility": false,
+                  "showInLayerTree": false
+                },
+                {
+                  "id": "wmsk_04106_kenntage2015:3",
+                  "visibility": false,
+                  "showInLayerTree": false
+                },
+                {
+                  "id": "wmsk_04106_kenntage2015:4",
+                  "visibility": false,
+                  "showInLayerTree": false
+                },
+                {
+                  "id": "wmsk_04106_kenntage2015:12",
+                  "visibility": false,
+                  "showInLayerTree": false
+                },
+                {
+                  "id": "wmsk_04106_kenntage2015:13",
+                  "visibility": false,
+                  "showInLayerTree": false
+                },
+                {
+                  "id": "wmsk_04106_kenntage2015:11",
+                  "visibility": false,
+                  "showInLayerTree": false
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

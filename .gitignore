@@ -50,6 +50,9 @@ npm-debug.log
 !/portal/master
 !/portal/auto
 !/portal/amarex
+!/portal/berlin
+!/portal/cologne
+!/portal/start
 
 # env files
 .env

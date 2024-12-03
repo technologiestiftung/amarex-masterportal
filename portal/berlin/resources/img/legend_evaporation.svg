@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 600">
+  <style>
+    text { font-family: Arial, sans-serif; font-size: 12px; }
+    .title { font-size: 16px; font-weight: bold; }
+  </style>
+  
+  <!-- Titel -->
+  <text x="10" y="20" class="title">Legende: Evaporationswerte</text>
+  
+  <!-- Farbbalken und Beschriftungen -->
+  <g transform="translate(10, 40)">
+    <rect x="0" y="0" width="30" height="20" fill="rgb(255,255,255)" />
+    <text x="35" y="15">0 bis 50</text>
+    
+    <rect x="0" y="25" width="30" height="20" fill="rgb(220,240,255)" />
+    <text x="35" y="40">50 bis 100</text>
+    
+    <rect x="0" y="50" width="30" height="20" fill="rgb(180,210,255)" />
+    <text x="35" y="65">100 bis 120</text>
+    
+    <rect x="0" y="75" width="30" height="20" fill="rgb(140,190,255)" />
+    <text x="35" y="90">120 bis 140</text>
+    
+    <rect x="0" y="100" width="30" height="20" fill="rgb(100,170,255)" />
+    <text x="35" y="115">140 bis 160</text>
+    
+    <rect x="0" y="125" width="30" height="20" fill="rgb(70,150,240)" />
+    <text x="35" y="140">160 bis 180</text>
+    
+    <rect x="0" y="150" width="30" height="20" fill="rgb(50,130,220)" />
+    <text x="35" y="165">180 bis 200</text>
+    
+    <rect x="0" y="175" width="30" height="20" fill="rgb(30,110,210)" />
+    <text x="35" y="190">200 bis 220</text>
+    
+    <rect x="0" y="200" width="30" height="20" fill="rgb(20,90,200)" />
+    <text x="35" y="215">220 bis 240</text>
+    
+    <rect x="0" y="225" width="30" height="20" fill="rgb(10,70,180)" />
+    <text x="35" y="240">240 bis 260</text>
+    
+    <rect x="0" y="250" width="30" height="20" fill="rgb(10,60,160)" />
+    <text x="35" y="265">260 bis 280</text>
+    
+    <rect x="0" y="275" width="30" height="20" fill="rgb(0,50,140)" />
+    <text x="35" y="290">280 bis 300</text>
+    
+    <rect x="0" y="300" width="30" height="20" fill="rgb(0,40,100)" />
+    <text x="35" y="315">300 bis 400</text>
+    
+    <rect x="0" y="325" width="30" height="20" fill="rgb(0,20,80)" />
+    <text x="35" y="340">400 bis 500</text>
+    
+    <rect x="0" y="350" width="30" height="20" fill="rgb(0,0,50)" />
+    <text x="35" y="365">500 bis 800</text>
+  </g>
+  
+  <!-- Einheit -->
+  <text x="10" y="430">Einheit: mm/Jahr</text>
+</svg>
