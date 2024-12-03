@@ -141,4 +141,3 @@ function getLayerNavigationData(layerConfig, rootGetters) {
 }
 
 export default actions;
-

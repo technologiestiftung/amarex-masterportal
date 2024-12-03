@@ -22,4 +22,3 @@ function checkAndAdd(singleBaselayer, visibleBaselayerConfigs, layerConfigs) {
 export default {
   checkAndAdd,
 };
-

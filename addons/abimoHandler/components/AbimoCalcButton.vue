@@ -75,7 +75,9 @@ export default {
           [propertyName]: values[propertyName] || 0,
         });
 
-        const styleId = layerData.find((data) => data.property === propertyName)
+        const styleId = layerData.find(
+          (data) => data.property === propertyName,
+        );
         newFeature.set("styleId", styleId);
 
         return newFeature;
@@ -182,4 +184,3 @@ export default {
   margin-left: 12px;
 }
 </style>
-

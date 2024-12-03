@@ -64,4 +64,3 @@ function inspectParentFolder(
 export default {
   collectDataByFolder,
 };
-

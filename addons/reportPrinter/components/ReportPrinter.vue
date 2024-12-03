@@ -141,7 +141,6 @@ export default {
       this.setProjectTitle(this.report.title);
       this.setProjectDescription(this.report.description);
 
-
       const doc = new jsPDF();
 
       this.getData();
@@ -246,4 +245,3 @@ export default {
   height: 100px;
 }
 </style>
-

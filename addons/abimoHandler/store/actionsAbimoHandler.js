@@ -51,7 +51,7 @@ const actions = {
       commit("setSteps", steps);
     }
   },
-  
+
   toggleStep({ commit, state }, stepToToggle) {
     const steps = state.steps.map((step) => ({
       ...step,
@@ -62,4 +62,3 @@ const actions = {
 };
 
 export default actions;
-

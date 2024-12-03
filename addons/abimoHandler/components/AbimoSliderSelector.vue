@@ -336,4 +336,3 @@ export default {
   padding-left: 8px;
 }
 </style>
-

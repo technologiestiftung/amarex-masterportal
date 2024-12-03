@@ -19,4 +19,3 @@ export default {
   highlightLayerId: null,
   encompassingBoundingBox: [Infinity, Infinity, -Infinity, -Infinity],
 };
-

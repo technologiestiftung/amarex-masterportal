@@ -294,4 +294,3 @@ export default {
   min-width: 35%;
 }
 </style>
-

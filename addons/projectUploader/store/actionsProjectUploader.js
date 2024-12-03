@@ -759,4 +759,3 @@ export default {
     dispatch("extendLayers", null, { root: true });
   },
 };
-

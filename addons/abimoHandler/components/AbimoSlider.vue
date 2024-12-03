@@ -59,4 +59,3 @@ export default {
   border-color: #b4b446;
 }
 </style>
-

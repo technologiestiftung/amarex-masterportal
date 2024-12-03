@@ -14,4 +14,3 @@ export default {
   projectDescription: "",
   projectDate: new Date().toDateString(),
 };
-
