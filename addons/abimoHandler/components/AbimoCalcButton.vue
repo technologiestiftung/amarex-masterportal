@@ -24,6 +24,7 @@ export default {
       "newUnpvd",
       "newToSwale",
     ]),
+    ...mapGetters(["configJs"]),
   },
   mounted() {
     this.layer_abimo_calculated = mapCollection
@@ -132,7 +133,10 @@ export default {
       }
 
       try {
-        const data = await getRabimo.getMultiblock(payload);
+        const data = await getRabimo.getMultiblock(
+          payload,
+          this.configJs.instance,
+        );
         // TODO add real data
         const dataWithDeltaW = data.map((item) => {
           return {
@@ -184,3 +188,4 @@ export default {
   margin-left: 12px;
 }
 </style>
+

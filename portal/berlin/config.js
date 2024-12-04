@@ -76,4 +76,5 @@ const Config = {
     "baseMaps",
     "themeMaps",
   ],
+  instance: 'berlin'
 };

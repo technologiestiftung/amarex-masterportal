@@ -76,5 +76,6 @@ const Config = {
     "baseMaps",
     "themeMaps",
   ],
+  instance: 'cologne'
 };
 
