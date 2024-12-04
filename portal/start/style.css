@@ -2,6 +2,13 @@ body {
     background-color: #f8f9fa;
     font-family: Arial, sans-serif;
 }
+header {
+    height: 100px;
+    background-color: white;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+}
 
 .background {
     background-image: url('./assets/images/basemap_default_grau.png');
@@ -14,8 +21,13 @@ body {
     z-index: -1;
 }
 
-.container {
-    margin-top: 100px;
+.start-container {
+    height: 100vh;
+    box-sizing: border-box;
+    margin: 0;
+}
+
+.content-wrapper {
     padding-top: 50px;
 }
 
