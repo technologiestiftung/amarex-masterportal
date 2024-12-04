@@ -79,3 +79,4 @@ async function getMultiblockDeltaW(payload) {
 export default { getMultiblock, getTest, getMultiblockDeltaW };
 
 
+
