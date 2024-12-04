@@ -5,14 +5,6 @@
  */
 async function getMultiblock(payload) {
 
-  // todo: remove this console.log
-  console.log("[getRabimo] process.env.API_URL::", process.env.API_URL);
-
-  console.log("Build Environment:", {
-    NODE_ENV: process.env.NODE_ENV,
-    API_URL: process.env.API_URL,
-  });
-
   try {
     const response = await fetch(
       `${process.env.API_URL}/calculate_multiblock`,
