@@ -218,7 +218,9 @@ module.exports = function () {
                 __VUE_OPTIONS_API__: true,
                 __VUE_PROD_DEVTOOLS__: false,
                 VUE_ADDONS: JSON.stringify(vueAddonsRelPaths),
-                ...loadEnvFiles()
+                ...loadEnvFiles(),
+                'process.env': JSON.stringify(process.env),
+                'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV)
             })
         ]
     };
