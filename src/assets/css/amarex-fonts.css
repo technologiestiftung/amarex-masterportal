@@ -45,6 +45,10 @@ h5 {
     line-height: 26px;
 }
 
+h1, h2, h3, h4, h5, p {
+    margin: 0;
+}
+
 .amarex-heading {
     font-family: "Inria Sans";
     font-size: 16px;
