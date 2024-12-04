@@ -46,9 +46,6 @@ const loadEnvFiles = () => {
     return envKeys;
 };
 
-console.log('Build Environment:', process.env.API_URL);
-
-
 
 module.exports = function () {
     const addonsRelPaths = {},
@@ -221,9 +218,9 @@ module.exports = function () {
                 __VUE_OPTIONS_API__: true,
                 __VUE_PROD_DEVTOOLS__: false,
                 VUE_ADDONS: JSON.stringify(vueAddonsRelPaths),
-                ...loadEnvFiles(),
                 'process.env': JSON.stringify(process.env),
                 'process.env.API_URL': JSON.stringify(process.env.API_URL),
+                ...loadEnvFiles(),
             })
         ]
     };
