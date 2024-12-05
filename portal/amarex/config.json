@@ -101,7 +101,7 @@
       "expanded": true,
       "title": {
         "text": "",
-        "logo": "./resources/img/amarex_logo.png",
+        "logo": "./resources/img/amarex_logo_webtool.png",
         "toolTip": "Anpassung des Managements von Regenwasser an Extremereignisse"
       },
       "searchBar": {
