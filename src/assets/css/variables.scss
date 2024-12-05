@@ -58,6 +58,9 @@ $menu-background-color: $amarex_primary;
 h1, h2, h3, h4, h5, p, a {
   color: $amarex_secondary;
 }
+input[type="range" i] {
+  cursor: grab !important;
+}
 
 .btn-primary {
   --bs-btn-color: $amarex_secondary;
@@ -132,6 +135,9 @@ $tool_box_shadow: 0 6px 12px rgba(0, 0, 0, 0.176);
 @mixin clickable() {
   cursor: pointer;
   user-select: none;
+}
+@mixin transform-p() {
+  transform: translateY(2px);
 }
 
 
