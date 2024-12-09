@@ -13,6 +13,11 @@ import utilsLogin from "../src/modules/login/js/utilsLogin";
 // import {instantiateVuetify} from "./plugins/vuetify";
 import {initiateVueI18Next, initLanguage} from "./plugins/i18next";
 
+window.addEventListener('load', () => {
+    localStorage.clear();
+    console.log('localStorage cleared on page load');
+});
+
 let app;
 const configPath = window.location.pathname.substring(0, window.location.pathname.lastIndexOf("/") + 1) + "config.js",
     loadConfigJs = new Promise((resolve, reject) => {
