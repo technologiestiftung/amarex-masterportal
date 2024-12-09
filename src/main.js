@@ -15,6 +15,10 @@ import {initiateVueI18Next, initLanguage} from "./plugins/i18next";
 
 import {initiateMatomo} from "./plugins/matomo";
 
+window.addEventListener('load', () => {
+    localStorage.clear();
+});
+
 let app;
 const configPath = window.location.pathname.substring(0, window.location.pathname.lastIndexOf("/") + 1) + "config.js",
     loadConfigJs = new Promise((resolve, reject) => {
