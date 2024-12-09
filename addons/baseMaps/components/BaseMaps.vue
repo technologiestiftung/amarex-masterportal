@@ -3,6 +3,8 @@ import { mapGetters, mapMutations, mapActions } from "vuex";
 import { CircleCheckBig, LoaderCircle } from "lucide-vue-next";
 import colors from "../../../src/shared/js/utils/amarex-colors.json";
 
+// CHANGED JS
+
 export default {
   name: "BaseMaps",
   components: {
@@ -12,7 +14,6 @@ export default {
   data() {
     return {
       selectedBaseLayer: 0,
-      // allen Content ändern in portal/amarex/resources/services-internet.json
       colors,
     };
   },
@@ -109,10 +110,20 @@ export default {
     },
 
     selectItem(layer, index) {
-      // console.log("this.allBaselayerConfigs :>> ", this.allBaselayerConfigs);
       this.switchActiveBaselayer(layer.id);
       this.selectedBaseLayer = index;
     },
+  },
+  mounted() {
+    const objectWithHighestZIndex = this.visibleBaselayerConfigs.reduce(
+      (max, current) => {
+        return current.zIndex > max.zIndex ? current : max;
+      },
+      this.visibleBaselayerConfigs[0],
+    );
+    this.selectedBaseLayer = this.allBaselayerConfigs.findIndex(
+      (layer) => layer.id === objectWithHighestZIndex.id,
+    );
   },
 };
 </script>
@@ -134,7 +145,6 @@ export default {
             backgroundImage: `url(${layer.preview.src})`,
           }"
         ></div>
-
         <!-- Text Content -->
         <div class="text-container">
           <h5>
@@ -155,36 +165,7 @@ export default {
           :color="colors.amarex_grey_mid"
           :size="20"
         />
-
-        <!-- Selection Indicator -->
-        <!-- <div class="indicator">
-          <div class="circle"></div>
-        </div> -->
       </div>
-      <!-- <div
-        v-for="(layer, index) in this.allBaselayerConfigs"
-        :key="index"
-        class="base-layer-item d-flex flex-column gap-3"
-      >
-        <div>
-          <img
-            :src="
-              layer.preview.src
-                ? layer.preview.src
-                : `https://picsum.photos/id/237/200/300`
-            "
-            :alt="layer.name"
-            class="base-layer-thumbnail"
-          />
-          <span class="base-layer-name pl-3">{{ layer.name }}</span>
-        </div>
-        <button
-          class="btn btn-primary"
-          @click="switchActiveBaselayer(layer.id)"
-        >
-          <span class="pl-2">Diese Karte wählen</span>
-        </button>
-      </div> -->
     </div>
   </div>
 </template>
