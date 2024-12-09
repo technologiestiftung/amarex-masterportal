@@ -140,6 +140,35 @@ $tool_box_shadow: 0 6px 12px rgba(0, 0, 0, 0.176);
   transform: translateY(2px);
 }
 
+.amarex-btn-primary {
+  @include radius();
+  @include boxShadow();
+  @include clickable();
+  background: $amarex_secondary;
+  border: none;
+  padding: 0.5rem 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  * {
+    color: $amarex_primary;
+  }
+  p {
+    @include transform-p();
+    text-align: left;
+  }
+  &:hover {
+    background: $amarex_secondary_light;
+    svg {
+      stroke: $amarex_secondary !important;
+    }
+    p {
+      color: $amarex_secondary !important;
+    }
+  }
+}
+
 
 
 /*
