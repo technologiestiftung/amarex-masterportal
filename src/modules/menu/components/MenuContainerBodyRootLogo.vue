@@ -56,7 +56,7 @@ export default {
             :src="logo"
             :alt="toolTip || text"
         >
-        <h1>{{ $t(text) }}</h1>
+        <h1 v-if="idAppendix !== 'mainMenu' ">{{ $t(text) }}</h1>
     </a>
 </template>
 
@@ -64,16 +64,22 @@ export default {
 @import "~variables";
 
 .mp-menu-logo {
-        padding: 0 $padding 0 $padding;
+        // padding: 0 $padding 0 $padding;
+        padding: 0;
         width: 100%;
         display: flex;
         justify-content: space-around;
         overflow-wrap: break-word;
 
         img {
-            max-height: 30px;
+            /* 
             flex-grow: 0;
-            flex-shrink: 0;
+            flex-shrink: 0; */
+            // width: 100%;
+            // max-height: 30px;
+            max-width: 300px;
+            height: auto;
+            display: block;
         }
 
         h1 {
