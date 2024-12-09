@@ -155,11 +155,9 @@ export default {
         currentComponentSide: {
             handler (newVal) {
                 if (newVal === "root" || (newVal === "layerSelection" && this.addLayerButtonSearchActive === true)) {
-                    this.removePolygonMarker();
-                    this.removePointMarker();
                     this.$refs?.searchInput.blur();
                     if (newVal === "root") {
-                        this.searchInputValue = "";
+                        this.setSearchResultsActive(false);
                         this.navigateBack(this.currentSide);
                         if (this.side) {
                             this.switchToRoot(this.side);
@@ -179,8 +177,14 @@ export default {
         * Watcher to check the searchInputValue for layerSelection module
         */
         searchInputValue: {
-            handler () {
-                this.checkCurrentComponent(this.currentComponentSide);
+            handler (value) {
+                if (value === "") {
+                    this.removePointMarker();
+                    this.removePolygonMarker();
+                }
+                else {
+                    this.checkCurrentComponent(this.currentComponentSide);
+                }
             },
             deep: true
         }

@@ -4,7 +4,6 @@
 
 *.sass-cache
 .DS_Store
-.env
 .idea
 .history
 /jsdoc
@@ -51,3 +50,15 @@ npm-debug.log
 !/portal/master
 !/portal/auto
 !/portal/amarex
+
+
+# Ignore mkdocs build dir
+site/*
+
+# Ignore Python virtual environment
+.venv/*
+
+# env files
+.env
+.env.*
+!*.example

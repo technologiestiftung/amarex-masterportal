@@ -31,11 +31,13 @@ Ensure you have the following installed on your machine:
 
 2. **Install Dependencies**
 
-    Run the following command to install all necessary packages:
+    Run the following command to install all necessary packages and add the .env:
 
     ```bash
-    npm install
+    npm install && npm run setup:env
     ```
+    
+    Then update the content of the env files accordingly
 
 ## Running the Project
 
