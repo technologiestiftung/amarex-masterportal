@@ -4,17 +4,44 @@ import LayerSelectionTreeNode from "../../../src/modules/layerSelection/componen
 import { treeSubjectsKey } from "../../../src/shared/js/utils/constants";
 import sortBy from "../../../src/shared/js/utils/sortBy";
 import layerFactory from "../../../src/core/layers/js/layerFactory";
+import LayerTreeAmarex from "../../../src/modules/layerTree/components/LayerTreeAmarex.vue";
+import LayerTree from "../../../src/modules/layerTree/components/LayerTree.vue";
+import Layer from "../../../src/modules/layerTree/components/LayerComponent.vue";
+import SearchBar from "../../../src/modules/searchBar/components/SearchBar.vue";
+import LayerInformation from "../../../src/modules/layerInformation/components/LayerInformation.vue";
+import {
+  CirclePlus,
+  CircleMinus,
+  ChevronDown,
+  ChevronUp,
+} from "lucide-vue-next";
+import colors from "../../../src/shared/js/utils/amarex-colors.json";
+
+// CHANGED JS
 
 export default {
   name: "ThemeMaps",
   components: {
     LayerSelectionTreeNode,
+    LayerTreeAmarex,
+    LayerTree,
+    Layer,
+    SearchBar,
+    LayerInformation,
+    CirclePlus,
+    CircleMinus,
+    ChevronDown,
+    ChevronUp,
   },
   data() {
     return {
       selectAllConfId: -1,
       selectAllConfigs: [],
       activeCategory: null,
+      selectedMapGroup: null,
+      colors,
+      showLayerTree: true,
+      showLayerTreeSelect: true,
     };
   },
   computed: {
@@ -45,11 +72,41 @@ export default {
     this.provideSelectAllProps();
     this.initializeComponent();
   },
+  mounted() {
+    const getCacheShowLayerTree = localStorage.getItem("cacheShowLayerTree");
+    this.showLayerTree = getCacheShowLayerTree
+      ? JSON.parse(getCacheShowLayerTree)
+      : true;
+    const getCacheShowLayerTreeSelect = localStorage.getItem(
+      "cacheShowLayerTreeSelect",
+    );
+    this.showLayerTreeSelect = getCacheShowLayerTreeSelect
+      ? JSON.parse(getCacheShowLayerTreeSelect)
+      : true;
+    const getCacheSelectedMapGroup = localStorage.getItem(
+      "cacheSelectedMapGroup",
+    );
+    this.selectedMapGroup = getCacheSelectedMapGroup
+      ? JSON.parse(getCacheSelectedMapGroup)
+      : null;
+  },
   unmounted() {
+    localStorage.setItem(
+      "cacheShowLayerTree",
+      JSON.stringify(this.showLayerTree),
+    );
+    localStorage.setItem(
+      "cacheShowLayerTreeSelect",
+      JSON.stringify(this.showLayerTreeSelect),
+    );
+    localStorage.setItem(
+      "cacheSelectedMapGroup",
+      JSON.stringify(this.selectedMapGroup),
+    );
     this.cleanupComponent();
   },
   methods: {
-    ...mapActions(["changeCategory"]),
+    ...mapActions(["changeCategory", "replaceByIdInLayerConfig"]),
     ...mapActions("Modules/ThemeMaps", [
       "navigateBack",
       "navigateForward",
@@ -58,6 +115,7 @@ export default {
       "changeVisibility",
     ]),
     ...mapMutations("Modules/ThemeMaps", ["setHighlightLayerId"]),
+    ...mapActions("Modules/LayerSelection", ["changeVisibility"]),
     initializeComponent() {
       this.activeCategory = this.activeOrFirstCategory?.key;
       this.provideSelectAllProps();
@@ -128,169 +186,226 @@ export default {
         this.changeCategory(category);
       }
     },
+    selectMapGroup(ele) {
+      if (this.selectedMapGroup?.id === ele.id) {
+        this.selectedMapGroup = null;
+        return;
+      }
+      this.selectedMapGroup = ele;
+    },
+    visibilityInLayerTreeChanged(value) {
+      const layerConfigs = [];
+      layerConfigs.push({
+        id: this.conf.id,
+        layer: {
+          id: this.conf.id,
+          visibility: value,
+        },
+      });
+      if (this.conf.baselayer) {
+        baselayerHandler.checkAndAdd(
+          this.singleBaselayer,
+          this.visibleBaselayerConfigs,
+          layerConfigs,
+        );
+      }
+      this.replaceByIdInLayerConfig({ layerConfigs });
+    },
+    clicked(conf) {
+      const isLayerVisible = conf.visibility;
+      this.changeVisibility({ layerId: conf.id, value: !isLayerVisible });
+    },
+    toggleLayerTree() {
+      this.showLayerTree = !this.showLayerTree;
+    },
+    toggleLayerTreeSelect() {
+      this.showLayerTreeSelect = !this.showLayerTreeSelect;
+    },
+    findNestedElementsById() {
+      const traverse = (array) => {
+        for (const item of array) {
+          if (item.id === this.selectedMapGroup.id) {
+            return item.elements;
+          }
+          if (item.elements && Array.isArray(item.elements)) {
+            const found = traverse(item.elements);
+            if (found) {
+              return found;
+            }
+          }
+        }
+        return null;
+      };
+      return traverse(this.themeMapsConfs) || []; // Ensure the result is always an array
+    },
   },
 };
 </script>
 
 <template>
-  <div class="theme-layer-selection">
-    <!-- <LayerTree /> -->
-    <!-- <SearchBar v-if="addLayerButtonSearchActive === true" /> -->
-    <!-- <hr /> -->
-    <div class="layer-selection-navigation d-flex pt-3">
+  <div>
+    <div
+      class="theme-layer-title-container"
+      @click="toggleLayerTree"
+    >
+      <h5 class="theme-layer-title">Ebenen Themenkarten</h5>
+      <ChevronUp
+        :color="colors.amarex_secondary"
+        :size="20"
+        v-if="showLayerTree"
+      />
+      <ChevronDown
+        :color="colors.amarex_secondary"
+        :size="20"
+        v-else
+      />
+    </div>
+    <LayerTreeAmarex v-if="showLayerTree" />
+    <div
+      class="theme-layer-title-container second-title-container"
+      @click="toggleLayerTreeSelect"
+    >
+      <h5 class="theme-layer-title">Themenkarten</h5>
+      <ChevronUp
+        :color="colors.amarex_secondary"
+        :size="20"
+        v-if="showLayerTreeSelect"
+      />
+      <ChevronDown
+        :color="colors.amarex_secondary"
+        :size="20"
+        v-else
+      />
+    </div>
+    <div
+      class="theme-layer-container mt-3"
+      v-if="
+        !!this.themeMapsConfs &&
+        !!this.themeMapsConfs?.length &&
+        showLayerTreeSelect
+      "
+    >
       <div
-        v-if="showAllResults === false"
-        class="layer-selection-navigation"
+        v-for="(main, index) in this.themeMapsConfs"
+        :key="index"
+        class="theme-layer-nav"
       >
         <div
-          v-if="
-            activeOrFirstCategory &&
-            categorySwitcher &&
-            lastThemeMapsFolderNames.length === 1
-          "
-          class="form-floating mb-3 mt-3"
+          v-for="(mainElement, indexElement) in main.elements"
+          :key="indexElement"
+          class="theme-layer-nav-item"
+          :class="{ selected: this.selectedMapGroup?.id === mainElement.id }"
+          @click="selectMapGroup(mainElement)"
         >
-          <select
-            id="select_category"
-            v-model="activeCategory"
-            class="form-select"
-            @change="categorySelected($event.target.value)"
-          >
-            <option
-              v-for="category in allCategories"
-              :key="category.key"
-              :value="category.key"
-            >
-              {{ $t(category.name) }}
-            </option>
-          </select>
-          <label for="select_category">
-            {{ $t("common:modules.layerTree.categories") }}
-          </label>
+          <p class="amarex-small">
+            {{ mainElement.name }}
+          </p>
+          <div class="bubble">
+            <p class="amarex-bold">
+              {{ mainElement.elements?.length }}
+            </p>
+          </div>
         </div>
+      </div>
+      <hr v-if="!!this.selectedMapGroup" />
+      <div v-if="!!this.selectedMapGroup">
+        <h5>Enthaltene Kartenlayer bei "{{ this.selectedMapGroup.name }}"</h5>
+        <!-- v-for="(selectedElement, indexElement) in this.selectedMapGroup
+            .elements" -->
         <div
-          class="align-items-left justify-content-center layer-selection-navigation-dataLayer"
+          v-for="(selectedElement, indexElement) in findNestedElementsById()"
+          :key="indexElement"
+          class="sub-group"
+          @click="clicked(selectedElement)"
         >
-          <!-- INFO: Navigation -->
-          <h5
-            v-if="lastThemeMapsFolderNames.length === 1"
-            class="layer-selection-subheadline"
-          >
-            {{ $t("common:modules.layerSelection.datalayer") }}
-          </h5>
-          <nav
-            v-if="lastThemeMapsFolderNames.length > 1"
-            aria-label="breadcrumb"
-            class="position-sticky top-0 bg-white py-3"
-          >
-            <ol class="breadcrumb mb-0">
-              <li
-                v-for="(lastFolderName, index) in lastThemeMapsFolderNames"
-                :key="index"
-                :class="[
-                  'breadcrumb-item',
-                  index === lastThemeMapsFolderNames.length - 1 ? 'active' : '',
-                ]"
-              >
-                <a
-                  v-if="index < lastThemeMapsFolderNames.length - 1"
-                  class="mp-menu-navigation"
-                  href="#"
-                  @click="navigateStepsBack(index)"
-                  @keypress="navigateStepsBack(index)"
-                >
-                  <h6 class="mp-menu-navigation-link bold">
-                    {{
-                      lastFolderName === "root"
-                        ? $t("common:modules.layerSelection.datalayer")
-                        : lastFolderName
-                    }}
-                  </h6>
-                </a>
-                <h6
-                  v-else
-                  class="mp-menu-navigation-link bold no-link"
-                >
-                  {{ lastFolderName }}
-                </h6>
-              </li>
-            </ol>
-          </nav>
-          <!-- END Navigation -->
-
-          <template
-            v-for="(conf, idx) in themeMapsConfs"
-            :key="idx"
-          >
-            <LayerSelectionTreeNode
-              :conf="conf"
-              :show-select-all-check-box="selectAllConfId === conf.id"
-              :select-all-configs="selectAllConfigs"
-              @show-node="folderClicked"
-            />
-          </template>
+          <CircleMinus
+            v-if="selectedElement.visibility"
+            :color="colors.amarex_secondary"
+            :size="20"
+          />
+          <CirclePlus
+            v-else
+            :color="colors.amarex_accent"
+            :size="20"
+          />
+          <p class="amarex_small">{{ selectedElement.name }}</p>
         </div>
       </div>
     </div>
-
-    <!-- <LayerInformation /> -->
   </div>
 </template>
 
 <style lang="scss" scoped>
 @import "~variables";
-
-.breadcrumb-item + .breadcrumb-item::before {
-  font-weight: bold;
-  line-height: 1.2rem;
-}
-
-.layer-selection {
-  background-color: $menu-background-color;
-  left: 0px;
-  height: calc(100% - 50px);
-  padding-top: 0;
-  @media (max-height: 670px) {
-    height: calc(100% - 85px);
-  }
-}
-.layer-selection-navigation {
-  height: 90%;
-  flex-direction: column;
-}
-
-.layer-selection-navigation-baselayer {
-  overflow-x: scroll;
-}
-@include media-breakpoint-down(md) {
-  .layer-selection-navigation-baselayer {
-    max-height: 120px;
-  }
-}
-.layer-selection-navigation-dataLayer {
-  @include media-breakpoint-down(md) {
-    max-height: calc(100% - 120px);
-  }
-}
-
-.layer-selection-subheadline {
-  margin: 0px 0 15px 0;
-}
-
-.mp-menu-navigation {
-  color: $black;
+.theme-layer-title-container {
+  margin-bottom: 5px;
   display: flex;
-}
-.mp-menu-navigation-link {
-  display: flex;
-}
-
-@include media-breakpoint-up(sm) {
-  .layer-selection-navigation-baselayer {
-    overflow-x: auto;
+  justify-content: space-between;
+  align-items: center;
+  @include clickable();
+  &.second-title-container {
+    border-top: 1px solid $amarex_grey_light;
+    padding-top: 20px;
   }
 }
-.baselayer {
-  min-width: 35%;
+.theme-layer-container {
+  width: 100%;
+  min-height: 200px;
+  .theme-layer-nav {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    .theme-layer-nav-item {
+      @include radius();
+      @include boxShadow();
+      @include clickable();
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 5px 10px;
+      border: 1px solid $amarex_grey_light;
+      &:hover {
+        background: $amarex_grey_light;
+      }
+      &.selected {
+        background: $amarex_secondary;
+        border: 1px solid $amarex_secondary;
+        & > p {
+          color: $amarex_primary;
+        }
+        &:hover {
+          background: $amarex_secondary !important;
+        }
+      }
+      .bubble {
+        width: fit-content;
+        background: $amarex_secondary_light;
+        border-radius: 100%;
+        min-width: 30px;
+        min-height: 30px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      p {
+        transform: translateY(2px);
+      }
+    }
+  }
+  .sub-group {
+    margin: 10px 0;
+    padding: 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    display: grid;
+    grid-template-columns: 20px 1fr;
+    align-items: center;
+    gap: 20px;
+  }
+}
+hr {
+  margin: 30px 0;
 }
 </style>
+
