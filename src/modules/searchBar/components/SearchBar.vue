@@ -2,6 +2,10 @@
 import {mapGetters, mapActions, mapMutations} from "vuex";
 import SearchBarSuggestionList from "./SearchBarSuggestionList.vue";
 import SearchBarResultList from "./SearchBarResultList.vue";
+import {
+    Search
+} from "lucide-vue-next";
+import colors from "../../../shared/js/utils/amarex-colors.json";
 
 /**
  * Searchbar to access search results.
@@ -13,7 +17,8 @@ export default {
     name: "SearchBar",
     components: {
         SearchBarResultList,
-        SearchBarSuggestionList
+        SearchBarSuggestionList,
+        Search
     },
     props: {
         clickAction: {
@@ -22,11 +27,12 @@ export default {
             required: false
         }
     },
-    data: function () {
+    data() {
         return {
             currentComponentSide: undefined,
             currentSearchInput: this.searchInput,
-            layerSelectionPlaceHolder: this.placeholder
+            layerSelectionPlaceHolder: this.placeholder,
+            colors
         };
     },
     computed: {
@@ -37,6 +43,7 @@ export default {
             "searchInput",
             "searchInterfaceInstances",
             "searchResults",
+            "searchResultsActive",
             "showAllResults",
             "suggestionListLength",
             "showAllResultsSearchCategory",
@@ -288,7 +295,7 @@ export default {
 
 <template lang="html">
     <div id="search-bar">
-        <div class="input-group mb-3">
+        <div class="input-group mb-4">
             <input
                 id="searchInput"
                 ref="searchInput"
@@ -301,15 +308,15 @@ export default {
             >
             <button
                 id="search-button"
-                class="btn btn-primary"
                 :disabled="!searchActivated"
                 :aria-label="$t(placeholder)"
                 type="button"
                 @click="zoomToAndMarkSearchResult(searchInputValue), startSearch(currentComponentSide)"
             >
-                <i
-                    class="bi-search"
-                    role="img"
+                <!-- Masterportal origin: change SearchBar Icon  -->
+                <Search
+                    :color="colors.amarex_grey_mid"
+                    :size="20"
                 />
             </button>
         </div>
@@ -321,23 +328,62 @@ export default {
             v-else-if="showAllResults"
             :limited-sorted-search-results="limitedSortedSearchResults"
         />
+        <p v-if="!searchInputValue.length && currentComponentSide === 'searchbar'" class="amarex-bold p-3">Bitte gib eine Adresse ein, die du suchen willst...</p>
+        <p v-else-if="!!searchInputValue.length && searchInputValue.length < minCharacters && currentComponentSide === 'searchbar'" class="amarex-bold p-3">Bitte gib min. {{ minCharacters }} Zeichen ein...</p>
     </div>
 </template>
 
 <style lang="scss" scoped>
 @import "~variables";
+// Masterportal origin: change SearchBar Stylings
+    .input-group {
+        border: 1px solid $amarex_grey_mid;
+        @include radius();
+    }
     #search-bar {
         #search-button {
             border-top-right-radius: 5px;
             border-bottom-right-radius: 5px;
+            cursor: pointer;
         }
         .input-label {
             color: $placeholder-color;
+        }
+        button {
+            border: none !important;
+            background: $amarex_primary;
+        }
+        input {
+            border: none !important;
+            &::placeholder {
+                @include transform-p();
+                color: $amarex_grey_mid !important;
+                font-family: "Inria Sans";
+                font-size: 16px;
+                font-weight: 400;
+                line-height: 24px;
+            }
         }
     }
     .overflowHidden{
         overflow: hidden;
         text-overflow: ellipsis;
+    }
+    .spinner-container {
+        display: flex;
+        justify-content: center;
+        width: 100%;
+        .spinner {
+        animation: spin 1s linear infinite;
+        }
+    }
+    @keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
     }
 </style>
 
