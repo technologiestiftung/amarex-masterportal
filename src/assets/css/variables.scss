@@ -158,7 +158,6 @@ $tool_box_shadow: 0 6px 12px rgba(0, 0, 0, 0.176);
     color: $amarex_primary;
   }
   p {
-    @include transform-p();
     text-align: left;
   }
   &:hover {
@@ -168,6 +167,15 @@ $tool_box_shadow: 0 6px 12px rgba(0, 0, 0, 0.176);
     }
     p {
       color: $amarex_secondary !important;
+    }
+  }
+  &.accent {
+    background: $amarex_accent;
+  }
+  &.full {
+    width: 100%;
+    p {
+      width: 100%;
     }
   }
 }
