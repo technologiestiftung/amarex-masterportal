@@ -2,7 +2,8 @@ const webpack = require("webpack"),
     MiniCssExtractPlugin = require("mini-css-extract-plugin"),
     path = require("path"),
     fse = require("fs-extra"),
-    {VueLoaderPlugin} = require("vue-loader"),
+    { VueLoaderPlugin } = require("vue-loader"),
+    dotenv = require("dotenv");
 
     rootPath = path.resolve(__dirname, "../"),
     addonBasePath = path.resolve(rootPath, "addons"),
@@ -17,6 +18,34 @@ if (!fse.existsSync(addonConfigPath)) {
 else {
     addonEntryPoints = require(addonConfigPath);
 }
+
+
+// load .env files in correct order
+const loadEnvFiles = () => {
+    // .env überschreibt process.env
+    const envConfig = dotenv.config({ path: path.resolve(__dirname, '../.env') });
+    
+    // .env.local überschreibt .env
+    const envLocalConfig = dotenv.config({ 
+        path: path.resolve(__dirname, '../.env.local'),
+        override: true 
+    });
+
+    // Kombiniere die Environments
+    const finalConfig = {
+        ...envConfig.parsed,
+        ...envLocalConfig.parsed
+    };
+
+    // Transformiere die Variablen für webpack.DefinePlugin
+    const envKeys = Object.keys(finalConfig).reduce((prev, next) => {
+        prev[`process.env.${next}`] = JSON.stringify(finalConfig[next]);
+        return prev;
+    }, {});
+
+    return envKeys;
+};
+
 
 module.exports = function () {
     const addonsRelPaths = {},
@@ -188,7 +217,10 @@ module.exports = function () {
                 ADDONS: JSON.stringify(addonsRelPaths),
                 __VUE_OPTIONS_API__: true,
                 __VUE_PROD_DEVTOOLS__: false,
-                VUE_ADDONS: JSON.stringify(vueAddonsRelPaths)
+                VUE_ADDONS: JSON.stringify(vueAddonsRelPaths),
+                'process.env': JSON.stringify(process.env),
+                'process.env.API_URL': JSON.stringify(process.env.API_URL),
+                ...loadEnvFiles(),
             })
         ]
     };

@@ -1,6 +1,3 @@
-// TODO: add url from env
-const apiUrl = "https://0.0.0.0:443";
-
 /**
  * Fetches data from Rabimo API asynchronously
  * @param {Object} payload - data to send
@@ -8,13 +5,16 @@ const apiUrl = "https://0.0.0.0:443";
  */
 async function getMultiblockDeltaW(payload) {
   try {
-    const response = await fetch(`${apiUrl}/calculate_multiblock_delta_w`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
+    const response = await fetch(
+      `${process.env.API_URL}/calculate_multiblock_delta_w`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(payload),
       },
-      body: JSON.stringify(payload),
-    });
+    );
     const data = await response.json();
     return data;
   } catch (error) {
@@ -24,3 +24,4 @@ async function getMultiblockDeltaW(payload) {
 }
 
 export default { getMultiblockDeltaW };
+
