@@ -4,6 +4,8 @@ import MenuNavigation from "./MenuNavigation.vue";
 import {mapActions, mapGetters} from "vuex";
 import GetFeatureInfo from "../../getFeatureInfo/components/GetFeatureInfo.vue";
 
+// CHANGED JS
+
 /**
  * @module modules/MenuContainerBody
  * @vue-prop {String} side - The side in which the menu component is being rendered.
@@ -97,7 +99,7 @@ export default {
             {'mp-menu-body-collapsed': !mainExpanded && side === 'mainMenu' || !secondaryExpanded && side === 'secondaryMenu'}
         "
     >
-        <MenuNavigation :side="side" />
+        <MenuNavigation :side="side" v-if="side === 'mainMenu'" />
         <GetFeatureInfo
             v-if="side === gfiMenuSide"
             v-show="currentComponent === 'getFeatureInfo'"
@@ -123,11 +125,10 @@ export default {
         display: flex;
         flex-direction: column;
         align-items: stretch;
-        padding: 0 $padding $padding $padding;
+        // padding: 0 $padding $padding $padding;
         font-size: $font-size-base;
-        overflow-y: auto;
+        // overflow-y: scroll;
         max-height: 100%;
-
         &-collapsed {
             padding: 0;
             display: none;
@@ -149,12 +150,10 @@ export default {
     }
 
     @include media-breakpoint-up(sm)  {
-        #mp-body-mainMenu {
-            margin-right: .5rem;
-        }
 
         #mp-body-secondaryMenu {
-            overflow-y: auto;
+            overflow-y: scroll;
+            padding: $padding $padding $padding calc($padding * 1.5);
         }
         .mp-menu-body-collapsed {
             display: flex;
