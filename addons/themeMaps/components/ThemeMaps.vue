@@ -42,6 +42,7 @@ export default {
       colors,
       showLayerTree: true,
       showLayerTreeSelect: true,
+      checkedSelectAll: false,
     };
   },
   computed: {
@@ -112,7 +113,6 @@ export default {
       "navigateForward",
       "reset",
       "setLayerInfoVisible",
-      "changeVisibility",
     ]),
     ...mapMutations("Modules/ThemeMaps", ["setHighlightLayerId"]),
     ...mapActions("Modules/LayerSelection", ["changeVisibility"]),
@@ -238,6 +238,21 @@ export default {
       };
       return traverse(this.themeMapsConfs) || []; // Ensure the result is always an array
     },
+    clickedSelectAll() {
+      this.checkedSelectAll = !this.checkedSelectAll;
+      this.themeMapsConfs.forEach((themeMap) => {
+        themeMap.elements.forEach((subThemeMap) => {
+          if (subThemeMap.id === this.selectedMapGroup.id) {
+            subThemeMap.elements.forEach((element) => {
+              this.changeVisibility({
+                layerId: element.id,
+                value: this.checkedSelectAll,
+              });
+            });
+          }
+        });
+      });
+    },
   },
 };
 </script>
@@ -310,8 +325,28 @@ export default {
       <hr v-if="!!this.selectedMapGroup" />
       <div v-if="!!this.selectedMapGroup">
         <h5>Enthaltene Kartenlayer bei "{{ this.selectedMapGroup.name }}"</h5>
-        <!-- v-for="(selectedElement, indexElement) in this.selectedMapGroup
-            .elements" -->
+        <div
+          class="sub-group selectAll"
+          @click="clickedSelectAll()"
+        >
+          <CircleMinus
+            v-if="checkedSelectAll"
+            :color="colors.amarex_secondary"
+            :size="20"
+          />
+          <CirclePlus
+            v-else
+            :color="colors.amarex_accent"
+            :size="20"
+          />
+          <p :class="checkedSelectAll ? 'amarex-bold' : 'amarex-small'">
+            {{
+              checkedSelectAll
+                ? "Alle Layer entfernen"
+                : "Alle Layer hinzufügen"
+            }}
+          </p>
+        </div>
         <div
           v-for="(selectedElement, indexElement) in findNestedElementsById()"
           :key="indexElement"
@@ -403,6 +438,13 @@ export default {
     grid-template-columns: 20px 1fr;
     align-items: center;
     gap: 20px;
+    &.selectAll {
+      background: $amarex_accent_light;
+      // @include boxShadow();
+    }
+    &:not(.selectAll):hover {
+      background: $amarex_grey_light;
+    }
   }
 }
 hr {
