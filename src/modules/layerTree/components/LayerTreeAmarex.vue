@@ -49,12 +49,7 @@ export default {
 </script>
 
 <template lang="html">
-    <div
-        id="layer-tree"
-        class="layer-tree"
-    >
-        <LayerTreeNodeAmarex />
-    </div>
+    <LayerTreeNodeAmarex />
 </template>
 
 <style lang="scss" scoped>

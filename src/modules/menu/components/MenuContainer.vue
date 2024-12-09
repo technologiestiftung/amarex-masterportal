@@ -152,6 +152,7 @@ export default {
         :aria-label="titleBySide(side) ? titleBySide(side).text : null"
     >
         <div
+            v-if="side === 'mainMenu'"
             :id="'mp-header-' + side"
             class="mp-menu-header"
             :class="

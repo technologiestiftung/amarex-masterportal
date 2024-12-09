@@ -14,6 +14,9 @@ import {
   CircleMinus,
   ChevronDown,
   ChevronUp,
+  Map as MapIcon,
+  ChevronLeft,
+  ChevronRight,
 } from "lucide-vue-next";
 import colors from "../../../src/shared/js/utils/amarex-colors.json";
 
@@ -32,6 +35,9 @@ export default {
     CircleMinus,
     ChevronDown,
     ChevronUp,
+    MapIcon,
+    ChevronLeft,
+    ChevronRight,
   },
   data() {
     return {
@@ -41,8 +47,9 @@ export default {
       selectedMapGroup: null,
       colors,
       showLayerTree: true,
-      showLayerTreeSelect: true,
       checkedSelectAll: false,
+      upperThemeMapsContainerHeight: 0,
+      selectElement: "card",
     };
   },
   computed: {
@@ -78,27 +85,24 @@ export default {
     this.showLayerTree = getCacheShowLayerTree
       ? JSON.parse(getCacheShowLayerTree)
       : true;
-    const getCacheShowLayerTreeSelect = localStorage.getItem(
-      "cacheShowLayerTreeSelect",
-    );
-    this.showLayerTreeSelect = getCacheShowLayerTreeSelect
-      ? JSON.parse(getCacheShowLayerTreeSelect)
-      : true;
     const getCacheSelectedMapGroup = localStorage.getItem(
       "cacheSelectedMapGroup",
     );
     this.selectedMapGroup = getCacheSelectedMapGroup
       ? JSON.parse(getCacheSelectedMapGroup)
       : null;
+    this.updateHeight();
+    this.resizeObserver = new ResizeObserver(() => {
+      this.updateHeight();
+    });
+    if (this.$refs.upperThemeMapsContainer) {
+      this.resizeObserver.observe(this.$refs.upperThemeMapsContainer);
+    }
   },
   unmounted() {
     localStorage.setItem(
       "cacheShowLayerTree",
       JSON.stringify(this.showLayerTree),
-    );
-    localStorage.setItem(
-      "cacheShowLayerTreeSelect",
-      JSON.stringify(this.showLayerTreeSelect),
     );
     localStorage.setItem(
       "cacheSelectedMapGroup",
@@ -193,6 +197,9 @@ export default {
       }
       this.selectedMapGroup = ele;
     },
+    unselectMapGroup() {
+      this.selectedMapGroup = null;
+    },
     visibilityInLayerTreeChanged(value) {
       const layerConfigs = [];
       layerConfigs.push({
@@ -218,9 +225,6 @@ export default {
     toggleLayerTree() {
       this.showLayerTree = !this.showLayerTree;
     },
-    toggleLayerTreeSelect() {
-      this.showLayerTreeSelect = !this.showLayerTreeSelect;
-    },
     findNestedElementsById() {
       const traverse = (array) => {
         for (const item of array) {
@@ -238,6 +242,21 @@ export default {
       };
       return traverse(this.themeMapsConfs) || []; // Ensure the result is always an array
     },
+    checkIfAllAreChecked() {
+      let allAreChecked = true;
+      this.themeMapsConfs.forEach((themeMap) => {
+        themeMap.elements.forEach((subThemeMap) => {
+          if (subThemeMap.id === this.selectedMapGroup.id) {
+            subThemeMap.elements.forEach((element) => {
+              if (!element.visibility) {
+                allAreChecked = false;
+              }
+            });
+          }
+        });
+      });
+      return allAreChecked;
+    },
     clickedSelectAll() {
       this.checkedSelectAll = !this.checkedSelectAll;
       this.themeMapsConfs.forEach((themeMap) => {
@@ -253,6 +272,18 @@ export default {
         });
       });
     },
+    updateHeight() {
+      const el = this.$refs.upperThemeMapsContainer;
+      if (el) {
+        this.upperThemeMapsContainerHeight = el.offsetHeight;
+      }
+    },
+  },
+  beforeUnmount() {
+    // Disconnect the observer to avoid memory leaks
+    if (this.resizeObserver) {
+      this.resizeObserver.disconnect();
+    }
   },
 };
 </script>
@@ -260,77 +291,122 @@ export default {
 <template>
   <div>
     <div
-      class="theme-layer-title-container"
-      @click="toggleLayerTree"
-    >
-      <h5 class="theme-layer-title">Ebenen Themenkarten</h5>
-      <ChevronUp
-        :color="colors.amarex_secondary"
-        :size="20"
-        v-if="showLayerTree"
-      />
-      <ChevronDown
-        :color="colors.amarex_secondary"
-        :size="20"
-        v-else
-      />
-    </div>
-    <LayerTreeAmarex v-if="showLayerTree" />
-    <div
-      class="theme-layer-title-container second-title-container"
-      @click="toggleLayerTreeSelect"
-    >
-      <h5 class="theme-layer-title">Themenkarten</h5>
-      <ChevronUp
-        :color="colors.amarex_secondary"
-        :size="20"
-        v-if="showLayerTreeSelect"
-      />
-      <ChevronDown
-        :color="colors.amarex_secondary"
-        :size="20"
-        v-else
-      />
-    </div>
-    <div
-      class="theme-layer-container mt-3"
-      v-if="
-        !!this.themeMapsConfs &&
-        !!this.themeMapsConfs?.length &&
-        showLayerTreeSelect
-      "
+      id="upper-theme-maps-container"
+      class="theme-maps-container"
+      ref="upperThemeMapsContainer"
+      :style="{
+        height: showLayerTree ? '35vh' : 'auto',
+      }"
     >
       <div
-        v-for="(main, index) in this.themeMapsConfs"
-        :key="index"
-        class="theme-layer-nav"
+        class="theme-layer-title-container mb-4"
+        @click="toggleLayerTree"
       >
-        <div
-          v-for="(mainElement, indexElement) in main.elements"
-          :key="indexElement"
-          class="theme-layer-nav-item"
-          :class="{ selected: this.selectedMapGroup?.id === mainElement.id }"
-          @click="selectMapGroup(mainElement)"
+        <h5 class="theme-layer-title">Ebenen Themenkarten</h5>
+        <ChevronUp
+          :color="colors.amarex_secondary"
+          :size="20"
+          v-if="showLayerTree"
+        />
+        <ChevronDown
+          :color="colors.amarex_secondary"
+          :size="20"
+          v-else
+        />
+      </div>
+      <LayerTreeAmarex v-if="showLayerTree" />
+    </div>
+    <div
+      v-if="selectElement === 'card'"
+      id="lower-theme-maps-container"
+      class="theme-maps-container"
+      :style="{
+        height: `calc(100vh - 3rem - ${this.upperThemeMapsContainerHeight}px)`,
+      }"
+    >
+      <div class="theme-layer-title-container second-title-container">
+        <h5
+          v-if="!this.selectedMapGroup"
+          class="theme-layer-title"
         >
-          <p class="amarex-small">
-            {{ mainElement.name }}
-          </p>
-          <div class="bubble">
-            <p class="amarex-bold">
-              {{ mainElement.elements?.length }}
-            </p>
-          </div>
+          Themenkarten
+        </h5>
+        <div
+          v-else
+          class="mb-3"
+          @click="unselectMapGroup()"
+        >
+          <ChevronLeft
+            :color="colors.amarex_secondary"
+            :size="20"
+          />
+          <h5 class="theme-layer-title ms-2">Zurück</h5>
         </div>
       </div>
-      <hr v-if="!!this.selectedMapGroup" />
-      <div v-if="!!this.selectedMapGroup">
-        <h5>Enthaltene Kartenlayer bei "{{ this.selectedMapGroup.name }}"</h5>
+      <div
+        v-if="
+          !!this.themeMapsConfs &&
+          !!this.themeMapsConfs?.length &&
+          !this.selectedMapGroup
+        "
+        class="theme-layer-container mt-3"
+      >
+        <div
+          v-for="(main, index) in this.themeMapsConfs"
+          :key="index"
+          class="theme-layer-nav"
+        >
+          <div
+            v-for="(mainElement, indexElement) in main.elements"
+            :key="indexElement"
+            class="theme-layer-nav-item-card p-4"
+            :class="{ selected: this.selectedMapGroup?.id === mainElement.id }"
+          >
+            <div class="d-flex align-items-center">
+              <MapIcon
+                :color="colors.amarex_secondary"
+                :size="20"
+              />
+              <p class="amarex-bold ms-3">
+                {{ mainElement.name }} /
+                {{ mainElement.elements?.length }} Karten
+              </p>
+            </div>
+            <!-- <p class="amarex-bold">{{ mainElement.elements?.length }} Karten</p> -->
+            <p class="amarex-caption">
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do
+              eiusmod tempor incididunt ut labore et dolore magna aliqua.
+            </p>
+            <button
+              class="amarex-btn-primary accent full"
+              @click="selectMapGroup(mainElement)"
+            >
+              <p class="amarex-small">Zur Layerauswahl</p>
+              <ChevronRight
+                :color="colors.primary"
+                :size="20"
+              />
+            </button>
+          </div>
+        </div>
+        <div class="mt-4"></div>
+      </div>
+      <h5
+        v-if="!!this.selectedMapGroup"
+        class="mt-2"
+      >
+        Enthaltene Kartenlayer bei "{{ this.selectedMapGroup.name }}"
+      </h5>
+      <div
+        v-if="!!this.selectedMapGroup"
+        class="theme-layer-overflow-container mt-2"
+      >
         <div
           class="sub-group selectAll"
           @click="clickedSelectAll()"
         >
           <CircleMinus
-            v-if="checkedSelectAll"
+            v-if="checkIfAllAreChecked()"
             :color="colors.amarex_secondary"
             :size="20"
           />
@@ -339,9 +415,104 @@ export default {
             :color="colors.amarex_accent"
             :size="20"
           />
-          <p :class="checkedSelectAll ? 'amarex-bold' : 'amarex-small'">
+          <p :class="checkIfAllAreChecked() ? 'amarex-bold' : 'amarex-small'">
             {{
-              checkedSelectAll
+              checkIfAllAreChecked()
+                ? "Alle Layer entfernen"
+                : "Alle Layer hinzufügen"
+            }}
+          </p>
+        </div>
+        <div
+          v-for="(selectedElement, indexElement) in findNestedElementsById()"
+          :key="indexElement"
+          class="sub-group"
+          @click="clicked(selectedElement)"
+        >
+          <CircleMinus
+            v-if="selectedElement.visibility"
+            :color="colors.amarex_secondary"
+            :size="20"
+          />
+          <CirclePlus
+            v-else
+            :color="colors.amarex_accent"
+            :size="20"
+          />
+          <p
+            :class="selectedElement.visibility ? 'amarex-bold' : 'amarex-small'"
+          >
+            {{ selectedElement.name }}
+          </p>
+        </div>
+      </div>
+    </div>
+    <div
+      v-else
+      id="lower-theme-maps-container"
+      class="theme-maps-container"
+      :style="{
+        height: `calc(100vh - 3rem - ${this.upperThemeMapsContainerHeight}px)`,
+      }"
+    >
+      <div class="theme-layer-title-container second-title-container">
+        <h5 class="theme-layer-title">Themenkarten</h5>
+      </div>
+      <div
+        v-if="!!this.themeMapsConfs && !!this.themeMapsConfs?.length"
+        class="theme-layer-container mt-3"
+      >
+        <div
+          v-for="(main, index) in this.themeMapsConfs"
+          :key="index"
+          class="theme-layer-nav"
+        >
+          <div
+            v-for="(mainElement, indexElement) in main.elements"
+            :key="indexElement"
+            class="theme-layer-nav-item"
+            :class="{ selected: this.selectedMapGroup?.id === mainElement.id }"
+            @click="selectMapGroup(mainElement)"
+          >
+            <p class="amarex-small">
+              {{ mainElement.name }}
+            </p>
+            <div class="bubble">
+              <p class="amarex-bold">
+                {{ mainElement.elements?.length }}
+              </p>
+            </div>
+          </div>
+        </div>
+        <hr
+          v-if="!!this.selectedMapGroup"
+          class="my-3"
+        />
+      </div>
+      <h5 v-if="!!this.selectedMapGroup">
+        Enthaltene Kartenlayer bei "{{ this.selectedMapGroup.name }}"
+      </h5>
+      <div
+        v-if="!!this.selectedMapGroup"
+        class="theme-layer-overflow-container mt-3"
+      >
+        <div
+          class="sub-group selectAll"
+          @click="clickedSelectAll()"
+        >
+          <CircleMinus
+            v-if="checkIfAllAreChecked()"
+            :color="colors.amarex_secondary"
+            :size="20"
+          />
+          <CirclePlus
+            v-else
+            :color="colors.amarex_accent"
+            :size="20"
+          />
+          <p :class="checkIfAllAreChecked() ? 'amarex-bold' : 'amarex-small'">
+            {{
+              checkIfAllAreChecked()
                 ? "Alle Layer entfernen"
                 : "Alle Layer hinzufügen"
             }}
@@ -376,20 +547,41 @@ export default {
 
 <style lang="scss" scoped>
 @import "~variables";
+.theme-maps-container {
+  &#upper-theme-maps-container {
+    display: grid;
+    grid-template-rows: auto auto 1fr;
+  }
+  &#lower-theme-maps-container {
+    display: grid;
+    grid-template-rows: auto auto 1fr;
+  }
+}
 .theme-layer-title-container {
-  margin-bottom: 5px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  @include clickable();
+  &:not(.second-title-container) {
+    @include clickable();
+  }
   &.second-title-container {
     border-top: 1px solid $amarex_grey_light;
     padding-top: 20px;
+    h5 {
+      user-select: none;
+      @include transform-p();
+    }
+    & > div {
+      @include clickable();
+      display: flex;
+      align-items: center;
+    }
   }
 }
 .theme-layer-container {
   width: 100%;
-  min-height: 200px;
+  overflow-y: scroll;
+  padding-right: 5px;
   .theme-layer-nav {
     display: flex;
     gap: 20px;
@@ -428,7 +620,20 @@ export default {
         justify-content: center;
       }
     }
+    .theme-layer-nav-item-card {
+      // background: $amarex_grey_light;
+      @include boxShadow();
+      user-select: none;
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+      border: 1px solid $amarex_secondary;
+      @include radius();
+    }
   }
+}
+.theme-layer-overflow-container {
+  overflow-y: scroll;
   .sub-group {
     margin: 10px 0;
     padding: 10px;
@@ -446,9 +651,6 @@ export default {
       background: $amarex_grey_light;
     }
   }
-}
-hr {
-  margin: 30px 0;
 }
 </style>
 

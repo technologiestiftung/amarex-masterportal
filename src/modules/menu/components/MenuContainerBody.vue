@@ -148,13 +148,18 @@ export default {
             display: none;
         }
     }
-
+    #mp-body-secondaryMenu {
+        .menu-body-component {
+            overflow-y: hidden;
+            max-height: 100vh;
+            padding: $padding $padding $padding calc($padding * 1.5);
+            display: grid;
+            grid-template-rows: auto 1fr;
+            height: 100%;
+        }
+    }
     @include media-breakpoint-up(sm)  {
 
-        #mp-body-secondaryMenu {
-            overflow-y: scroll;
-            padding: $padding $padding $padding calc($padding * 1.5);
-        }
         .mp-menu-body-collapsed {
             display: flex;
         }

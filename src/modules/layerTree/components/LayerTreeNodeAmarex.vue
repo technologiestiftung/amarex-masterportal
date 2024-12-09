@@ -132,7 +132,7 @@ export default {
 
 <template>
     <!-- eslint-disable vue/attribute-hyphenation -->
-    <div class="amarex-themenkarten-toggle-settings-container" @click="toggleSettings" v-if="sortedLayerConfig.some((element) => !element.baselayer && element.parentId !== `folder-1` && element.visibility)">
+    <div class="amarex-themenkarten-toggle-settings-container mb-2" @click="toggleSettings" v-if="sortedLayerConfig.some((element) => !element.baselayer && element.parentId !== `folder-1` && element.visibility)">
         <p class="amarex-bold">Themekarten Einstellungen {{ showToggle ? "ausblenden" : "anzeigen" }}</p>
         <ToggleRight
             v-if="showToggle"
@@ -145,13 +145,12 @@ export default {
             :size="30"
         />
     </div>
-    <div v-else class="mt-4"></div>
 
-    <p class="amarex-bold" v-if="!sortedLayerConfig.some((element) => !element.baselayer && element.parentId !== `folder-1` && element.visibility)">&ndash; Wählen Sie im unten stehenden Katalog Ebenen aus verschiedenen Themenkarten aus für Ihre Untersuchung. &ndash; </p>
+    <p class="amarex-bold mb-4" v-if="!sortedLayerConfig.some((element) => !element.baselayer && element.parentId !== `folder-1` && element.visibility)">&ndash; Wähle im unten stehenden Katalog Ebenen aus verschiedenen Themenkarten aus für deine Untersuchung. &ndash; </p>
 
     <Draggable
         v-model="sortedLayerConfig"
-        class="dragArea no-list ps-0 ms-2"
+        class="dragArea no-list ps-0 m-0"
         tag="ul"
         item-key="name"
         chosen-class="chosen"
@@ -182,9 +181,11 @@ export default {
         display: flex;
         align-items: center;
         justify-content: space-between;
-        margin-bottom: 20px;
         p {
             max-width: calc(100% - 50px);
         }
+    }
+    .dragArea {
+        overflow-y: scroll;
     }
 </style>
