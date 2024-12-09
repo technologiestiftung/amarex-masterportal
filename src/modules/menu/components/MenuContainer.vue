@@ -4,6 +4,13 @@ import MenuContainerBody from "./MenuContainerBody.vue";
 import ResizeHandle from "../../../shared/modules/resize/components/ResizeHandle.vue";
 import MenuContainerBodyRootLogo from "./MenuContainerBodyRootLogo.vue";
 import SearchBar from "../../searchBar/components/SearchBar.vue";
+import {
+    File as FileIcon,
+    FolderOpen as FolderOpenIcon,
+    Save as SaveIcon,
+    Upload as UploadIcon,
+} from "lucide-vue-next";
+import colors from "../../../shared/js/utils/amarex-colors.json";
 
 /**
  * @module modules/MenuContainer
@@ -17,7 +24,11 @@ export default {
         MenuContainerBody,
         MenuContainerBodyRootLogo,
         ResizeHandle,
-        SearchBar
+        SearchBar,
+        FileIcon,
+        FolderOpenIcon,
+        SaveIcon,
+        UploadIcon,
     },
     props: {
         /** Defines in which menu the component is being rendered */
@@ -116,6 +127,11 @@ export default {
                 type: "searchbar"
             });
         }
+    },
+    data () {
+        return {
+            colors
+        };
     }
 };
 </script>
@@ -132,7 +148,7 @@ export default {
             }
         ]"
         tabindex="-1"
-        :style="expanded ? 'width:' + currentMenuWidth(side) : 'width:0'"
+        :style="{ width: expanded ? currentMenuWidth(side) : '0', padding: expanded ? '' : '0px', minWidth: expanded ? 'calc(300px + 5rem)' : '0px' }"
         :aria-label="titleBySide(side) ? titleBySide(side).text : null"
     >
         <div
@@ -161,15 +177,45 @@ export default {
                     class="mb-5 mt-4"
                     v-bind="titleBySide(side)"
                 />
-                <!-- Masterportal origin Search Bar -->
-                <!-- <SearchBar
+                <SearchBar
                     :click-action="openSearchBar"
-                /> -->
+                />
             </div>
         </div>
         <MenuContainerBody
             :side="side"
         />
+        <!-- Masterportal origin: added CTAs  -->
+        <div v-if="side === 'mainMenu'" class="project-management-amarex-container">
+            <button class="amarex-btn-primary">
+                <FileIcon
+                    :color="colors.amarex_primary"
+                    :size="20"
+                />
+                <p class="amarex-small">Neues Projekt</p>
+            </button>
+            <button class="amarex-btn-primary">
+                <FolderOpenIcon
+                    :color="colors.amarex_primary"
+                    :size="20"
+                />
+                <p class="amarex-small">Projekt öffnen</p>
+            </button>
+            <button class="amarex-btn-primary">
+                <SaveIcon
+                :color="colors.amarex_primary"
+                :size="20"
+                />
+                <p class="amarex-small">Speichern</p>
+            </button>
+            <button class="amarex-btn-primary">
+                <UploadIcon
+                    :color="colors.amarex_primary"
+                    :size="20"
+                />
+                <p class="amarex-small">Exportieren</p>
+            </button>
+        </div>
         <ResizeHandle
             v-if="!isMobile"
             :id="'mp-resize-handle-' + side"
@@ -193,11 +239,13 @@ export default {
     background-color: $menu-background-color;
     transition: width 0.3s ease;
     z-index: 2;
-    flex-direction: column
+    flex-direction: column;
+    max-width: 45vw !important;
 }
 
 .mp-mainMenu {
     left: 0px;
+    padding: $padding calc($padding * 1.5) $padding $padding;
 }
 
 .mp-secondaryMenu {
@@ -225,9 +273,9 @@ export default {
         flex-direction: column;
         align-items: stretch;
         font-size: $font-size-base;
-        padding: $padding $padding 0 $padding;
+        // padding: $padding $padding 0 $padding;
         width:100%;
-
+        border-bottom: 1px solid $amarex_grey_mid;
         &-collapsed {
             padding: 0;
             display: none;
@@ -290,4 +338,11 @@ export default {
     left: calc(50% - 200px);
     top: calc(100% - 250px);
 }
+
+.project-management-amarex-container {
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: 1fr 1fr;
+}
+
 </style>
