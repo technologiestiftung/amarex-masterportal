@@ -328,7 +328,11 @@ export default {
             :color="colors.amarex_accent"
             :size="20"
           />
-          <p class="amarex_small">{{ selectedElement.name }}</p>
+          <p
+            :class="selectedElement.visibility ? 'amarex-bold' : 'amarex-small'"
+          >
+            {{ selectedElement.name }}
+          </p>
         </div>
       </div>
     </div>

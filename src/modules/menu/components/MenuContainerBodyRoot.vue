@@ -1,7 +1,7 @@
 <script>
 import LayerTree from "../../layerTree/components/LayerTree.vue";
 import MenuContainerBodyRootItems from "./MenuContainerBodyRootItems.vue";
-import {mapGetters} from "vuex";
+import {mapGetters,mapActions} from "vuex";
 import { CircleCheckBig, LoaderCircle } from 'lucide-vue-next';
 import colors from '../../../shared/js/utils/amarex-colors.json';
 
@@ -57,7 +57,8 @@ export default {
         ...mapGetters("Menu", [
             "mainMenu",
             "secondaryMenu",
-            "titleBySide"
+            "titleBySide", 
+            "secondaryExpanded"
         ]),
         /**
          * @returns {Object} Menu configuration for the given menu.
@@ -75,6 +76,7 @@ export default {
         }
     },
     methods: {
+        ...mapActions("Menu", ["toggleMenu"]),
         /**
          * Returns the path for a section inside the menu this component is rendered in.
          * @param {Number} sectionIndex Index inside of a section of a menu.
@@ -88,7 +90,11 @@ export default {
          * @param {Object} step The step to select.
          * @returns {void}
          */
-        selectStep(step, index) {
+        selectStep(step, index, clicked) {
+            if (clicked && !this.secondaryExpanded) {
+                console.log('expand secondary menu');
+                this.toggleMenu('secondaryMenu');
+            }
             this.currentStepIndex = index;
             this.$store.dispatch('Menu/changeCurrentComponent', {
             type: step.component,
@@ -111,19 +117,9 @@ export default {
                 :key="index"
                 class="step-indicator"
                 :class="{ 'active': index === currentStepIndex }"
-                @click="selectStep(step, index)"
+                @click="selectStep(step, index, true)"
             >
                 <h5>{{ step.label }}</h5>
-                <!-- <CircleCheckBig
-                    v-if="index === currentStepIndex"
-                    :color="colors.amarex_primary"
-                    :size="20"
-                />
-                <LoaderCircle
-                    v-else
-                    :color="colors.amarex_primary"
-                    :size="20"
-                /> -->
             </button>
         </div>
 
