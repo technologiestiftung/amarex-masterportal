@@ -11,6 +11,7 @@ import isMobile from "./shared/js/utils/isMobile";
 import mapCollection from "./core/maps/js/mapCollection";
 import MenuContainer from "./modules/menu/components/MenuContainer.vue";
 import MenuToggleButton from "./modules/menu/components/MenuToggleButton.vue";
+import MenuToggleButtonAmarex from "./modules/menu/components/MenuToggleButtonAmarex.vue";
 import addonsPlugin from "./plugins/addons";
 
 export default {
@@ -20,7 +21,8 @@ export default {
         BaselayerSwitcher,
         ControlBar,
         MenuContainer,
-        MenuToggleButton
+        MenuToggleButton,
+        MenuToggleButtonAmarex
     },
     data () {
         return {
@@ -196,7 +198,7 @@ export default {
             v-if="allConfigsLoaded && addonsLoaded && mainMenu && uiStyle !== 'SIMPLE'"
             side="mainMenu"
         />
-        <MenuToggleButton
+        <MenuToggleButtonAmarex
             v-if="allConfigsLoaded && addonsLoaded && mainMenu && uiStyle !== 'SIMPLE'"
             side="mainMenu"
         />
@@ -211,7 +213,7 @@ export default {
             <component :is="componentMap.layerPills" />
             <component :is="componentMap.portalFooter" />
         </div>
-        <MenuToggleButton
+        <MenuToggleButtonAmarex
             v-if="allConfigsLoaded && addonsLoaded && secondaryMenu && uiStyle !== 'SIMPLE'"
             side="secondaryMenu"
         />
