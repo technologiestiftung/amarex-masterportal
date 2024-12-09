@@ -33,7 +33,8 @@ describe("src/modules/layerTree/components/LayerComponentSubMenu.vue", () => {
             transparency: 50,
             datasets: [
                 {
-                    md_id: "123456789"
+                    md_id: "123456789",
+                    md_name: "Layer ABC"
                 }
             ]
         };
@@ -57,11 +58,34 @@ describe("src/modules/layerTree/components/LayerComponentSubMenu.vue", () => {
                                 removeLayer: removeLayerSpy,
                                 updateTransparency: updateTransparencySpy
                             }
+                        },
+                        LayerInformation: {
+                            namespaced: true,
+                            getters: {
+                                layerInfo: () => ({"metaIdArray": [], "url": ["https://wms.example.org/", "https://wfs.example.org/?evil=1", "./local.geojson"], "typ": ["WMS", "WFS", "GeoJSON"], "layerNames": ["X-WMS", "X-WFS", ""]}),
+                                pointOfContact: () => "Contact XYZ",
+                                publisher: () => ""
+                            }
+                        },
+                        Contact: {
+                            namespaced: true,
+                            getters: {
+                                name: () => "Contactname",
+                                type: () => "contact"
+                            }
                         }
+                    }
+                },
+                Menu: {
+                    namespaced: true,
+                    actions: {
+                        changeCurrentComponent: sinon.stub(),
+                        setMenuBackAndActivateItem: sinon.stub()
                     }
                 }
             },
             getters: {
+                isModuleAvailable: () => () => true,
                 showFolderPath: () => showFolderPath,
                 folderById: () => (id) => {
                     if (id === "folder-1") {
@@ -71,6 +95,13 @@ describe("src/modules/layerTree/components/LayerComponentSubMenu.vue", () => {
                         return folder_2;
                     }
                     return null;
+                },
+                portalConfig: () => {
+                    return {
+                        tree: {
+                            contactButton: true
+                        }
+                    };
                 }
             }
         });
@@ -179,7 +210,8 @@ describe("src/modules/layerTree/components/LayerComponentSubMenu.vue", () => {
                 transparency: 50,
                 datasets: [
                     {
-                        md_id: "123456789"
+                        md_id: "123456789",
+                        md_name: "Layer ABC"
                     }
                 ]
             },
@@ -194,7 +226,8 @@ describe("src/modules/layerTree/components/LayerComponentSubMenu.vue", () => {
             typ: "Terrain3D",
             datasets: [
                 {
-                    md_id: "123456789"
+                    md_id: "123456789",
+                    md_name: "Layer ABC"
                 }
             ]
         };
@@ -219,7 +252,8 @@ describe("src/modules/layerTree/components/LayerComponentSubMenu.vue", () => {
             typ: "Tileset3D",
             datasets: [
                 {
-                    md_id: "123456789"
+                    md_id: "123456789",
+                    md_name: "Layer ABC"
                 }
             ]
         };

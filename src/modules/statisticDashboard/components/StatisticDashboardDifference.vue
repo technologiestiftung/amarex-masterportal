@@ -3,6 +3,9 @@ import Multiselect from "vue-multiselect";
 import {mapGetters, mapMutations} from "vuex";
 import isObject from "../../../shared/js/utils/isObject";
 import StatisticSwitcher from "./StatisticDashboardSwitcher.vue";
+import getOAFFeature from "../../../shared/js/api/oaf/getOAFFeature";
+import {rawLayerList} from "@masterportal/masterportalapi";
+
 
 export default {
     name: "StatisticDashboardDifference",
@@ -33,13 +36,24 @@ export default {
     },
     computed: {
         ...mapGetters("Modules/StatisticDashboard", [
-            "selectedReferenceData"
+            "selectedReferenceData",
+            "flattenedRegions",
+            "selectedLevel"
         ])
+    },
+    watch: {
+        selectedReferenceData (val) {
+            if (typeof val === "undefined") {
+                this.selectedDate = "";
+                this.selectedRegion = "";
+            }
+        }
     },
     created () {
         document.addEventListener("click", this.handleClickOutside);
     },
-    mounted () {
+    async mounted () {
+        this.regionOptions = await this.getRegionsOptionsForLastChild(this.flattenedRegions);
         this.handleReference(this.buttonGroupReference[0].name);
         if (isObject(this.selectedReferenceData)) {
             if (this.selectedReferenceData.type === "date" && isObject(this.selectedReferenceData.value)) {
@@ -102,6 +116,30 @@ export default {
             }
 
             this.setSelectedReferenceData(selectedReferenceData);
+        },
+
+        /**
+         * Gets the region options for the last child. Is required if the region has nested children.
+         * @param {Object[]} flattenedRegions The regions as flattened array.
+         * @returns {String[]} the list of options for region dropdown.
+         */
+        async getRegionsOptionsForLastChild (flattenedRegions) {
+            if (!Array.isArray(flattenedRegions) || !flattenedRegions.length) {
+                return [];
+            }
+            const lastChild = flattenedRegions[flattenedRegions.length - 1],
+                selectedLayer = rawLayerList.getLayerWhere({id: this.selectedLevel?.layerId});
+            let uniqueObject = {};
+
+            if (lastChild?.values?.length) {
+                return lastChild.values;
+            }
+            if (!isObject(selectedLayer)) {
+                return [];
+            }
+            uniqueObject = await getOAFFeature.getUniqueValuesByScheme(selectedLayer.url, selectedLayer.collection, [lastChild.attrName]);
+
+            return !isObject(uniqueObject[lastChild.attrName]) ? [] : Object.keys(uniqueObject[lastChild.attrName]);
         }
     }
 };
@@ -134,7 +172,7 @@ export default {
                     :placeholder="$t('common:modules.statisticDashboard.reference.placeholder')"
                     label="label"
                     track-by="label"
-                    @select="updateSelectedReferenceData('date')"
+                    @update:model-value="updateSelectedReferenceData('date')"
                 />
             </div>
             <div
@@ -149,7 +187,7 @@ export default {
                     :searchable="false"
                     :show-labels="false"
                     :placeholder="$t('common:modules.statisticDashboard.reference.placeholder')"
-                    @select="updateSelectedReferenceData('region')"
+                    @update:model-value="updateSelectedReferenceData('region')"
                 />
             </div>
         </div>

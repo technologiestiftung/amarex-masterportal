@@ -51,6 +51,13 @@ npm-debug.log
 !/portal/auto
 !/portal/amarex
 
+
+# Ignore mkdocs build dir
+site/*
+
+# Ignore Python virtual environment
+.venv/*
+
 # env files
 .env
 .env.*
