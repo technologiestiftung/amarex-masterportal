@@ -5,6 +5,8 @@ import {mapGetters} from "vuex";
 import { CircleCheckBig, LoaderCircle } from 'lucide-vue-next';
 import colors from '../../../shared/js/utils/amarex-colors.json';
 
+// CHANGED JS
+
 /**
  * @module modules/MenuContainerBodyRoot
  * @vue-prop {String} side - The side in which the menu component is being rendered.
@@ -100,21 +102,9 @@ export default {
 
 <template>
     <div
-        :id="'mp-body-root-'+side"
+        :id="'mp-body-root-'+side" v-if="side === 'mainMenu'"
     >       
-        <!-- <div class="stepper-root mb-5 d-flex flex-column gap-2" v-if="side === 'mainMenu'">
-            <button 
-                v-for="(step, index) in steps" 
-                :key="index"
-                class="btn"
-                :class="{ 'btn-primary': index === currentStepIndex, 'btn-secondary': index !== currentStepIndex }"
-                @click="selectStep(step, index)"
-            >
-                {{ step.label }}
-            </button>
-        </div> -->
         
-        <!-- JS Changed -->
         <div class="stepper-root mb-5 d-flex flex-column gap-2" v-if="side === 'mainMenu'">
             <button 
                 v-for="(step, index) in steps" 
@@ -124,7 +114,7 @@ export default {
                 @click="selectStep(step, index)"
             >
                 <h5>{{ step.label }}</h5>
-                <CircleCheckBig
+                <!-- <CircleCheckBig
                     v-if="index === currentStepIndex"
                     :color="colors.amarex_primary"
                     :size="20"
@@ -133,24 +123,10 @@ export default {
                     v-else
                     :color="colors.amarex_primary"
                     :size="20"
-                />
+                /> -->
             </button>
         </div>
 
-        <!-- Masterportal origin Layer Tree  -->
-        <!-- <LayerTree v-if="side === 'mainMenu'" /> -->
-        
-        <!-- <template
-            v-for="(_, key) in menu.sections"
-            :key="key"
-        >
-            <MenuContainerBodyRootItems
-                :id-appendix="side"
-                :side="side"
-                :path="path(key)"
-            />
-            <hr>
-        </template> -->
     </div>
 </template>
 
@@ -173,7 +149,6 @@ export default {
         background: $amarex_grey_mid;
     }
     h5 {
-        margin: 0;
         color: $amarex_primary;
         transform: translateY(4px);
         text-align: left;
