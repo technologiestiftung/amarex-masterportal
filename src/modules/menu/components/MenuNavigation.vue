@@ -41,9 +41,16 @@ export default {
         v-if="previousNavigation"
         :id="'mp-menu-navigation-' + side"
     >
+        <div class="logo-container">
+            <img
+                id="logo-in-search"
+                src="../../../../portal/amarex/resources/img/amarex_logo_webtool.png"
+                alt="Anpassung des Managements von Regenwasser an Extremereignisse"
+            >
+        </div>
         <!-- Masterportal origin Menu Navigation -->
         <div
-            class="mp-menu-navigation"
+            class="mp-menu-navigation mb-4 mt-4"
         >
             <a
                 :id="'mp-navigation-' + side"
@@ -82,6 +89,16 @@ export default {
 <style lang="scss" scoped>
 @import "~variables";
 
+.logo-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    #logo-in-search {
+        max-width: 300px;
+        height: auto;
+        display: block;
+    }
+}
 .mp-menu-navigation{
     display: flex;
     justify-content: space-between;
