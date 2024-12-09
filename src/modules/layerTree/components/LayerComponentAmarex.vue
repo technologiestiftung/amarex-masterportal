@@ -237,7 +237,7 @@ export default {
             .amarex-layer-tree-label {
                 word-wrap: break-word;
                 overflow-wrap: break-word;
-                @include transform-p();
+                // @include transform-p();
                 user-select: none;
                 margin: 15px 0;
             }

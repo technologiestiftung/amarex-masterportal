@@ -388,9 +388,6 @@ export default {
         align-items: center;
         justify-content: center;
       }
-      p {
-        transform: translateY(2px);
-      }
     }
   }
   .sub-group {

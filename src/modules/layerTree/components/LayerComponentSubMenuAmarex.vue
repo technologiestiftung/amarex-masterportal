@@ -163,7 +163,7 @@ export default {
         @include clickable();
         width: fit-content;
         span {
-            @include transform-p();
+            // @include transform-p();
         }
     }
     .layer-component-sub-menu {

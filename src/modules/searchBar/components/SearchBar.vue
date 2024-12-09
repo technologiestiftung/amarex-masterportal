@@ -356,9 +356,9 @@ export default {
         input {
             border: none !important;
             &::placeholder {
-                @include transform-p();
+                // @include transform-p();
                 color: $amarex_grey_mid !important;
-                font-family: "Inria Sans";
+                // font-family: "Inria Sans";
                 font-size: 16px;
                 font-weight: 400;
                 line-height: 24px;

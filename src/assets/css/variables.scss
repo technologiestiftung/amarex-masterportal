@@ -111,9 +111,12 @@ $icon_length: 2.25rem;
 $icon_length_small: 1.5rem;
 
 /* FONT STYLES */
-$font_family_default: "Inria Sans", "Arial", sans-serif;
+$font_family_default: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+$font_family_narrow: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; 
+$font_family_accent: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+/* $font_family_default: "Inria Sans", "Arial", sans-serif;
 $font_family_narrow: "Inria Sans", Arial, sans-serif;
-$font_family_accent: "Inria Sans", Arial, sans-serif;
+$font_family_accent: "Inria Sans", Arial, sans-serif; */
 
 /* PADDING */
 $padding: 1.5rem;
