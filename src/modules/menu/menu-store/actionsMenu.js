@@ -1,5 +1,6 @@
 import {nextTick} from "vue";
 import changeCase from "../../../shared/js/utils/changeCase";
+import {trackMatomo} from "../../../plugins/matomo";
 
 export default {
     /**
@@ -45,6 +46,9 @@ export default {
         }
         else if (props?.name !== currentProps?.name) {
             commit("setCurrentComponentProps", {side, props});
+        }
+        if (type !== "getFeatureInfo" && type !== "searchbar" && type !== "layerSelection") {
+            trackMatomo("Menu", "Menuitem clicked", i18next.t(props.name));
         }
     },
 
@@ -119,10 +123,17 @@ export default {
      * Closes and resets Menucontainers.
      * @param {Object} param store context
      * @param {Object} param.commit the commit
+     * @param {Object} param.dispatch the dispatch
+     * @param {Object} param.getters the getters
+     * @param {Object} param.state the state
      * @param {String} side secondary or main Menu
      * @returns {void}
      */
-    closeMenu ({commit, dispatch}, side) {
+    closeMenu ({commit, dispatch, getters, state}, side) {
+        if (getters.currentComponent(side).type === state.currentMouseMapInteractionsComponent && getters.currentComponent(side).type !== state.defaultComponent) {
+            dispatch("changeCurrentMouseMapInteractionsComponent", {type: state.defaultComponent, side});
+        }
+
         commit("switchToRoot", side);
         dispatch("toggleMenu", side);
     },

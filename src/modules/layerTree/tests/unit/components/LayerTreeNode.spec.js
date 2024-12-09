@@ -124,7 +124,9 @@ describe("src/modules/layerTree/components/LayerTreeNode.vue", () => {
                         LayerInformation: {
                             namespaced: true,
                             getters: {
-                                icon: sinon.stub()
+                                icon: sinon.stub(),
+                                pointOfContact: () => "ABC Kontakt",
+                                publisher: () => ""
                             }
                         },
                         LayerTree: {
@@ -147,6 +149,13 @@ describe("src/modules/layerTree/components/LayerTreeNode.vue", () => {
                             getters: {
                                 highlightLayerId: sinon.stub()
                             }
+                        },
+                        Contact: {
+                            namespaced: true,
+                            getters: {
+                                name: () => "Contactname",
+                                type: () => "contact"
+                            }
                         }
                     }
                 },
@@ -158,6 +167,7 @@ describe("src/modules/layerTree/components/LayerTreeNode.vue", () => {
                 }
             },
             getters: {
+                isModuleAvailable: () => () => true,
                 allLayerConfigs: () => layersBG.concat(subjectDataLayers),
                 layerConfig: () => {
                     return {

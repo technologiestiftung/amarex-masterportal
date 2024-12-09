@@ -16,7 +16,6 @@ function getApiUrl(instanceId) {
 
 async function getMultiblock(payload, instanceId) {
   let API_URL = getApiUrl(instanceId);
-  console.log("[getRabimo] API_URL::", API_URL);
 
   try {
     const response = await fetch(`${API_URL}/calculate_multiblock`, {
