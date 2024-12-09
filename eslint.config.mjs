@@ -24,6 +24,8 @@ export default [
       "examples/",
       "/portal/*",
       "!/portal/amarex",
+      "site/",
+      ".venv/",
     ],
   },
   { files: ["**/*.{js,mjs,cjs,vue}"] },
@@ -55,3 +57,4 @@ export default [
   ...pluginVue.configs["flat/essential"],
   eslintConfigPrettier,
 ];
+
