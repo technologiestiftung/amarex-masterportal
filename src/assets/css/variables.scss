@@ -160,7 +160,10 @@ $tool_box_shadow: 0 6px 12px rgba(0, 0, 0, 0.176);
   p {
     text-align: left;
   }
-  &:hover {
+  &.mid p {
+    text-align: center;
+  }
+  &:not(.deactivated):hover {
     background: $amarex_secondary_light;
     svg {
       stroke: $amarex_secondary !important;
@@ -172,10 +175,23 @@ $tool_box_shadow: 0 6px 12px rgba(0, 0, 0, 0.176);
   &.accent {
     background: $amarex_accent;
   }
+  &.grey {
+    background: $amarex_grey_light;
+    * {
+      color: $amarex_secondary !important
+    }
+  }
   &.full {
     width: 100%;
     p {
       width: 100%;
+    }
+  }
+  &.deactivated {
+    background: $amarex_grey_light !important;
+    cursor: not-allowed !important;
+    * {
+      color: $amarex_grey_mid !important
     }
   }
 }
