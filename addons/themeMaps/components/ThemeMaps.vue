@@ -7,8 +7,8 @@ import layerFactory from "../../../src/core/layers/js/layerFactory";
 import LayerTreeAmarex from "../../../src/modules/layerTree/components/LayerTreeAmarex.vue";
 import LayerTree from "../../../src/modules/layerTree/components/LayerTree.vue";
 import Layer from "../../../src/modules/layerTree/components/LayerComponent.vue";
-import SearchBar from "../../../src/modules/searchBar/components/SearchBar.vue";
 import LayerInformation from "../../../src/modules/layerInformation/components/LayerInformation.vue";
+import SearchBar from "../../../src/modules/searchBar/components/SearchBar.vue";
 import {
   CirclePlus,
   CircleMinus,
@@ -46,10 +46,11 @@ export default {
       activeCategory: null,
       selectedMapGroup: null,
       colors,
-      showLayerTree: true,
+      showLayerTree: false,
       checkedSelectAll: false,
       upperThemeMapsContainerHeight: 0,
       selectElement: "card",
+      showInfo: null,
     };
   },
   computed: {
@@ -58,6 +59,7 @@ export default {
       "activeOrFirstCategory",
       "allCategories",
       "portalConfig",
+      "allLayerConfigs",
     ]),
     ...mapGetters("Maps", ["mode"]),
     ...mapGetters("Modules/SearchBar", [
@@ -84,7 +86,7 @@ export default {
     const getCacheShowLayerTree = localStorage.getItem("cacheShowLayerTree");
     this.showLayerTree = getCacheShowLayerTree
       ? JSON.parse(getCacheShowLayerTree)
-      : true;
+      : false;
     const getCacheSelectedMapGroup = localStorage.getItem(
       "cacheSelectedMapGroup",
     );
@@ -120,6 +122,8 @@ export default {
     ]),
     ...mapMutations("Modules/ThemeMaps", ["setHighlightLayerId"]),
     ...mapActions("Modules/LayerSelection", ["changeVisibility"]),
+    ...mapActions("Modules/LayerInformation", ["startLayerInformation"]),
+    ...mapActions("Menu", ["navigateBack", "resetMenu"]),
     initializeComponent() {
       this.activeCategory = this.activeOrFirstCategory?.key;
       this.provideSelectAllProps();
@@ -220,6 +224,17 @@ export default {
     },
     clicked(conf) {
       const isLayerVisible = conf.visibility;
+      const layerTreeLength = this.allLayerConfigs.filter(
+        (element) =>
+          !element.baselayer &&
+          element.parentId !== `folder-1` &&
+          element.visibility,
+      )?.length;
+      if (!layerTreeLength && !isLayerVisible) {
+        this.showLayerTree = true;
+      } else if (layerTreeLength === 1 && isLayerVisible) {
+        this.showLayerTree = false;
+      }
       this.changeVisibility({ layerId: conf.id, value: !isLayerVisible });
     },
     toggleLayerTree() {
@@ -258,7 +273,20 @@ export default {
       return allAreChecked;
     },
     clickedSelectAll() {
-      this.checkedSelectAll = !this.checkedSelectAll;
+      if (!this.checkIfAllAreChecked()) {
+        this.checkedSelectAll = true;
+      } else {
+        this.checkedSelectAll = false;
+      }
+      const layerTreeLengthBefore = this.allLayerConfigs.filter(
+        (element) =>
+          !element.baselayer &&
+          element.parentId !== `folder-1` &&
+          element.visibility,
+      )?.length;
+      if (!layerTreeLengthBefore && this.checkedSelectAll) {
+        this.showLayerTree = true;
+      }
       this.themeMapsConfs.forEach((themeMap) => {
         themeMap.elements.forEach((subThemeMap) => {
           if (subThemeMap.id === this.selectedMapGroup.id) {
@@ -271,12 +299,46 @@ export default {
           }
         });
       });
+      const layerTreeLengthAfter = this.allLayerConfigs.filter(
+        (element) =>
+          !element.baselayer &&
+          element.parentId !== `folder-1` &&
+          element.visibility,
+      )?.length;
+      if (!layerTreeLengthAfter) {
+        this.showLayerTree = false;
+      }
     },
     updateHeight() {
       const el = this.$refs.upperThemeMapsContainer;
       if (el) {
         this.upperThemeMapsContainerHeight = el.offsetHeight;
       }
+    },
+    openInfo(conf) {
+      if (conf?.id === this.showInfo?.id) return (this.showInfo = null);
+      console.log("openInfo in ThemeMaps conf :>> ", conf);
+      let findFolderName;
+      this.themeMapsConfs.forEach((themeMap) => {
+        themeMap.elements.forEach((subThemeMap) => {
+          if (subThemeMap.elements.some((element) => element.id === conf.id)) {
+            findFolderName = subThemeMap;
+          }
+        });
+      });
+      this.showInfo = {
+        ...conf,
+        folderName: findFolderName.name,
+      };
+      this.startLayerInformation(conf);
+      // this.navigateBack("mainMenu");
+      this.resetMenu("mainMenu");
+    },
+    hideInfo() {
+      this.showInfo = null;
+    },
+    scrollToTop() {
+      this.$refs.scrollableDiv.scrollTop = 0;
     },
   },
   beforeUnmount() {
@@ -314,10 +376,14 @@ export default {
           v-else
         />
       </div>
-      <LayerTreeAmarex v-if="showLayerTree" />
+      <LayerTreeAmarex
+        v-if="showLayerTree"
+        :openInfo="openInfo"
+        :showInfo="showInfo"
+      />
     </div>
     <div
-      v-if="selectElement === 'card'"
+      v-if="selectElement === 'card' && !showInfo"
       id="lower-theme-maps-container"
       class="theme-maps-container"
       :style="{
@@ -340,7 +406,7 @@ export default {
             :color="colors.amarex_secondary"
             :size="20"
           />
-          <h5 class="theme-layer-title ms-2">Zurück</h5>
+          <p class="amarex-bold theme-layer-title ms-2">Zurück</p>
         </div>
       </div>
       <div
@@ -367,10 +433,14 @@ export default {
                 :color="colors.amarex_secondary"
                 :size="20"
               />
-              <p class="amarex-bold ms-3">
+              <!-- <p class="amarex-bold ms-3">
                 {{ mainElement.name }} /
                 {{ mainElement.elements?.length }} Karten
-              </p>
+              </p> -->
+              <h5 class="ms-3">
+                {{ mainElement.name }} /
+                {{ mainElement.elements?.length }} Karten
+              </h5>
             </div>
             <!-- <p class="amarex-bold">{{ mainElement.elements?.length }} Karten</p> -->
             <p class="amarex-caption">
@@ -381,7 +451,7 @@ export default {
               class="amarex-btn-primary accent full"
               @click="selectMapGroup(mainElement)"
             >
-              <p class="amarex-small">Zur Layerauswahl</p>
+              <p class="amarex-bold">Zur Layerauswahl</p>
               <ChevronRight
                 :color="colors.primary"
                 :size="20"
@@ -391,18 +461,31 @@ export default {
         </div>
         <div class="mt-4"></div>
       </div>
-      <h5
-        v-if="!!this.selectedMapGroup"
-        class="mt-2"
-      >
-        Enthaltene Kartenlayer bei "{{ this.selectedMapGroup.name }}"
-      </h5>
       <div
         v-if="!!this.selectedMapGroup"
-        class="theme-layer-overflow-container mt-2"
+        class="theme-layer-nav-item-card p-4"
       >
-        <div
-          class="sub-group selectAll"
+        <div class="d-flex align-items-center">
+          <MapIcon
+            :color="colors.amarex_secondary"
+            :size="20"
+          />
+          <!-- <p class="amarex-bold ms-3">
+              {{ mainElement.name }} /
+              {{ mainElement.elements?.length }} Karten
+            </p> -->
+          <h5 class="ms-3">
+            {{ this.selectedMapGroup?.name }} /
+            {{ this.selectedMapGroup?.elements?.length }} Karten
+          </h5>
+        </div>
+        <!-- <p class="amarex-bold">{{ mainElement.elements?.length }} Karten</p> -->
+        <p class="amarex-caption">
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do
+          eiusmod tempor incididunt ut labore et dolore magna aliqua.
+        </p>
+        <button
+          class="amarex-btn-primary accent full"
           @click="clickedSelectAll()"
         >
           <CircleMinus
@@ -412,17 +495,35 @@ export default {
           />
           <CirclePlus
             v-else
-            :color="colors.amarex_accent"
+            :color="colors.amarex_primary"
             :size="20"
           />
-          <p :class="checkIfAllAreChecked() ? 'amarex-bold' : 'amarex-small'">
+          <p
+            :class="checkIfAllAreChecked() ? 'amarex-bold' : 'amarex-small'"
+            :style="{
+              color: checkIfAllAreChecked()
+                ? colors.amarex_secondary
+                : colors.amarex_primary,
+            }"
+          >
             {{
               checkIfAllAreChecked()
                 ? "Alle Layer entfernen"
                 : "Alle Layer hinzufügen"
             }}
           </p>
-        </div>
+        </button>
+      </div>
+      <h5
+        v-if="!!this.selectedMapGroup"
+        class="mt-5 mb-3"
+      >
+        Enthaltene Kartenlayer
+      </h5>
+      <div
+        v-if="!!this.selectedMapGroup"
+        class="theme-layer-overflow-container mt-2"
+      >
         <div
           v-for="(selectedElement, indexElement) in findNestedElementsById()"
           :key="indexElement"
@@ -445,6 +546,39 @@ export default {
             {{ selectedElement.name }}
           </p>
         </div>
+      </div>
+    </div>
+    <div
+      v-if="selectElement === 'card' && !!showInfo"
+      id="lower-theme-maps-container"
+      class="theme-maps-container"
+      :class="{ 'show-info': !!showInfo }"
+      :style="{
+        height: `calc(100vh - 3rem - ${this.upperThemeMapsContainerHeight}px)`,
+      }"
+    >
+      <div class="theme-layer-title-container second-title-container">
+        <div
+          class="mb-3"
+          @click="hideInfo()"
+        >
+          <ChevronLeft
+            :color="colors.amarex_secondary"
+            :size="20"
+          />
+          <p class="amarex-bold theme-layer-title ms-2">
+            Zurück zum Themenkatalog
+          </p>
+        </div>
+      </div>
+      <div
+        class="theme-layer-overflow-container"
+        ref="scrollableDiv"
+      >
+        <LayerInformation
+          :showInfo="showInfo"
+          :scrollToTop="scrollToTop"
+        />
       </div>
     </div>
     <div
@@ -490,7 +624,7 @@ export default {
         />
       </div>
       <h5 v-if="!!this.selectedMapGroup">
-        Enthaltene Kartenlayer bei "{{ this.selectedMapGroup.name }}"
+        Enthaltene Kartenlayer<!--  bei "{{ this.selectedMapGroup.name }}" -->
       </h5>
       <div
         v-if="!!this.selectedMapGroup"
@@ -554,7 +688,10 @@ export default {
   }
   &#lower-theme-maps-container {
     display: grid;
-    grid-template-rows: auto auto 1fr;
+    grid-template-rows: auto auto auto 1fr;
+    &.show-info {
+      grid-template-rows: auto 1fr;
+    }
   }
 }
 .theme-layer-title-container {
@@ -620,20 +757,21 @@ export default {
         justify-content: center;
       }
     }
-    .theme-layer-nav-item-card {
-      // background: $amarex_grey_light;
-      @include boxShadow();
-      user-select: none;
-      display: flex;
-      flex-direction: column;
-      gap: 1.5rem;
-      border: 1px solid $amarex_secondary;
-      @include radius();
-    }
   }
+}
+.theme-layer-nav-item-card {
+  // background: $amarex_grey_light;
+  @include boxShadow();
+  user-select: none;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  border: 1px solid $amarex_secondary;
+  @include radius();
 }
 .theme-layer-overflow-container {
   overflow-y: scroll;
+  scroll-behavior: smooth;
   .sub-group {
     margin: 10px 0;
     padding: 10px;
