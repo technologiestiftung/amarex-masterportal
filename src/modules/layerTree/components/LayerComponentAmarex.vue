@@ -1,5 +1,5 @@
 <script>
-import {mapGetters, mapActions} from "vuex";
+import {mapGetters, mapActions, mapMutations} from "vuex";
 import layerFactory from "../../../core/layers/js/layerFactory";
 import thousandsSeparator from "../../../shared/js/utils/thousandsSeparator";
 import LayerCheckBox from "./LayerCheckBox.vue";
@@ -43,6 +43,13 @@ export default {
         showToggle: {
             type: Boolean,
             required: true
+        },
+        openInfo: {
+            type: Function,
+            required: true
+        },
+        showInfo: {
+            type: Object
         }
     },
     data () {
@@ -83,6 +90,8 @@ export default {
         ...mapActions("Modules/ThemeMaps", [
             "changeVisibility",
         ]),
+        ...mapActions("Modules/LayerInformation", ["startLayerInformation"]),
+        ...mapMutations("Modules/LayerSelection", ["setLayerInfoVisible"]),
         /**
          * Returns true, if layer configuration shall be shown in tree in current map mode.
          * Filteres by attribute 'showInLayerTree' and respects 'isNeverVisibleInTree' is not true.
@@ -132,9 +141,15 @@ export default {
                 this.updateTransparency({layerConf, transparency: 100})
             }
         },
-        openSubMenu() {
-            console.log("openSubMenu");
-        }
+        /* openInfo(conf) {
+            console.log("openInfo", conf);
+
+            return
+            this.startLayerInformation(conf);
+            if (!this.isLayerTree) {
+                // this.setLayerInfoVisible(true);
+            }
+        } */
     }
 };
 </script>
@@ -150,35 +165,26 @@ export default {
             <p class="amarex-bold amarex-layer-tree-label">
                 {{ conf.name }}
             </p>
-            <Eye
-                v-if="conf.transparency === 0"
-                :color="colors.amarex_secondary"
-                :size="24"
-                @click="toggleVisibility"
-                />
-            <EyeOff
-                v-else
-                :color="colors.amarex_secondary"
-                :size="24"
-                @click="toggleVisibility"
-            />
-            <SquareChevronRight
-                :color="colors.amarex_secondary"
-                :size="24"
-                @click="openSubMenu(conf)"
-            />
-            <!-- <div
-                class="d-flex"
-            >
-                <LayerComponentIconSubMenu
-                    v-if="isLayerTree()"
-                    :layer-conf="conf"
-                />
-                <LayerComponentIconInfo
-                    :is-layer-tree="isLayerTree()"
-                    :layer-conf="conf"
-                />
-            </div>  -->
+            <div class="d-flex">
+                <div class="clickable" @click="toggleVisibility">
+                    <Eye
+                        v-if="conf.transparency === 0"
+                        :color="colors.amarex_secondary"
+                        :size="24"
+                        />
+                    <EyeOff
+                        v-else
+                        :color="colors.amarex_secondary"
+                        :size="24"
+                    />
+                </div>
+                <div class="ani clickable" @click="openInfo(conf)" :style="{ transform: showInfo?.id === conf?.id ? 'rotate(90deg)' : 'rotate(0deg)' }">
+                    <SquareChevronRight
+                        :color="colors.amarex_secondary"
+                        :size="24"
+                    />
+                </div>
+            </div>
         </div>
         <div
             v-if="showToggle"
@@ -200,11 +206,11 @@ export default {
         border: 1px solid $amarex_grey_mid;
         margin: 7.5px 0;
         .draggable-container {
-            padding-right: 20px;
+            padding-right: 10px;
             gap: 20px;
             display: grid;
-            // grid-template-columns: 30px 18px minmax(0, 1fr) 24px 24px;
-            grid-template-columns: 30px minmax(0, 1fr) 24px 24px;
+            // grid-template-columns: 30px 18px minmax(0, 1fr) 44px 44px;
+            grid-template-columns: 30px minmax(0, 1fr) 88px;
             align-items: center;
             min-height: 55px;
             overflow: hidden;
@@ -250,5 +256,8 @@ export default {
             background-color: $amarex_secondary_light;
             // opacity: 0.5;
         }
+    }
+    .ani {
+        transition: all 0.3s ease-in-out;
     }
 </style>

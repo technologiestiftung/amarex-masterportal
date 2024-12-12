@@ -126,14 +126,23 @@ export default {
             JSON.stringify(this.showToggle),
         );
         this.setRemoveOnSpill(true);
-    }
+    },
+    props: {
+        openInfo: {
+            type: Function,
+            required: true
+        },
+        showInfo: {
+            type: Object
+        }
+    },
 };
 </script>
 
 <template>
     <!-- eslint-disable vue/attribute-hyphenation -->
     <div class="amarex-themenkarten-toggle-settings-container mb-2" @click="toggleSettings" v-if="sortedLayerConfig.some((element) => !element.baselayer && element.parentId !== `folder-1` && element.visibility)">
-        <p class="amarex-bold">Themekarten Einstellungen {{ showToggle ? "ausblenden" : "anzeigen" }}</p>
+        <p class="amarex-bold">Themenkarten Einstellungen {{ showToggle ? "ausblenden" : "anzeigen" }}</p>
         <ToggleRight
             v-if="showToggle"
             :color="colors.amarex_secondary"
@@ -164,6 +173,8 @@ export default {
                 <LayerAmarex
                     :showToggle="showToggle"
                     :conf="element"
+                    :openInfo="openInfo"
+                    :showInfo="showInfo"
                 />
             </li>
         </template>

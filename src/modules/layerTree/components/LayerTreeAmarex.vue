@@ -44,12 +44,21 @@ export default {
             this.navigateForward({lastFolderName: "root", subjectDataLayerConfs, baselayerConfs});
             this.setLayerSelectionVisible(true);
         },
+    },
+    props: {
+        openInfo: {
+            type: Function,
+            required: true
+        },
+        showInfo: {
+            type: Object
+        }
     }
 };
 </script>
 
 <template lang="html">
-    <LayerTreeNodeAmarex />
+    <LayerTreeNodeAmarex :openInfo="openInfo" :showInfo="showInfo" />
 </template>
 
 <style lang="scss" scoped>

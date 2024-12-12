@@ -56,7 +56,13 @@ export default {
             this.navigateForward({lastFolderName: "root", subjectDataLayerConfs, baselayerConfs});
             this.setLayerSelectionVisible(true);
         }
-    }
+    },
+    props: {
+        openInfo: {
+            type: Function,
+            required: true
+        }
+    },
 };
 </script>
 
@@ -65,7 +71,7 @@ export default {
         id="layer-tree"
         class="layer-tree"
     >
-        <LayerTreeNode />
+        <LayerTreeNode :openInfo="openInfo" />
         <div
             v-if="showLayerAddButton"
             class="mt-4 d-flex justify-content-center sticky"
