@@ -195,27 +195,27 @@ export default {
                 />
                 <p class="amarex-small">Neues Projekt</p>
             </button>
-            <button class="amarex-btn-primary">
+            <!-- <button class="amarex-btn-primary">
                 <FolderOpenIcon
                     :color="colors.amarex_primary"
                     :size="20"
                 />
                 <p class="amarex-small">Projekt öffnen</p>
-            </button>
+            </button> -->
             <button class="amarex-btn-primary">
                 <SaveIcon
                 :color="colors.amarex_primary"
                 :size="20"
                 />
-                <p class="amarex-small">Speichern</p>
+                <p class="amarex-small">Herunterladen</p>
             </button>
-            <button class="amarex-btn-primary">
+            <!-- <button class="amarex-btn-primary">
                 <UploadIcon
                     :color="colors.amarex_primary"
                     :size="20"
                 />
                 <p class="amarex-small">Exportieren</p>
-            </button>
+            </button> -->
         </div>
         <ResizeHandle
             v-if="!isMobile"
