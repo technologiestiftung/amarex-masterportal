@@ -48,7 +48,7 @@ export default {
             commit("setCurrentComponentProps", {side, props});
         }
         if (type !== "getFeatureInfo" && type !== "searchbar" && type !== "layerSelection") {
-            trackMatomo("Menu", "Menuitem clicked", i18next.t(props.name));
+            // trackMatomo("Menu", "Menuitem clicked", i18next.t(props.name));
         }
     },
 

@@ -25,7 +25,7 @@ export default {
             }
         }
 
-        trackMatomo("MapMode", "Mapmode switched", "Mapmode switched to " + targetMode);
+        // trackMatomo("MapMode", "Mapmode switched", "Mapmode switched to " + targetMode);
     },
 
     /**
