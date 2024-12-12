@@ -51,7 +51,7 @@ export default {
   mounted() {
     setTimeout(() => {
       this.toggleMenu("secondaryMenu");
-    }, 100);
+    }, 1000);
   },
   props: {
     startAmarexProject: {
@@ -212,7 +212,7 @@ export default {
   z-index: 1000;
   width: 100vw;
   height: 100vh;
-  padding: 0 12vw 0 calc(480px + 12vw);
+  padding: 0 100px 0 calc(480px + 100px);
   & > div {
     background: $amarex_primary;
     padding: 4rem;
