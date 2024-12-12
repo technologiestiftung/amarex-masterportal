@@ -411,7 +411,9 @@ export default {
     .gfi {
         color: $dark_blue;
         height: 100vh;
-        overflow-x: auto
+        overflow-x: auto;
+        // Masterportal change: padding increased in FeatureInfo Container
+        padding: 2rem !important;
     }
 
     .gfi-pager {

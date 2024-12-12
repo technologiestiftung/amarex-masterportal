@@ -4,6 +4,10 @@ import SensorTheme from "../themes/sensor/components/SensorTheme.vue";
 import getTheme from "../js/getTheme";
 import {mapActions, mapGetters, mapMutations} from "vuex";
 import layerCollection from "../../../core/layers/js/layerCollection";
+import {
+    X as CloseIcon
+} from "lucide-vue-next";
+import colors from "../../../shared/js/utils/amarex-colors.json";
 
 /**
  * Get Feature Info Detached
@@ -18,7 +22,8 @@ export default {
     name: "GetFeatureInfoDetached",
     components: {
         DefaultTheme,
-        SensorTheme
+        SensorTheme,
+        CloseIcon
     },
     props: {
         feature: {
@@ -35,7 +40,8 @@ export default {
     data () {
         return {
             isContentHtml: false,
-            lastFeature: null
+            lastFeature: null,
+            colors
         };
     },
     computed: {
@@ -73,6 +79,8 @@ export default {
         }
     },
     mounted () {
+        console.log('GetFeatureInfoDetached mounted :>> ', this.feature);
+        console.log('GetFeatureInfoDetached mounted :>> ', this.feature.getMappedProperties());
         this.highlightVectorFeature();
         this.setMarker();
     },
@@ -90,7 +98,10 @@ export default {
         }
     },
     methods: {
-        ...mapMutations("Modules/GetFeatureInfo", ["setShowMarker"]),
+        ...mapMutations("Modules/GetFeatureInfo", [
+            "setShowMarker",
+            "setVisible"
+        ]),
         ...mapActions("Maps", [
             "placingPointMarker",
             "removePointMarker",
@@ -98,6 +109,7 @@ export default {
             "removeHighlightFeature",
             "setCenter"
         ]),
+        ...mapActions("Menu", ["navigateBack", "resetMenu"]),
 
         /**
          * Sets the center of the view on the clickCoord and place the MapMarker on it
@@ -207,6 +219,25 @@ export default {
          */
         translate (key, options = null) {
             return this.$t(key, options);
+        },
+
+        mappedPropertiesExists (feature) {
+            return typeof feature === "object" && feature !== null && typeof feature.getMappedProperties === "function";
+        },
+        hasMappedProperties (feature) {
+            return Object.keys(feature.getMappedProperties()).length !== 0;
+        },
+        closeFeatureInfo() {
+            console.log('closeFeatureInfo');
+            this.setVisible(false);
+            const targetElement = document.querySelector('.step-indicator.active');
+            if (targetElement) {
+                setTimeout(() => {
+                    targetElement.click();
+                }, 100);
+            } else {
+                console.warn('Element with classes ".step-indicator.active" not found.');
+            }
         }
     }
 };
@@ -214,17 +245,97 @@ export default {
 
 <template>
     <div>
-        <div class="d-flex align-items-center justify-content-between mt-3 mb-4">
+        <!-- <div class="d-flex align-items-center justify-content-between mt-3 mb-4">
             <slot name="pager-left" />
             <span class="gfi-title mx-3 font-bold">
                 {{ translate(title) }}
             </span>
             <slot name="pager-right" />
+        </div> -->
+        <!-- <component
+        :is="theme"
+        :feature="feature"
+        /> -->
+        <!-- Masterportal change: give the FeatureInfoContainer a new Title Element -->
+        <!-- NEW TITLE -->
+        <div class="close-container w-100 d-flex justify-content-end align-items-center" @click="closeFeatureInfo">
+            <p>Schließen</p>
+            <CloseIcon
+                :color="colors.amarex_secondary"
+                :size="24"
+            />
         </div>
-        <component
-            :is="theme"
-            :feature="feature"
-        />
+        <hr>
+        <h5 class="my-4">LAYER: Topographische Senkenanalyse</h5>
+        <table
+            class="table table-hover"
+        >
+            <tbody v-if="mappedPropertiesExists(feature) && !hasMappedProperties(feature)">
+                <tr>
+                    <td>
+                        {{ $t("common:modules.getFeatureInfo.themes.default.noAttributeAvailable") }}
+                    </td>
+                </tr>
+            </tbody>
+            <tbody v-else-if="mappedPropertiesExists(feature)">
+                <tr>
+                    <td>
+                        ID
+                    </td>
+                    <td>
+                        XXXXXXXX
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Fläche Einzugsgebiet [m²]
+                    </td>
+                    <td>
+                        XXXXXXXX
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Fläche Senke [m²]
+                    </td>
+                    <td>
+                        XXXXXXXX
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Maximale Tiefe der Senke [cm]
+                    </td>
+                    <td>
+                        XXXXXXXX
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Geländehöhe Senkenbasis [m]
+                    </td>
+                    <td>
+                        XXXXXXXX
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Geländehöhe maximaler Füllstand [m]
+                    </td>
+                    <td>
+                        XXXXXXXX
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Füllvolumen [m³]
+                    </td>
+                    <td>
+                        XXXXXXXX
+                    </td>
+                </tr>
+            </tbody>
+        </table>
     </div>
 </template>
 
@@ -234,4 +345,21 @@ export default {
 .gfi-title {
     font-size: 1.5rem;
  }
+ .table {
+    margin-bottom: 0;
+    border: 1px solid $amarex_secondary;
+    td {
+        border: 1px solid $amarex_secondary;
+        padding: 0.5rem;
+    }
+    @include media-breakpoint-up(sm) {
+        max-width: 400px;
+    }
+}
+.close-container {
+    p, svg {
+        cursor: pointer;
+        user-select: none;
+    }
+}
 </style>

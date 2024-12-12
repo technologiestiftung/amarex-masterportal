@@ -1,7 +1,7 @@
 <script>
 import LayerTree from "../../layerTree/components/LayerTree.vue";
 import MenuContainerBodyRootItems from "./MenuContainerBodyRootItems.vue";
-import {mapGetters,mapActions} from "vuex";
+import {mapGetters,mapActions,mapMutations} from "vuex";
 import { CircleCheckBig, LoaderCircle } from 'lucide-vue-next';
 import colors from '../../../shared/js/utils/amarex-colors.json';
 
@@ -21,30 +21,30 @@ export default {
         LoaderCircle
     },
     data() {
-    return {
-        // Masterportal origin Menu Steps
-      steps: [
-        // { label: '1. Projekt Starten', component: 'projectStarter' },
-        { label: 'Hintergrundkarten', component: 'baseMaps' },
-        { label: 'Themenkarten', component: 'themeMaps' },
-        // { label: 'Maßnahmenpotentiale', component: 'actionPotentials' },
-        // { label: 'Wasserhaushalt berechnen', component: 'abimoHandler' },
-        // { label: 'Eigene Ebenen', component: '?' },
-        // { label: '6. Geodaten importieren', component: 'fileImporter' },
-        // { label: '7. Features listen', component: 'featureLister' },
-        // { label: 'X. Features untersuchen', component: 'getFeatureInfo' },
-        // { label: '9. Eigene Notizen', component: 'draw' },
-        // { label: 'X. Eigene Notizen', component: 'draw_old' },
-        // { label: 'X. ESB Tool', component: 'esbTool' },
-        // { label: 'X. Print', component: 'print' },
-        // { label: 'X. Multikriterien Analyse', component: 'multiCriteria' },
-        // { label: 'X. Report zusammenstellen', component: 'reportPrinter' },
-        // { label: 'X. Projekt speichern/exportieren', component: 'projectDownloader' }
-      ],
-      currentStepIndex: 0,
-      colors
-    }
-  },
+        return {
+            // Masterportal origin Menu Steps
+            steps: [
+                // { label: 'Projekt Starten', component: 'projectStarter' },
+                { label: 'Hintergrundkarten', component: 'baseMaps' },
+                { label: 'Themenkarten', component: 'themeMaps' },
+                // { label: 'Maßnahmenpotentiale', component: 'actionPotentials' },
+                // { label: 'Wasserhaushalt berechnen', component: 'abimoHandler' },
+                // { label: 'Eigene Ebenen', component: '?' },
+                // { label: '6. Geodaten importieren', component: 'fileImporter' },
+                // { label: '7. Features listen', component: 'featureLister' },
+                // { label: 'X. Features untersuchen', component: 'getFeatureInfo' },
+                // { label: '9. Eigene Notizen', component: 'draw' },
+                // { label: 'X. Eigene Notizen', component: 'draw_old' },
+                // { label: 'X. ESB Tool', component: 'esbTool' },
+                // { label: 'X. Print', component: 'print' },
+                // { label: 'X. Multikriterien Analyse', component: 'multiCriteria' },
+                // { label: 'X. Report zusammenstellen', component: 'reportPrinter' },
+                // { label: 'X. Projekt speichern/exportieren', component: 'projectDownloader' }
+            ],
+            currentStepIndex: 0,
+            colors
+        }
+    },
     props: {
         /** Defines in which menu the component is being rendered */
         side: {
@@ -77,6 +77,9 @@ export default {
     },
     methods: {
         ...mapActions("Menu", ["toggleMenu"]),
+        ...mapMutations("Modules/GetFeatureInfo", [
+            "setVisible"
+        ]),
         /**
          * Returns the path for a section inside the menu this component is rendered in.
          * @param {Number} sectionIndex Index inside of a section of a menu.
@@ -91,16 +94,28 @@ export default {
          * @returns {void}
          */
         selectStep(step, index, clicked) {
-            if (clicked && !this.secondaryExpanded) {
-                console.log('expand secondary menu');
-                this.toggleMenu('secondaryMenu');
+            const clickEvent = () => {
+                if (clicked && !this.secondaryExpanded) {
+                    console.log('expand secondary menu');
+                    this.toggleMenu('secondaryMenu');
+                }
+                this.currentStepIndex = index;
+                this.$store.dispatch('Menu/changeCurrentComponent', {
+                    type: step.component,
+                    side: 'secondaryMenu',
+                    props: { name: step.label }
+                });
             }
-            this.currentStepIndex = index;
-            this.$store.dispatch('Menu/changeCurrentComponent', {
-            type: step.component,
-            side: 'secondaryMenu',
-            props: { name: step.label }
-            });
+            const targetElement = document.querySelector('.gfi');
+            if (targetElement) {
+                this.setVisible(false)
+                setTimeout(() => {
+                    clickEvent();
+                }, 100);
+            } else {
+                clickEvent();
+            }
+            
         }
     }
 };

@@ -12,6 +12,7 @@ import mapCollection from "./core/maps/js/mapCollection";
 import MenuContainer from "./modules/menu/components/MenuContainer.vue";
 import MenuToggleButton from "./modules/menu/components/MenuToggleButton.vue";
 import MenuToggleButtonAmarex from "./modules/menu/components/MenuToggleButtonAmarex.vue";
+import ProjectStarterAmarex from "../addons/projectStarter/components/ProjectStarterAmarex.vue";
 import addonsPlugin from "./plugins/addons";
 
 export default {
@@ -22,11 +23,13 @@ export default {
         ControlBar,
         MenuContainer,
         MenuToggleButton,
-        MenuToggleButtonAmarex
+        MenuToggleButtonAmarex,
+        ProjectStarterAmarex
     },
     data () {
         return {
-            addonsLoaded: false
+            addonsLoaded: false,
+            showProjectStarter: true
         };
     },
     computed: {
@@ -88,6 +91,7 @@ export default {
             "loadRestServicesJson",
             "loadServicesJson"
         ]),
+        ...mapActions("Menu", [ "toggleMenu"]),
 
         /**
          * Sets global variables.
@@ -180,6 +184,11 @@ export default {
                 clearTimeout(timeout);
                 timeout = setTimeout(() => callback.apply(that, args), wait);
             };
+        },
+        startAmarexProject() {
+            console.log('startAmarexProject');
+            this.toggleMenu("secondaryMenu");
+            this.showProjectStarter = false;
         }
     }
 };
@@ -197,6 +206,7 @@ export default {
         <MenuContainer
             v-if="allConfigsLoaded && addonsLoaded && mainMenu && uiStyle !== 'SIMPLE'"
             side="mainMenu"
+            :showProjectStarter="showProjectStarter"
         />
         <MenuToggleButtonAmarex
             v-if="allConfigsLoaded && addonsLoaded && mainMenu && uiStyle !== 'SIMPLE'"
@@ -230,6 +240,7 @@ export default {
                 id="map"
             />
         </div>
+        <ProjectStarterAmarex v-if="showProjectStarter" :startAmarexProject="startAmarexProject" />
     </div>
 </template>
 

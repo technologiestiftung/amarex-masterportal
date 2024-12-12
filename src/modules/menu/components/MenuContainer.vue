@@ -36,6 +36,10 @@ export default {
             type: String,
             default: "mainMenu",
             validator: value => value === "mainMenu" || value === "secondaryMenu"
+        },
+        showProjectStarter: {
+            type: Boolean,
+            default: true
         }
     },
     computed: {
@@ -54,6 +58,10 @@ export default {
             "titleBySide",
             "currentComponent",
             "defaultComponent"
+        ]),
+        ...mapGetters("Modules/ProjectStarter", [
+            "projectTitle",
+            "projectDescription",
         ]),
         /**
          * @returns {Object} Menu configuration for the given menu.
@@ -179,6 +187,7 @@ export default {
                     v-bind="titleBySide(side)"
                 />
                 <SearchBar
+                    v-if="!showProjectStarter"
                     :click-action="openSearchBar"
                 />
             </div>
@@ -186,6 +195,9 @@ export default {
         <MenuContainerBody
             :side="side"
         />
+        <div v-if="side === 'mainMenu'" class="project-info-container mb-3">
+            <h5>Aktuelles Projekt: {{ projectTitle }}</h5>
+        </div>
         <!-- Masterportal origin: added CTAs  -->
         <div v-if="side === 'mainMenu'" class="project-management-amarex-container">
             <button class="amarex-btn-primary">
