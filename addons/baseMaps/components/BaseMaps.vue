@@ -185,10 +185,10 @@ export default {
     border: 1px solid $amarex_grey_mid;
     border-radius: 4px;
     display: grid;
-    grid-template-columns: 75px minmax(100px, 1fr) 20px;
+    grid-template-columns: 90px minmax(100px, 1fr) 20px;
     align-items: center;
-    gap: 10px;
-    padding: 20px;
+    gap: 20px;
+    padding: 15px;
     cursor: pointer;
     user-select: none;
     margin: 3px;
@@ -200,8 +200,8 @@ export default {
       }
     }
     .preview-image {
-      width: 75px;
-      height: 75px;
+      width: 90px;
+      height: 90px;
       border-radius: 4px;
       background-size: cover;
       background-position: center;
