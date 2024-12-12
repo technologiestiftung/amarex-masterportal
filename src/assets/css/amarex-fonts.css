@@ -43,6 +43,7 @@ h5 {
     font-size: 20px;
     font-weight: 700;
     line-height: 26px;
+    transform: translateY(2px);
 }
 
 h1, h2, h3, h4, h5, p {
