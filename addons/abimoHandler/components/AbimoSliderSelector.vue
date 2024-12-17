@@ -206,12 +206,12 @@ export default {
       </div>
     </div>
 
-    <button
+    <!-- <button
       class="btn btn-primary mt-3"
       @click="updateAbimoData"
     >
       Bestätigen
-    </button>
+    </button> -->
   </div>
 </template>
 
@@ -336,3 +336,4 @@ export default {
   padding-left: 8px;
 }
 </style>
+
