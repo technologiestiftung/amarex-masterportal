@@ -28,7 +28,7 @@ export default {
                 { label: 'Hintergrundkarten', component: 'baseMaps' },
                 { label: 'Themenkarten', component: 'themeMaps' },
                 // { label: 'Maßnahmenpotentiale', component: 'actionPotentials' },
-                // { label: 'Wasserhaushalt berechnen', component: 'abimoHandler' },
+                { label: 'Wasserhaushalt berechnen', component: 'abimoHandler' },
                 // { label: 'Eigene Ebenen', component: '?' },
                 // { label: '6. Geodaten importieren', component: 'fileImporter' },
                 // { label: '7. Features listen', component: 'featureLister' },
@@ -151,7 +151,7 @@ export default {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 15px 10px;
+    padding: 10px;
     background: $amarex_secondary;
     &.active {
         background: $amarex_accent;
@@ -161,7 +161,7 @@ export default {
     }
     h5 {
         color: $amarex_primary;
-        transform: translateY(4px);
+        transform: translateY(2px);
         text-align: left;
         user-select: none;
     }

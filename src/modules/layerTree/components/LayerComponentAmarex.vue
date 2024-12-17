@@ -11,7 +11,8 @@ import {
     EllipsisVertical,
     Eye,
     EyeOff,
-    SquareChevronRight
+    SquareChevronRight,
+    ArrowRight
 } from "lucide-vue-next";
 import colors from "../../../shared/js/utils/amarex-colors.json";
 
@@ -33,7 +34,8 @@ export default {
         EllipsisVertical,
         Eye,
         EyeOff,
-        SquareChevronRight
+        SquareChevronRight,
+        ArrowRight
     },
     props: {
         conf: {
@@ -179,7 +181,7 @@ export default {
                     />
                 </div>
                 <div class="ani clickable" @click="openInfo(conf)" :style="{ transform: showInfo?.id === conf?.id ? 'rotate(90deg)' : 'rotate(0deg)' }">
-                    <SquareChevronRight
+                    <ArrowRight
                         :color="colors.amarex_secondary"
                         :size="24"
                     />

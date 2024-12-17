@@ -150,7 +150,7 @@ export default {
     }
     #mp-body-secondaryMenu {
         .menu-body-component {
-            overflow-y: hidden;
+            overflow-y: scroll;
             max-height: 100vh;
             padding: $padding $padding $padding calc($padding * 1.5);
             display: grid;

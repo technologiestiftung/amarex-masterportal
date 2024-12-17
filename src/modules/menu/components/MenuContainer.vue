@@ -195,38 +195,24 @@ export default {
         <MenuContainerBody
             :side="side"
         />
-        <div v-if="side === 'mainMenu'" class="project-info-container mb-3">
+        <div v-if="side === 'mainMenu' && !!projectTitle" class="project-info-container mb-3">
             <h5>Aktuelles Projekt: {{ projectTitle }}</h5>
         </div>
         <!-- Masterportal origin: added CTAs  -->
         <div v-if="side === 'mainMenu'" class="project-management-amarex-container">
-            <button class="amarex-btn-primary">
+            <!-- <button class="amarex-btn-primary">
                 <FileIcon
                     :color="colors.amarex_primary"
                     :size="20"
                 />
                 <p class="amarex-small">Neues Projekt</p>
-            </button>
-            <!-- <button class="amarex-btn-primary">
-                <FolderOpenIcon
-                    :color="colors.amarex_primary"
-                    :size="20"
-                />
-                <p class="amarex-small">Projekt öffnen</p>
-            </button> -->
+            </button> 
             <button class="amarex-btn-primary">
                 <SaveIcon
                 :color="colors.amarex_primary"
                 :size="20"
                 />
                 <p class="amarex-small">Herunterladen</p>
-            </button>
-            <!-- <button class="amarex-btn-primary">
-                <UploadIcon
-                    :color="colors.amarex_primary"
-                    :size="20"
-                />
-                <p class="amarex-small">Exportieren</p>
             </button> -->
         </div>
         <ResizeHandle

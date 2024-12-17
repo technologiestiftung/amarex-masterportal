@@ -168,7 +168,7 @@ export default {
     }
     .layer-component-sub-menu {
         font-size: $font-size-base;
-        padding: 2rem;
+        padding: 1rem;
         .transparency-label {
             padding-left: 10px;
         }
