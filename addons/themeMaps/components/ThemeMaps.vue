@@ -516,13 +516,13 @@ export default {
       </div>
       <h5
         v-if="!!this.selectedMapGroup"
-        class="mt-5 mb-3"
+        class="mt-4 mb-2"
       >
         Enthaltene Kartenlayer
       </h5>
       <div
         v-if="!!this.selectedMapGroup"
-        class="theme-layer-overflow-container mt-2"
+        class="theme-layer-overflow-container"
       >
         <div
           v-for="(selectedElement, indexElement) in findNestedElementsById()"
@@ -549,7 +549,7 @@ export default {
       </div>
     </div>
     <div
-      v-if="selectElement === 'card' && !!showInfo"
+      v-else-if="selectElement === 'card' && !!showInfo"
       id="lower-theme-maps-container"
       class="theme-maps-container"
       :class="{ 'show-info': !!showInfo }"
@@ -628,7 +628,7 @@ export default {
       </h5>
       <div
         v-if="!!this.selectedMapGroup"
-        class="theme-layer-overflow-container mt-3"
+        class="theme-layer-overflow-container"
       >
         <div
           class="sub-group selectAll"
