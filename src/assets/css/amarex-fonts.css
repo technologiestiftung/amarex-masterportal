@@ -16,33 +16,33 @@
 
 h1 {
     font-family: "Inria Sans";
-    font-size: 60px;
+    font-size: 50px;
     font-weight: 700;
-    line-height: 72px;
+    line-height: 65px;
 }
 h2 {
     font-family: "Inria Sans";
-    font-size: 48px;
+    font-size: 40px;
     font-weight: 700;
-    line-height: 72px;
+    line-height: 60px;
 }
 h3 {
     font-family: "Inria Sans";
-    font-size: 36px;
+    font-size: 30px;
     font-weight: 700;
-    line-height: 54px;
+    line-height: 48px;
 }
 h4 {
     font-family: "Inria Sans";
-    font-size: 28px;
+    font-size: 24px;
     font-weight: 700;
-    line-height: 35px;
+    line-height: 30px;
 }
 h5 {
     font-family: "Inria Sans";
-    font-size: 20px;
+    font-size: 18px;
     font-weight: 700;
-    line-height: 26px;
+    line-height: 20px;
     transform: translateY(2px);
 }
 
@@ -105,31 +105,4 @@ h1, h2, h3, h4, h5, p {
     font-size: 16px;
     font-weight: 300;
     line-height: 20px;
-}
-
-@media (max-width: 767px) {
-    h1 {
-        font-size: 40px;
-        line-height: 56px;
-    }
-    h2 {
-        font-size: 32px;
-        line-height: 48px;
-    }
-    h3 {
-        font-size: 28px;
-        line-height: 42px;
-    }
-    h4 {
-        font-size: 24px;
-        line-height: 38px;
-    }
-    h5 {
-        font-size: 18px;
-        line-height: 25px;
-    }
-    .amarex-large {
-        font-size: 24px;
-        line-height: 31px;
-    }
 }
