@@ -185,7 +185,7 @@ export default {
                 </button>
                 <button
                   class="amarex-btn-primary accent mid full"
-                  :class="{ deactivated: !title || !description }"
+                  :class="{ deactivated: !title }"
                   @click="saveProject"
                 >
                   <p class="amarex-bold">
@@ -212,7 +212,7 @@ export default {
   z-index: 1000;
   width: 100vw;
   height: 100vh;
-  padding: 0 100px 0 calc(480px + 100px);
+  padding: 0 7vw 0 calc(370px + 7vw);
   & > div {
     background: $amarex_primary;
     padding: 4rem;
@@ -222,7 +222,7 @@ export default {
     @include clickable();
   }
   .accordion-button {
-    font-size: 1.5rem !important;
+    font-size: 1rem !important;
     font-weight: 700 !important;
     color: $amarex_secondary !important;
     &:not(.collapsed) {
@@ -238,7 +238,7 @@ export default {
     }
   }
   label {
-    font-size: 1.2rem !important;
+    font-size: 1rem !important;
     font-weight: 700;
     color: $amarex_secondary;
   }
@@ -246,7 +246,7 @@ export default {
     padding: 2.5rem 2rem !important;
   }
   textarea {
-    font-size: 1.2rem !important;
+    font-size: 1rem !important;
   }
 }
 </style>
