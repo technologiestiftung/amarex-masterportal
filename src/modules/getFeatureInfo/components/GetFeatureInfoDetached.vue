@@ -245,19 +245,7 @@ export default {
 
 <template>
     <div>
-        <!-- <div class="d-flex align-items-center justify-content-between mt-3 mb-4">
-            <slot name="pager-left" />
-            <span class="gfi-title mx-3 font-bold">
-                {{ translate(title) }}
-            </span>
-            <slot name="pager-right" />
-        </div> -->
-        <!-- <component
-        :is="theme"
-        :feature="feature"
-        /> -->
         <!-- Masterportal change: give the FeatureInfoContainer a new Title Element -->
-        <!-- NEW TITLE -->
         <div class="close-container w-100 d-flex justify-content-end align-items-center" @click="closeFeatureInfo">
             <p>Schließen</p>
             <CloseIcon

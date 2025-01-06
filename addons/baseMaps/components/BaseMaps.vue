@@ -3,8 +3,6 @@ import { mapGetters, mapMutations, mapActions } from "vuex";
 import { CircleCheckBig, LoaderCircle } from "lucide-vue-next";
 import colors from "../../../src/shared/js/utils/amarex-colors.json";
 
-// CHANGED JS
-
 export default {
   name: "BaseMaps",
   components: {

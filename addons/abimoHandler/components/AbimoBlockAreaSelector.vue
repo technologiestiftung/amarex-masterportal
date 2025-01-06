@@ -136,12 +136,7 @@ export default {
       <p class="area">
         GESAMTFLÄCHE: {{ accumulatedAbimoStats.totalArea.toFixed(0) }} m²
       </p>
-      <!-- <p class="area">
-        Anzahl Flächen: {{ accumulatedAbimoStats.featuresSelected }}
-      </p> -->
-
       <hr />
-
       <div class="area-types-legend d-flex flex-column w-100">
         <div
           v-for="(areaType, index) in areaTypesData"

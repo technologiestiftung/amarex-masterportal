@@ -16,8 +16,6 @@ import {
 } from "lucide-vue-next";
 import colors from "../../../shared/js/utils/amarex-colors.json";
 
-// CHANGED JS
-
 /**
  * Representation of a layer in layerTree.
  * @module modules/layerTree/components/LayerComponentAmarex
@@ -143,15 +141,6 @@ export default {
                 this.updateTransparency({layerConf, transparency: 100})
             }
         },
-        /* openInfo(conf) {
-            console.log("openInfo", conf);
-
-            return
-            this.startLayerInformation(conf);
-            if (!this.isLayerTree) {
-                // this.setLayerInfoVisible(true);
-            }
-        } */
     }
 };
 </script>
@@ -163,7 +152,6 @@ export default {
                 <div ></div>
                 <div ></div>
             </div>
-            <!-- <div class="legend"></div> -->
             <p class="amarex-bold amarex-layer-tree-label">
                 {{ conf.name }}
             </p>
@@ -211,7 +199,6 @@ export default {
             padding-right: 10px;
             gap: 20px;
             display: grid;
-            // grid-template-columns: 30px 18px minmax(0, 1fr) 44px 44px;
             grid-template-columns: 30px minmax(0, 1fr) 88px;
             align-items: center;
             min-height: 55px;
@@ -245,7 +232,6 @@ export default {
             .amarex-layer-tree-label {
                 word-wrap: break-word;
                 overflow-wrap: break-word;
-                // @include transform-p();
                 user-select: none;
                 margin: 15px 0;
             }
@@ -254,9 +240,7 @@ export default {
 
     .chosen {
         .draggable-container {
-            // color: $amarex_secondary;
             background-color: $amarex_secondary_light;
-            // opacity: 0.5;
         }
     }
     .ani {

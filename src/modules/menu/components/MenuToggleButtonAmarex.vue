@@ -39,7 +39,6 @@ export default {
 </script>
 
 <template>
-    <!-- class="btn btn-light bootstrap-icon menu-toggle-button" -->
     <button
         :id="side + '-toggle-button'"
         class="menu-toggle-button"

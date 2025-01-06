@@ -39,7 +39,6 @@ export default {
       ToolIMG,
       QuartierIMG,
       TestCalcImage,
-      amarex: true,
       showLayerTree: false,
       colors,
       upperAbimoHandlerContainerHeight: 0,
@@ -260,10 +259,7 @@ export default {
 </script>
 
 <template lang="html">
-  <div
-    v-if="amarex"
-    id="abimo"
-  >
+  <div id="abimo">
     <div
       id="upper-abimo-handler-container"
       class="abimo-handler-container"
@@ -329,13 +325,6 @@ export default {
         ref="contentContainerRef"
       >
         <br />
-        <!-- <div
-          v-for="abimoStep in abimoSteps"
-          :key="abimoStep.id"
-          :style="{
-            width: `${contentContainerRefWidth}px`,
-          }"
-        > -->
         <div
           :style="{
             width: `${contentContainerRefWidth}px`,
@@ -361,20 +350,6 @@ export default {
             v-if="activeAbimoStep?.id === 2"
             class="step-2-intro"
           >
-            <!-- <p class="amarex-bold mb-1">Maßnahmentool</p>
-            <div class="w-100 d-flex">
-              <img :src="ToolIMG" />
-            </div>
-            <p class="amarex-caption mt-1 mb-2">
-              Mit unserem Maßnahmentool, können sie mehrere Maßnahmen frei
-              innerhalb einer Blockteilfläche verorten.
-            </p>
-            <button
-              class="amarex-btn-primary mid full accent mb-4"
-              @click="handleAbimoStepClick(3)"
-            >
-              <p class="amarex-bold">Zum Massnahmentool</p>
-            </button> -->
             <p class="amarex-bold mb-1">Quartierplanung</p>
             <div class="w-100 d-flex">
               <img :src="QuartierIMG" />
@@ -492,7 +467,7 @@ export default {
             </p>
           </button>
         </div>
-        <!-- <div
+        <div
           class="d-flex w-100 justify-content-end mt-2 abimo-handler-reset"
           :style="{ visibility: activeAbimoStep === 3 ? 'visible' : 'hidden' }"
           @click="resetClick"
@@ -502,70 +477,8 @@ export default {
             :size="15"
             :color="colors.amarex_grey_dark"
           />
-        </div> -->
+        </div>
       </div>
-    </div>
-  </div>
-  <div
-    v-else
-    id="abimo"
-    class="d-flex flex-column gap-3"
-  >
-    <div class="d-flex flex-column h-100 overflow-scroll">
-      <!-- <h1>Berechnete Layer</h1> -->
-    </div>
-    <hr />
-    <div class="flex-grow-1">
-      <AbimoAccordion>
-        <template v-slot:default="slotProps">
-          <!-- Step 1 -->
-          <div v-if="slotProps.step.id === 1">
-            <button class="btn btn-primary">Zum Katalog</button>
-            <button
-              class="btn btn-secondary"
-              @click="updateAccordionSteps(2)"
-            >
-              Überspringen
-            </button>
-          </div>
-
-          <!-- Step 2 -->
-          <div v-if="slotProps.step.id === 2">
-            <AbimoBlockAreaSelector />
-          </div>
-
-          <!-- Step 3 -->
-          <div v-if="slotProps.step.id === 3">
-            <AbimoSelector type="greenRoof" />
-          </div>
-
-          <!-- Step 4 -->
-          <div v-else-if="slotProps.step.id === 4">
-            <AbimoSelector type="unsealed" />
-          </div>
-
-          <!-- Step 5 -->
-          <div v-else-if="slotProps.step.id === 5">
-            <AbimoSelector type="swaleConnected" />
-          </div>
-
-          <!-- Step 6 -->
-          <div v-if="slotProps.step.id === 6">
-            <AbimoCalcButton />
-          </div>
-
-          <!-- Step 7 -->
-          <div v-if="slotProps.step.id === 7">
-            <!-- todo add reset function -->
-            <button
-              class="btn btn-primary"
-              @click="handleAbimoReset"
-            >
-              Neue Berechnen
-            </button>
-          </div>
-        </template>
-      </AbimoAccordion>
     </div>
   </div>
 </template>
@@ -647,10 +560,8 @@ export default {
           height: 10px;
           border-radius: 100%;
           border: 2px solid $amarex_accent;
-          // cursor: pointer;
           &.active {
             background: $amarex_accent;
-            // cursor: default;
           }
         }
       }

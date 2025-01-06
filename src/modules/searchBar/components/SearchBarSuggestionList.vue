@@ -88,24 +88,7 @@ export default {
             id="search-bar-suggestion-list"
             :key="categoryItem"
         >
-        <!-- Masterportal origin search resultss suggestion header -->
-            <!-- <h5
-                id="search-bar-suggestion-heading"
-                class="bold mb-4 mt-4"
-                :title="$t('common:modules.searchBar.searchResultsFrom') + limitedSortedSearchResults.results.categoryProvider[categoryItem] + '-' + $t('common:modules.searchBar.search')"
-            >
-                <img
-                    v-if="limitedSortedSearchResults.results[categoryItem + 'ImgPath']"
-                    alt="search result image"
-                    src="searchResult.imgPath"
-                >
-                <i
-                    v-if="!limitedSortedSearchResults.results[categoryItem + 'ImgPath']"
-                    :class="limitedSortedSearchResults.results[categoryItem + 'Icon']"
-                />
-
-                {{ categoryItem +": " + limitedSortedSearchResults.results[categoryItem+"Count"] + "    " + $t("common:modules.searchBar.searchResults") }}
-            </h5> -->
+            <!-- Masterportal origin search resultss suggestion header -->
             <div
                 v-for="(item, index) in showAllResults===false ? limitedSortedSearchResults.results : limitedSortedSearchResults.currentShowAllList"
                 :key="item.id + '-' + index"
@@ -121,17 +104,6 @@ export default {
                 </p>
             </div>
             <!-- Masterportal origin show all button -->
-            <!-- <div class="showAllSection">
-                <button
-                    type="button"
-                    class="btn btn-light d-flex text-left"
-                    :title="$t('common:modules.searchBar.showAllResults')"
-                    @click="prepareShowAllResults(categoryItem)"
-                >
-                    {{ $t("common:modules.searchBar.showAll") }}
-                    <span class="bi-chevron-right" />
-                </button>
-            </div> -->
         </div>
     </div>
 </template>

@@ -76,7 +76,7 @@ export default {
             />
         </div>
 
-        <!-- Masterportal origin Menu Title -->
+        <!-- Masterportal origin: Menu Title -->
         <!-- <h4
             v-if="currentTitle !== 'none'"
             class="mp-menu-navigation-moduletitle mb-4"

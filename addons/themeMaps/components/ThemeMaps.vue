@@ -20,8 +20,6 @@ import {
 } from "lucide-vue-next";
 import colors from "../../../src/shared/js/utils/amarex-colors.json";
 
-// CHANGED JS
-
 export default {
   name: "ThemeMaps",
   components: {
@@ -433,16 +431,11 @@ export default {
                 :color="colors.amarex_secondary"
                 :size="20"
               />
-              <!-- <p class="amarex-bold ms-3">
-                {{ mainElement.name }} /
-                {{ mainElement.elements?.length }} Karten
-              </p> -->
               <h5 class="ms-3">
                 {{ mainElement.name }} /
                 {{ mainElement.elements?.length }} Karten
               </h5>
             </div>
-            <!-- <p class="amarex-bold">{{ mainElement.elements?.length }} Karten</p> -->
             <p class="amarex-caption">
               Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do
               eiusmod tempor incididunt ut labore et dolore magna aliqua.
@@ -470,16 +463,11 @@ export default {
             :color="colors.amarex_secondary"
             :size="20"
           />
-          <!-- <p class="amarex-bold ms-3">
-              {{ mainElement.name }} /
-              {{ mainElement.elements?.length }} Karten
-            </p> -->
           <h5 class="ms-3">
             {{ this.selectedMapGroup?.name }} /
             {{ this.selectedMapGroup?.elements?.length }} Karten
           </h5>
         </div>
-        <!-- <p class="amarex-bold">{{ mainElement.elements?.length }} Karten</p> -->
         <p class="amarex-caption">
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do
           eiusmod tempor incididunt ut labore et dolore magna aliqua.
@@ -623,9 +611,7 @@ export default {
           class="my-3"
         />
       </div>
-      <h5 v-if="!!this.selectedMapGroup">
-        Enthaltene Kartenlayer<!--  bei "{{ this.selectedMapGroup.name }}" -->
-      </h5>
+      <h5 v-if="!!this.selectedMapGroup">Enthaltene Kartenlayer</h5>
       <div
         v-if="!!this.selectedMapGroup"
         class="theme-layer-overflow-container"
@@ -760,7 +746,6 @@ export default {
   }
 }
 .theme-layer-nav-item-card {
-  // background: $amarex_grey_light;
   @include boxShadow();
   user-select: none;
   display: flex;
@@ -783,7 +768,6 @@ export default {
     gap: 20px;
     &.selectAll {
       background: $amarex_accent_light;
-      // @include boxShadow();
     }
     &:not(.selectAll):hover {
       background: $amarex_grey_light;
