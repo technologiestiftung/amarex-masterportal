@@ -10,8 +10,6 @@ import {
 } from "lucide-vue-next";
 import colors from "../../../shared/js/utils/amarex-colors.json";
 
-// CHANGED JS
-
 /**
  * Representation of a node in layertree containing folders or layers.
  * @module modules/layerTree/components/LayerTreeNodeAmarex
