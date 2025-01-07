@@ -1,7 +1,6 @@
 <script>
 import {mapActions, mapMutations, mapGetters} from "vuex";
 import LayerTreeNodeAmarex from "./LayerTreeNodeAmarex.vue";
-import LayerTreeNode from "./LayerTreeNode.vue";
 import {treeBaselayersKey, treeSubjectsKey} from "../../../shared/js/utils/constants";
 import sortBy from "../../../shared/js/utils/sortBy";
 
@@ -12,8 +11,7 @@ import sortBy from "../../../shared/js/utils/sortBy";
 export default {
     name: "LayerTreeAmarex",
     components: {
-        LayerTreeNodeAmarex,
-        LayerTreeNode
+        LayerTreeNodeAmarex
     },
     computed: {
         ...mapGetters(["allLayerConfigsStructured", "showLayerAddButton", "allLayerConfigs", "layerConfigsByAttributes"]),

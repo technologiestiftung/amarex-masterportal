@@ -5,7 +5,6 @@ import { treeSubjectsKey } from "../../../src/shared/js/utils/constants";
 import sortBy from "../../../src/shared/js/utils/sortBy";
 import layerFactory from "../../../src/core/layers/js/layerFactory";
 import LayerTreeAmarex from "../../../src/modules/layerTree/components/LayerTreeAmarex.vue";
-import LayerTree from "../../../src/modules/layerTree/components/LayerTree.vue";
 import Layer from "../../../src/modules/layerTree/components/LayerComponent.vue";
 import LayerInformation from "../../../src/modules/layerInformation/components/LayerInformation.vue";
 import SearchBar from "../../../src/modules/searchBar/components/SearchBar.vue";
@@ -25,7 +24,6 @@ export default {
   components: {
     LayerSelectionTreeNode,
     LayerTreeAmarex,
-    LayerTree,
     Layer,
     SearchBar,
     LayerInformation,
