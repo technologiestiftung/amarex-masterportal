@@ -1,5 +1,5 @@
 import AbimoHandler from "../abimoHandler/components/AbimoHandler.vue";
-import BaseMaps from "../baseMaps/components/BaseMaps.vue";
+import BaseMaps from "../baseMaps/components/BaseMapsAmarex.vue";
 import FileImporter from "../fileImporter/components/FileImporter.vue";
 import ProjectDownloader from "../projectDownloader/components/ProjectDownloader.vue";
 import ProjectStarter from "../projectStarter/components/ProjectStarter.vue";
@@ -26,3 +26,4 @@ const getters = {
 };
 
 export default getters;
+
