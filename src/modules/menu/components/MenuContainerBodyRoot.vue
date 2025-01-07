@@ -1,9 +1,7 @@
 <script>
 import LayerTree from "../../layerTree/components/LayerTree.vue";
 import MenuContainerBodyRootItems from "./MenuContainerBodyRootItems.vue";
-import {mapGetters,mapActions,mapMutations} from "vuex";
-import { CircleCheckBig, LoaderCircle } from 'lucide-vue-next';
-import colors from '../../../shared/js/utils/amarex-colors.json';
+import {mapGetters} from "vuex";
 
 /**
  * @module modules/MenuContainerBodyRoot
@@ -14,35 +12,28 @@ export default {
     name: "MenuContainerBodyRoot",
     components: {
         LayerTree,
-        MenuContainerBodyRootItems,
-        CircleCheckBig,
-        LoaderCircle
+        MenuContainerBodyRootItems
     },
     data() {
-        return {
-            // Masterportal origin Menu Steps
-            steps: [
-                // { label: 'Projekt Starten', component: 'projectStarter' },
-                { label: 'Hintergrundkarten', component: 'baseMaps' },
-                { label: 'Themenkarten', component: 'themeMaps' },
-                // { label: 'Maßnahmenpotentiale', component: 'actionPotentials' },
-                { label: 'Wasserhaushalt berechnen', component: 'abimoHandler' },
-                // { label: 'Eigene Ebenen', component: '?' },
-                // { label: '6. Geodaten importieren', component: 'fileImporter' },
-                // { label: '7. Features listen', component: 'featureLister' },
-                // { label: 'X. Features untersuchen', component: 'getFeatureInfo' },
-                // { label: '9. Eigene Notizen', component: 'draw' },
-                // { label: 'X. Eigene Notizen', component: 'draw_old' },
-                // { label: 'X. ESB Tool', component: 'esbTool' },
-                // { label: 'X. Print', component: 'print' },
-                // { label: 'X. Multikriterien Analyse', component: 'multiCriteria' },
-                // { label: 'X. Report zusammenstellen', component: 'reportPrinter' },
-                // { label: 'X. Projekt speichern/exportieren', component: 'projectDownloader' }
-            ],
-            currentStepIndex: 0,
-            colors
-        }
-    },
+    return {
+        // Menu Steps
+      steps: [
+        { label: '1. Projekt Starten', component: 'projectStarter' },
+        { label: '2. Hintergrundkarten', component: 'baseMaps' },
+        { label: '3. Themenkarten', component: 'themeMaps' },
+        { label: '4. Maßnahmenpotentiale', component: 'actionPotentials' },
+        { label: '5. Wasserhaushalt berechnen', component: 'abimoHandler' },
+        { label: '6. Eigene Notizen', component: 'draw' },
+        { label: '7. Eigene Notizen', component: 'draw_old' },
+        { label: 'X. ESB Tool', component: 'esbTool' },
+        { label: 'X. Multikriterien Analyse', component: 'multiCriteria' },
+        { label: 'X. Report zusammenstellen', component: 'reportPrinter' },
+        { label: 'XX. Projekt speichern/exportieren', component: 'projectDownloader' }
+      ],
+      currentStepIndex: 0,
+      
+    }
+  },
     props: {
         /** Defines in which menu the component is being rendered */
         side: {
@@ -55,8 +46,7 @@ export default {
         ...mapGetters("Menu", [
             "mainMenu",
             "secondaryMenu",
-            "titleBySide", 
-            "secondaryExpanded"
+            "titleBySide"
         ]),
         /**
          * @returns {Object} Menu configuration for the given menu.
@@ -70,14 +60,10 @@ export default {
     },
     mounted() {
         if (this.side === 'mainMenu' && this.steps.length > 0) {
-            this.selectStep(this.steps[0], 0);
+            this.selectStep(this.steps[2], 2);
         }
     },
     methods: {
-        ...mapActions("Menu", ["toggleMenu"]),
-        ...mapMutations("Modules/GetFeatureInfo", [
-            "setVisible"
-        ]),
         /**
          * Returns the path for a section inside the menu this component is rendered in.
          * @param {Number} sectionIndex Index inside of a section of a menu.
@@ -91,29 +77,13 @@ export default {
          * @param {Object} step The step to select.
          * @returns {void}
          */
-        selectStep(step, index, clicked) {
-            const clickEvent = () => {
-                if (clicked && !this.secondaryExpanded) {
-                    console.log('expand secondary menu');
-                    this.toggleMenu('secondaryMenu');
-                }
-                this.currentStepIndex = index;
-                this.$store.dispatch('Menu/changeCurrentComponent', {
-                    type: step.component,
-                    side: 'secondaryMenu',
-                    props: { name: step.label }
-                });
-            }
-            const targetElement = document.querySelector('.gfi');
-            if (targetElement) {
-                this.setVisible(false)
-                setTimeout(() => {
-                    clickEvent();
-                }, 100);
-            } else {
-                clickEvent();
-            }
-            
+        selectStep(step, index) {
+            this.currentStepIndex = index;
+            this.$store.dispatch('Menu/changeCurrentComponent', {
+            type: step.component,
+            side: 'secondaryMenu',
+            props: { name: step.label }
+            });
         }
     }
 };
@@ -121,48 +91,38 @@ export default {
 
 <template>
     <div
-        :id="'mp-body-root-'+side" v-if="side === 'mainMenu'"
+        :id="'mp-body-root-'+side"
     >       
-        
         <div class="stepper-root mb-5 d-flex flex-column gap-2" v-if="side === 'mainMenu'">
             <button 
                 v-for="(step, index) in steps" 
                 :key="index"
-                class="step-indicator"
-                :class="{ 'active': index === currentStepIndex }"
-                @click="selectStep(step, index, true)"
+                class="btn"
+                :class="{ 'btn-primary': index === currentStepIndex, 'btn-secondary': index !== currentStepIndex }"
+                @click="selectStep(step, index)"
             >
-                <h5>{{ step.label }}</h5>
+                {{ step.label }}
             </button>
         </div>
 
+        <!-- Masterportal origin Layer Tree  -->
+        <LayerTree v-if="side === 'mainMenu'" />
+        
+        <template
+            v-for="(_, key) in menu.sections"
+            :key="key"
+        >
+            <MenuContainerBodyRootItems
+                :id-appendix="side"
+                :side="side"
+                :path="path(key)"
+            />
+            <hr>
+        </template>
     </div>
 </template>
 
 <style lang="scss" scoped>
 @import "~variables";
-
-.step-indicator {
-    border: none;
-    box-shadow: 4px 4px 0px 0px $amarex_secondary_light;
-    border-radius: 4px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px;
-    background: $amarex_secondary;
-    &.active {
-        background: $amarex_accent;
-    }
-    &:not(.active):hover {
-        background: $amarex_grey_mid;
-    }
-    h5 {
-        color: $amarex_primary;
-        transform: translateY(2px);
-        text-align: left;
-        user-select: none;
-    }
-}
 
 </style>

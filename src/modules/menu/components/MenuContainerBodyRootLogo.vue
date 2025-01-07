@@ -56,6 +56,7 @@ export default {
             :src="logo"
             :alt="toolTip || text"
         >
+        <!-- Masterportal origin: add text to logo -->
         <h1 v-if="idAppendix !== 'mainMenu' ">{{ $t(text) }}</h1>
     </a>
 </template>
@@ -71,6 +72,7 @@ export default {
         overflow-wrap: break-word;
 
         img {
+            /* Masterportal origin: give logo a max-width */
             max-width: 300px;
             height: auto;
             display: block;

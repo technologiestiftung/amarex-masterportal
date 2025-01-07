@@ -1,10 +1,8 @@
 <script>
-import MenuContainerBodyRoot from "./MenuContainerBodyRoot.vue";
+import MenuContainerBodyRootAmarex from "./MenuContainerBodyRootAmarex.vue";
 import MenuNavigation from "./MenuNavigation.vue";
 import {mapActions, mapGetters} from "vuex";
 import GetFeatureInfo from "../../getFeatureInfo/components/GetFeatureInfo.vue";
-
-// CHANGED JS
 
 /**
  * @module modules/MenuContainerBody
@@ -16,7 +14,7 @@ export default {
     name: "MenuContainerBody",
     components: {
         GetFeatureInfo,
-        MenuContainerBodyRoot,
+        MenuContainerBodyRootAmarex,
         MenuNavigation
     },
     props: {
@@ -112,7 +110,7 @@ export default {
             class="menu-body-component"
         />
 
-        <MenuContainerBodyRoot
+        <MenuContainerBodyRootAmarex
             v-show="currentComponent === 'root'"
             :side="side"
         />
