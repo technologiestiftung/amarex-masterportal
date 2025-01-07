@@ -1,4 +1,4 @@
-import component from "./components/ThemeMapsAmarex.vue";
+import component from "./components/ThemeMaps.vue";
 import store from "./store/indexThemeMaps";
 
 export default {

@@ -1,4 +1,4 @@
-import component from "./components/BaseMapsAmarex.vue";
+import component from "./components/BaseMaps.vue";
 import store from "./store/indexBaseMaps";
 
 export default {

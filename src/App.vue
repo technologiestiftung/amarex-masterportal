@@ -11,7 +11,7 @@ import isMobile from "./shared/js/utils/isMobile";
 import mapCollection from "./core/maps/js/mapCollection";
 import MenuContainerAmarex from "./modules/menu/components/MenuContainerAmarex.vue";
 import MenuToggleButtonAmarex from "./modules/menu/components/MenuToggleButtonAmarex.vue";
-import ProjectStarterAmarex from "../addons/projectStarter/components/ProjectStarterAmarex.vue";
+import ProjectStarter from "../addons/projectStarter/components/ProjectStarter.vue";
 import addonsPlugin from "./plugins/addons";
 
 export default {
@@ -22,7 +22,7 @@ export default {
         ControlBar,
         MenuContainerAmarex,
         MenuToggleButtonAmarex,
-        ProjectStarterAmarex
+        ProjectStarter
     },
     data () {
         return {
@@ -238,7 +238,7 @@ export default {
                 id="map"
             />
         </div>
-        <ProjectStarterAmarex v-if="showProjectStarter" :startAmarexProject="startAmarexProject" />
+        <ProjectStarter v-if="showProjectStarter" :startAmarexProject="startAmarexProject" />
     </div>
 </template>
 

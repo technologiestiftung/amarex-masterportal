@@ -1,11 +1,18 @@
 <script>
 import { mapGetters, mapMutations, mapActions } from "vuex";
+import { CircleCheckBig, LoaderCircle } from "lucide-vue-next";
+import colors from "../../../src/shared/js/utils/amarex-colors.json";
 
 export default {
   name: "BaseMaps",
+  components: {
+    CircleCheckBig,
+    LoaderCircle,
+  },
   data() {
     return {
-      selectedBaseLayer: null,
+      selectedBaseLayer: 0,
+      colors,
     };
   },
   computed: {
@@ -85,16 +92,9 @@ export default {
     ]),
     ...mapActions("Modules/BaseMaps", ["updateLayerVisibilityAndZIndex"]),
     ...mapActions("Modules/LayerSelection", ["changeVisibility"]),
-
     switchActiveBaselayer(layerId) {
-      //
-      // TODO: fix baselayer display
-      //
-
       const selectableBackroundLayerIds = this.baselayerIds;
-
       this.updateLayerVisibilityAndZIndex(layerId);
-
       selectableBackroundLayerIds.splice(
         selectableBackroundLayerIds.indexOf(layerId),
         1,
@@ -106,6 +106,22 @@ export default {
 
       this.setTopBaselayerId(layerId);
     },
+
+    selectItem(layer, index) {
+      this.switchActiveBaselayer(layer.id);
+      this.selectedBaseLayer = index;
+    },
+  },
+  mounted() {
+    const objectWithHighestZIndex = this.visibleBaselayerConfigs.reduce(
+      (max, current) => {
+        return current.zIndex > max.zIndex ? current : max;
+      },
+      this.visibleBaselayerConfigs[0],
+    );
+    this.selectedBaseLayer = this.allBaselayerConfigs.findIndex(
+      (layer) => layer.id === objectWithHighestZIndex.id,
+    );
   },
 };
 </script>
@@ -116,26 +132,37 @@ export default {
       <div
         v-for="(layer, index) in this.allBaselayerConfigs"
         :key="index"
-        class="base-layer-item d-flex flex-column gap-3"
+        class="base-layer-item"
+        :class="{ selected: selectedBaseLayer === index }"
+        @click="selectItem(layer, index)"
       >
-        <div>
-          <img
-            :src="
-              layer.preview.src
-                ? layer.preview.src
-                : `https://picsum.photos/id/237/200/300`
-            "
-            :alt="layer.name"
-            class="base-layer-thumbnail"
-          />
-          <span class="base-layer-name pl-3">{{ layer.name }}</span>
+        <!-- Masked Image -->
+        <div
+          class="preview-image"
+          :style="{
+            backgroundImage: `url(${layer.preview.src})`,
+          }"
+        ></div>
+        <!-- Text Content -->
+        <div class="text-container">
+          <h5>
+            {{ layer.name }}
+          </h5>
+          <p class="amarex-tooltips">
+            {{ "Das ist der Beschreibungstext der Ebene" }}
+          </p>
         </div>
-        <button
-          class="btn btn-primary"
-          @click="switchActiveBaselayer(layer.id)"
-        >
-          <span class="pl-2">Diese Karte wählen</span>
-        </button>
+
+        <CircleCheckBig
+          v-if="selectedBaseLayer === index"
+          :color="colors.amarex_accent"
+          :size="20"
+        />
+        <LoaderCircle
+          v-else
+          :color="colors.amarex_grey_mid"
+          :size="20"
+        />
       </div>
     </div>
   </div>
@@ -152,35 +179,41 @@ export default {
   display: flex;
   flex-direction: column;
   gap: 4px;
-}
-
-.base-layer-item {
-  padding: 12px;
-  background-color: #ececed;
-  border: solid 1px #e4e4e4;
-}
-
-.base-layer-label {
-  display: flex;
-  align-items: center;
-  cursor: pointer;
-}
-
-.base-layer-thumbnail {
-  width: 45px;
-  height: 40px;
-  margin-right: 10px;
-  overflow: hidden;
-  border-radius: 4px;
-  object-fit: cover;
-  border: 1px solid #e4e4e4;
-}
-
-.base-layer-name {
-  font-size: 14px;
-}
-
-input[type="radio"] {
-  margin-right: 10px;
+  .base-layer-item {
+    border: 1px solid $amarex_grey_mid;
+    border-radius: 4px;
+    display: grid;
+    grid-template-columns: 90px minmax(100px, 1fr) 20px;
+    align-items: center;
+    gap: 20px;
+    padding: 15px;
+    cursor: pointer;
+    user-select: none;
+    margin: 3px;
+    &.selected {
+      border: 4px solid $amarex_accent;
+      margin: 0;
+      .circle {
+        border: 4px solid $amarex_accent;
+      }
+    }
+    .preview-image {
+      width: 90px;
+      height: 90px;
+      border-radius: 4px;
+      background-size: cover;
+      background-position: center;
+    }
+    .text-container {
+      overflow: hidden;
+    }
+    .circle {
+      width: 20px;
+      height: 20px;
+      border: 1px solid $amarex_grey_mid;
+      border-radius: 50%;
+    }
+  }
 }
 </style>
+
