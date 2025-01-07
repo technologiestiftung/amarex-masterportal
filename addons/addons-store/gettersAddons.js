@@ -5,7 +5,7 @@ import ProjectDownloader from "../projectDownloader/components/ProjectDownloader
 import ProjectStarter from "../projectStarter/components/ProjectStarter.vue";
 import ProjectUploader from "../projectUploader/components/ProjectUploader.vue";
 import ReportPrinter from "../reportPrinter/components/ReportPrinter.vue";
-import ThemeMaps from "../themeMaps/components/ThemeMaps.vue";
+import ThemeMaps from "../themeMaps/components/ThemeMapsAmarex.vue";
 
 const getters = {
   componentMap: () => {
