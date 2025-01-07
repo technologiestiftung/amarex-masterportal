@@ -9,8 +9,7 @@ import {initializeMaps} from "./core/maps/js/maps";
 import {initializeUrlParams, startProcessUrlParams} from "./core/urlParams/js/urlParams";
 import isMobile from "./shared/js/utils/isMobile";
 import mapCollection from "./core/maps/js/mapCollection";
-import MenuContainer from "./modules/menu/components/MenuContainer.vue";
-import MenuToggleButton from "./modules/menu/components/MenuToggleButton.vue";
+import MenuContainerAmarex from "./modules/menu/components/MenuContainerAmarex.vue";
 import MenuToggleButtonAmarex from "./modules/menu/components/MenuToggleButtonAmarex.vue";
 import ProjectStarterAmarex from "../addons/projectStarter/components/ProjectStarterAmarex.vue";
 import addonsPlugin from "./plugins/addons";
@@ -21,15 +20,14 @@ export default {
         Alerting,
         BaselayerSwitcher,
         ControlBar,
-        MenuContainer,
-        MenuToggleButton,
+        MenuContainerAmarex,
         MenuToggleButtonAmarex,
         ProjectStarterAmarex
     },
     data () {
         return {
             addonsLoaded: false,
-            showProjectStarter: true
+            showProjectStarter: false
         };
     },
     computed: {
@@ -203,7 +201,7 @@ export default {
         <!-- <div v-if="allConfigsLoaded && addonsLoaded">
             <Alerting />
         </div> -->
-        <MenuContainer
+        <MenuContainerAmarex
             v-if="allConfigsLoaded && addonsLoaded && mainMenu && uiStyle !== 'SIMPLE'"
             side="mainMenu"
             :showProjectStarter="showProjectStarter"
@@ -227,7 +225,7 @@ export default {
             v-if="allConfigsLoaded && addonsLoaded && secondaryMenu && uiStyle !== 'SIMPLE'"
             side="secondaryMenu"
         />
-        <MenuContainer
+        <MenuContainerAmarex
             v-if="allConfigsLoaded && addonsLoaded && secondaryMenu && uiStyle !== 'SIMPLE'"
             side="secondaryMenu"
         />

@@ -41,6 +41,7 @@ export default {
         v-if="previousNavigation"
         :id="'mp-menu-navigation-' + side"
     >
+        <!-- Masterportal origin: change Logo -->
         <div class="logo-container">
             <img
                 id="logo-in-search"
@@ -52,20 +53,19 @@ export default {
         <div
             class="mp-menu-navigation mb-4 mt-4"
         >
-            <a
+            <!-- Masterportal origin: hide back functionality in mainMenu -->
+            <!-- <a
                 :id="'mp-navigation-' + side"
                 class="pt-2 mp-menu-navigation-link"
                 href="#"
                 @click="navigateBack(side)"
                 @keypress="navigateBack(side)"
             >
-                <!-- Masterportal origin Menu Navigation -->
-                <!-- <h6 class="mp-menu-navigation-link-text mb-1"><p class="bi-chevron-left me-2" />{{ previousNavigation }}</h6> -->
-                <!-- <h6 class="mp-menu-navigation-link-text mb-1"><p class="bi-chevron-left me-2" />Zurück</h6> -->
-
-            </a>
+                <h6 class="mp-menu-navigation-link-text mb-1"><p class="bi-chevron-left me-2" />{{ previousNavigation }}</h6>
+                <h6 class="mp-menu-navigation-link-text mb-1"><p class="bi-chevron-left me-2" />Zurück</h6>
+            </a> -->
         
-            <!-- Masterportal origin update reset button logic (add  && side === 'mainMenu' to v-if) -->
+            <!-- Masterportal origin: update reset button logic (add  && side === 'mainMenu' to v-if) -->
             <button
                 v-if="!isMobile && side === 'mainMenu'"
                 :id="'mp-menu-navigation-reset-button-' + side"
@@ -76,19 +76,20 @@ export default {
             />
         </div>
 
-        <!-- Masterportal origin: Menu Title -->
+        <!-- Masterportal origin: remove Menu Title -->
         <!-- <h4
-            v-if="currentTitle !== 'none'"
-            class="mp-menu-navigation-moduletitle mb-4"
+        v-if="currentTitle !== 'none'"
+        class="mp-menu-navigation-moduletitle mb-4"
         >
-            {{ currentTitle }}
-        </h4> -->
-    </div>
+        {{ currentTitle }}
+    </h4> -->
+</div>
 </template>
 
 <style lang="scss" scoped>
 @import "~variables";
 
+// Masterportal origin: adjust CSS for new logo
 .logo-container {
     width: 100%;
     display: flex;

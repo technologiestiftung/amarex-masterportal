@@ -5,8 +5,6 @@ import {mapGetters,mapActions,mapMutations} from "vuex";
 import { CircleCheckBig, LoaderCircle } from 'lucide-vue-next';
 import colors from '../../../shared/js/utils/amarex-colors.json';
 
-// CHANGED JS
-
 /**
  * @module modules/MenuContainerBodyRoot
  * @vue-prop {String} side - The side in which the menu component is being rendered.
