@@ -64,7 +64,6 @@ export default {
 @import "~variables";
 
 .mp-menu-logo {
-        // padding: 0 $padding 0 $padding;
         padding: 0;
         width: 100%;
         display: flex;
@@ -72,11 +71,6 @@ export default {
         overflow-wrap: break-word;
 
         img {
-            /* 
-            flex-grow: 0;
-            flex-shrink: 0; */
-            // width: 100%;
-            // max-height: 30px;
             max-width: 300px;
             height: auto;
             display: block;
