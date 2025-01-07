@@ -12,9 +12,9 @@ import {
   LoaderCircle,
 } from "lucide-vue-next";
 import colors from "../../../src/shared/js/utils/amarex-colors.json";
-import ToolIMG from "../../../portal/amarex/resources/img/BerechnungsTutorial-Tools.jpg";
-import QuartierIMG from "../../../portal/amarex/resources/img/BerechnungsTutorial-Quartier.jpg";
-import TestCalcImage from "../../../portal/amarex/resources/img/TestCalcImage.jpg";
+import ToolIMG from "../../../portal/amarex/resources/img/Placeholder-Tutorial-Tools.jpg";
+import QuartierIMG from "../../../portal/amarex/resources/img/Placeholder-Tutorial-Quarter.jpg";
+import PlaceholderDeltaWRectangle from "../../../portal/amarex/resources/img/Placeholder-DeltaW-Rectangle.jpg";
 import LayerTree from "../../../src/modules/layerTree/components/LayerTree.vue";
 
 /**
@@ -38,7 +38,7 @@ export default {
     return {
       ToolIMG,
       QuartierIMG,
-      TestCalcImage,
+      PlaceholderDeltaWRectangle,
       showLayerTree: false,
       colors,
       upperAbimoHandlerContainerHeight: 0,
@@ -410,7 +410,7 @@ export default {
             v-else-if="activeAbimoStep?.id === 7"
             class="calc-container"
           >
-            <img :src="TestCalcImage" />
+            <img :src="PlaceholderDeltaWRectangle" />
             <p class="amarex-small my-3">
               Sie können nun die verschiedenen Ergebnislayer Ihrer Ansicht
               hinzufügen.
