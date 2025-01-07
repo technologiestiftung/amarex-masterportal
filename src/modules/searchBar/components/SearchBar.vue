@@ -332,6 +332,7 @@ export default {
             v-else-if="showAllResults"
             :limited-sorted-search-results="limitedSortedSearchResults"
         />
+        <!-- Masterportal origin: added empty states for user to input text to be able to search -->
         <p v-if="!searchInputValue.length && currentComponentSide === 'searchbar'" class="amarex-bold p-3">Bitte gib eine Adresse ein, die du suchen willst...</p>
         <p v-else-if="!!searchInputValue.length && searchInputValue.length < minCharacters && currentComponentSide === 'searchbar'" class="amarex-bold p-3">Bitte gib min. {{ minCharacters }} Zeichen ein...</p>
     </div>
@@ -339,7 +340,7 @@ export default {
 
 <style lang="scss" scoped>
 @import "~variables";
-// Masterportal origin: change SearchBar Stylings
+    // Masterportal origin: change SearchBar Stylings
     .input-group {
         border: 1px solid $amarex_grey_mid;
         @include radius();
@@ -368,26 +369,6 @@ export default {
                 line-height: 24px;
             }
         }
-    }
-    .overflowHidden{
-        overflow: hidden;
-        text-overflow: ellipsis;
-    }
-    .spinner-container {
-        display: flex;
-        justify-content: center;
-        width: 100%;
-        .spinner {
-        animation: spin 1s linear infinite;
-        }
-    }
-    @keyframes spin {
-    0% {
-        transform: rotate(0deg);
-    }
-    100% {
-        transform: rotate(360deg);
-    }
     }
 </style>
 
