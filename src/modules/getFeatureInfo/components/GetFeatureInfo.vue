@@ -1,7 +1,7 @@
 <script>
 import {mapGetters, mapMutations, mapActions} from "vuex";
 
-import GetFeatureInfoDetached from "./GetFeatureInfoDetached.vue";
+import GetFeatureInfoDetachedAmarex from "./GetFeatureInfoDetachedAmarex.vue";
 import {mapAttributes} from "@masterportal/masterportalapi/src/lib/attributeMapper";
 import omit from "../../../shared/js/utils/omit";
 import IconButton from "../../../shared/modules/buttons/components/IconButton.vue";
@@ -21,7 +21,7 @@ import IconButton from "../../../shared/modules/buttons/components/IconButton.vu
 export default {
     name: "GetFeatureInfo",
     components: {
-        GetFeatureInfoDetached,
+        GetFeatureInfoDetachedAmarex,
         IconButton
     },
     data () {
@@ -81,7 +81,7 @@ export default {
          * @returns {String} the current view type (Detached or Mobile)
          */
         currentViewType () {
-            return "GetFeatureInfoDetached";
+            return "GetFeatureInfoDetachedAmarex";
         },
 
         /**
@@ -200,7 +200,7 @@ export default {
          */
         mapSize: {
             handler () {
-                if (this.currentViewType === "GetFeatureInfoDetached") {
+                if (this.currentViewType === "GetFeatureInfoDetachedAmarex") {
                     this.componentKey = !this.componentKey;
                 }
             },
@@ -410,9 +410,10 @@ export default {
 
     .gfi {
         color: $dark_blue;
+        // Masterportal origin: display GetFeatureInfo Container in full height
         height: 100vh;
         overflow-x: auto;
-        // Masterportal change: padding increased in FeatureInfo Container
+        // Masterportal origin: padding increased in FeatureInfo Container
         padding: 2rem !important;
     }
 
