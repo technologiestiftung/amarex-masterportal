@@ -149,7 +149,7 @@ export default {
             {{ layer.name }}
           </h5>
           <p class="amarex-tooltips">
-            {{ "Das ist der Beschreibungstext der Ebene" }}
+            {{ layer.preview.abstract }}
           </p>
         </div>
 

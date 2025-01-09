@@ -24,7 +24,15 @@
     ],
     "notSupportedIn3D": false,
     "preview": {
-      "src": "./resources/img/basemap_default_grau.png"
+      "src": "./resources/img/basemap_default_grau.png",
+      "abstract": "WMTS DE basemap.de Web Raster basiert auf Web-Vektor.",
+      "keywords": [
+        "basemap.de",
+        "WMTS",
+        "Deutschland",
+        "Geobasisdaten",
+        "Webkarte"
+      ]
     }
   },
   {
@@ -72,7 +80,9 @@
       }
     ],
     "preview": {
-      "src": "./resources/img/truedop_2024.png"
+      "src": "./resources/img/truedop_2024.png",
+      "abstract": "Farbiges TrueDOP-Mosaik, lagetreu und schattenfrei",
+      "keywords": ["TrueDOP", "Berlin", "Geodaten", "Orthophoto", "GDI-BE"]
     }
   },
   {
@@ -97,7 +107,15 @@
       }
     ],
     "preview": {
-      "src": "./resources/img/basemap_raster_color.png"
+      "src": "./resources/img/basemap_raster_color.png",
+      "abstract": "WMTS DE basemap.de Web Raster basiert auf Web-Vektor",
+      "keywords": [
+        "basemap.de",
+        "WMTS",
+        "Deutschland",
+        "Geobasisdaten",
+        "Webkarte"
+      ]
     }
   },
   {
