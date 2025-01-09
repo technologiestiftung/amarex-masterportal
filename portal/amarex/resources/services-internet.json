@@ -151,7 +151,9 @@
       }
     ],
     "preview": {
-      "src": "./resources/img/webatlas_wms_color.png"
+      "src": "./resources/img/webatlas_wms_color.png",
+      "abstract": "",
+      "keywords": []
     }
   },
   {
@@ -164,7 +166,15 @@
     "layers": "hg_openlayer_farbig",
     "optionsFromCapabilities": true,
     "preview": {
-      "src": "./resources/img/hg_openlayer_wmts.png"
+      "src": "./resources/img/hg_openlayer_wmts.png",
+      "abstract": "Open Layer Hintergrundkarte für Geodaten in Berlin",
+      "keywords": [
+        "Geodaten",
+        "Berlin",
+        "Hintergrundkarte",
+        "Open Data",
+        "Übersichtskarte"
+      ]
     }
   },
   {
@@ -191,7 +201,15 @@
       }
     ],
     "preview": {
-      "src": "./resources/img/backgroundCanvas.jpeg"
+      "src": "./resources/img/backgroundCanvas.jpeg",
+      "abstract": "WMTS DE basemap.de basiert auf einheitlichem Signaturenkatalog",
+      "keywords": [
+        "WMTS",
+        "basemap.de",
+        "Geobasisdaten",
+        "Deutschland",
+        "Webkarte"
+      ]
     }
   },
   {
@@ -212,7 +230,9 @@
     "optionsFromCapabilities": true,
     "layerAttribution": "Für die Nutzung der Daten ist die Datenlizenz Deutschland - Namensnennung - Version 2.0 anzuwenden. Die Lizenz ist über https://www.govdata.de/dl-de/by-2-0 abrufbar. Der Quellenvermerk gemäß (2) der Lizenz lautet \"Geoportal Berlin / [Titel des Datensatzes]\"",
     "preview": {
-      "src": "./resources/img/backgroundCanvas.jpeg"
+      "src": "./resources/img/backgroundCanvas.jpeg",
+      "abstract": "Farbiges TrueDOP-Mosaik, lagetreu und schattenfrei",
+      "keywords": ["TrueDOP", "Berlin", "Geodaten", "WMTS", "Orthophoto"]
     }
   },
   {
@@ -234,7 +254,9 @@
     "optionsFromCapabilities": true,
     "layerAttribution": "Für die Nutzung der Daten ist die Datenlizenz Deutschland - Namensnennung - Version 2.0 anzuwenden. Die Lizenz ist über https://www.govdata.de/dl-de/by-2-0 abrufbar. Der Quellenvermerk gemäß (2) der Lizenz lautet \"Geoportal Berlin / [Titel des Datensatzes]\"",
     "preview": {
-      "src": "./resources/img/backgroundCanvas.jpeg"
+      "src": "./resources/img/backgroundCanvas.jpeg",
+      "abstract": "Landeskartenwerk mit administrativen Grenzen und ALKIS",
+      "keywords": ["WMTS", "Berlin", "Geodaten", "ALKIS", "Landeskartenwerk"]
     }
   },
   {
@@ -256,7 +278,9 @@
     "optionsFromCapabilities": true,
     "layerAttribution": "Für die Nutzung der Daten ist die Datenlizenz Deutschland - Namensnennung - Version 2.0 anzuwenden. Die Lizenz ist über https://www.govdata.de/dl-de/by-2-0 abrufbar. Der Quellenvermerk gemäß (2) der Lizenz lautet \"Geoportal Berlin / [Titel des Datensatzes]\"",
     "preview": {
-      "src": "./resources/img/backgroundCanvas.jpeg"
+      "src": "./resources/img/backgroundCanvas.jpeg",
+      "abstract": "Landeskartenwerk mit administrativen Grenzen (ALKIS)",
+      "keywords": ["WMTS", "Berlin", "Geodaten", "Landeskartenwerk", "ALKIS"]
     }
   },
   {
@@ -283,7 +307,9 @@
     "transparent": true,
     "singleTile": true,
     "preview": {
-      "src": "./resources/img/backgroundCanvas.jpeg"
+      "src": "./resources/img/backgroundCanvas.jpeg",
+      "abstract": "Landeskartenwerk mit administrativen Grenzen (ALKIS)",
+      "keywords": ["WMTS", "Berlin", "Geodaten", "Landeskartenwerk", "ALKIS"]
     }
   },
   {
