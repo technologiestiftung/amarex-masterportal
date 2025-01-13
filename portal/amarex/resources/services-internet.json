@@ -3,7 +3,7 @@
     "id": "basemap_default_grau",
     "name": "Hintergrund Berlin",
     "name_lang": "basemap.de Web Raster Grau",
-    "capabilitiesUrl": "https://sgx.geodatenzentrum.de/wmts_basemapde/1.0.0/WMTSCapabilities.xml/",
+    "capabilitiesUrl": "https://sgx.geodatenzentrum.de/wmts_basemapde/1.0.0/WMTSCapabilities.xml",
     "url": "https://sgx.geodatenzentrum.de/wmts_basemapde/1.0.0/",
     "typ": "WMTS",
     "tileMatrixSet": "DE_EPSG_25833_ADV",
@@ -81,6 +81,7 @@
     ],
     "preview": {
       "src": "./resources/img/truedop_2024.png",
+      "title": "Digitale Orthophotos 2024",
       "abstract": "Farbiges TrueDOP-Mosaik, lagetreu und schattenfrei",
       "keywords": ["TrueDOP", "Berlin", "Geodaten", "Orthophoto", "GDI-BE"]
     }
@@ -89,7 +90,7 @@
     "id": "basemap_raster_color",
     "name": "basemap.de Web Raster Farbe",
     "name_lang": "basemap.de Web Raster Farbe",
-    "capabilitiesUrl": "https://sgx.geodatenzentrum.de/wmts_basemapde/1.0.0/WMTSCapabilities.xml/",
+    "capabilitiesUrl": "https://sgx.geodatenzentrum.de/wmts_basemapde/1.0.0/WMTSCapabilities.xml",
     "url": "https://sgx.geodatenzentrum.de/wmts_basemapde/1.0.0/",
     "typ": "WMTS",
     "tileMatrixSet": "DE_EPSG_25833_ADV",
@@ -108,6 +109,7 @@
     ],
     "preview": {
       "src": "./resources/img/basemap_raster_color.png",
+      "title": "Basemap Farbe",
       "abstract": "WMTS DE basemap.de Web Raster basiert auf Web-Vektor",
       "keywords": [
         "basemap.de",
@@ -168,6 +170,7 @@
     "optionsFromCapabilities": true,
     "preview": {
       "src": "./resources/img/hg_openlayer_wmts.png",
+      "title": "Open Layer Hintergrundkarte",
       "abstract": "Open Layer Hintergrundkarte für Geodaten in Berlin",
       "keywords": [
         "Geodaten",

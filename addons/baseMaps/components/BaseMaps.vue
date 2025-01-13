@@ -1,7 +1,6 @@
 <script>
 import { mapGetters, mapMutations, mapActions } from "vuex";
 import colors from "../../../src/shared/js/utils/amarex-colors.json";
-import * as services from "../../../portal/amarex/resources/services-internet.json";
 
 export default {
   name: "BaseMaps",
@@ -9,17 +8,14 @@ export default {
     return {
       selectedBaseLayer: 0,
       colors,
-      baseMapsWithErrors: [],
     };
   },
   computed: {
     ...mapGetters("Maps", ["mode"]),
     ...mapGetters([
-      "isMobile",
       "visibleBaselayerConfigs",
       "allBaselayerConfigs",
       "layerConfigsByAttributes",
-      "allLayerConfigs",
     ]),
     ...mapGetters("Modules/BaseMaps", [
       "active",
@@ -57,17 +53,7 @@ export default {
       deep: true,
     },
   },
-  async created() {
-    const resCheckBaseMaps = await this.checkBaseMaps();
-    console.log("resCheckBaseMaps :>> ", resCheckBaseMaps);
-    this.baseMapsWithErrors = resCheckBaseMaps;
-    console.log("services[0].id :>> ", services[0].id);
-    if (
-      this.baseMapsWithErrors.length > 0 &&
-      this.baseMapsWithErrors[0].id === services[0].id
-    ) {
-      console.error("FIRST BASEMAP HAS ERROR");
-    }
+  created() {
     const baselayerConfigIds = [];
     const baselayers = this.layerConfigsByAttributes({
       baselayer: true,
@@ -108,46 +94,11 @@ export default {
         selectableBackroundLayerIds.push(this.topBaselayerId);
       }
       this.setBaselayerIds(selectableBackroundLayerIds);
-
       this.setTopBaselayerId(layerId);
     },
     selectItem(layer, index) {
-      if (this.baseMapsWithErrors.some((error) => error.id === layer.id))
-        return;
       this.switchActiveBaselayer(layer.id);
       this.selectedBaseLayer = index;
-    },
-    checkBaseMaps() {
-      return new Promise(async (resolve) => {
-        const errorURLs = [];
-        let getAllServicesURLs = [];
-        services
-          .filter((service) => service.typ === "WMTS")
-          .forEach((service) =>
-            getAllServicesURLs.push({
-              id: service.id,
-              name: service.name,
-              url: service.capabilitiesUrl || service.url,
-            }),
-          );
-        const fetchPromises = getAllServicesURLs.map(async (service) => {
-          if (service.url) {
-            try {
-              const resp = await fetch(service.url);
-              console.log("resp.status :>> ", resp.status);
-              if (!resp.ok && false) {
-                errorURLs.push(service);
-              }
-              return resp;
-            } catch (error) {
-              errorURLs.push(service);
-              return null;
-            }
-          }
-        });
-        await Promise.all(fetchPromises);
-        resolve(errorURLs);
-      });
     },
   },
   mounted() {
@@ -173,7 +124,6 @@ export default {
         class="base-layer-item"
         :class="{
           selected: selectedBaseLayer === index,
-          error: baseMapsWithErrors.some((error) => error.id === layer.id),
         }"
         @click="selectItem(layer, index)"
       >
@@ -183,12 +133,9 @@ export default {
         <!-- Text Content -->
         <div class="text-container">
           <h5>
-            {{ layer.name }}
+            {{ layer?.preview?.title || layer.name }}
           </h5>
-          <p v-if="baseMapsWithErrors.some((error) => error.id === layer.id)">
-            Karte konnte nicht geladen werden.
-          </p>
-          <p v-else-if="!!layer?.preview?.abstract">
+          <p v-if="!!layer?.preview?.abstract">
             {{ layer?.preview?.abstract }}
           </p>
         </div>
@@ -240,13 +187,6 @@ export default {
           height: 14px;
           border-radius: 50%;
         }
-      }
-    }
-    &.error {
-      border-bottom: 2px solid $amarex_red;
-      cursor: not-allowed;
-      .circle {
-        visibility: hidden;
       }
     }
     .preview-image {
