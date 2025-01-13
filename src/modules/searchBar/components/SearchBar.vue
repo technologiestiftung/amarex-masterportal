@@ -299,7 +299,20 @@ export default {
 
 <template lang="html">
     <div id="search-bar">
-        <div class="input-group mb-4">
+        <div class="input-group">
+            <!-- <button
+                id="search-button"
+                :disabled="!searchActivated"
+                :aria-label="$t(placeholder)"
+                type="button"
+                @click="zoomToAndMarkSearchResult(searchInputValue), startSearch(currentComponentSide)"
+            >
+        </button> -->
+        <!-- Masterportal origin: change SearchBar Icon  -->
+            <Search
+                :color="colors.amarex_grey_dark"
+                :size="16"
+            />
             <input
                 id="searchInput"
                 ref="searchInput"
@@ -310,19 +323,6 @@ export default {
                 :aria-label="$t(layerSelectionPlaceHolder)"
                 @keydown.enter="zoomToAndMarkSearchResult(searchInputValue), startSearch(currentComponentSide)"
             >
-            <button
-                id="search-button"
-                :disabled="!searchActivated"
-                :aria-label="$t(placeholder)"
-                type="button"
-                @click="zoomToAndMarkSearchResult(searchInputValue), startSearch(currentComponentSide)"
-            >
-                <!-- Masterportal origin: change SearchBar Icon  -->
-                <Search
-                    :color="colors.amarex_grey_mid"
-                    :size="20"
-                />
-            </button>
         </div>
         <SearchBarSuggestionList
             v-if="!showAllResults"
@@ -343,9 +343,19 @@ export default {
     // Masterportal origin: change SearchBar Stylings
     .input-group {
         border: 1px solid $amarex_grey_mid;
-        @include radius();
+        align-items: center !important;
     }
     #search-bar {
+        margin-top: 24px;
+        max-width: calc(380px - 48px);
+        & > div:not(.suggestions-container) {
+            margin-left: 0 !important;
+            margin-right: 0 !important;
+            margin-top: 0 !important;
+            overflow: hidden;
+            padding: 12px 16px;
+            margin-bottom: 24px;
+        }
         #search-button {
             border-top-right-radius: 5px;
             border-bottom-right-radius: 5px;
@@ -360,13 +370,16 @@ export default {
         }
         input {
             border: none !important;
+            padding: 0 !important;
+            transform: translateY(1px);
+            margin-left: 10px !important;
             &::placeholder {
-                // @include transform-p();
-                color: $amarex_grey_mid !important;
-                // font-family: "Inria Sans";
+                color: $amarex_grey_dark !important;
+                font-family: Arial;
                 font-size: 16px;
+                font-style: normal;
                 font-weight: 400;
-                line-height: 24px;
+                line-height: 16px;
             }
         }
     }
