@@ -1,18 +1,15 @@
 <script>
 import { mapGetters, mapMutations, mapActions } from "vuex";
-import { CircleCheckBig, LoaderCircle } from "lucide-vue-next";
 import colors from "../../../src/shared/js/utils/amarex-colors.json";
+import * as services from "../../../portal/amarex/resources/services-internet.json";
 
 export default {
   name: "BaseMaps",
-  components: {
-    CircleCheckBig,
-    LoaderCircle,
-  },
   data() {
     return {
       selectedBaseLayer: 0,
       colors,
+      baseMapsWithErrors: [],
     };
   },
   computed: {
@@ -60,13 +57,22 @@ export default {
       deep: true,
     },
   },
-  created() {
+  async created() {
+    const resCheckBaseMaps = await this.checkBaseMaps();
+    console.log("resCheckBaseMaps :>> ", resCheckBaseMaps);
+    this.baseMapsWithErrors = resCheckBaseMaps;
+    console.log("services[0].id :>> ", services[0].id);
+    if (
+      this.baseMapsWithErrors.length > 0 &&
+      this.baseMapsWithErrors[0].id === services[0].id
+    ) {
+      console.error("FIRST BASEMAP HAS ERROR");
+    }
     const baselayerConfigIds = [];
     const baselayers = this.layerConfigsByAttributes({
       baselayer: true,
       showInLayerTree: true,
     });
-
     if (baselayers.length > 1) {
       const maxZIndexLayer = baselayers.reduce((max, layer) =>
         layer.zIndex > max.zIndex ? layer : max,
@@ -77,7 +83,6 @@ export default {
     } else {
       this.setTopBaselayerId(baselayers[0].id);
     }
-
     baselayerConfigIds.push(
       ...Object.values(this.allBaselayerConfigs)
         .filter((layer) => layer.id !== this.topBaselayerId)
@@ -106,10 +111,43 @@ export default {
 
       this.setTopBaselayerId(layerId);
     },
-
     selectItem(layer, index) {
+      if (this.baseMapsWithErrors.some((error) => error.id === layer.id))
+        return;
       this.switchActiveBaselayer(layer.id);
       this.selectedBaseLayer = index;
+    },
+    checkBaseMaps() {
+      return new Promise(async (resolve) => {
+        const errorURLs = [];
+        let getAllServicesURLs = [];
+        services
+          .filter((service) => service.typ === "WMTS")
+          .forEach((service) =>
+            getAllServicesURLs.push({
+              id: service.id,
+              name: service.name,
+              url: service.capabilitiesUrl || service.url,
+            }),
+          );
+        const fetchPromises = getAllServicesURLs.map(async (service) => {
+          if (service.url) {
+            try {
+              const resp = await fetch(service.url);
+              console.log("resp.status :>> ", resp.status);
+              if (!resp.ok && false) {
+                errorURLs.push(service);
+              }
+              return resp;
+            } catch (error) {
+              errorURLs.push(service);
+              return null;
+            }
+          }
+        });
+        await Promise.all(fetchPromises);
+        resolve(errorURLs);
+      });
     },
   },
   mounted() {
@@ -133,9 +171,27 @@ export default {
         v-for="(layer, index) in this.allBaselayerConfigs"
         :key="index"
         class="base-layer-item"
-        :class="{ selected: selectedBaseLayer === index }"
+        :class="{
+          selected: selectedBaseLayer === index,
+          error: baseMapsWithErrors.some((error) => error.id === layer.id),
+        }"
         @click="selectItem(layer, index)"
       >
+        <div class="circle">
+          <div v-if="selectedBaseLayer === index"></div>
+        </div>
+        <!-- Text Content -->
+        <div class="text-container">
+          <h5>
+            {{ layer.name }}
+          </h5>
+          <p v-if="baseMapsWithErrors.some((error) => error.id === layer.id)">
+            Karte konnte nicht geladen werden.
+          </p>
+          <p v-else-if="!!layer?.preview?.abstract">
+            {{ layer?.preview?.abstract }}
+          </p>
+        </div>
         <!-- Masked Image -->
         <div
           class="preview-image"
@@ -143,26 +199,6 @@ export default {
             backgroundImage: `url(${layer.preview.src})`,
           }"
         ></div>
-        <!-- Text Content -->
-        <div class="text-container">
-          <h5>
-            {{ layer.name }}
-          </h5>
-          <p class="amarex-tooltips">
-            {{ "Das ist der Beschreibungstext der Ebene" }}
-          </p>
-        </div>
-
-        <CircleCheckBig
-          v-if="selectedBaseLayer === index"
-          :color="colors.amarex_accent"
-          :size="20"
-        />
-        <LoaderCircle
-          v-else
-          :color="colors.amarex_grey_mid"
-          :size="20"
-        />
       </div>
     </div>
   </div>
@@ -178,39 +214,74 @@ export default {
 .base-layer-list {
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: 24px;
   .base-layer-item {
-    border: 1px solid $amarex_grey_mid;
-    border-radius: 4px;
+    border-bottom: 2px solid $amarex_grey_light;
+    border-left: 2px solid $primary;
+    border-right: 2px solid $primary;
+    border-top: 2px solid $primary;
     display: grid;
-    grid-template-columns: 90px minmax(100px, 1fr) 20px;
+    grid-template-columns: 26px minmax(100px, 1fr) 56px;
     align-items: center;
-    gap: 20px;
-    padding: 15px;
+    gap: 16px;
+    padding: 16px 10px 16px 16px;
     cursor: pointer;
     user-select: none;
-    margin: 3px;
     &.selected {
-      border: 4px solid $amarex_accent;
-      margin: 0;
+      border: 2px solid $amarex_secondary;
       .circle {
-        border: 4px solid $amarex_accent;
+        border: 2px solid $amarex_secondary;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        div {
+          background-color: $amarex_secondary;
+          width: 14px;
+          height: 14px;
+          border-radius: 50%;
+        }
+      }
+    }
+    &.error {
+      border-bottom: 2px solid $amarex_red;
+      cursor: not-allowed;
+      .circle {
+        visibility: hidden;
       }
     }
     .preview-image {
-      width: 90px;
-      height: 90px;
-      border-radius: 4px;
+      width: 56px;
+      height: 80px;
       background-size: cover;
       background-position: center;
     }
     .text-container {
       overflow: hidden;
+      h5 {
+        color: $amarex_secondary;
+        font-family: Arial;
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 700;
+        line-height: 16px;
+        margin-bottom: 4px;
+      }
+      p {
+        overflow: hidden;
+        color: $amarex_grey_mid;
+        // text-overflow: ellipsis;
+        // white-space: nowrap;
+        font-family: Arial;
+        font-size: 14px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 16px;
+      }
     }
     .circle {
-      width: 20px;
-      height: 20px;
-      border: 1px solid $amarex_grey_mid;
+      width: 26px;
+      height: 26px;
+      border: 2px solid $amarex_grey_mid;
       border-radius: 50%;
     }
   }

@@ -13,6 +13,7 @@ import MenuContainerAmarex from "./modules/menu/components/MenuContainerAmarex.v
 import MenuToggleButtonAmarex from "./modules/menu/components/MenuToggleButtonAmarex.vue";
 import ProjectStarter from "../addons/projectStarter/components/ProjectStarter.vue";
 import addonsPlugin from "./plugins/addons";
+import * as services from '../portal/amarex/resources/services-internet.json';
 
 export default {
     name: "App",
@@ -52,6 +53,8 @@ export default {
     watch: {
         async allConfigsLoaded (value) {
             if (value) {
+                // const resCheckBaseMaps = await this.checkBaseMaps();
+                // console.log("resCheckBaseMaps", resCheckBaseMaps);
                 await addonsPlugin.loadAddons(Config.addons);
                 this.addonsLoaded = true;
                 this.extendLayers();
@@ -187,7 +190,30 @@ export default {
             console.log('startAmarexProject');
             this.toggleMenu("secondaryMenu");
             this.showProjectStarter = false;
-        }
+        },
+        checkBaseMaps() {
+            return new Promise(async (resolve) => {
+                const errorURLs = []
+                let getAllServicesURLs = services.filter(service => service.typ === 'WMTS').map(service => service.capabilitiesUrl || service.url);
+                getAllServicesURLs = Array.from(new Set(getAllServicesURLs));
+                const fetchPromises = getAllServicesURLs.map(async (url) => {
+                    if (url) {
+                        try {
+                            const resp = await fetch(url);
+                            if (!resp.ok) {
+                                errorURLs.push(url);
+                            }
+                            return resp;
+                        } catch (error) {
+                            errorURLs.push(url);
+                            return null;
+                        }
+                    }
+                });
+                await Promise.all(fetchPromises);
+                resolve(errorURLs);
+            });
+        },
     }
 };
 </script>

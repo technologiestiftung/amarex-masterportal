@@ -3,7 +3,7 @@
     "id": "basemap_default_grau",
     "name": "Hintergrund Berlin",
     "name_lang": "basemap.de Web Raster Grau",
-    "capabilitiesUrl": "https://sgx.geodatenzentrum.de/wmts_basemapde/1.0.0/WMTSCapabilities.xml",
+    "capabilitiesUrl": "https://sgx.geodatenzentrum.de/wmts_basemapde/1.0.0/WMTSCapabilities.xml/",
     "url": "https://sgx.geodatenzentrum.de/wmts_basemapde/1.0.0/",
     "typ": "WMTS",
     "tileMatrixSet": "DE_EPSG_25833_ADV",
@@ -24,7 +24,8 @@
     ],
     "notSupportedIn3D": false,
     "preview": {
-      "src": "./resources/img/basemap_default_grau.png"
+      "src": "./resources/img/basemap_default_grau.png",
+      "abstract": "Der WMTS DE basemap.de Web Raster basiert auf der Web Vektor-Karte und nutzt den AdV-Signaturenkatalog."
     }
   },
   {
@@ -79,7 +80,7 @@
     "id": "basemap_raster_color",
     "name": "basemap.de Web Raster Farbe",
     "name_lang": "basemap.de Web Raster Farbe",
-    "capabilitiesUrl": "https://sgx.geodatenzentrum.de/wmts_basemapde/1.0.0/WMTSCapabilities.xml",
+    "capabilitiesUrl": "https://sgx.geodatenzentrum.de/wmts_basemapde/1.0.0/WMTSCapabilities.xml/",
     "url": "https://sgx.geodatenzentrum.de/wmts_basemapde/1.0.0/",
     "typ": "WMTS",
     "tileMatrixSet": "DE_EPSG_25833_ADV",
@@ -133,7 +134,8 @@
       }
     ],
     "preview": {
-      "src": "./resources/img/webatlas_wms_color.png"
+      "src": "./resources/img/webatlas_wms_color.png",
+      "abstract": "TBD..."
     }
   },
   {
@@ -173,7 +175,8 @@
       }
     ],
     "preview": {
-      "src": "./resources/img/backgroundCanvas.jpeg"
+      "src": "./resources/img/backgroundCanvas.jpeg",
+      "abstract": "Der WMTS DE basemap.de Web Raster basiert auf der Web Vektor-Karte und nutzt den AdV-Signaturenkatalog."
     }
   },
   {
