@@ -760,7 +760,7 @@ export default {
         }
         .link-text {
             i {
-                font-size: 14px;
+                font-size: 16px;
             }
         }
     }

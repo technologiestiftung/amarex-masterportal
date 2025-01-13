@@ -124,7 +124,7 @@ export default {
         :id="'mp-body-root-'+side" v-if="side === 'mainMenu'"
     >       
         
-        <div class="stepper-root mb-5 d-flex flex-column gap-2" v-if="side === 'mainMenu'">
+        <div class="stepper-root d-flex flex-column" v-if="side === 'mainMenu'">
             <button 
                 v-for="(step, index) in steps" 
                 :key="index"
@@ -132,7 +132,7 @@ export default {
                 :class="{ 'active': index === currentStepIndex }"
                 @click="selectStep(step, index, true)"
             >
-                <h5>{{ step.label }}</h5>
+                <p>{{ step.label }}</p>
             </button>
         </div>
 
@@ -142,26 +142,31 @@ export default {
 <style lang="scss" scoped>
 @import "~variables";
 
-.step-indicator {
-    border: none;
-    box-shadow: 4px 4px 0px 0px $amarex_secondary_light;
-    border-radius: 4px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px;
-    background: $amarex_secondary;
-    &.active {
-        background: $amarex_accent;
-    }
-    &:not(.active):hover {
-        background: $amarex_grey_mid;
-    }
-    h5 {
-        color: $amarex_primary;
-        transform: translateY(2px);
-        text-align: left;
-        user-select: none;
+.stepper-root {
+    gap: 8px;
+    .step-indicator {
+        border: none;
+        background: none;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 8px 16px;
+        border-left: 1px solid white;
+        &.active {
+            background: $amarex_secondary_mid;
+            border-left: 1px solid $amarex_secondary;
+        }
+        p {
+            color: $amarex_secondary;
+            text-align: left;
+            user-select: none;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            font-size: 18px;
+            font-style: normal;
+            font-weight: 400;
+            line-height: 24px;
+        }
     }
 }
 

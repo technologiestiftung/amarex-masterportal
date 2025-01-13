@@ -131,26 +131,24 @@ export default {
             padding: 0;
             display: none;
         }
-        div:first-child {
-            padding-top: $padding;
-        }
-
         .menu-body-component {
             /* Hide scrollbar for Firefox */
             -ms-overflow-style: none;
             scrollbar-width: none;
         }
-
         /* Hide scrollbar for Chrome, Edge, Safari and Opera */
         .menu-body-component::-webkit-scrollbar {
             display: none;
         }
     }
+    #mp-body-root-mainMenu {
+        padding-top: 32px;
+    }
     #mp-body-secondaryMenu {
         .menu-body-component {
             overflow-y: scroll;
             max-height: 100vh;
-            padding: $padding $padding $padding calc($padding * 1.5);
+            padding: 16px;
             display: grid;
             grid-template-rows: auto 1fr;
             height: 100%;

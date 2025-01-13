@@ -162,9 +162,6 @@ export default {
     .remove-layer-container {
         @include clickable();
         width: fit-content;
-        span {
-            // @include transform-p();
-        }
     }
     .layer-component-sub-menu {
         font-size: $font-size-base;

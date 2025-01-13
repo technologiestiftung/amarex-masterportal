@@ -191,7 +191,6 @@ export default {
     @import "~mixins";
 
     .draggable-wrapper {
-        @include radius();
         background: $amarex_primary;
         border: 1px solid $amarex_grey_mid;
         margin: 7.5px 0;

@@ -68,13 +68,12 @@ export default {
         padding: 0;
         width: 100%;
         display: flex;
-        justify-content: space-around;
         overflow-wrap: break-word;
-
+        margin-bottom: 26px;
         img {
             /* Masterportal origin: give logo a max-width */
-            max-width: 300px;
-            height: auto;
+            width: auto;
+            height: 32px;
             display: block;
         }
 
@@ -86,14 +85,5 @@ export default {
         }
     }
 
-@include media-breakpoint-up(sm)  {
-    .mp-menu-logo {
-
-        img {
-            max-height: 40px;
-        }
-
-    }
-}
 
 </style>

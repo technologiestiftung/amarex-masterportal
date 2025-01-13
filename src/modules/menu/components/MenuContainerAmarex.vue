@@ -40,6 +40,10 @@ export default {
         showProjectStarter: {
             type: Boolean,
             default: true
+        },
+        menuWidth: {
+            type: Number,
+            default: 380
         }
     },
     computed: {
@@ -106,7 +110,7 @@ export default {
                 this.setCurrentMenuWidth({side: this.side, width: "100%"});
             }
             else {
-                this.setCurrentMenuWidth({side: this.side, width: "25%"});
+                this.setCurrentMenuWidth({side: this.side, width: `${this.menuWidth}px`});
             }
         }
     },
@@ -156,7 +160,7 @@ export default {
             }
         ]"
         tabindex="-1"
-        :style="{ width: expanded ? currentMenuWidth(side) : '0', padding: expanded ? '' : '0px', minWidth: expanded ? 'calc(300px + 5rem)' : '0px' }"
+        :style="{ width: expanded ? this.menuWidth : '0', padding: expanded ? '' : '0px', minWidth: expanded ? `${this.menuWidth}px` : '0px' }"
         :aria-label="titleBySide(side) ? titleBySide(side).text : null"
     >
         <div
@@ -183,7 +187,6 @@ export default {
                 "
             >
                 <MenuContainerBodyRootLogo
-                    class="mb-5 mt-4"
                     v-bind="titleBySide(side)"
                 />
                 <SearchBar
@@ -201,21 +204,21 @@ export default {
         <div v-if="side === 'mainMenu'" class="project-management-amarex-container">
             <button class="amarex-btn-primary">
                 <FileIcon
-                    :color="colors.amarex_primary"
-                    :size="20"
+                    :color="colors.secondary"
+                    :size="16"
                 />
-                <p class="amarex-small">Neues Projekt</p>
+                <p>Neues Projekt</p>
             </button> 
             <button class="amarex-btn-primary">
                 <SaveIcon
-                :color="colors.amarex_primary"
-                :size="20"
+                :color="colors.secondary"
+                :size="16"
                 />
-                <p class="amarex-small">Herunterladen</p>
+                <p>Herunterladen</p>
             </button>
         </div>
         <ResizeHandle
-            v-if="!isMobile"
+            v-if="!isMobile && side !== 'mainMenu'"
             :id="'mp-resize-handle-' + side"
             class="mp-menu-container-handle"
             :handle-position="handlePosition"
@@ -243,7 +246,7 @@ export default {
 
 .mp-mainMenu {
     left: 0px;
-    padding: $padding calc($padding * 1.5) $padding $padding;
+    padding: 38px 24px 24px 24px;
 }
 
 .mp-secondaryMenu {
@@ -271,9 +274,8 @@ export default {
         flex-direction: column;
         align-items: stretch;
         font-size: $font-size-base;
-        // padding: $padding $padding 0 $padding;
         width:100%;
-        border-bottom: 1px solid $amarex_grey_mid;
+        border-bottom: 1px solid $amarex_grey_light;
         &-collapsed {
             padding: 0;
             display: none;
@@ -339,8 +341,10 @@ export default {
 
 .project-management-amarex-container {
     display: grid;
-    gap: 1rem;
-    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    grid-template-columns: 1fr;
+    padding-top: 24px;
+    border-top: 1px solid $amarex_grey_light;
 }
 
 </style>

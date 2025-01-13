@@ -71,15 +71,14 @@ export default {
     .menu-toggle-button {
         background: $amarex_primary;
         right: 20px;
-        @include boxShadow();
-        @include radius();
         flex-grow: 0;
         flex-shrink: 0;
         z-index: 4;
         top: calc(50vh - 1.5rem);
-        height: 3rem;
-        width: 3rem;
+        height: 40px;
+        width: 40px;
         position: relative;
+        border: 1px solid $amarex_secondary;
     }
 
     .toggle-button-mainMenu {

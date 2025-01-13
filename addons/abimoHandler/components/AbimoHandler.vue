@@ -507,9 +507,8 @@ export default {
         flex: 1;
         background: $amarex_grey_light;
         height: 10px;
-        @include boxShadow();
         & > div {
-          background: $amarex_accent;
+          background: $amarex_secondary_mid;
           height: 100%;
           transition: all 1s ease-in-out;
         }
@@ -559,9 +558,9 @@ export default {
           width: 10px;
           height: 10px;
           border-radius: 100%;
-          border: 2px solid $amarex_accent;
+          border: 2px solid $amarex_secondary_mid;
           &.active {
-            background: $amarex_accent;
+            background: $amarex_secondary_mid;
           }
         }
       }
@@ -589,7 +588,6 @@ export default {
     padding-top: 20px;
     h5 {
       user-select: none;
-      @include transform-p();
     }
     & > div {
       @include clickable();

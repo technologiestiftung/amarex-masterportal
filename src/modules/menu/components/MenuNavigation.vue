@@ -1,5 +1,9 @@
 <script>
 import {mapActions, mapGetters} from "vuex";
+import {
+  ChevronLeft,
+} from "lucide-vue-next";
+import colors from "../../../shared/js/utils/amarex-colors.json";   
 
 /**
  * Menu Navigation
@@ -10,6 +14,14 @@ import {mapActions, mapGetters} from "vuex";
  */
 export default {
     name: "MenuNavigation",
+    components: {
+        ChevronLeft,
+    },
+    data() {
+        return {
+            colors,
+        };
+    },
     props: {
         /** Defines in which menu the component is being rendered */
         side: {
@@ -51,7 +63,7 @@ export default {
         </div>
         <!-- Masterportal origin Menu Navigation -->
         <div
-            class="mp-menu-navigation mb-4 mt-4"
+            class="mp-menu-navigation mt-4"
         >
             <!-- Masterportal origin: hide back functionality in mainMenu -->
             <!-- <a
@@ -70,10 +82,14 @@ export default {
                 v-if="!isMobile && side === 'mainMenu'"
                 :id="'mp-menu-navigation-reset-button-' + side"
                 type="button"
-                class="btn-close mp-menu-navigation-reset-button"
-                :aria-label="$t('common:modules.menu.ariaLabelClose')"
+                class="mp-menu-navigation-reset-button"
                 @click="resetMenu(side)"
+            >
+            <ChevronLeft
+                :color="colors.amarex_grey_dark"
+                :size="24"
             />
+            </button>
         </div>
 
         <!-- Masterportal origin: remove Menu Title -->
@@ -93,12 +109,18 @@ export default {
 .logo-container {
     width: 100%;
     display: flex;
-    justify-content: center;
     #logo-in-search {
-        max-width: 300px;
-        height: auto;
+        width: auto;
+        height: 32px;
         display: block;
     }
+}
+.mp-menu-navigation-reset-button {
+    border: none;
+    background: none;
+    margin: 0;
+    padding: 0;
+    outline: 0;
 }
 .mp-menu-navigation{
     display: flex;

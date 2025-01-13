@@ -10,7 +10,7 @@ import colors from "../../../src/shared/js/utils/amarex-colors.json";
  * @module modules/ProjectStarter
  */
 export default {
-  name: "ProjectStarterAmarex",
+  name: "ProjectStarter",
   components: {
     SearchBar,
     ProjectUploader,
@@ -216,7 +216,6 @@ export default {
   & > div {
     background: $amarex_primary;
     padding: 4rem;
-    @include radius();
     height: fit-content;
     width: 100%;
     @include clickable();
@@ -231,7 +230,6 @@ export default {
   }
   .accordion-item {
     padding: 1px !important;
-    @include radius();
     border: 1px solid $amarex_secondary;
     &:first-of-type {
       margin-bottom: 2rem;
@@ -239,7 +237,7 @@ export default {
   }
   label {
     font-size: 1rem !important;
-    font-weight: 700;
+    font-weight: 400;
     color: $amarex_secondary;
   }
   .accordion-body {

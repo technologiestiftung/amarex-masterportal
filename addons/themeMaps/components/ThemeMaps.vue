@@ -481,7 +481,7 @@ export default {
           />
           <CirclePlus
             v-else
-            :color="colors.amarex_primary"
+            :color="colors.amarex_secondary"
             :size="20"
           />
           <p
@@ -489,7 +489,7 @@ export default {
             :style="{
               color: checkIfAllAreChecked()
                 ? colors.amarex_secondary
-                : colors.amarex_primary,
+                : colors.amarex_secondary,
             }"
           >
             {{
@@ -523,7 +523,7 @@ export default {
           />
           <CirclePlus
             v-else
-            :color="colors.amarex_accent"
+            :color="colors.amarex_secondary"
             :size="20"
           />
           <p
@@ -625,7 +625,7 @@ export default {
           />
           <CirclePlus
             v-else
-            :color="colors.amarex_accent"
+            :color="colors.amarex_secondary"
             :size="20"
           />
           <p :class="checkIfAllAreChecked() ? 'amarex-bold' : 'amarex-small'">
@@ -649,7 +649,7 @@ export default {
           />
           <CirclePlus
             v-else
-            :color="colors.amarex_accent"
+            :color="colors.amarex_secondary"
             :size="20"
           />
           <p
@@ -690,7 +690,6 @@ export default {
     padding-top: 20px;
     h5 {
       user-select: none;
-      @include transform-p();
     }
     & > div {
       @include clickable();
@@ -708,8 +707,6 @@ export default {
     gap: 20px;
     flex-wrap: wrap;
     .theme-layer-nav-item {
-      @include radius();
-      @include boxShadow();
       @include clickable();
       display: flex;
       align-items: center;
@@ -744,13 +741,11 @@ export default {
   }
 }
 .theme-layer-nav-item-card {
-  @include boxShadow();
   user-select: none;
   display: flex;
   flex-direction: column;
   gap: 1rem;
   border: 1px solid $amarex_secondary;
-  @include radius();
 }
 .theme-layer-overflow-container {
   overflow-y: scroll;
@@ -765,7 +760,7 @@ export default {
     align-items: center;
     gap: 20px;
     &.selectAll {
-      background: $amarex_accent_light;
+      background: $amarex_secondary_light;
     }
     &:not(.selectAll):hover {
       background: $amarex_grey_light;
