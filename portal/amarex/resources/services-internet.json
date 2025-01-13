@@ -3,7 +3,7 @@
     "id": "basemap_default_grau",
     "name": "Hintergrund Berlin",
     "name_lang": "basemap.de Web Raster Grau",
-    "capabilitiesUrl": "https://sgx.geodatenzentrum.de/wmts_basemapde/1.0.0/WMTSCapabilities.xml",
+    "capabilitiesUrl": "https://sgx.geodatenzentrum.de/wmts_basemapde/1.0.0/WMTSCapabilities.xml/QUATSCH",
     "url": "https://sgx.geodatenzentrum.de/wmts_basemapde/1.0.0/",
     "typ": "WMTS",
     "tileMatrixSet": "DE_EPSG_25833_ADV",
@@ -72,7 +72,7 @@
     ],
     "origin": [368000.0, 5838000.0],
     "requestEncoding": "REST",
-    "capabilitiesUrl": "https://gdi.berlin.de/services/wmts/truedop_2024?SERVICE=wmts&REQUEST=getcapabilities&VERSION=1.0.0",
+    "capabilitiesUrl": "https://gdi.berlin-quatsch.de/services/wmts/truedop_2024?SERVICE=wmts&REQUEST=getcapabilities&VERSION=1.0.0",
     "datasets": [
       {
         "md_id": "3361473d-79cb-3a8b-8a3f-2b4f5751b58d",

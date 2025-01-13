@@ -1,6 +1,9 @@
 <script>
 import { mapGetters, mapMutations, mapActions } from "vuex";
 import colors from "../../../src/shared/js/utils/amarex-colors.json";
+import * as services from "../../../portal/amarex/resources/services-internet.json";
+import { wmts } from "@masterportal/masterportalapi";
+import { LoaderCircle } from "lucide-vue-next";
 
 export default {
   name: "BaseMaps",
@@ -8,7 +11,12 @@ export default {
     return {
       selectedBaseLayer: 0,
       colors,
+      baseMapsWithErrors: [],
+      loadingBaseMaps: true,
     };
+  },
+  components: {
+    LoaderCircle,
   },
   computed: {
     ...mapGetters("Maps", ["mode"]),
@@ -53,7 +61,29 @@ export default {
       deep: true,
     },
   },
-  created() {
+  async created() {
+    const resCheckBaseMaps = await this.checkBaseMaps();
+    this.baseMapsWithErrors = resCheckBaseMaps;
+    if (resCheckBaseMaps.length > 0) {
+      const errorMapIds = new Set(resCheckBaseMaps.map((map) => map.id));
+      let setIndexOfSelectedBaseLayer = null;
+      for (let i = 0; i < this.allBaselayerConfigs.length; i++) {
+        const baseLayer = this.allBaselayerConfigs[i];
+        if (!errorMapIds.has(baseLayer.id)) {
+          setIndexOfSelectedBaseLayer = i;
+          break;
+        }
+      }
+      if (setIndexOfSelectedBaseLayer !== null) {
+        const selectedBaseLayer =
+          this.allBaselayerConfigs[setIndexOfSelectedBaseLayer];
+        if (!selectedBaseLayer?.id) return;
+        this.switchActiveBaselayer(selectedBaseLayer.id);
+        this.selectedBaseLayer = setIndexOfSelectedBaseLayer;
+      }
+    }
+    this.loadingBaseMaps = false;
+
     const baselayerConfigIds = [];
     const baselayers = this.layerConfigsByAttributes({
       baselayer: true,
@@ -97,8 +127,38 @@ export default {
       this.setTopBaselayerId(layerId);
     },
     selectItem(layer, index) {
+      if (this.baseMapsWithErrors.some((error) => error.id === layer.id))
+        return;
       this.switchActiveBaselayer(layer.id);
       this.selectedBaseLayer = index;
+    },
+    checkBaseMaps() {
+      return new Promise(async (resolve) => {
+        const errorURLs = [];
+        let getAllServicesURLs = [];
+        services
+          .filter((service) => service.typ === "WMTS")
+          .forEach((service) =>
+            getAllServicesURLs.push({
+              id: service.id,
+              name: service.name,
+              url: service.capabilitiesUrl || service.url,
+            }),
+          );
+        const fetchPromises = getAllServicesURLs.map(async (service) => {
+          if (service.url) {
+            try {
+              await wmts.getWMTSCapabilities(service.url);
+              return null;
+            } catch (error) {
+              errorURLs.push(service);
+              return null;
+            }
+          }
+        });
+        await Promise.all(fetchPromises);
+        resolve(errorURLs);
+      });
     },
   },
   mounted() {
@@ -117,13 +177,27 @@ export default {
 
 <template>
   <div class="base-layer-selection">
-    <div class="base-layer-list">
+    <div
+      v-if="loadingBaseMaps"
+      class="loader-container"
+    >
+      <LoaderCircle
+        :color="colors.amarex_grey_mid"
+        :size="20"
+      />
+      <p>Hintergrundskarten werden geladen und überprüft...</p>
+    </div>
+    <div
+      v-else
+      class="base-layer-list"
+    >
       <div
         v-for="(layer, index) in this.allBaselayerConfigs"
         :key="index"
         class="base-layer-item"
         :class="{
           selected: selectedBaseLayer === index,
+          error: baseMapsWithErrors.some((error) => error.id === layer.id),
         }"
         @click="selectItem(layer, index)"
       >
@@ -135,7 +209,10 @@ export default {
           <h5>
             {{ layer?.preview?.title || layer.name }}
           </h5>
-          <p v-if="!!layer?.preview?.abstract">
+          <p v-if="baseMapsWithErrors.some((error) => error.id === layer.id)">
+            Karte konnte nicht geladen werden.
+          </p>
+          <p v-else-if="!!layer?.preview?.abstract">
             {{ layer?.preview?.abstract }}
           </p>
         </div>
@@ -153,9 +230,29 @@ export default {
 
 <style lang="scss" scoped>
 @import "~variables";
+@keyframes rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
 
 .base-layer-selection {
   padding: 4px;
+}
+
+.loader-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  svg {
+    animation: rotate 1s linear infinite;
+    margin: 16px 0;
+  }
 }
 
 .base-layer-list {
@@ -189,6 +286,13 @@ export default {
         }
       }
     }
+    &.error {
+      border-bottom: 2px solid $amarex_red;
+      cursor: not-allowed;
+      .circle {
+        visibility: hidden;
+      }
+    }
     .preview-image {
       width: 56px;
       height: 80px;
@@ -209,8 +313,6 @@ export default {
       p {
         overflow: hidden;
         color: $amarex_grey_mid;
-        // text-overflow: ellipsis;
-        // white-space: nowrap;
         font-family: Arial;
         font-size: 14px;
         font-style: normal;
