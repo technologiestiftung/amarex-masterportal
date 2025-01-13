@@ -9,9 +9,8 @@
 */
 $amarex_primary: #fff;
 $amarex_secondary: #173561;
+$amarex_secondary_mid: #E0EAF5;
 $amarex_secondary_light: #CED5DD;
-$amarex_accent: #29A992;
-$amarex_accent_light: #CCECE7;
 $amarex_grey_light: #DCDCDC;
 $amarex_grey_mid: #A4A4A4;
 $amarex_grey_dark: #5A5A5A;
@@ -46,8 +45,8 @@ $dark_grey: $amarex_grey_dark;
 $light_blue: $amarex_secondary_light;
 $placeholder-color: $amarex_grey_mid;
 $form-check-input-checked-bg-color: $amarex_secondary;
-$accent: $amarex_accent;
-$accent_hover: $amarex_accent_light;
+$accent: $amarex_secondary_mid;
+$accent_hover: $amarex_secondary_light;
 $accent_focus: $amarex_secondary_light;
 $accent_active: $amarex_secondary_light;
 $accent_disabled: $amarex_grey_light;
@@ -111,12 +110,9 @@ $icon_length: 2.25rem;
 $icon_length_small: 1.5rem;
 
 /* FONT STYLES */
-$font_family_default: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-$font_family_narrow: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; 
-$font_family_accent: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-/* $font_family_default: "Inria Sans", "Arial", sans-serif;
-$font_family_narrow: "Inria Sans", Arial, sans-serif;
-$font_family_accent: "Inria Sans", Arial, sans-serif; */
+$font_family_default:Arial, sans-serif;
+$font_family_narrow: Arial, sans-serif;
+$font_family_accent: Arial, sans-serif;
 
 /* PADDING */
 $padding: 1.5rem;
@@ -129,36 +125,28 @@ $tool_box_shadow: 0 6px 12px rgba(0, 0, 0, 0.176);
 /*
   * MIXINGS
 */
-@mixin boxShadow() {
-  box-shadow: 4px 4px 0px 0px $amarex_secondary_light;
-}
-@mixin radius() {
-  border-radius: 4px;
-}
 @mixin clickable() {
   cursor: pointer;
   user-select: none;
 }
-@mixin transform-p() {
-  transform: translateY(2px);
-}
 
 .amarex-btn-primary {
-  @include radius();
-  @include boxShadow();
   @include clickable();
-  background: $amarex_secondary;
+  background: $amarex_secondary_mid;
   border: none;
-  padding: 0.5rem 1rem;
+  padding: 10px 16px;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 10px;
+  gap: 8px;
   * {
-    color: $amarex_primary;
+    color: $amarex_secondary;
   }
   p {
-    text-align: left;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 20px;
   }
   &.mid p {
     text-align: center;
@@ -173,7 +161,7 @@ $tool_box_shadow: 0 6px 12px rgba(0, 0, 0, 0.176);
     }
   }
   &.accent {
-    background: $amarex_accent;
+    background: $amarex_secondary_mid;
   }
   &.grey {
     background: $amarex_grey_light;

@@ -1,9 +1,8 @@
 {
     "amarex_primary": "#fff",
     "amarex_secondary": "#173561",
+    "amarex_secondary_mid": "#E0EAF5",
     "amarex_secondary_light": "#CED5DD",
-    "amarex_accent": "#29A992",
-    "amarex_accent_light": "#CCECE7",
     "amarex_grey_light": "#DCDCDC",
     "amarex_grey_mid": "#A4A4A4",
     "amarex_grey_dark": "#5A5A5A",
