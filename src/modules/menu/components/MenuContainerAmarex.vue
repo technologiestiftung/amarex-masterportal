@@ -41,7 +41,11 @@ export default {
             type: Boolean,
             default: true
         },
-        menuWidth: {
+        mainMenuWidth: {
+            type: Number,
+            default: 320
+        },
+        secondaryMenuWidth: {
             type: Number,
             default: 380
         }
@@ -110,7 +114,7 @@ export default {
                 this.setCurrentMenuWidth({side: this.side, width: "100%"});
             }
             else {
-                this.setCurrentMenuWidth({side: this.side, width: `${this.menuWidth}px`});
+                this.setCurrentMenuWidth({side: this.side, width: `${this.mainMenuWidth}px`});
             }
         }
     },
@@ -160,7 +164,7 @@ export default {
             }
         ]"
         tabindex="-1"
-        :style="{ width: expanded ? this.menuWidth : '0', padding: expanded ? '' : '0px', minWidth: expanded ? `${this.menuWidth}px` : '0px' }"
+        :style="{ width: expanded ? side === 'mainMenu' ? this.mainMenuWidth : this.secondaryMenuWidth : '0', padding: expanded ? '' : '0px', minWidth: expanded ? side === 'mainMenu' ? `${this.mainMenuWidth}px` : `${this.secondaryMenuWidth}px` : '0px', maxWidth: expanded ? `${this.mainMenuWidth}px` : '0px' }"
         :aria-label="titleBySide(side) ? titleBySide(side).text : null"
     >
         <div
@@ -192,6 +196,7 @@ export default {
                 <SearchBar
                     v-if="!showProjectStarter"
                     :click-action="openSearchBar"
+                    :mainMenuWidth="mainMenuWidth"
                 />
             </div>
         </div>
@@ -201,7 +206,7 @@ export default {
         <div v-if="side === 'mainMenu' && !!projectTitle" class="project-info-container mb-3">
             <h5>Aktuelles Projekt: {{ projectTitle }}</h5>
         </div>
-        <div v-if="side === 'mainMenu'" class="project-management-amarex-container">
+        <div v-if="side === 'mainMenu' && currentComponent?.name !=='SearchBar' " class="project-management-amarex-container">
             <button class="amarex-btn-primary">
                 <FileIcon
                     :color="colors.secondary"
@@ -211,8 +216,8 @@ export default {
             </button> 
             <button class="amarex-btn-primary">
                 <SaveIcon
-                :color="colors.secondary"
-                :size="16"
+                    :color="colors.secondary"
+                    :size="16"
                 />
                 <p>Herunterladen</p>
             </button>
@@ -241,7 +246,6 @@ export default {
     transition: width 0.3s ease;
     z-index: 2;
     flex-direction: column;
-    max-width: 45vw !important;
 }
 
 .mp-mainMenu {
@@ -255,6 +259,7 @@ export default {
     position: absolute;
     top: 100%;
     transition: top 0.3s ease;
+    max-width: 45vw !important;
     &-expanded {
         height: 100%;
         top: 70%;

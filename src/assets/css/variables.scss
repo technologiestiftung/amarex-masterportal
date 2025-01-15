@@ -133,6 +133,7 @@ $tool_box_shadow: 0 6px 12px rgba(0, 0, 0, 0.176);
 .amarex-btn-primary {
   @include clickable();
   background: $amarex_secondary_mid;
+  // background: $amarex_secondary;
   border: none;
   padding: 10px 16px;
   display: flex;
@@ -141,6 +142,7 @@ $tool_box_shadow: 0 6px 12px rgba(0, 0, 0, 0.176);
   gap: 8px;
   * {
     color: $amarex_secondary;
+    // color: $amarex_primary;
   }
   p {
     font-size: 16px;
@@ -152,12 +154,12 @@ $tool_box_shadow: 0 6px 12px rgba(0, 0, 0, 0.176);
     text-align: center;
   }
   &:not(.deactivated):hover {
-    background: $amarex_secondary_light;
+    background: $amarex_secondary;
     svg {
-      stroke: $amarex_secondary !important;
+      stroke: $amarex_primary !important;
     }
     p {
-      color: $amarex_secondary !important;
+      color: $amarex_primary !important;
     }
   }
   &.accent {

@@ -161,14 +161,13 @@ export default {
 .base-layer-list {
   display: flex;
   flex-direction: column;
-  gap: 24px;
   .base-layer-item {
     border-bottom: 2px solid $amarex_grey_light;
-    border-left: 2px solid $primary;
-    border-right: 2px solid $primary;
-    border-top: 2px solid $primary;
+    border-left: 2px solid $amarex_primary;
+    border-right: 2px solid $amarex_primary;
+    border-top: 2px solid $amarex_primary;
     display: grid;
-    grid-template-columns: 26px minmax(100px, 1fr) 56px;
+    grid-template-columns: 26px minmax(100px, 1fr) 80px;
     align-items: center;
     gap: 16px;
     padding: 16px 10px 16px 16px;
@@ -190,7 +189,7 @@ export default {
       }
     }
     .preview-image {
-      width: 56px;
+      width: 80px;
       height: 80px;
       background-size: cover;
       background-position: center;
@@ -204,7 +203,7 @@ export default {
         font-style: normal;
         font-weight: 700;
         line-height: 16px;
-        margin-bottom: 4px;
+        margin-bottom: 8px;
       }
       p {
         overflow: hidden;

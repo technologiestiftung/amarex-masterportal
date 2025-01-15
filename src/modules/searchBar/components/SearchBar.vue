@@ -25,6 +25,10 @@ export default {
             type: Function,
             default: undefined,
             required: false
+        },
+        menuWidth: {
+            type: Number,
+            required: false
         }
     },
     data() {
@@ -298,7 +302,7 @@ export default {
 </script>
 
 <template lang="html">
-    <div id="search-bar">
+    <div id="search-bar" :style="{ maxWidth: this.menuWidth + 'px' }">
         <div class="input-group">
             <!-- <button
                 id="search-button"
@@ -347,13 +351,13 @@ export default {
     }
     #search-bar {
         margin-top: 24px;
-        max-width: calc(380px - 48px);
+        // max-width: calc(380px - 48px);
         & > div:not(.suggestions-container) {
             margin-left: 0 !important;
             margin-right: 0 !important;
             margin-top: 0 !important;
             overflow: hidden;
-            padding: 12px 16px;
+            padding: 10px 16px;
             margin-bottom: 24px;
         }
         #search-button {

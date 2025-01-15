@@ -1,5 +1,4 @@
 <script>
-import LayerTree from "../../layerTree/components/LayerTree.vue";
 import MenuContainerBodyRootItems from "./MenuContainerBodyRootItems.vue";
 import {mapGetters,mapActions,mapMutations} from "vuex";
 import { CircleCheckBig, LoaderCircle } from 'lucide-vue-next';
@@ -13,7 +12,6 @@ import colors from '../../../shared/js/utils/amarex-colors.json';
 export default {
     name: "MenuContainerBodyRoot",
     components: {
-        LayerTree,
         MenuContainerBodyRootItems,
         CircleCheckBig,
         LoaderCircle
@@ -24,9 +22,9 @@ export default {
             steps: [
                 // { label: 'Projekt Starten', component: 'projectStarter' },
                 { label: 'Hintergrundkarten', component: 'baseMaps' },
-                { label: 'Themenkarten', component: 'themeMaps' },
+                // { label: 'Themenkarten', component: 'themeMaps' },
                 // { label: 'Maßnahmenpotentiale', component: 'actionPotentials' },
-                { label: 'Wasserhaushalt berechnen', component: 'abimoHandler' },
+                // { label: 'Wasserhaushalt berechnen', component: 'abimoHandler' },
                 // { label: 'Eigene Ebenen', component: '?' },
                 // { label: '6. Geodaten importieren', component: 'fileImporter' },
                 // { label: '7. Features listen', component: 'featureLister' },
@@ -123,7 +121,6 @@ export default {
     <div
         :id="'mp-body-root-'+side" v-if="side === 'mainMenu'"
     >       
-        
         <div class="stepper-root d-flex flex-column" v-if="side === 'mainMenu'">
             <button 
                 v-for="(step, index) in steps" 
@@ -135,7 +132,6 @@ export default {
                 <p>{{ step.label }}</p>
             </button>
         </div>
-
     </div>
 </template>
 
@@ -151,10 +147,14 @@ export default {
         justify-content: space-between;
         align-items: center;
         padding: 8px 16px;
-        border-left: 1px solid white;
+        // border-left: 1px solid white;
         &.active {
-            background: $amarex_secondary_mid;
-            border-left: 1px solid $amarex_secondary;
+            // background: $amarex_secondary_mid;
+            background: $amarex_secondary;
+            // border-left: 1px solid $amarex_secondary;
+            p {
+                color: $amarex_primary !important;
+            }
         }
         p {
             color: $amarex_secondary;
