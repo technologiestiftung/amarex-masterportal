@@ -11,9 +11,7 @@ import isMobile from "./shared/js/utils/isMobile";
 import mapCollection from "./core/maps/js/mapCollection";
 import MenuContainerAmarex from "./modules/menu/components/MenuContainerAmarex.vue";
 import MenuToggleButtonAmarex from "./modules/menu/components/MenuToggleButtonAmarex.vue";
-import ProjectStarter from "../addons/projectStarter/components/ProjectStarter.vue";
 import addonsPlugin from "./plugins/addons";
-import * as services from '../portal/amarex/resources/services-internet.json';
 
 export default {
     name: "App",
@@ -22,13 +20,11 @@ export default {
         BaselayerSwitcher,
         ControlBar,
         MenuContainerAmarex,
-        MenuToggleButtonAmarex,
-        ProjectStarter
+        MenuToggleButtonAmarex
     },
     data () {
         return {
-            addonsLoaded: false,
-            showProjectStarter: false
+            addonsLoaded: false
         };
     },
     computed: {
@@ -185,9 +181,7 @@ export default {
             };
         },
         startAmarexProject() {
-            console.log('startAmarexProject');
             this.toggleMenu("secondaryMenu");
-            this.showProjectStarter = false;
         },
     }
 };
@@ -205,7 +199,6 @@ export default {
         <MenuContainerAmarex
             v-if="allConfigsLoaded && addonsLoaded && mainMenu && uiStyle !== 'SIMPLE'"
             side="mainMenu"
-            :showProjectStarter="showProjectStarter"
         />
         <MenuToggleButtonAmarex
             v-if="allConfigsLoaded && addonsLoaded && mainMenu && uiStyle !== 'SIMPLE'"
@@ -239,7 +232,6 @@ export default {
                 id="map"
             />
         </div>
-        <ProjectStarter v-if="showProjectStarter" :startAmarexProject="startAmarexProject" />
     </div>
 </template>
 

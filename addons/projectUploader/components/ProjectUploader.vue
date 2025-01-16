@@ -32,6 +32,7 @@ export default {
       "importedFileNames",
       "enableZoomToExtend",
       "featureExtents",
+      "addLayerConfig",
     ]),
 
     ...mapGetters(["Maps/projectionCode", "layerConfig", "portalConfig"]),
@@ -222,7 +223,7 @@ export default {
      * @returns {Promise<void>}
      */
     async addFiles() {
-      this.filesToUpload?.forEach(async (file) => {
+      this.filesToUpload.forEach(async (file) => {
         if (!this.checkValid(file)) {
           return;
         }
@@ -269,12 +270,12 @@ export default {
         Array.isArray(fileNames) &&
         fileNames.length
       ) {
-        fileNames?.forEach((name) => {
+        fileNames.forEach((name) => {
           if (this.selectedFiles[name]) {
             this.layer
               .getSource()
               .getFeatures()
-              ?.forEach((feature) => {
+              .forEach((feature) => {
                 if (
                   feature.get("source") &&
                   feature.get("source") === name &&
@@ -300,7 +301,7 @@ export default {
     modifyImportedFileExtent(featureExtents, fileNames) {
       const modifiedFeatureExtents = {};
 
-      fileNames?.forEach((name) => {
+      fileNames.forEach((name) => {
         if (this.selectedFiles[name]) {
           modifiedFeatureExtents[name] = featureExtents[name];
         }
@@ -405,4 +406,3 @@ li {
   }
 }
 </style>
-

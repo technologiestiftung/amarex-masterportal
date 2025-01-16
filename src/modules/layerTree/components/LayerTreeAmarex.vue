@@ -14,7 +14,7 @@ export default {
         LayerTreeNodeAmarex
     },
     computed: {
-        ...mapGetters(["allLayerConfigsStructured", "showLayerAddButton", "allLayerConfigs", "layerConfigsByAttributes"]),
+        ...mapGetters(["allLayerConfigsStructured", "allLayerConfigs"]),
         ...mapGetters("Modules/LayerTree", ["menuSide"]),
         ...mapGetters("Modules/LayerSelection", {layerSelectionType: "type", layerSelectionName: "name"})
     },
@@ -29,18 +29,6 @@ export default {
          */
         sort (configs) {
             return sortBy(configs, (conf) => conf.type !== "folder");
-        },
-        /**
-         * Shows the component LayerSelection and sets it visible.
-         * @returns {void}
-         */
-        showLayerSelection () {
-            const subjectDataLayerConfs = this.sort(this.allLayerConfigsStructured(treeSubjectsKey)),
-                baselayerConfs = this.allLayerConfigsStructured(treeBaselayersKey);
-
-            this.changeCurrentComponent({type: this.layerSelectionType, side: this.menuSide, props: {name: this.layerSelectionName}});
-            this.navigateForward({lastFolderName: "root", subjectDataLayerConfs, baselayerConfs});
-            this.setLayerSelectionVisible(true);
         },
     },
     props: {
@@ -58,7 +46,3 @@ export default {
 <template lang="html">
     <LayerTreeNodeAmarex :openInfo="openInfo" :showInfo="showInfo" />
 </template>
-
-<style lang="scss" scoped>
-@import "~variables";
-</style>

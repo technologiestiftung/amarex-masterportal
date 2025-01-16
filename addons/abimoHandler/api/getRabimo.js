@@ -1,21 +1,21 @@
+// TODO: add url from env
+// const apiUrl = "https://localhost:443";
+const apiUrl = "https://rapimo.ds-apps.tsb-berlin.de";
+
 /**
  * Fetches data from Rabimo API asynchronously
  * @param {Object} payload - data to send
  * @returns {Promise} - a promise that resolves to the response data
  */
 async function getMultiblock(payload) {
-
   try {
-    const response = await fetch(
-      `${process.env.API_URL}/calculate_multiblock`,
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(payload),
+    const response = await fetch(`${apiUrl}/calculate_multiblock`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
       },
-    );
+      body: JSON.stringify(payload),
+    });
     const data = await response.json();
     return data;
   } catch (error) {
@@ -29,7 +29,7 @@ async function getMultiblock(payload) {
  */
 async function getTest() {
   try {
-    const response = await fetch(`${process.env.API_URL}/calculate_all`, {
+    const response = await fetch(`${apiUrl}/calculate_all`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -50,16 +50,13 @@ async function getTest() {
  */
 async function getMultiblockDeltaW(payload) {
   try {
-    const response = await fetch(
-      `${process.env.API_URL}/calculate_multiblock_delta_w`,
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(payload),
+    const response = await fetch(`${apiUrl}/calculate_multiblock_delta_w`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
       },
-    );
+      body: JSON.stringify(payload),
+    });
     const data = await response.json();
     return data;
   } catch (error) {
@@ -69,4 +66,3 @@ async function getMultiblockDeltaW(payload) {
 }
 
 export default { getMultiblock, getTest, getMultiblockDeltaW };
-

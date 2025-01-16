@@ -33,8 +33,8 @@ export default {
         };
     },
     computed: {
-        ...mapGetters(["portalConfig", "allLayerConfigs", "layerConfigsByAttributes", "showLayerAddButton"]),
-        ...mapGetters("Modules/LayerTree", ["delay", "delayOnTouchOnly", "removeOnSpill", "touchStartThreshold"]),
+        ...mapGetters(["allLayerConfigs", "layerConfigsByAttributes", "showLayerAddButton"]),
+        ...mapGetters("Modules/LayerTree", ["delay", "delayOnTouchOnly", "touchStartThreshold"]),
 
         /**
          * v-model for sorted layerConfig.
@@ -84,36 +84,6 @@ export default {
     methods: {
         ...mapActions("Modules/LayerTree", ["removeLayer", "replaceByIdInLayerConfig"]),
         ...mapMutations("Modules/LayerTree", ["setRemoveOnSpill"]),
-
-        /**
-         * Indicates if a conf is a layer and showInlayerTree is true and isNeverVisibleInTree is not true
-         * @param {Object} conf The current layer configuration.
-         * @returns {void}
-         */
-        isLayerShowInLayerTree (conf) {
-            return conf?.type === "layer" && conf?.showInLayerTree === true && conf?.isNeverVisibleInTree !== true;
-        },
-
-        /**
-         * Returns a layer array element.
-         * @param {Object} conf The current layer configuration.
-         * @returns {void}
-         */
-        getLayerArray (conf) {
-            return conf?.elements ? conf.elements.filter(el => el.type === "layer" && el.showInLayerTree === true) : [];
-        },
-
-        /**
-         * Removes the spilled layer from layer tree if showLayerAddButton is true.
-         * @param {Event} event The spill event.
-         * @returns {void}
-         */
-        removeLayerOnSpill (event) {
-            if (this.showLayerAddButton) {
-                this.removeLayer(this.sortedLayerConfig[event.oldIndex]);
-            }
-        },
-
         toggleSettings () {
             this.showToggle = !this.showToggle;
         },
@@ -140,7 +110,7 @@ export default {
 <template>
     <!-- eslint-disable vue/attribute-hyphenation -->
     <div class="amarex-themenkarten-toggle-settings-container mb-2" @click="toggleSettings" v-if="sortedLayerConfig.some((element) => !element.baselayer && element.parentId !== `folder-1` && element.visibility)">
-        <p class="amarex-bold">Themenkarten Einstellungen {{ showToggle ? "ausblenden" : "anzeigen" }}</p>
+        <p>Themenkarten Einstellungen {{ showToggle ? "ausblenden" : "anzeigen" }}</p>
         <ToggleRight
             v-if="showToggle"
             :color="colors.amarex_secondary"
@@ -153,7 +123,7 @@ export default {
         />
     </div>
 
-    <p class="amarex-bold mb-4" v-if="!sortedLayerConfig.some((element) => !element.baselayer && element.parentId !== `folder-1` && element.visibility)">&ndash; Wähle im unten stehenden Katalog Ebenen aus verschiedenen Themenkarten aus für deine Untersuchung. &ndash; </p>
+    <p class="mb-4" v-if="!sortedLayerConfig.some((element) => !element.baselayer && element.parentId !== `folder-1` && element.visibility)">&ndash; Wähle im unten stehenden Katalog Ebenen aus verschiedenen Themenkarten aus für deine Untersuchung. &ndash; </p>
 
     <Draggable
         v-model="sortedLayerConfig"

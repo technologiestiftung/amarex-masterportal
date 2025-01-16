@@ -11,7 +11,6 @@ import {
     EllipsisVertical,
     Eye,
     EyeOff,
-    SquareChevronRight,
     ArrowRight
 } from "lucide-vue-next";
 import colors from "../../../shared/js/utils/amarex-colors.json";
@@ -32,7 +31,6 @@ export default {
         EllipsisVertical,
         Eye,
         EyeOff,
-        SquareChevronRight,
         ArrowRight
     },
     props: {
@@ -60,13 +58,10 @@ export default {
     },
     computed: {
         ...mapGetters("Maps", ["mode", "scale", "scales"]),
-        isLayerVisible () {
-            return typeof this.conf.visibility === "boolean" ? this.conf.visibility : false;
-        },
         applyBorderStyle() {
-        return this.showToggle
-            ? { borderBottomRightRadius: '4px', borderBottomLeftRadius: '0px' }
-            : {};
+            return this.showToggle
+                ? { borderBottomRightRadius: '4px', borderBottomLeftRadius: '0px' }
+                : {};
         },
     },
     mounted () {
@@ -87,11 +82,6 @@ export default {
     },
     methods: {
         ...mapActions("Modules/LayerTree", ["updateTransparency"]),
-        ...mapActions("Modules/ThemeMaps", [
-            "changeVisibility",
-        ]),
-        ...mapActions("Modules/LayerInformation", ["startLayerInformation"]),
-        ...mapMutations("Modules/LayerSelection", ["setLayerInfoVisible"]),
         /**
          * Returns true, if layer configuration shall be shown in tree in current map mode.
          * Filteres by attribute 'showInLayerTree' and respects 'isNeverVisibleInTree' is not true.
@@ -115,23 +105,6 @@ export default {
          * Returns true, if this layer is not visible in the maps current scale. Returns false, if this is not the layerTree or mode is '3D'.
          * @returns {Boolean}  true, if this layer is not visible in the maps current scale
          */
-        scaleIsOutOfRange () {
-            if (!this.isLayerTree() || this.conf.maxScale === undefined) {
-                return false;
-            }
-            if (this.mode === "3D" && this.conf.visibility === true && (this.scale > parseInt(this.conf.maxScale, 10) || this.scale < parseInt(this.conf.minScale, 10))) {
-                const layer = layerCollection.getLayerById(this.conf.id).layer;
-
-                layer.setVisible(false);
-            }
-            else if (this.mode === "3D" && this.conf.visibility === true) {
-                const layer = layerCollection.getLayerById(this.conf.id).layer;
-
-                layer.setVisible(true);
-            }
-
-            return this.scale > parseInt(this.conf.maxScale, 10) || this.scale < parseInt(this.conf.minScale, 10);
-        },
         toggleVisibility() {
             const layerConf = this.conf;
             if (layerConf.transparency === 100) {
@@ -152,7 +125,7 @@ export default {
                 <div ></div>
                 <div ></div>
             </div>
-            <p class="amarex-bold amarex-layer-tree-label">
+            <p class="amarex-layer-tree-label">
                 {{ conf.name }}
             </p>
             <div class="d-flex">

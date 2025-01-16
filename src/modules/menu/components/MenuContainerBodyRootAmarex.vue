@@ -92,7 +92,6 @@ export default {
         selectStep(step, index, clicked) {
             const clickEvent = () => {
                 if (clicked && !this.secondaryExpanded) {
-                    console.log('expand secondary menu');
                     this.toggleMenu('secondaryMenu');
                 }
                 this.currentStepIndex = index;

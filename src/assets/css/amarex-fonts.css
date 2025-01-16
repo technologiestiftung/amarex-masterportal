@@ -28,66 +28,8 @@ h5 {
     font-size: 18px;
     font-weight: 400;
     line-height: 20px;
-    transform: translateY(2px);
 }
 
 h1, h2, h3, h4, h5, p {
     margin: 0;
-}
-
-.amarex-heading {
-    font-family: Arial, sans-serif;
-    font-size: 16px;
-    font-weight: 400;
-    line-height: 24px; 
-}
-
-.amarex-large {
-    font-family: Arial, sans-serif;
-    font-size: 32px;
-    font-weight: 400;
-    line-height: 48px;
-}
-
-.amarex-small {
-    font-family: Arial, sans-serif;
-    font-size: 16px;
-    font-weight: 400;
-    line-height: 24px;
-}
-.amarex-bold {
-    font-family: Arial, sans-serif;
-    font-size: 16px;
-    font-weight: 400;
-    line-height: 24px;
-}
-.amarex-caption {
-    font-family: Arial, sans-serif;
-    font-size: 12px;
-    font-weight: 400;
-    line-height: 14px;
-}
-.amarex-caption-bold {
-    font-family: Arial, sans-serif;
-    font-size: 12px;
-    font-weight: 400;
-    line-height: 14px;
-}
-.amarex-tooltips {
-    font-family: Arial, sans-serif;
-    font-size: 10px;
-    font-weight: 400;
-    line-height: 12px;
-}
-.amarex-button {
-    font-family: Arial, sans-serif;
-    font-size: 16px;
-    font-weight: 400;
-    line-height: 20px;
-}
-.amarex-button-light {
-    font-family: Arial, sans-serif;
-    font-size: 16px;
-    font-weight: 300;
-    line-height: 20px;
 }

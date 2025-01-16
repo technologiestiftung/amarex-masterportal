@@ -123,20 +123,16 @@ export default {
         display: flex;
         flex-direction: column;
         align-items: stretch;
-        // padding: 0 $padding $padding $padding;
         font-size: $font-size-base;
-        // overflow-y: scroll;
         max-height: 100%;
         &-collapsed {
             padding: 0;
             display: none;
         }
         .menu-body-component {
-            /* Hide scrollbar for Firefox */
             -ms-overflow-style: none;
             scrollbar-width: none;
         }
-        /* Hide scrollbar for Chrome, Edge, Safari and Opera */
         .menu-body-component::-webkit-scrollbar {
             display: none;
         }

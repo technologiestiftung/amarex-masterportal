@@ -16,21 +16,9 @@ export default {
         LayerTreeNode
     },
     computed: {
-        ...mapGetters(["allLayerConfigsStructured", "showLayerAddButton", "portalConfig"]),
+        ...mapGetters(["allLayerConfigsStructured", "showLayerAddButton"]),
         ...mapGetters("Modules/LayerTree", ["menuSide"]),
-        ...mapGetters("Modules/LayerSelection", {layerSelectionType: "type", layerSelectionName: "name"}),
-
-        /**
-         * Returns the title of button.
-         * @returns {String} the button title.
-         */
-        title () {
-            if (typeof this.portalConfig?.tree?.addLayerButton?.buttonTitle === "string" && this.portalConfig?.tree?.addLayerButton?.buttonTitle !== "") {
-                return this.portalConfig?.tree?.addLayerButton?.buttonTitle;
-            }
-
-            return "common:modules.layerTree.addLayer";
-        }
+        ...mapGetters("Modules/LayerSelection", {layerSelectionType: "type", layerSelectionName: "name"})
     },
     methods: {
         ...mapActions("Modules/LayerSelection", ["navigateForward"]),
@@ -56,13 +44,7 @@ export default {
             this.navigateForward({lastFolderName: "root", subjectDataLayerConfs, baselayerConfs});
             this.setLayerSelectionVisible(true);
         }
-    },
-    props: {
-        openInfo: {
-            type: Function,
-            required: true
-        }
-    },
+    }
 };
 </script>
 
@@ -71,16 +53,16 @@ export default {
         id="layer-tree"
         class="layer-tree"
     >
-        <LayerTreeNode :openInfo="openInfo" />
+        <LayerTreeNode />
         <div
             v-if="showLayerAddButton"
             class="mt-4 d-flex justify-content-center sticky"
         >
             <ElevatedButton
                 id="add-layer-btn"
-                :aria-label="$t(title)"
+                aria-label="$t('common:modules.layerTree.addLayer')"
                 :interaction="showLayerSelection"
-                :text="$t(title)"
+                :text="$t('common:modules.layerTree.addLayer')"
                 :icon="'bi-plus-circle'"
             />
         </div>

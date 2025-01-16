@@ -153,7 +153,6 @@ export default {
     ...mapActions("Modules/Legend", ["createLegendForLayerInfo"]),
     ...mapMutations("Modules/LayerInformation", ["setMetaDataCatalogueId"]),
     ...mapMutations("Modules/Legend", ["setLayerInfoLegend"]),
-    ...mapActions("Menu", ["changeCurrentComponent"]),
     isWebLink,
 
     /**
@@ -274,16 +273,16 @@ export default {
         <div>
           <h5 class="mb-2">{{ layerInfo.layername }}</h5>
           <p
-            class="amarex-small mb-4"
+            class="mb-4"
             v-if="!!showInfo?.name_lang"
           >
             {{ showInfo?.name_lang }}
           </p>
           <hr>
-          <p class="amarex-bold mb-2 mt-4">
+          <p class="mb-2 mt-4">
             {{ showInfo?.folderName }}
           </p>
-          <p class="amarex-small">{{ abstractText.replace("<p>", "").replace("</p>", "") }}</p>
+          <p>{{ abstractText.replace("<p>", "").replace("</p>", "") }}</p>
           <AccordionItem
             v-if="contact"
             id="layer-info-contact"

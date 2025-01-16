@@ -35,15 +35,11 @@ export default {
         ]),
         ...mapGetters("Menu", [
             "menuBySide"
-        ]),
-        ...mapGetters([
-            "portalConfig"
         ])
     },
     methods: {
         ...mapMutations("Modules/SearchBar", [
             "setCurrentAvailableCategories",
-            "setSearchResultsActive",
             "setShowAllResults",
             "setShowAllResultsSearchInterfaceInstance"
         ]),
@@ -52,28 +48,7 @@ export default {
             "setNavigationHistoryBySide",
             "setCurrentComponent",
             "setCurrentComponentBySide"
-        ]),
-        /**
-         * Prepares the all results list of one category and adapts the navigation history
-         * @param {String} categoryItem the category of the results
-         * @returns {void}
-         */
-        prepareShowAllResults (categoryItem) {
-            const side = this.currentSide;
-
-            this.setShowAllResultsSearchInterfaceInstance(this.limitedSortedSearchResults.results.categoryProvider[categoryItem]);
-            if (this.menuBySide(side)) {
-                this.setNavigationCurrentComponentBySide({side: side, newComponent: {props: {name: "common:modules.searchBar.searchResults"}, type: "searchbar"}});
-                this.setCurrentComponentBySide({side: side, type: "searchbar"});
-                this.setNavigationHistoryBySide({side: side, newHistory: [{type: "root", props: []}, {type: "searchBar", props: {name: "modules.searchBar.searchBar"}}, {type: "searchBar", props: {name: "modules.searchBar.searchResultList"}}]});
-            }
-            this.setCurrentAvailableCategories(categoryItem);
-            this.currentShowAllList = this.limitedSortedSearchResults.currentShowAllList.filter(value => {
-                return value.category === categoryItem;
-            });
-
-            this.setShowAllResults(true);
-        }
+        ])
     }
 };
 </script>

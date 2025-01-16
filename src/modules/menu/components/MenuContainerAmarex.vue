@@ -6,9 +6,7 @@ import MenuContainerBodyRootLogo from "./MenuContainerBodyRootLogo.vue";
 import SearchBar from "../../searchBar/components/SearchBar.vue";
 import {
     File as FileIcon,
-    FolderOpen as FolderOpenIcon,
     Save as SaveIcon,
-    Upload as UploadIcon,
 } from "lucide-vue-next";
 import colors from "../../../shared/js/utils/amarex-colors.json";
 
@@ -26,9 +24,7 @@ export default {
         ResizeHandle,
         SearchBar,
         FileIcon,
-        FolderOpenIcon,
         SaveIcon,
-        UploadIcon,
     },
     props: {
         /** Defines in which menu the component is being rendered */
@@ -36,10 +32,6 @@ export default {
             type: String,
             default: "mainMenu",
             validator: value => value === "mainMenu" || value === "secondaryMenu"
-        },
-        showProjectStarter: {
-            type: Boolean,
-            default: true
         },
         mainMenuWidth: {
             type: Number,
@@ -60,7 +52,6 @@ export default {
         ...mapGetters("Menu", [
             "mainMenu",
             "secondaryMenu",
-            "currentMenuWidth",
             "mainExpanded",
             "secondaryExpanded",
             "titleBySide",
@@ -69,7 +60,6 @@ export default {
         ]),
         ...mapGetters("Modules/ProjectStarter", [
             "projectTitle",
-            "projectDescription",
         ]),
         /**
          * @returns {Object} Menu configuration for the given menu.
@@ -131,7 +121,7 @@ export default {
             "mergeMenuState",
             "setCurrentMenuWidth"
         ]),
-        ...mapActions("Menu", ["clickedMenuElement", "toggleMenu", "closeMenu"]),
+        ...mapActions("Menu", ["clickedMenuElement", "closeMenu"]),
         /**
          * Opens the searchbar module.
          * @returns {void}
@@ -194,7 +184,6 @@ export default {
                     v-bind="titleBySide(side)"
                 />
                 <SearchBar
-                    v-if="!showProjectStarter"
                     :click-action="openSearchBar"
                     :mainMenuWidth="mainMenuWidth"
                 />

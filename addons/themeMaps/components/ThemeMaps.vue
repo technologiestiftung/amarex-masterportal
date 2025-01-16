@@ -2,8 +2,6 @@
 import { mapGetters, mapMutations, mapActions } from "vuex";
 import LayerSelectionTreeNode from "../../../src/modules/layerSelection/components/LayerSelectionTreeNode.vue";
 import { treeSubjectsKey } from "../../../src/shared/js/utils/constants";
-import sortBy from "../../../src/shared/js/utils/sortBy";
-import layerFactory from "../../../src/core/layers/js/layerFactory";
 import LayerTreeAmarex from "../../../src/modules/layerTree/components/LayerTreeAmarex.vue";
 import Layer from "../../../src/modules/layerTree/components/LayerComponent.vue";
 import LayerInformation from "../../../src/modules/layerInformation/components/LayerInformation.vue";
@@ -11,10 +9,7 @@ import {
   CirclePlus,
   CircleMinus,
   ChevronDown,
-  ChevronUp,
   Map as MapIcon,
-  ChevronLeft,
-  ChevronRight,
   Settings,
 } from "lucide-vue-next";
 import colors from "../../../src/shared/js/utils/amarex-colors.json";
@@ -30,10 +25,7 @@ export default {
     CirclePlus,
     CircleMinus,
     ChevronDown,
-    ChevronUp,
     MapIcon,
-    ChevronLeft,
-    ChevronRight,
     Settings,
     SliderItem,
   },
@@ -49,26 +41,10 @@ export default {
   computed: {
     ...mapGetters([
       "allLayerConfigsStructured",
-      "activeOrFirstCategory",
-      "allCategories",
       "portalConfig",
       "allLayerConfigs",
     ]),
-    ...mapGetters("Maps", ["mode"]),
-    ...mapGetters("Modules/SearchBar", [
-      "searchInput",
-      "addLayerButtonSearchActive",
-      "currentSide",
-      "showAllResults",
-    ]),
-    ...mapGetters("Modules/ThemeMaps", [
-      "themeMapsConfs",
-      "lastThemeMapsFolderNames",
-      "layerInfoVisible",
-    ]),
-    categorySwitcher() {
-      return this.portalConfig?.tree?.categories;
-    },
+    ...mapGetters("Modules/ThemeMaps", ["themeMapsConfs", "layerInfoVisible"]),
   },
   created() {
     this.initializeComponent();
@@ -100,17 +76,11 @@ export default {
     this.cleanupComponent();
   },
   methods: {
-    ...mapActions(["changeCategory", "replaceByIdInLayerConfig"]),
-    ...mapActions("Modules/ThemeMaps", [
-      "navigateBack",
-      "navigateForward",
-      "reset",
-      "setLayerInfoVisible",
-    ]),
+    ...mapActions("Modules/ThemeMaps", ["navigateForward", "reset"]),
     ...mapMutations("Modules/ThemeMaps", ["setHighlightLayerId"]),
     ...mapActions("Modules/LayerSelection", ["changeVisibility"]),
     ...mapActions("Modules/LayerInformation", ["startLayerInformation"]),
-    ...mapActions("Menu", ["navigateBack", "resetMenu"]),
+    ...mapActions("Menu", ["resetMenu"]),
     ...mapActions("Modules/LayerTree", ["updateTransparency"]),
     initializeComponent() {
       this.initializeThemeMapsConfs();
@@ -160,7 +130,6 @@ export default {
     },
     openInfo(conf) {
       if (conf?.id === this.showInfo?.id) return (this.showInfo = null);
-      console.log("openInfo in ThemeMaps conf :>> ", conf);
       let findFolderName;
       this.themeMapsConfs.forEach((themeMap) => {
         themeMap.elements.forEach((subThemeMap) => {
@@ -174,7 +143,6 @@ export default {
         folderName: findFolderName.name,
       };
       this.startLayerInformation(conf);
-      // this.navigateBack("mainMenu");
       this.resetMenu("mainMenu");
     },
     hideInfo() {
@@ -199,7 +167,6 @@ export default {
       }
     },
     updateTransparencyOfSelectedThemeMap($event) {
-      console.log("udpateTransparency");
       this.updateTransparency({
         layerConf: this.selectedThemeMap,
         transparency: 100 - parseInt($event.target.value, 10),
@@ -311,7 +278,10 @@ export default {
                   :size="20"
                 />
               </button>
-              <button v-if="false">
+              <button
+                v-if="false"
+                @click="openInfo(themeMap)"
+              >
                 <MapIcon
                   :color="colors.amarex_secondary"
                   :size="20"
@@ -421,4 +391,3 @@ export default {
   }
 }
 </style>
-

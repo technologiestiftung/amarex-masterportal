@@ -11,17 +11,12 @@ export default {
     };
   },
   computed: {
-    ...mapGetters("Maps", ["mode"]),
     ...mapGetters([
       "visibleBaselayerConfigs",
       "allBaselayerConfigs",
       "layerConfigsByAttributes",
     ]),
-    ...mapGetters("Modules/BaseMaps", [
-      "active",
-      "baselayerIds",
-      "topBaselayerId",
-    ]),
+    ...mapGetters("Modules/BaseMaps", ["baselayerIds", "topBaselayerId"]),
   },
   watch: {
     visibleBaselayerConfigs: {
@@ -82,7 +77,6 @@ export default {
       "setTopBaselayerId",
     ]),
     ...mapActions("Modules/BaseMaps", ["updateLayerVisibilityAndZIndex"]),
-    ...mapActions("Modules/LayerSelection", ["changeVisibility"]),
     switchActiveBaselayer(layerId) {
       const selectableBackroundLayerIds = this.baselayerIds;
       this.updateLayerVisibilityAndZIndex(layerId);
@@ -130,7 +124,6 @@ export default {
         <div class="circle">
           <div v-if="selectedBaseLayer === index"></div>
         </div>
-        <!-- Text Content -->
         <div class="text-container">
           <h5>
             {{ layer?.preview?.title || layer.name }}
@@ -139,7 +132,6 @@ export default {
             {{ layer?.preview?.abstract }}
           </p>
         </div>
-        <!-- Masked Image -->
         <div
           class="preview-image"
           :style="{
@@ -208,8 +200,6 @@ export default {
       p {
         overflow: hidden;
         color: $amarex_grey_mid;
-        // text-overflow: ellipsis;
-        // white-space: nowrap;
         font-family: Arial;
         font-size: 14px;
         font-style: normal;
@@ -226,4 +216,3 @@ export default {
   }
 }
 </style>
-

@@ -30,20 +30,6 @@ export default {
 <template lang="html">
     <div id="search-bar-suggestion-list-item">
         <div class="d-flex flex-row bd-highlight bold">
-            <!-- <button
-                type="button"
-                class="btn btn-light d-flex"
-                :title="searchSuggestion.toolTip ? searchSuggestion.toolTip : searchSuggestion.name"
-                :aria-label="searchSuggestion.toolTip ? searchSuggestion.toolTip : searchSuggestion.name"
-                @click="activateActions({searchResult: searchSuggestion, actionType: 'onClick'})"
-                @keydown.enter="activateActions({searchResult: searchSuggestion, actionType: 'onClick'})"
-                @mouseover="activateActions({searchResult: searchSuggestion, actionType: 'onHover'})"
-                @focus="activateActions({searchResult: searchSuggestion, actionType: 'onHover'})"
-            >
-                <span class="btn-title">
-                    {{ searchSuggestion.name }}
-                </span>
-            </button> -->
             <button
                 type="button"
                 class="btn btn-light d-flex"

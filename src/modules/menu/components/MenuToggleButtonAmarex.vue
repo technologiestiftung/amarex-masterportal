@@ -25,7 +25,7 @@ export default {
         }
     },
     computed: {
-        ...mapGetters("Menu", ["mainExpanded", "secondaryExpanded", "mainToggleButtonIcon", "secondaryToggleButtonIcon"]),
+        ...mapGetters("Menu", ["mainExpanded", "secondaryExpanded"]),
     },
     methods: {
         ...mapActions("Menu", ["toggleMenu"])

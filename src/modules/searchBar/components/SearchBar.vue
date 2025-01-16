@@ -34,7 +34,6 @@ export default {
     data() {
         return {
             currentComponentSide: undefined,
-            currentSearchInput: this.searchInput,
             layerSelectionPlaceHolder: this.placeholder,
             colors
         };
@@ -47,7 +46,6 @@ export default {
             "searchInput",
             "searchInterfaceInstances",
             "searchResults",
-            "searchResultsActive",
             "showAllResults",
             "suggestionListLength",
             "showAllResultsSearchCategory",
@@ -225,11 +223,7 @@ export default {
             "setCurrentSide"
         ]),
         ...mapMutations("Menu", [
-            "switchToRoot",
-            "switchToPreviousComponent",
-            "setCurrentComponentBySide",
-            "setNavigationHistoryBySide",
-            "setCurrentComponentPropsName"
+            "switchToRoot"
         ]),
         /**
          * Starts the search in searchInterfaces, if min characters are introduced, updates the result list.
@@ -304,14 +298,6 @@ export default {
 <template lang="html">
     <div id="search-bar" :style="{ maxWidth: this.menuWidth + 'px' }">
         <div class="input-group">
-            <!-- <button
-                id="search-button"
-                :disabled="!searchActivated"
-                :aria-label="$t(placeholder)"
-                type="button"
-                @click="zoomToAndMarkSearchResult(searchInputValue), startSearch(currentComponentSide)"
-            >
-        </button> -->
         <!-- Masterportal origin: change SearchBar Icon  -->
             <Search
                 :color="colors.amarex_grey_dark"
@@ -337,8 +323,8 @@ export default {
             :limited-sorted-search-results="limitedSortedSearchResults"
         />
         <!-- Masterportal origin: added empty states for user to input text to be able to search -->
-        <p v-if="!searchInputValue.length && currentComponentSide === 'searchbar'" class="amarex-bold p-3">Bitte gib eine Adresse ein, die du suchen willst...</p>
-        <p v-else-if="!!searchInputValue.length && searchInputValue.length < minCharacters && currentComponentSide === 'searchbar'" class="amarex-bold p-3">Bitte gib min. {{ minCharacters }} Zeichen ein...</p>
+        <p v-if="!searchInputValue.length && currentComponentSide === 'searchbar'" class="p-3">Bitte gib eine Adresse ein, die du suchen willst...</p>
+        <p v-else-if="!!searchInputValue.length && searchInputValue.length < minCharacters && currentComponentSide === 'searchbar'" class="p-3">Bitte gib min. {{ minCharacters }} Zeichen ein...</p>
     </div>
 </template>
 
@@ -351,7 +337,6 @@ export default {
     }
     #search-bar {
         margin-top: 24px;
-        // max-width: calc(380px - 48px);
         & > div:not(.suggestions-container) {
             margin-left: 0 !important;
             margin-right: 0 !important;
