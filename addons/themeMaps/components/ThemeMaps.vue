@@ -1,10 +1,6 @@
 <script>
 import { mapGetters, mapMutations, mapActions } from "vuex";
-import LayerSelectionTreeNode from "../../../src/modules/layerSelection/components/LayerSelectionTreeNode.vue";
 import { treeSubjectsKey } from "../../../src/shared/js/utils/constants";
-import LayerTreeAmarex from "../../../src/modules/layerTree/components/LayerTreeAmarex.vue";
-import Layer from "../../../src/modules/layerTree/components/LayerComponent.vue";
-import LayerInformation from "../../../src/modules/layerInformation/components/LayerInformation.vue";
 import {
   CirclePlus,
   CircleMinus,
@@ -18,10 +14,6 @@ import SliderItem from "../../../src/shared/modules/slider/components/SliderItem
 export default {
   name: "ThemeMaps",
   components: {
-    LayerSelectionTreeNode,
-    LayerTreeAmarex,
-    Layer,
-    LayerInformation,
     CirclePlus,
     CircleMinus,
     ChevronDown,
@@ -185,6 +177,7 @@ export default {
   <div id="theme-accordion">
     <div
       v-for="(themeMapGroup, indexThemeMapGroup) in this.allThemeMapsGroups"
+      :key="indexThemeMapGroup"
       class="accordion-item"
     >
       <button
