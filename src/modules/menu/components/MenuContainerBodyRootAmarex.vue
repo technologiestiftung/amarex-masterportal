@@ -22,7 +22,7 @@ export default {
             steps: [
                 // { label: 'Projekt Starten', component: 'projectStarter' },
                 { label: 'Hintergrundkarten', component: 'baseMaps' },
-                // { label: 'Themenkarten', component: 'themeMaps' },
+                { label: 'Themenkarten', component: 'themeMaps' },
                 // { label: 'Maßnahmenpotentiale', component: 'actionPotentials' },
                 // { label: 'Wasserhaushalt berechnen', component: 'abimoHandler' },
                 // { label: 'Eigene Ebenen', component: '?' },

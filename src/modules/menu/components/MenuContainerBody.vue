@@ -148,7 +148,7 @@ export default {
         .menu-body-component {
             overflow-y: scroll;
             max-height: 100vh;
-            padding: 16px 14px 0 15px;
+            padding: 32px 24px;
             display: grid;
             grid-template-rows: auto 1fr;
             height: 100%;
