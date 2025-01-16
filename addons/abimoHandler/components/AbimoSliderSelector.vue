@@ -170,7 +170,9 @@ export default {
       <div class="stats-display">
         <div class="d-flex flex-column w-100">
           <strong>ZIELWERT</strong>
+
           <span>{{ sliderContent.title }}</span>
+          <!-- <span>{{ sliderContent.baseDataSubTitle }}</span> -->
         </div>
 
         <input
@@ -203,6 +205,13 @@ export default {
         </p>
       </div>
     </div>
+
+    <button
+      class="btn btn-primary mt-3"
+      @click="updateAbimoData"
+    >
+      Bestätigen
+    </button>
   </div>
 </template>
 
@@ -273,6 +282,7 @@ export default {
   width: 100%;
   position: relative;
   background-color: #d9d9d9;
+  // border: 2px solid #878786;
   overflow: hidden;
   z-index: 1;
 }
@@ -326,4 +336,3 @@ export default {
   padding-left: 8px;
 }
 </style>
-

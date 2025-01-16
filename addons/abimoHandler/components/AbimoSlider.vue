@@ -38,6 +38,7 @@ export default {
   height: 26px;
   width: 100%;
   background-color: #d9d9d9;
+  // border: 2px solid #878786;
   overflow: hidden;
 }
 
@@ -58,4 +59,3 @@ export default {
   border-color: #b4b446;
 }
 </style>
-

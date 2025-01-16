@@ -42,10 +42,17 @@ export default {
   >
     <div class="area-types-visualization w-100">
       <AbimoSliderSelector :type="type" />
-      <!-- Masterportal origin: remove totalArea display from abimoHandler child elements -->
+      <!-- <hr />
+      <div class="legend-item">
+        <div class="color-indicator mr-3"></div>
+        <div class="stats-display">
+          <p class="area">
+            GESAMTFLÄCHE: {{ accumulatedAbimoStats.totalArea.toFixed(0) }} m²
+          </p>
+        </div>
+      </div> -->
     </div>
   </div>
 </template>
 
 <style lang="scss" scoped></style>
-

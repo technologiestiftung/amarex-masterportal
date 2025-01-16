@@ -81,16 +81,15 @@ export default {
           this.selectedFeatures.push(inputFeature);
           this.setSelectedFeatures(this.selectedFeatures);
         });
+
         event.deselected.forEach((feature) => {
           const featureCode = feature.values_.code;
-          const index = this.selectedFeatures.findIndex(
-            (f) => f.values_.code === featureCode,
+          this.selectedFeatures = this.selectedFeatures.filter(
+            (f) => f.values_.code !== featureCode,
           );
-          if (index !== -1) {
-            this.selectedFeatures.splice(index, 1)[0];
-          }
           this.setSelectedFeatures(this.selectedFeatures);
         });
+
         this.updateAccumulatedStats();
       });
       // registers interaction in module - check masterportal docu
@@ -136,7 +135,12 @@ export default {
       <p class="area">
         GESAMTFLÄCHE: {{ accumulatedAbimoStats.totalArea.toFixed(0) }} m²
       </p>
+      <!-- <p class="area">
+        Anzahl Flächen: {{ accumulatedAbimoStats.featuresSelected }}
+      </p> -->
+
       <hr />
+
       <div class="area-types-legend d-flex flex-column w-100">
         <div
           v-for="(areaType, index) in areaTypesData"
@@ -208,12 +212,12 @@ export default {
         </div>
       </div>
     </div>
-    <!-- <button
+    <button
       class="btn btn-primary mt-5"
       @click="handleBlockAreaConfirm"
     >
       Bestätigen
-    </button> -->
+    </button>
   </div>
 </template>
 
@@ -266,4 +270,3 @@ export default {
   margin-top: 10px;
 }
 </style>
-
