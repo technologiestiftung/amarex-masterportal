@@ -74,13 +74,29 @@ export default {
     this.initializeComponent();
   },
   mounted() {
-    console.log("this.themeMapsConfs", this.themeMapsConfs);
     this.themeMapsConfs[0].elements.forEach((themeMap) => {
       this.allThemeMapsGroups.push(themeMap);
     });
-    console.log("this.allThemeMapsGroups :>> ", this.allThemeMapsGroups);
+    const getCacheSelectedThemeMap = localStorage.getItem(
+      "cacheSelectedThemeMap",
+    );
+    this.selectedThemeMap = getCacheSelectedThemeMap
+      ? JSON.parse(getCacheSelectedThemeMap)
+      : null;
+    const getCacheOpenAccordions = localStorage.getItem("cacheOpenAccordions");
+    this.openAccordions = getCacheOpenAccordions
+      ? JSON.parse(getCacheOpenAccordions)
+      : [];
   },
   unmounted() {
+    localStorage.setItem(
+      "cacheSelectedThemeMap",
+      JSON.stringify(this.selectedThemeMap),
+    );
+    localStorage.setItem(
+      "cacheOpenAccordions",
+      JSON.stringify(this.openAccordions),
+    );
     this.cleanupComponent();
   },
   methods: {
