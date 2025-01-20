@@ -1,5 +1,9 @@
 <script>
 import {mapActions, mapGetters} from "vuex";
+import {
+  ChevronLeft,
+} from "lucide-vue-next";
+import colors from "../../../shared/js/utils/amarex-colors.json";   
 
 /**
  * Menu Navigation
@@ -10,6 +14,14 @@ import {mapActions, mapGetters} from "vuex";
  */
 export default {
     name: "MenuNavigation",
+    components: {
+        ChevronLeft,
+    },
+    data() {
+        return {
+            colors,
+        };
+    },
     props: {
         /** Defines in which menu the component is being rendered */
         side: {
@@ -41,47 +53,75 @@ export default {
         v-if="previousNavigation"
         :id="'mp-menu-navigation-' + side"
     >
+        <!-- Masterportal origin: change Logo -->
+        <div class="logo-container">
+            <img
+                id="logo-in-search"
+                src="../../../../portal/amarex/resources/img/amarex_logo_webtool.png"
+                alt="Anpassung des Managements von Regenwasser an Extremereignisse"
+            >
+        </div>
         <!-- Masterportal origin Menu Navigation -->
         <div
-            class="mp-menu-navigation"
+            class="mp-menu-navigation mt-4"
         >
-            <a
+            <!-- Masterportal origin: hide back functionality in mainMenu -->
+            <!-- <a
                 :id="'mp-navigation-' + side"
                 class="pt-2 mp-menu-navigation-link"
                 href="#"
                 @click="navigateBack(side)"
                 @keypress="navigateBack(side)"
             >
-                <!-- Masterportal origin Menu Navigation -->
-                <!-- <h6 class="mp-menu-navigation-link-text mb-1"><p class="bi-chevron-left me-2" />{{ previousNavigation }}</h6> -->
-                <!-- <h6 class="mp-menu-navigation-link-text mb-1"><p class="bi-chevron-left me-2" />Zurück</h6> -->
-
-            </a>
+                <h6 class="mp-menu-navigation-link-text mb-1"><p class="bi-chevron-left me-2" />{{ previousNavigation }}</h6>
+                <h6 class="mp-menu-navigation-link-text mb-1"><p class="bi-chevron-left me-2" />Zurück</h6>
+            </a> -->
         
-            <!-- Masterportal origin update reset button logic (add  && side === 'mainMenu' to v-if) -->
+            <!-- Masterportal origin: update reset button logic (add  && side === 'mainMenu' to v-if) -->
             <button
                 v-if="!isMobile && side === 'mainMenu'"
                 :id="'mp-menu-navigation-reset-button-' + side"
                 type="button"
-                class="btn-close mp-menu-navigation-reset-button"
-                :aria-label="$t('common:modules.menu.ariaLabelClose')"
+                class="mp-menu-navigation-reset-button"
                 @click="resetMenu(side)"
+            >
+            <ChevronLeft
+                :color="colors.amarex_grey_dark"
+                :size="24"
             />
+            </button>
         </div>
 
-        <!-- Masterportal origin Menu Title -->
+        <!-- Masterportal origin: remove Menu Title -->
         <!-- <h4
-            v-if="currentTitle !== 'none'"
-            class="mp-menu-navigation-moduletitle mb-4"
+        v-if="currentTitle !== 'none'"
+        class="mp-menu-navigation-moduletitle mb-4"
         >
-            {{ currentTitle }}
-        </h4> -->
-    </div>
+        {{ currentTitle }}
+    </h4> -->
+</div>
 </template>
 
 <style lang="scss" scoped>
 @import "~variables";
 
+// Masterportal origin: adjust CSS for new logo
+.logo-container {
+    width: 100%;
+    display: flex;
+    #logo-in-search {
+        width: auto;
+        height: 32px;
+        display: block;
+    }
+}
+.mp-menu-navigation-reset-button {
+    border: none;
+    background: none;
+    margin: 0;
+    padding: 0;
+    outline: 0;
+}
 .mp-menu-navigation{
     display: flex;
     justify-content: space-between;

@@ -1,5 +1,5 @@
 <script>
-import MenuContainerBodyRoot from "./MenuContainerBodyRoot.vue";
+import MenuContainerBodyRootAmarex from "./MenuContainerBodyRootAmarex.vue";
 import MenuNavigation from "./MenuNavigation.vue";
 import {mapActions, mapGetters} from "vuex";
 import GetFeatureInfo from "../../getFeatureInfo/components/GetFeatureInfo.vue";
@@ -14,7 +14,7 @@ export default {
     name: "MenuContainerBody",
     components: {
         GetFeatureInfo,
-        MenuContainerBodyRoot,
+        MenuContainerBodyRootAmarex,
         MenuNavigation
     },
     props: {
@@ -97,7 +97,7 @@ export default {
             {'mp-menu-body-collapsed': !mainExpanded && side === 'mainMenu' || !secondaryExpanded && side === 'secondaryMenu'}
         "
     >
-        <MenuNavigation :side="side" />
+        <MenuNavigation :side="side" v-if="side === 'mainMenu'" />
         <GetFeatureInfo
             v-if="side === gfiMenuSide"
             v-show="currentComponent === 'getFeatureInfo'"
@@ -110,7 +110,7 @@ export default {
             class="menu-body-component"
         />
 
-        <MenuContainerBodyRoot
+        <MenuContainerBodyRootAmarex
             v-show="currentComponent === 'root'"
             :side="side"
         />
@@ -123,39 +123,35 @@ export default {
         display: flex;
         flex-direction: column;
         align-items: stretch;
-        padding: 0 $padding $padding $padding;
         font-size: $font-size-base;
-        overflow-y: auto;
         max-height: 100%;
-
         &-collapsed {
             padding: 0;
             display: none;
         }
-        div:first-child {
-            padding-top: $padding;
-        }
-
         .menu-body-component {
-            /* Hide scrollbar for Firefox */
             -ms-overflow-style: none;
             scrollbar-width: none;
         }
-
-        /* Hide scrollbar for Chrome, Edge, Safari and Opera */
         .menu-body-component::-webkit-scrollbar {
             display: none;
         }
     }
-
+    #mp-body-root-mainMenu {
+        padding-top: 32px;
+    }
+    #mp-body-secondaryMenu {
+        .menu-body-component {
+            overflow-y: scroll;
+            max-height: 100vh;
+            padding: 32px 24px;
+            display: grid;
+            grid-template-rows: auto 1fr;
+            height: 100%;
+        }
+    }
     @include media-breakpoint-up(sm)  {
-        #mp-body-mainMenu {
-            margin-right: .5rem;
-        }
 
-        #mp-body-secondaryMenu {
-            overflow-y: auto;
-        }
         .mp-menu-body-collapsed {
             display: flex;
         }

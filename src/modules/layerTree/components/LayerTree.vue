@@ -16,21 +16,9 @@ export default {
         LayerTreeNode
     },
     computed: {
-        ...mapGetters(["allLayerConfigsStructured", "showLayerAddButton", "portalConfig"]),
+        ...mapGetters(["allLayerConfigsStructured", "showLayerAddButton"]),
         ...mapGetters("Modules/LayerTree", ["menuSide"]),
-        ...mapGetters("Modules/LayerSelection", {layerSelectionType: "type", layerSelectionName: "name"}),
-
-        /**
-         * Returns the title of button.
-         * @returns {String} the button title.
-         */
-        title () {
-            if (typeof this.portalConfig?.tree?.addLayerButton?.buttonTitle === "string" && this.portalConfig?.tree?.addLayerButton?.buttonTitle !== "") {
-                return this.portalConfig?.tree?.addLayerButton?.buttonTitle;
-            }
-
-            return "common:modules.layerTree.addLayer";
-        }
+        ...mapGetters("Modules/LayerSelection", {layerSelectionType: "type", layerSelectionName: "name"})
     },
     methods: {
         ...mapActions("Modules/LayerSelection", ["navigateForward"]),
@@ -72,9 +60,9 @@ export default {
         >
             <ElevatedButton
                 id="add-layer-btn"
-                :aria-label="$t(title)"
+                aria-label="$t('common:modules.layerTree.addLayer')"
                 :interaction="showLayerSelection"
-                :text="$t(title)"
+                :text="$t('common:modules.layerTree.addLayer')"
                 :icon="'bi-plus-circle'"
             />
         </div>

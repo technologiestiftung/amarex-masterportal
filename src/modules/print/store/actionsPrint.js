@@ -353,10 +353,10 @@ const actions = {
         }
 
         if (printJob.payload.attributes.is3dMode) {
-            trackMatomo("Print", "3D printjob created ", "Layout: " + printJob.payload.layout);
+            // trackMatomo("Print", "3D printjob created ", "Layout: " + printJob.payload.layout);
         }
         else {
-            trackMatomo("Print", "2D printjob created ", "Layout: " + printJob.payload.layout);
+            // trackMatomo("Print", "2D printjob created ", "Layout: " + printJob.payload.layout);
         }
     },
 

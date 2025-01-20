@@ -1,0 +1,170 @@
+<script>
+import draggable from "vuedraggable";
+import {mapActions, mapGetters, mapMutations} from "vuex";
+import Layer from "./LayerComponent.vue";
+import LayerAmarex from "./LayerComponentAmarex.vue";
+import {sortObjects} from "../../../shared/js/utils/sortObjects";
+import {
+    ToggleRight,
+    ToggleLeft
+} from "lucide-vue-next";
+import colors from "../../../shared/js/utils/amarex-colors.json";
+
+/**
+ * Representation of a node in layertree containing folders or layers.
+ * @module modules/layerTree/components/LayerTreeNodeAmarex
+ * @vue-data {Boolean} isOpen - Shows if node is open.
+ * @vue-computed {Object} sortedLayerConfig - The v-model for sorted layerConfig.
+ */
+export default {
+    name: "LayerTreeNodeAmarex",
+    components: {
+        Draggable: draggable,
+        Layer,
+        LayerAmarex,
+        ToggleRight,
+        ToggleLeft
+    },
+    data () {
+        return {
+            isOpen: false,
+            showToggle: false,
+            colors
+        };
+    },
+    computed: {
+        ...mapGetters(["allLayerConfigs", "layerConfigsByAttributes", "showLayerAddButton"]),
+        ...mapGetters("Modules/LayerTree", ["delay", "delayOnTouchOnly", "touchStartThreshold"]),
+
+        /**
+         * v-model for sorted layerConfig.
+         */
+        sortedLayerConfig: {
+            /**
+             * Gets the layerconfigs sorted by zIndex.
+             * @returns {void}
+             */
+            get () {
+                let sortedLayerConfig;
+
+                if (this.showLayerAddButton) {
+                    sortedLayerConfig = this.layerConfigsByAttributes({showInLayerTree: true});
+                }
+                else {
+                    sortedLayerConfig = this.allLayerConfigs;
+                }
+                sortObjects(sortedLayerConfig, "zIndex", "desc");
+
+                return sortedLayerConfig;
+            },
+            /**
+             * Sets the changed layer Configs order.
+             * @param {Object[]} changedLayerConfig The layer configs with changed order
+             * @returns {void}
+             */
+            set (changedLayerConfig) {
+                let configLength = changedLayerConfig.length;
+
+                changedLayerConfig.forEach(conf => {
+                    conf.zIndex = --configLength;
+                    this.replaceByIdInLayerConfig(conf);
+                });
+            }
+        }
+    },
+    mounted () {
+        const getCacheShowToggle = localStorage.getItem(
+            "cacheShowToggle"
+        );
+        this.showToggle = getCacheShowToggle ? JSON.parse(getCacheShowToggle) : false;
+        if (!this.showLayerAddButton) {
+            this.setRemoveOnSpill(false);
+        }
+    },
+    methods: {
+        ...mapActions("Modules/LayerTree", ["removeLayer", "replaceByIdInLayerConfig"]),
+        ...mapMutations("Modules/LayerTree", ["setRemoveOnSpill"]),
+        toggleSettings () {
+            this.showToggle = !this.showToggle;
+        },
+    },
+    unmounted () {
+        localStorage.setItem(
+            "cacheShowToggle",
+            JSON.stringify(this.showToggle),
+        );
+        this.setRemoveOnSpill(true);
+    },
+    props: {
+        openInfo: {
+            type: Function,
+            required: true
+        },
+        showInfo: {
+            type: Object
+        }
+    },
+};
+</script>
+
+<template>
+    <!-- eslint-disable vue/attribute-hyphenation -->
+    <div class="amarex-themenkarten-toggle-settings-container mb-2" @click="toggleSettings" v-if="sortedLayerConfig.some((element) => !element.baselayer && element.parentId !== `folder-1` && element.visibility)">
+        <p>Themenkarten Einstellungen {{ showToggle ? "ausblenden" : "anzeigen" }}</p>
+        <ToggleRight
+            v-if="showToggle"
+            :color="colors.amarex_secondary"
+            :size="30"
+            />
+        <ToggleLeft
+            v-else
+            :color="colors.amarex_secondary_light"
+            :size="30"
+        />
+    </div>
+
+    <p class="mb-4" v-if="!sortedLayerConfig.some((element) => !element.baselayer && element.parentId !== `folder-1` && element.visibility)">&ndash; Wähle im unten stehenden Katalog Ebenen aus verschiedenen Themenkarten aus für deine Untersuchung. &ndash; </p>
+
+    <Draggable
+        v-model="sortedLayerConfig"
+        class="dragArea no-list ps-0 m-0"
+        tag="ul"
+        item-key="name"
+        chosen-class="chosen"
+        handle=".handle-layer-component-drag"
+        :delay-on-touch-only="delayOnTouchOnly"
+        :delay="delay"
+        :touch-start-threshold="touchStartThreshold"
+    >
+        <template #item="{ element }">
+            <li v-if="!element.baselayer && element.parentId !== `folder-1` && element.visibility">
+                <LayerAmarex
+                    :showToggle="showToggle"
+                    :conf="element"
+                    :openInfo="openInfo"
+                    :showInfo="showInfo"
+                />
+            </li>
+        </template>
+    </Draggable>
+</template>
+
+
+<style lang="scss" scoped>
+    @import "~variables";
+    .no-list{
+        list-style: none;
+    }
+    .amarex-themenkarten-toggle-settings-container {
+        @include clickable();
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        p {
+            max-width: calc(100% - 50px);
+        }
+    }
+    .dragArea {
+        overflow-y: scroll;
+    }
+</style>

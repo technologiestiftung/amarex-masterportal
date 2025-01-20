@@ -985,7 +985,7 @@ export default {
 }
 
 .medium-font-size {
-    font-size: 14px;
+    font-size: 16px;
 }
 
 .pull-left {

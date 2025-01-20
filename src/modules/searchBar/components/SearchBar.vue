@@ -2,6 +2,10 @@
 import {mapGetters, mapActions, mapMutations} from "vuex";
 import SearchBarSuggestionList from "./SearchBarSuggestionList.vue";
 import SearchBarResultList from "./SearchBarResultList.vue";
+import {
+    Search
+} from "lucide-vue-next";
+import colors from "../../../shared/js/utils/amarex-colors.json";
 
 /**
  * Searchbar to access search results.
@@ -13,20 +17,25 @@ export default {
     name: "SearchBar",
     components: {
         SearchBarResultList,
-        SearchBarSuggestionList
+        SearchBarSuggestionList,
+        Search
     },
     props: {
         clickAction: {
             type: Function,
             default: undefined,
             required: false
+        },
+        menuWidth: {
+            type: Number,
+            required: false
         }
     },
-    data: function () {
+    data() {
         return {
             currentComponentSide: undefined,
-            currentSearchInput: this.searchInput,
-            layerSelectionPlaceHolder: this.placeholder
+            layerSelectionPlaceHolder: this.placeholder,
+            colors
         };
     },
     computed: {
@@ -214,11 +223,7 @@ export default {
             "setCurrentSide"
         ]),
         ...mapMutations("Menu", [
-            "switchToRoot",
-            "switchToPreviousComponent",
-            "setCurrentComponentBySide",
-            "setNavigationHistoryBySide",
-            "setCurrentComponentPropsName"
+            "switchToRoot"
         ]),
         /**
          * Starts the search in searchInterfaces, if min characters are introduced, updates the result list.
@@ -291,8 +296,13 @@ export default {
 </script>
 
 <template lang="html">
-    <div id="search-bar">
-        <div class="input-group mb-3">
+    <div id="search-bar" :style="{ maxWidth: this.menuWidth + 'px' }">
+        <div class="input-group">
+        <!-- Masterportal origin: change SearchBar Icon  -->
+            <Search
+                :color="colors.amarex_grey_dark"
+                :size="16"
+            />
             <input
                 id="searchInput"
                 ref="searchInput"
@@ -303,19 +313,6 @@ export default {
                 :aria-label="$t(layerSelectionPlaceHolder)"
                 @keydown.enter="zoomToAndMarkSearchResult(searchInputValue), startSearch(currentComponentSide)"
             >
-            <button
-                id="search-button"
-                class="btn btn-primary"
-                :disabled="!searchActivated"
-                :aria-label="$t(placeholder)"
-                type="button"
-                @click="zoomToAndMarkSearchResult(searchInputValue), startSearch(currentComponentSide)"
-            >
-                <i
-                    class="bi-search"
-                    role="img"
-                />
-            </button>
         </div>
         <SearchBarSuggestionList
             v-if="!showAllResults"
@@ -325,23 +322,55 @@ export default {
             v-else-if="showAllResults"
             :limited-sorted-search-results="limitedSortedSearchResults"
         />
+        <!-- Masterportal origin: added empty states for user to input text to be able to search -->
+        <p v-if="!searchInputValue.length && currentComponentSide === 'searchbar'" class="p-3">Bitte gib eine Adresse ein, die du suchen willst...</p>
+        <p v-else-if="!!searchInputValue.length && searchInputValue.length < minCharacters && currentComponentSide === 'searchbar'" class="p-3">Bitte gib min. {{ minCharacters }} Zeichen ein...</p>
     </div>
 </template>
 
 <style lang="scss" scoped>
 @import "~variables";
+    // Masterportal origin: change SearchBar Stylings
+    .input-group {
+        border: 1px solid $amarex_grey_mid;
+        align-items: center !important;
+    }
     #search-bar {
+        margin-top: 24px;
+        & > div:not(.suggestions-container) {
+            margin-left: 0 !important;
+            margin-right: 0 !important;
+            margin-top: 0 !important;
+            overflow: hidden;
+            padding: 10px 16px;
+            margin-bottom: 24px;
+        }
         #search-button {
             border-top-right-radius: 5px;
             border-bottom-right-radius: 5px;
+            cursor: pointer;
         }
         .input-label {
             color: $placeholder-color;
         }
-    }
-    .overflowHidden{
-        overflow: hidden;
-        text-overflow: ellipsis;
+        button {
+            border: none !important;
+            background: $amarex_primary;
+        }
+        input {
+            border: none !important;
+            padding: 0 !important;
+            transform: translateY(1px);
+            margin-left: 10px !important;
+            &::placeholder {
+                color: $amarex_grey_dark !important;
+                font-family: Arial;
+                font-size: 16px;
+                font-style: normal;
+                font-weight: 400;
+                line-height: 16px;
+            }
+        }
     }
 </style>
 

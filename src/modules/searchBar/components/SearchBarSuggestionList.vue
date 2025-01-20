@@ -35,15 +35,11 @@ export default {
         ]),
         ...mapGetters("Menu", [
             "menuBySide"
-        ]),
-        ...mapGetters([
-            "portalConfig"
         ])
     },
     methods: {
         ...mapMutations("Modules/SearchBar", [
             "setCurrentAvailableCategories",
-            "setSearchResultsActive",
             "setShowAllResults",
             "setShowAllResultsSearchInterfaceInstance"
         ]),
@@ -52,28 +48,7 @@ export default {
             "setNavigationHistoryBySide",
             "setCurrentComponent",
             "setCurrentComponentBySide"
-        ]),
-        /**
-         * Prepares the all results list of one category and adapts the navigation history
-         * @param {String} categoryItem the category of the results
-         * @returns {void}
-         */
-        prepareShowAllResults (categoryItem) {
-            const side = this.currentSide;
-
-            this.setShowAllResultsSearchInterfaceInstance(this.limitedSortedSearchResults.results.categoryProvider[categoryItem]);
-            if (this.menuBySide(side)) {
-                this.setNavigationCurrentComponentBySide({side: side, newComponent: {props: {name: "common:modules.searchBar.searchResults"}, type: "searchbar"}});
-                this.setCurrentComponentBySide({side: side, type: "searchbar"});
-                this.setNavigationHistoryBySide({side: side, newHistory: [{type: "root", props: []}, {type: "searchBar", props: {name: "modules.searchBar.searchBar"}}, {type: "searchBar", props: {name: "modules.searchBar.searchResultList"}}]});
-            }
-            this.setCurrentAvailableCategories(categoryItem);
-            this.currentShowAllList = this.limitedSortedSearchResults.currentShowAllList.filter(value => {
-                return value.category === categoryItem;
-            });
-
-            this.setShowAllResults(true);
-        }
+        ])
     }
 };
 </script>
@@ -88,24 +63,7 @@ export default {
             id="search-bar-suggestion-list"
             :key="categoryItem"
         >
-        <!-- Masterportal origin search resultss suggestion header -->
-            <!-- <h5
-                id="search-bar-suggestion-heading"
-                class="bold mb-4 mt-4"
-                :title="$t('common:modules.searchBar.searchResultsFrom') + limitedSortedSearchResults.results.categoryProvider[categoryItem] + '-' + $t('common:modules.searchBar.search')"
-            >
-                <img
-                    v-if="limitedSortedSearchResults.results[categoryItem + 'ImgPath']"
-                    alt="search result image"
-                    src="searchResult.imgPath"
-                >
-                <i
-                    v-if="!limitedSortedSearchResults.results[categoryItem + 'ImgPath']"
-                    :class="limitedSortedSearchResults.results[categoryItem + 'Icon']"
-                />
-
-                {{ categoryItem +": " + limitedSortedSearchResults.results[categoryItem+"Count"] + "    " + $t("common:modules.searchBar.searchResults") }}
-            </h5> -->
+            <!-- Masterportal origin search resultss suggestion header -->
             <div
                 v-for="(item, index) in showAllResults===false ? limitedSortedSearchResults.results : limitedSortedSearchResults.currentShowAllList"
                 :key="item.id + '-' + index"
@@ -121,17 +79,6 @@ export default {
                 </p>
             </div>
             <!-- Masterportal origin show all button -->
-            <!-- <div class="showAllSection">
-                <button
-                    type="button"
-                    class="btn btn-light d-flex text-left"
-                    :title="$t('common:modules.searchBar.showAllResults')"
-                    @click="prepareShowAllResults(categoryItem)"
-                >
-                    {{ $t("common:modules.searchBar.showAll") }}
-                    <span class="bi-chevron-right" />
-                </button>
-            </div> -->
         </div>
     </div>
 </template>

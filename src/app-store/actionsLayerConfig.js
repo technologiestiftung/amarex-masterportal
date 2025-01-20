@@ -308,7 +308,7 @@ export default {
             baselayerConfs: rootGetters.allLayerConfigsStructured(treeBaselayersKey)
         }, {root: true});
 
-        trackMatomo("Layer", "Layertree category switched", i18next.t(category.name));
+        // trackMatomo("Layer", "Layertree category switched", i18next.t(category.name));
     },
 
     /**

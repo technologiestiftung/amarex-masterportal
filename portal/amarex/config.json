@@ -86,7 +86,7 @@
     },
     "tree": {
       "addLayerButton": {
-        "active": true,
+        "active": false,
         "searchBar": {
           "active": true,
           "searchInterfaceInstanceId": "elasticSearch_0",
@@ -101,7 +101,7 @@
       "expanded": true,
       "title": {
         "text": "",
-        "logo": "./resources/img/amarex_logo.png",
+        "logo": "./resources/img/amarex_logo_webtool.png",
         "toolTip": "Anpassung des Managements von Regenwasser an Extremereignisse"
       },
       "searchBar": {
@@ -156,10 +156,6 @@
         },
         {
           "id": "truedop_2024",
-          "visibility": false
-        },
-        {
-          "id": "s_wfs_alkis",
           "visibility": false
         }
       ]

@@ -99,12 +99,12 @@ export default {
                         content: i18next.t("common:modules.searchBar.layerResultNotShown")
                     }, {root: true});
                 }
-                trackMatomo("Layer", "Layer added via Search", rootGetters.layerConfigById(layerId).name + " (layerId: " + layerId + ")");
+                // trackMatomo("Layer", "Layer added via Search", rootGetters.layerConfigById(layerId).name + " (layerId: " + layerId + ")");
             });
         }
         else {
             dispatch("activateLayerInTopicTree", {layerId, source});
-            trackMatomo("Layer", "Layer added via Search", rootGetters.layerConfigById(layerId).name + " (layerId: " + layerId + ")");
+            // trackMatomo("Layer", "Layer added via Search", rootGetters.layerConfigById(layerId).name + " (layerId: " + layerId + ")");
         }
     },
 

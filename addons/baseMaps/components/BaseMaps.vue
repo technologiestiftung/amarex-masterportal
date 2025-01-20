@@ -1,27 +1,22 @@
 <script>
 import { mapGetters, mapMutations, mapActions } from "vuex";
+import colors from "../../../src/shared/js/utils/amarex-colors.json";
 
 export default {
   name: "BaseMaps",
   data() {
     return {
-      selectedBaseLayer: null,
+      selectedBaseLayer: 0,
+      colors,
     };
   },
   computed: {
-    ...mapGetters("Maps", ["mode"]),
     ...mapGetters([
-      "isMobile",
       "visibleBaselayerConfigs",
       "allBaselayerConfigs",
       "layerConfigsByAttributes",
-      "allLayerConfigs",
     ]),
-    ...mapGetters("Modules/BaseMaps", [
-      "active",
-      "baselayerIds",
-      "topBaselayerId",
-    ]),
+    ...mapGetters("Modules/BaseMaps", ["baselayerIds", "topBaselayerId"]),
   },
   watch: {
     visibleBaselayerConfigs: {
@@ -59,7 +54,6 @@ export default {
       baselayer: true,
       showInLayerTree: true,
     });
-
     if (baselayers.length > 1) {
       const maxZIndexLayer = baselayers.reduce((max, layer) =>
         layer.zIndex > max.zIndex ? layer : max,
@@ -70,7 +64,6 @@ export default {
     } else {
       this.setTopBaselayerId(baselayers[0].id);
     }
-
     baselayerConfigIds.push(
       ...Object.values(this.allBaselayerConfigs)
         .filter((layer) => layer.id !== this.topBaselayerId)
@@ -84,17 +77,9 @@ export default {
       "setTopBaselayerId",
     ]),
     ...mapActions("Modules/BaseMaps", ["updateLayerVisibilityAndZIndex"]),
-    ...mapActions("Modules/LayerSelection", ["changeVisibility"]),
-
     switchActiveBaselayer(layerId) {
-      //
-      // TODO: fix baselayer display
-      //
-
       const selectableBackroundLayerIds = this.baselayerIds;
-
       this.updateLayerVisibilityAndZIndex(layerId);
-
       selectableBackroundLayerIds.splice(
         selectableBackroundLayerIds.indexOf(layerId),
         1,
@@ -103,9 +88,23 @@ export default {
         selectableBackroundLayerIds.push(this.topBaselayerId);
       }
       this.setBaselayerIds(selectableBackroundLayerIds);
-
       this.setTopBaselayerId(layerId);
     },
+    selectItem(layer, index) {
+      this.switchActiveBaselayer(layer.id);
+      this.selectedBaseLayer = index;
+    },
+  },
+  mounted() {
+    const objectWithHighestZIndex = this.visibleBaselayerConfigs.reduce(
+      (max, current) => {
+        return current.zIndex > max.zIndex ? current : max;
+      },
+      this.visibleBaselayerConfigs[0],
+    );
+    this.selectedBaseLayer = this.allBaselayerConfigs.findIndex(
+      (layer) => layer.id === objectWithHighestZIndex.id,
+    );
   },
 };
 </script>
@@ -116,26 +115,29 @@ export default {
       <div
         v-for="(layer, index) in this.allBaselayerConfigs"
         :key="index"
-        class="base-layer-item d-flex flex-column gap-3"
+        class="base-layer-item"
+        :class="{
+          selected: selectedBaseLayer === index,
+        }"
+        @click="selectItem(layer, index)"
       >
-        <div>
-          <img
-            :src="
-              layer.preview.src
-                ? layer.preview.src
-                : `https://picsum.photos/id/237/200/300`
-            "
-            :alt="layer.name"
-            class="base-layer-thumbnail"
-          />
-          <span class="base-layer-name pl-3">{{ layer.name }}</span>
+        <div class="circle">
+          <div v-if="selectedBaseLayer === index"></div>
         </div>
-        <button
-          class="btn btn-primary"
-          @click="switchActiveBaselayer(layer.id)"
-        >
-          <span class="pl-2">Diese Karte wählen</span>
-        </button>
+        <div class="text-container">
+          <h5>
+            {{ layer?.preview?.title || layer.name }}
+          </h5>
+          <p v-if="!!layer?.preview?.abstract">
+            {{ layer?.preview?.abstract }}
+          </p>
+        </div>
+        <div
+          class="preview-image"
+          :style="{
+            backgroundImage: `url(${layer.preview.src})`,
+          }"
+        ></div>
       </div>
     </div>
   </div>
@@ -151,36 +153,66 @@ export default {
 .base-layer-list {
   display: flex;
   flex-direction: column;
-  gap: 4px;
-}
-
-.base-layer-item {
-  padding: 12px;
-  background-color: #ececed;
-  border: solid 1px #e4e4e4;
-}
-
-.base-layer-label {
-  display: flex;
-  align-items: center;
-  cursor: pointer;
-}
-
-.base-layer-thumbnail {
-  width: 45px;
-  height: 40px;
-  margin-right: 10px;
-  overflow: hidden;
-  border-radius: 4px;
-  object-fit: cover;
-  border: 1px solid #e4e4e4;
-}
-
-.base-layer-name {
-  font-size: 14px;
-}
-
-input[type="radio"] {
-  margin-right: 10px;
+  .base-layer-item {
+    border-bottom: 2px solid $amarex_grey_light;
+    border-left: 2px solid $amarex_primary;
+    border-right: 2px solid $amarex_primary;
+    border-top: 2px solid $amarex_primary;
+    display: grid;
+    grid-template-columns: 26px minmax(100px, 1fr) 80px;
+    align-items: center;
+    gap: 16px;
+    padding: 16px 10px 16px 16px;
+    cursor: pointer;
+    user-select: none;
+    &.selected {
+      border: 2px solid $amarex_secondary;
+      .circle {
+        border: 2px solid $amarex_secondary;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        div {
+          background-color: $amarex_secondary;
+          width: 14px;
+          height: 14px;
+          border-radius: 50%;
+        }
+      }
+    }
+    .preview-image {
+      width: 80px;
+      height: 80px;
+      background-size: cover;
+      background-position: center;
+    }
+    .text-container {
+      overflow: hidden;
+      h5 {
+        color: $amarex_secondary;
+        font-family: Arial;
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 700;
+        line-height: 16px;
+        margin-bottom: 8px;
+      }
+      p {
+        overflow: hidden;
+        color: $amarex_grey_mid;
+        font-family: Arial;
+        font-size: 14px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 16px;
+      }
+    }
+    .circle {
+      width: 26px;
+      height: 26px;
+      border: 2px solid $amarex_grey_mid;
+      border-radius: 50%;
+    }
+  }
 }
 </style>

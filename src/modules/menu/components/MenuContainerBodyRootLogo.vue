@@ -56,7 +56,8 @@ export default {
             :src="logo"
             :alt="toolTip || text"
         >
-        <h1>{{ $t(text) }}</h1>
+        <!-- Masterportal origin: add text to logo -->
+        <h1 v-if="idAppendix !== 'mainMenu' ">{{ $t(text) }}</h1>
     </a>
 </template>
 
@@ -64,16 +65,16 @@ export default {
 @import "~variables";
 
 .mp-menu-logo {
-        padding: 0 $padding 0 $padding;
+        padding: 0;
         width: 100%;
         display: flex;
-        justify-content: space-around;
         overflow-wrap: break-word;
-
+        margin-bottom: 26px;
         img {
-            max-height: 30px;
-            flex-grow: 0;
-            flex-shrink: 0;
+            /* Masterportal origin: give logo a max-width */
+            width: auto;
+            height: 32px;
+            display: block;
         }
 
         h1 {
@@ -84,14 +85,5 @@ export default {
         }
     }
 
-@include media-breakpoint-up(sm)  {
-    .mp-menu-logo {
-
-        img {
-            max-height: 40px;
-        }
-
-    }
-}
 
 </style>
