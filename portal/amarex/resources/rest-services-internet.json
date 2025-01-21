@@ -4,5 +4,12 @@
     "name": "Komoot Photon Suche",
     "url": "https://photon.komoot.io/api/?",
     "typ": "WFS"
+  },
+  {
+    "id": "mapfish_printservice_id",
+    "name": "Mapfish Print Service",
+    "url": "http://localhost:8080/print/",
+    "typ": "PrintService"
   }
 ]
+

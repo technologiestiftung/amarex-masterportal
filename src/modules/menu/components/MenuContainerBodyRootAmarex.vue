@@ -32,7 +32,7 @@ export default {
                 // { label: '9. Eigene Notizen', component: 'draw' },
                 // { label: 'X. Eigene Notizen', component: 'draw_old' },
                 // { label: 'X. ESB Tool', component: 'esbTool' },
-                // { label: 'X. Print', component: 'print' },
+                { label: 'X. Print', component: 'print' },
                 // { label: 'X. Multikriterien Analyse', component: 'multiCriteria' },
                 { label: 'X. Report zusammenstellen', component: 'reportPrinter' },
                 // { label: 'X. Projekt speichern/exportieren', component: 'projectDownloader' }
