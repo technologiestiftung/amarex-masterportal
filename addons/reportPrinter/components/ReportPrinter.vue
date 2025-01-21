@@ -74,63 +74,18 @@ export default {
       this.map.center = mapView.getCenter();
     },
 
-    async generatePDF() {
-      // set state title and description
-      this.setProjectTitle(this.report.title);
-      this.setProjectDescription(this.report.description);
+    async generateReport() {
+      console.log("[ReportPrinter] :: generate Report");
 
-      const doc = new jsPDF();
+      let payload = {};
 
-      this.getData();
-
-      // start at x = 10, y = 10
-      let x = 10,
-        y = 10;
-
-      // INFO: add new page if needed
-      // const addNewPageIfNeeded = (yPosition, doc) => {
-      //   if (yPosition > this.pdf.max.width - this.pdf.margin.bottom) {
-      //     doc.addPage();
-      //     yPosition = this.addHeader(doc);
-      //   }
-      //   return yPosition;
-      // };
-
-      y = this.addHeader(doc);
-
-      y += this.pdf.margin.top;
-      y = this.addTextWithWordWrap(
-        doc,
-        this.report.title,
-        x,
-        y,
-        this.pdf.max.width - 2 * x,
-        this.pdf.fontSize.m,
-        this.lineHeight,
-      );
-      y += this.pdf.margin.bottom;
-
-      doc
-        .setFontSize(this.pdf.fontSize.m)
-        .text("Steckbrief Untersuchungsgebiet", x, y);
-      y += this.pdf.margin.bottom;
-
-      y += this.pdf.margin.top;
-
-      doc
-        .setFontSize(this.pdf.fontSize.m)
-        .text(`X-Koordinate: ${this.map.center[0].toFixed(2)}`, x, y);
-      y += this.pdf.margin.bottom;
-      doc
-        .setFontSize(this.pdf.fontSize.m)
-        .text(`Y-Koordinate: ${this.map.center[1].toFixed(2)}`, x, y);
-      y += this.pdf.margin.bottom;
-
-      try {
-        doc.save("report.pdf");
-      } catch (error) {
-        console.error("Fehler beim Erstellen des PDFs:", error);
-      }
+      getReport(payload)
+        .then(() => {
+          console.log("Report Data: successfully retrieved");
+        })
+        .catch((error) => {
+          console.error("Fehler beim Abrufen des Reports:", error);
+        });
     },
   },
 };
@@ -168,11 +123,12 @@ export default {
         rows="3"
       />
     </div>
+
     <button
       class="btn btn-primary"
-      @click="generatePDF"
+      @click="generateReport"
     >
-      Download Report
+      Get Mapfish Print Report
     </button>
   </div>
 </template>
@@ -183,3 +139,4 @@ export default {
   height: 100px;
 }
 </style>
+

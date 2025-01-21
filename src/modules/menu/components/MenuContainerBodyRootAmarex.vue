@@ -34,7 +34,7 @@ export default {
                 // { label: 'X. ESB Tool', component: 'esbTool' },
                 // { label: 'X. Print', component: 'print' },
                 // { label: 'X. Multikriterien Analyse', component: 'multiCriteria' },
-                // { label: 'X. Report zusammenstellen', component: 'reportPrinter' },
+                { label: 'X. Report zusammenstellen', component: 'reportPrinter' },
                 // { label: 'X. Projekt speichern/exportieren', component: 'projectDownloader' }
             ],
             currentStepIndex: 0,
