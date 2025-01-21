@@ -331,7 +331,8 @@
                   "visibility": false,
                   "showInLayerTree": false
                 }
-              ]
+              ],
+              "desc": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sit amet libero auctor, ultricies nunc nec, tincidunt nunc. Nullam nec nunc nec nunc ultricies tincidunt. Nullam nec nunc nec nunc ultricies"
             },
             {
               "name": "Hitze",
@@ -367,7 +368,8 @@
                   "visibility": false,
                   "showInLayerTree": false
                 }
-              ]
+              ],
+              "desc": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sit amet libero auctor, ultricies nunc nec, tincidunt nunc. Nullam nec nunc nec nunc ultricies tincidunt. Nullam nec nunc nec nunc ultricies"
             }
           ]
         }
@@ -375,3 +377,4 @@
     }
   }
 }
+
