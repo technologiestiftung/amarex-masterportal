@@ -39,6 +39,7 @@ export default {
         center: [0, 0],
       },
       lineHeight: 10,
+      reportLoading: false,
     };
   },
   computed: {
@@ -77,13 +78,17 @@ export default {
     async generateReport() {
       console.log("[ReportPrinter] :: generate Report");
 
+      this.reportLoading = true;
+
       let payload = {};
 
       getReport(payload)
         .then(() => {
           console.log("Report Data: successfully retrieved");
+          this.reportLoading = false;
         })
         .catch((error) => {
+          this.reportLoading = false;
           console.error("Fehler beim Abrufen des Reports:", error);
         });
     },
@@ -126,9 +131,21 @@ export default {
 
     <button
       class="btn btn-primary"
+      @click="getData"
+    >
+      get Data
+    </button>
+
+    <button
+      class="btn btn-primary"
       @click="generateReport"
     >
-      Get Mapfish Print Report
+      <div
+        v-if="reportLoading"
+        class="spinner-border"
+        role="status"
+      ></div>
+      Drucke Report
     </button>
   </div>
 </template>
