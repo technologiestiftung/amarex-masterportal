@@ -1,7 +1,7 @@
 <script>
 import { mapGetters, mapMutations } from "vuex";
-import { jsPDF } from "jspdf";
 import mapCollection from "../../../src/core/maps/js/mapCollection";
+import getReport from "../api/getReport";
 
 /**
  * ReportPrinter
@@ -62,77 +62,15 @@ export default {
       "setProjectTitle",
       "setProjectDescription",
     ]),
-    splitTextToFit(doc, text, maxWidth, fontSize) {
-      doc.setFontSize(fontSize);
-      const words = text.split(" ");
-      let lines = [],
-        currentLine = words[0];
-
-      for (let i = 1; i < words.length; i++) {
-        const word = words[i],
-          width =
-            (doc.getStringUnitWidth(currentLine + " " + word) * fontSize) /
-            doc.internal.scaleFactor;
-
-        if (width < maxWidth) {
-          currentLine += " " + word;
-        } else {
-          lines.push(currentLine);
-          currentLine = word;
-        }
-      }
-      lines.push(currentLine);
-      return lines;
-    },
-    addTextWithWordWrap(doc, text, x, y, maxWidth, fontSize, lineHeight) {
-      const lines = this.splitTextToFit(doc, text, maxWidth, fontSize);
-
-      lines.forEach((line, index) => {
-        doc.text(line, x, y + index * lineHeight);
-      });
-      return y + lines.length * lineHeight;
-    },
-    async takeScreenshot() {
+    getData() {
+      // set state title and description
+      this.setProjectTitle(this.report.title);
+      this.setProjectDescription(this.report.description);
+      const mapView = mapCollection.getMapView("2D");
       const mapElement = document.getElementById("map");
-
       if (!mapElement) {
         throw new Error("Kartencontainer nicht gefunden");
       }
-
-      const canvas = mapElement.querySelector("canvas");
-
-      if (!canvas) {
-        throw new Error("Canvas-Element in der Karte nicht gefunden");
-      }
-
-      try {
-        return canvas.toDataURL("image/png");
-      } catch (e) {
-        console.error("Fehler beim direkten Zugriff auf das Canvas:", e);
-        throw new Error("Konnte keinen Screenshot erstellen");
-      }
-    },
-
-    addHeader(doc) {
-      let y = 1,
-        x = 0;
-
-      doc.setFillColor("#29A992");
-      // rect: x, y, w, h, style
-      doc.rect(x, y, this.pdf.max.width, 8, "F");
-      doc.setFontSize(this.pdf.fontSize.m);
-      y += this.pdf.margin.bottom + 8;
-      doc.text("AMAREX Webtool", 150, y);
-      doc.setFontSize(this.pdf.fontSize.s);
-      y += this.pdf.margin.bottom;
-      doc.text(`Report Nr. xxx, Bearbeiter: ${this.report.editor}`, 100, y);
-      y += this.pdf.margin.bottom;
-
-      return y; // return y position
-    },
-    getData() {
-      const mapView = mapCollection.getMapView("2D");
-
       this.map.center = mapView.getCenter();
     },
 
