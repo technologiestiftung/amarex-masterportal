@@ -153,6 +153,7 @@ export default {
       return this.openAccordions.includes(target);
     },
     openTransparencySubMenu(themeMap) {
+      if (!themeMap.visibility) return;
       if (this.selectedThemeMap?.id === themeMap.id) {
         this.selectedThemeMap = null;
       } else {
@@ -280,7 +281,11 @@ export default {
               </p>
               <button @click="openTransparencySubMenu(themeMap)">
                 <Settings
-                  :color="colors.amarex_secondary"
+                  :color="
+                    themeMap.visibility
+                      ? colors.amarex_secondary
+                      : colors.amarex_grey_light
+                  "
                   :size="20"
                 />
               </button>
@@ -296,7 +301,7 @@ export default {
             </div>
             <div
               class="theme-map-sub"
-              v-if="themeMap.id === selectedThemeMap?.id && themeMap.visibility"
+              v-if="themeMap.id === selectedThemeMap?.id"
             >
               <p>Deckkraft:</p>
               <SliderItem
