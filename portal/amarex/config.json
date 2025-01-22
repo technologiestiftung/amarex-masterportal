@@ -235,6 +235,7 @@
             {
               "name": "Starkregen",
               "type": "folder",
+              "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sit amet libero auctor, ultricies nunc nec, tincidunt nunc. Nullam nec nunc nec nunc ultricies tincidunt. Nullam nec nunc nec nunc ultricies",
               "elements": [
                 {
                   "id": "ua_srgk:a_modellgebiete",
@@ -336,6 +337,7 @@
             {
               "name": "Hitze",
               "type": "folder",
+              "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sit amet libero auctor, ultricies nunc nec, tincidunt nunc. Nullam nec nunc nec nunc ultricies tincidunt. Nullam nec nunc nec nunc ultricies",
               "elements": [
                 {
                   "id": "wmsk_04106_kenntage2015:5",
@@ -375,3 +377,4 @@
     }
   }
 }
+
