@@ -10,6 +10,13 @@
     "name": "Mapfish Print Service",
     "url": "http://localhost:8080/print/",
     "typ": "PrintService"
+  },
+  {
+    "id": "mapfish_printservice_id_local",
+    "name": "Mapfish Print Service",
+    "url": "http://localhost:8080/print/",
+    "typ": "PrintService"
   }
 ]
+
 
