@@ -134,7 +134,7 @@ export default {
     openInfo(info) {
       this.showInfo = {
         title: info.name,
-        desc: info.desc,
+        description: info.description,
         legend: info.legend,
       };
     },
@@ -329,7 +329,7 @@ export default {
       class="layer-information-container"
       v-if="showInfo"
       :class="{
-        info: showInfo?.desc,
+        info: showInfo?.description,
         legend: showInfo?.legend,
       }"
     >
@@ -347,14 +347,14 @@ export default {
         {{ showInfo?.title }}
       </p>
       <p
-        v-if="showInfo?.desc"
-        class="desc"
+        v-if="showInfo?.description"
+        class="description"
       >
-        {{ showInfo?.desc }}
+        {{ showInfo?.description }}
       </p>
       <p
         v-if="showInfo?.legend"
-        class="desc"
+        class="description"
       >
         Legende:
       </p>
@@ -474,7 +474,7 @@ export default {
     line-height: 24px;
     color: $amarex_secondary;
   }
-  .desc {
+  .description {
     font-size: 16px;
     font-weight: 400;
     line-height: 24px;
