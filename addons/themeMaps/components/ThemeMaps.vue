@@ -278,13 +278,7 @@ export default {
               <p class="thememap-name">
                 {{ themeMap.name }}
               </p>
-              <button
-                :style="{
-                  visibility: themeMap.visibility ? 'visible' : 'hidden',
-                }"
-                @click="openTransparencySubMenu(themeMap)"
-                :active="themeMap.visibility"
-              >
+              <button @click="openTransparencySubMenu(themeMap)">
                 <Settings
                   :color="colors.amarex_secondary"
                   :size="20"
