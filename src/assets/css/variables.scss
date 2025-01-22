@@ -16,6 +16,12 @@ $amarex_grey_mid: #A4A4A4;
 $amarex_grey_dark: #5A5A5A;
 $amarex_green: #00F456;
 $amarex_red: #F40004;
+$amarex_extras_darkgreen: #2E9F61;
+$amarex_extras_lightgreen: #53C486;
+$amarex_extras_darkyellow: #B4B446;
+$amarex_extras_lightyellow: #DFDF6B;
+$amarex_extras_darkred: #971F1F;
+$amarex_extras_lightred: #D17B7B;
 
 
 // Typography
@@ -133,7 +139,6 @@ $tool_box_shadow: 0 6px 12px rgba(0, 0, 0, 0.176);
 .amarex-btn-primary {
   @include clickable();
   background: $amarex_secondary_mid;
-  // background: $amarex_secondary;
   border: none;
   padding: 10px 16px;
   display: flex;
@@ -142,7 +147,6 @@ $tool_box_shadow: 0 6px 12px rgba(0, 0, 0, 0.176);
   gap: 8px;
   * {
     color: $amarex_secondary;
-    // color: $amarex_primary;
   }
   p {
     font-size: 16px;
@@ -153,17 +157,29 @@ $tool_box_shadow: 0 6px 12px rgba(0, 0, 0, 0.176);
   &.mid p {
     text-align: center;
   }
-  &:not(.deactivated):hover {
-    background: $amarex_secondary;
-    svg {
+  &:not(.deactivated):not(.accent):hover {
+    background: $amarex_secondary_light;
+    /* svg {
       stroke: $amarex_primary !important;
     }
     p {
       color: $amarex_primary !important;
-    }
+    } */
   }
   &.accent {
-    background: $amarex_secondary_mid;
+    background: $amarex_secondary;
+    * {
+      color: $amarex_primary !important
+    }
+    &:not(.deactivated):hover {
+      background: $amarex_secondary_light;
+      svg {
+        stroke: $amarex_secondary !important;
+      }
+      p {
+        color: $amarex_secondary !important;
+      }
+    }
   }
   &.grey {
     background: $amarex_grey_light;
