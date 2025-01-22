@@ -141,7 +141,7 @@ export default {
         padding-top: 32px;
     }
     #mp-body-secondaryMenu {
-        .menu-body-component {
+        .menu-body-component:not(#abimo-amarex) {
             overflow-y: scroll;
             max-height: 100vh;
             padding: 32px 24px;
