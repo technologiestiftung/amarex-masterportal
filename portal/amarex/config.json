@@ -147,14 +147,6 @@
           "visibility": false
         },
         {
-          "id": "webatlas_wms_color",
-          "visibility": false
-        },
-        {
-          "id": "hg_openlayer_wmts",
-          "visibility": false
-        },
-        {
           "id": "truedop_2024",
           "visibility": false
         }
@@ -220,11 +212,6 @@
         },
         {
           "name": "Potentialkarten",
-          "type": "folder",
-          "elements": []
-        },
-        {
-          "name": "Hintergrundkarten",
           "type": "folder",
           "elements": []
         },
@@ -655,5 +642,4 @@
     }
   }
 }
-
 
