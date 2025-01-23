@@ -2,11 +2,13 @@
 import { mapGetters, mapMutations, mapActions } from "vuex";
 import { treeSubjectsKey } from "../../../src/shared/js/utils/constants";
 import {
-  CirclePlus,
-  CircleMinus,
   ChevronDown,
   Map as MapIcon,
+  Info as InfoIcon,
+  X as CloseIcon,
   Settings,
+  EyeOff,
+  EyeIcon,
 } from "lucide-vue-next";
 import colors from "../../../src/shared/js/utils/amarex-colors.json";
 import SliderItem from "../../../src/shared/modules/slider/components/SliderItem.vue";
@@ -14,10 +16,12 @@ import SliderItem from "../../../src/shared/modules/slider/components/SliderItem
 export default {
   name: "ThemeMaps",
   components: {
-    CirclePlus,
-    CircleMinus,
     ChevronDown,
+    EyeOff,
+    EyeIcon,
+    CloseIcon,
     MapIcon,
+    InfoIcon,
     Settings,
     SliderItem,
   },
@@ -94,6 +98,7 @@ export default {
       this.navigateForward({ lastFolderName: "root", themeMapsConfs });
     },
     themeMapClick(conf) {
+      if (this.showInfo) return (this.showInfo = null);
       const isLayerVisible = conf.visibility;
       this.changeVisibility({ layerId: conf.id, value: !isLayerVisible });
     },
@@ -106,12 +111,18 @@ export default {
       });
       return allAreChecked;
     },
-    clickedSelectAll(themeMapGroup) {
+    clickedSelectAll(themeMapGroup, collapse) {
+      if (this.showInfo) return (this.showInfo = null);
       let checkedSelectAll = null;
       if (!this.checkIfAllAreChecked(themeMapGroup)) {
         checkedSelectAll = true;
       } else {
         checkedSelectAll = false;
+      }
+      if (this.openAccordions.indexOf(collapse) === -1 && checkedSelectAll) {
+        this.openAccordions.push(collapse);
+      } else if (!checkedSelectAll) {
+        this.openAccordions.splice(this.openAccordions.indexOf(collapse), 1);
       }
       themeMapGroup.elements.forEach((subThemeMap) => {
         this.changeVisibility({
@@ -120,22 +131,12 @@ export default {
         });
       });
     },
-    openInfo(conf) {
-      if (conf?.id === this.showInfo?.id) return (this.showInfo = null);
-      let findFolderName;
-      this.themeMapsConfs.forEach((themeMap) => {
-        themeMap.elements.forEach((subThemeMap) => {
-          if (subThemeMap.elements.some((element) => element.id === conf.id)) {
-            findFolderName = subThemeMap;
-          }
-        });
-      });
+    openInfo(info) {
       this.showInfo = {
-        ...conf,
-        folderName: findFolderName.name,
+        title: info.name,
+        description: info.description,
+        legend: info.legend,
       };
-      this.startLayerInformation(conf);
-      this.resetMenu("mainMenu");
     },
     hideInfo() {
       this.showInfo = null;
@@ -164,6 +165,12 @@ export default {
         transparency: 100 - parseInt($event.target.value, 10),
       });
     },
+    handleParentClick(event) {
+      if (this.showInfo) {
+        this.showInfo = null;
+        event.stopPropagation();
+      }
+    },
   },
   beforeUnmount() {
     if (this.resizeObserver) {
@@ -174,11 +181,12 @@ export default {
 </script>
 
 <template lang="html">
-  <div id="theme-accordion">
+  <div>
     <div
       v-for="(themeMapGroup, indexThemeMapGroup) in this.allThemeMapsGroups"
       :key="indexThemeMapGroup"
       class="accordion-item"
+      @click="handleParentClick"
     >
       <button
         class="accordion-button"
@@ -193,14 +201,16 @@ export default {
         <div class="accordion-button-wrapper">
           <button
             class="select-all-btn"
-            @click.stop="clickedSelectAll(themeMapGroup)"
+            @click.stop="
+              clickedSelectAll(themeMapGroup, `#collapse${indexThemeMapGroup}`)
+            "
           >
-            <CircleMinus
+            <EyeOff
               v-if="checkIfAllAreChecked(themeMapGroup)"
               :color="colors.amarex_secondary"
               :size="20"
             />
-            <CirclePlus
+            <EyeIcon
               v-else
               :color="colors.amarex_secondary"
               :size="20"
@@ -210,6 +220,15 @@ export default {
           <p class="thememapgroup-number">
             {{ themeMapGroup.elements?.length }} Karten
           </p>
+          <button
+            class="select-all-btn"
+            @click.stop="openInfo(themeMapGroup)"
+          >
+            <InfoIcon
+              :color="colors.amarex_secondary"
+              :size="20"
+            />
+          </button>
           <div
             class="icon-container"
             :style="{
@@ -245,12 +264,12 @@ export default {
               }"
             >
               <button @click="themeMapClick(themeMap)">
-                <CircleMinus
+                <EyeOff
                   v-if="themeMap.visibility"
                   :color="colors.amarex_secondary"
                   :size="20"
                 />
-                <CirclePlus
+                <EyeIcon
                   v-else
                   :color="colors.amarex_secondary"
                   :size="20"
@@ -272,8 +291,8 @@ export default {
                 />
               </button>
               <button
-                v-if="false"
-                @click="openInfo(themeMap)"
+                v-if="themeMap.legend && typeof themeMap.legend !== 'boolean'"
+                @click.stop="openInfo(themeMap)"
               >
                 <MapIcon
                   :color="colors.amarex_secondary"
@@ -306,81 +325,168 @@ export default {
         </div>
       </div>
     </div>
+    <div
+      class="layer-information-container"
+      v-if="showInfo"
+      :class="{
+        info: showInfo?.description,
+        legend: showInfo?.legend,
+      }"
+    >
+      <div class="close-container">
+        <CloseIcon
+          :color="colors.amarex_secondary"
+          :size="20"
+          @click="hideInfo"
+        />
+      </div>
+      <p
+        v-if="showInfo?.title"
+        class="title"
+      >
+        {{ showInfo?.title }}
+      </p>
+      <p
+        v-if="showInfo?.description"
+        class="description"
+      >
+        {{ showInfo?.description }}
+      </p>
+      <p
+        v-if="showInfo?.legend"
+        class="description"
+      >
+        Legende:
+      </p>
+      <div class="img-container">
+        <img
+          v-if="showInfo?.legend"
+          :src="showInfo?.legend"
+        />
+      </div>
+    </div>
   </div>
 </template>
 
 <style lang="scss" scoped>
 @import "~variables";
-#theme-accordion {
-  .accordion-button {
-    font-size: 16px !important;
-    padding: 12px 16px !important;
-    border: 1px solid $amarex_grey_light !important;
-    &[aria-expanded="true"] {
-      background-color: $amarex_secondary_mid;
+.accordion-button {
+  font-size: 16px !important;
+  padding: 12px 16px !important;
+  border: 1px solid $amarex_grey_light !important;
+  &[aria-expanded="true"] {
+    background-color: $amarex_secondary_mid;
+  }
+  .accordion-button-wrapper {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    .select-all-btn {
+      border: none !important;
+      padding: 4px !important;
+      background: none !important;
+      margin: 0 !important;
     }
-    .accordion-button-wrapper {
-      width: 100%;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      .select-all-btn {
-        border: none !important;
-        padding: 4px !important;
-        background: none !important;
-        margin: 0 !important;
-      }
-      .thememapgroup-name {
-        margin-right: auto;
-        font-weight: 700 !important;
-      }
-      .thememapgroup-number {
-        font-weight: 400 !important;
-      }
-      .icon-container {
-        transition: all 0.3s ease-in-out;
-      }
+    .thememapgroup-name {
+      margin-right: auto;
+      font-weight: 700 !important;
+    }
+    .thememapgroup-number {
+      font-weight: 400 !important;
+    }
+    .icon-container {
+      transition: all 0.3s ease-in-out;
     }
   }
-  .accordion-body {
-    padding: 0 0 0 24px !important;
-    .theme-map {
-      border: 1px solid $amarex_grey_light !important;
-      padding: 12px 16px !important;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      svg {
-        cursor: pointer;
-      }
-      &.theme-map-active {
-        background-color: $amarex_secondary_mid;
-        border-bottom: 1px solid $amarex_secondary_mid !important;
-      }
-      .thememap-name {
-        font-size: 16px !important;
-        font-weight: 400 !important;
-        user-select: none;
-        margin-right: auto;
-      }
-      button {
-        border: none !important;
-        padding: 4px !important;
-        background: none !important;
-        margin: 0 !important;
-      }
+}
+.accordion-body {
+  padding: 0 0 0 24px !important;
+  .theme-map {
+    border: 1px solid $amarex_grey_light !important;
+    padding: 12px 16px !important;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    svg {
+      cursor: pointer;
     }
-    .theme-map-sub {
-      padding: 0 16px 12px 16px;
-      background: $amarex_secondary_mid;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      border-left: 1px solid $amarex_grey_light !important;
-      border-right: 1px solid $amarex_grey_light !important;
-      border-bottom: 1px solid $amarex_grey_light !important;
-      border-top: 1px solid $amarex_secondary_mid !important;
+    &.theme-map-active {
+      background-color: $amarex_secondary_mid;
+      border-bottom: 1px solid $amarex_secondary_mid !important;
+    }
+    .thememap-name {
+      font-size: 16px !important;
+      font-weight: 400 !important;
+      user-select: none;
+      margin-right: auto;
+    }
+    button {
+      border: none !important;
+      padding: 4px !important;
+      background: none !important;
+      margin: 0 !important;
+    }
+  }
+  .theme-map-sub {
+    padding: 0 16px 12px 16px;
+    background: $amarex_secondary_mid;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    border-left: 1px solid $amarex_grey_light !important;
+    border-right: 1px solid $amarex_grey_light !important;
+    border-bottom: 1px solid $amarex_grey_light !important;
+    border-top: 1px solid $amarex_secondary_mid !important;
+  }
+}
+.layer-information-container {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  z-index: 1000;
+  width: 100%;
+  height: auto;
+  border-top: 1px solid #c9d4e3;
+  box-shadow: 0px -4px 8px 0px rgba(23, 53, 97, 0.06);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  background: $amarex_primary;
+  &.info {
+    padding: 16px 24px 200px 24px;
+  }
+  &.legend {
+    padding: 16px 24px;
+  }
+  .close-container {
+    padding: 2px 0;
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+    svg {
+      cursor: pointer;
+    }
+  }
+  .title {
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 24px;
+    color: $amarex_secondary;
+  }
+  .description {
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 24px;
+    color: $amarex_secondary;
+  }
+  .img-container {
+    overflow: scroll;
+    max-height: 45vh;
+    img {
+      width: 100%;
     }
   }
 }
 </style>
+
