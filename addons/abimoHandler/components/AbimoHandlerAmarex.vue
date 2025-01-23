@@ -211,8 +211,7 @@ export default {
         // when the User goes back to the Block Area Selector
       }
       if ((step === 0 || step === 1) && this.totalArea > 0) {
-        // @Luise: Should the Block Selection be reset when the User goes back to one of the first two steps
-        // if yes, please add the functionality here
+        // @Luise: the Block Selection should be reset when the User goes back to one of the first two steps
       }
     },
     calcState(state) {
@@ -385,18 +384,6 @@ export default {
         @click="resetAbimoCalculation"
       >
         <p>Neue Berechnung starten</p>
-      </button>
-      <button
-        class="amarex-btn-primary full"
-        @click="
-          () => {
-            calcState = null;
-            activeStep = 6;
-          }
-        "
-      >
-        <!-- @Luise: Just for Testing -->
-        <p>Leere Ergebnisse sehen</p>
       </button>
     </span>
   </div>

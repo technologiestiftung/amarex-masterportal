@@ -51,7 +51,7 @@ export default {
       }
     },
     setNames(id) {
-      // @Luise: Please check if these are the correct names
+      // @Luise: Please check if these are the correct names of the needed result layers
       if (id === "delta_w_wfs")
         return "∆W - Abweichung vom natürlichen Wasserhaushalt";
       if (id === "abimo_result_infiltration") return "Infiltration";
@@ -67,7 +67,7 @@ export default {
     };
   },
   mounted() {
-    // @Luise: Please check if these are the correct result layers needed
+    // @Luise: Please check if these are the correct names of the needed result layers
     this.resultLayers = this.allLayerConfigs.filter(
       (layer) =>
         layer.id === "delta_w_wfs" ||
@@ -76,7 +76,7 @@ export default {
         layer.id === "abimo_evaporatio",
     );
     //
-    // @Luise: Do the layers need to be sorted
+    // @Luise: Do the layers need to be sorted?
     // If yes, adjust the sort function accordingly
     //
     /* .sort((a, b) => {
@@ -84,22 +84,20 @@ export default {
         if (b.id === "delta_w_wfs") return 1;
         return 0;
       }); */
-    //
-    // @Luise: Do all layers need to be visible?
-    // If yes, activate the following code
-    //
-    /* this.resultLayers.forEach((layer) => {
+    this.resultLayers.forEach((layer) => {
       const isLayerVisible = layer.visibility;
       if (!isLayerVisible) {
         this.changeVisibility({ layerId: layer.id, value: true });
       }
-    }); */
+    });
   },
   computed: {
     ...mapGetters(["allLayerConfigs"]),
   },
 };
 </script>
+
+<!-- @Luise: Please remove the Result Overlay on the Map -->
 
 <template lang="html">
   <div class="result-container d-flex flex-column">

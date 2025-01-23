@@ -59,11 +59,18 @@ export default {
         this.selectedThemeMap = themeMap;
       }
     },
+    setNames(id) {
+      // @Luise: Please check if these are the correct names of the needed result layers
+      if (id === "delta_w_wfs")
+        return "∆W - Abweichung vom natürlichen Wasserhaushalt";
+      return "Abimo";
+    },
   },
   computed: {
     ...mapGetters(["allLayerConfigs"]),
   },
   mounted() {
+    // @Luise: Please check if these are the correct names of the needed result layers
     this.preComputedModels = this.allLayerConfigs
       .filter(
         (layer) =>
@@ -120,13 +127,10 @@ export default {
             :size="20"
           />
         </button>
-        <p class="thememap-name">
-          {{
-            themeMap?.id === "delta_w_wfs"
-              ? "∆W - Abweichung vom natürlichen Wasserhaushalt"
-              : "Abimo"
-          }}
-        </p>
+        <p
+          class="thememap-name"
+          v-html="setNames(themeMap?.id)"
+        ></p>
         <button @click="openTransparencySubMenu(themeMap)">
           <Settings
             :color="

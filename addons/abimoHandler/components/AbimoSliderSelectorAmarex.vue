@@ -149,9 +149,7 @@ export default {
         class="description"
       ></p>
     </span>
-    <span
-      :style="{ marginLeft: currentStatusQuo.toFixed(0) === '0' ? '7px' : 0 }"
-    >
+    <span :style="{ marginLeft: '7px' }">
       <div
         class="status-quo-bar"
         :style="{
