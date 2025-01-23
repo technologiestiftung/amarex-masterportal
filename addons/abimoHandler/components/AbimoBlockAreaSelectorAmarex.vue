@@ -149,7 +149,7 @@ export default {
       :key="index"
       class="stats-wrapper d-flex justify-content-center"
     >
-      <div :class="['color-indicator mr-3', `${areaType.id}`]"></div>
+      <div :class="['color-indicator', `${areaType.id}`]"></div>
       <div
         class="stats-container d-flex justify-content-between w-100 align-items-center"
       >
@@ -225,12 +225,16 @@ export default {
   .area {
     margin-top: 8px;
   }
+  .abimo-slider-bar {
+    background-color: $amarex_grey_light !important;
+  }
   .stats-wrapper {
     gap: 10px;
     .color-indicator {
       width: 24px;
       height: 24px;
       border: 2px solid;
+      flex-shrink: 0;
     }
     .unpvd {
       background-color: $amarex_extras_lightgreen;
