@@ -2596,6 +2596,1767 @@
     "singleTile": true,
     "infoFormat": "application/json",
     "layerAttribution": "Für die Nutzung der Daten ist die Datenlizenz Deutschland - Namensnennung - Version 2.0 anzuwenden. Die Lizenz ist über https://www.govdata.de/dl-de/by-2-0 abrufbar. Der Quellenvermerk gemäß (2) der Lizenz lautet \"Umweltatlas Berlin / [Titel des Datensatzes]\"."
+  },
+  {
+    "id": "Klimabewerungskarten"
+  },
+  {
+    "id": "ua_klimabewertung_2022:wfs:bj_ua_phk_biokl_siedl_2022",
+    "name": "Bioklimatische Gesamtbewertung der Siedlungsfl\u00e4chen anhand der Tag- und Nachtsituation 2022",
+    "crs": "urn:ogc:def:crs:EPSG::25833",
+    "url": "https://gdi.berlin.de/services/wfs/ua_klimabewertung_2022",
+    "typ": "WFS",
+    "featureType": "ua_klimabewertung_2022:bj_ua_phk_biokl_siedl_2022",
+    "featureNS": "ua_klimabewertung_2022",
+    "datasets": [
+      {
+        "md_name": "Klimabewertungskarten 2022 (Umweltatlas)",
+        "md_id": "d002e10f-d745-49e5-98b1-bde00700f4e4",
+        "rs_id": "https://registry.gdi-de.org/id/de.be.csw/b12543bc-e79d-3af5-88fa-b54da877b30f",
+        "csw_url": "https://gdi.berlin.de/geonetwork/srv/ger/csw"
+      }
+    ],
+    "gfiAttributes": "showAll"
+  },
+  {
+    "id": "ua_klimabewertung_2022:wfs:bi_ua_phk_biokl_str_2022",
+    "name": "Bioklimatische Gesamtbewertung der Verkehrsfl\u00e4chen anhand der Tag- und Nachtsituation 2022",
+    "crs": "urn:ogc:def:crs:EPSG::25833",
+    "url": "https://gdi.berlin.de/services/wfs/ua_klimabewertung_2022",
+    "typ": "WFS",
+    "featureType": "ua_klimabewertung_2022:bi_ua_phk_biokl_str_2022",
+    "featureNS": "ua_klimabewertung_2022",
+    "datasets": [
+      {
+        "md_name": "Klimabewertungskarten 2022 (Umweltatlas)",
+        "md_id": "d002e10f-d745-49e5-98b1-bde00700f4e4",
+        "rs_id": "https://registry.gdi-de.org/id/de.be.csw/b12543bc-e79d-3af5-88fa-b54da877b30f",
+        "csw_url": "https://gdi.berlin.de/geonetwork/srv/ger/csw"
+      }
+    ],
+    "gfiAttributes": "showAll"
+  },
+  {
+    "id": "ua_klimabewertung_2022:wfs:be_ua_phk_kvsd_grfrei_2022",
+    "name": "Fl\u00e4chen der Gr\u00fcn-/Freifl\u00e4chen mit einer \u00fcberdurchschnittlich hohen Kaltluftvolumenstromdichte 2022",
+    "crs": "urn:ogc:def:crs:EPSG::25833",
+    "url": "https://gdi.berlin.de/services/wfs/ua_klimabewertung_2022",
+    "typ": "WFS",
+    "featureType": "ua_klimabewertung_2022:be_ua_phk_kvsd_grfrei_2022",
+    "featureNS": "ua_klimabewertung_2022",
+    "datasets": [
+      {
+        "md_name": "Klimabewertungskarten 2022 (Umweltatlas)",
+        "md_id": "d002e10f-d745-49e5-98b1-bde00700f4e4",
+        "rs_id": "https://registry.gdi-de.org/id/de.be.csw/b12543bc-e79d-3af5-88fa-b54da877b30f",
+        "csw_url": "https://gdi.berlin.de/geonetwork/srv/ger/csw"
+      }
+    ],
+    "gfiAttributes": "showAll"
+  },
+  {
+    "id": "ua_klimabewertung_2022:wfs:aa_ua_phk_alkisgeb_2022",
+    "name": "Geb\u00e4ude (ALKIS, Stand 11/2022)",
+    "crs": "urn:ogc:def:crs:EPSG::25833",
+    "url": "https://gdi.berlin.de/services/wfs/ua_klimabewertung_2022",
+    "typ": "WFS",
+    "featureType": "ua_klimabewertung_2022:aa_ua_phk_alkisgeb_2022",
+    "featureNS": "ua_klimabewertung_2022",
+    "datasets": [
+      {
+        "md_name": "Klimabewertungskarten 2022 (Umweltatlas)",
+        "md_id": "d002e10f-d745-49e5-98b1-bde00700f4e4",
+        "rs_id": "https://registry.gdi-de.org/id/de.be.csw/b12543bc-e79d-3af5-88fa-b54da877b30f",
+        "csw_url": "https://gdi.berlin.de/geonetwork/srv/ger/csw"
+      }
+    ],
+    "gfiAttributes": "showAll"
+  },
+  {
+    "id": "ua_klimabewertung_2022:wfs:g_ua_phk_gew_2022",
+    "name": "Gew\u00e4sser 2022",
+    "crs": "urn:ogc:def:crs:EPSG::25833",
+    "url": "https://gdi.berlin.de/services/wfs/ua_klimabewertung_2022",
+    "typ": "WFS",
+    "featureType": "ua_klimabewertung_2022:g_ua_phk_gew_2022",
+    "featureNS": "ua_klimabewertung_2022",
+    "datasets": [
+      {
+        "md_name": "Klimabewertungskarten 2022 (Umweltatlas)",
+        "md_id": "d002e10f-d745-49e5-98b1-bde00700f4e4",
+        "rs_id": "https://registry.gdi-de.org/id/de.be.csw/b12543bc-e79d-3af5-88fa-b54da877b30f",
+        "csw_url": "https://gdi.berlin.de/geonetwork/srv/ger/csw"
+      }
+    ],
+    "gfiAttributes": "showAll"
+  },
+  {
+    "id": "ua_klimabewertung_2022:wfs:ca_ua_phk_aufenth_grfrei_tag_2022",
+    "name": "Gr\u00fcn- und Freifl\u00e4chen: Bewertung der Aufenthaltsqualit\u00e4t am Tag anhand des mittleren Physiologisch \u00c4quivalenten Temperatur (PET) pro Block(teil)fl\u00e4che um 14:00 Uhr [\u00b0C] 2022",
+    "crs": "urn:ogc:def:crs:EPSG::25833",
+    "url": "https://gdi.berlin.de/services/wfs/ua_klimabewertung_2022",
+    "typ": "WFS",
+    "featureType": "ua_klimabewertung_2022:ca_ua_phk_aufenth_grfrei_tag_2022",
+    "featureNS": "ua_klimabewertung_2022",
+    "datasets": [
+      {
+        "md_name": "Klimabewertungskarten 2022 (Umweltatlas)",
+        "md_id": "d002e10f-d745-49e5-98b1-bde00700f4e4",
+        "rs_id": "https://registry.gdi-de.org/id/de.be.csw/b12543bc-e79d-3af5-88fa-b54da877b30f",
+        "csw_url": "https://gdi.berlin.de/geonetwork/srv/ger/csw"
+      }
+    ],
+    "gfiAttributes": "showAll"
+  },
+  {
+    "id": "ua_klimabewertung_2022:wfs:bb_ua_phk_belast_tag_grfrei_2022",
+    "name": "Gr\u00fcn-/Freifl\u00e4chen mit einer starken oder extremen thermischen Belastung am Tag 2022",
+    "crs": "urn:ogc:def:crs:EPSG::25833",
+    "url": "https://gdi.berlin.de/services/wfs/ua_klimabewertung_2022",
+    "typ": "WFS",
+    "featureType": "ua_klimabewertung_2022:bb_ua_phk_belast_tag_grfrei_2022",
+    "featureNS": "ua_klimabewertung_2022",
+    "datasets": [
+      {
+        "md_name": "Klimabewertungskarten 2022 (Umweltatlas)",
+        "md_id": "d002e10f-d745-49e5-98b1-bde00700f4e4",
+        "rs_id": "https://registry.gdi-de.org/id/de.be.csw/b12543bc-e79d-3af5-88fa-b54da877b30f",
+        "csw_url": "https://gdi.berlin.de/geonetwork/srv/ger/csw"
+      }
+    ],
+    "gfiAttributes": "showAll"
+  },
+  {
+    "id": "ua_klimabewertung_2022:wfs:bh_ua_phk_luftbelast_2022",
+    "name": "Index der Luftbelastung durch Kfz-Verkehr 2022",
+    "crs": "urn:ogc:def:crs:EPSG::25833",
+    "url": "https://gdi.berlin.de/services/wfs/ua_klimabewertung_2022",
+    "typ": "WFS",
+    "featureType": "ua_klimabewertung_2022:bh_ua_phk_luftbelast_2022",
+    "featureNS": "ua_klimabewertung_2022",
+    "datasets": [
+      {
+        "md_name": "Klimabewertungskarten 2022 (Umweltatlas)",
+        "md_id": "d002e10f-d745-49e5-98b1-bde00700f4e4",
+        "rs_id": "https://registry.gdi-de.org/id/de.be.csw/b12543bc-e79d-3af5-88fa-b54da877b30f",
+        "csw_url": "https://gdi.berlin.de/geonetwork/srv/ger/csw"
+      }
+    ],
+    "gfiAttributes": "showAll"
+  },
+  {
+    "id": "ua_klimabewertung_2022:wfs:bf_ua_phk_kaltluft_siedl_2022",
+    "name": "Kaltlufteinwirkbereich innerhalb von Siedlungs- und Verkehrsfl\u00e4chen 2022",
+    "crs": "urn:ogc:def:crs:EPSG::25833",
+    "url": "https://gdi.berlin.de/services/wfs/ua_klimabewertung_2022",
+    "typ": "WFS",
+    "featureType": "ua_klimabewertung_2022:bf_ua_phk_kaltluft_siedl_2022",
+    "featureNS": "ua_klimabewertung_2022",
+    "datasets": [
+      {
+        "md_name": "Klimabewertungskarten 2022 (Umweltatlas)",
+        "md_id": "d002e10f-d745-49e5-98b1-bde00700f4e4",
+        "rs_id": "https://registry.gdi-de.org/id/de.be.csw/b12543bc-e79d-3af5-88fa-b54da877b30f",
+        "csw_url": "https://gdi.berlin.de/geonetwork/srv/ger/csw"
+      }
+    ],
+    "gfiAttributes": "showAll"
+  },
+  {
+    "id": "ua_klimabewertung_2022:wfs:bc_ua_phk_leitbahn_2022",
+    "name": "Leitbahnkorridor 2022",
+    "crs": "urn:ogc:def:crs:EPSG::25833",
+    "url": "https://gdi.berlin.de/services/wfs/ua_klimabewertung_2022",
+    "typ": "WFS",
+    "featureType": "ua_klimabewertung_2022:bc_ua_phk_leitbahn_2022",
+    "featureNS": "ua_klimabewertung_2022",
+    "datasets": [
+      {
+        "md_name": "Klimabewertungskarten 2022 (Umweltatlas)",
+        "md_id": "d002e10f-d745-49e5-98b1-bde00700f4e4",
+        "rs_id": "https://registry.gdi-de.org/id/de.be.csw/b12543bc-e79d-3af5-88fa-b54da877b30f",
+        "csw_url": "https://gdi.berlin.de/geonetwork/srv/ger/csw"
+      }
+    ],
+    "gfiAttributes": "showAll"
+  },
+  {
+    "id": "ua_klimabewertung_2022:wfs:ba_ua_phk_luftaust_2022",
+    "name": "Luftaustausch 2022",
+    "crs": "urn:ogc:def:crs:EPSG::25833",
+    "url": "https://gdi.berlin.de/services/wfs/ua_klimabewertung_2022",
+    "typ": "WFS",
+    "featureType": "ua_klimabewertung_2022:ba_ua_phk_luftaust_2022",
+    "featureNS": "ua_klimabewertung_2022",
+    "datasets": [
+      {
+        "md_name": "Klimabewertungskarten 2022 (Umweltatlas)",
+        "md_id": "d002e10f-d745-49e5-98b1-bde00700f4e4",
+        "rs_id": "https://registry.gdi-de.org/id/de.be.csw/b12543bc-e79d-3af5-88fa-b54da877b30f",
+        "csw_url": "https://gdi.berlin.de/geonetwork/srv/ger/csw"
+      }
+    ],
+    "gfiAttributes": "showAll"
+  },
+  {
+    "id": "ua_klimabewertung_2022:wfs:fh_ua_phk_m8_2022",
+    "name": "M-08 Durchl\u00fcften (Blau-gr\u00fcne Stadtentwicklung) 2022",
+    "crs": "urn:ogc:def:crs:EPSG::25833",
+    "url": "https://gdi.berlin.de/services/wfs/ua_klimabewertung_2022",
+    "typ": "WFS",
+    "featureType": "ua_klimabewertung_2022:fh_ua_phk_m8_2022",
+    "featureNS": "ua_klimabewertung_2022",
+    "datasets": [
+      {
+        "md_name": "Klimabewertungskarten 2022 (Umweltatlas)",
+        "md_id": "d002e10f-d745-49e5-98b1-bde00700f4e4",
+        "rs_id": "https://registry.gdi-de.org/id/de.be.csw/b12543bc-e79d-3af5-88fa-b54da877b30f",
+        "csw_url": "https://gdi.berlin.de/geonetwork/srv/ger/csw"
+      }
+    ],
+    "gfiAttributes": "showAll"
+  },
+  {
+    "id": "ua_klimabewertung_2022:wfs:fi_ua_phk_m9_2022",
+    "name": "M-09 Verschatten (Blau-gr\u00fcne Stadtentwicklung) 2022",
+    "crs": "urn:ogc:def:crs:EPSG::25833",
+    "url": "https://gdi.berlin.de/services/wfs/ua_klimabewertung_2022",
+    "typ": "WFS",
+    "featureType": "ua_klimabewertung_2022:fi_ua_phk_m9_2022",
+    "featureNS": "ua_klimabewertung_2022",
+    "datasets": [
+      {
+        "md_name": "Klimabewertungskarten 2022 (Umweltatlas)",
+        "md_id": "d002e10f-d745-49e5-98b1-bde00700f4e4",
+        "rs_id": "https://registry.gdi-de.org/id/de.be.csw/b12543bc-e79d-3af5-88fa-b54da877b30f",
+        "csw_url": "https://gdi.berlin.de/geonetwork/srv/ger/csw"
+      }
+    ],
+    "gfiAttributes": "showAll"
+  },
+  {
+    "id": "ua_klimabewertung_2022:wfs:fj_ua_phk_m10_2022",
+    "name": "M-10 Begr\u00fcnen (Blau-gr\u00fcne Stadtentwicklung) 2022",
+    "crs": "urn:ogc:def:crs:EPSG::25833",
+    "url": "https://gdi.berlin.de/services/wfs/ua_klimabewertung_2022",
+    "typ": "WFS",
+    "featureType": "ua_klimabewertung_2022:fj_ua_phk_m10_2022",
+    "featureNS": "ua_klimabewertung_2022",
+    "datasets": [
+      {
+        "md_name": "Klimabewertungskarten 2022 (Umweltatlas)",
+        "md_id": "d002e10f-d745-49e5-98b1-bde00700f4e4",
+        "rs_id": "https://registry.gdi-de.org/id/de.be.csw/b12543bc-e79d-3af5-88fa-b54da877b30f",
+        "csw_url": "https://gdi.berlin.de/geonetwork/srv/ger/csw"
+      }
+    ],
+    "gfiAttributes": "showAll"
+  },
+  {
+    "id": "ua_klimabewertung_2022:wfs:fk_ua_phk_m11_2022",
+    "name": "M-11 Verdunsten (Blau-gr\u00fcne Stadtentwicklung) 2022",
+    "crs": "urn:ogc:def:crs:EPSG::25833",
+    "url": "https://gdi.berlin.de/services/wfs/ua_klimabewertung_2022",
+    "typ": "WFS",
+    "featureType": "ua_klimabewertung_2022:fk_ua_phk_m11_2022",
+    "featureNS": "ua_klimabewertung_2022",
+    "datasets": [
+      {
+        "md_name": "Klimabewertungskarten 2022 (Umweltatlas)",
+        "md_id": "d002e10f-d745-49e5-98b1-bde00700f4e4",
+        "rs_id": "https://registry.gdi-de.org/id/de.be.csw/b12543bc-e79d-3af5-88fa-b54da877b30f",
+        "csw_url": "https://gdi.berlin.de/geonetwork/srv/ger/csw"
+      }
+    ],
+    "gfiAttributes": "showAll"
+  },
+  {
+    "id": "ua_klimabewertung_2022:wfs:fl_ua_phk_m12_2022",
+    "name": "M-12 Klimakomfortpl\u00e4tze anlegen (Blau-gr\u00fcne Stadtentwicklung) 2022",
+    "crs": "urn:ogc:def:crs:EPSG::25833",
+    "url": "https://gdi.berlin.de/services/wfs/ua_klimabewertung_2022",
+    "typ": "WFS",
+    "featureType": "ua_klimabewertung_2022:fl_ua_phk_m12_2022",
+    "featureNS": "ua_klimabewertung_2022",
+    "datasets": [
+      {
+        "md_name": "Klimabewertungskarten 2022 (Umweltatlas)",
+        "md_id": "d002e10f-d745-49e5-98b1-bde00700f4e4",
+        "rs_id": "https://registry.gdi-de.org/id/de.be.csw/b12543bc-e79d-3af5-88fa-b54da877b30f",
+        "csw_url": "https://gdi.berlin.de/geonetwork/srv/ger/csw"
+      }
+    ],
+    "gfiAttributes": "showAll"
+  },
+  {
+    "id": "ua_klimabewertung_2022:wfs:fm_ua_phk_m13_2022",
+    "name": "M-13 R\u00fcckstrahlen (Blau-gr\u00fcne Stadtentwicklung) 2022",
+    "crs": "urn:ogc:def:crs:EPSG::25833",
+    "url": "https://gdi.berlin.de/services/wfs/ua_klimabewertung_2022",
+    "typ": "WFS",
+    "featureType": "ua_klimabewertung_2022:fm_ua_phk_m13_2022",
+    "featureNS": "ua_klimabewertung_2022",
+    "datasets": [
+      {
+        "md_name": "Klimabewertungskarten 2022 (Umweltatlas)",
+        "md_id": "d002e10f-d745-49e5-98b1-bde00700f4e4",
+        "rs_id": "https://registry.gdi-de.org/id/de.be.csw/b12543bc-e79d-3af5-88fa-b54da877b30f",
+        "csw_url": "https://gdi.berlin.de/geonetwork/srv/ger/csw"
+      }
+    ],
+    "gfiAttributes": "showAll"
+  },
+  {
+    "id": "ua_klimabewertung_2022:wfs:fn_ua_phk_m14_2022",
+    "name": "M-14 Ausstattung klimaoptimieren (klimaoptimierte, k\u00fchlende Gr\u00fcn- und Freir\u00e4ume) 2022",
+    "crs": "urn:ogc:def:crs:EPSG::25833",
+    "url": "https://gdi.berlin.de/services/wfs/ua_klimabewertung_2022",
+    "typ": "WFS",
+    "featureType": "ua_klimabewertung_2022:fn_ua_phk_m14_2022",
+    "featureNS": "ua_klimabewertung_2022",
+    "datasets": [
+      {
+        "md_name": "Klimabewertungskarten 2022 (Umweltatlas)",
+        "md_id": "d002e10f-d745-49e5-98b1-bde00700f4e4",
+        "rs_id": "https://registry.gdi-de.org/id/de.be.csw/b12543bc-e79d-3af5-88fa-b54da877b30f",
+        "csw_url": "https://gdi.berlin.de/geonetwork/srv/ger/csw"
+      }
+    ],
+    "gfiAttributes": "showAll"
+  },
+  {
+    "id": "ua_klimabewertung_2022:wfs:fo_ua_phk_m15_2022",
+    "name": "M-15 Bew\u00e4ssern (klimaoptimierte, k\u00fchlende Gr\u00fcn- und Freir\u00e4ume) 2022",
+    "crs": "urn:ogc:def:crs:EPSG::25833",
+    "url": "https://gdi.berlin.de/services/wfs/ua_klimabewertung_2022",
+    "typ": "WFS",
+    "featureType": "ua_klimabewertung_2022:fo_ua_phk_m15_2022",
+    "featureNS": "ua_klimabewertung_2022",
+    "datasets": [
+      {
+        "md_name": "Klimabewertungskarten 2022 (Umweltatlas)",
+        "md_id": "d002e10f-d745-49e5-98b1-bde00700f4e4",
+        "rs_id": "https://registry.gdi-de.org/id/de.be.csw/b12543bc-e79d-3af5-88fa-b54da877b30f",
+        "csw_url": "https://gdi.berlin.de/geonetwork/srv/ger/csw"
+      }
+    ],
+    "gfiAttributes": "showAll"
+  },
+  {
+    "id": "ua_klimabewertung_2022:wfs:fp_ua_phk_m16_2022",
+    "name": "M-16 Mehrfach nutzen (klimaoptimierte, k\u00fchlende Gr\u00fcn- und Freir\u00e4ume) 2022",
+    "crs": "urn:ogc:def:crs:EPSG::25833",
+    "url": "https://gdi.berlin.de/services/wfs/ua_klimabewertung_2022",
+    "typ": "WFS",
+    "featureType": "ua_klimabewertung_2022:fp_ua_phk_m16_2022",
+    "featureNS": "ua_klimabewertung_2022",
+    "datasets": [
+      {
+        "md_name": "Klimabewertungskarten 2022 (Umweltatlas)",
+        "md_id": "d002e10f-d745-49e5-98b1-bde00700f4e4",
+        "rs_id": "https://registry.gdi-de.org/id/de.be.csw/b12543bc-e79d-3af5-88fa-b54da877b30f",
+        "csw_url": "https://gdi.berlin.de/geonetwork/srv/ger/csw"
+      }
+    ],
+    "gfiAttributes": "showAll"
+  },
+  {
+    "id": "ua_klimabewertung_2022:wfs:fq_ua_phk_m17_2022",
+    "name": "M-17 CO2 binden und speichern (klimaoptimierte, k\u00fchlende Gr\u00fcn- und Freir\u00e4ume) 2022",
+    "crs": "urn:ogc:def:crs:EPSG::25833",
+    "url": "https://gdi.berlin.de/services/wfs/ua_klimabewertung_2022",
+    "typ": "WFS",
+    "featureType": "ua_klimabewertung_2022:fq_ua_phk_m17_2022",
+    "featureNS": "ua_klimabewertung_2022",
+    "datasets": [
+      {
+        "md_name": "Klimabewertungskarten 2022 (Umweltatlas)",
+        "md_id": "d002e10f-d745-49e5-98b1-bde00700f4e4",
+        "rs_id": "https://registry.gdi-de.org/id/de.be.csw/b12543bc-e79d-3af5-88fa-b54da877b30f",
+        "csw_url": "https://gdi.berlin.de/geonetwork/srv/ger/csw"
+      }
+    ],
+    "gfiAttributes": "showAll"
+  },
+  {
+    "id": "ua_klimabewertung_2022:wfs:fr_ua_phk_m18_2022",
+    "name": "M-18 Regenwasser speichern (Synergie Stadt und Wasser) 2022",
+    "crs": "urn:ogc:def:crs:EPSG::25833",
+    "url": "https://gdi.berlin.de/services/wfs/ua_klimabewertung_2022",
+    "typ": "WFS",
+    "featureType": "ua_klimabewertung_2022:fr_ua_phk_m18_2022",
+    "featureNS": "ua_klimabewertung_2022",
+    "datasets": [
+      {
+        "md_name": "Klimabewertungskarten 2022 (Umweltatlas)",
+        "md_id": "d002e10f-d745-49e5-98b1-bde00700f4e4",
+        "rs_id": "https://registry.gdi-de.org/id/de.be.csw/b12543bc-e79d-3af5-88fa-b54da877b30f",
+        "csw_url": "https://gdi.berlin.de/geonetwork/srv/ger/csw"
+      }
+    ],
+    "gfiAttributes": "showAll"
+  },
+  {
+    "id": "ua_klimabewertung_2022:wfs:fs_ua_phk_m19_2022",
+    "name": "M-19 Versickern (Synergie Stadt und Wasser) 2022",
+    "crs": "urn:ogc:def:crs:EPSG::25833",
+    "url": "https://gdi.berlin.de/services/wfs/ua_klimabewertung_2022",
+    "typ": "WFS",
+    "featureType": "ua_klimabewertung_2022:fs_ua_phk_m19_2022",
+    "featureNS": "ua_klimabewertung_2022",
+    "datasets": [
+      {
+        "md_name": "Klimabewertungskarten 2022 (Umweltatlas)",
+        "md_id": "d002e10f-d745-49e5-98b1-bde00700f4e4",
+        "rs_id": "https://registry.gdi-de.org/id/de.be.csw/b12543bc-e79d-3af5-88fa-b54da877b30f",
+        "csw_url": "https://gdi.berlin.de/geonetwork/srv/ger/csw"
+      }
+    ],
+    "gfiAttributes": "showAll"
+  },
+  {
+    "id": "ua_klimabewertung_2022:wfs:ft_ua_phk_m20_2022",
+    "name": "M-20 Zuf\u00fchren (Synergie Stadt und Wasser) 2022",
+    "crs": "urn:ogc:def:crs:EPSG::25833",
+    "url": "https://gdi.berlin.de/services/wfs/ua_klimabewertung_2022",
+    "typ": "WFS",
+    "featureType": "ua_klimabewertung_2022:ft_ua_phk_m20_2022",
+    "featureNS": "ua_klimabewertung_2022",
+    "datasets": [
+      {
+        "md_name": "Klimabewertungskarten 2022 (Umweltatlas)",
+        "md_id": "d002e10f-d745-49e5-98b1-bde00700f4e4",
+        "rs_id": "https://registry.gdi-de.org/id/de.be.csw/b12543bc-e79d-3af5-88fa-b54da877b30f",
+        "csw_url": "https://gdi.berlin.de/geonetwork/srv/ger/csw"
+      }
+    ],
+    "gfiAttributes": "showAll"
+  },
+  {
+    "id": "ua_klimabewertung_2022:wfs:fu_ua_phk_m21_2022",
+    "name": "M-21 Retentionsr\u00e4ume schaffen (Vorsorge Starkregen + Hochwasser) 2022",
+    "crs": "urn:ogc:def:crs:EPSG::25833",
+    "url": "https://gdi.berlin.de/services/wfs/ua_klimabewertung_2022",
+    "typ": "WFS",
+    "featureType": "ua_klimabewertung_2022:fu_ua_phk_m21_2022",
+    "featureNS": "ua_klimabewertung_2022",
+    "datasets": [
+      {
+        "md_name": "Klimabewertungskarten 2022 (Umweltatlas)",
+        "md_id": "d002e10f-d745-49e5-98b1-bde00700f4e4",
+        "rs_id": "https://registry.gdi-de.org/id/de.be.csw/b12543bc-e79d-3af5-88fa-b54da877b30f",
+        "csw_url": "https://gdi.berlin.de/geonetwork/srv/ger/csw"
+      }
+    ],
+    "gfiAttributes": "showAll"
+  },
+  {
+    "id": "ua_klimabewertung_2022:wfs:fv_ua_phk_m22_2022",
+    "name": "M-22 Starkregenabfl\u00fcsse leiten (Vorsorge Starkregen + Hochwasser) 2022",
+    "crs": "urn:ogc:def:crs:EPSG::25833",
+    "url": "https://gdi.berlin.de/services/wfs/ua_klimabewertung_2022",
+    "typ": "WFS",
+    "featureType": "ua_klimabewertung_2022:fv_ua_phk_m22_2022",
+    "featureNS": "ua_klimabewertung_2022",
+    "datasets": [
+      {
+        "md_name": "Klimabewertungskarten 2022 (Umweltatlas)",
+        "md_id": "d002e10f-d745-49e5-98b1-bde00700f4e4",
+        "rs_id": "https://registry.gdi-de.org/id/de.be.csw/b12543bc-e79d-3af5-88fa-b54da877b30f",
+        "csw_url": "https://gdi.berlin.de/geonetwork/srv/ger/csw"
+      }
+    ],
+    "gfiAttributes": "showAll"
+  },
+  {
+    "id": "ua_klimabewertung_2022:wfs:fw_ua_phk_m23_2022",
+    "name": "M-23 Sch\u00fctzen (Vorsorge Starkregen + Hochwasser) 2022",
+    "crs": "urn:ogc:def:crs:EPSG::25833",
+    "url": "https://gdi.berlin.de/services/wfs/ua_klimabewertung_2022",
+    "typ": "WFS",
+    "featureType": "ua_klimabewertung_2022:fw_ua_phk_m23_2022",
+    "featureNS": "ua_klimabewertung_2022",
+    "datasets": [
+      {
+        "md_name": "Klimabewertungskarten 2022 (Umweltatlas)",
+        "md_id": "d002e10f-d745-49e5-98b1-bde00700f4e4",
+        "rs_id": "https://registry.gdi-de.org/id/de.be.csw/b12543bc-e79d-3af5-88fa-b54da877b30f",
+        "csw_url": "https://gdi.berlin.de/geonetwork/srv/ger/csw"
+      }
+    ],
+    "gfiAttributes": "showAll"
+  },
+  {
+    "id": "ua_klimabewertung_2022:wfs:bk_ua_phk_ausgl_grfrei_2022",
+    "name": "N\u00e4chtliche Ausgleichfunktion von Gr\u00fcn- und Freifl\u00e4chen gegen\u00fcber den Siedlungsfl\u00e4chen 2022",
+    "crs": "urn:ogc:def:crs:EPSG::25833",
+    "url": "https://gdi.berlin.de/services/wfs/ua_klimabewertung_2022",
+    "typ": "WFS",
+    "featureType": "ua_klimabewertung_2022:bk_ua_phk_ausgl_grfrei_2022",
+    "featureNS": "ua_klimabewertung_2022",
+    "datasets": [
+      {
+        "md_name": "Klimabewertungskarten 2022 (Umweltatlas)",
+        "md_id": "d002e10f-d745-49e5-98b1-bde00700f4e4",
+        "rs_id": "https://registry.gdi-de.org/id/de.be.csw/b12543bc-e79d-3af5-88fa-b54da877b30f",
+        "csw_url": "https://gdi.berlin.de/geonetwork/srv/ger/csw"
+      }
+    ],
+    "gfiAttributes": "showAll"
+  },
+  {
+    "id": "ua_klimabewertung_2022:wfs:da_ua_phk_ausgleich_nacht_2022",
+    "name": "N\u00e4chtliche Ausgleichfunktion von Gr\u00fcn- und Freifl\u00e4chen gegen\u00fcber den Siedlungsfl\u00e4chen 2022",
+    "crs": "urn:ogc:def:crs:EPSG::25833",
+    "url": "https://gdi.berlin.de/services/wfs/ua_klimabewertung_2022",
+    "typ": "WFS",
+    "featureType": "ua_klimabewertung_2022:da_ua_phk_ausgleich_nacht_2022",
+    "featureNS": "ua_klimabewertung_2022",
+    "datasets": [
+      {
+        "md_name": "Klimabewertungskarten 2022 (Umweltatlas)",
+        "md_id": "d002e10f-d745-49e5-98b1-bde00700f4e4",
+        "rs_id": "https://registry.gdi-de.org/id/de.be.csw/b12543bc-e79d-3af5-88fa-b54da877b30f",
+        "csw_url": "https://gdi.berlin.de/geonetwork/srv/ger/csw"
+      }
+    ],
+    "gfiAttributes": "showAll"
+  },
+  {
+    "id": "ua_klimabewertung_2022:wfs:cb_ua_phk_bioklim_siedl_tag_2022",
+    "name": "Siedlungsfl\u00e4chen: Bewertung der bioklimatische Situation anhand des mittleren Physiologisch \u00c4quivalenten Temperatur (PET) pro Block(teil)fl\u00e4che um 14:00 Uhr [\u00b0C] 2022",
+    "crs": "urn:ogc:def:crs:EPSG::25833",
+    "url": "https://gdi.berlin.de/services/wfs/ua_klimabewertung_2022",
+    "typ": "WFS",
+    "featureType": "ua_klimabewertung_2022:cb_ua_phk_bioklim_siedl_tag_2022",
+    "featureNS": "ua_klimabewertung_2022",
+    "datasets": [
+      {
+        "md_name": "Klimabewertungskarten 2022 (Umweltatlas)",
+        "md_id": "d002e10f-d745-49e5-98b1-bde00700f4e4",
+        "rs_id": "https://registry.gdi-de.org/id/de.be.csw/b12543bc-e79d-3af5-88fa-b54da877b30f",
+        "csw_url": "https://gdi.berlin.de/geonetwork/srv/ger/csw"
+      }
+    ],
+    "gfiAttributes": "showAll"
+  },
+  {
+    "id": "ua_klimabewertung_2022:wfs:dc_ua_phk_bioklim_siedl_nacht_2022",
+    "name": "Siedlungsfl\u00e4chen: Bioklimatische Bewertung anhand der mittleren Lufttemperatur pro Block(teil)fl\u00e4che um 04:00 Uhr [\u00b0C] 2022",
+    "crs": "urn:ogc:def:crs:EPSG::25833",
+    "url": "https://gdi.berlin.de/services/wfs/ua_klimabewertung_2022",
+    "typ": "WFS",
+    "featureType": "ua_klimabewertung_2022:dc_ua_phk_bioklim_siedl_nacht_2022",
+    "featureNS": "ua_klimabewertung_2022",
+    "datasets": [
+      {
+        "md_name": "Klimabewertungskarten 2022 (Umweltatlas)",
+        "md_id": "d002e10f-d745-49e5-98b1-bde00700f4e4",
+        "rs_id": "https://registry.gdi-de.org/id/de.be.csw/b12543bc-e79d-3af5-88fa-b54da877b30f",
+        "csw_url": "https://gdi.berlin.de/geonetwork/srv/ger/csw"
+      }
+    ],
+    "gfiAttributes": "showAll"
+  },
+  {
+    "id": "ua_klimabewertung_2022:wfs:ab_ua_phk_gebsonst_2022",
+    "name": "Sonstige Geb\u00e4ude",
+    "crs": "urn:ogc:def:crs:EPSG::25833",
+    "url": "https://gdi.berlin.de/services/wfs/ua_klimabewertung_2022",
+    "typ": "WFS",
+    "featureType": "ua_klimabewertung_2022:ab_ua_phk_gebsonst_2022",
+    "featureNS": "ua_klimabewertung_2022",
+    "datasets": [
+      {
+        "md_name": "Klimabewertungskarten 2022 (Umweltatlas)",
+        "md_id": "d002e10f-d745-49e5-98b1-bde00700f4e4",
+        "rs_id": "https://registry.gdi-de.org/id/de.be.csw/b12543bc-e79d-3af5-88fa-b54da877b30f",
+        "csw_url": "https://gdi.berlin.de/geonetwork/srv/ger/csw"
+      }
+    ],
+    "gfiAttributes": "showAll"
+  },
+  {
+    "id": "ua_klimabewertung_2022:wfs:ea_ua_phk_vul_geb_therm_belast_2022",
+    "name": "Stadtgebiete mit sehr ung\u00fcnstiger thermischer Belastung gem\u00e4\u00df Planungshinweiskarte am Tag und Nacht 2022",
+    "crs": "urn:ogc:def:crs:EPSG::25833",
+    "url": "https://gdi.berlin.de/services/wfs/ua_klimabewertung_2022",
+    "typ": "WFS",
+    "featureType": "ua_klimabewertung_2022:ea_ua_phk_vul_geb_therm_belast_2022",
+    "featureNS": "ua_klimabewertung_2022",
+    "datasets": [
+      {
+        "md_name": "Klimabewertungskarten 2022 (Umweltatlas)",
+        "md_id": "d002e10f-d745-49e5-98b1-bde00700f4e4",
+        "rs_id": "https://registry.gdi-de.org/id/de.be.csw/b12543bc-e79d-3af5-88fa-b54da877b30f",
+        "csw_url": "https://gdi.berlin.de/geonetwork/srv/ger/csw"
+      }
+    ],
+    "gfiAttributes": "showAll"
+  },
+  {
+    "id": "ua_klimabewertung_2022:wfs:bg_ua_phk_oschlaf_2022",
+    "name": "Stadtgebiete ohne Schlaffunktion 2022",
+    "crs": "urn:ogc:def:crs:EPSG::25833",
+    "url": "https://gdi.berlin.de/services/wfs/ua_klimabewertung_2022",
+    "typ": "WFS",
+    "featureType": "ua_klimabewertung_2022:bg_ua_phk_oschlaf_2022",
+    "featureNS": "ua_klimabewertung_2022",
+    "datasets": [
+      {
+        "md_name": "Klimabewertungskarten 2022 (Umweltatlas)",
+        "md_id": "d002e10f-d745-49e5-98b1-bde00700f4e4",
+        "rs_id": "https://registry.gdi-de.org/id/de.be.csw/b12543bc-e79d-3af5-88fa-b54da877b30f",
+        "csw_url": "https://gdi.berlin.de/geonetwork/srv/ger/csw"
+      }
+    ],
+    "gfiAttributes": "showAll"
+  },
+  {
+    "id": "ua_klimabewertung_2022:wfs:db_ua_phk_oschlaf_nacht_2022",
+    "name": "Stadtgebiete ohne Schlaffunktion 2022",
+    "crs": "urn:ogc:def:crs:EPSG::25833",
+    "url": "https://gdi.berlin.de/services/wfs/ua_klimabewertung_2022",
+    "typ": "WFS",
+    "featureType": "ua_klimabewertung_2022:db_ua_phk_oschlaf_nacht_2022",
+    "featureNS": "ua_klimabewertung_2022",
+    "datasets": [
+      {
+        "md_name": "Klimabewertungskarten 2022 (Umweltatlas)",
+        "md_id": "d002e10f-d745-49e5-98b1-bde00700f4e4",
+        "rs_id": "https://registry.gdi-de.org/id/de.be.csw/b12543bc-e79d-3af5-88fa-b54da877b30f",
+        "csw_url": "https://gdi.berlin.de/geonetwork/srv/ger/csw"
+      }
+    ],
+    "gfiAttributes": "showAll"
+  },
+  {
+    "id": "ua_klimabewertung_2022:wfs:eb_ua_phk_vul_geb_demog_2022",
+    "name": "Stadtklimatisch besonderes vulnerable Stadtgebiete 2022",
+    "crs": "urn:ogc:def:crs:EPSG::25833",
+    "url": "https://gdi.berlin.de/services/wfs/ua_klimabewertung_2022",
+    "typ": "WFS",
+    "featureType": "ua_klimabewertung_2022:eb_ua_phk_vul_geb_demog_2022",
+    "featureNS": "ua_klimabewertung_2022",
+    "datasets": [
+      {
+        "md_name": "Klimabewertungskarten 2022 (Umweltatlas)",
+        "md_id": "d002e10f-d745-49e5-98b1-bde00700f4e4",
+        "rs_id": "https://registry.gdi-de.org/id/de.be.csw/b12543bc-e79d-3af5-88fa-b54da877b30f",
+        "csw_url": "https://gdi.berlin.de/geonetwork/srv/ger/csw"
+      }
+    ],
+    "gfiAttributes": "showAll"
+  },
+  {
+    "id": "ua_klimabewertung_2022:wfs:cc_ua_phk_bioklim_str_tag_2022",
+    "name": "Verkehrsfl\u00e4chen: Bewertung der bioklimatische Situation anhand des mittleren Physiologisch \u00c4quivalenten Temperatur (PET) pro Block(teil)fl\u00e4che um 14:00 Uhr [\u00b0C] 2022",
+    "crs": "urn:ogc:def:crs:EPSG::25833",
+    "url": "https://gdi.berlin.de/services/wfs/ua_klimabewertung_2022",
+    "typ": "WFS",
+    "featureType": "ua_klimabewertung_2022:cc_ua_phk_bioklim_str_tag_2022",
+    "featureNS": "ua_klimabewertung_2022",
+    "datasets": [
+      {
+        "md_name": "Klimabewertungskarten 2022 (Umweltatlas)",
+        "md_id": "d002e10f-d745-49e5-98b1-bde00700f4e4",
+        "rs_id": "https://registry.gdi-de.org/id/de.be.csw/b12543bc-e79d-3af5-88fa-b54da877b30f",
+        "csw_url": "https://gdi.berlin.de/geonetwork/srv/ger/csw"
+      }
+    ],
+    "gfiAttributes": "showAll"
+  },
+  {
+    "id": "ua_klimabewertung_2022:wfs:dd_ua_phk_bioklim_str_nacht_2022",
+    "name": "Verkehrsfl\u00e4chen: Bioklimatische Bewertung anhand der mittleren Lufttemperatur pro Block(teil)fl\u00e4che um 04:00 Uhr [\u00b0C] 2022",
+    "crs": "urn:ogc:def:crs:EPSG::25833",
+    "url": "https://gdi.berlin.de/services/wfs/ua_klimabewertung_2022",
+    "typ": "WFS",
+    "featureType": "ua_klimabewertung_2022:dd_ua_phk_bioklim_str_nacht_2022",
+    "featureNS": "ua_klimabewertung_2022",
+    "datasets": [
+      {
+        "md_name": "Klimabewertungskarten 2022 (Umweltatlas)",
+        "md_id": "d002e10f-d745-49e5-98b1-bde00700f4e4",
+        "rs_id": "https://registry.gdi-de.org/id/de.be.csw/b12543bc-e79d-3af5-88fa-b54da877b30f",
+        "csw_url": "https://gdi.berlin.de/geonetwork/srv/ger/csw"
+      }
+    ],
+    "gfiAttributes": "showAll"
+  },
+  {
+    "id": "ua_klimabewertung_2022:wfs:bd_ua_phk_klimarelevante_bebauung_2022",
+    "name": "Wohngebiete mit klimarelevanter Funktion 2022",
+    "crs": "urn:ogc:def:crs:EPSG::25833",
+    "url": "https://gdi.berlin.de/services/wfs/ua_klimabewertung_2022",
+    "typ": "WFS",
+    "featureType": "ua_klimabewertung_2022:bd_ua_phk_klimarelevante_bebauung_2022",
+    "featureNS": "ua_klimabewertung_2022",
+    "datasets": [
+      {
+        "md_name": "Klimabewertungskarten 2022 (Umweltatlas)",
+        "md_id": "d002e10f-d745-49e5-98b1-bde00700f4e4",
+        "rs_id": "https://registry.gdi-de.org/id/de.be.csw/b12543bc-e79d-3af5-88fa-b54da877b30f",
+        "csw_url": "https://gdi.berlin.de/geonetwork/srv/ger/csw"
+      }
+    ],
+    "gfiAttributes": "showAll"
+  },
+  {
+    "id": "ua_klimabewertung_2022:ba_ua_phk_luftaust_2022",
+    "name": "Luftaustausch 2022",
+    "name_lang": "Luftaustausch 2022 (Klimabewertungskarten 2022 (Umweltatlas))",
+    "crs": "EPSG:25833",
+    "url": "https://gdi.berlin.de/services/wms/ua_klimabewertung_2022",
+    "typ": "WMS",
+    "gfiAttributes": "showAll",
+    "layers": "ba_ua_phk_luftaust_2022",
+    "legend": true,
+    "datasets": [
+      {
+        "md_name": "Klimabewertungskarten 2022 (Umweltatlas)",
+        "md_id": "d002e10f-d745-49e5-98b1-bde00700f4e4",
+        "rs_id": "https://registry.gdi-de.org/id/de.be.csw/b12543bc-e79d-3af5-88fa-b54da877b30f",
+        "csw_url": "https://gdi.berlin.de/geonetwork/srv/ger/csw"
+      }
+    ],
+    "format": "image/png",
+    "version": "1.3.0",
+    "featureCount": "5",
+    "gfiTheme": "default",
+    "transparent": true,
+    "singleTile": true,
+    "infoFormat": "application/json",
+    "layerAttribution": "F\u00fcr die Nutzung der Daten ist die Datenlizenz Deutschland - Namensnennung - Version 2.0 anzuwenden. Die Lizenz ist \u00fcber https://www.govdata.de/dl-de/by-2-0 abrufbar. Der Quellenvermerk gem\u00e4\u00df (2) der Lizenz lautet \"Umweltatlas Berlin / [Titel des Datensatzes]\"."
+  },
+  {
+    "id": "ua_klimabewertung_2022:bb_ua_phk_belast_tag_grfrei_2022",
+    "name": "Gr\u00fcn-/Freifl\u00e4chen mit einer starken oder extremen thermischen Belastung am Tag 2022",
+    "name_lang": "Gr\u00fcn-/Freifl\u00e4chen mit einer starken oder extremen thermischen Belastung am Tag 2022 (Klimabewertungskarten 2022 (Umweltatlas))",
+    "crs": "EPSG:25833",
+    "url": "https://gdi.berlin.de/services/wms/ua_klimabewertung_2022",
+    "typ": "WMS",
+    "gfiAttributes": "showAll",
+    "layers": "bb_ua_phk_belast_tag_grfrei_2022",
+    "legend": true,
+    "datasets": [
+      {
+        "md_name": "Klimabewertungskarten 2022 (Umweltatlas)",
+        "md_id": "d002e10f-d745-49e5-98b1-bde00700f4e4",
+        "rs_id": "https://registry.gdi-de.org/id/de.be.csw/b12543bc-e79d-3af5-88fa-b54da877b30f",
+        "csw_url": "https://gdi.berlin.de/geonetwork/srv/ger/csw"
+      }
+    ],
+    "maxScale": "10000.0",
+    "format": "image/png",
+    "version": "1.3.0",
+    "featureCount": "5",
+    "gfiTheme": "default",
+    "transparent": true,
+    "singleTile": true,
+    "infoFormat": "application/json",
+    "layerAttribution": "F\u00fcr die Nutzung der Daten ist die Datenlizenz Deutschland - Namensnennung - Version 2.0 anzuwenden. Die Lizenz ist \u00fcber https://www.govdata.de/dl-de/by-2-0 abrufbar. Der Quellenvermerk gem\u00e4\u00df (2) der Lizenz lautet \"Umweltatlas Berlin / [Titel des Datensatzes]\"."
+  },
+  {
+    "id": "ua_klimabewertung_2022:bc_ua_phk_leitbahn_2022",
+    "name": "Leitbahnkorridor 2022",
+    "name_lang": "Leitbahnkorridor 2022 (Klimabewertungskarten 2022 (Umweltatlas))",
+    "crs": "EPSG:25833",
+    "url": "https://gdi.berlin.de/services/wms/ua_klimabewertung_2022",
+    "typ": "WMS",
+    "gfiAttributes": "showAll",
+    "layers": "bc_ua_phk_leitbahn_2022",
+    "legend": true,
+    "datasets": [
+      {
+        "md_name": "Klimabewertungskarten 2022 (Umweltatlas)",
+        "md_id": "d002e10f-d745-49e5-98b1-bde00700f4e4",
+        "rs_id": "https://registry.gdi-de.org/id/de.be.csw/b12543bc-e79d-3af5-88fa-b54da877b30f",
+        "csw_url": "https://gdi.berlin.de/geonetwork/srv/ger/csw"
+      }
+    ],
+    "format": "image/png",
+    "version": "1.3.0",
+    "featureCount": "5",
+    "gfiTheme": "default",
+    "transparent": true,
+    "singleTile": true,
+    "infoFormat": "application/json",
+    "layerAttribution": "F\u00fcr die Nutzung der Daten ist die Datenlizenz Deutschland - Namensnennung - Version 2.0 anzuwenden. Die Lizenz ist \u00fcber https://www.govdata.de/dl-de/by-2-0 abrufbar. Der Quellenvermerk gem\u00e4\u00df (2) der Lizenz lautet \"Umweltatlas Berlin / [Titel des Datensatzes]\"."
+  },
+  {
+    "id": "ua_klimabewertung_2022:bd_ua_phk_klimarelevante_bebauung_2022",
+    "name": "Wohngebiete mit klimarelevanter Funktion 2022",
+    "name_lang": "Wohngebiete mit klimarelevanter Funktion 2022 (Klimabewertungskarten 2022 (Umweltatlas))",
+    "crs": "EPSG:25833",
+    "url": "https://gdi.berlin.de/services/wms/ua_klimabewertung_2022",
+    "typ": "WMS",
+    "gfiAttributes": "showAll",
+    "layers": "bd_ua_phk_klimarelevante_bebauung_2022",
+    "legend": true,
+    "datasets": [
+      {
+        "md_name": "Klimabewertungskarten 2022 (Umweltatlas)",
+        "md_id": "d002e10f-d745-49e5-98b1-bde00700f4e4",
+        "rs_id": "https://registry.gdi-de.org/id/de.be.csw/b12543bc-e79d-3af5-88fa-b54da877b30f",
+        "csw_url": "https://gdi.berlin.de/geonetwork/srv/ger/csw"
+      }
+    ],
+    "format": "image/png",
+    "version": "1.3.0",
+    "featureCount": "5",
+    "gfiTheme": "default",
+    "transparent": true,
+    "singleTile": true,
+    "infoFormat": "application/json",
+    "layerAttribution": "F\u00fcr die Nutzung der Daten ist die Datenlizenz Deutschland - Namensnennung - Version 2.0 anzuwenden. Die Lizenz ist \u00fcber https://www.govdata.de/dl-de/by-2-0 abrufbar. Der Quellenvermerk gem\u00e4\u00df (2) der Lizenz lautet \"Umweltatlas Berlin / [Titel des Datensatzes]\"."
+  },
+  {
+    "id": "ua_klimabewertung_2022:be_ua_phk_kvsd_grfrei_2022",
+    "name": "Fl\u00e4chen der Gr\u00fcn-/Freifl\u00e4chen mit einer \u00fcberdurchschnittlich hohen Kaltluftvolumenstromdichte 2022",
+    "name_lang": "Fl\u00e4chen der Gr\u00fcn-/Freifl\u00e4chen mit einer \u00fcberdurchschnittlich hohen Kaltluftvolumenstromdichte 2022 (Klimabewertungskarten 2022 (Umweltatlas))",
+    "crs": "EPSG:25833",
+    "url": "https://gdi.berlin.de/services/wms/ua_klimabewertung_2022",
+    "typ": "WMS",
+    "gfiAttributes": "showAll",
+    "layers": "be_ua_phk_kvsd_grfrei_2022",
+    "legend": true,
+    "datasets": [
+      {
+        "md_name": "Klimabewertungskarten 2022 (Umweltatlas)",
+        "md_id": "d002e10f-d745-49e5-98b1-bde00700f4e4",
+        "rs_id": "https://registry.gdi-de.org/id/de.be.csw/b12543bc-e79d-3af5-88fa-b54da877b30f",
+        "csw_url": "https://gdi.berlin.de/geonetwork/srv/ger/csw"
+      }
+    ],
+    "format": "image/png",
+    "version": "1.3.0",
+    "featureCount": "5",
+    "gfiTheme": "default",
+    "transparent": true,
+    "singleTile": true,
+    "infoFormat": "application/json",
+    "layerAttribution": "F\u00fcr die Nutzung der Daten ist die Datenlizenz Deutschland - Namensnennung - Version 2.0 anzuwenden. Die Lizenz ist \u00fcber https://www.govdata.de/dl-de/by-2-0 abrufbar. Der Quellenvermerk gem\u00e4\u00df (2) der Lizenz lautet \"Umweltatlas Berlin / [Titel des Datensatzes]\"."
+  },
+  {
+    "id": "ua_klimabewertung_2022:bf_ua_phk_kaltluft_siedl_2022",
+    "name": "Kaltlufteinwirkbereich innerhalb von Siedlungs- und Verkehrsfl\u00e4chen 2022",
+    "name_lang": "Kaltlufteinwirkbereich innerhalb von Siedlungs- und Verkehrsfl\u00e4chen 2022 (Klimabewertungskarten 2022 (Umweltatlas))",
+    "crs": "EPSG:25833",
+    "url": "https://gdi.berlin.de/services/wms/ua_klimabewertung_2022",
+    "typ": "WMS",
+    "gfiAttributes": "showAll",
+    "layers": "bf_ua_phk_kaltluft_siedl_2022",
+    "legend": true,
+    "datasets": [
+      {
+        "md_name": "Klimabewertungskarten 2022 (Umweltatlas)",
+        "md_id": "d002e10f-d745-49e5-98b1-bde00700f4e4",
+        "rs_id": "https://registry.gdi-de.org/id/de.be.csw/b12543bc-e79d-3af5-88fa-b54da877b30f",
+        "csw_url": "https://gdi.berlin.de/geonetwork/srv/ger/csw"
+      }
+    ],
+    "format": "image/png",
+    "version": "1.3.0",
+    "featureCount": "5",
+    "gfiTheme": "default",
+    "transparent": true,
+    "singleTile": true,
+    "infoFormat": "application/json",
+    "layerAttribution": "F\u00fcr die Nutzung der Daten ist die Datenlizenz Deutschland - Namensnennung - Version 2.0 anzuwenden. Die Lizenz ist \u00fcber https://www.govdata.de/dl-de/by-2-0 abrufbar. Der Quellenvermerk gem\u00e4\u00df (2) der Lizenz lautet \"Umweltatlas Berlin / [Titel des Datensatzes]\"."
+  },
+  {
+    "id": "ua_klimabewertung_2022:bg_ua_phk_oschlaf_2022",
+    "name": "Stadtgebiete ohne Schlaffunktion 2022",
+    "name_lang": "Stadtgebiete ohne Schlaffunktion 2022 (Klimabewertungskarten 2022 (Umweltatlas))",
+    "crs": "EPSG:25833",
+    "url": "https://gdi.berlin.de/services/wms/ua_klimabewertung_2022",
+    "typ": "WMS",
+    "gfiAttributes": "showAll",
+    "layers": "bg_ua_phk_oschlaf_2022",
+    "legend": true,
+    "datasets": [
+      {
+        "md_name": "Klimabewertungskarten 2022 (Umweltatlas)",
+        "md_id": "d002e10f-d745-49e5-98b1-bde00700f4e4",
+        "rs_id": "https://registry.gdi-de.org/id/de.be.csw/b12543bc-e79d-3af5-88fa-b54da877b30f",
+        "csw_url": "https://gdi.berlin.de/geonetwork/srv/ger/csw"
+      }
+    ],
+    "format": "image/png",
+    "version": "1.3.0",
+    "featureCount": "5",
+    "gfiTheme": "default",
+    "transparent": true,
+    "singleTile": true,
+    "infoFormat": "application/json",
+    "layerAttribution": "F\u00fcr die Nutzung der Daten ist die Datenlizenz Deutschland - Namensnennung - Version 2.0 anzuwenden. Die Lizenz ist \u00fcber https://www.govdata.de/dl-de/by-2-0 abrufbar. Der Quellenvermerk gem\u00e4\u00df (2) der Lizenz lautet \"Umweltatlas Berlin / [Titel des Datensatzes]\"."
+  },
+  {
+    "id": "ua_klimabewertung_2022:bh_ua_phk_luftbelast_2022",
+    "name": "Index der Luftbelastung durch Kfz-Verkehr 2022",
+    "name_lang": "Index der Luftbelastung durch Kfz-Verkehr 2022 (Klimabewertungskarten 2022 (Umweltatlas))",
+    "crs": "EPSG:25833",
+    "url": "https://gdi.berlin.de/services/wms/ua_klimabewertung_2022",
+    "typ": "WMS",
+    "gfiAttributes": "showAll",
+    "layers": "bh_ua_phk_luftbelast_2022",
+    "legend": true,
+    "datasets": [
+      {
+        "md_name": "Klimabewertungskarten 2022 (Umweltatlas)",
+        "md_id": "d002e10f-d745-49e5-98b1-bde00700f4e4",
+        "rs_id": "https://registry.gdi-de.org/id/de.be.csw/b12543bc-e79d-3af5-88fa-b54da877b30f",
+        "csw_url": "https://gdi.berlin.de/geonetwork/srv/ger/csw"
+      }
+    ],
+    "format": "image/png",
+    "version": "1.3.0",
+    "featureCount": "5",
+    "gfiTheme": "default",
+    "transparent": true,
+    "singleTile": true,
+    "infoFormat": "application/json",
+    "layerAttribution": "F\u00fcr die Nutzung der Daten ist die Datenlizenz Deutschland - Namensnennung - Version 2.0 anzuwenden. Die Lizenz ist \u00fcber https://www.govdata.de/dl-de/by-2-0 abrufbar. Der Quellenvermerk gem\u00e4\u00df (2) der Lizenz lautet \"Umweltatlas Berlin / [Titel des Datensatzes]\"."
+  },
+  {
+    "id": "ua_klimabewertung_2022:bi_ua_phk_biokl_str_2022",
+    "name": "Bioklimatische Gesamtbewertung der Verkehrsfl\u00e4chen anhand der Tag- und Nachtsituation 2022",
+    "name_lang": "Bioklimatische Gesamtbewertung der Verkehrsfl\u00e4chen anhand der Tag- und Nachtsituation 2022 (Klimabewertungskarten 2022 (Umweltatlas))",
+    "crs": "EPSG:25833",
+    "url": "https://gdi.berlin.de/services/wms/ua_klimabewertung_2022",
+    "typ": "WMS",
+    "gfiAttributes": "showAll",
+    "layers": "bi_ua_phk_biokl_str_2022",
+    "legend": true,
+    "datasets": [
+      {
+        "md_name": "Klimabewertungskarten 2022 (Umweltatlas)",
+        "md_id": "d002e10f-d745-49e5-98b1-bde00700f4e4",
+        "rs_id": "https://registry.gdi-de.org/id/de.be.csw/b12543bc-e79d-3af5-88fa-b54da877b30f",
+        "csw_url": "https://gdi.berlin.de/geonetwork/srv/ger/csw"
+      }
+    ],
+    "format": "image/png",
+    "version": "1.3.0",
+    "featureCount": "5",
+    "gfiTheme": "default",
+    "transparent": true,
+    "singleTile": true,
+    "infoFormat": "application/json",
+    "layerAttribution": "F\u00fcr die Nutzung der Daten ist die Datenlizenz Deutschland - Namensnennung - Version 2.0 anzuwenden. Die Lizenz ist \u00fcber https://www.govdata.de/dl-de/by-2-0 abrufbar. Der Quellenvermerk gem\u00e4\u00df (2) der Lizenz lautet \"Umweltatlas Berlin / [Titel des Datensatzes]\"."
+  },
+  {
+    "id": "ua_klimabewertung_2022:bj_ua_phk_biokl_siedl_2022",
+    "name": "Bioklimatische Gesamtbewertung der Siedlungsfl\u00e4chen anhand der Tag- und Nachtsituation 2022",
+    "name_lang": "Bioklimatische Gesamtbewertung der Siedlungsfl\u00e4chen anhand der Tag- und Nachtsituation 2022 (Klimabewertungskarten 2022 (Umweltatlas))",
+    "crs": "EPSG:25833",
+    "url": "https://gdi.berlin.de/services/wms/ua_klimabewertung_2022",
+    "typ": "WMS",
+    "gfiAttributes": "showAll",
+    "layers": "bj_ua_phk_biokl_siedl_2022",
+    "legend": true,
+    "datasets": [
+      {
+        "md_name": "Klimabewertungskarten 2022 (Umweltatlas)",
+        "md_id": "d002e10f-d745-49e5-98b1-bde00700f4e4",
+        "rs_id": "https://registry.gdi-de.org/id/de.be.csw/b12543bc-e79d-3af5-88fa-b54da877b30f",
+        "csw_url": "https://gdi.berlin.de/geonetwork/srv/ger/csw"
+      }
+    ],
+    "format": "image/png",
+    "version": "1.3.0",
+    "featureCount": "5",
+    "gfiTheme": "default",
+    "transparent": true,
+    "singleTile": true,
+    "infoFormat": "application/json",
+    "layerAttribution": "F\u00fcr die Nutzung der Daten ist die Datenlizenz Deutschland - Namensnennung - Version 2.0 anzuwenden. Die Lizenz ist \u00fcber https://www.govdata.de/dl-de/by-2-0 abrufbar. Der Quellenvermerk gem\u00e4\u00df (2) der Lizenz lautet \"Umweltatlas Berlin / [Titel des Datensatzes]\"."
+  },
+  {
+    "id": "ua_klimabewertung_2022:bk_ua_phk_ausgl_grfrei_2022",
+    "name": "N\u00e4chtliche Ausgleichfunktion von Gr\u00fcn- und Freifl\u00e4chen gegen\u00fcber den Siedlungsfl\u00e4chen 2022",
+    "name_lang": "N\u00e4chtliche Ausgleichfunktion von Gr\u00fcn- und Freifl\u00e4chen gegen\u00fcber den Siedlungsfl\u00e4chen 2022 (Klimabewertungskarten 2022 (Umweltatlas))",
+    "crs": "EPSG:25833",
+    "url": "https://gdi.berlin.de/services/wms/ua_klimabewertung_2022",
+    "typ": "WMS",
+    "gfiAttributes": "showAll",
+    "layers": "bk_ua_phk_ausgl_grfrei_2022",
+    "legend": true,
+    "datasets": [
+      {
+        "md_name": "Klimabewertungskarten 2022 (Umweltatlas)",
+        "md_id": "d002e10f-d745-49e5-98b1-bde00700f4e4",
+        "rs_id": "https://registry.gdi-de.org/id/de.be.csw/b12543bc-e79d-3af5-88fa-b54da877b30f",
+        "csw_url": "https://gdi.berlin.de/geonetwork/srv/ger/csw"
+      }
+    ],
+    "format": "image/png",
+    "version": "1.3.0",
+    "featureCount": "5",
+    "gfiTheme": "default",
+    "transparent": true,
+    "singleTile": true,
+    "infoFormat": "application/json",
+    "layerAttribution": "F\u00fcr die Nutzung der Daten ist die Datenlizenz Deutschland - Namensnennung - Version 2.0 anzuwenden. Die Lizenz ist \u00fcber https://www.govdata.de/dl-de/by-2-0 abrufbar. Der Quellenvermerk gem\u00e4\u00df (2) der Lizenz lautet \"Umweltatlas Berlin / [Titel des Datensatzes]\"."
+  },
+  {
+    "id": "ua_klimabewertung_2022:ca_ua_phk_aufenth_grfrei_tag_2022",
+    "name": "Gr\u00fcn- und Freifl\u00e4chen: Bewertung der Aufenthaltsqualit\u00e4t am Tag anhand des mittleren Physiologisch \u00c4quivalenten Temperatur (PET) pro Block(teil)fl\u00e4che um 14:00 Uhr [\u00b0C] 2022",
+    "name_lang": "Gr\u00fcn- und Freifl\u00e4chen: Bewertung der Aufenthaltsqualit\u00e4t am Tag anhand des mittleren Physiologisch \u00c4quivalenten Temperatur (PET) pro Block(teil)fl\u00e4che um 14:00 Uhr [\u00b0C] 2022 (Klimabewertungskarten 2022 (Umweltatlas))",
+    "crs": "EPSG:25833",
+    "url": "https://gdi.berlin.de/services/wms/ua_klimabewertung_2022",
+    "typ": "WMS",
+    "gfiAttributes": "showAll",
+    "layers": "ca_ua_phk_aufenth_grfrei_tag_2022",
+    "legend": true,
+    "datasets": [
+      {
+        "md_name": "Klimabewertungskarten 2022 (Umweltatlas)",
+        "md_id": "d002e10f-d745-49e5-98b1-bde00700f4e4",
+        "rs_id": "https://registry.gdi-de.org/id/de.be.csw/b12543bc-e79d-3af5-88fa-b54da877b30f",
+        "csw_url": "https://gdi.berlin.de/geonetwork/srv/ger/csw"
+      }
+    ],
+    "format": "image/png",
+    "version": "1.3.0",
+    "featureCount": "5",
+    "gfiTheme": "default",
+    "transparent": true,
+    "singleTile": true,
+    "infoFormat": "application/json",
+    "layerAttribution": "F\u00fcr die Nutzung der Daten ist die Datenlizenz Deutschland - Namensnennung - Version 2.0 anzuwenden. Die Lizenz ist \u00fcber https://www.govdata.de/dl-de/by-2-0 abrufbar. Der Quellenvermerk gem\u00e4\u00df (2) der Lizenz lautet \"Umweltatlas Berlin / [Titel des Datensatzes]\"."
+  },
+  {
+    "id": "ua_klimabewertung_2022:cb_ua_phk_bioklim_siedl_tag_2022",
+    "name": "Siedlungsfl\u00e4chen: Bewertung der bioklimatische Situation anhand des mittleren Physiologisch \u00c4quivalenten Temperatur (PET) pro Block(teil)fl\u00e4che um 14:00 Uhr [\u00b0C] 2022",
+    "name_lang": "Siedlungsfl\u00e4chen: Bewertung der bioklimatische Situation anhand des mittleren Physiologisch \u00c4quivalenten Temperatur (PET) pro Block(teil)fl\u00e4che um 14:00 Uhr [\u00b0C] 2022 (Klimabewertungskarten 2022 (Umweltatlas))",
+    "crs": "EPSG:25833",
+    "url": "https://gdi.berlin.de/services/wms/ua_klimabewertung_2022",
+    "typ": "WMS",
+    "gfiAttributes": "showAll",
+    "layers": "cb_ua_phk_bioklim_siedl_tag_2022",
+    "legend": true,
+    "datasets": [
+      {
+        "md_name": "Klimabewertungskarten 2022 (Umweltatlas)",
+        "md_id": "d002e10f-d745-49e5-98b1-bde00700f4e4",
+        "rs_id": "https://registry.gdi-de.org/id/de.be.csw/b12543bc-e79d-3af5-88fa-b54da877b30f",
+        "csw_url": "https://gdi.berlin.de/geonetwork/srv/ger/csw"
+      }
+    ],
+    "format": "image/png",
+    "version": "1.3.0",
+    "featureCount": "5",
+    "gfiTheme": "default",
+    "transparent": true,
+    "singleTile": true,
+    "infoFormat": "application/json",
+    "layerAttribution": "F\u00fcr die Nutzung der Daten ist die Datenlizenz Deutschland - Namensnennung - Version 2.0 anzuwenden. Die Lizenz ist \u00fcber https://www.govdata.de/dl-de/by-2-0 abrufbar. Der Quellenvermerk gem\u00e4\u00df (2) der Lizenz lautet \"Umweltatlas Berlin / [Titel des Datensatzes]\"."
+  },
+  {
+    "id": "ua_klimabewertung_2022:cc_ua_phk_bioklim_str_tag_2022",
+    "name": "Verkehrsfl\u00e4chen: Bewertung der bioklimatische Situation anhand des mittleren Physiologisch \u00c4quivalenten Temperatur (PET) pro Block(teil)fl\u00e4che um 14:00 Uhr [\u00b0C] 2022",
+    "name_lang": "Verkehrsfl\u00e4chen: Bewertung der bioklimatische Situation anhand des mittleren Physiologisch \u00c4quivalenten Temperatur (PET) pro Block(teil)fl\u00e4che um 14:00 Uhr [\u00b0C] 2022 (Klimabewertungskarten 2022 (Umweltatlas))",
+    "crs": "EPSG:25833",
+    "url": "https://gdi.berlin.de/services/wms/ua_klimabewertung_2022",
+    "typ": "WMS",
+    "gfiAttributes": "showAll",
+    "layers": "cc_ua_phk_bioklim_str_tag_2022",
+    "legend": true,
+    "datasets": [
+      {
+        "md_name": "Klimabewertungskarten 2022 (Umweltatlas)",
+        "md_id": "d002e10f-d745-49e5-98b1-bde00700f4e4",
+        "rs_id": "https://registry.gdi-de.org/id/de.be.csw/b12543bc-e79d-3af5-88fa-b54da877b30f",
+        "csw_url": "https://gdi.berlin.de/geonetwork/srv/ger/csw"
+      }
+    ],
+    "format": "image/png",
+    "version": "1.3.0",
+    "featureCount": "5",
+    "gfiTheme": "default",
+    "transparent": true,
+    "singleTile": true,
+    "infoFormat": "application/json",
+    "layerAttribution": "F\u00fcr die Nutzung der Daten ist die Datenlizenz Deutschland - Namensnennung - Version 2.0 anzuwenden. Die Lizenz ist \u00fcber https://www.govdata.de/dl-de/by-2-0 abrufbar. Der Quellenvermerk gem\u00e4\u00df (2) der Lizenz lautet \"Umweltatlas Berlin / [Titel des Datensatzes]\"."
+  },
+  {
+    "id": "ua_klimabewertung_2022:da_ua_phk_ausgleich_nacht_2022",
+    "name": "N\u00e4chtliche Ausgleichfunktion von Gr\u00fcn- und Freifl\u00e4chen gegen\u00fcber den Siedlungsfl\u00e4chen 2022",
+    "name_lang": "N\u00e4chtliche Ausgleichfunktion von Gr\u00fcn- und Freifl\u00e4chen gegen\u00fcber den Siedlungsfl\u00e4chen 2022 (Klimabewertungskarten 2022 (Umweltatlas))",
+    "crs": "EPSG:25833",
+    "url": "https://gdi.berlin.de/services/wms/ua_klimabewertung_2022",
+    "typ": "WMS",
+    "gfiAttributes": "showAll",
+    "layers": "da_ua_phk_ausgleich_nacht_2022",
+    "legend": true,
+    "datasets": [
+      {
+        "md_name": "Klimabewertungskarten 2022 (Umweltatlas)",
+        "md_id": "d002e10f-d745-49e5-98b1-bde00700f4e4",
+        "rs_id": "https://registry.gdi-de.org/id/de.be.csw/b12543bc-e79d-3af5-88fa-b54da877b30f",
+        "csw_url": "https://gdi.berlin.de/geonetwork/srv/ger/csw"
+      }
+    ],
+    "format": "image/png",
+    "version": "1.3.0",
+    "featureCount": "5",
+    "gfiTheme": "default",
+    "transparent": true,
+    "singleTile": true,
+    "infoFormat": "application/json",
+    "layerAttribution": "F\u00fcr die Nutzung der Daten ist die Datenlizenz Deutschland - Namensnennung - Version 2.0 anzuwenden. Die Lizenz ist \u00fcber https://www.govdata.de/dl-de/by-2-0 abrufbar. Der Quellenvermerk gem\u00e4\u00df (2) der Lizenz lautet \"Umweltatlas Berlin / [Titel des Datensatzes]\"."
+  },
+  {
+    "id": "ua_klimabewertung_2022:db_ua_phk_oschlaf_nacht_2022",
+    "name": "Stadtgebiete ohne Schlaffunktion 2022",
+    "name_lang": "Stadtgebiete ohne Schlaffunktion 2022 (Klimabewertungskarten 2022 (Umweltatlas))",
+    "crs": "EPSG:25833",
+    "url": "https://gdi.berlin.de/services/wms/ua_klimabewertung_2022",
+    "typ": "WMS",
+    "gfiAttributes": "showAll",
+    "layers": "db_ua_phk_oschlaf_nacht_2022",
+    "legend": true,
+    "datasets": [
+      {
+        "md_name": "Klimabewertungskarten 2022 (Umweltatlas)",
+        "md_id": "d002e10f-d745-49e5-98b1-bde00700f4e4",
+        "rs_id": "https://registry.gdi-de.org/id/de.be.csw/b12543bc-e79d-3af5-88fa-b54da877b30f",
+        "csw_url": "https://gdi.berlin.de/geonetwork/srv/ger/csw"
+      }
+    ],
+    "format": "image/png",
+    "version": "1.3.0",
+    "featureCount": "5",
+    "gfiTheme": "default",
+    "transparent": true,
+    "singleTile": true,
+    "infoFormat": "application/json",
+    "layerAttribution": "F\u00fcr die Nutzung der Daten ist die Datenlizenz Deutschland - Namensnennung - Version 2.0 anzuwenden. Die Lizenz ist \u00fcber https://www.govdata.de/dl-de/by-2-0 abrufbar. Der Quellenvermerk gem\u00e4\u00df (2) der Lizenz lautet \"Umweltatlas Berlin / [Titel des Datensatzes]\"."
+  },
+  {
+    "id": "ua_klimabewertung_2022:dc_ua_phk_bioklim_siedl_nacht_2022",
+    "name": "Siedlungsfl\u00e4chen: Bioklimatische Bewertung anhand der mittleren Lufttemperatur pro Block(teil)fl\u00e4che um 04:00 Uhr [\u00b0C] 2022",
+    "name_lang": "Siedlungsfl\u00e4chen: Bioklimatische Bewertung anhand der mittleren Lufttemperatur pro Block(teil)fl\u00e4che um 04:00 Uhr [\u00b0C] 2022 (Klimabewertungskarten 2022 (Umweltatlas))",
+    "crs": "EPSG:25833",
+    "url": "https://gdi.berlin.de/services/wms/ua_klimabewertung_2022",
+    "typ": "WMS",
+    "gfiAttributes": "showAll",
+    "layers": "dc_ua_phk_bioklim_siedl_nacht_2022",
+    "legend": true,
+    "datasets": [
+      {
+        "md_name": "Klimabewertungskarten 2022 (Umweltatlas)",
+        "md_id": "d002e10f-d745-49e5-98b1-bde00700f4e4",
+        "rs_id": "https://registry.gdi-de.org/id/de.be.csw/b12543bc-e79d-3af5-88fa-b54da877b30f",
+        "csw_url": "https://gdi.berlin.de/geonetwork/srv/ger/csw"
+      }
+    ],
+    "format": "image/png",
+    "version": "1.3.0",
+    "featureCount": "5",
+    "gfiTheme": "default",
+    "transparent": true,
+    "singleTile": true,
+    "infoFormat": "application/json",
+    "layerAttribution": "F\u00fcr die Nutzung der Daten ist die Datenlizenz Deutschland - Namensnennung - Version 2.0 anzuwenden. Die Lizenz ist \u00fcber https://www.govdata.de/dl-de/by-2-0 abrufbar. Der Quellenvermerk gem\u00e4\u00df (2) der Lizenz lautet \"Umweltatlas Berlin / [Titel des Datensatzes]\"."
+  },
+  {
+    "id": "ua_klimabewertung_2022:dd_ua_phk_bioklim_str_nacht_2022",
+    "name": "Verkehrsfl\u00e4chen: Bioklimatische Bewertung anhand der mittleren Lufttemperatur pro Block(teil)fl\u00e4che um 04:00 Uhr [\u00b0C] 2022",
+    "name_lang": "Verkehrsfl\u00e4chen: Bioklimatische Bewertung anhand der mittleren Lufttemperatur pro Block(teil)fl\u00e4che um 04:00 Uhr [\u00b0C] 2022 (Klimabewertungskarten 2022 (Umweltatlas))",
+    "crs": "EPSG:25833",
+    "url": "https://gdi.berlin.de/services/wms/ua_klimabewertung_2022",
+    "typ": "WMS",
+    "gfiAttributes": "showAll",
+    "layers": "dd_ua_phk_bioklim_str_nacht_2022",
+    "legend": true,
+    "datasets": [
+      {
+        "md_name": "Klimabewertungskarten 2022 (Umweltatlas)",
+        "md_id": "d002e10f-d745-49e5-98b1-bde00700f4e4",
+        "rs_id": "https://registry.gdi-de.org/id/de.be.csw/b12543bc-e79d-3af5-88fa-b54da877b30f",
+        "csw_url": "https://gdi.berlin.de/geonetwork/srv/ger/csw"
+      }
+    ],
+    "format": "image/png",
+    "version": "1.3.0",
+    "featureCount": "5",
+    "gfiTheme": "default",
+    "transparent": true,
+    "singleTile": true,
+    "infoFormat": "application/json",
+    "layerAttribution": "F\u00fcr die Nutzung der Daten ist die Datenlizenz Deutschland - Namensnennung - Version 2.0 anzuwenden. Die Lizenz ist \u00fcber https://www.govdata.de/dl-de/by-2-0 abrufbar. Der Quellenvermerk gem\u00e4\u00df (2) der Lizenz lautet \"Umweltatlas Berlin / [Titel des Datensatzes]\"."
+  },
+  {
+    "id": "ua_klimabewertung_2022:ea_ua_phk_vul_geb_therm_belast_2022",
+    "name": "Stadtgebiete mit sehr ung\u00fcnstiger thermischer Belastung gem\u00e4\u00df Planungshinweiskarte am Tag und Nacht 2022",
+    "name_lang": "Stadtgebiete mit sehr ung\u00fcnstiger thermischer Belastung gem\u00e4\u00df Planungshinweiskarte am Tag und Nacht 2022 (Klimabewertungskarten 2022 (Umweltatlas))",
+    "crs": "EPSG:25833",
+    "url": "https://gdi.berlin.de/services/wms/ua_klimabewertung_2022",
+    "typ": "WMS",
+    "gfiAttributes": "showAll",
+    "layers": "ea_ua_phk_vul_geb_therm_belast_2022",
+    "legend": true,
+    "datasets": [
+      {
+        "md_name": "Klimabewertungskarten 2022 (Umweltatlas)",
+        "md_id": "d002e10f-d745-49e5-98b1-bde00700f4e4",
+        "rs_id": "https://registry.gdi-de.org/id/de.be.csw/b12543bc-e79d-3af5-88fa-b54da877b30f",
+        "csw_url": "https://gdi.berlin.de/geonetwork/srv/ger/csw"
+      }
+    ],
+    "format": "image/png",
+    "version": "1.3.0",
+    "featureCount": "5",
+    "gfiTheme": "default",
+    "transparent": true,
+    "singleTile": true,
+    "infoFormat": "application/json",
+    "layerAttribution": "F\u00fcr die Nutzung der Daten ist die Datenlizenz Deutschland - Namensnennung - Version 2.0 anzuwenden. Die Lizenz ist \u00fcber https://www.govdata.de/dl-de/by-2-0 abrufbar. Der Quellenvermerk gem\u00e4\u00df (2) der Lizenz lautet \"Umweltatlas Berlin / [Titel des Datensatzes]\"."
+  },
+  {
+    "id": "ua_klimabewertung_2022:eb_ua_phk_vul_geb_demog_2022",
+    "name": "Stadtklimatisch besonderes vulnerable Stadtgebiete 2022",
+    "name_lang": "Stadtklimatisch besonderes vulnerable Stadtgebiete 2022 (Klimabewertungskarten 2022 (Umweltatlas))",
+    "crs": "EPSG:25833",
+    "url": "https://gdi.berlin.de/services/wms/ua_klimabewertung_2022",
+    "typ": "WMS",
+    "gfiAttributes": "showAll",
+    "layers": "eb_ua_phk_vul_geb_demog_2022",
+    "legend": true,
+    "datasets": [
+      {
+        "md_name": "Klimabewertungskarten 2022 (Umweltatlas)",
+        "md_id": "d002e10f-d745-49e5-98b1-bde00700f4e4",
+        "rs_id": "https://registry.gdi-de.org/id/de.be.csw/b12543bc-e79d-3af5-88fa-b54da877b30f",
+        "csw_url": "https://gdi.berlin.de/geonetwork/srv/ger/csw"
+      }
+    ],
+    "format": "image/png",
+    "version": "1.3.0",
+    "featureCount": "5",
+    "gfiTheme": "default",
+    "transparent": true,
+    "singleTile": true,
+    "infoFormat": "application/json",
+    "layerAttribution": "F\u00fcr die Nutzung der Daten ist die Datenlizenz Deutschland - Namensnennung - Version 2.0 anzuwenden. Die Lizenz ist \u00fcber https://www.govdata.de/dl-de/by-2-0 abrufbar. Der Quellenvermerk gem\u00e4\u00df (2) der Lizenz lautet \"Umweltatlas Berlin / [Titel des Datensatzes]\"."
+  },
+  {
+    "id": "ua_klimabewertung_2022:fh_ua_phk_m8_2022",
+    "name": "M-08 Durchl\u00fcften (Blau-gr\u00fcne Stadtentwicklung) 2022",
+    "name_lang": "M-08 Durchl\u00fcften (Blau-gr\u00fcne Stadtentwicklung) 2022 (Klimabewertungskarten 2022 (Umweltatlas))",
+    "crs": "EPSG:25833",
+    "url": "https://gdi.berlin.de/services/wms/ua_klimabewertung_2022",
+    "typ": "WMS",
+    "gfiAttributes": "showAll",
+    "layers": "fh_ua_phk_m8_2022",
+    "legend": true,
+    "datasets": [
+      {
+        "md_name": "Klimabewertungskarten 2022 (Umweltatlas)",
+        "md_id": "d002e10f-d745-49e5-98b1-bde00700f4e4",
+        "rs_id": "https://registry.gdi-de.org/id/de.be.csw/b12543bc-e79d-3af5-88fa-b54da877b30f",
+        "csw_url": "https://gdi.berlin.de/geonetwork/srv/ger/csw"
+      }
+    ],
+    "format": "image/png",
+    "version": "1.3.0",
+    "featureCount": "5",
+    "gfiTheme": "default",
+    "transparent": true,
+    "singleTile": true,
+    "infoFormat": "application/json",
+    "layerAttribution": "F\u00fcr die Nutzung der Daten ist die Datenlizenz Deutschland - Namensnennung - Version 2.0 anzuwenden. Die Lizenz ist \u00fcber https://www.govdata.de/dl-de/by-2-0 abrufbar. Der Quellenvermerk gem\u00e4\u00df (2) der Lizenz lautet \"Umweltatlas Berlin / [Titel des Datensatzes]\"."
+  },
+  {
+    "id": "ua_klimabewertung_2022:fi_ua_phk_m9_2022",
+    "name": "M-09 Verschatten (Blau-gr\u00fcne Stadtentwicklung) 2022",
+    "name_lang": "M-09 Verschatten (Blau-gr\u00fcne Stadtentwicklung) 2022 (Klimabewertungskarten 2022 (Umweltatlas))",
+    "crs": "EPSG:25833",
+    "url": "https://gdi.berlin.de/services/wms/ua_klimabewertung_2022",
+    "typ": "WMS",
+    "gfiAttributes": "showAll",
+    "layers": "fi_ua_phk_m9_2022",
+    "legend": true,
+    "datasets": [
+      {
+        "md_name": "Klimabewertungskarten 2022 (Umweltatlas)",
+        "md_id": "d002e10f-d745-49e5-98b1-bde00700f4e4",
+        "rs_id": "https://registry.gdi-de.org/id/de.be.csw/b12543bc-e79d-3af5-88fa-b54da877b30f",
+        "csw_url": "https://gdi.berlin.de/geonetwork/srv/ger/csw"
+      }
+    ],
+    "format": "image/png",
+    "version": "1.3.0",
+    "featureCount": "5",
+    "gfiTheme": "default",
+    "transparent": true,
+    "singleTile": true,
+    "infoFormat": "application/json",
+    "layerAttribution": "F\u00fcr die Nutzung der Daten ist die Datenlizenz Deutschland - Namensnennung - Version 2.0 anzuwenden. Die Lizenz ist \u00fcber https://www.govdata.de/dl-de/by-2-0 abrufbar. Der Quellenvermerk gem\u00e4\u00df (2) der Lizenz lautet \"Umweltatlas Berlin / [Titel des Datensatzes]\"."
+  },
+  {
+    "id": "ua_klimabewertung_2022:fj_ua_phk_m10_2022",
+    "name": "M-10 Begr\u00fcnen (Blau-gr\u00fcne Stadtentwicklung) 2022",
+    "name_lang": "M-10 Begr\u00fcnen (Blau-gr\u00fcne Stadtentwicklung) 2022 (Klimabewertungskarten 2022 (Umweltatlas))",
+    "crs": "EPSG:25833",
+    "url": "https://gdi.berlin.de/services/wms/ua_klimabewertung_2022",
+    "typ": "WMS",
+    "gfiAttributes": "showAll",
+    "layers": "fj_ua_phk_m10_2022",
+    "legend": true,
+    "datasets": [
+      {
+        "md_name": "Klimabewertungskarten 2022 (Umweltatlas)",
+        "md_id": "d002e10f-d745-49e5-98b1-bde00700f4e4",
+        "rs_id": "https://registry.gdi-de.org/id/de.be.csw/b12543bc-e79d-3af5-88fa-b54da877b30f",
+        "csw_url": "https://gdi.berlin.de/geonetwork/srv/ger/csw"
+      }
+    ],
+    "format": "image/png",
+    "version": "1.3.0",
+    "featureCount": "5",
+    "gfiTheme": "default",
+    "transparent": true,
+    "singleTile": true,
+    "infoFormat": "application/json",
+    "layerAttribution": "F\u00fcr die Nutzung der Daten ist die Datenlizenz Deutschland - Namensnennung - Version 2.0 anzuwenden. Die Lizenz ist \u00fcber https://www.govdata.de/dl-de/by-2-0 abrufbar. Der Quellenvermerk gem\u00e4\u00df (2) der Lizenz lautet \"Umweltatlas Berlin / [Titel des Datensatzes]\"."
+  },
+  {
+    "id": "ua_klimabewertung_2022:fk_ua_phk_m11_2022",
+    "name": "M-11 Verdunsten (Blau-gr\u00fcne Stadtentwicklung) 2022",
+    "name_lang": "M-11 Verdunsten (Blau-gr\u00fcne Stadtentwicklung) 2022 (Klimabewertungskarten 2022 (Umweltatlas))",
+    "crs": "EPSG:25833",
+    "url": "https://gdi.berlin.de/services/wms/ua_klimabewertung_2022",
+    "typ": "WMS",
+    "gfiAttributes": "showAll",
+    "layers": "fk_ua_phk_m11_2022",
+    "legend": true,
+    "datasets": [
+      {
+        "md_name": "Klimabewertungskarten 2022 (Umweltatlas)",
+        "md_id": "d002e10f-d745-49e5-98b1-bde00700f4e4",
+        "rs_id": "https://registry.gdi-de.org/id/de.be.csw/b12543bc-e79d-3af5-88fa-b54da877b30f",
+        "csw_url": "https://gdi.berlin.de/geonetwork/srv/ger/csw"
+      }
+    ],
+    "format": "image/png",
+    "version": "1.3.0",
+    "featureCount": "5",
+    "gfiTheme": "default",
+    "transparent": true,
+    "singleTile": true,
+    "infoFormat": "application/json",
+    "layerAttribution": "F\u00fcr die Nutzung der Daten ist die Datenlizenz Deutschland - Namensnennung - Version 2.0 anzuwenden. Die Lizenz ist \u00fcber https://www.govdata.de/dl-de/by-2-0 abrufbar. Der Quellenvermerk gem\u00e4\u00df (2) der Lizenz lautet \"Umweltatlas Berlin / [Titel des Datensatzes]\"."
+  },
+  {
+    "id": "ua_klimabewertung_2022:fl_ua_phk_m12_2022",
+    "name": "M-12 Klimakomfortpl\u00e4tze anlegen (Blau-gr\u00fcne Stadtentwicklung) 2022",
+    "name_lang": "M-12 Klimakomfortpl\u00e4tze anlegen (Blau-gr\u00fcne Stadtentwicklung) 2022 (Klimabewertungskarten 2022 (Umweltatlas))",
+    "crs": "EPSG:25833",
+    "url": "https://gdi.berlin.de/services/wms/ua_klimabewertung_2022",
+    "typ": "WMS",
+    "gfiAttributes": "showAll",
+    "layers": "fl_ua_phk_m12_2022",
+    "legend": true,
+    "datasets": [
+      {
+        "md_name": "Klimabewertungskarten 2022 (Umweltatlas)",
+        "md_id": "d002e10f-d745-49e5-98b1-bde00700f4e4",
+        "rs_id": "https://registry.gdi-de.org/id/de.be.csw/b12543bc-e79d-3af5-88fa-b54da877b30f",
+        "csw_url": "https://gdi.berlin.de/geonetwork/srv/ger/csw"
+      }
+    ],
+    "format": "image/png",
+    "version": "1.3.0",
+    "featureCount": "5",
+    "gfiTheme": "default",
+    "transparent": true,
+    "singleTile": true,
+    "infoFormat": "application/json",
+    "layerAttribution": "F\u00fcr die Nutzung der Daten ist die Datenlizenz Deutschland - Namensnennung - Version 2.0 anzuwenden. Die Lizenz ist \u00fcber https://www.govdata.de/dl-de/by-2-0 abrufbar. Der Quellenvermerk gem\u00e4\u00df (2) der Lizenz lautet \"Umweltatlas Berlin / [Titel des Datensatzes]\"."
+  },
+  {
+    "id": "ua_klimabewertung_2022:fm_ua_phk_m13_2022",
+    "name": "M-13 R\u00fcckstrahlen (Blau-gr\u00fcne Stadtentwicklung) 2022",
+    "name_lang": "M-13 R\u00fcckstrahlen (Blau-gr\u00fcne Stadtentwicklung) 2022 (Klimabewertungskarten 2022 (Umweltatlas))",
+    "crs": "EPSG:25833",
+    "url": "https://gdi.berlin.de/services/wms/ua_klimabewertung_2022",
+    "typ": "WMS",
+    "gfiAttributes": "showAll",
+    "layers": "fm_ua_phk_m13_2022",
+    "legend": true,
+    "datasets": [
+      {
+        "md_name": "Klimabewertungskarten 2022 (Umweltatlas)",
+        "md_id": "d002e10f-d745-49e5-98b1-bde00700f4e4",
+        "rs_id": "https://registry.gdi-de.org/id/de.be.csw/b12543bc-e79d-3af5-88fa-b54da877b30f",
+        "csw_url": "https://gdi.berlin.de/geonetwork/srv/ger/csw"
+      }
+    ],
+    "format": "image/png",
+    "version": "1.3.0",
+    "featureCount": "5",
+    "gfiTheme": "default",
+    "transparent": true,
+    "singleTile": true,
+    "infoFormat": "application/json",
+    "layerAttribution": "F\u00fcr die Nutzung der Daten ist die Datenlizenz Deutschland - Namensnennung - Version 2.0 anzuwenden. Die Lizenz ist \u00fcber https://www.govdata.de/dl-de/by-2-0 abrufbar. Der Quellenvermerk gem\u00e4\u00df (2) der Lizenz lautet \"Umweltatlas Berlin / [Titel des Datensatzes]\"."
+  },
+  {
+    "id": "ua_klimabewertung_2022:fn_ua_phk_m14_2022",
+    "name": "M-14 Ausstattung klimaoptimieren (klimaoptimierte, k\u00fchlende Gr\u00fcn- und Freir\u00e4ume) 2022",
+    "name_lang": "M-14 Ausstattung klimaoptimieren (klimaoptimierte, k\u00fchlende Gr\u00fcn- und Freir\u00e4ume) 2022 (Klimabewertungskarten 2022 (Umweltatlas))",
+    "crs": "EPSG:25833",
+    "url": "https://gdi.berlin.de/services/wms/ua_klimabewertung_2022",
+    "typ": "WMS",
+    "gfiAttributes": "showAll",
+    "layers": "fn_ua_phk_m14_2022",
+    "legend": true,
+    "datasets": [
+      {
+        "md_name": "Klimabewertungskarten 2022 (Umweltatlas)",
+        "md_id": "d002e10f-d745-49e5-98b1-bde00700f4e4",
+        "rs_id": "https://registry.gdi-de.org/id/de.be.csw/b12543bc-e79d-3af5-88fa-b54da877b30f",
+        "csw_url": "https://gdi.berlin.de/geonetwork/srv/ger/csw"
+      }
+    ],
+    "format": "image/png",
+    "version": "1.3.0",
+    "featureCount": "5",
+    "gfiTheme": "default",
+    "transparent": true,
+    "singleTile": true,
+    "infoFormat": "application/json",
+    "layerAttribution": "F\u00fcr die Nutzung der Daten ist die Datenlizenz Deutschland - Namensnennung - Version 2.0 anzuwenden. Die Lizenz ist \u00fcber https://www.govdata.de/dl-de/by-2-0 abrufbar. Der Quellenvermerk gem\u00e4\u00df (2) der Lizenz lautet \"Umweltatlas Berlin / [Titel des Datensatzes]\"."
+  },
+  {
+    "id": "ua_klimabewertung_2022:fo_ua_phk_m15_2022",
+    "name": "M-15 Bew\u00e4ssern (klimaoptimierte, k\u00fchlende Gr\u00fcn- und Freir\u00e4ume) 2022",
+    "name_lang": "M-15 Bew\u00e4ssern (klimaoptimierte, k\u00fchlende Gr\u00fcn- und Freir\u00e4ume) 2022 (Klimabewertungskarten 2022 (Umweltatlas))",
+    "crs": "EPSG:25833",
+    "url": "https://gdi.berlin.de/services/wms/ua_klimabewertung_2022",
+    "typ": "WMS",
+    "gfiAttributes": "showAll",
+    "layers": "fo_ua_phk_m15_2022",
+    "legend": true,
+    "datasets": [
+      {
+        "md_name": "Klimabewertungskarten 2022 (Umweltatlas)",
+        "md_id": "d002e10f-d745-49e5-98b1-bde00700f4e4",
+        "rs_id": "https://registry.gdi-de.org/id/de.be.csw/b12543bc-e79d-3af5-88fa-b54da877b30f",
+        "csw_url": "https://gdi.berlin.de/geonetwork/srv/ger/csw"
+      }
+    ],
+    "format": "image/png",
+    "version": "1.3.0",
+    "featureCount": "5",
+    "gfiTheme": "default",
+    "transparent": true,
+    "singleTile": true,
+    "infoFormat": "application/json",
+    "layerAttribution": "F\u00fcr die Nutzung der Daten ist die Datenlizenz Deutschland - Namensnennung - Version 2.0 anzuwenden. Die Lizenz ist \u00fcber https://www.govdata.de/dl-de/by-2-0 abrufbar. Der Quellenvermerk gem\u00e4\u00df (2) der Lizenz lautet \"Umweltatlas Berlin / [Titel des Datensatzes]\"."
+  },
+  {
+    "id": "ua_klimabewertung_2022:fp_ua_phk_m16_2022",
+    "name": "M-16 Mehrfach nutzen (klimaoptimierte, k\u00fchlende Gr\u00fcn- und Freir\u00e4ume) 2022",
+    "name_lang": "M-16 Mehrfach nutzen (klimaoptimierte, k\u00fchlende Gr\u00fcn- und Freir\u00e4ume) 2022 (Klimabewertungskarten 2022 (Umweltatlas))",
+    "crs": "EPSG:25833",
+    "url": "https://gdi.berlin.de/services/wms/ua_klimabewertung_2022",
+    "typ": "WMS",
+    "gfiAttributes": "showAll",
+    "layers": "fp_ua_phk_m16_2022",
+    "legend": true,
+    "datasets": [
+      {
+        "md_name": "Klimabewertungskarten 2022 (Umweltatlas)",
+        "md_id": "d002e10f-d745-49e5-98b1-bde00700f4e4",
+        "rs_id": "https://registry.gdi-de.org/id/de.be.csw/b12543bc-e79d-3af5-88fa-b54da877b30f",
+        "csw_url": "https://gdi.berlin.de/geonetwork/srv/ger/csw"
+      }
+    ],
+    "format": "image/png",
+    "version": "1.3.0",
+    "featureCount": "5",
+    "gfiTheme": "default",
+    "transparent": true,
+    "singleTile": true,
+    "infoFormat": "application/json",
+    "layerAttribution": "F\u00fcr die Nutzung der Daten ist die Datenlizenz Deutschland - Namensnennung - Version 2.0 anzuwenden. Die Lizenz ist \u00fcber https://www.govdata.de/dl-de/by-2-0 abrufbar. Der Quellenvermerk gem\u00e4\u00df (2) der Lizenz lautet \"Umweltatlas Berlin / [Titel des Datensatzes]\"."
+  },
+  {
+    "id": "ua_klimabewertung_2022:fq_ua_phk_m17_2022",
+    "name": "M-17 CO2 binden und speichern (klimaoptimierte, k\u00fchlende Gr\u00fcn- und Freir\u00e4ume) 2022",
+    "name_lang": "M-17 CO2 binden und speichern (klimaoptimierte, k\u00fchlende Gr\u00fcn- und Freir\u00e4ume) 2022 (Klimabewertungskarten 2022 (Umweltatlas))",
+    "crs": "EPSG:25833",
+    "url": "https://gdi.berlin.de/services/wms/ua_klimabewertung_2022",
+    "typ": "WMS",
+    "gfiAttributes": "showAll",
+    "layers": "fq_ua_phk_m17_2022",
+    "legend": true,
+    "datasets": [
+      {
+        "md_name": "Klimabewertungskarten 2022 (Umweltatlas)",
+        "md_id": "d002e10f-d745-49e5-98b1-bde00700f4e4",
+        "rs_id": "https://registry.gdi-de.org/id/de.be.csw/b12543bc-e79d-3af5-88fa-b54da877b30f",
+        "csw_url": "https://gdi.berlin.de/geonetwork/srv/ger/csw"
+      }
+    ],
+    "format": "image/png",
+    "version": "1.3.0",
+    "featureCount": "5",
+    "gfiTheme": "default",
+    "transparent": true,
+    "singleTile": true,
+    "infoFormat": "application/json",
+    "layerAttribution": "F\u00fcr die Nutzung der Daten ist die Datenlizenz Deutschland - Namensnennung - Version 2.0 anzuwenden. Die Lizenz ist \u00fcber https://www.govdata.de/dl-de/by-2-0 abrufbar. Der Quellenvermerk gem\u00e4\u00df (2) der Lizenz lautet \"Umweltatlas Berlin / [Titel des Datensatzes]\"."
+  },
+  {
+    "id": "ua_klimabewertung_2022:fr_ua_phk_m18_2022",
+    "name": "M-18 Regenwasser speichern (Synergie Stadt und Wasser) 2022",
+    "name_lang": "M-18 Regenwasser speichern (Synergie Stadt und Wasser) 2022 (Klimabewertungskarten 2022 (Umweltatlas))",
+    "crs": "EPSG:25833",
+    "url": "https://gdi.berlin.de/services/wms/ua_klimabewertung_2022",
+    "typ": "WMS",
+    "gfiAttributes": "showAll",
+    "layers": "fr_ua_phk_m18_2022",
+    "legend": true,
+    "datasets": [
+      {
+        "md_name": "Klimabewertungskarten 2022 (Umweltatlas)",
+        "md_id": "d002e10f-d745-49e5-98b1-bde00700f4e4",
+        "rs_id": "https://registry.gdi-de.org/id/de.be.csw/b12543bc-e79d-3af5-88fa-b54da877b30f",
+        "csw_url": "https://gdi.berlin.de/geonetwork/srv/ger/csw"
+      }
+    ],
+    "format": "image/png",
+    "version": "1.3.0",
+    "featureCount": "5",
+    "gfiTheme": "default",
+    "transparent": true,
+    "singleTile": true,
+    "infoFormat": "application/json",
+    "layerAttribution": "F\u00fcr die Nutzung der Daten ist die Datenlizenz Deutschland - Namensnennung - Version 2.0 anzuwenden. Die Lizenz ist \u00fcber https://www.govdata.de/dl-de/by-2-0 abrufbar. Der Quellenvermerk gem\u00e4\u00df (2) der Lizenz lautet \"Umweltatlas Berlin / [Titel des Datensatzes]\"."
+  },
+  {
+    "id": "ua_klimabewertung_2022:fs_ua_phk_m19_2022",
+    "name": "M-19 Versickern (Synergie Stadt und Wasser) 2022",
+    "name_lang": "M-19 Versickern (Synergie Stadt und Wasser) 2022 (Klimabewertungskarten 2022 (Umweltatlas))",
+    "crs": "EPSG:25833",
+    "url": "https://gdi.berlin.de/services/wms/ua_klimabewertung_2022",
+    "typ": "WMS",
+    "gfiAttributes": "showAll",
+    "layers": "fs_ua_phk_m19_2022",
+    "legend": true,
+    "datasets": [
+      {
+        "md_name": "Klimabewertungskarten 2022 (Umweltatlas)",
+        "md_id": "d002e10f-d745-49e5-98b1-bde00700f4e4",
+        "rs_id": "https://registry.gdi-de.org/id/de.be.csw/b12543bc-e79d-3af5-88fa-b54da877b30f",
+        "csw_url": "https://gdi.berlin.de/geonetwork/srv/ger/csw"
+      }
+    ],
+    "format": "image/png",
+    "version": "1.3.0",
+    "featureCount": "5",
+    "gfiTheme": "default",
+    "transparent": true,
+    "singleTile": true,
+    "infoFormat": "application/json",
+    "layerAttribution": "F\u00fcr die Nutzung der Daten ist die Datenlizenz Deutschland - Namensnennung - Version 2.0 anzuwenden. Die Lizenz ist \u00fcber https://www.govdata.de/dl-de/by-2-0 abrufbar. Der Quellenvermerk gem\u00e4\u00df (2) der Lizenz lautet \"Umweltatlas Berlin / [Titel des Datensatzes]\"."
+  },
+  {
+    "id": "ua_klimabewertung_2022:ft_ua_phk_m20_2022",
+    "name": "M-20 Zuf\u00fchren (Synergie Stadt und Wasser) 2022",
+    "name_lang": "M-20 Zuf\u00fchren (Synergie Stadt und Wasser) 2022 (Klimabewertungskarten 2022 (Umweltatlas))",
+    "crs": "EPSG:25833",
+    "url": "https://gdi.berlin.de/services/wms/ua_klimabewertung_2022",
+    "typ": "WMS",
+    "gfiAttributes": "showAll",
+    "layers": "ft_ua_phk_m20_2022",
+    "legend": true,
+    "datasets": [
+      {
+        "md_name": "Klimabewertungskarten 2022 (Umweltatlas)",
+        "md_id": "d002e10f-d745-49e5-98b1-bde00700f4e4",
+        "rs_id": "https://registry.gdi-de.org/id/de.be.csw/b12543bc-e79d-3af5-88fa-b54da877b30f",
+        "csw_url": "https://gdi.berlin.de/geonetwork/srv/ger/csw"
+      }
+    ],
+    "format": "image/png",
+    "version": "1.3.0",
+    "featureCount": "5",
+    "gfiTheme": "default",
+    "transparent": true,
+    "singleTile": true,
+    "infoFormat": "application/json",
+    "layerAttribution": "F\u00fcr die Nutzung der Daten ist die Datenlizenz Deutschland - Namensnennung - Version 2.0 anzuwenden. Die Lizenz ist \u00fcber https://www.govdata.de/dl-de/by-2-0 abrufbar. Der Quellenvermerk gem\u00e4\u00df (2) der Lizenz lautet \"Umweltatlas Berlin / [Titel des Datensatzes]\"."
+  },
+  {
+    "id": "ua_klimabewertung_2022:fu_ua_phk_m21_2022",
+    "name": "M-21 Retentionsr\u00e4ume schaffen (Vorsorge Starkregen + Hochwasser) 2022",
+    "name_lang": "M-21 Retentionsr\u00e4ume schaffen (Vorsorge Starkregen + Hochwasser) 2022 (Klimabewertungskarten 2022 (Umweltatlas))",
+    "crs": "EPSG:25833",
+    "url": "https://gdi.berlin.de/services/wms/ua_klimabewertung_2022",
+    "typ": "WMS",
+    "gfiAttributes": "showAll",
+    "layers": "fu_ua_phk_m21_2022",
+    "legend": true,
+    "datasets": [
+      {
+        "md_name": "Klimabewertungskarten 2022 (Umweltatlas)",
+        "md_id": "d002e10f-d745-49e5-98b1-bde00700f4e4",
+        "rs_id": "https://registry.gdi-de.org/id/de.be.csw/b12543bc-e79d-3af5-88fa-b54da877b30f",
+        "csw_url": "https://gdi.berlin.de/geonetwork/srv/ger/csw"
+      }
+    ],
+    "format": "image/png",
+    "version": "1.3.0",
+    "featureCount": "5",
+    "gfiTheme": "default",
+    "transparent": true,
+    "singleTile": true,
+    "infoFormat": "application/json",
+    "layerAttribution": "F\u00fcr die Nutzung der Daten ist die Datenlizenz Deutschland - Namensnennung - Version 2.0 anzuwenden. Die Lizenz ist \u00fcber https://www.govdata.de/dl-de/by-2-0 abrufbar. Der Quellenvermerk gem\u00e4\u00df (2) der Lizenz lautet \"Umweltatlas Berlin / [Titel des Datensatzes]\"."
+  },
+  {
+    "id": "ua_klimabewertung_2022:fv_ua_phk_m22_2022",
+    "name": "M-22 Starkregenabfl\u00fcsse leiten (Vorsorge Starkregen + Hochwasser) 2022",
+    "name_lang": "M-22 Starkregenabfl\u00fcsse leiten (Vorsorge Starkregen + Hochwasser) 2022 (Klimabewertungskarten 2022 (Umweltatlas))",
+    "crs": "EPSG:25833",
+    "url": "https://gdi.berlin.de/services/wms/ua_klimabewertung_2022",
+    "typ": "WMS",
+    "gfiAttributes": "showAll",
+    "layers": "fv_ua_phk_m22_2022",
+    "legend": true,
+    "datasets": [
+      {
+        "md_name": "Klimabewertungskarten 2022 (Umweltatlas)",
+        "md_id": "d002e10f-d745-49e5-98b1-bde00700f4e4",
+        "rs_id": "https://registry.gdi-de.org/id/de.be.csw/b12543bc-e79d-3af5-88fa-b54da877b30f",
+        "csw_url": "https://gdi.berlin.de/geonetwork/srv/ger/csw"
+      }
+    ],
+    "format": "image/png",
+    "version": "1.3.0",
+    "featureCount": "5",
+    "gfiTheme": "default",
+    "transparent": true,
+    "singleTile": true,
+    "infoFormat": "application/json",
+    "layerAttribution": "F\u00fcr die Nutzung der Daten ist die Datenlizenz Deutschland - Namensnennung - Version 2.0 anzuwenden. Die Lizenz ist \u00fcber https://www.govdata.de/dl-de/by-2-0 abrufbar. Der Quellenvermerk gem\u00e4\u00df (2) der Lizenz lautet \"Umweltatlas Berlin / [Titel des Datensatzes]\"."
+  },
+  {
+    "id": "ua_klimabewertung_2022:fw_ua_phk_m23_2022",
+    "name": "M-23 Sch\u00fctzen (Vorsorge Starkregen + Hochwasser) 2022",
+    "name_lang": "M-23 Sch\u00fctzen (Vorsorge Starkregen + Hochwasser) 2022 (Klimabewertungskarten 2022 (Umweltatlas))",
+    "crs": "EPSG:25833",
+    "url": "https://gdi.berlin.de/services/wms/ua_klimabewertung_2022",
+    "typ": "WMS",
+    "gfiAttributes": "showAll",
+    "layers": "fw_ua_phk_m23_2022",
+    "legend": true,
+    "datasets": [
+      {
+        "md_name": "Klimabewertungskarten 2022 (Umweltatlas)",
+        "md_id": "d002e10f-d745-49e5-98b1-bde00700f4e4",
+        "rs_id": "https://registry.gdi-de.org/id/de.be.csw/b12543bc-e79d-3af5-88fa-b54da877b30f",
+        "csw_url": "https://gdi.berlin.de/geonetwork/srv/ger/csw"
+      }
+    ],
+    "format": "image/png",
+    "version": "1.3.0",
+    "featureCount": "5",
+    "gfiTheme": "default",
+    "transparent": true,
+    "singleTile": true,
+    "infoFormat": "application/json",
+    "layerAttribution": "F\u00fcr die Nutzung der Daten ist die Datenlizenz Deutschland - Namensnennung - Version 2.0 anzuwenden. Die Lizenz ist \u00fcber https://www.govdata.de/dl-de/by-2-0 abrufbar. Der Quellenvermerk gem\u00e4\u00df (2) der Lizenz lautet \"Umweltatlas Berlin / [Titel des Datensatzes]\"."
+  },
+  {
+    "id": "ua_klimabewertung_2022:aa_ua_phk_alkisgeb_2022",
+    "name": "Geb\u00e4ude (ALKIS, Stand 11/2022)",
+    "name_lang": "Geb\u00e4ude (ALKIS, Stand 11/2022) (Klimabewertungskarten 2022 (Umweltatlas))",
+    "crs": "EPSG:25833",
+    "url": "https://gdi.berlin.de/services/wms/ua_klimabewertung_2022",
+    "typ": "WMS",
+    "gfiAttributes": "showAll",
+    "layers": "aa_ua_phk_alkisgeb_2022",
+    "legend": true,
+    "datasets": [
+      {
+        "md_name": "Klimabewertungskarten 2022 (Umweltatlas)",
+        "md_id": "d002e10f-d745-49e5-98b1-bde00700f4e4",
+        "rs_id": "https://registry.gdi-de.org/id/de.be.csw/b12543bc-e79d-3af5-88fa-b54da877b30f",
+        "csw_url": "https://gdi.berlin.de/geonetwork/srv/ger/csw"
+      }
+    ],
+    "maxScale": "25000.0",
+    "format": "image/png",
+    "version": "1.3.0",
+    "featureCount": "5",
+    "gfiTheme": "default",
+    "transparent": true,
+    "singleTile": true,
+    "infoFormat": "application/json",
+    "layerAttribution": "F\u00fcr die Nutzung der Daten ist die Datenlizenz Deutschland - Namensnennung - Version 2.0 anzuwenden. Die Lizenz ist \u00fcber https://www.govdata.de/dl-de/by-2-0 abrufbar. Der Quellenvermerk gem\u00e4\u00df (2) der Lizenz lautet \"Umweltatlas Berlin / [Titel des Datensatzes]\"."
+  },
+  {
+    "id": "ua_klimabewertung_2022:ab_ua_phk_gebsonst_2022",
+    "name": "Sonstige Geb\u00e4ude",
+    "name_lang": "Sonstige Geb\u00e4ude (Klimabewertungskarten 2022 (Umweltatlas))",
+    "crs": "EPSG:25833",
+    "url": "https://gdi.berlin.de/services/wms/ua_klimabewertung_2022",
+    "typ": "WMS",
+    "gfiAttributes": "showAll",
+    "layers": "ab_ua_phk_gebsonst_2022",
+    "legend": true,
+    "datasets": [
+      {
+        "md_name": "Klimabewertungskarten 2022 (Umweltatlas)",
+        "md_id": "d002e10f-d745-49e5-98b1-bde00700f4e4",
+        "rs_id": "https://registry.gdi-de.org/id/de.be.csw/b12543bc-e79d-3af5-88fa-b54da877b30f",
+        "csw_url": "https://gdi.berlin.de/geonetwork/srv/ger/csw"
+      }
+    ],
+    "maxScale": "25000.0",
+    "format": "image/png",
+    "version": "1.3.0",
+    "featureCount": "5",
+    "gfiTheme": "default",
+    "transparent": true,
+    "singleTile": true,
+    "infoFormat": "application/json",
+    "layerAttribution": "F\u00fcr die Nutzung der Daten ist die Datenlizenz Deutschland - Namensnennung - Version 2.0 anzuwenden. Die Lizenz ist \u00fcber https://www.govdata.de/dl-de/by-2-0 abrufbar. Der Quellenvermerk gem\u00e4\u00df (2) der Lizenz lautet \"Umweltatlas Berlin / [Titel des Datensatzes]\"."
+  },
+  {
+    "id": "ua_klimabewertung_2022:g_ua_phk_gew_2022",
+    "name": "Gew\u00e4sser 2022",
+    "name_lang": "Gew\u00e4sser 2022 (Klimabewertungskarten 2022 (Umweltatlas))",
+    "crs": "EPSG:25833",
+    "url": "https://gdi.berlin.de/services/wms/ua_klimabewertung_2022",
+    "typ": "WMS",
+    "gfiAttributes": "showAll",
+    "layers": "g_ua_phk_gew_2022",
+    "legend": true,
+    "datasets": [
+      {
+        "md_name": "Klimabewertungskarten 2022 (Umweltatlas)",
+        "md_id": "d002e10f-d745-49e5-98b1-bde00700f4e4",
+        "rs_id": "https://registry.gdi-de.org/id/de.be.csw/b12543bc-e79d-3af5-88fa-b54da877b30f",
+        "csw_url": "https://gdi.berlin.de/geonetwork/srv/ger/csw"
+      }
+    ],
+    "format": "image/png",
+    "version": "1.3.0",
+    "featureCount": "5",
+    "gfiTheme": "default",
+    "transparent": true,
+    "singleTile": true,
+    "infoFormat": "application/json",
+    "layerAttribution": "F\u00fcr die Nutzung der Daten ist die Datenlizenz Deutschland - Namensnennung - Version 2.0 anzuwenden. Die Lizenz ist \u00fcber https://www.govdata.de/dl-de/by-2-0 abrufbar. Der Quellenvermerk gem\u00e4\u00df (2) der Lizenz lautet \"Umweltatlas Berlin / [Titel des Datensatzes]\"."
   }
 ]
 

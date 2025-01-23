@@ -631,7 +631,398 @@
               "name": "Klimabewertungskarten",
               "type": "folder",
               "description": "Klimabewertungskarten",
-              "elements": []
+              "elements": [
+                {
+                  "id": "ua_klimabewertung_2022:wfs:bj_ua_phk_biokl_siedl_2022",
+                  "visibility": false,
+                  "showInLayerTree": false
+                },
+                {
+                  "id": "ua_klimabewertung_2022:wfs:bi_ua_phk_biokl_str_2022",
+                  "visibility": false,
+                  "showInLayerTree": false
+                },
+                {
+                  "id": "ua_klimabewertung_2022:wfs:be_ua_phk_kvsd_grfrei_2022",
+                  "visibility": false,
+                  "showInLayerTree": false
+                },
+                {
+                  "id": "ua_klimabewertung_2022:wfs:aa_ua_phk_alkisgeb_2022",
+                  "visibility": false,
+                  "showInLayerTree": false
+                },
+                {
+                  "id": "ua_klimabewertung_2022:wfs:g_ua_phk_gew_2022",
+                  "visibility": false,
+                  "showInLayerTree": false
+                },
+                {
+                  "id": "ua_klimabewertung_2022:wfs:ca_ua_phk_aufenth_grfrei_tag_2022",
+                  "visibility": false,
+                  "showInLayerTree": false
+                },
+                {
+                  "id": "ua_klimabewertung_2022:wfs:bb_ua_phk_belast_tag_grfrei_2022",
+                  "visibility": false,
+                  "showInLayerTree": false
+                },
+                {
+                  "id": "ua_klimabewertung_2022:wfs:bh_ua_phk_luftbelast_2022",
+                  "visibility": false,
+                  "showInLayerTree": false
+                },
+                {
+                  "id": "ua_klimabewertung_2022:wfs:bf_ua_phk_kaltluft_siedl_2022",
+                  "visibility": false,
+                  "showInLayerTree": false
+                },
+                {
+                  "id": "ua_klimabewertung_2022:wfs:bc_ua_phk_leitbahn_2022",
+                  "visibility": false,
+                  "showInLayerTree": false
+                },
+                {
+                  "id": "ua_klimabewertung_2022:wfs:ba_ua_phk_luftaust_2022",
+                  "visibility": false,
+                  "showInLayerTree": false
+                },
+                {
+                  "id": "ua_klimabewertung_2022:wfs:fh_ua_phk_m8_2022",
+                  "visibility": false,
+                  "showInLayerTree": false
+                },
+                {
+                  "id": "ua_klimabewertung_2022:wfs:fi_ua_phk_m9_2022",
+                  "visibility": false,
+                  "showInLayerTree": false
+                },
+                {
+                  "id": "ua_klimabewertung_2022:wfs:fj_ua_phk_m10_2022",
+                  "visibility": false,
+                  "showInLayerTree": false
+                },
+                {
+                  "id": "ua_klimabewertung_2022:wfs:fk_ua_phk_m11_2022",
+                  "visibility": false,
+                  "showInLayerTree": false
+                },
+                {
+                  "id": "ua_klimabewertung_2022:wfs:fl_ua_phk_m12_2022",
+                  "visibility": false,
+                  "showInLayerTree": false
+                },
+                {
+                  "id": "ua_klimabewertung_2022:wfs:fm_ua_phk_m13_2022",
+                  "visibility": false,
+                  "showInLayerTree": false
+                },
+                {
+                  "id": "ua_klimabewertung_2022:wfs:fn_ua_phk_m14_2022",
+                  "visibility": false,
+                  "showInLayerTree": false
+                },
+                {
+                  "id": "ua_klimabewertung_2022:wfs:fo_ua_phk_m15_2022",
+                  "visibility": false,
+                  "showInLayerTree": false
+                },
+                {
+                  "id": "ua_klimabewertung_2022:wfs:fp_ua_phk_m16_2022",
+                  "visibility": false,
+                  "showInLayerTree": false
+                },
+                {
+                  "id": "ua_klimabewertung_2022:wfs:fq_ua_phk_m17_2022",
+                  "visibility": false,
+                  "showInLayerTree": false
+                },
+                {
+                  "id": "ua_klimabewertung_2022:wfs:fr_ua_phk_m18_2022",
+                  "visibility": false,
+                  "showInLayerTree": false
+                },
+                {
+                  "id": "ua_klimabewertung_2022:wfs:fs_ua_phk_m19_2022",
+                  "visibility": false,
+                  "showInLayerTree": false
+                },
+                {
+                  "id": "ua_klimabewertung_2022:wfs:ft_ua_phk_m20_2022",
+                  "visibility": false,
+                  "showInLayerTree": false
+                },
+                {
+                  "id": "ua_klimabewertung_2022:wfs:fu_ua_phk_m21_2022",
+                  "visibility": false,
+                  "showInLayerTree": false
+                },
+                {
+                  "id": "ua_klimabewertung_2022:wfs:fv_ua_phk_m22_2022",
+                  "visibility": false,
+                  "showInLayerTree": false
+                },
+                {
+                  "id": "ua_klimabewertung_2022:wfs:fw_ua_phk_m23_2022",
+                  "visibility": false,
+                  "showInLayerTree": false
+                },
+                {
+                  "id": "ua_klimabewertung_2022:wfs:bk_ua_phk_ausgl_grfrei_2022",
+                  "visibility": false,
+                  "showInLayerTree": false
+                },
+                {
+                  "id": "ua_klimabewertung_2022:wfs:da_ua_phk_ausgleich_nacht_2022",
+                  "visibility": false,
+                  "showInLayerTree": false
+                },
+                {
+                  "id": "ua_klimabewertung_2022:wfs:cb_ua_phk_bioklim_siedl_tag_2022",
+                  "visibility": false,
+                  "showInLayerTree": false
+                },
+                {
+                  "id": "ua_klimabewertung_2022:wfs:dc_ua_phk_bioklim_siedl_nacht_2022",
+                  "visibility": false,
+                  "showInLayerTree": false
+                },
+                {
+                  "id": "ua_klimabewertung_2022:wfs:ab_ua_phk_gebsonst_2022",
+                  "visibility": false,
+                  "showInLayerTree": false
+                },
+                {
+                  "id": "ua_klimabewertung_2022:wfs:ea_ua_phk_vul_geb_therm_belast_2022",
+                  "visibility": false,
+                  "showInLayerTree": false
+                },
+                {
+                  "id": "ua_klimabewertung_2022:wfs:bg_ua_phk_oschlaf_2022",
+                  "visibility": false,
+                  "showInLayerTree": false
+                },
+                {
+                  "id": "ua_klimabewertung_2022:wfs:db_ua_phk_oschlaf_nacht_2022",
+                  "visibility": false,
+                  "showInLayerTree": false
+                },
+                {
+                  "id": "ua_klimabewertung_2022:wfs:eb_ua_phk_vul_geb_demog_2022",
+                  "visibility": false,
+                  "showInLayerTree": false
+                },
+                {
+                  "id": "ua_klimabewertung_2022:wfs:cc_ua_phk_bioklim_str_tag_2022",
+                  "visibility": false,
+                  "showInLayerTree": false
+                },
+                {
+                  "id": "ua_klimabewertung_2022:wfs:dd_ua_phk_bioklim_str_nacht_2022",
+                  "visibility": false,
+                  "showInLayerTree": false
+                },
+                {
+                  "id": "ua_klimabewertung_2022:wfs:bd_ua_phk_klimarelevante_bebauung_2022",
+                  "visibility": false,
+                  "showInLayerTree": false
+                },
+                {
+                  "id": "ua_klimabewertung_2022:ba_ua_phk_luftaust_2022",
+                  "visibility": false,
+                  "showInLayerTree": false
+                },
+                {
+                  "id": "ua_klimabewertung_2022:bb_ua_phk_belast_tag_grfrei_2022",
+                  "visibility": false,
+                  "showInLayerTree": false
+                },
+                {
+                  "id": "ua_klimabewertung_2022:bc_ua_phk_leitbahn_2022",
+                  "visibility": false,
+                  "showInLayerTree": false
+                },
+                {
+                  "id": "ua_klimabewertung_2022:bd_ua_phk_klimarelevante_bebauung_2022",
+                  "visibility": false,
+                  "showInLayerTree": false
+                },
+                {
+                  "id": "ua_klimabewertung_2022:be_ua_phk_kvsd_grfrei_2022",
+                  "visibility": false,
+                  "showInLayerTree": false
+                },
+                {
+                  "id": "ua_klimabewertung_2022:bf_ua_phk_kaltluft_siedl_2022",
+                  "visibility": false,
+                  "showInLayerTree": false
+                },
+                {
+                  "id": "ua_klimabewertung_2022:bg_ua_phk_oschlaf_2022",
+                  "visibility": false,
+                  "showInLayerTree": false
+                },
+                {
+                  "id": "ua_klimabewertung_2022:bh_ua_phk_luftbelast_2022",
+                  "visibility": false,
+                  "showInLayerTree": false
+                },
+                {
+                  "id": "ua_klimabewertung_2022:bi_ua_phk_biokl_str_2022",
+                  "visibility": false,
+                  "showInLayerTree": false
+                },
+                {
+                  "id": "ua_klimabewertung_2022:bj_ua_phk_biokl_siedl_2022",
+                  "visibility": false,
+                  "showInLayerTree": false
+                },
+                {
+                  "id": "ua_klimabewertung_2022:bk_ua_phk_ausgl_grfrei_2022",
+                  "visibility": false,
+                  "showInLayerTree": false
+                },
+                {
+                  "id": "ua_klimabewertung_2022:ca_ua_phk_aufenth_grfrei_tag_2022",
+                  "visibility": false,
+                  "showInLayerTree": false
+                },
+                {
+                  "id": "ua_klimabewertung_2022:cb_ua_phk_bioklim_siedl_tag_2022",
+                  "visibility": false,
+                  "showInLayerTree": false
+                },
+                {
+                  "id": "ua_klimabewertung_2022:cc_ua_phk_bioklim_str_tag_2022",
+                  "visibility": false,
+                  "showInLayerTree": false
+                },
+                {
+                  "id": "ua_klimabewertung_2022:da_ua_phk_ausgleich_nacht_2022",
+                  "visibility": false,
+                  "showInLayerTree": false
+                },
+                {
+                  "id": "ua_klimabewertung_2022:db_ua_phk_oschlaf_nacht_2022",
+                  "visibility": false,
+                  "showInLayerTree": false
+                },
+                {
+                  "id": "ua_klimabewertung_2022:dc_ua_phk_bioklim_siedl_nacht_2022",
+                  "visibility": false,
+                  "showInLayerTree": false
+                },
+                {
+                  "id": "ua_klimabewertung_2022:dd_ua_phk_bioklim_str_nacht_2022",
+                  "visibility": false,
+                  "showInLayerTree": false
+                },
+                {
+                  "id": "ua_klimabewertung_2022:ea_ua_phk_vul_geb_therm_belast_2022",
+                  "visibility": false,
+                  "showInLayerTree": false
+                },
+                {
+                  "id": "ua_klimabewertung_2022:eb_ua_phk_vul_geb_demog_2022",
+                  "visibility": false,
+                  "showInLayerTree": false
+                },
+                {
+                  "id": "ua_klimabewertung_2022:fh_ua_phk_m8_2022",
+                  "visibility": false,
+                  "showInLayerTree": false
+                },
+                {
+                  "id": "ua_klimabewertung_2022:fi_ua_phk_m9_2022",
+                  "visibility": false,
+                  "showInLayerTree": false
+                },
+                {
+                  "id": "ua_klimabewertung_2022:fj_ua_phk_m10_2022",
+                  "visibility": false,
+                  "showInLayerTree": false
+                },
+                {
+                  "id": "ua_klimabewertung_2022:fk_ua_phk_m11_2022",
+                  "visibility": false,
+                  "showInLayerTree": false
+                },
+                {
+                  "id": "ua_klimabewertung_2022:fl_ua_phk_m12_2022",
+                  "visibility": false,
+                  "showInLayerTree": false
+                },
+                {
+                  "id": "ua_klimabewertung_2022:fm_ua_phk_m13_2022",
+                  "visibility": false,
+                  "showInLayerTree": false
+                },
+                {
+                  "id": "ua_klimabewertung_2022:fn_ua_phk_m14_2022",
+                  "visibility": false,
+                  "showInLayerTree": false
+                },
+                {
+                  "id": "ua_klimabewertung_2022:fo_ua_phk_m15_2022",
+                  "visibility": false,
+                  "showInLayerTree": false
+                },
+                {
+                  "id": "ua_klimabewertung_2022:fp_ua_phk_m16_2022",
+                  "visibility": false,
+                  "showInLayerTree": false
+                },
+                {
+                  "id": "ua_klimabewertung_2022:fq_ua_phk_m17_2022",
+                  "visibility": false,
+                  "showInLayerTree": false
+                },
+                {
+                  "id": "ua_klimabewertung_2022:fr_ua_phk_m18_2022",
+                  "visibility": false,
+                  "showInLayerTree": false
+                },
+                {
+                  "id": "ua_klimabewertung_2022:fs_ua_phk_m19_2022",
+                  "visibility": false,
+                  "showInLayerTree": false
+                },
+                {
+                  "id": "ua_klimabewertung_2022:ft_ua_phk_m20_2022",
+                  "visibility": false,
+                  "showInLayerTree": false
+                },
+                {
+                  "id": "ua_klimabewertung_2022:fu_ua_phk_m21_2022",
+                  "visibility": false,
+                  "showInLayerTree": false
+                },
+                {
+                  "id": "ua_klimabewertung_2022:fv_ua_phk_m22_2022",
+                  "visibility": false,
+                  "showInLayerTree": false
+                },
+                {
+                  "id": "ua_klimabewertung_2022:fw_ua_phk_m23_2022",
+                  "visibility": false,
+                  "showInLayerTree": false
+                },
+                {
+                  "id": "ua_klimabewertung_2022:aa_ua_phk_alkisgeb_2022",
+                  "visibility": false,
+                  "showInLayerTree": false
+                },
+                {
+                  "id": "ua_klimabewertung_2022:ab_ua_phk_gebsonst_2022",
+                  "visibility": false,
+                  "showInLayerTree": false
+                },
+                {
+                  "id": "ua_klimabewertung_2022:g_ua_phk_gew_2022",
+                  "visibility": false,
+                  "showInLayerTree": false
+                }
+              ]
             }
           ]
         }
