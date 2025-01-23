@@ -1513,7 +1513,7 @@ let requestData = {
 
 const CONFIG = {
   API_BASE: "https://mapfish.ds-apps.tsb-berlin.de/",
-  // Localhost
+  // Localhost API, TODO: fetch from config once setup is ready
   // API_Base: "http://localhost:8080/print/",
   APP_ID: "abimo",
   FORMAT: "pdf",
@@ -1583,16 +1583,11 @@ async function getReport(payload) {
 
   try {
     // 1. create print job
-    const { ref, statusURL, downloadURL } = await createPrintJob(payload);
-    console.log("Druckjob erstellt:", { ref, statusURL, downloadURL });
-
+    const { statusURL, downloadURL } = await createPrintJob(payload);
     // 2. watch status
     await monitorJobStatus(statusURL);
-    console.log("Druckjob abgeschlossen");
-
     // 3. download report
     await downloadReport(downloadURL);
-    console.log("Bericht erfolgreich heruntergeladen");
   } catch (error) {
     console.error("Fehler bei der Berichtserstellung:", error);
     throw error;

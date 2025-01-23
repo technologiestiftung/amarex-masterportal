@@ -1,6 +1,5 @@
 <script>
 import { mapGetters, mapMutations } from "vuex";
-import mapCollection from "../../../src/core/maps/js/mapCollection";
 import getReport from "../api/getReport";
 
 /**
@@ -63,21 +62,12 @@ export default {
       "setProjectTitle",
       "setProjectDescription",
     ]),
-    getData() {
-      // set state title and description
-      this.setProjectTitle(this.report.title);
-      this.setProjectDescription(this.report.description);
-      const mapView = mapCollection.getMapView("2D");
-      const mapElement = document.getElementById("map");
-      if (!mapElement) {
-        throw new Error("Kartencontainer nicht gefunden");
-      }
-      this.map.center = mapView.getCenter();
-    },
-
+    /**
+     * Generate Report
+     * @description Calls the getReport function with the prepared payload and toggles the reportLoading flag accordingly.
+     * @fires getReport
+     */
     async generateReport() {
-      console.log("[ReportPrinter] :: generate Report");
-
       this.reportLoading = true;
 
       let payload = {};
@@ -128,14 +118,6 @@ export default {
         rows="3"
       />
     </div>
-
-    <button
-      class="btn btn-primary"
-      @click="getData"
-    >
-      get Data
-    </button>
-
     <button
       class="btn btn-primary"
       @click="generateReport"
