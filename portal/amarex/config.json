@@ -233,6 +233,272 @@
           "type": "folder",
           "elements": [
             {
+              "name": "ALKIS Berlin",
+              "type": "folder",
+              "description": "Flächendeckende Beschreibung und Darstellung von Liegenschaften",
+              "elements": [
+                {
+                  "id": "wmsk_alkis:30",
+                  "visibility": false,
+                  "showInLayerTree": false
+                },
+                {
+                  "id": "wmsk_alkis:5",
+                  "visibility": false,
+                  "showInLayerTree": false
+                },
+                {
+                  "id": "wmsk_alkis:21",
+                  "visibility": false,
+                  "showInLayerTree": false
+                },
+                {
+                  "id": "wmsk_alkis:0",
+                  "visibility": false,
+                  "showInLayerTree": false
+                },
+                {
+                  "id": "wmsk_alkis:29",
+                  "visibility": false,
+                  "showInLayerTree": false
+                },
+                {
+                  "id": "wmsk_alkis:4",
+                  "visibility": false,
+                  "showInLayerTree": false
+                },
+                {
+                  "id": "wmsk_alkis:7",
+                  "visibility": false,
+                  "showInLayerTree": false
+                },
+                {
+                  "id": "wmsk_alkis:13",
+                  "visibility": false,
+                  "showInLayerTree": false
+                },
+                {
+                  "id": "wmsk_alkis:9",
+                  "visibility": false,
+                  "showInLayerTree": false
+                },
+                {
+                  "id": "wmsk_alkis:25",
+                  "visibility": false,
+                  "showInLayerTree": false
+                },
+                {
+                  "id": "wmsk_alkis:8",
+                  "visibility": false,
+                  "showInLayerTree": false
+                },
+                {
+                  "id": "wmsk_alkis:18",
+                  "visibility": false,
+                  "showInLayerTree": false
+                },
+                {
+                  "id": "wmsk_alkis:20",
+                  "visibility": false,
+                  "showInLayerTree": false
+                },
+                {
+                  "id": "wmsk_alkis:16",
+                  "visibility": false,
+                  "showInLayerTree": false
+                },
+                {
+                  "id": "wmsk_alkis:28",
+                  "visibility": false,
+                  "showInLayerTree": false
+                },
+                {
+                  "id": "wmsk_alkis:12",
+                  "visibility": false,
+                  "showInLayerTree": false
+                },
+                {
+                  "id": "wmsk_alkis:24",
+                  "visibility": false,
+                  "showInLayerTree": false
+                },
+                {
+                  "id": "wmsk_alkis:22",
+                  "visibility": false,
+                  "showInLayerTree": false
+                },
+                {
+                  "id": "wmsk_alkis:34",
+                  "visibility": false,
+                  "showInLayerTree": false
+                },
+                {
+                  "id": "wmsk_alkis:26",
+                  "visibility": false,
+                  "showInLayerTree": false
+                },
+                {
+                  "id": "wmsk_alkis:47",
+                  "visibility": false,
+                  "showInLayerTree": false
+                },
+                {
+                  "id": "wmsk_alkis:46",
+                  "visibility": false,
+                  "showInLayerTree": false
+                },
+                {
+                  "id": "wmsk_alkis:44",
+                  "visibility": false,
+                  "showInLayerTree": false
+                },
+                {
+                  "id": "wmsk_alkis:43",
+                  "visibility": false,
+                  "showInLayerTree": false
+                }
+              ]
+            },
+            {
+              "name": "ALKIS Berlin Flurstücke",
+              "type": "folder",
+              "description": "Flächendeckende Beschreibung und Darstellung der Flurstücke",
+              "elements": [
+                {
+                  "id": "alkis_flurstuecke:flurstuecke",
+                  "visibility": false,
+                  "showInLayerTree": false
+                }
+              ]
+            },
+            {
+              "name": "ALKIS Berlin s/w",
+              "type": "folder",
+              "description": "ALKIS Berlin s/w (Amtliches Liegenschaftskatasterinformationssystem)",
+              "elements": [
+                {
+                  "id": "wmsk_alkis_sw:30",
+                  "visibility": false,
+                  "showInLayerTree": false
+                },
+                {
+                  "id": "wmsk_alkis_sw:4",
+                  "visibility": false,
+                  "showInLayerTree": false
+                },
+                {
+                  "id": "wmsk_alkis_sw:19",
+                  "visibility": false,
+                  "showInLayerTree": false
+                },
+                {
+                  "id": "wmsk_alkis_sw:21",
+                  "visibility": false,
+                  "showInLayerTree": false
+                },
+                {
+                  "id": "wmsk_alkis_sw:0",
+                  "visibility": false,
+                  "showInLayerTree": false
+                },
+                {
+                  "id": "wmsk_alkis_sw:24",
+                  "visibility": false,
+                  "showInLayerTree": false
+                },
+                {
+                  "id": "wmsk_alkis_sw:13",
+                  "visibility": false,
+                  "showInLayerTree": false
+                },
+                {
+                  "id": "wmsk_alkis_sw:9",
+                  "visibility": false,
+                  "showInLayerTree": false
+                },
+                {
+                  "id": "wmsk_alkis_sw:8",
+                  "visibility": false,
+                  "showInLayerTree": false
+                },
+                {
+                  "id": "wmsk_alkis_sw:18",
+                  "visibility": false,
+                  "showInLayerTree": false
+                },
+                {
+                  "id": "wmsk_alkis_sw:25",
+                  "visibility": false,
+                  "showInLayerTree": false
+                },
+                {
+                  "id": "wmsk_alkis_sw:20",
+                  "visibility": false,
+                  "showInLayerTree": false
+                },
+                {
+                  "id": "wmsk_alkis_sw:17",
+                  "visibility": false,
+                  "showInLayerTree": false
+                },
+                {
+                  "id": "wmsk_alkis_sw:12",
+                  "visibility": false,
+                  "showInLayerTree": false
+                },
+                {
+                  "id": "wmsk_alkis_sw:34",
+                  "visibility": false,
+                  "showInLayerTree": false
+                },
+                {
+                  "id": "wmsk_alkis_sw:28",
+                  "visibility": false,
+                  "showInLayerTree": false
+                },
+                {
+                  "id": "wmsk_alkis_sw:6",
+                  "visibility": false,
+                  "showInLayerTree": false
+                },
+                {
+                  "id": "wmsk_alkis_sw:22",
+                  "visibility": false,
+                  "showInLayerTree": false
+                },
+                {
+                  "id": "wmsk_alkis_sw:29",
+                  "visibility": false,
+                  "showInLayerTree": false
+                },
+                {
+                  "id": "wmsk_alkis_sw:26",
+                  "visibility": false,
+                  "showInLayerTree": false
+                },
+                {
+                  "id": "wmsk_alkis_sw:47",
+                  "visibility": false,
+                  "showInLayerTree": false
+                },
+                {
+                  "id": "wmsk_alkis_sw:46",
+                  "visibility": false,
+                  "showInLayerTree": false
+                },
+                {
+                  "id": "wmsk_alkis_sw:44",
+                  "visibility": false,
+                  "showInLayerTree": false
+                },
+                {
+                  "id": "wmsk_alkis_sw:42",
+                  "visibility": false,
+                  "showInLayerTree": false
+                }
+              ]
+            },
+            {
               "name": "Starkregen",
               "type": "folder",
               "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sit amet libero auctor, ultricies nunc nec, tincidunt nunc. Nullam nec nunc nec nunc ultricies tincidunt. Nullam nec nunc nec nunc ultricies",
