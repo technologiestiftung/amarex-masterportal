@@ -636,6 +636,12 @@
                   "showInLayerTree": false
                 }
               ]
+            },
+            {
+              "name": "Klimabewertungskarten",
+              "type": "folder",
+              "description": "Klimabewertungskarten",
+              "elements": []
             }
           ]
         }
