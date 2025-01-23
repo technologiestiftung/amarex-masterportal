@@ -8,7 +8,7 @@
   {
     "id": "mapfish_printservice_id",
     "name": "Mapfish Print Service",
-    "url": "http://localhost:8080/print/",
+    "url": "https://mapfish.ds-apps.tsb-berlin.de/",
     "typ": "PrintService"
   },
   {
@@ -18,5 +18,4 @@
     "typ": "PrintService"
   }
 ]
-
 

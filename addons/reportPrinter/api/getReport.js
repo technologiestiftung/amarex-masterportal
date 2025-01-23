@@ -1512,7 +1512,9 @@ let requestData = {
 };
 
 const CONFIG = {
-  API_BASE: "http://localhost:8080",
+  API_BASE: "https://mapfish.ds-apps.tsb-berlin.de/",
+  // Localhost
+  // API_Base: "http://localhost:8080/print/",
   APP_ID: "abimo",
   FORMAT: "pdf",
 };
