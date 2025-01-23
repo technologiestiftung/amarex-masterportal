@@ -4357,6 +4357,25 @@
     "singleTile": true,
     "infoFormat": "application/json",
     "layerAttribution": "F\u00fcr die Nutzung der Daten ist die Datenlizenz Deutschland - Namensnennung - Version 2.0 anzuwenden. Die Lizenz ist \u00fcber https://www.govdata.de/dl-de/by-2-0 abrufbar. Der Quellenvermerk gem\u00e4\u00df (2) der Lizenz lautet \"Umweltatlas Berlin / [Titel des Datensatzes]\"."
+  },
+  {
+    "id": "ua_klimaanalyse_2022:wfs:ta_kak_luftaustausch_2022",
+    "name": "Luftaustausch 2022",
+    "crs": "urn:ogc:def:crs:EPSG::25833",
+    "url": "https://gdi.berlin.de/services/wfs/ua_klimaanalyse_2022",
+    "typ": "WFS",
+    "featureType": "ua_klimaanalyse_2022:ta_kak_luftaustausch_2022",
+    "featureNS": "ua_klimaanalyse_2022",
+    "datasets": [
+      {
+        "md_name": "Klimaanalysekarten 2022 (Umweltatlas)",
+        "md_id": "8ea601b2-9a12-4123-bb19-b5774fe3003b",
+        "rs_id": "https://registry.gdi-de.org/id/de.be.csw/78c87800-446e-3e83-8171-03ca776eaa7f",
+        "csw_url": "https://gdi.berlin.de/geonetwork/srv/ger/csw"
+      }
+    ],
+    "gfiAttributes": "showAll"
   }
 ]
+
 
