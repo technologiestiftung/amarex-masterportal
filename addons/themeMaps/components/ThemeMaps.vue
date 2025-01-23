@@ -484,6 +484,7 @@ export default {
     max-height: 45vh;
     img {
       width: 100%;
+      max-width: 450px;
     }
   }
 }
