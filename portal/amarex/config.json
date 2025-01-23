@@ -601,43 +601,6 @@
               ]
             },
             {
-              "name": "Hitze",
-              "type": "folder",
-              "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sit amet libero auctor, ultricies nunc nec, tincidunt nunc. Nullam nec nunc nec nunc ultricies tincidunt. Nullam nec nunc nec nunc ultricies",
-              "elements": [
-                {
-                  "id": "wmsk_04106_kenntage2015:5",
-                  "visibility": false,
-                  "showInLayerTree": false
-                },
-                {
-                  "id": "wmsk_04106_kenntage2015:3",
-                  "visibility": false,
-                  "showInLayerTree": false
-                },
-                {
-                  "id": "wmsk_04106_kenntage2015:4",
-                  "visibility": false,
-                  "showInLayerTree": false
-                },
-                {
-                  "id": "wmsk_04106_kenntage2015:12",
-                  "visibility": false,
-                  "showInLayerTree": false
-                },
-                {
-                  "id": "wmsk_04106_kenntage2015:13",
-                  "visibility": false,
-                  "showInLayerTree": false
-                },
-                {
-                  "id": "wmsk_04106_kenntage2015:11",
-                  "visibility": false,
-                  "showInLayerTree": false
-                }
-              ]
-            },
-            {
               "name": "Versiegelung",
               "type": "folder",
               "description": "Versiegelung",
