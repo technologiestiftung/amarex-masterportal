@@ -104,72 +104,73 @@ export default {
         :size="20"
       />
     </div>
-    <span
-      v-if="preComputedModels.length > 0 && preComputedModelsShown"
-      v-for="(themeMap, themeMapIndex) in preComputedModels"
-      :key="themeMapIndex"
-    >
-      <div
-        class="theme-map"
-        :class="{
-          'theme-map-active': selectedThemeMap?.id === themeMap?.id,
-        }"
+    <span v-if="preComputedModels.length > 0 && preComputedModelsShown">
+      <span
+        v-for="(themeMap, themeMapIndex) in preComputedModels"
+        :key="themeMapIndex"
       >
-        <button @click="themeMapClick(themeMap)">
-          <EyeOff
-            v-if="themeMap?.visibility"
-            :color="colors.amarex_secondary"
-            :size="20"
-          />
-          <EyeIcon
-            v-else
-            :color="colors.amarex_secondary"
-            :size="20"
-          />
-        </button>
-        <p
-          class="thememap-name"
-          v-html="setNames(themeMap?.id)"
-        ></p>
-        <button @click="openTransparencySubMenu(themeMap)">
-          <Settings
-            :color="
-              themeMap.visibility
-                ? colors.amarex_secondary
-                : colors.amarex_grey_light
-            "
-            :size="20"
-          />
-        </button>
-        <button
-          v-if="themeMap?.legend && typeof themeMap?.legend !== 'boolean'"
-          @click.stop="openInfo(themeMap)"
+        <div
+          class="theme-map"
+          :class="{
+            'theme-map-active': selectedThemeMap?.id === themeMap?.id,
+          }"
         >
-          <MapIcon
-            :color="colors.amarex_secondary"
-            :size="20"
+          <button @click="themeMapClick(themeMap)">
+            <EyeOff
+              v-if="themeMap?.visibility"
+              :color="colors.amarex_secondary"
+              :size="20"
+            />
+            <EyeIcon
+              v-else
+              :color="colors.amarex_secondary"
+              :size="20"
+            />
+          </button>
+          <p
+            class="thememap-name"
+            v-html="setNames(themeMap?.id)"
+          ></p>
+          <button @click="openTransparencySubMenu(themeMap)">
+            <Settings
+              :color="
+                themeMap.visibility
+                  ? colors.amarex_secondary
+                  : colors.amarex_grey_light
+              "
+              :size="20"
+            />
+          </button>
+          <button
+            v-if="themeMap?.legend && typeof themeMap?.legend !== 'boolean'"
+            @click.stop="openInfo(themeMap)"
+          >
+            <MapIcon
+              :color="colors.amarex_secondary"
+              :size="20"
+            />
+          </button>
+        </div>
+        <div
+          class="theme-map-sub"
+          v-if="themeMap?.id === selectedThemeMap?.id"
+        >
+          <p>Deckkraft:</p>
+          <SliderItem
+            :id="'layer-component-sub-menu-transparency-input-' + themeMap?.id"
+            :aria="
+              $t('common:modules.aria.sliderAria') +
+              `${100 - themeMap?.transparency}%`
+            "
+            :label="`${100 - themeMap?.transparency}%`"
+            :value="100 - themeMap?.transparency"
+            :min="0"
+            :max="100"
+            :step="10"
+            :interaction="updateTransparencyOfSelectedThemeMap"
           />
-        </button>
-      </div>
-      <div
-        class="theme-map-sub"
-        v-if="themeMap?.id === selectedThemeMap?.id"
-      >
-        <p>Deckkraft:</p>
-        <SliderItem
-          :id="'layer-component-sub-menu-transparency-input-' + themeMap?.id"
-          :aria="
-            $t('common:modules.aria.sliderAria') +
-            `${100 - themeMap?.transparency}%`
-          "
-          :label="`${100 - themeMap?.transparency}%`"
-          :value="100 - themeMap?.transparency"
-          :min="0"
-          :max="100"
-          :step="10"
-          :interaction="updateTransparencyOfSelectedThemeMap"
-        />
-      </div>
+        </div>
+      </span>
     </span>
   </div>
 </template>

@@ -49,7 +49,7 @@ export default {
       </p>
       <button
         class="amarex-btn-primary full accent deactivated"
-        @click=""
+        @click="console.log('Zum Massnahmentool')"
       >
         <p>Zum Massnahmentool</p>
       </button>

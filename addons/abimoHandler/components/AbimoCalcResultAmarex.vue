@@ -1,12 +1,6 @@
 <script>
 import { mapActions, mapGetters } from "vuex";
-import {
-  ChevronDown,
-  EyeOff,
-  EyeIcon,
-  Settings,
-  Map as MapIcon,
-} from "lucide-vue-next";
+import { EyeOff, EyeIcon, Settings, Map as MapIcon } from "lucide-vue-next";
 import colors from "../../../src/shared/js/utils/amarex-colors.json";
 import SliderItem from "../../../src/shared/modules/slider/components/SliderItem.vue";
 /**
@@ -16,7 +10,6 @@ import SliderItem from "../../../src/shared/modules/slider/components/SliderItem
 export default {
   name: "AbimoCalcResultAmarex",
   components: {
-    ChevronDown,
     EyeOff,
     EyeIcon,
     Settings,
@@ -144,9 +137,8 @@ export default {
       <p class="description">
         Sie können nun die verschiedenen Ergebnislayer Ihrer Ansicht hinzufügen.
       </p>
-      <span
-        ><span
-          v-if="resultLayers.length > 0"
+      <span v-if="resultLayers.length > 0">
+        <span
           v-for="(themeMap, themeMapIndex) in resultLayers"
           :key="themeMapIndex"
         >
@@ -212,8 +204,9 @@ export default {
               :step="10"
               :interaction="updateTransparencyOfSelectedThemeMap"
             />
-          </div> </span
-      ></span>
+          </div>
+        </span>
+      </span>
     </div>
   </div>
 </template>

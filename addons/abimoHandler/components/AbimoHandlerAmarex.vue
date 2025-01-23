@@ -318,6 +318,7 @@ export default {
             click: stepIndex < activeStep,
           }"
           @click="clickOnStepIndicator(stepIndex)"
+          :key="stepIndex"
         ></div>
       </div>
       <div
