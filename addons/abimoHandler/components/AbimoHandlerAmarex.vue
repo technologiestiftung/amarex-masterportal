@@ -234,7 +234,7 @@ export default {
   >
     <!-- PRE COMPUTED MODELS -->
     <PreComputedModelsAmarex
-      v-if="preComputedModelsAdded"
+      v-if="preComputedModelsAdded && activeStep < 6"
       :openInfo="openInfo"
     />
     <!-- TITLE & DESCRIPTION IN EACH STEP -->
