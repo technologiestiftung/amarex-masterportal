@@ -1,13 +1,15 @@
 <script>
 import AbimoBlockAreaSelectorAmarex from "./AbimoBlockAreaSelectorAmarex.vue";
-import AbimoSelector from "./AbimoSelector.vue";
-import AbimoCalcButton from "./AbimoCalcButton.vue";
-import AbimoSliderSelector from "./AbimoSliderSelector.vue";
+import AbimoCalcButtonAmarex from "./AbimoCalcButtonAmarex.vue";
+import AbimoCalcResultAmarex from "./AbimoCalcResultAmarex.vue";
+import AbimoSliderSelectorAmarex from "./AbimoSliderSelectorAmarex.vue";
 import { mapGetters } from "vuex";
 import { markRaw } from "vue";
 import PreComputedModelsAmarex from "./PreComputedModelsAmarex.vue";
 import AbimoLayerInfoAmarex from "./AbimoLayerInfoAmarex.vue";
 import AbimoViewSelectorAmarex from "./AbimoViewSelectorAmarex.vue";
+import { LoaderCircle } from "lucide-vue-next";
+import colors from "../../../src/shared/js/utils/amarex-colors.json";
 
 /**
  * Abimo
@@ -17,35 +19,33 @@ export default {
   name: "AbimoHandler",
   components: {
     AbimoBlockAreaSelectorAmarex,
-    AbimoSelector,
-    AbimoCalcButton,
+    AbimoCalcButtonAmarex,
     PreComputedModelsAmarex,
     AbimoLayerInfoAmarex,
     AbimoViewSelectorAmarex,
+    LoaderCircle,
+    AbimoCalcResultAmarex,
   },
   data() {
     return {
-      activeStep: null,
+      colors,
+      activeStep: 0,
       steps: [
         {
           id: "PreComputedModels",
           title: "Vorberechnete Modelle",
           description:
-            "Zur Status Quo Analyse können Sie mit den vorberechneten Karten aus dem Kartenkatalog starten.\n\nMöchten Sie diese ihrer Bearbeitung hinzufügen?",
+            "Zur Status Quo Analyse können Sie mit den vorberechneten Karten aus dem Kartenkatalog starten.<br><br>Möchten Sie diese ihrer Bearbeitung hinzufügen?",
           continueDescription:
             "Sie haben jetzt die vorberechneten Modelle Delta W und Abimo hinzugefügt.",
           buttons: [
             {
               text: "Vorberechnete Modelle hinzufügen",
-              action: () => {
-                this.preComputedModelsAdded = true;
-              },
+              action: () => (this.preComputedModelsAdded = true),
             },
             {
               text: "Überspringen",
-              action: () => {
-                this.activeStep = 1;
-              },
+              action: () => (this.activeStep = 1),
             },
           ],
           upperButtons: true,
@@ -54,9 +54,7 @@ export default {
           id: "ViewSelector",
           component: markRaw(AbimoViewSelectorAmarex),
           props: {
-            nextStep: (step) => {
-              this.activeStep = 2;
-            },
+            nextStep: () => (this.activeStep = 2),
           },
           title: "Betrachtungsraum wählen",
           description:
@@ -64,24 +62,20 @@ export default {
           buttons: [
             {
               text: "Zurück",
-              action: () => {
-                this.activeStep = 0;
-              },
+              action: () => (this.activeStep = 0),
             },
           ],
         },
         {
           id: "BlockAreaSelector",
           component: markRaw(AbimoBlockAreaSelectorAmarex),
-          title: "Vorberechnete Modelle",
+          title: "Untersuchungsgebiet wählen",
           description:
-            "Zur Status Quo Analyse können Sie mit den vorberechneten Karten aus dem Kartenkatalog starten.\nMöchten Sie diese ihrer Bearbeitung hinzufügen?",
+            "Wählen Sie in der Karte die zu untersuchende Blockteilfläche via Mausklick aus.",
           buttons: [
             {
               text: "Zurück",
-              action: () => {
-                this.activeStep = 1;
-              },
+              action: () => (this.activeStep = 1),
             },
             {
               text: "Bestätigen",
@@ -93,10 +87,73 @@ export default {
             },
           ],
         },
+        {
+          id: "GreenRoof",
+          component: markRaw(AbimoSliderSelectorAmarex),
+          props: { type: "greenRoof" },
+          buttons: [
+            {
+              text: "Zurück",
+              action: () => (this.activeStep = 2),
+            },
+            {
+              text: "Bestätigen",
+              action: () => {
+                this.$refs.componentRef?.updateAbimoData();
+                this.activeStep = 4;
+              },
+              accent: true,
+            },
+          ],
+        },
+        {
+          id: "Unsealed",
+          component: markRaw(AbimoSliderSelectorAmarex),
+          props: { type: "unsealed" },
+          buttons: [
+            {
+              text: "Zurück",
+              action: () => (this.activeStep = 3),
+            },
+            {
+              text: "Bestätigen",
+              action: () => {
+                this.$refs.componentRef?.updateAbimoData();
+                this.activeStep = 5;
+              },
+              accent: true,
+            },
+          ],
+        },
+        {
+          id: "SwaleConnected",
+          component: markRaw(AbimoSliderSelectorAmarex),
+          props: { type: "swaleConnected" },
+          buttons: [
+            {
+              text: "Zurück",
+              action: () => (this.activeStep = 4),
+            },
+          ],
+        },
+        {
+          id: "AbimoResult",
+          component: markRaw(AbimoCalcResultAmarex),
+          props: {
+            openInfoFromResults: (info) => this.openInfo(info),
+          },
+          buttons: [
+            {
+              text: "Neue Berechnung starten",
+              action: () => this.resetAbimoCalculation(),
+            },
+          ],
+        },
       ],
       totalArea: 0,
       preComputedModelsAdded: false,
       showInfo: null,
+      calcState: null,
     };
   },
   methods: {
@@ -119,29 +176,50 @@ export default {
         event.stopPropagation();
       }
     },
+    changeCalcState(state) {
+      this.calcState = state;
+    },
+    resetAbimoCalculation() {
+      // @Luise: Please add the functionality to start a new calculcation with this button
+    },
+    clickOnStepIndicator(stepIndex) {
+      if (stepIndex < this.activeStep) {
+        this.activeStep = stepIndex;
+      }
+    },
   },
   computed: {
     ...mapGetters("Modules/AbimoHandler", ["accumulatedAbimoStats"]),
     activeComponent() {
       return this.steps[this.activeStep] || {};
     },
-    formattedDescription() {
-      return this.preComputedModelsAdded &&
-        !!this.steps[this.activeStep]?.continueDescription &&
-        this.activeStep === 0
-        ? this.steps[this.activeStep]?.continueDescription?.replace(
-            /\n/g,
-            "<br>",
-          )
-        : this.steps[this.activeStep]?.description?.replace(/\n/g, "<br>");
-    },
-  },
-  mounted() {
-    this.activeStep = 2;
   },
   watch: {
     accumulatedAbimoStats(value) {
       this.totalArea = +value.totalArea.toFixed(0);
+    },
+    activeStep(step) {
+      const contentContainerRef = this.$refs.contentContainerRef;
+      if (contentContainerRef) {
+        contentContainerRef.scrollTo({
+          top: 0,
+          behavior: "smooth",
+        });
+      }
+      if (step === 2) {
+        // @Luise: Please add the functionality here so that the Block Selection is activated again
+        // when the User goes back to the Block Area Selector
+      }
+      if ((step === 0 || step === 1) && this.totalArea > 0) {
+        // @Luise: Should the Block Selection be reset when the User goes back to one of the first two steps
+        // if yes, please add the functionality here
+      }
+    },
+    calcState(state) {
+      if (state === "isCalculated") {
+        this.calcState = null;
+        this.activeStep = 6;
+      }
     },
   },
 };
@@ -153,6 +231,7 @@ export default {
     :class="{
       'three-columns': preComputedModelsAdded,
     }"
+    v-if="!calcState"
   >
     <!-- PRE COMPUTED MODELS -->
     <PreComputedModelsAmarex
@@ -162,6 +241,7 @@ export default {
     <!-- TITLE & DESCRIPTION IN EACH STEP -->
     <div
       class="content-container"
+      ref="contentContainerRef"
       @click="handleParentClick"
     >
       <span v-if="preComputedModelsAdded && activeStep === 0"></span>
@@ -173,7 +253,7 @@ export default {
       </p>
       <p
         v-if="steps[activeStep]?.description"
-        v-html="formattedDescription"
+        v-html="steps[activeStep]?.description"
         class="description"
       ></p>
       <!-- MAIN COMPONENT -->
@@ -238,6 +318,7 @@ export default {
             active: stepIndex === activeStep,
             click: stepIndex < activeStep,
           }"
+          @click="clickOnStepIndicator(stepIndex)"
         ></div>
       </div>
       <div
@@ -263,6 +344,9 @@ export default {
             <p>{{ steps[activeStep]?.buttons[btnIndex].text }}</p>
           </button>
         </span>
+        <span v-if="activeStep === 5"
+          ><AbimoCalcButtonAmarex :changeCalcState="changeCalcState"
+        /></span>
       </div>
     </div>
     <!-- INFO CONTAINER -->
@@ -271,6 +355,50 @@ export default {
       :showInfo="showInfo"
       :hideInfo="hideInfo"
     />
+  </div>
+  <div
+    id="abimo-amarex"
+    v-else
+  >
+    <span
+      v-if="calcState === 'loading'"
+      class="loading-container d-flex flex-column align-items-center"
+    >
+      <LoaderCircle
+        :color="colors.amarex_secondary"
+        :size="24"
+      />
+      <p class="title">Ihr Ergebnis wird geladen...</p>
+    </span>
+    <span
+      v-else
+      class="error-container d-flex flex-column align-items-center"
+    >
+      <p>!!!</p>
+      <p class="title">Es ist leider ein Fehler aufgetreten.</p>
+      <AbimoCalcButtonAmarex
+        :wording="'Nochmal probieren'"
+        :changeCalcState="changeCalcState"
+      />
+      <button
+        class="amarex-btn-primary full"
+        @click="resetAbimoCalculation"
+      >
+        <p>Neue Berechnung starten</p>
+      </button>
+      <button
+        class="amarex-btn-primary full"
+        @click="
+          () => {
+            calcState = null;
+            activeStep = 6;
+          }
+        "
+      >
+        <!-- @Luise: Just for Testing -->
+        <p>Leere Ergebnisse sehen</p>
+      </button>
+    </span>
   </div>
 </template>
 
@@ -334,21 +462,35 @@ export default {
     font-weight: 400;
     line-height: 22px;
   }
+  .loading-container {
+    gap: 16px;
+    margin-top: 48px;
+    svg {
+      animation: spin 1s linear infinite;
+    }
+    p {
+      text-align: center;
+    }
+  }
+  .error-container {
+    gap: 16px;
+    margin-top: 48px;
+    & > p:first-of-type {
+      color: $amarex_secondary;
+      text-align: center;
+      font-size: 32px;
+      font-weight: 700;
+      line-height: 32px;
+    }
+  }
+}
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
 </style>
-
-<!-- STEPS
-
-<AbimoBlockAreaSelectorAmarex />
-component: markRaw(AbimoBlockAreaSelectorAmarex),
-
-<AbimoSelector type="greenRoof" />
-
-<AbimoSelector type="unsealed" />
-
-<AbimoSelector type="swaleConnected" />
-
-<AbimoCalcButton />
-
--->
 
