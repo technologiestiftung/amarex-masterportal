@@ -3,13 +3,14 @@ import AbimoBlockAreaSelector from "./AbimoBlockAreaSelector.vue";
 import AbimoCalcButton from "./AbimoCalcButton.vue";
 import AbimoCalcResult from "./AbimoCalcResult.vue";
 import AbimoSliderSelector from "./AbimoSliderSelector.vue";
-import { mapGetters } from "vuex";
 import { markRaw } from "vue";
 import PreComputedModels from "./PreComputedModels.vue";
 import AbimoLayerInfoAmarex from "./AbimoLayerInfo.vue";
 import AbimoViewSelector from "./AbimoViewSelector.vue";
 import { LoaderCircle } from "lucide-vue-next";
 import colors from "../../../src/shared/js/utils/amarex-colors.json";
+import mapCollection from "../../../src/core/maps/js/mapCollection";
+import { mapActions, mapGetters, mapMutations } from "vuex";
 
 /**
  * Abimo
@@ -156,7 +157,26 @@ export default {
       calcState: null,
     };
   },
+  computed: {
+    ...mapGetters("Modules/AbimoHandler", [
+      "selectInteraction",
+      "accumulatedAbimoStats",
+    ]),
+    activeComponent() {
+      return this.steps[this.activeStep] || {};
+    },
+  },
   methods: {
+    ...mapActions("Maps", {
+      addInteractionToMap: "addInteraction",
+    }),
+    ...mapMutations("Modules/AbimoHandler", [
+      "setSelectedFeatures",
+      "setNewGreenRoof",
+      "setNewUnpvd",
+      "setNewToSwale",
+      "setResetTargetValues",
+    ]),
     setDisabled() {
       if (this.activeStep === 2) return this.totalArea === 0;
       return false;
@@ -180,18 +200,50 @@ export default {
       this.calcState = state;
     },
     resetAbimoCalculation() {
-      // @Luise: Please add the functionality to start a new calculcation with this button
+      mapCollection
+        .getMap("2D")
+        .getLayers()
+        .getArray()
+        .find((layer) => layer.get("id") === "planung_abimo")
+        .values_.source.clear();
+      mapCollection
+        .getMap("2D")
+        .getLayers()
+        .getArray()
+        .find((layer) => layer.get("id") === "abimo_result_infiltration")
+        .values_.source.clear();
+      mapCollection
+        .getMap("2D")
+        .getLayers()
+        .getArray()
+        .find((layer) => layer.get("id") === "abimo_result_evaporation")
+        .values_.source.clear();
+      mapCollection
+        .getMap("2D")
+        .getLayers()
+        .getArray()
+        .find((layer) => layer.get("id") === "abimo_result_surface_run_off")
+        .values_.source.clear();
+      mapCollection
+        .getMap("2D")
+        .getLayers()
+        .getArray()
+        .find((layer) => layer.get("id") === "abimo_result_delta_w")
+        .values_.source.clear();
+      this.addInteractionToMap(this.selectInteraction);
+      this.setNewGreenRoof(0);
+      this.setNewUnpvd(0);
+      this.setNewToSwale(0);
+      this.setResetTargetValues(true);
+
+      // @luise todo: remove all block area selections
+
+      this.activeStep = 0;
     },
     clickOnStepIndicator(stepIndex) {
       if (stepIndex < this.activeStep) {
         this.activeStep = stepIndex;
       }
-    },
-  },
-  computed: {
-    ...mapGetters("Modules/AbimoHandler", ["accumulatedAbimoStats"]),
-    activeComponent() {
-      return this.steps[this.activeStep] || {};
     },
   },
   watch: {
