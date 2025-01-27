@@ -19,13 +19,42 @@ export default {
   data() {
     return {
       targetValue: 0,
+      content: {
+        greenRoof: {
+          title: "Dachbegrünung",
+          description: (area = "XXXX", percentage = "XX") => {
+            // @Luise: Please input the correct area and percentage for greenRoof
+            if (!area || !percentage)
+              return "Welchen Anteil möchten Sie begrünen?";
+            return `Bei den von Ihnen gewählten Flächen stehen ${area} m² (${percentage}%) Dachflächen zur Verfügung.<br><br>Welchen Anteil möchten Sie begrünen?`;
+          },
+        },
+        unsealed: {
+          title: "Unversiegelte Flächen",
+          subTitle: "unversiegelte Fläche",
+          description: (area = "XXXX", percentage = "XX") => {
+            // @Luise: Please input the correct area and percentage for unsealed
+            if (!area || !percentage)
+              return "Möchten Sie diesen Anteil variieren?";
+            return `Bei den von Ihnen gewählten Flächen stehen ${area} m² (${percentage}%) unbebaute Fläche zur Verfügung.<br><br>Möchten Sie diesen Anteil variieren?`;
+          },
+        },
+        swaleConnected: {
+          title: "Mulde",
+          description: (area = "XXXX", percentage = "XX") => {
+            // @Luise: Please input the correct area and percentage for swaleConnected
+            if (!area || !percentage)
+              return "Welchen Anteil möchten Sie an Mulden anschliessen?";
+            return `Bei den von Ihnen gewählten Flächen stehen ${area} m² (${percentage}%) unverbaute Fläche zur Verfügung.Dieser Wert ist abhängig von der im vorhergehenden Schritt gewählten unversiegelten Fläche.<br><br>Welchen Anteil möchten Sie an Mulden anschliessen?`;
+          },
+        },
+      },
     };
   },
   computed: {
     ...mapGetters("Modules/AbimoHandler", [
       "accumulatedAbimoStats",
       "newUnpvd",
-      "resetTargetValues",
     ]),
     currentBaseData() {
       switch (this.type) {
@@ -59,19 +88,16 @@ export default {
           return {
             title: "Dachbegrünung",
             baseDataTitle: "Dachflächen",
-            baseDataSubTitle: "update green_roof",
           };
         case "unsealed":
           return {
             title: "Unversiegelte Flächen",
             baseDataTitle: "Unversiegelte Flächen",
-            baseDataSubTitle: "update unpvd",
           };
         case "swaleConnected":
           return {
             title: "Anschluss an Mulden",
             baseDataTitle: "Versiegelte Flächen",
-            baseDataSubTitle: "update to_swale",
           };
         default:
           return "";
@@ -79,10 +105,8 @@ export default {
     },
   },
   watch: {
-    resetTargetValues(newValue) {
-      if (newValue) {
-        this.resetTargetValue();
-      }
+    type() {
+      this.targetValue = 0;
     },
   },
   methods: {
@@ -112,69 +136,71 @@ export default {
           break;
       }
     },
-    resetTargetValue() {
-      this.targetValue = 0;
-    },
   },
 };
 </script>
 
 <template lang="html">
-  <div
-    class="status-quo-bar"
-    :style="{
-      width: `${currentStatusQuo.toFixed(0)}%`,
-    }"
-  >
-    <div
-      class="status-quo"
-      style=""
-    ></div>
-  </div>
-
-  <div
-    id="AbimoSliderSelector-root"
-    class="abimo-slider-bar"
-  >
-    <div
-      :class="['abimo-slider-segment', `${type}`]"
-      :style="{
-        width: `${currentBaseData.toFixed(0)}%`,
-        borderWidth: this.currentBaseData > 0 ? '2px' : '0',
-      }"
-      :title="`${currentBaseData.toFixed(0)}%`"
-    ></div>
-
-    <div
-      class="target"
-      :style="{
-        width: `${targetValue}%`,
-        borderWidth: this.targetValue > 0 ? '2px' : '0',
-      }"
-    ></div>
-  </div>
-
-  <div class="area-types-legend">
-    <div class="d-flex gap-3 align-items-center">
-      <div class="stats-display">
-        <div class="d-flex gap-3 align-items-center">
-          <div class="status-quo-legend-item"></div>
-          <strong>Status Quo</strong>
-        </div>
-        <p>{{ currentStatusQuo.toFixed(0) }} %</p>
+  <div class="slider-selector-container w-100 d-flex flex-column">
+    <span :style="{ marginBottom: '16px' }">
+      <p class="title">{{ content[type].title }}</p>
+      <p
+        v-html="content[type].description()"
+        class="description"
+      ></p>
+    </span>
+    <span :style="{ marginLeft: '7px' }">
+      <div
+        class="status-quo-bar"
+        :style="{
+          width: `${currentStatusQuo.toFixed(0)}%`,
+        }"
+      >
+        <div
+          class="status-quo"
+          style=""
+        ></div>
       </div>
+      <div class="abimo-slider-bar">
+        <div
+          :class="['abimo-slider-segment', `${type}`]"
+          :style="{
+            width: `${currentBaseData.toFixed(0)}%`,
+            borderWidth: currentBaseData > 0 ? '2px' : '0',
+          }"
+          :title="`${currentBaseData.toFixed(0)}%`"
+        ></div>
+        <div
+          class="target"
+          :style="{
+            width: `${targetValue}%`,
+            borderWidth: targetValue > 0 ? '2px' : '0',
+          }"
+        ></div>
+      </div>
+    </span>
+    <div class="d-flex justify-content-between area">
+      <p class="description-with-smaller-lineheight">Gesamtfläche</p>
+      <p class="description-with-smaller-lineheight">
+        {{ accumulatedAbimoStats.totalArea.toFixed(0) }}m²
+      </p>
     </div>
-
-    <div class="legend-item">
-      <div :class="['color-indicator mr-3 target-color']"></div>
-      <div class="stats-display">
-        <div class="d-flex flex-column w-100">
-          <strong>ZIELWERT</strong>
-
-          <span>{{ sliderContent.title }}</span>
-          <!-- <span>{{ sliderContent.baseDataSubTitle }}</span> -->
-        </div>
-
+    <div
+      class="slider-wrapper d-flex justify-content-between align-items-center"
+    >
+      <div :class="['color-indicator target-color']"></div>
+      <div class="d-flex flex-column w-100">
+        <p
+          class="description-with-smaller-lineheight"
+          :style="{ fontWeight: 700 }"
+        >
+          ZIELWERT
+        </p>
+        <p class="description-with-smaller-lineheight">
+          {{ content[type].subTitle || content[type].title }}
+        </p>
+      </div>
+      <div class="input-wrapper">
         <input
           id="targetValue"
           v-model="targetValue"
@@ -183,156 +209,262 @@ export default {
           min="0"
           :max="currentBaseData.toFixed(0)"
         />
+        <p class="percentage">%</p>
       </div>
     </div>
-
-    <div class="legend-item">
-      <div :class="['color-indicator mr-3', `${type}`]"></div>
-
-      <div class="stats-display d-flex justify-content-between">
-        <div class="d-flex flex-column">
-          <strong>{{ sliderContent.baseDataTitle }}</strong>
-        </div>
-        <p>{{ currentBaseData.toFixed(0) }} %</p>
-      </div>
+    <span class="line"></span>
+    <div class="d-flex stats-wrapper align-items-center">
+      <div class="polygon"></div>
+      <p class="description-with-smaller-lineheight flex-fill">Status Quo</p>
+      <p class="description-with-smaller-lineheight">
+        {{ currentStatusQuo.toFixed(0) }} %
+      </p>
     </div>
-
-    <hr />
-    <div class="legend-item">
-      <div class="stats-display">
-        <p class="area">
-          GESAMTFLÄCHE: {{ accumulatedAbimoStats.totalArea.toFixed(0) }} m²
-        </p>
-      </div>
-    </div>
-
-    <button
-      class="btn btn-primary mt-3"
-      @click="updateAbimoData"
+    <div
+      class="d-flex stats-wrapper align-items-center"
+      v-if="type === 'greenRoof'"
     >
-      Bestätigen
-    </button>
+      <div class="color-indicator maxGreenRoof"></div>
+      <p class="description-with-smaller-lineheight flex-fill">
+        maximale Dachfläche
+      </p>
+      <p class="description-with-smaller-lineheight">
+        XX %
+        <!-- @Luise: Please input maximale Dachfläche -->
+      </p>
+    </div>
+    <div
+      class="d-flex stats-wrapper align-items-center"
+      v-if="type === 'greenRoof'"
+    >
+      <div class="color-indicator notUsable"></div>
+      <p class="description-with-smaller-lineheight flex-fill">
+        nicht nutzbare Fläche
+      </p>
+      <p class="description-with-smaller-lineheight">
+        XX %
+        <!-- @Luise: Please input nicht nutzbare Fläche -->
+      </p>
+    </div>
+    <div
+      class="d-flex stats-wrapper align-items-center"
+      v-if="type === 'unsealed'"
+    >
+      <div class="color-indicator unsealed"></div>
+      <p class="description-with-smaller-lineheight flex-fill">
+        <strong>Nicht bebaut</strong><br />unversiegelt und unbebaut
+      </p>
+      <p class="description-with-smaller-lineheight">
+        XX %
+        <!-- @Luise: Please input Nicht bebaute Fläche -->
+      </p>
+    </div>
+    <div
+      class="d-flex stats-wrapper align-items-center"
+      v-if="type === 'unsealed'"
+    >
+      <div class="color-indicator notUsable"></div>
+      <p class="description-with-smaller-lineheight flex-fill">
+        <strong>Nicht nutzbarer Bereich</strong><br />bebaute Flächen
+      </p>
+      <p class="description-with-smaller-lineheight">
+        XX %
+        <!-- @Luise: Please input nicht nutzbare Fläche -->
+      </p>
+    </div>
+    <div
+      class="d-flex stats-wrapper align-items-center"
+      v-if="type === 'swaleConnected'"
+    >
+      <div class="color-indicator swaleConnected"></div>
+      <p class="description-with-smaller-lineheight flex-fill">
+        <strong>Versiegelt</strong><br />unbebaut und bebaut
+      </p>
+      <p class="description-with-smaller-lineheight">
+        XX %
+        <!-- @Luise: Please input Nicht bebaute Fläche -->
+      </p>
+    </div>
+    <div
+      class="d-flex stats-wrapper align-items-center"
+      v-if="type === 'swaleConnected'"
+    >
+      <div class="color-indicator notUsable"></div>
+      <p class="description-with-smaller-lineheight flex-fill">
+        nicht nutzbare Fläche
+      </p>
+      <p class="description-with-smaller-lineheight">
+        XX %
+        <!-- @Luise: Please input nicht nutzbare Fläche -->
+      </p>
+    </div>
   </div>
 </template>
 
 <style lang="scss" scoped>
-.area {
-  margin-top: 12px;
+@import "~variables";
+.slider-selector-container {
+  gap: 16px;
+  .status-quo-bar {
+    height: 12px;
+    margin-bottom: 4px;
+    position: relative;
+    .status-quo {
+      margin-right: -5px;
+      position: absolute;
+      right: 0;
+      width: 0px;
+      height: 0px;
+      transform: rotate(360deg);
+      -webkit-transform: rotate(360deg);
+      border-style: solid;
+      border-width: 12px 6px 0 6px;
+      border-color: $amarex_grey_dark transparent transparent transparent;
+    }
+  }
+  .abimo-slider-bar {
+    display: flex;
+    height: 26px;
+    width: 100%;
+    position: relative;
+    background-color: $amarex_grey_light;
+    overflow: hidden;
+    z-index: 1;
+    .abimo-slider-segment {
+      height: 100%;
+      border: 2px solid;
+    }
+    .target {
+      position: absolute;
+      margin-top: 2px;
+      height: 22px;
+      z-index: 3;
+      left: 0;
+      border: 2px solid;
+      background-color: #5d8bef;
+      border-color: #2663e9;
+    }
+    .greenRoof {
+      background-color: $amarex_extras_lightred;
+      border-color: $amarex_extras_darkred;
+      z-index: 2;
+    }
+    .unsealed {
+      background-color: $amarex_extras_lightgreen;
+      border-color: $amarex_extras_darkgreen;
+      z-index: 2;
+    }
+    .swaleConnected {
+      background-color: $amarex_extras_lightyellow;
+      border-color: $amarex_extras_darkyellow;
+      z-index: 2;
+    }
+  }
+  .area {
+    margin-bottom: 16px;
+  }
+  .slider-wrapper {
+    gap: 10px;
+    .color-indicator {
+      width: 24px;
+      height: 24px;
+      border: 2px solid;
+      flex-shrink: 0;
+    }
+    .target-color {
+      background-color: $amarex_extras_lightblue;
+      border-color: $amarex_extras_darkblue;
+    }
+    .input-wrapper {
+      position: relative;
+      .target-input {
+        width: 73px;
+        padding: 7px 7px 7px 10px;
+        border-radius: 0 !important;
+        border: 1px solid $amarex_grey_light;
+        font-size: 16px;
+        font-weight: 700;
+        &::-webkit-inner-spin-button,
+        &::-webkit-outer-spin-button {
+          opacity: 1 !important;
+          -webkit-appearance: inner-spin-button !important;
+        }
+      }
+      .percentage {
+        font-size: 16px;
+        font-weight: 700;
+        color: $amarex_secondary;
+        position: absolute;
+        left: auto;
+        right: 29px;
+        top: 7.5px;
+      }
+    }
+  }
+  .stats-wrapper {
+    gap: 10px;
+    p {
+      line-height: 16px !important;
+    }
+    .polygon {
+      width: 24px;
+      height: 19.5px;
+      background-color: $amarex_grey_dark;
+      clip-path: polygon(0% 0%, 100% 0%, 50% 100%);
+      flex-shrink: 0;
+    }
+    .color-indicator {
+      width: 24px;
+      height: 24px;
+      border: 2px solid;
+      flex-shrink: 0;
+    }
+    .maxGreenRoof {
+      background-color: $amarex_extras_lightred;
+      border-color: $amarex_extras_darkred;
+    }
+    .notUsable {
+      background-color: $amarex_grey_light;
+      border-color: $amarex_grey_mid;
+    }
+    .unsealed {
+      background-color: $amarex_extras_lightgreen;
+      border-color: $amarex_extras_darkgreen;
+    }
+    .swaleConnected {
+      background-color: $amarex_extras_lightyellow;
+      border-color: $amarex_extras_darkyellow;
+    }
+  }
+  .line {
+    height: 1px;
+    width: 100%;
+    background: $amarex_grey_mid;
+  }
 }
-.area-types-visualization {
-  margin-top: 20px;
+.title {
+  color: $amarex_secondary;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 32px;
 }
-
-.area-types-legend {
-  width: 100%;
-  display: flex;
-  gap: 8px;
-  flex-direction: column;
-  justify-content: space-between;
-  margin-top: 20px;
+.description {
+  color: $amarex_secondary;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 22px;
 }
-
-.legend-item {
-  display: flex;
-  gap: 8px;
-  align-items: center;
+.description-with-bigger-lineheight {
+  color: $amarex_secondary;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 32px;
 }
-
-.stats-container {
-  margin-top: 20px;
-  margin-left: 20px;
-}
-.stats-display {
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 8px;
-}
-.status-quo-bar {
-  height: 12px;
-  margin-bottom: 4px;
-  position: relative;
-}
-.status-quo {
-  margin-right: -5px;
-  position: absolute;
-  right: 0;
-  width: 0px;
-  height: 0px;
-  transform: rotate(360deg);
-  -webkit-transform: rotate(360deg);
-  border-style: solid;
-  border-width: 12px 6px 0 6px;
-  border-color: #878786 transparent transparent transparent;
-}
-.status-quo-legend-item {
-  width: 0px;
-  height: 0px;
-  transform: rotate(360deg);
-  -webkit-transform: rotate(360deg);
-  border-style: solid;
-  border-width: 12px 6px 0 6px;
-  border-color: #878786 transparent transparent transparent;
-}
-
-.abimo-slider-bar {
-  display: flex;
-  height: 26px;
-  width: 100%;
-  position: relative;
-  background-color: #d9d9d9;
-  // border: 2px solid #878786;
-  overflow: hidden;
-  z-index: 1;
-}
-.color-indicator {
-  width: 20px;
-  height: 20px;
-  margin-right: 4px;
-  border: 2px solid;
-}
-.abimo-slider-segment {
-  height: 100%;
-  border: 2px solid;
-}
-.greenRoof {
-  background-color: #d17b7b;
-  border-color: #971f1f;
-  z-index: 2;
-}
-.unsealed {
-  background-color: #53c486;
-  border-color: #2e9f61;
-  z-index: 2;
-}
-.sealed {
-  background-color: #d59f5d;
-  border-color: #b67a2f;
-  z-index: 2;
-}
-.swaleConnected {
-  background-color: #d59f5d;
-  border-color: #b67a2f;
-  z-index: 2;
-}
-.target-color {
-  background-color: #5d8bef;
-  border-color: #2663e9;
-}
-
-.target {
-  position: absolute;
-  margin-top: 2px;
-  height: 22px;
-  z-index: 3;
-  left: 0;
-  border: 2px solid;
-  background-color: #5d8bef;
-  border-color: #2663e9;
-}
-.target-input {
-  width: 52px;
-  padding-left: 8px;
+.description-with-smaller-lineheight {
+  color: $amarex_secondary;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 20px;
 }
 </style>
+

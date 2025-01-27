@@ -4,10 +4,10 @@ import colors from "../../../src/shared/js/utils/amarex-colors.json";
 
 /**
  * Abimo
- * @module modules/PreComputedModelsAmarex
+ * @module modules/AbimoLayerInfo
  */
 export default {
-  name: "PreComputedModelsAmarex",
+  name: "AbimoLayerInfo",
   components: {
     CloseIcon,
   },

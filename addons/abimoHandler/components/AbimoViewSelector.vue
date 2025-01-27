@@ -4,10 +4,10 @@ import src2 from "../../../portal/amarex/resources/img/Placeholder-Tutorial-Tool
 
 /**
  * Abimo
- * @module modules/AbimoViewSelectorAmarex
+ * @module modules/AbimoViewSelector
  */
 export default {
-  name: "AbimoViewSelectorAmarex",
+  name: "AbimoViewSelector",
   data() {
     return {
       src1,

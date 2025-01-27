@@ -1,4 +1,4 @@
-import component from "./components/AbimoHandlerAmarex.vue";
+import component from "./components/AbimoHandler.vue";
 import store from "./store/indexAbimoHandler";
 
 export default {

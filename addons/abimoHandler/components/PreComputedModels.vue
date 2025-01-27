@@ -12,10 +12,10 @@ import SliderItem from "../../../src/shared/modules/slider/components/SliderItem
 
 /**
  * Abimo
- * @module modules/PreComputedModelsAmarex
+ * @module modules/PreComputedModels
  */
 export default {
-  name: "PreComputedModelsAmarex",
+  name: "PreComputedModels",
   components: {
     ChevronDown,
     EyeOff,

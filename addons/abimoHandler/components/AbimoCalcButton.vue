@@ -9,14 +9,6 @@ import getRabimo from "../api/getRabimo";
  */
 export default {
   name: "AbimoCalcButton",
-  components: {},
-  data() {
-    return {
-      isLoading: false,
-      helperText: "",
-      isCalculated: false,
-    };
-  },
   computed: {
     ...mapGetters("Modules/AbimoHandler", [
       "selectedFeatures",
@@ -102,7 +94,7 @@ export default {
         layers[index].getSource().addFeatures(newFeatures);
       });
 
-      this.isCalculated = true;
+      this.changeCalcState("isCalculated");
     },
 
     /**
@@ -110,6 +102,7 @@ export default {
      * @return {Promise<void>} A promise that resolves when the data has been fetched and processed.
      */
     async fetchCalculateMultiblock() {
+      this.changeCalcState("loading");
       const mapFeatures =
         this.layer_abimo_calculated.values_.source.getFeatures();
 
@@ -142,45 +135,32 @@ export default {
         });
         // TODO add real data
         await this.processAndAddFeatures(mapFeatures, dataWithDeltaW);
-        this.isCalculated = true;
+        this.changeCalcState("isCalculated");
       } catch (error) {
         console.error("Fehler beim Abrufen der Daten:", error);
-        this.isLoading = false;
-        this.helperText = "Fehler beim Abrufen der Daten";
+        this.changeCalcState("error");
       }
+    },
+  },
+  props: {
+    wording: {
+      type: String,
+      default: "Berechnen",
+    },
+    changeCalcState: {
+      type: Function,
+      required: true,
     },
   },
 };
 </script>
 
 <template lang="html">
-  <div
-    id="AbimoCalcButton-root"
-    class="d-flex flex-column gap-3"
+  <button
+    class="amarex-btn-primary full accent"
+    @click="fetchCalculateMultiblock"
   >
-    <div
-      v-if="isCalculated"
-      class="layer-abimo-calculated"
-    ></div>
-
-    <button
-      class="btn btn-primary"
-      @click="fetchCalculateMultiblock"
-    >
-      Blockteilflächen berechnen
-    </button>
-    <span
-      v-if="helperText"
-      class="helper-text"
-      aria-hidden="true"
-      >{{ helperText }}</span
-    >
-  </div>
+    <p>{{ wording }}</p>
+  </button>
 </template>
 
-<style lang="scss" scoped>
-.helper-text {
-  color: red;
-  margin-left: 12px;
-}
-</style>
