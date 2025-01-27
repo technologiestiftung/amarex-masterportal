@@ -145,8 +145,6 @@ export default {
             overflow-y: scroll;
             max-height: 100vh;
             padding: 32px 24px;
-            display: grid;
-            grid-template-rows: auto 1fr;
             height: 100%;
         }
     }

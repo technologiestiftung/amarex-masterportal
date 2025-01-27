@@ -390,6 +390,10 @@ export default {
     .thememapgroup-name {
       margin-right: auto;
       font-weight: 700 !important;
+      flex: 1;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
     .thememapgroup-number {
       font-weight: 400 !important;
