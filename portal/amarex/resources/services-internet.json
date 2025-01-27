@@ -408,8 +408,7 @@
     "typ": "GEOJSON",
     "gfiAttributes": "showAll",
     "maxScale": "25000",
-    "legend": "./resources/img/legend_surface_runoff.svg",
-    "mouseHoverField": ["runoff"]
+    "legend": "./resources/img/legend_surface_runoff.svg"
   },
   {
     "id": "abimo_result_evaporation",
@@ -419,8 +418,7 @@
     "typ": "GEOJSON",
     "gfiAttributes": "showAll",
     "maxScale": "25000",
-    "legend": "./resources/img/legend_evaporation.svg",
-    "mouseHoverField": ["evapor"]
+    "legend": "./resources/img/legend_evaporation.svg"
   },
   {
     "id": "abimo_result_infiltration",
@@ -430,8 +428,7 @@
     "typ": "GEOJSON",
     "gfiAttributes": "showAll",
     "maxScale": "25000",
-    "legend": "./resources/img/legend_infiltration.svg",
-    "mouseHoverField": ["infiltr"]
+    "legend": "./resources/img/legend_infiltration.svg"
   },
   {
     "id": "abimo_result_delta_w",
@@ -442,7 +439,6 @@
     "gfiAttributes": "showAll",
     "maxScale": "25000",
     "legend": "./resources/img/legend_delta_w.svg",
-    "mouseHoverField": ["delta_w"],
     "searchField": "delta_w"
   },
   {
@@ -1144,3 +1140,4 @@
     "layerAttribution": "Für die Nutzung der Daten ist die Datenlizenz Deutschland - Namensnennung - Version 2.0 anzuwenden. Die Lizenz ist über https://www.govdata.de/dl-de/by-2-0 abrufbar. Der Quellenvermerk gemäß (2) der Lizenz lautet \"Umweltatlas Berlin / [Titel des Datensatzes]\"."
   }
 ]
+

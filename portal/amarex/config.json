@@ -4,10 +4,6 @@
       "baselayerSwitcher": {
         "active": false
       },
-      "mouseHover": {
-        "numFeaturesToShow": 1,
-        "infoText": "Ergebnis"
-      },
       "controls": {
         "zoom": true,
         "tiltView": false,
