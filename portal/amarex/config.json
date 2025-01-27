@@ -486,6 +486,23 @@
               ]
             },
             {
+              "name": "Grünversorgung",
+              "type": "folder",
+              "description": "Grünversorgung",
+              "elements": [
+                {
+                  "id": "s06_05gruenversorg2020",
+                  "visibility": false,
+                  "showInLayerTree": false
+                },
+                {
+                  "id": "s06_05gruenversorg2020_gruenanl",
+                  "visibility": false,
+                  "showInLayerTree": false
+                }
+              ]
+            },
+            {
               "name": "Klimabewertungskarten",
               "type": "folder",
               "description": "Klimabewertungskarten",

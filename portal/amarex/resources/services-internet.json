@@ -4402,6 +4402,42 @@
     "singleTile": true,
     "infoFormat": "application/json",
     "layerAttribution": "Für die Nutzung der Daten ist die Datenlizenz Deutschland - Namensnennung - Version 2.0 anzuwenden. Die Lizenz ist über https://www.govdata.de/dl-de/by-2-0 abrufbar. Der Quellenvermerk gemäß (2) der Lizenz lautet \"Umweltatlas Berlin / [Titel des Datensatzes]\"."
+  },
+  {
+    "id": "s06_05gruenversorg2020",
+    "name": "Versorgung mit öffentlichen, wohnungsnahen Grünanlagen 2020 - Block- und Blockteilflächen (Umweltatlas)",
+    "crs": "urn:ogc:def:crs:EPSG:6.9:25833",
+    "url": "https://fbinter.stadt-berlin.de/fb/wfs/data/senstadt/s06_05gruenversorg2020",
+    "typ": "WFS",
+    "featureType": "fis:s06_05gruenversorg2020",
+    "featureNS": "http://www.berlin.de/broker",
+    "datasets": [
+      {
+        "md_name": "Versorgung mit öffentlichen, wohnungsnahen Grünanlagen 2020 - Block- und Blockteilflächen (Umweltatlas)",
+        "md_id": "e7419261-f29e-403d-a235-41f53fa540f0",
+        "rs_id": "https://registry.gdi-de.org/id/de.be.csw/be9f12f5-5f4f-34ac-9725-7690b644f01c",
+        "csw_url": "https://gdi.berlin.de/geonetwork/srv/ger/csw"
+      }
+    ],
+    "gfiAttributes": "showAll"
+  },
+  {
+    "id": "s06_05gruenversorg2020_gruenanl",
+    "name": "Versorgung mit öffentlichen, wohnungsnahen Grünanlagen 2020 - Grünanlagen (Umweltatlas)",
+    "crs": "urn:ogc:def:crs:EPSG:6.9:25833",
+    "url": "https://fbinter.stadt-berlin.de/fb/wfs/data/senstadt/s06_05gruenversorg2020_gruenanl",
+    "typ": "WFS",
+    "featureType": "fis:s06_05gruenversorg2020_gruenanl",
+    "featureNS": "http://www.berlin.de/broker",
+    "datasets": [
+      {
+        "md_name": "Versorgung mit öffentlichen, wohnungsnahen Grünanlagen 2020 - Grünanlagen (Umweltatlas)",
+        "md_id": "e7419261-f29e-403d-a235-41f53fa540f0",
+        "rs_id": "https://registry.gdi-de.org/id/de.be.csw/be9f12f5-5f4f-34ac-9725-7690b644f01c",
+        "csw_url": "https://gdi.berlin.de/geonetwork/srv/ger/csw"
+      }
+    ],
+    "gfiAttributes": "showAll"
   }
 ]
 
