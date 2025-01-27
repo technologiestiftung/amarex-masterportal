@@ -9,7 +9,7 @@ import omit from "../../../shared/js/utils/omit";
 import changeCase from "../../../shared/js/utils/changeCase";
 import {takeScreenshot} from "olcs/lib/olcs/print/takeCesiumScreenshot.js";
 import {computeRectangle} from "olcs/lib/olcs/print/computeRectangle.js";
-import {trackMatomo} from "../../../plugins/matomo";
+// import {trackMatomo} from "../../../plugins/matomo";
 
 const actions = {
     ...actionsPrintInitialization,
@@ -177,6 +177,12 @@ const actions = {
                 "outputFormat": state.currentFormat,
                 "attributes": {
                     "title": state.title,
+
+                    // NOTE: Masterportal origin more attributes can be added here, it is very important, 
+                    // that the attributes match the attributes on the mapfish config
+                    "subtitle": "Report Subtitle",
+
+
                     "map": {
                         "dpi": state.dpiForPdf,
                         "projection": mapCollection.getMapView("2D").getProjection().getCode(),

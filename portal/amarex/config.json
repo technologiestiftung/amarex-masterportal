@@ -132,7 +132,20 @@
     },
     "secondaryMenu": {
       "expanded": true,
-      "sections": [[]]
+      "sections": [
+        [
+          {
+            "type": "print",
+            "printServiceId": "mapfish_printservice_id",
+            "printAppId": "abimo",
+            "filename": "Ausdruck",
+            "title": "Amarex Report",
+            "printMapMarker": true,
+            "isLegendSelected": false,
+            "dpiForPdf": 90
+          }
+        ]
+      ]
     }
   },
   "layerConfig": {
