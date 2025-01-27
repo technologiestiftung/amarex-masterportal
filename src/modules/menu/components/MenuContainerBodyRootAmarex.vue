@@ -1,8 +1,5 @@
 <script>
-import MenuContainerBodyRootItems from "./MenuContainerBodyRootItems.vue";
 import {mapGetters,mapActions,mapMutations} from "vuex";
-import { CircleCheckBig, LoaderCircle } from 'lucide-vue-next';
-import colors from '../../../shared/js/utils/amarex-colors.json';
 
 /**
  * @module modules/MenuContainerBodyRoot
@@ -11,11 +8,6 @@ import colors from '../../../shared/js/utils/amarex-colors.json';
  */
 export default {
     name: "MenuContainerBodyRoot",
-    components: {
-        MenuContainerBodyRootItems,
-        CircleCheckBig,
-        LoaderCircle
-    },
     data() {
         return {
             // Masterportal origin Menu Steps
@@ -23,8 +15,8 @@ export default {
                 // { label: 'Projekt Starten', component: 'projectStarter' },
                 { label: 'Hintergrundkarten', component: 'baseMaps' },
                 { label: 'Themenkarten', component: 'themeMaps' },
+                { label: 'Wasserhaushalt berechnen', component: 'abimoHandler' },
                 // { label: 'Maßnahmenpotentiale', component: 'actionPotentials' },
-                // { label: 'Wasserhaushalt berechnen', component: 'abimoHandler' },
                 // { label: 'Eigene Ebenen', component: '?' },
                 // { label: '6. Geodaten importieren', component: 'fileImporter' },
                 // { label: '7. Features listen', component: 'featureLister' },
@@ -37,8 +29,7 @@ export default {
                 // { label: 'X. Report zusammenstellen', component: 'reportPrinter' },
                 // { label: 'X. Projekt speichern/exportieren', component: 'projectDownloader' }
             ],
-            currentStepIndex: 0,
-            colors
+            currentStepIndex: 0
         }
     },
     props: {
