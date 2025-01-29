@@ -43,15 +43,6 @@ export default {
         this.selectedThemeMap = themeMap;
       }
     },
-    setNames(id) {
-      // result layers
-      if (id === "abimo_result_delta_w")
-        return "∆W - Abweichung vom natürlichen Wasserhaushalt";
-      if (id === "abimo_result_infiltration") return "Infiltration";
-      if (id === "abimo_result_evaporation") return "Verdunstung";
-      if (id === "abimo_result_surface_run_off") return "Oberflächenabfluss";
-      return "Abimo";
-    },
   },
   data() {
     return {
@@ -62,22 +53,19 @@ export default {
   },
   mounted() {
     // result layers
-    this.resultLayers = this.allLayerConfigs.filter(
-      (layer) =>
-        layer.id === "abimo_result_delta_w" ||
-        layer.id === "abimo_result_surface_run_off" ||
-        layer.id === "abimo_result_infiltration" ||
-        layer.id === "abimo_result_evaporation",
-    );
-    //
-    // @Luise: Do the layers need to be sorted?
-    // If yes, adjust the sort function accordingly
-    //
-    /* .sort((a, b) => {
+    this.resultLayers = this.allLayerConfigs
+      .filter(
+        (layer) =>
+          layer.id === "abimo_result_delta_w" ||
+          layer.id === "abimo_result_surface_run_off" ||
+          layer.id === "abimo_result_infiltration" ||
+          layer.id === "abimo_result_evaporation",
+      )
+      .sort((a, b) => {
         if (a.id === "abimo_result_delta_w") return -1;
         if (b.id === "abimo_result_delta_w") return 1;
         return 0;
-      }); */
+      });
     this.resultLayers.forEach((layer) => {
       const isLayerVisible = layer.visibility;
       if (!isLayerVisible) {
@@ -136,7 +124,7 @@ export default {
             </button>
             <p
               class="thememap-name"
-              v-html="setNames(themeMap?.id)"
+              v-html="themeMap.name"
             ></p>
             <button @click="openTransparencySubMenu(themeMap)">
               <Settings
