@@ -59,22 +59,18 @@ export default {
         this.selectedThemeMap = themeMap;
       }
     },
-    setNames(id) {
-      // @Luise: Please check if these are the correct names of the needed result layers
-      if (id === "delta_w_wfs")
-        return "∆W - Abweichung vom natürlichen Wasserhaushalt";
-      return "Abimo";
-    },
   },
   computed: {
     ...mapGetters(["allLayerConfigs"]),
   },
   mounted() {
-    // @Luise: Please check if these are the correct names of the needed result layers
     this.preComputedModels = this.allLayerConfigs
       .filter(
         (layer) =>
-          layer.id === "delta_w_wfs" || layer.id === "rabimo_input_2020",
+          layer.id === "delta_w_wfs" ||
+          layer.id === "abimo_2020_wfs:evaporatio" ||
+          layer.id === "abimo_2020_wfs:surface_ru" ||
+          layer.id === "abimo_2020_wfs:infiltrati",
       )
       .sort((a, b) => {
         if (a.id === "delta_w_wfs") return -1;
@@ -129,7 +125,7 @@ export default {
           </button>
           <p
             class="thememap-name"
-            v-html="setNames(themeMap?.id)"
+            v-html="themeMap.name"
           ></p>
           <button @click="openTransparencySubMenu(themeMap)">
             <Settings
