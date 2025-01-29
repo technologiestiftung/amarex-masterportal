@@ -335,7 +335,7 @@
   {
     "id": "abimo_2020_wfs:evaporatio",
     "styleId": "abimo_evaporatio",
-    "name": "Wasserhaushalt 2020 Verdunstung",
+    "name": "Verdunstung 2020",
     "crs": "EPSG:25833",
     "url": "https://technologiestiftung-berlin.webgis1.com/geoserver/Amarex/wfs",
     "typ": "WFS",
@@ -350,7 +350,7 @@
   {
     "id": "abimo_2020_wfs:surface_ru",
     "styleId": "abimo_surface_ru",
-    "name": "Wasserhaushalt 2020 Oberflächenabfluss",
+    "name": "Oberflächenabfluss 2020",
     "crs": "EPSG:25833",
     "url": "https://technologiestiftung-berlin.webgis1.com/geoserver/Amarex/wfs",
     "typ": "WFS",
@@ -364,7 +364,7 @@
   },
   {
     "id": "abimo_2020_wfs:infiltrati",
-    "name": "Wasserhaushalt 2020 Infiltration",
+    "name": "Infiltration 2020",
     "styleId": "abimo_infiltrati",
     "crs": "EPSG:25833",
     "url": "https://technologiestiftung-berlin.webgis1.com/geoserver/Amarex/wfs",
@@ -380,7 +380,7 @@
   {
     "id": "delta_w_wfs",
     "styleId": "delta_w",
-    "name": "DeltaW",
+    "name": "∆W - Abweichung vom natürlichen Wasserhaushalt 2020",
     "crs": "EPSG:25833",
     "url": "https://technologiestiftung-berlin.webgis1.com/geoserver/SmartWater/wfs",
     "typ": "WFS",
@@ -403,7 +403,7 @@
   {
     "id": "abimo_result_surface_run_off",
     "styleId": "abimo_result_surface_run_off",
-    "name": "Abimo Ergebnis Oberflächenabfluss",
+    "name": "Oberflächenabfluss",
     "crs": "urn:ogc:def:crs:EPSG::25833",
     "typ": "GEOJSON",
     "gfiAttributes": "showAll",
@@ -413,7 +413,7 @@
   {
     "id": "abimo_result_evaporation",
     "styleId": "abimo_result_evaporation",
-    "name": "Abimo Ergebnis Verdunstung",
+    "name": "Verdunstung",
     "crs": "urn:ogc:def:crs:EPSG::25833",
     "typ": "GEOJSON",
     "gfiAttributes": "showAll",
@@ -423,7 +423,7 @@
   {
     "id": "abimo_result_infiltration",
     "styleId": "abimo_result_infiltration",
-    "name": "Abimo Ergebnis Infiltration",
+    "name": "Infiltration",
     "crs": "urn:ogc:def:crs:EPSG::25833",
     "typ": "GEOJSON",
     "gfiAttributes": "showAll",
@@ -433,7 +433,7 @@
   {
     "id": "abimo_result_delta_w",
     "styleId": "abimo_result_delta_w",
-    "name": "Abimo Ergebnis DeltaW",
+    "name": "∆W - Abweichung vom natürlichen Wasserhaushalt",
     "crs": "urn:ogc:def:crs:EPSG::25833",
     "typ": "GEOJSON",
     "gfiAttributes": "showAll",
