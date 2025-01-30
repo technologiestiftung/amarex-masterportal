@@ -62,8 +62,8 @@ export default {
           layer.id === "abimo_result_evaporation",
       )
       .sort((a, b) => {
-        if (a.id === "abimo_result_delta_w") return -1;
-        if (b.id === "abimo_result_delta_w") return 1;
+        if (a.id === "abimo_result_delta_w") return 1;
+        if (b.id === "abimo_result_delta_w") return -1;
         return 0;
       });
     this.resultLayers.forEach((layer) => {
