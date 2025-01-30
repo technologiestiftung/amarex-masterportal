@@ -160,14 +160,6 @@
           "visibility": false
         },
         {
-          "id": "webatlas_wms_color",
-          "visibility": false
-        },
-        {
-          "id": "hg_openlayer_wmts",
-          "visibility": false
-        },
-        {
           "id": "truedop_2024",
           "visibility": false
         }
@@ -237,14 +229,314 @@
           "elements": []
         },
         {
-          "name": "Hintergrundkarten",
-          "type": "folder",
-          "elements": []
-        },
-        {
           "name": "Themenkarten",
           "type": "folder",
           "elements": [
+            {
+              "name": "ALKIS Berlin",
+              "type": "folder",
+              "description": "Flächendeckende Beschreibung und Darstellung von Liegenschaften",
+              "elements": [
+                {
+                  "id": "wmsk_alkis:30",
+                  "visibility": false,
+                  "showInLayerTree": false
+                },
+                {
+                  "id": "wmsk_alkis:5",
+                  "visibility": false,
+                  "showInLayerTree": false
+                },
+                {
+                  "id": "wmsk_alkis:21",
+                  "visibility": false,
+                  "showInLayerTree": false
+                },
+                {
+                  "id": "wmsk_alkis:0",
+                  "visibility": false,
+                  "showInLayerTree": false
+                },
+                {
+                  "id": "wmsk_alkis:29",
+                  "visibility": false,
+                  "showInLayerTree": false
+                },
+                {
+                  "id": "wmsk_alkis:4",
+                  "visibility": false,
+                  "showInLayerTree": false
+                },
+                {
+                  "id": "wmsk_alkis:7",
+                  "visibility": false,
+                  "showInLayerTree": false
+                },
+                {
+                  "id": "wmsk_alkis:13",
+                  "visibility": false,
+                  "showInLayerTree": false
+                },
+                {
+                  "id": "wmsk_alkis:9",
+                  "visibility": false,
+                  "showInLayerTree": false
+                },
+                {
+                  "id": "wmsk_alkis:25",
+                  "visibility": false,
+                  "showInLayerTree": false
+                },
+                {
+                  "id": "wmsk_alkis:8",
+                  "visibility": false,
+                  "showInLayerTree": false
+                },
+                {
+                  "id": "wmsk_alkis:18",
+                  "visibility": false,
+                  "showInLayerTree": false
+                },
+                {
+                  "id": "wmsk_alkis:20",
+                  "visibility": false,
+                  "showInLayerTree": false
+                },
+                {
+                  "id": "wmsk_alkis:16",
+                  "visibility": false,
+                  "showInLayerTree": false
+                },
+                {
+                  "id": "wmsk_alkis:28",
+                  "visibility": false,
+                  "showInLayerTree": false
+                },
+                {
+                  "id": "wmsk_alkis:12",
+                  "visibility": false,
+                  "showInLayerTree": false
+                },
+                {
+                  "id": "wmsk_alkis:24",
+                  "visibility": false,
+                  "showInLayerTree": false
+                },
+                {
+                  "id": "wmsk_alkis:22",
+                  "visibility": false,
+                  "showInLayerTree": false
+                },
+                {
+                  "id": "wmsk_alkis:34",
+                  "visibility": false,
+                  "showInLayerTree": false
+                },
+                {
+                  "id": "wmsk_alkis:26",
+                  "visibility": false,
+                  "showInLayerTree": false
+                },
+                {
+                  "id": "wmsk_alkis:47",
+                  "visibility": false,
+                  "showInLayerTree": false
+                },
+                {
+                  "id": "wmsk_alkis:46",
+                  "visibility": false,
+                  "showInLayerTree": false
+                },
+                {
+                  "id": "wmsk_alkis:44",
+                  "visibility": false,
+                  "showInLayerTree": false
+                },
+                {
+                  "id": "wmsk_alkis:43",
+                  "visibility": false,
+                  "showInLayerTree": false
+                }
+              ]
+            },
+            {
+              "name": "ALKIS Berlin Flurstücke",
+              "type": "folder",
+              "description": "Flächendeckende Beschreibung und Darstellung der Flurstücke",
+              "elements": [
+                {
+                  "id": "alkis_flurstuecke:flurstuecke",
+                  "visibility": false,
+                  "showInLayerTree": false
+                }
+              ]
+            },
+            {
+              "name": "ALKIS Berlin s/w",
+              "type": "folder",
+              "description": "ALKIS Berlin s/w (Amtliches Liegenschaftskatasterinformationssystem)",
+              "elements": [
+                {
+                  "id": "wmsk_alkis_sw:30",
+                  "visibility": false,
+                  "showInLayerTree": false
+                },
+                {
+                  "id": "wmsk_alkis_sw:4",
+                  "visibility": false,
+                  "showInLayerTree": false
+                },
+                {
+                  "id": "wmsk_alkis_sw:19",
+                  "visibility": false,
+                  "showInLayerTree": false
+                },
+                {
+                  "id": "wmsk_alkis_sw:21",
+                  "visibility": false,
+                  "showInLayerTree": false
+                },
+                {
+                  "id": "wmsk_alkis_sw:0",
+                  "visibility": false,
+                  "showInLayerTree": false
+                },
+                {
+                  "id": "wmsk_alkis_sw:24",
+                  "visibility": false,
+                  "showInLayerTree": false
+                },
+                {
+                  "id": "wmsk_alkis_sw:13",
+                  "visibility": false,
+                  "showInLayerTree": false
+                },
+                {
+                  "id": "wmsk_alkis_sw:9",
+                  "visibility": false,
+                  "showInLayerTree": false
+                },
+                {
+                  "id": "wmsk_alkis_sw:8",
+                  "visibility": false,
+                  "showInLayerTree": false
+                },
+                {
+                  "id": "wmsk_alkis_sw:18",
+                  "visibility": false,
+                  "showInLayerTree": false
+                },
+                {
+                  "id": "wmsk_alkis_sw:25",
+                  "visibility": false,
+                  "showInLayerTree": false
+                },
+                {
+                  "id": "wmsk_alkis_sw:20",
+                  "visibility": false,
+                  "showInLayerTree": false
+                },
+                {
+                  "id": "wmsk_alkis_sw:17",
+                  "visibility": false,
+                  "showInLayerTree": false
+                },
+                {
+                  "id": "wmsk_alkis_sw:12",
+                  "visibility": false,
+                  "showInLayerTree": false
+                },
+                {
+                  "id": "wmsk_alkis_sw:34",
+                  "visibility": false,
+                  "showInLayerTree": false
+                },
+                {
+                  "id": "wmsk_alkis_sw:28",
+                  "visibility": false,
+                  "showInLayerTree": false
+                },
+                {
+                  "id": "wmsk_alkis_sw:6",
+                  "visibility": false,
+                  "showInLayerTree": false
+                },
+                {
+                  "id": "wmsk_alkis_sw:22",
+                  "visibility": false,
+                  "showInLayerTree": false
+                },
+                {
+                  "id": "wmsk_alkis_sw:29",
+                  "visibility": false,
+                  "showInLayerTree": false
+                },
+                {
+                  "id": "wmsk_alkis_sw:26",
+                  "visibility": false,
+                  "showInLayerTree": false
+                },
+                {
+                  "id": "wmsk_alkis_sw:47",
+                  "visibility": false,
+                  "showInLayerTree": false
+                },
+                {
+                  "id": "wmsk_alkis_sw:46",
+                  "visibility": false,
+                  "showInLayerTree": false
+                },
+                {
+                  "id": "wmsk_alkis_sw:44",
+                  "visibility": false,
+                  "showInLayerTree": false
+                },
+                {
+                  "id": "wmsk_alkis_sw:42",
+                  "visibility": false,
+                  "showInLayerTree": false
+                }
+              ]
+            },
+            {
+              "name": "Grünversorgung",
+              "type": "folder",
+              "description": "Grünversorgung",
+              "elements": [
+                {
+                  "id": "s06_05gruenversorg2020",
+                  "visibility": false,
+                  "showInLayerTree": false
+                },
+                {
+                  "id": "s06_05gruenversorg2020_gruenanl",
+                  "visibility": false,
+                  "showInLayerTree": false
+                }
+              ]
+            },
+            {
+              "name": "Klimabewertungskarten",
+              "type": "folder",
+              "description": "Klimabewertungskarten",
+              "elements": [
+                {
+                  "id": "ua_klimabewertung_2022:wfs:bj_ua_phk_biokl_siedl_2022",
+                  "visibility": false,
+                  "showInLayerTree": false
+                },
+                {
+                  "id": "ua_klimabewertung_2022:wfs:bi_ua_phk_biokl_str_2022",
+                  "visibility": false,
+                  "showInLayerTree": false
+                },
+                {
+                  "id": "ua_klimaanalyse_2022:ta_kak_luftaustausch_2022",
+                  "visibility": false,
+                  "showInLayerTree": false
+                }
+              ]
+            },
             {
               "name": "Starkregen",
               "type": "folder",
@@ -348,37 +640,27 @@
               ]
             },
             {
-              "name": "Hitze",
+              "name": "Versiegelung",
               "type": "folder",
-              "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sit amet libero auctor, ultricies nunc nec, tincidunt nunc. Nullam nec nunc nec nunc ultricies tincidunt. Nullam nec nunc nec nunc ultricies",
+              "description": "Versiegelung",
               "elements": [
                 {
-                  "id": "wmsk_04106_kenntage2015:5",
+                  "id": "ua_versiegelung_2021:versieg2021",
                   "visibility": false,
                   "showInLayerTree": false
                 },
                 {
-                  "id": "wmsk_04106_kenntage2015:3",
+                  "id": "ua_versiegelung_2021:versieg2021_str",
                   "visibility": false,
                   "showInLayerTree": false
                 },
                 {
-                  "id": "wmsk_04106_kenntage2015:4",
+                  "id": "ua_versiegelung_2021:versieg2021_veraenderung",
                   "visibility": false,
                   "showInLayerTree": false
                 },
                 {
-                  "id": "wmsk_04106_kenntage2015:12",
-                  "visibility": false,
-                  "showInLayerTree": false
-                },
-                {
-                  "id": "wmsk_04106_kenntage2015:13",
-                  "visibility": false,
-                  "showInLayerTree": false
-                },
-                {
-                  "id": "wmsk_04106_kenntage2015:11",
+                  "id": "ua_versiegelung_2021:versiegelung_2021_raster",
                   "visibility": false,
                   "showInLayerTree": false
                 }
