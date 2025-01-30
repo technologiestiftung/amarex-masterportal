@@ -95,7 +95,10 @@ export default {
           buttons: [
             {
               text: "Zurück",
-              action: () => (this.activeStep = 2),
+              action: () => {
+                this.$refs.componentRef?.updateAbimoData();
+                this.activeStep = 2;
+              },
             },
             {
               text: "Bestätigen",
@@ -114,7 +117,10 @@ export default {
           buttons: [
             {
               text: "Zurück",
-              action: () => (this.activeStep = 3),
+              action: () => {
+                this.$refs.componentRef?.updateAbimoData();
+                this.activeStep = 3;
+              },
             },
             {
               text: "Bestätigen",
@@ -133,7 +139,10 @@ export default {
           buttons: [
             {
               text: "Zurück",
-              action: () => (this.activeStep = 4),
+              action: () => {
+                this.$refs.componentRef?.updateAbimoData();
+                this.activeStep = 4;
+              },
             },
           ],
         },
