@@ -82,7 +82,7 @@
     "preview": {
       "src": "./resources/img/truedop_2024.png",
       "title": "Digitale Orthophotos 2024",
-      "abstract": "Farbiges TrueDOP-Mosaik, lagetreu und schattenfrei",
+      "abstract": "Luftbilder des Stadtgebiets mit einer Bodenauflösung von 0,20 Meter",
       "keywords": ["TrueDOP", "Berlin", "Geodaten", "Orthophoto", "GDI-BE"]
     }
   },
@@ -288,17 +288,21 @@
     }
   },
   {
-    "id": "k_alkis_land:1",
-    "name": "Landesgrenze",
+    "id": "ALKIS_layer_start:"
+  },
+  {
+    "id": "alkis_flurstuecke:flurstuecke",
+    "name": "ALKIS Berlin Flurstücke",
+    "name_lang": "Flurstücke (ALKIS Berlin Flurstücke)",
     "crs": "EPSG:25833",
-    "url": "https://gdi.berlin.de/services/wms/alkis_land",
+    "url": "https://gdi.berlin.de/services/wms/alkis_flurstuecke",
     "typ": "WMS",
-    "gfiAttributes": "ignore",
-    "layers": "landesgrenze",
+    "gfiAttributes": "showAll",
+    "layers": "flurstuecke",
     "legend": true,
     "datasets": [
       {
-        "md_name": "ALKIS Berlin Landesgrenze",
+        "md_name": "ALKIS Berlin Flurstücke",
         "md_id": "0a7c53a5-b29d-3f45-9734-1c811045e6c2",
         "rs_id": "https://registry.gdi-de.org/id/de.be.csw/cb2897d1-4258-3312-a3db-7ceb2ad86be7",
         "csw_url": "https://gdi.berlin.de/geonetwork/srv/ger/csw"
@@ -310,11 +314,1353 @@
     "gfiTheme": "default",
     "transparent": true,
     "singleTile": true,
-    "preview": {
-      "src": "./resources/img/backgroundCanvas.jpeg",
-      "abstract": "Landeskartenwerk mit administrativen Grenzen (ALKIS)",
-      "keywords": ["WMTS", "Berlin", "Geodaten", "Landeskartenwerk", "ALKIS"]
-    }
+    "infoFormat": "application/json",
+    "layerAttribution": "Für die Nutzung der Daten ist die Datenlizenz Deutschland - Namensnennung - Version 2.0 anzuwenden. Die Lizenz ist über https://www.govdata.de/dl-de/by-2-0 abrufbar. Der Quellenvermerk gemäß (2) der Lizenz lautet \"Geoportal Berlin / [Titel des Datensatzes]\"."
+  },
+  {
+    "id": "wmsk_alkis:30",
+    "name": "Lagebezeichnung",
+    "name_lang": "Lagebezeichnung (ALKIS Berlin (Amtliches Liegenschaftskatasterinformationssystem))",
+    "crs": "EPSG:25833",
+    "url": "https://fbinter.stadt-berlin.de/fb/wms/senstadt/wmsk_alkis",
+    "typ": "WMS",
+    "gfiAttributes": "ignore",
+    "layers": "30",
+    "legend": "https://fbinter.stadt-berlin.de/fb_daten/legenden/leg_alkis.png",
+    "datasets": [
+      {
+        "md_name": "ALKIS Berlin (Amtliches Liegenschaftskatasterinformationssystem)",
+        "md_id": "0a7c53a5-b29d-3f45-9734-1c811045e6c2",
+        "rs_id": "https://registry.gdi-de.org/id/de.be.csw/cb2897d1-4258-3312-a3db-7ceb2ad86be7",
+        "csw_url": "https://gdi.berlin.de/geonetwork/srv/ger/csw"
+      }
+    ],
+    "minScale": "100",
+    "maxScale": "2000",
+    "format": "image/png",
+    "version": "1.3.0",
+    "featureCount": "5",
+    "gfiTheme": "default",
+    "transparent": true,
+    "singleTile": true,
+    "layerAttribution": "Für die Nutzung der Daten ist die  Datenlizenz Deutschland - Namensnennung - Version 2.0 anzuwenden. Die Lizenz ist über https://www.govdata.de/dl-de/by-2-0 abrufbar. Der Quellenvermerk gemäß (2) der Lizenz lautet \"Geoportal Berlin / [Titel des Datensatzes]\"."
+  },
+  {
+    "id": "wmsk_alkis:5",
+    "name": "Tatsächliche Flächennutzung",
+    "name_lang": "Tatsächliche Flächennutzung (ALKIS Berlin (Amtliches Liegenschaftskatasterinformationssystem))",
+    "crs": "EPSG:25833",
+    "url": "https://fbinter.stadt-berlin.de/fb/wms/senstadt/wmsk_alkis",
+    "typ": "WMS",
+    "gfiAttributes": "ignore",
+    "layers": "5",
+    "legend": "https://fbinter.stadt-berlin.de/fb_daten/legenden/leg_alkis.png",
+    "datasets": [
+      {
+        "md_name": "ALKIS Berlin (Amtliches Liegenschaftskatasterinformationssystem)",
+        "md_id": "0a7c53a5-b29d-3f45-9734-1c811045e6c2",
+        "rs_id": "https://registry.gdi-de.org/id/de.be.csw/cb2897d1-4258-3312-a3db-7ceb2ad86be7",
+        "csw_url": "https://gdi.berlin.de/geonetwork/srv/ger/csw"
+      }
+    ],
+    "minScale": "100",
+    "maxScale": "2000",
+    "format": "image/png",
+    "version": "1.3.0",
+    "featureCount": "5",
+    "gfiTheme": "default",
+    "transparent": true,
+    "singleTile": true,
+    "layerAttribution": "Für die Nutzung der Daten ist die  Datenlizenz Deutschland - Namensnennung - Version 2.0 anzuwenden. Die Lizenz ist über https://www.govdata.de/dl-de/by-2-0 abrufbar. Der Quellenvermerk gemäß (2) der Lizenz lautet \"Geoportal Berlin / [Titel des Datensatzes]\"."
+  },
+  {
+    "id": "wmsk_alkis:21",
+    "name": "Gewässer Vegetation Linien",
+    "name_lang": "Gewässer Vegetation Linien (ALKIS Berlin (Amtliches Liegenschaftskatasterinformationssystem))",
+    "crs": "EPSG:25833",
+    "url": "https://fbinter.stadt-berlin.de/fb/wms/senstadt/wmsk_alkis",
+    "typ": "WMS",
+    "gfiAttributes": "ignore",
+    "layers": "21",
+    "legend": "https://fbinter.stadt-berlin.de/fb_daten/legenden/leg_alkis.png",
+    "datasets": [
+      {
+        "md_name": "ALKIS Berlin (Amtliches Liegenschaftskatasterinformationssystem)",
+        "md_id": "0a7c53a5-b29d-3f45-9734-1c811045e6c2",
+        "rs_id": "https://registry.gdi-de.org/id/de.be.csw/cb2897d1-4258-3312-a3db-7ceb2ad86be7",
+        "csw_url": "https://gdi.berlin.de/geonetwork/srv/ger/csw"
+      }
+    ],
+    "minScale": "100",
+    "maxScale": "2000",
+    "format": "image/png",
+    "version": "1.3.0",
+    "featureCount": "5",
+    "gfiTheme": "default",
+    "transparent": true,
+    "singleTile": true,
+    "layerAttribution": "Für die Nutzung der Daten ist die  Datenlizenz Deutschland - Namensnennung - Version 2.0 anzuwenden. Die Lizenz ist über https://www.govdata.de/dl-de/by-2-0 abrufbar. Der Quellenvermerk gemäß (2) der Lizenz lautet \"Geoportal Berlin / [Titel des Datensatzes]\"."
+  },
+  {
+    "id": "wmsk_alkis:0",
+    "name": "Relief",
+    "name_lang": "Relief (ALKIS Berlin (Amtliches Liegenschaftskatasterinformationssystem))",
+    "crs": "EPSG:25833",
+    "url": "https://fbinter.stadt-berlin.de/fb/wms/senstadt/wmsk_alkis",
+    "typ": "WMS",
+    "gfiAttributes": "ignore",
+    "layers": "0",
+    "legend": "https://fbinter.stadt-berlin.de/fb_daten/legenden/leg_alkis.png",
+    "datasets": [
+      {
+        "md_name": "ALKIS Berlin (Amtliches Liegenschaftskatasterinformationssystem)",
+        "md_id": "0a7c53a5-b29d-3f45-9734-1c811045e6c2",
+        "rs_id": "https://registry.gdi-de.org/id/de.be.csw/cb2897d1-4258-3312-a3db-7ceb2ad86be7",
+        "csw_url": "https://gdi.berlin.de/geonetwork/srv/ger/csw"
+      }
+    ],
+    "minScale": "100",
+    "maxScale": "2000",
+    "format": "image/png",
+    "version": "1.3.0",
+    "featureCount": "5",
+    "gfiTheme": "default",
+    "transparent": true,
+    "singleTile": true,
+    "layerAttribution": "Für die Nutzung der Daten ist die  Datenlizenz Deutschland - Namensnennung - Version 2.0 anzuwenden. Die Lizenz ist über https://www.govdata.de/dl-de/by-2-0 abrufbar. Der Quellenvermerk gemäß (2) der Lizenz lautet \"Geoportal Berlin / [Titel des Datensatzes]\"."
+  },
+  {
+    "id": "wmsk_alkis:29",
+    "name": "Straßennamen",
+    "name_lang": "Straßennamen (ALKIS Berlin (Amtliches Liegenschaftskatasterinformationssystem))",
+    "crs": "EPSG:25833",
+    "url": "https://fbinter.stadt-berlin.de/fb/wms/senstadt/wmsk_alkis",
+    "typ": "WMS",
+    "gfiAttributes": "ignore",
+    "layers": "29",
+    "legend": "https://fbinter.stadt-berlin.de/fb_daten/legenden/leg_alkis.png",
+    "datasets": [
+      {
+        "md_name": "ALKIS Berlin (Amtliches Liegenschaftskatasterinformationssystem)",
+        "md_id": "0a7c53a5-b29d-3f45-9734-1c811045e6c2",
+        "rs_id": "https://registry.gdi-de.org/id/de.be.csw/cb2897d1-4258-3312-a3db-7ceb2ad86be7",
+        "csw_url": "https://gdi.berlin.de/geonetwork/srv/ger/csw"
+      }
+    ],
+    "minScale": "2000",
+    "maxScale": "5000",
+    "format": "image/png",
+    "version": "1.3.0",
+    "featureCount": "5",
+    "gfiTheme": "default",
+    "transparent": true,
+    "singleTile": true,
+    "layerAttribution": "Für die Nutzung der Daten ist die  Datenlizenz Deutschland - Namensnennung - Version 2.0 anzuwenden. Die Lizenz ist über https://www.govdata.de/dl-de/by-2-0 abrufbar. Der Quellenvermerk gemäß (2) der Lizenz lautet \"Geoportal Berlin / [Titel des Datensatzes]\"."
+  },
+  {
+    "id": "wmsk_alkis:4",
+    "name": "Tatsächliche Flächennutzung - Navigation",
+    "name_lang": "Tatsächliche Flächennutzung - Navigation (ALKIS Berlin (Amtliches Liegenschaftskatasterinformationssystem))",
+    "crs": "EPSG:25833",
+    "url": "https://fbinter.stadt-berlin.de/fb/wms/senstadt/wmsk_alkis",
+    "typ": "WMS",
+    "gfiAttributes": "ignore",
+    "layers": "4",
+    "legend": "https://fbinter.stadt-berlin.de/fb_daten/legenden/leg_alkis.png",
+    "datasets": [
+      {
+        "md_name": "ALKIS Berlin (Amtliches Liegenschaftskatasterinformationssystem)",
+        "md_id": "0a7c53a5-b29d-3f45-9734-1c811045e6c2",
+        "rs_id": "https://registry.gdi-de.org/id/de.be.csw/cb2897d1-4258-3312-a3db-7ceb2ad86be7",
+        "csw_url": "https://gdi.berlin.de/geonetwork/srv/ger/csw"
+      }
+    ],
+    "minScale": "2000",
+    "maxScale": "25000",
+    "format": "image/png",
+    "version": "1.3.0",
+    "featureCount": "5",
+    "gfiTheme": "default",
+    "transparent": true,
+    "singleTile": true,
+    "layerAttribution": "Für die Nutzung der Daten ist die  Datenlizenz Deutschland - Namensnennung - Version 2.0 anzuwenden. Die Lizenz ist über https://www.govdata.de/dl-de/by-2-0 abrufbar. Der Quellenvermerk gemäß (2) der Lizenz lautet \"Geoportal Berlin / [Titel des Datensatzes]\"."
+  },
+  {
+    "id": "wmsk_alkis:7",
+    "name": "Erläuterungen zu tatsächlichen Flächennutzungen",
+    "name_lang": "Erläuterungen zu tatsächlichen Flächennutzungen (ALKIS Berlin (Amtliches Liegenschaftskatasterinformationssystem))",
+    "crs": "EPSG:25833",
+    "url": "https://fbinter.stadt-berlin.de/fb/wms/senstadt/wmsk_alkis",
+    "typ": "WMS",
+    "gfiAttributes": "ignore",
+    "layers": "7",
+    "legend": "https://fbinter.stadt-berlin.de/fb_daten/legenden/leg_alkis.png",
+    "datasets": [
+      {
+        "md_name": "ALKIS Berlin (Amtliches Liegenschaftskatasterinformationssystem)",
+        "md_id": "0a7c53a5-b29d-3f45-9734-1c811045e6c2",
+        "rs_id": "https://registry.gdi-de.org/id/de.be.csw/cb2897d1-4258-3312-a3db-7ceb2ad86be7",
+        "csw_url": "https://gdi.berlin.de/geonetwork/srv/ger/csw"
+      }
+    ],
+    "minScale": "100",
+    "maxScale": "2000",
+    "format": "image/png",
+    "version": "1.3.0",
+    "featureCount": "5",
+    "gfiTheme": "default",
+    "transparent": true,
+    "singleTile": true,
+    "layerAttribution": "Für die Nutzung der Daten ist die  Datenlizenz Deutschland - Namensnennung - Version 2.0 anzuwenden. Die Lizenz ist über https://www.govdata.de/dl-de/by-2-0 abrufbar. Der Quellenvermerk gemäß (2) der Lizenz lautet \"Geoportal Berlin / [Titel des Datensatzes]\"."
+  },
+  {
+    "id": "wmsk_alkis:13",
+    "name": "Bauwerke",
+    "name_lang": "Bauwerke (ALKIS Berlin (Amtliches Liegenschaftskatasterinformationssystem))",
+    "crs": "EPSG:25833",
+    "url": "https://fbinter.stadt-berlin.de/fb/wms/senstadt/wmsk_alkis",
+    "typ": "WMS",
+    "gfiAttributes": "ignore",
+    "layers": "13",
+    "legend": "https://fbinter.stadt-berlin.de/fb_daten/legenden/leg_alkis.png",
+    "datasets": [
+      {
+        "md_name": "ALKIS Berlin (Amtliches Liegenschaftskatasterinformationssystem)",
+        "md_id": "0a7c53a5-b29d-3f45-9734-1c811045e6c2",
+        "rs_id": "https://registry.gdi-de.org/id/de.be.csw/cb2897d1-4258-3312-a3db-7ceb2ad86be7",
+        "csw_url": "https://gdi.berlin.de/geonetwork/srv/ger/csw"
+      }
+    ],
+    "minScale": "100",
+    "maxScale": "5000",
+    "format": "image/png",
+    "version": "1.3.0",
+    "featureCount": "5",
+    "gfiTheme": "default",
+    "transparent": true,
+    "singleTile": true,
+    "layerAttribution": "Für die Nutzung der Daten ist die  Datenlizenz Deutschland - Namensnennung - Version 2.0 anzuwenden. Die Lizenz ist über https://www.govdata.de/dl-de/by-2-0 abrufbar. Der Quellenvermerk gemäß (2) der Lizenz lautet \"Geoportal Berlin / [Titel des Datensatzes]\"."
+  },
+  {
+    "id": "wmsk_alkis:9",
+    "name": "Gebäude",
+    "name_lang": "Gebäude (ALKIS Berlin (Amtliches Liegenschaftskatasterinformationssystem))",
+    "crs": "EPSG:25833",
+    "url": "https://fbinter.stadt-berlin.de/fb/wms/senstadt/wmsk_alkis",
+    "typ": "WMS",
+    "gfiAttributes": "ignore",
+    "layers": "9",
+    "legend": "https://fbinter.stadt-berlin.de/fb_daten/legenden/leg_alkis.png",
+    "datasets": [
+      {
+        "md_name": "ALKIS Berlin (Amtliches Liegenschaftskatasterinformationssystem)",
+        "md_id": "0a7c53a5-b29d-3f45-9734-1c811045e6c2",
+        "rs_id": "https://registry.gdi-de.org/id/de.be.csw/cb2897d1-4258-3312-a3db-7ceb2ad86be7",
+        "csw_url": "https://gdi.berlin.de/geonetwork/srv/ger/csw"
+      }
+    ],
+    "minScale": "100",
+    "maxScale": "5000",
+    "format": "image/png",
+    "version": "1.3.0",
+    "featureCount": "5",
+    "gfiTheme": "default",
+    "transparent": true,
+    "singleTile": true,
+    "layerAttribution": "Für die Nutzung der Daten ist die  Datenlizenz Deutschland - Namensnennung - Version 2.0 anzuwenden. Die Lizenz ist über https://www.govdata.de/dl-de/by-2-0 abrufbar. Der Quellenvermerk gemäß (2) der Lizenz lautet \"Geoportal Berlin / [Titel des Datensatzes]\"."
+  },
+  {
+    "id": "wmsk_alkis:25",
+    "name": "Flurstücke",
+    "name_lang": "Flurstücke (ALKIS Berlin (Amtliches Liegenschaftskatasterinformationssystem))",
+    "crs": "EPSG:25833",
+    "url": "https://fbinter.stadt-berlin.de/fb/wms/senstadt/wmsk_alkis",
+    "typ": "WMS",
+    "gfiAttributes": "ignore",
+    "layers": "25",
+    "legend": "https://fbinter.stadt-berlin.de/fb_daten/legenden/leg_alkis.png",
+    "datasets": [
+      {
+        "md_name": "ALKIS Berlin (Amtliches Liegenschaftskatasterinformationssystem)",
+        "md_id": "0a7c53a5-b29d-3f45-9734-1c811045e6c2",
+        "rs_id": "https://registry.gdi-de.org/id/de.be.csw/cb2897d1-4258-3312-a3db-7ceb2ad86be7",
+        "csw_url": "https://gdi.berlin.de/geonetwork/srv/ger/csw"
+      }
+    ],
+    "minScale": "100",
+    "maxScale": "5000",
+    "format": "image/png",
+    "version": "1.3.0",
+    "featureCount": "5",
+    "gfiTheme": "default",
+    "transparent": true,
+    "singleTile": true,
+    "layerAttribution": "Für die Nutzung der Daten ist die  Datenlizenz Deutschland - Namensnennung - Version 2.0 anzuwenden. Die Lizenz ist über https://www.govdata.de/dl-de/by-2-0 abrufbar. Der Quellenvermerk gemäß (2) der Lizenz lautet \"Geoportal Berlin / [Titel des Datensatzes]\"."
+  },
+  {
+    "id": "wmsk_alkis:8",
+    "name": "Gebäude - Navigation",
+    "name_lang": "Gebäude - Navigation (ALKIS Berlin (Amtliches Liegenschaftskatasterinformationssystem))",
+    "crs": "EPSG:25833",
+    "url": "https://fbinter.stadt-berlin.de/fb/wms/senstadt/wmsk_alkis",
+    "typ": "WMS",
+    "gfiAttributes": "ignore",
+    "layers": "8",
+    "legend": "https://fbinter.stadt-berlin.de/fb_daten/legenden/leg_alkis.png",
+    "datasets": [
+      {
+        "md_name": "ALKIS Berlin (Amtliches Liegenschaftskatasterinformationssystem)",
+        "md_id": "0a7c53a5-b29d-3f45-9734-1c811045e6c2",
+        "rs_id": "https://registry.gdi-de.org/id/de.be.csw/cb2897d1-4258-3312-a3db-7ceb2ad86be7",
+        "csw_url": "https://gdi.berlin.de/geonetwork/srv/ger/csw"
+      }
+    ],
+    "minScale": "5000",
+    "maxScale": "25000",
+    "format": "image/png",
+    "version": "1.3.0",
+    "featureCount": "5",
+    "gfiTheme": "default",
+    "transparent": true,
+    "singleTile": true,
+    "layerAttribution": "Für die Nutzung der Daten ist die  Datenlizenz Deutschland - Namensnennung - Version 2.0 anzuwenden. Die Lizenz ist über https://www.govdata.de/dl-de/by-2-0 abrufbar. Der Quellenvermerk gemäß (2) der Lizenz lautet \"Geoportal Berlin / [Titel des Datensatzes]\"."
+  },
+  {
+    "id": "wmsk_alkis:18",
+    "name": "Rechtliche Festlegungen",
+    "name_lang": "Rechtliche Festlegungen (ALKIS Berlin (Amtliches Liegenschaftskatasterinformationssystem))",
+    "crs": "EPSG:25833",
+    "url": "https://fbinter.stadt-berlin.de/fb/wms/senstadt/wmsk_alkis",
+    "typ": "WMS",
+    "gfiAttributes": "ignore",
+    "layers": "18",
+    "legend": "https://fbinter.stadt-berlin.de/fb_daten/legenden/leg_alkis.png",
+    "datasets": [
+      {
+        "md_name": "ALKIS Berlin (Amtliches Liegenschaftskatasterinformationssystem)",
+        "md_id": "0a7c53a5-b29d-3f45-9734-1c811045e6c2",
+        "rs_id": "https://registry.gdi-de.org/id/de.be.csw/cb2897d1-4258-3312-a3db-7ceb2ad86be7",
+        "csw_url": "https://gdi.berlin.de/geonetwork/srv/ger/csw"
+      }
+    ],
+    "minScale": "100",
+    "maxScale": "5000",
+    "format": "image/png",
+    "version": "1.3.0",
+    "featureCount": "5",
+    "gfiTheme": "default",
+    "transparent": true,
+    "singleTile": true,
+    "layerAttribution": "Für die Nutzung der Daten ist die  Datenlizenz Deutschland - Namensnennung - Version 2.0 anzuwenden. Die Lizenz ist über https://www.govdata.de/dl-de/by-2-0 abrufbar. Der Quellenvermerk gemäß (2) der Lizenz lautet \"Geoportal Berlin / [Titel des Datensatzes]\"."
+  },
+  {
+    "id": "wmsk_alkis:20",
+    "name": "Gewässer- und Vegetationsflächen",
+    "name_lang": "Gewässer- und Vegetationsflächen (ALKIS Berlin (Amtliches Liegenschaftskatasterinformationssystem))",
+    "crs": "EPSG:25833",
+    "url": "https://fbinter.stadt-berlin.de/fb/wms/senstadt/wmsk_alkis",
+    "typ": "WMS",
+    "gfiAttributes": "ignore",
+    "layers": "20",
+    "legend": "https://fbinter.stadt-berlin.de/fb_daten/legenden/leg_alkis.png",
+    "datasets": [
+      {
+        "md_name": "ALKIS Berlin (Amtliches Liegenschaftskatasterinformationssystem)",
+        "md_id": "0a7c53a5-b29d-3f45-9734-1c811045e6c2",
+        "rs_id": "https://registry.gdi-de.org/id/de.be.csw/cb2897d1-4258-3312-a3db-7ceb2ad86be7",
+        "csw_url": "https://gdi.berlin.de/geonetwork/srv/ger/csw"
+      }
+    ],
+    "minScale": "100",
+    "maxScale": "5000",
+    "format": "image/png",
+    "version": "1.3.0",
+    "featureCount": "5",
+    "gfiTheme": "default",
+    "transparent": true,
+    "singleTile": true,
+    "layerAttribution": "Für die Nutzung der Daten ist die  Datenlizenz Deutschland - Namensnennung - Version 2.0 anzuwenden. Die Lizenz ist über https://www.govdata.de/dl-de/by-2-0 abrufbar. Der Quellenvermerk gemäß (2) der Lizenz lautet \"Geoportal Berlin / [Titel des Datensatzes]\"."
+  },
+  {
+    "id": "wmsk_alkis:16",
+    "name": "Erläuterungen zu Bauwerken",
+    "name_lang": "Erläuterungen zu Bauwerken (ALKIS Berlin (Amtliches Liegenschaftskatasterinformationssystem))",
+    "crs": "EPSG:25833",
+    "url": "https://fbinter.stadt-berlin.de/fb/wms/senstadt/wmsk_alkis",
+    "typ": "WMS",
+    "gfiAttributes": "ignore",
+    "layers": "16",
+    "legend": "https://fbinter.stadt-berlin.de/fb_daten/legenden/leg_alkis.png",
+    "datasets": [
+      {
+        "md_name": "ALKIS Berlin (Amtliches Liegenschaftskatasterinformationssystem)",
+        "md_id": "0a7c53a5-b29d-3f45-9734-1c811045e6c2",
+        "rs_id": "https://registry.gdi-de.org/id/de.be.csw/cb2897d1-4258-3312-a3db-7ceb2ad86be7",
+        "csw_url": "https://gdi.berlin.de/geonetwork/srv/ger/csw"
+      }
+    ],
+    "minScale": "100",
+    "maxScale": "2000",
+    "format": "image/png",
+    "version": "1.3.0",
+    "featureCount": "5",
+    "gfiTheme": "default",
+    "transparent": true,
+    "singleTile": true,
+    "layerAttribution": "Für die Nutzung der Daten ist die  Datenlizenz Deutschland - Namensnennung - Version 2.0 anzuwenden. Die Lizenz ist über https://www.govdata.de/dl-de/by-2-0 abrufbar. Der Quellenvermerk gemäß (2) der Lizenz lautet \"Geoportal Berlin / [Titel des Datensatzes]\"."
+  },
+  {
+    "id": "wmsk_alkis:28",
+    "name": "Flurstücksnummer",
+    "name_lang": "Flurstücksnummer (ALKIS Berlin (Amtliches Liegenschaftskatasterinformationssystem))",
+    "crs": "EPSG:25833",
+    "url": "https://fbinter.stadt-berlin.de/fb/wms/senstadt/wmsk_alkis",
+    "typ": "WMS",
+    "gfiAttributes": "ignore",
+    "layers": "28",
+    "legend": "https://fbinter.stadt-berlin.de/fb_daten/legenden/leg_alkis.png",
+    "datasets": [
+      {
+        "md_name": "ALKIS Berlin (Amtliches Liegenschaftskatasterinformationssystem)",
+        "md_id": "0a7c53a5-b29d-3f45-9734-1c811045e6c2",
+        "rs_id": "https://registry.gdi-de.org/id/de.be.csw/cb2897d1-4258-3312-a3db-7ceb2ad86be7",
+        "csw_url": "https://gdi.berlin.de/geonetwork/srv/ger/csw"
+      }
+    ],
+    "minScale": "100",
+    "maxScale": "2000",
+    "format": "image/png",
+    "version": "1.3.0",
+    "featureCount": "5",
+    "gfiTheme": "default",
+    "transparent": true,
+    "singleTile": true,
+    "layerAttribution": "Für die Nutzung der Daten ist die  Datenlizenz Deutschland - Namensnennung - Version 2.0 anzuwenden. Die Lizenz ist über https://www.govdata.de/dl-de/by-2-0 abrufbar. Der Quellenvermerk gemäß (2) der Lizenz lautet \"Geoportal Berlin / [Titel des Datensatzes]\"."
+  },
+  {
+    "id": "wmsk_alkis:12",
+    "name": "Erläuterungen zu Gebäuden",
+    "name_lang": "Erläuterungen zu Gebäuden (ALKIS Berlin (Amtliches Liegenschaftskatasterinformationssystem))",
+    "crs": "EPSG:25833",
+    "url": "https://fbinter.stadt-berlin.de/fb/wms/senstadt/wmsk_alkis",
+    "typ": "WMS",
+    "gfiAttributes": "ignore",
+    "layers": "12",
+    "legend": "https://fbinter.stadt-berlin.de/fb_daten/legenden/leg_alkis.png",
+    "datasets": [
+      {
+        "md_name": "ALKIS Berlin (Amtliches Liegenschaftskatasterinformationssystem)",
+        "md_id": "0a7c53a5-b29d-3f45-9734-1c811045e6c2",
+        "rs_id": "https://registry.gdi-de.org/id/de.be.csw/cb2897d1-4258-3312-a3db-7ceb2ad86be7",
+        "csw_url": "https://gdi.berlin.de/geonetwork/srv/ger/csw"
+      }
+    ],
+    "minScale": "100",
+    "maxScale": "2000",
+    "format": "image/png",
+    "version": "1.3.0",
+    "featureCount": "5",
+    "gfiTheme": "default",
+    "transparent": true,
+    "singleTile": true,
+    "layerAttribution": "Für die Nutzung der Daten ist die  Datenlizenz Deutschland - Namensnennung - Version 2.0 anzuwenden. Die Lizenz ist über https://www.govdata.de/dl-de/by-2-0 abrufbar. Der Quellenvermerk gemäß (2) der Lizenz lautet \"Geoportal Berlin / [Titel des Datensatzes]\"."
+  },
+  {
+    "id": "wmsk_alkis:24",
+    "name": "Erläuterungen zu untergeordneten Gewässern und Vegetation",
+    "name_lang": "Erläuterungen zu untergeordneten Gewässern und Vegetation (ALKIS Berlin (Amtliches Liegenschaftskatasterinformationssystem))",
+    "crs": "EPSG:25833",
+    "url": "https://fbinter.stadt-berlin.de/fb/wms/senstadt/wmsk_alkis",
+    "typ": "WMS",
+    "gfiAttributes": "ignore",
+    "layers": "24",
+    "legend": "https://fbinter.stadt-berlin.de/fb_daten/legenden/leg_alkis.png",
+    "datasets": [
+      {
+        "md_name": "ALKIS Berlin (Amtliches Liegenschaftskatasterinformationssystem)",
+        "md_id": "0a7c53a5-b29d-3f45-9734-1c811045e6c2",
+        "rs_id": "https://registry.gdi-de.org/id/de.be.csw/cb2897d1-4258-3312-a3db-7ceb2ad86be7",
+        "csw_url": "https://gdi.berlin.de/geonetwork/srv/ger/csw"
+      }
+    ],
+    "minScale": "100",
+    "maxScale": "2000",
+    "format": "image/png",
+    "version": "1.3.0",
+    "featureCount": "5",
+    "gfiTheme": "default",
+    "transparent": true,
+    "singleTile": true,
+    "layerAttribution": "Für die Nutzung der Daten ist die  Datenlizenz Deutschland - Namensnennung - Version 2.0 anzuwenden. Die Lizenz ist über https://www.govdata.de/dl-de/by-2-0 abrufbar. Der Quellenvermerk gemäß (2) der Lizenz lautet \"Geoportal Berlin / [Titel des Datensatzes]\"."
+  },
+  {
+    "id": "wmsk_alkis:22",
+    "name": "Vegetation - Punkte",
+    "name_lang": "Vegetation - Punkte (ALKIS Berlin (Amtliches Liegenschaftskatasterinformationssystem))",
+    "crs": "EPSG:25833",
+    "url": "https://fbinter.stadt-berlin.de/fb/wms/senstadt/wmsk_alkis",
+    "typ": "WMS",
+    "gfiAttributes": "ignore",
+    "layers": "22",
+    "legend": "https://fbinter.stadt-berlin.de/fb_daten/legenden/leg_alkis.png",
+    "datasets": [
+      {
+        "md_name": "ALKIS Berlin (Amtliches Liegenschaftskatasterinformationssystem)",
+        "md_id": "0a7c53a5-b29d-3f45-9734-1c811045e6c2",
+        "rs_id": "https://registry.gdi-de.org/id/de.be.csw/cb2897d1-4258-3312-a3db-7ceb2ad86be7",
+        "csw_url": "https://gdi.berlin.de/geonetwork/srv/ger/csw"
+      }
+    ],
+    "minScale": "100",
+    "maxScale": "2000",
+    "format": "image/png",
+    "version": "1.3.0",
+    "featureCount": "5",
+    "gfiTheme": "default",
+    "transparent": true,
+    "singleTile": true,
+    "layerAttribution": "Für die Nutzung der Daten ist die  Datenlizenz Deutschland - Namensnennung - Version 2.0 anzuwenden. Die Lizenz ist über https://www.govdata.de/dl-de/by-2-0 abrufbar. Der Quellenvermerk gemäß (2) der Lizenz lautet \"Geoportal Berlin / [Titel des Datensatzes]\"."
+  },
+  {
+    "id": "wmsk_alkis:34",
+    "name": "Ortsteile",
+    "name_lang": "Ortsteile (ALKIS Berlin (Amtliches Liegenschaftskatasterinformationssystem))",
+    "crs": "EPSG:25833",
+    "url": "https://fbinter.stadt-berlin.de/fb/wms/senstadt/wmsk_alkis",
+    "typ": "WMS",
+    "gfiAttributes": "ignore",
+    "layers": "34",
+    "legend": "https://fbinter.stadt-berlin.de/fb_daten/legenden/leg_alkis.png",
+    "datasets": [
+      {
+        "md_name": "ALKIS Berlin (Amtliches Liegenschaftskatasterinformationssystem)",
+        "md_id": "0a7c53a5-b29d-3f45-9734-1c811045e6c2",
+        "rs_id": "https://registry.gdi-de.org/id/de.be.csw/cb2897d1-4258-3312-a3db-7ceb2ad86be7",
+        "csw_url": "https://gdi.berlin.de/geonetwork/srv/ger/csw"
+      }
+    ],
+    "minScale": "5000",
+    "maxScale": "25000",
+    "format": "image/png",
+    "version": "1.3.0",
+    "featureCount": "5",
+    "gfiTheme": "default",
+    "transparent": true,
+    "singleTile": true,
+    "layerAttribution": "Für die Nutzung der Daten ist die  Datenlizenz Deutschland - Namensnennung - Version 2.0 anzuwenden. Die Lizenz ist über https://www.govdata.de/dl-de/by-2-0 abrufbar. Der Quellenvermerk gemäß (2) der Lizenz lautet \"Geoportal Berlin / [Titel des Datensatzes]\"."
+  },
+  {
+    "id": "wmsk_alkis:26",
+    "name": "Besondere Flurstücksgrenzen",
+    "name_lang": "Besondere Flurstücksgrenzen (ALKIS Berlin (Amtliches Liegenschaftskatasterinformationssystem))",
+    "crs": "EPSG:25833",
+    "url": "https://fbinter.stadt-berlin.de/fb/wms/senstadt/wmsk_alkis",
+    "typ": "WMS",
+    "gfiAttributes": "ignore",
+    "layers": "26",
+    "legend": "https://fbinter.stadt-berlin.de/fb_daten/legenden/leg_alkis.png",
+    "datasets": [
+      {
+        "md_name": "ALKIS Berlin (Amtliches Liegenschaftskatasterinformationssystem)",
+        "md_id": "0a7c53a5-b29d-3f45-9734-1c811045e6c2",
+        "rs_id": "https://registry.gdi-de.org/id/de.be.csw/cb2897d1-4258-3312-a3db-7ceb2ad86be7",
+        "csw_url": "https://gdi.berlin.de/geonetwork/srv/ger/csw"
+      }
+    ],
+    "minScale": "100",
+    "maxScale": "2000",
+    "format": "image/png",
+    "version": "1.3.0",
+    "featureCount": "5",
+    "gfiTheme": "default",
+    "transparent": true,
+    "singleTile": true,
+    "layerAttribution": "Für die Nutzung der Daten ist die  Datenlizenz Deutschland - Namensnennung - Version 2.0 anzuwenden. Die Lizenz ist über https://www.govdata.de/dl-de/by-2-0 abrufbar. Der Quellenvermerk gemäß (2) der Lizenz lautet \"Geoportal Berlin / [Titel des Datensatzes]\"."
+  },
+  {
+    "id": "wmsk_alkis:47",
+    "name": "Land",
+    "name_lang": "Land (ALKIS Berlin (Amtliches Liegenschaftskatasterinformationssystem))",
+    "crs": "EPSG:25833",
+    "url": "https://fbinter.stadt-berlin.de/fb/wms/senstadt/wmsk_alkis",
+    "typ": "WMS",
+    "gfiAttributes": "ignore",
+    "layers": "47",
+    "legend": "https://fbinter.stadt-berlin.de/fb_daten/legenden/leg_alkis.png",
+    "datasets": [
+      {
+        "md_name": "ALKIS Berlin (Amtliches Liegenschaftskatasterinformationssystem)",
+        "md_id": "0a7c53a5-b29d-3f45-9734-1c811045e6c2",
+        "rs_id": "https://registry.gdi-de.org/id/de.be.csw/cb2897d1-4258-3312-a3db-7ceb2ad86be7",
+        "csw_url": "https://gdi.berlin.de/geonetwork/srv/ger/csw"
+      }
+    ],
+    "minScale": "5000",
+    "maxScale": "25000",
+    "format": "image/png",
+    "version": "1.3.0",
+    "featureCount": "5",
+    "gfiTheme": "default",
+    "transparent": true,
+    "singleTile": true,
+    "layerAttribution": "Für die Nutzung der Daten ist die  Datenlizenz Deutschland - Namensnennung - Version 2.0 anzuwenden. Die Lizenz ist über https://www.govdata.de/dl-de/by-2-0 abrufbar. Der Quellenvermerk gemäß (2) der Lizenz lautet \"Geoportal Berlin / [Titel des Datensatzes]\"."
+  },
+  {
+    "id": "wmsk_alkis:46",
+    "name": "Gemeinde",
+    "name_lang": "Gemeinde (ALKIS Berlin (Amtliches Liegenschaftskatasterinformationssystem))",
+    "crs": "EPSG:25833",
+    "url": "https://fbinter.stadt-berlin.de/fb/wms/senstadt/wmsk_alkis",
+    "typ": "WMS",
+    "gfiAttributes": "ignore",
+    "layers": "46",
+    "legend": "https://fbinter.stadt-berlin.de/fb_daten/legenden/leg_alkis.png",
+    "datasets": [
+      {
+        "md_name": "ALKIS Berlin (Amtliches Liegenschaftskatasterinformationssystem)",
+        "md_id": "0a7c53a5-b29d-3f45-9734-1c811045e6c2",
+        "rs_id": "https://registry.gdi-de.org/id/de.be.csw/cb2897d1-4258-3312-a3db-7ceb2ad86be7",
+        "csw_url": "https://gdi.berlin.de/geonetwork/srv/ger/csw"
+      }
+    ],
+    "minScale": "5000",
+    "maxScale": "25000",
+    "format": "image/png",
+    "version": "1.3.0",
+    "featureCount": "5",
+    "gfiTheme": "default",
+    "transparent": true,
+    "singleTile": true,
+    "layerAttribution": "Für die Nutzung der Daten ist die  Datenlizenz Deutschland - Namensnennung - Version 2.0 anzuwenden. Die Lizenz ist über https://www.govdata.de/dl-de/by-2-0 abrufbar. Der Quellenvermerk gemäß (2) der Lizenz lautet \"Geoportal Berlin / [Titel des Datensatzes]\"."
+  },
+  {
+    "id": "wmsk_alkis:44",
+    "name": "Gemarkung",
+    "name_lang": "Gemarkung (ALKIS Berlin (Amtliches Liegenschaftskatasterinformationssystem))",
+    "crs": "EPSG:25833",
+    "url": "https://fbinter.stadt-berlin.de/fb/wms/senstadt/wmsk_alkis",
+    "typ": "WMS",
+    "gfiAttributes": "ignore",
+    "layers": "44",
+    "legend": "https://fbinter.stadt-berlin.de/fb_daten/legenden/leg_alkis.png",
+    "datasets": [
+      {
+        "md_name": "ALKIS Berlin (Amtliches Liegenschaftskatasterinformationssystem)",
+        "md_id": "0a7c53a5-b29d-3f45-9734-1c811045e6c2",
+        "rs_id": "https://registry.gdi-de.org/id/de.be.csw/cb2897d1-4258-3312-a3db-7ceb2ad86be7",
+        "csw_url": "https://gdi.berlin.de/geonetwork/srv/ger/csw"
+      }
+    ],
+    "minScale": "2000",
+    "maxScale": "5000",
+    "format": "image/png",
+    "version": "1.3.0",
+    "featureCount": "5",
+    "gfiTheme": "default",
+    "transparent": true,
+    "singleTile": true,
+    "layerAttribution": "Für die Nutzung der Daten ist die  Datenlizenz Deutschland - Namensnennung - Version 2.0 anzuwenden. Die Lizenz ist über https://www.govdata.de/dl-de/by-2-0 abrufbar. Der Quellenvermerk gemäß (2) der Lizenz lautet \"Geoportal Berlin / [Titel des Datensatzes]\"."
+  },
+  {
+    "id": "wmsk_alkis:43",
+    "name": "Flur",
+    "name_lang": "Flur (ALKIS Berlin (Amtliches Liegenschaftskatasterinformationssystem))",
+    "crs": "EPSG:25833",
+    "url": "https://fbinter.stadt-berlin.de/fb/wms/senstadt/wmsk_alkis",
+    "typ": "WMS",
+    "gfiAttributes": "ignore",
+    "layers": "43",
+    "legend": "https://fbinter.stadt-berlin.de/fb_daten/legenden/leg_alkis.png",
+    "datasets": [
+      {
+        "md_name": "ALKIS Berlin (Amtliches Liegenschaftskatasterinformationssystem)",
+        "md_id": "0a7c53a5-b29d-3f45-9734-1c811045e6c2",
+        "rs_id": "https://registry.gdi-de.org/id/de.be.csw/cb2897d1-4258-3312-a3db-7ceb2ad86be7",
+        "csw_url": "https://gdi.berlin.de/geonetwork/srv/ger/csw"
+      }
+    ],
+    "minScale": "2000",
+    "maxScale": "5000",
+    "format": "image/png",
+    "version": "1.3.0",
+    "featureCount": "5",
+    "gfiTheme": "default",
+    "transparent": true,
+    "singleTile": true,
+    "layerAttribution": "Für die Nutzung der Daten ist die  Datenlizenz Deutschland - Namensnennung - Version 2.0 anzuwenden. Die Lizenz ist über https://www.govdata.de/dl-de/by-2-0 abrufbar. Der Quellenvermerk gemäß (2) der Lizenz lautet \"Geoportal Berlin / [Titel des Datensatzes]\"."
+  },
+
+  {
+    "id": "wmsk_alkis_sw:30",
+    "name": "Lagebezeichnung",
+    "name_lang": "Lagebezeichnung (ALKIS Berlin s/w (Amtliches Liegenschaftskatasterinformationssystem))",
+    "crs": "EPSG:25833",
+    "url": "https://fbinter.stadt-berlin.de/fb/wms/senstadt/wmsk_alkis_sw",
+    "typ": "WMS",
+    "gfiAttributes": "ignore",
+    "layers": "30",
+    "legend": "https://fbinter.stadt-berlin.de/fb_daten/legenden/leg_alkis_sw.png",
+    "datasets": [
+      {
+        "md_name": "ALKIS Berlin s/w (Amtliches Liegenschaftskatasterinformationssystem)",
+        "md_id": "0a7c53a5-b29d-3f45-9734-1c811045e6c2",
+        "rs_id": "https://registry.gdi-de.org/id/de.be.csw/cb2897d1-4258-3312-a3db-7ceb2ad86be7",
+        "csw_url": "https://gdi.berlin.de/geonetwork/srv/ger/csw"
+      }
+    ],
+    "minScale": "100",
+    "maxScale": "2000",
+    "format": "image/png",
+    "version": "1.3.0",
+    "featureCount": "5",
+    "gfiTheme": "default",
+    "transparent": true,
+    "singleTile": true,
+    "layerAttribution": "Für die Nutzung der Daten ist die  Datenlizenz Deutschland - Namensnennung - Version 2.0 anzuwenden. Die Lizenz ist über https://www.govdata.de/dl-de/by-2-0 abrufbar. Der Quellenvermerk gemäß (2) der Lizenz lautet \"Geoportal Berlin / [Titel des Datensatzes]\"."
+  },
+  {
+    "id": "wmsk_alkis_sw:4",
+    "name": "Tatsächliche Flächennutzung",
+    "name_lang": "Tatsächliche Flächennutzung (ALKIS Berlin s/w (Amtliches Liegenschaftskatasterinformationssystem))",
+    "crs": "EPSG:25833",
+    "url": "https://fbinter.stadt-berlin.de/fb/wms/senstadt/wmsk_alkis_sw",
+    "typ": "WMS",
+    "gfiAttributes": "ignore",
+    "layers": "4",
+    "legend": "https://fbinter.stadt-berlin.de/fb_daten/legenden/leg_alkis_sw.png",
+    "datasets": [
+      {
+        "md_name": "ALKIS Berlin s/w (Amtliches Liegenschaftskatasterinformationssystem)",
+        "md_id": "0a7c53a5-b29d-3f45-9734-1c811045e6c2",
+        "rs_id": "https://registry.gdi-de.org/id/de.be.csw/cb2897d1-4258-3312-a3db-7ceb2ad86be7",
+        "csw_url": "https://gdi.berlin.de/geonetwork/srv/ger/csw"
+      }
+    ],
+    "minScale": "2000",
+    "maxScale": "25000",
+    "format": "image/png",
+    "version": "1.3.0",
+    "featureCount": "5",
+    "gfiTheme": "default",
+    "transparent": true,
+    "singleTile": true,
+    "layerAttribution": "Für die Nutzung der Daten ist die  Datenlizenz Deutschland - Namensnennung - Version 2.0 anzuwenden. Die Lizenz ist über https://www.govdata.de/dl-de/by-2-0 abrufbar. Der Quellenvermerk gemäß (2) der Lizenz lautet \"Geoportal Berlin / [Titel des Datensatzes]\"."
+  },
+  {
+    "id": "wmsk_alkis_sw:19",
+    "name": "Tatsächliche Flächennutzung - Flächen",
+    "name_lang": "Tatsächliche Flächennutzung - Flächen (ALKIS Berlin s/w (Amtliches Liegenschaftskatasterinformationssystem))",
+    "crs": "EPSG:25833",
+    "url": "https://fbinter.stadt-berlin.de/fb/wms/senstadt/wmsk_alkis_sw",
+    "typ": "WMS",
+    "gfiAttributes": "ignore",
+    "layers": "19",
+    "legend": "https://fbinter.stadt-berlin.de/fb_daten/legenden/leg_alkis_sw.png",
+    "datasets": [
+      {
+        "md_name": "ALKIS Berlin s/w (Amtliches Liegenschaftskatasterinformationssystem)",
+        "md_id": "0a7c53a5-b29d-3f45-9734-1c811045e6c2",
+        "rs_id": "https://registry.gdi-de.org/id/de.be.csw/cb2897d1-4258-3312-a3db-7ceb2ad86be7",
+        "csw_url": "https://gdi.berlin.de/geonetwork/srv/ger/csw"
+      }
+    ],
+    "minScale": "100",
+    "maxScale": "2000",
+    "format": "image/png",
+    "version": "1.3.0",
+    "featureCount": "5",
+    "gfiTheme": "default",
+    "transparent": true,
+    "singleTile": true,
+    "layerAttribution": "Für die Nutzung der Daten ist die  Datenlizenz Deutschland - Namensnennung - Version 2.0 anzuwenden. Die Lizenz ist über https://www.govdata.de/dl-de/by-2-0 abrufbar. Der Quellenvermerk gemäß (2) der Lizenz lautet \"Geoportal Berlin / [Titel des Datensatzes]\"."
+  },
+  {
+    "id": "wmsk_alkis_sw:21",
+    "name": "Gewaesser Vegetation Linien",
+    "name_lang": "Gewaesser Vegetation Linien (ALKIS Berlin s/w (Amtliches Liegenschaftskatasterinformationssystem))",
+    "crs": "EPSG:25833",
+    "url": "https://fbinter.stadt-berlin.de/fb/wms/senstadt/wmsk_alkis_sw",
+    "typ": "WMS",
+    "gfiAttributes": "ignore",
+    "layers": "21",
+    "legend": "https://fbinter.stadt-berlin.de/fb_daten/legenden/leg_alkis_sw.png",
+    "datasets": [
+      {
+        "md_name": "ALKIS Berlin s/w (Amtliches Liegenschaftskatasterinformationssystem)",
+        "md_id": "0a7c53a5-b29d-3f45-9734-1c811045e6c2",
+        "rs_id": "https://registry.gdi-de.org/id/de.be.csw/cb2897d1-4258-3312-a3db-7ceb2ad86be7",
+        "csw_url": "https://gdi.berlin.de/geonetwork/srv/ger/csw"
+      }
+    ],
+    "minScale": "100",
+    "maxScale": "2000",
+    "format": "image/png",
+    "version": "1.3.0",
+    "featureCount": "5",
+    "gfiTheme": "default",
+    "transparent": true,
+    "singleTile": true,
+    "layerAttribution": "Für die Nutzung der Daten ist die  Datenlizenz Deutschland - Namensnennung - Version 2.0 anzuwenden. Die Lizenz ist über https://www.govdata.de/dl-de/by-2-0 abrufbar. Der Quellenvermerk gemäß (2) der Lizenz lautet \"Geoportal Berlin / [Titel des Datensatzes]\"."
+  },
+  {
+    "id": "wmsk_alkis_sw:0",
+    "name": "Relief",
+    "name_lang": "Relief (ALKIS Berlin s/w (Amtliches Liegenschaftskatasterinformationssystem))",
+    "crs": "EPSG:25833",
+    "url": "https://fbinter.stadt-berlin.de/fb/wms/senstadt/wmsk_alkis_sw",
+    "typ": "WMS",
+    "gfiAttributes": "ignore",
+    "layers": "0",
+    "legend": "https://fbinter.stadt-berlin.de/fb_daten/legenden/leg_alkis_sw.png",
+    "datasets": [
+      {
+        "md_name": "ALKIS Berlin s/w (Amtliches Liegenschaftskatasterinformationssystem)",
+        "md_id": "0a7c53a5-b29d-3f45-9734-1c811045e6c2",
+        "rs_id": "https://registry.gdi-de.org/id/de.be.csw/cb2897d1-4258-3312-a3db-7ceb2ad86be7",
+        "csw_url": "https://gdi.berlin.de/geonetwork/srv/ger/csw"
+      }
+    ],
+    "minScale": "100",
+    "maxScale": "2000",
+    "format": "image/png",
+    "version": "1.3.0",
+    "featureCount": "5",
+    "gfiTheme": "default",
+    "transparent": true,
+    "singleTile": true,
+    "layerAttribution": "Für die Nutzung der Daten ist die  Datenlizenz Deutschland - Namensnennung - Version 2.0 anzuwenden. Die Lizenz ist über https://www.govdata.de/dl-de/by-2-0 abrufbar. Der Quellenvermerk gemäß (2) der Lizenz lautet \"Geoportal Berlin / [Titel des Datensatzes]\"."
+  },
+  {
+    "id": "wmsk_alkis_sw:24",
+    "name": "Erläuterungen zu untergeordneten Gewässern und Vegetation",
+    "name_lang": "Erläuterungen zu untergeordneten Gewässern und Vegetation (ALKIS Berlin s/w (Amtliches Liegenschaftskatasterinformationssystem))",
+    "crs": "EPSG:25833",
+    "url": "https://fbinter.stadt-berlin.de/fb/wms/senstadt/wmsk_alkis_sw",
+    "typ": "WMS",
+    "gfiAttributes": "ignore",
+    "layers": "24",
+    "legend": "https://fbinter.stadt-berlin.de/fb_daten/legenden/leg_alkis_sw.png",
+    "datasets": [
+      {
+        "md_name": "ALKIS Berlin s/w (Amtliches Liegenschaftskatasterinformationssystem)",
+        "md_id": "0a7c53a5-b29d-3f45-9734-1c811045e6c2",
+        "rs_id": "https://registry.gdi-de.org/id/de.be.csw/cb2897d1-4258-3312-a3db-7ceb2ad86be7",
+        "csw_url": "https://gdi.berlin.de/geonetwork/srv/ger/csw"
+      }
+    ],
+    "minScale": "100",
+    "maxScale": "2000",
+    "format": "image/png",
+    "version": "1.3.0",
+    "featureCount": "5",
+    "gfiTheme": "default",
+    "transparent": true,
+    "singleTile": true,
+    "layerAttribution": "Für die Nutzung der Daten ist die  Datenlizenz Deutschland - Namensnennung - Version 2.0 anzuwenden. Die Lizenz ist über https://www.govdata.de/dl-de/by-2-0 abrufbar. Der Quellenvermerk gemäß (2) der Lizenz lautet \"Geoportal Berlin / [Titel des Datensatzes]\"."
+  },
+  {
+    "id": "wmsk_alkis_sw:13",
+    "name": "Bauwerke",
+    "name_lang": "Bauwerke (ALKIS Berlin s/w (Amtliches Liegenschaftskatasterinformationssystem))",
+    "crs": "EPSG:25833",
+    "url": "https://fbinter.stadt-berlin.de/fb/wms/senstadt/wmsk_alkis_sw",
+    "typ": "WMS",
+    "gfiAttributes": "ignore",
+    "layers": "13",
+    "legend": "https://fbinter.stadt-berlin.de/fb_daten/legenden/leg_alkis_sw.png",
+    "datasets": [
+      {
+        "md_name": "ALKIS Berlin s/w (Amtliches Liegenschaftskatasterinformationssystem)",
+        "md_id": "0a7c53a5-b29d-3f45-9734-1c811045e6c2",
+        "rs_id": "https://registry.gdi-de.org/id/de.be.csw/cb2897d1-4258-3312-a3db-7ceb2ad86be7",
+        "csw_url": "https://gdi.berlin.de/geonetwork/srv/ger/csw"
+      }
+    ],
+    "minScale": "100",
+    "maxScale": "5000",
+    "format": "image/png",
+    "version": "1.3.0",
+    "featureCount": "5",
+    "gfiTheme": "default",
+    "transparent": true,
+    "singleTile": true,
+    "layerAttribution": "Für die Nutzung der Daten ist die  Datenlizenz Deutschland - Namensnennung - Version 2.0 anzuwenden. Die Lizenz ist über https://www.govdata.de/dl-de/by-2-0 abrufbar. Der Quellenvermerk gemäß (2) der Lizenz lautet \"Geoportal Berlin / [Titel des Datensatzes]\"."
+  },
+  {
+    "id": "wmsk_alkis_sw:9",
+    "name": "Gebäude",
+    "name_lang": "Gebäude (ALKIS Berlin s/w (Amtliches Liegenschaftskatasterinformationssystem))",
+    "crs": "EPSG:25833",
+    "url": "https://fbinter.stadt-berlin.de/fb/wms/senstadt/wmsk_alkis_sw",
+    "typ": "WMS",
+    "gfiAttributes": "ignore",
+    "layers": "9",
+    "legend": "https://fbinter.stadt-berlin.de/fb_daten/legenden/leg_alkis_sw.png",
+    "datasets": [
+      {
+        "md_name": "ALKIS Berlin s/w (Amtliches Liegenschaftskatasterinformationssystem)",
+        "md_id": "0a7c53a5-b29d-3f45-9734-1c811045e6c2",
+        "rs_id": "https://registry.gdi-de.org/id/de.be.csw/cb2897d1-4258-3312-a3db-7ceb2ad86be7",
+        "csw_url": "https://gdi.berlin.de/geonetwork/srv/ger/csw"
+      }
+    ],
+    "minScale": "100",
+    "maxScale": "5000",
+    "format": "image/png",
+    "version": "1.3.0",
+    "featureCount": "5",
+    "gfiTheme": "default",
+    "transparent": true,
+    "singleTile": true,
+    "layerAttribution": "Für die Nutzung der Daten ist die  Datenlizenz Deutschland - Namensnennung - Version 2.0 anzuwenden. Die Lizenz ist über https://www.govdata.de/dl-de/by-2-0 abrufbar. Der Quellenvermerk gemäß (2) der Lizenz lautet \"Geoportal Berlin / [Titel des Datensatzes]\"."
+  },
+  {
+    "id": "wmsk_alkis_sw:8",
+    "name": "Gebäude - Navigation",
+    "name_lang": "Gebäude - Navigation (ALKIS Berlin s/w (Amtliches Liegenschaftskatasterinformationssystem))",
+    "crs": "EPSG:25833",
+    "url": "https://fbinter.stadt-berlin.de/fb/wms/senstadt/wmsk_alkis_sw",
+    "typ": "WMS",
+    "gfiAttributes": "ignore",
+    "layers": "8",
+    "legend": "https://fbinter.stadt-berlin.de/fb_daten/legenden/leg_alkis_sw.png",
+    "datasets": [
+      {
+        "md_name": "ALKIS Berlin s/w (Amtliches Liegenschaftskatasterinformationssystem)",
+        "md_id": "0a7c53a5-b29d-3f45-9734-1c811045e6c2",
+        "rs_id": "https://registry.gdi-de.org/id/de.be.csw/cb2897d1-4258-3312-a3db-7ceb2ad86be7",
+        "csw_url": "https://gdi.berlin.de/geonetwork/srv/ger/csw"
+      }
+    ],
+    "minScale": "5000",
+    "maxScale": "25000",
+    "format": "image/png",
+    "version": "1.3.0",
+    "featureCount": "5",
+    "gfiTheme": "default",
+    "transparent": true,
+    "singleTile": true,
+    "layerAttribution": "Für die Nutzung der Daten ist die  Datenlizenz Deutschland - Namensnennung - Version 2.0 anzuwenden. Die Lizenz ist über https://www.govdata.de/dl-de/by-2-0 abrufbar. Der Quellenvermerk gemäß (2) der Lizenz lautet \"Geoportal Berlin / [Titel des Datensatzes]\"."
+  },
+  {
+    "id": "wmsk_alkis_sw:18",
+    "name": "Rechtliche Festlegungen",
+    "name_lang": "Rechtliche Festlegungen (ALKIS Berlin s/w (Amtliches Liegenschaftskatasterinformationssystem))",
+    "crs": "EPSG:25833",
+    "url": "https://fbinter.stadt-berlin.de/fb/wms/senstadt/wmsk_alkis_sw",
+    "typ": "WMS",
+    "gfiAttributes": "ignore",
+    "layers": "18",
+    "legend": "https://fbinter.stadt-berlin.de/fb_daten/legenden/leg_alkis_sw.png",
+    "datasets": [
+      {
+        "md_name": "ALKIS Berlin s/w (Amtliches Liegenschaftskatasterinformationssystem)",
+        "md_id": "0a7c53a5-b29d-3f45-9734-1c811045e6c2",
+        "rs_id": "https://registry.gdi-de.org/id/de.be.csw/cb2897d1-4258-3312-a3db-7ceb2ad86be7",
+        "csw_url": "https://gdi.berlin.de/geonetwork/srv/ger/csw"
+      }
+    ],
+    "minScale": "100",
+    "maxScale": "5000",
+    "format": "image/png",
+    "version": "1.3.0",
+    "featureCount": "5",
+    "gfiTheme": "default",
+    "transparent": true,
+    "singleTile": true,
+    "layerAttribution": "Für die Nutzung der Daten ist die  Datenlizenz Deutschland - Namensnennung - Version 2.0 anzuwenden. Die Lizenz ist über https://www.govdata.de/dl-de/by-2-0 abrufbar. Der Quellenvermerk gemäß (2) der Lizenz lautet \"Geoportal Berlin / [Titel des Datensatzes]\"."
+  },
+  {
+    "id": "wmsk_alkis_sw:25",
+    "name": "Flurstücke",
+    "name_lang": "Flurstücke (ALKIS Berlin s/w (Amtliches Liegenschaftskatasterinformationssystem))",
+    "crs": "EPSG:25833",
+    "url": "https://fbinter.stadt-berlin.de/fb/wms/senstadt/wmsk_alkis_sw",
+    "typ": "WMS",
+    "gfiAttributes": "ignore",
+    "layers": "25",
+    "legend": "https://fbinter.stadt-berlin.de/fb_daten/legenden/leg_alkis_sw.png",
+    "datasets": [
+      {
+        "md_name": "ALKIS Berlin s/w (Amtliches Liegenschaftskatasterinformationssystem)",
+        "md_id": "0a7c53a5-b29d-3f45-9734-1c811045e6c2",
+        "rs_id": "https://registry.gdi-de.org/id/de.be.csw/cb2897d1-4258-3312-a3db-7ceb2ad86be7",
+        "csw_url": "https://gdi.berlin.de/geonetwork/srv/ger/csw"
+      }
+    ],
+    "minScale": "100",
+    "maxScale": "5000",
+    "format": "image/png",
+    "version": "1.3.0",
+    "featureCount": "5",
+    "gfiTheme": "default",
+    "transparent": true,
+    "singleTile": true,
+    "layerAttribution": "Für die Nutzung der Daten ist die  Datenlizenz Deutschland - Namensnennung - Version 2.0 anzuwenden. Die Lizenz ist über https://www.govdata.de/dl-de/by-2-0 abrufbar. Der Quellenvermerk gemäß (2) der Lizenz lautet \"Geoportal Berlin / [Titel des Datensatzes]\"."
+  },
+  {
+    "id": "wmsk_alkis_sw:20",
+    "name": "Gewässer- und Vegetationsflächen",
+    "name_lang": "Gewässer- und Vegetationsflächen (ALKIS Berlin s/w (Amtliches Liegenschaftskatasterinformationssystem))",
+    "crs": "EPSG:25833",
+    "url": "https://fbinter.stadt-berlin.de/fb/wms/senstadt/wmsk_alkis_sw",
+    "typ": "WMS",
+    "gfiAttributes": "ignore",
+    "layers": "20",
+    "legend": "https://fbinter.stadt-berlin.de/fb_daten/legenden/leg_alkis_sw.png",
+    "datasets": [
+      {
+        "md_name": "ALKIS Berlin s/w (Amtliches Liegenschaftskatasterinformationssystem)",
+        "md_id": "0a7c53a5-b29d-3f45-9734-1c811045e6c2",
+        "rs_id": "https://registry.gdi-de.org/id/de.be.csw/cb2897d1-4258-3312-a3db-7ceb2ad86be7",
+        "csw_url": "https://gdi.berlin.de/geonetwork/srv/ger/csw"
+      }
+    ],
+    "minScale": "100",
+    "maxScale": "5000",
+    "format": "image/png",
+    "version": "1.3.0",
+    "featureCount": "5",
+    "gfiTheme": "default",
+    "transparent": true,
+    "singleTile": true,
+    "layerAttribution": "Für die Nutzung der Daten ist die  Datenlizenz Deutschland - Namensnennung - Version 2.0 anzuwenden. Die Lizenz ist über https://www.govdata.de/dl-de/by-2-0 abrufbar. Der Quellenvermerk gemäß (2) der Lizenz lautet \"Geoportal Berlin / [Titel des Datensatzes]\"."
+  },
+  {
+    "id": "wmsk_alkis_sw:17",
+    "name": "Erläuterungen Bauwerke",
+    "name_lang": "Erläuterungen Bauwerke (ALKIS Berlin s/w (Amtliches Liegenschaftskatasterinformationssystem))",
+    "crs": "EPSG:25833",
+    "url": "https://fbinter.stadt-berlin.de/fb/wms/senstadt/wmsk_alkis_sw",
+    "typ": "WMS",
+    "gfiAttributes": "ignore",
+    "layers": "17",
+    "legend": "https://fbinter.stadt-berlin.de/fb_daten/legenden/leg_alkis_sw.png",
+    "datasets": [
+      {
+        "md_name": "ALKIS Berlin s/w (Amtliches Liegenschaftskatasterinformationssystem)",
+        "md_id": "0a7c53a5-b29d-3f45-9734-1c811045e6c2",
+        "rs_id": "https://registry.gdi-de.org/id/de.be.csw/cb2897d1-4258-3312-a3db-7ceb2ad86be7",
+        "csw_url": "https://gdi.berlin.de/geonetwork/srv/ger/csw"
+      }
+    ],
+    "minScale": "100",
+    "maxScale": "2000",
+    "format": "image/png",
+    "version": "1.3.0",
+    "featureCount": "5",
+    "gfiTheme": "default",
+    "transparent": true,
+    "singleTile": true,
+    "layerAttribution": "Für die Nutzung der Daten ist die  Datenlizenz Deutschland - Namensnennung - Version 2.0 anzuwenden. Die Lizenz ist über https://www.govdata.de/dl-de/by-2-0 abrufbar. Der Quellenvermerk gemäß (2) der Lizenz lautet \"Geoportal Berlin / [Titel des Datensatzes]\"."
+  },
+  {
+    "id": "wmsk_alkis_sw:12",
+    "name": "Erläuterungen Gebäude",
+    "name_lang": "Erläuterungen Gebäude (ALKIS Berlin s/w (Amtliches Liegenschaftskatasterinformationssystem))",
+    "crs": "EPSG:25833",
+    "url": "https://fbinter.stadt-berlin.de/fb/wms/senstadt/wmsk_alkis_sw",
+    "typ": "WMS",
+    "gfiAttributes": "ignore",
+    "layers": "12",
+    "legend": "https://fbinter.stadt-berlin.de/fb_daten/legenden/leg_alkis_sw.png",
+    "datasets": [
+      {
+        "md_name": "ALKIS Berlin s/w (Amtliches Liegenschaftskatasterinformationssystem)",
+        "md_id": "0a7c53a5-b29d-3f45-9734-1c811045e6c2",
+        "rs_id": "https://registry.gdi-de.org/id/de.be.csw/cb2897d1-4258-3312-a3db-7ceb2ad86be7",
+        "csw_url": "https://gdi.berlin.de/geonetwork/srv/ger/csw"
+      }
+    ],
+    "minScale": "100",
+    "maxScale": "2000",
+    "format": "image/png",
+    "version": "1.3.0",
+    "featureCount": "5",
+    "gfiTheme": "default",
+    "transparent": true,
+    "singleTile": true,
+    "layerAttribution": "Für die Nutzung der Daten ist die  Datenlizenz Deutschland - Namensnennung - Version 2.0 anzuwenden. Die Lizenz ist über https://www.govdata.de/dl-de/by-2-0 abrufbar. Der Quellenvermerk gemäß (2) der Lizenz lautet \"Geoportal Berlin / [Titel des Datensatzes]\"."
+  },
+  {
+    "id": "wmsk_alkis_sw:34",
+    "name": "Ortsteile",
+    "name_lang": "Ortsteile (ALKIS Berlin s/w (Amtliches Liegenschaftskatasterinformationssystem))",
+    "crs": "EPSG:25833",
+    "url": "https://fbinter.stadt-berlin.de/fb/wms/senstadt/wmsk_alkis_sw",
+    "typ": "WMS",
+    "gfiAttributes": "ignore",
+    "layers": "34",
+    "legend": "https://fbinter.stadt-berlin.de/fb_daten/legenden/leg_alkis_sw.png",
+    "datasets": [
+      {
+        "md_name": "ALKIS Berlin s/w (Amtliches Liegenschaftskatasterinformationssystem)",
+        "md_id": "0a7c53a5-b29d-3f45-9734-1c811045e6c2",
+        "rs_id": "https://registry.gdi-de.org/id/de.be.csw/cb2897d1-4258-3312-a3db-7ceb2ad86be7",
+        "csw_url": "https://gdi.berlin.de/geonetwork/srv/ger/csw"
+      }
+    ],
+    "minScale": "5000",
+    "maxScale": "25000",
+    "format": "image/png",
+    "version": "1.3.0",
+    "featureCount": "5",
+    "gfiTheme": "default",
+    "transparent": true,
+    "singleTile": true,
+    "layerAttribution": "Für die Nutzung der Daten ist die  Datenlizenz Deutschland - Namensnennung - Version 2.0 anzuwenden. Die Lizenz ist über https://www.govdata.de/dl-de/by-2-0 abrufbar. Der Quellenvermerk gemäß (2) der Lizenz lautet \"Geoportal Berlin / [Titel des Datensatzes]\"."
+  },
+  {
+    "id": "wmsk_alkis_sw:28",
+    "name": "Flurstücksnummer",
+    "name_lang": "Flurstücksnummer (ALKIS Berlin s/w (Amtliches Liegenschaftskatasterinformationssystem))",
+    "crs": "EPSG:25833",
+    "url": "https://fbinter.stadt-berlin.de/fb/wms/senstadt/wmsk_alkis_sw",
+    "typ": "WMS",
+    "gfiAttributes": "ignore",
+    "layers": "28",
+    "legend": "https://fbinter.stadt-berlin.de/fb_daten/legenden/leg_alkis_sw.png",
+    "datasets": [
+      {
+        "md_name": "ALKIS Berlin s/w (Amtliches Liegenschaftskatasterinformationssystem)",
+        "md_id": "0a7c53a5-b29d-3f45-9734-1c811045e6c2",
+        "rs_id": "https://registry.gdi-de.org/id/de.be.csw/cb2897d1-4258-3312-a3db-7ceb2ad86be7",
+        "csw_url": "https://gdi.berlin.de/geonetwork/srv/ger/csw"
+      }
+    ],
+    "minScale": "100",
+    "maxScale": "2000",
+    "format": "image/png",
+    "version": "1.3.0",
+    "featureCount": "5",
+    "gfiTheme": "default",
+    "transparent": true,
+    "singleTile": true,
+    "layerAttribution": "Für die Nutzung der Daten ist die  Datenlizenz Deutschland - Namensnennung - Version 2.0 anzuwenden. Die Lizenz ist über https://www.govdata.de/dl-de/by-2-0 abrufbar. Der Quellenvermerk gemäß (2) der Lizenz lautet \"Geoportal Berlin / [Titel des Datensatzes]\"."
+  },
+  {
+    "id": "wmsk_alkis_sw:6",
+    "name": "Erläuterungen Tatsächliche Flächennutzungen",
+    "name_lang": "Erläuterungen Tatsächliche Flächennutzungen (ALKIS Berlin s/w (Amtliches Liegenschaftskatasterinformationssystem))",
+    "crs": "EPSG:25833",
+    "url": "https://fbinter.stadt-berlin.de/fb/wms/senstadt/wmsk_alkis_sw",
+    "typ": "WMS",
+    "gfiAttributes": "ignore",
+    "layers": "6",
+    "legend": "https://fbinter.stadt-berlin.de/fb_daten/legenden/leg_alkis_sw.png",
+    "datasets": [
+      {
+        "md_name": "ALKIS Berlin s/w (Amtliches Liegenschaftskatasterinformationssystem)",
+        "md_id": "0a7c53a5-b29d-3f45-9734-1c811045e6c2",
+        "rs_id": "https://registry.gdi-de.org/id/de.be.csw/cb2897d1-4258-3312-a3db-7ceb2ad86be7",
+        "csw_url": "https://gdi.berlin.de/geonetwork/srv/ger/csw"
+      }
+    ],
+    "minScale": "100",
+    "maxScale": "2000",
+    "format": "image/png",
+    "version": "1.3.0",
+    "featureCount": "5",
+    "gfiTheme": "default",
+    "transparent": true,
+    "singleTile": true,
+    "layerAttribution": "Für die Nutzung der Daten ist die  Datenlizenz Deutschland - Namensnennung - Version 2.0 anzuwenden. Die Lizenz ist über https://www.govdata.de/dl-de/by-2-0 abrufbar. Der Quellenvermerk gemäß (2) der Lizenz lautet \"Geoportal Berlin / [Titel des Datensatzes]\"."
+  },
+  {
+    "id": "wmsk_alkis_sw:22",
+    "name": "Vegetation - Punkte",
+    "name_lang": "Vegetation - Punkte (ALKIS Berlin s/w (Amtliches Liegenschaftskatasterinformationssystem))",
+    "crs": "EPSG:25833",
+    "url": "https://fbinter.stadt-berlin.de/fb/wms/senstadt/wmsk_alkis_sw",
+    "typ": "WMS",
+    "gfiAttributes": "ignore",
+    "layers": "22",
+    "legend": "https://fbinter.stadt-berlin.de/fb_daten/legenden/leg_alkis_sw.png",
+    "datasets": [
+      {
+        "md_name": "ALKIS Berlin s/w (Amtliches Liegenschaftskatasterinformationssystem)",
+        "md_id": "0a7c53a5-b29d-3f45-9734-1c811045e6c2",
+        "rs_id": "https://registry.gdi-de.org/id/de.be.csw/cb2897d1-4258-3312-a3db-7ceb2ad86be7",
+        "csw_url": "https://gdi.berlin.de/geonetwork/srv/ger/csw"
+      }
+    ],
+    "minScale": "100",
+    "maxScale": "2000",
+    "format": "image/png",
+    "version": "1.3.0",
+    "featureCount": "5",
+    "gfiTheme": "default",
+    "transparent": true,
+    "singleTile": true,
+    "layerAttribution": "Für die Nutzung der Daten ist die  Datenlizenz Deutschland - Namensnennung - Version 2.0 anzuwenden. Die Lizenz ist über https://www.govdata.de/dl-de/by-2-0 abrufbar. Der Quellenvermerk gemäß (2) der Lizenz lautet \"Geoportal Berlin / [Titel des Datensatzes]\"."
+  },
+  {
+    "id": "wmsk_alkis_sw:29",
+    "name": "Straßennamen",
+    "name_lang": "Straßennamen (ALKIS Berlin s/w (Amtliches Liegenschaftskatasterinformationssystem))",
+    "crs": "EPSG:25833",
+    "url": "https://fbinter.stadt-berlin.de/fb/wms/senstadt/wmsk_alkis_sw",
+    "typ": "WMS",
+    "gfiAttributes": "ignore",
+    "layers": "29",
+    "legend": "https://fbinter.stadt-berlin.de/fb_daten/legenden/leg_alkis_sw.png",
+    "datasets": [
+      {
+        "md_name": "ALKIS Berlin s/w (Amtliches Liegenschaftskatasterinformationssystem)",
+        "md_id": "0a7c53a5-b29d-3f45-9734-1c811045e6c2",
+        "rs_id": "https://registry.gdi-de.org/id/de.be.csw/cb2897d1-4258-3312-a3db-7ceb2ad86be7",
+        "csw_url": "https://gdi.berlin.de/geonetwork/srv/ger/csw"
+      }
+    ],
+    "minScale": "2000",
+    "maxScale": "5000",
+    "format": "image/png",
+    "version": "1.3.0",
+    "featureCount": "5",
+    "gfiTheme": "default",
+    "transparent": true,
+    "singleTile": true,
+    "layerAttribution": "Für die Nutzung der Daten ist die  Datenlizenz Deutschland - Namensnennung - Version 2.0 anzuwenden. Die Lizenz ist über https://www.govdata.de/dl-de/by-2-0 abrufbar. Der Quellenvermerk gemäß (2) der Lizenz lautet \"Geoportal Berlin / [Titel des Datensatzes]\"."
+  },
+  {
+    "id": "wmsk_alkis_sw:26",
+    "name": "Besondere Flurstücksgrenzen",
+    "name_lang": "Besondere Flurstücksgrenzen (ALKIS Berlin s/w (Amtliches Liegenschaftskatasterinformationssystem))",
+    "crs": "EPSG:25833",
+    "url": "https://fbinter.stadt-berlin.de/fb/wms/senstadt/wmsk_alkis_sw",
+    "typ": "WMS",
+    "gfiAttributes": "ignore",
+    "layers": "26",
+    "legend": "https://fbinter.stadt-berlin.de/fb_daten/legenden/leg_alkis_sw.png",
+    "datasets": [
+      {
+        "md_name": "ALKIS Berlin s/w (Amtliches Liegenschaftskatasterinformationssystem)",
+        "md_id": "0a7c53a5-b29d-3f45-9734-1c811045e6c2",
+        "rs_id": "https://registry.gdi-de.org/id/de.be.csw/cb2897d1-4258-3312-a3db-7ceb2ad86be7",
+        "csw_url": "https://gdi.berlin.de/geonetwork/srv/ger/csw"
+      }
+    ],
+    "minScale": "100",
+    "maxScale": "2000",
+    "format": "image/png",
+    "version": "1.3.0",
+    "featureCount": "5",
+    "gfiTheme": "default",
+    "transparent": true,
+    "singleTile": true,
+    "layerAttribution": "Für die Nutzung der Daten ist die  Datenlizenz Deutschland - Namensnennung - Version 2.0 anzuwenden. Die Lizenz ist über https://www.govdata.de/dl-de/by-2-0 abrufbar. Der Quellenvermerk gemäß (2) der Lizenz lautet \"Geoportal Berlin / [Titel des Datensatzes]\"."
+  },
+  {
+    "id": "wmsk_alkis_sw:47",
+    "name": "Land",
+    "name_lang": "Land (ALKIS Berlin s/w (Amtliches Liegenschaftskatasterinformationssystem))",
+    "crs": "EPSG:25833",
+    "url": "https://fbinter.stadt-berlin.de/fb/wms/senstadt/wmsk_alkis_sw",
+    "typ": "WMS",
+    "gfiAttributes": "ignore",
+    "layers": "47",
+    "legend": "https://fbinter.stadt-berlin.de/fb_daten/legenden/leg_alkis_sw.png",
+    "datasets": [
+      {
+        "md_name": "ALKIS Berlin s/w (Amtliches Liegenschaftskatasterinformationssystem)",
+        "md_id": "0a7c53a5-b29d-3f45-9734-1c811045e6c2",
+        "rs_id": "https://registry.gdi-de.org/id/de.be.csw/cb2897d1-4258-3312-a3db-7ceb2ad86be7",
+        "csw_url": "https://gdi.berlin.de/geonetwork/srv/ger/csw"
+      }
+    ],
+    "minScale": "5000",
+    "maxScale": "25000",
+    "format": "image/png",
+    "version": "1.3.0",
+    "featureCount": "5",
+    "gfiTheme": "default",
+    "transparent": true,
+    "singleTile": true,
+    "layerAttribution": "Für die Nutzung der Daten ist die  Datenlizenz Deutschland - Namensnennung - Version 2.0 anzuwenden. Die Lizenz ist über https://www.govdata.de/dl-de/by-2-0 abrufbar. Der Quellenvermerk gemäß (2) der Lizenz lautet \"Geoportal Berlin / [Titel des Datensatzes]\"."
+  },
+  {
+    "id": "wmsk_alkis_sw:46",
+    "name": "Gemeinde",
+    "name_lang": "Gemeinde (ALKIS Berlin s/w (Amtliches Liegenschaftskatasterinformationssystem))",
+    "crs": "EPSG:25833",
+    "url": "https://fbinter.stadt-berlin.de/fb/wms/senstadt/wmsk_alkis_sw",
+    "typ": "WMS",
+    "gfiAttributes": "ignore",
+    "layers": "46",
+    "legend": "https://fbinter.stadt-berlin.de/fb_daten/legenden/leg_alkis_sw.png",
+    "datasets": [
+      {
+        "md_name": "ALKIS Berlin s/w (Amtliches Liegenschaftskatasterinformationssystem)",
+        "md_id": "0a7c53a5-b29d-3f45-9734-1c811045e6c2",
+        "rs_id": "https://registry.gdi-de.org/id/de.be.csw/cb2897d1-4258-3312-a3db-7ceb2ad86be7",
+        "csw_url": "https://gdi.berlin.de/geonetwork/srv/ger/csw"
+      }
+    ],
+    "minScale": "5000",
+    "maxScale": "25000",
+    "format": "image/png",
+    "version": "1.3.0",
+    "featureCount": "5",
+    "gfiTheme": "default",
+    "transparent": true,
+    "singleTile": true,
+    "layerAttribution": "Für die Nutzung der Daten ist die  Datenlizenz Deutschland - Namensnennung - Version 2.0 anzuwenden. Die Lizenz ist über https://www.govdata.de/dl-de/by-2-0 abrufbar. Der Quellenvermerk gemäß (2) der Lizenz lautet \"Geoportal Berlin / [Titel des Datensatzes]\"."
+  },
+  {
+    "id": "wmsk_alkis_sw:44",
+    "name": "Gemarkung",
+    "name_lang": "Gemarkung (ALKIS Berlin s/w (Amtliches Liegenschaftskatasterinformationssystem))",
+    "crs": "EPSG:25833",
+    "url": "https://fbinter.stadt-berlin.de/fb/wms/senstadt/wmsk_alkis_sw",
+    "typ": "WMS",
+    "gfiAttributes": "ignore",
+    "layers": "44",
+    "legend": "https://fbinter.stadt-berlin.de/fb_daten/legenden/leg_alkis_sw.png",
+    "datasets": [
+      {
+        "md_name": "ALKIS Berlin s/w (Amtliches Liegenschaftskatasterinformationssystem)",
+        "md_id": "0a7c53a5-b29d-3f45-9734-1c811045e6c2",
+        "rs_id": "https://registry.gdi-de.org/id/de.be.csw/cb2897d1-4258-3312-a3db-7ceb2ad86be7",
+        "csw_url": "https://gdi.berlin.de/geonetwork/srv/ger/csw"
+      }
+    ],
+    "minScale": "2000",
+    "maxScale": "5000",
+    "format": "image/png",
+    "version": "1.3.0",
+    "featureCount": "5",
+    "gfiTheme": "default",
+    "transparent": true,
+    "singleTile": true,
+    "layerAttribution": "Für die Nutzung der Daten ist die  Datenlizenz Deutschland - Namensnennung - Version 2.0 anzuwenden. Die Lizenz ist über https://www.govdata.de/dl-de/by-2-0 abrufbar. Der Quellenvermerk gemäß (2) der Lizenz lautet \"Geoportal Berlin / [Titel des Datensatzes]\"."
+  },
+  {
+    "id": "wmsk_alkis_sw:42",
+    "name": "Flur",
+    "name_lang": "Flur (ALKIS Berlin s/w (Amtliches Liegenschaftskatasterinformationssystem))",
+    "crs": "EPSG:25833",
+    "url": "https://fbinter.stadt-berlin.de/fb/wms/senstadt/wmsk_alkis_sw",
+    "typ": "WMS",
+    "gfiAttributes": "ignore",
+    "layers": "42",
+    "legend": "https://fbinter.stadt-berlin.de/fb_daten/legenden/leg_alkis_sw.png",
+    "datasets": [
+      {
+        "md_name": "ALKIS Berlin s/w (Amtliches Liegenschaftskatasterinformationssystem)",
+        "md_id": "0a7c53a5-b29d-3f45-9734-1c811045e6c2",
+        "rs_id": "https://registry.gdi-de.org/id/de.be.csw/cb2897d1-4258-3312-a3db-7ceb2ad86be7",
+        "csw_url": "https://gdi.berlin.de/geonetwork/srv/ger/csw"
+      }
+    ],
+    "minScale": "2000",
+    "maxScale": "5000",
+    "format": "image/png",
+    "version": "1.3.0",
+    "featureCount": "5",
+    "gfiTheme": "default",
+    "transparent": true,
+    "singleTile": true,
+    "layerAttribution": "Für die Nutzung der Daten ist die  Datenlizenz Deutschland - Namensnennung - Version 2.0 anzuwenden. Die Lizenz ist über https://www.govdata.de/dl-de/by-2-0 abrufbar. Der Quellenvermerk gemäß (2) der Lizenz lautet \"Geoportal Berlin / [Titel des Datensatzes]\"."
   },
   {
     "id": "abimo_layer_start:"
@@ -1138,6 +2484,1956 @@
     "singleTile": true,
     "infoFormat": "application/json",
     "layerAttribution": "Für die Nutzung der Daten ist die Datenlizenz Deutschland - Namensnennung - Version 2.0 anzuwenden. Die Lizenz ist über https://www.govdata.de/dl-de/by-2-0 abrufbar. Der Quellenvermerk gemäß (2) der Lizenz lautet \"Umweltatlas Berlin / [Titel des Datensatzes]\"."
+  },
+  {
+    "id": "ua_versiegelung_2021:versieg2021",
+    "name": "Versiegelung der Block- und Blockteilflächen 2021",
+    "name_lang": "Versiegelung der Block- und Blockteilflächen 2021 (Versiegelung 2021 (Umweltatlas))",
+    "crs": "EPSG:25833",
+    "url": "https://gdi.berlin.de/services/wms/ua_versiegelung_2021",
+    "typ": "WMS",
+    "gfiAttributes": "showAll",
+    "layers": "versieg2021",
+    "legend": true,
+    "datasets": [
+      {
+        "md_name": "Versiegelung 2021 (Umweltatlas)",
+        "md_id": "2c8a769b-364e-4596-ace4-4c05cd8eb872",
+        "rs_id": "https://registry.gdi-de.org/id/de.be.csw/25091cc2-3b41-3d21-b479-b2895fd9ec8a",
+        "csw_url": "https://gdi.berlin.de/geonetwork/srv/ger/csw"
+      }
+    ],
+    "format": "image/png",
+    "version": "1.3.0",
+    "featureCount": "5",
+    "gfiTheme": "default",
+    "transparent": true,
+    "singleTile": true,
+    "infoFormat": "application/json",
+    "layerAttribution": "Für die Nutzung der Daten ist die Datenlizenz Deutschland - Namensnennung - Version 2.0 anzuwenden. Die Lizenz ist über https://www.govdata.de/dl-de/by-2-0 abrufbar. Der Quellenvermerk gemäß (2) der Lizenz lautet \"Umweltatlas Berlin / [Titel des Datensatzes]\"."
+  },
+  {
+    "id": "ua_versiegelung_2021:versieg2021_str",
+    "name": "Versiegelung der Straßenflächen 2021",
+    "name_lang": "Versiegelung der Straßenflächen 2021 (Versiegelung 2021 (Umweltatlas))",
+    "crs": "EPSG:25833",
+    "url": "https://gdi.berlin.de/services/wms/ua_versiegelung_2021",
+    "typ": "WMS",
+    "gfiAttributes": "showAll",
+    "layers": "versieg2021_str",
+    "legend": true,
+    "datasets": [
+      {
+        "md_name": "Versiegelung 2021 (Umweltatlas)",
+        "md_id": "2c8a769b-364e-4596-ace4-4c05cd8eb872",
+        "rs_id": "https://registry.gdi-de.org/id/de.be.csw/25091cc2-3b41-3d21-b479-b2895fd9ec8a",
+        "csw_url": "https://gdi.berlin.de/geonetwork/srv/ger/csw"
+      }
+    ],
+    "format": "image/png",
+    "version": "1.3.0",
+    "featureCount": "5",
+    "gfiTheme": "default",
+    "transparent": true,
+    "singleTile": true,
+    "infoFormat": "application/json",
+    "layerAttribution": "Für die Nutzung der Daten ist die Datenlizenz Deutschland - Namensnennung - Version 2.0 anzuwenden. Die Lizenz ist über https://www.govdata.de/dl-de/by-2-0 abrufbar. Der Quellenvermerk gemäß (2) der Lizenz lautet \"Umweltatlas Berlin / [Titel des Datensatzes]\"."
+  },
+  {
+    "id": "ua_versiegelung_2021:versieg2021_veraenderung",
+    "name": "Veränderungskartierung 2016 zu 2021 (Block- und Blockteilflächen)",
+    "name_lang": "Veränderungskartierung 2016 zu 2021 (Block- und Blockteilflächen) (Versiegelung 2021 (Umweltatlas))",
+    "crs": "EPSG:25833",
+    "url": "https://gdi.berlin.de/services/wms/ua_versiegelung_2021",
+    "typ": "WMS",
+    "gfiAttributes": "showAll",
+    "layers": "versieg2021_veraenderung",
+    "legend": true,
+    "datasets": [
+      {
+        "md_name": "Versiegelung 2021 (Umweltatlas)",
+        "md_id": "2c8a769b-364e-4596-ace4-4c05cd8eb872",
+        "rs_id": "https://registry.gdi-de.org/id/de.be.csw/25091cc2-3b41-3d21-b479-b2895fd9ec8a",
+        "csw_url": "https://gdi.berlin.de/geonetwork/srv/ger/csw"
+      }
+    ],
+    "format": "image/png",
+    "version": "1.3.0",
+    "featureCount": "5",
+    "gfiTheme": "default",
+    "transparent": true,
+    "singleTile": true,
+    "infoFormat": "application/json",
+    "layerAttribution": "Für die Nutzung der Daten ist die Datenlizenz Deutschland - Namensnennung - Version 2.0 anzuwenden. Die Lizenz ist über https://www.govdata.de/dl-de/by-2-0 abrufbar. Der Quellenvermerk gemäß (2) der Lizenz lautet \"Umweltatlas Berlin / [Titel des Datensatzes]\"."
+  },
+  {
+    "id": "ua_versiegelung_2021:versiegelung_2021_raster",
+    "name": "Versiegelung 2021 (unkorrigierte Versiegelungsgrade, Rasterdaten)",
+    "name_lang": "Versiegelung 2021 (unkorrigierte Versiegelungsgrade, Rasterdaten) (Versiegelung 2021 (Umweltatlas))",
+    "crs": "EPSG:25833",
+    "url": "https://gdi.berlin.de/services/wms/ua_versiegelung_2021",
+    "typ": "WMS",
+    "gfiAttributes": "showAll",
+    "layers": "versiegelung_2021_raster",
+    "legend": true,
+    "datasets": [
+      {
+        "md_name": "Versiegelung 2021 (Umweltatlas)",
+        "md_id": "2c8a769b-364e-4596-ace4-4c05cd8eb872",
+        "rs_id": "https://registry.gdi-de.org/id/de.be.csw/25091cc2-3b41-3d21-b479-b2895fd9ec8a",
+        "csw_url": "https://gdi.berlin.de/geonetwork/srv/ger/csw"
+      }
+    ],
+    "format": "image/png",
+    "version": "1.3.0",
+    "featureCount": "5",
+    "gfiTheme": "default",
+    "transparent": true,
+    "singleTile": true,
+    "infoFormat": "application/json",
+    "layerAttribution": "Für die Nutzung der Daten ist die Datenlizenz Deutschland - Namensnennung - Version 2.0 anzuwenden. Die Lizenz ist über https://www.govdata.de/dl-de/by-2-0 abrufbar. Der Quellenvermerk gemäß (2) der Lizenz lautet \"Umweltatlas Berlin / [Titel des Datensatzes]\"."
+  },
+  {
+    "id": "Klimabewerungskarten"
+  },
+  {
+    "id": "ua_klimabewertung_2022:wfs:bj_ua_phk_biokl_siedl_2022",
+    "name": "Bioklimatische Gesamtbewertung der Siedlungsfl\u00e4chen anhand der Tag- und Nachtsituation 2022",
+    "crs": "urn:ogc:def:crs:EPSG::25833",
+    "url": "https://gdi.berlin.de/services/wfs/ua_klimabewertung_2022",
+    "typ": "WFS",
+    "featureType": "ua_klimabewertung_2022:bj_ua_phk_biokl_siedl_2022",
+    "featureNS": "ua_klimabewertung_2022",
+    "datasets": [
+      {
+        "md_name": "Klimabewertungskarten 2022 (Umweltatlas)",
+        "md_id": "d002e10f-d745-49e5-98b1-bde00700f4e4",
+        "rs_id": "https://registry.gdi-de.org/id/de.be.csw/b12543bc-e79d-3af5-88fa-b54da877b30f",
+        "csw_url": "https://gdi.berlin.de/geonetwork/srv/ger/csw"
+      }
+    ],
+    "gfiAttributes": "showAll"
+  },
+  {
+    "id": "ua_klimabewertung_2022:wfs:bi_ua_phk_biokl_str_2022",
+    "name": "Bioklimatische Gesamtbewertung der Verkehrsfl\u00e4chen anhand der Tag- und Nachtsituation 2022",
+    "crs": "urn:ogc:def:crs:EPSG::25833",
+    "url": "https://gdi.berlin.de/services/wfs/ua_klimabewertung_2022",
+    "typ": "WFS",
+    "featureType": "ua_klimabewertung_2022:bi_ua_phk_biokl_str_2022",
+    "featureNS": "ua_klimabewertung_2022",
+    "datasets": [
+      {
+        "md_name": "Klimabewertungskarten 2022 (Umweltatlas)",
+        "md_id": "d002e10f-d745-49e5-98b1-bde00700f4e4",
+        "rs_id": "https://registry.gdi-de.org/id/de.be.csw/b12543bc-e79d-3af5-88fa-b54da877b30f",
+        "csw_url": "https://gdi.berlin.de/geonetwork/srv/ger/csw"
+      }
+    ],
+    "gfiAttributes": "showAll"
+  },
+  {
+    "id": "ua_klimabewertung_2022:wfs:be_ua_phk_kvsd_grfrei_2022",
+    "name": "Fl\u00e4chen der Gr\u00fcn-/Freifl\u00e4chen mit einer \u00fcberdurchschnittlich hohen Kaltluftvolumenstromdichte 2022",
+    "crs": "urn:ogc:def:crs:EPSG::25833",
+    "url": "https://gdi.berlin.de/services/wfs/ua_klimabewertung_2022",
+    "typ": "WFS",
+    "featureType": "ua_klimabewertung_2022:be_ua_phk_kvsd_grfrei_2022",
+    "featureNS": "ua_klimabewertung_2022",
+    "datasets": [
+      {
+        "md_name": "Klimabewertungskarten 2022 (Umweltatlas)",
+        "md_id": "d002e10f-d745-49e5-98b1-bde00700f4e4",
+        "rs_id": "https://registry.gdi-de.org/id/de.be.csw/b12543bc-e79d-3af5-88fa-b54da877b30f",
+        "csw_url": "https://gdi.berlin.de/geonetwork/srv/ger/csw"
+      }
+    ],
+    "gfiAttributes": "showAll"
+  },
+  {
+    "id": "ua_klimabewertung_2022:wfs:aa_ua_phk_alkisgeb_2022",
+    "name": "Geb\u00e4ude (ALKIS, Stand 11/2022)",
+    "crs": "urn:ogc:def:crs:EPSG::25833",
+    "url": "https://gdi.berlin.de/services/wfs/ua_klimabewertung_2022",
+    "typ": "WFS",
+    "featureType": "ua_klimabewertung_2022:aa_ua_phk_alkisgeb_2022",
+    "featureNS": "ua_klimabewertung_2022",
+    "datasets": [
+      {
+        "md_name": "Klimabewertungskarten 2022 (Umweltatlas)",
+        "md_id": "d002e10f-d745-49e5-98b1-bde00700f4e4",
+        "rs_id": "https://registry.gdi-de.org/id/de.be.csw/b12543bc-e79d-3af5-88fa-b54da877b30f",
+        "csw_url": "https://gdi.berlin.de/geonetwork/srv/ger/csw"
+      }
+    ],
+    "gfiAttributes": "showAll"
+  },
+  {
+    "id": "ua_klimabewertung_2022:wfs:g_ua_phk_gew_2022",
+    "name": "Gew\u00e4sser 2022",
+    "crs": "urn:ogc:def:crs:EPSG::25833",
+    "url": "https://gdi.berlin.de/services/wfs/ua_klimabewertung_2022",
+    "typ": "WFS",
+    "featureType": "ua_klimabewertung_2022:g_ua_phk_gew_2022",
+    "featureNS": "ua_klimabewertung_2022",
+    "datasets": [
+      {
+        "md_name": "Klimabewertungskarten 2022 (Umweltatlas)",
+        "md_id": "d002e10f-d745-49e5-98b1-bde00700f4e4",
+        "rs_id": "https://registry.gdi-de.org/id/de.be.csw/b12543bc-e79d-3af5-88fa-b54da877b30f",
+        "csw_url": "https://gdi.berlin.de/geonetwork/srv/ger/csw"
+      }
+    ],
+    "gfiAttributes": "showAll"
+  },
+  {
+    "id": "ua_klimabewertung_2022:wfs:ca_ua_phk_aufenth_grfrei_tag_2022",
+    "name": "Gr\u00fcn- und Freifl\u00e4chen: Bewertung der Aufenthaltsqualit\u00e4t am Tag anhand des mittleren Physiologisch \u00c4quivalenten Temperatur (PET) pro Block(teil)fl\u00e4che um 14:00 Uhr [\u00b0C] 2022",
+    "crs": "urn:ogc:def:crs:EPSG::25833",
+    "url": "https://gdi.berlin.de/services/wfs/ua_klimabewertung_2022",
+    "typ": "WFS",
+    "featureType": "ua_klimabewertung_2022:ca_ua_phk_aufenth_grfrei_tag_2022",
+    "featureNS": "ua_klimabewertung_2022",
+    "datasets": [
+      {
+        "md_name": "Klimabewertungskarten 2022 (Umweltatlas)",
+        "md_id": "d002e10f-d745-49e5-98b1-bde00700f4e4",
+        "rs_id": "https://registry.gdi-de.org/id/de.be.csw/b12543bc-e79d-3af5-88fa-b54da877b30f",
+        "csw_url": "https://gdi.berlin.de/geonetwork/srv/ger/csw"
+      }
+    ],
+    "gfiAttributes": "showAll"
+  },
+  {
+    "id": "ua_klimabewertung_2022:wfs:bb_ua_phk_belast_tag_grfrei_2022",
+    "name": "Gr\u00fcn-/Freifl\u00e4chen mit einer starken oder extremen thermischen Belastung am Tag 2022",
+    "crs": "urn:ogc:def:crs:EPSG::25833",
+    "url": "https://gdi.berlin.de/services/wfs/ua_klimabewertung_2022",
+    "typ": "WFS",
+    "featureType": "ua_klimabewertung_2022:bb_ua_phk_belast_tag_grfrei_2022",
+    "featureNS": "ua_klimabewertung_2022",
+    "datasets": [
+      {
+        "md_name": "Klimabewertungskarten 2022 (Umweltatlas)",
+        "md_id": "d002e10f-d745-49e5-98b1-bde00700f4e4",
+        "rs_id": "https://registry.gdi-de.org/id/de.be.csw/b12543bc-e79d-3af5-88fa-b54da877b30f",
+        "csw_url": "https://gdi.berlin.de/geonetwork/srv/ger/csw"
+      }
+    ],
+    "gfiAttributes": "showAll"
+  },
+  {
+    "id": "ua_klimabewertung_2022:wfs:bh_ua_phk_luftbelast_2022",
+    "name": "Index der Luftbelastung durch Kfz-Verkehr 2022",
+    "crs": "urn:ogc:def:crs:EPSG::25833",
+    "url": "https://gdi.berlin.de/services/wfs/ua_klimabewertung_2022",
+    "typ": "WFS",
+    "featureType": "ua_klimabewertung_2022:bh_ua_phk_luftbelast_2022",
+    "featureNS": "ua_klimabewertung_2022",
+    "datasets": [
+      {
+        "md_name": "Klimabewertungskarten 2022 (Umweltatlas)",
+        "md_id": "d002e10f-d745-49e5-98b1-bde00700f4e4",
+        "rs_id": "https://registry.gdi-de.org/id/de.be.csw/b12543bc-e79d-3af5-88fa-b54da877b30f",
+        "csw_url": "https://gdi.berlin.de/geonetwork/srv/ger/csw"
+      }
+    ],
+    "gfiAttributes": "showAll"
+  },
+  {
+    "id": "ua_klimabewertung_2022:wfs:bf_ua_phk_kaltluft_siedl_2022",
+    "name": "Kaltlufteinwirkbereich innerhalb von Siedlungs- und Verkehrsfl\u00e4chen 2022",
+    "crs": "urn:ogc:def:crs:EPSG::25833",
+    "url": "https://gdi.berlin.de/services/wfs/ua_klimabewertung_2022",
+    "typ": "WFS",
+    "featureType": "ua_klimabewertung_2022:bf_ua_phk_kaltluft_siedl_2022",
+    "featureNS": "ua_klimabewertung_2022",
+    "datasets": [
+      {
+        "md_name": "Klimabewertungskarten 2022 (Umweltatlas)",
+        "md_id": "d002e10f-d745-49e5-98b1-bde00700f4e4",
+        "rs_id": "https://registry.gdi-de.org/id/de.be.csw/b12543bc-e79d-3af5-88fa-b54da877b30f",
+        "csw_url": "https://gdi.berlin.de/geonetwork/srv/ger/csw"
+      }
+    ],
+    "gfiAttributes": "showAll"
+  },
+  {
+    "id": "ua_klimabewertung_2022:wfs:bc_ua_phk_leitbahn_2022",
+    "name": "Leitbahnkorridor 2022",
+    "crs": "urn:ogc:def:crs:EPSG::25833",
+    "url": "https://gdi.berlin.de/services/wfs/ua_klimabewertung_2022",
+    "typ": "WFS",
+    "featureType": "ua_klimabewertung_2022:bc_ua_phk_leitbahn_2022",
+    "featureNS": "ua_klimabewertung_2022",
+    "datasets": [
+      {
+        "md_name": "Klimabewertungskarten 2022 (Umweltatlas)",
+        "md_id": "d002e10f-d745-49e5-98b1-bde00700f4e4",
+        "rs_id": "https://registry.gdi-de.org/id/de.be.csw/b12543bc-e79d-3af5-88fa-b54da877b30f",
+        "csw_url": "https://gdi.berlin.de/geonetwork/srv/ger/csw"
+      }
+    ],
+    "gfiAttributes": "showAll"
+  },
+  {
+    "id": "ua_klimabewertung_2022:wfs:ba_ua_phk_luftaust_2022",
+    "name": "Luftaustausch 2022",
+    "crs": "urn:ogc:def:crs:EPSG::25833",
+    "url": "https://gdi.berlin.de/services/wfs/ua_klimabewertung_2022",
+    "typ": "WFS",
+    "featureType": "ua_klimabewertung_2022:ba_ua_phk_luftaust_2022",
+    "featureNS": "ua_klimabewertung_2022",
+    "datasets": [
+      {
+        "md_name": "Klimabewertungskarten 2022 (Umweltatlas)",
+        "md_id": "d002e10f-d745-49e5-98b1-bde00700f4e4",
+        "rs_id": "https://registry.gdi-de.org/id/de.be.csw/b12543bc-e79d-3af5-88fa-b54da877b30f",
+        "csw_url": "https://gdi.berlin.de/geonetwork/srv/ger/csw"
+      }
+    ],
+    "gfiAttributes": "showAll"
+  },
+  {
+    "id": "ua_klimabewertung_2022:wfs:fh_ua_phk_m8_2022",
+    "name": "M-08 Durchl\u00fcften (Blau-gr\u00fcne Stadtentwicklung) 2022",
+    "crs": "urn:ogc:def:crs:EPSG::25833",
+    "url": "https://gdi.berlin.de/services/wfs/ua_klimabewertung_2022",
+    "typ": "WFS",
+    "featureType": "ua_klimabewertung_2022:fh_ua_phk_m8_2022",
+    "featureNS": "ua_klimabewertung_2022",
+    "datasets": [
+      {
+        "md_name": "Klimabewertungskarten 2022 (Umweltatlas)",
+        "md_id": "d002e10f-d745-49e5-98b1-bde00700f4e4",
+        "rs_id": "https://registry.gdi-de.org/id/de.be.csw/b12543bc-e79d-3af5-88fa-b54da877b30f",
+        "csw_url": "https://gdi.berlin.de/geonetwork/srv/ger/csw"
+      }
+    ],
+    "gfiAttributes": "showAll"
+  },
+  {
+    "id": "ua_klimabewertung_2022:wfs:fi_ua_phk_m9_2022",
+    "name": "M-09 Verschatten (Blau-gr\u00fcne Stadtentwicklung) 2022",
+    "crs": "urn:ogc:def:crs:EPSG::25833",
+    "url": "https://gdi.berlin.de/services/wfs/ua_klimabewertung_2022",
+    "typ": "WFS",
+    "featureType": "ua_klimabewertung_2022:fi_ua_phk_m9_2022",
+    "featureNS": "ua_klimabewertung_2022",
+    "datasets": [
+      {
+        "md_name": "Klimabewertungskarten 2022 (Umweltatlas)",
+        "md_id": "d002e10f-d745-49e5-98b1-bde00700f4e4",
+        "rs_id": "https://registry.gdi-de.org/id/de.be.csw/b12543bc-e79d-3af5-88fa-b54da877b30f",
+        "csw_url": "https://gdi.berlin.de/geonetwork/srv/ger/csw"
+      }
+    ],
+    "gfiAttributes": "showAll"
+  },
+  {
+    "id": "ua_klimabewertung_2022:wfs:fj_ua_phk_m10_2022",
+    "name": "M-10 Begr\u00fcnen (Blau-gr\u00fcne Stadtentwicklung) 2022",
+    "crs": "urn:ogc:def:crs:EPSG::25833",
+    "url": "https://gdi.berlin.de/services/wfs/ua_klimabewertung_2022",
+    "typ": "WFS",
+    "featureType": "ua_klimabewertung_2022:fj_ua_phk_m10_2022",
+    "featureNS": "ua_klimabewertung_2022",
+    "datasets": [
+      {
+        "md_name": "Klimabewertungskarten 2022 (Umweltatlas)",
+        "md_id": "d002e10f-d745-49e5-98b1-bde00700f4e4",
+        "rs_id": "https://registry.gdi-de.org/id/de.be.csw/b12543bc-e79d-3af5-88fa-b54da877b30f",
+        "csw_url": "https://gdi.berlin.de/geonetwork/srv/ger/csw"
+      }
+    ],
+    "gfiAttributes": "showAll"
+  },
+  {
+    "id": "ua_klimabewertung_2022:wfs:fk_ua_phk_m11_2022",
+    "name": "M-11 Verdunsten (Blau-gr\u00fcne Stadtentwicklung) 2022",
+    "crs": "urn:ogc:def:crs:EPSG::25833",
+    "url": "https://gdi.berlin.de/services/wfs/ua_klimabewertung_2022",
+    "typ": "WFS",
+    "featureType": "ua_klimabewertung_2022:fk_ua_phk_m11_2022",
+    "featureNS": "ua_klimabewertung_2022",
+    "datasets": [
+      {
+        "md_name": "Klimabewertungskarten 2022 (Umweltatlas)",
+        "md_id": "d002e10f-d745-49e5-98b1-bde00700f4e4",
+        "rs_id": "https://registry.gdi-de.org/id/de.be.csw/b12543bc-e79d-3af5-88fa-b54da877b30f",
+        "csw_url": "https://gdi.berlin.de/geonetwork/srv/ger/csw"
+      }
+    ],
+    "gfiAttributes": "showAll"
+  },
+  {
+    "id": "ua_klimabewertung_2022:wfs:fl_ua_phk_m12_2022",
+    "name": "M-12 Klimakomfortpl\u00e4tze anlegen (Blau-gr\u00fcne Stadtentwicklung) 2022",
+    "crs": "urn:ogc:def:crs:EPSG::25833",
+    "url": "https://gdi.berlin.de/services/wfs/ua_klimabewertung_2022",
+    "typ": "WFS",
+    "featureType": "ua_klimabewertung_2022:fl_ua_phk_m12_2022",
+    "featureNS": "ua_klimabewertung_2022",
+    "datasets": [
+      {
+        "md_name": "Klimabewertungskarten 2022 (Umweltatlas)",
+        "md_id": "d002e10f-d745-49e5-98b1-bde00700f4e4",
+        "rs_id": "https://registry.gdi-de.org/id/de.be.csw/b12543bc-e79d-3af5-88fa-b54da877b30f",
+        "csw_url": "https://gdi.berlin.de/geonetwork/srv/ger/csw"
+      }
+    ],
+    "gfiAttributes": "showAll"
+  },
+  {
+    "id": "ua_klimabewertung_2022:wfs:fm_ua_phk_m13_2022",
+    "name": "M-13 R\u00fcckstrahlen (Blau-gr\u00fcne Stadtentwicklung) 2022",
+    "crs": "urn:ogc:def:crs:EPSG::25833",
+    "url": "https://gdi.berlin.de/services/wfs/ua_klimabewertung_2022",
+    "typ": "WFS",
+    "featureType": "ua_klimabewertung_2022:fm_ua_phk_m13_2022",
+    "featureNS": "ua_klimabewertung_2022",
+    "datasets": [
+      {
+        "md_name": "Klimabewertungskarten 2022 (Umweltatlas)",
+        "md_id": "d002e10f-d745-49e5-98b1-bde00700f4e4",
+        "rs_id": "https://registry.gdi-de.org/id/de.be.csw/b12543bc-e79d-3af5-88fa-b54da877b30f",
+        "csw_url": "https://gdi.berlin.de/geonetwork/srv/ger/csw"
+      }
+    ],
+    "gfiAttributes": "showAll"
+  },
+  {
+    "id": "ua_klimabewertung_2022:wfs:fn_ua_phk_m14_2022",
+    "name": "M-14 Ausstattung klimaoptimieren (klimaoptimierte, k\u00fchlende Gr\u00fcn- und Freir\u00e4ume) 2022",
+    "crs": "urn:ogc:def:crs:EPSG::25833",
+    "url": "https://gdi.berlin.de/services/wfs/ua_klimabewertung_2022",
+    "typ": "WFS",
+    "featureType": "ua_klimabewertung_2022:fn_ua_phk_m14_2022",
+    "featureNS": "ua_klimabewertung_2022",
+    "datasets": [
+      {
+        "md_name": "Klimabewertungskarten 2022 (Umweltatlas)",
+        "md_id": "d002e10f-d745-49e5-98b1-bde00700f4e4",
+        "rs_id": "https://registry.gdi-de.org/id/de.be.csw/b12543bc-e79d-3af5-88fa-b54da877b30f",
+        "csw_url": "https://gdi.berlin.de/geonetwork/srv/ger/csw"
+      }
+    ],
+    "gfiAttributes": "showAll"
+  },
+  {
+    "id": "ua_klimabewertung_2022:wfs:fo_ua_phk_m15_2022",
+    "name": "M-15 Bew\u00e4ssern (klimaoptimierte, k\u00fchlende Gr\u00fcn- und Freir\u00e4ume) 2022",
+    "crs": "urn:ogc:def:crs:EPSG::25833",
+    "url": "https://gdi.berlin.de/services/wfs/ua_klimabewertung_2022",
+    "typ": "WFS",
+    "featureType": "ua_klimabewertung_2022:fo_ua_phk_m15_2022",
+    "featureNS": "ua_klimabewertung_2022",
+    "datasets": [
+      {
+        "md_name": "Klimabewertungskarten 2022 (Umweltatlas)",
+        "md_id": "d002e10f-d745-49e5-98b1-bde00700f4e4",
+        "rs_id": "https://registry.gdi-de.org/id/de.be.csw/b12543bc-e79d-3af5-88fa-b54da877b30f",
+        "csw_url": "https://gdi.berlin.de/geonetwork/srv/ger/csw"
+      }
+    ],
+    "gfiAttributes": "showAll"
+  },
+  {
+    "id": "ua_klimabewertung_2022:wfs:fp_ua_phk_m16_2022",
+    "name": "M-16 Mehrfach nutzen (klimaoptimierte, k\u00fchlende Gr\u00fcn- und Freir\u00e4ume) 2022",
+    "crs": "urn:ogc:def:crs:EPSG::25833",
+    "url": "https://gdi.berlin.de/services/wfs/ua_klimabewertung_2022",
+    "typ": "WFS",
+    "featureType": "ua_klimabewertung_2022:fp_ua_phk_m16_2022",
+    "featureNS": "ua_klimabewertung_2022",
+    "datasets": [
+      {
+        "md_name": "Klimabewertungskarten 2022 (Umweltatlas)",
+        "md_id": "d002e10f-d745-49e5-98b1-bde00700f4e4",
+        "rs_id": "https://registry.gdi-de.org/id/de.be.csw/b12543bc-e79d-3af5-88fa-b54da877b30f",
+        "csw_url": "https://gdi.berlin.de/geonetwork/srv/ger/csw"
+      }
+    ],
+    "gfiAttributes": "showAll"
+  },
+  {
+    "id": "ua_klimabewertung_2022:wfs:fq_ua_phk_m17_2022",
+    "name": "M-17 CO2 binden und speichern (klimaoptimierte, k\u00fchlende Gr\u00fcn- und Freir\u00e4ume) 2022",
+    "crs": "urn:ogc:def:crs:EPSG::25833",
+    "url": "https://gdi.berlin.de/services/wfs/ua_klimabewertung_2022",
+    "typ": "WFS",
+    "featureType": "ua_klimabewertung_2022:fq_ua_phk_m17_2022",
+    "featureNS": "ua_klimabewertung_2022",
+    "datasets": [
+      {
+        "md_name": "Klimabewertungskarten 2022 (Umweltatlas)",
+        "md_id": "d002e10f-d745-49e5-98b1-bde00700f4e4",
+        "rs_id": "https://registry.gdi-de.org/id/de.be.csw/b12543bc-e79d-3af5-88fa-b54da877b30f",
+        "csw_url": "https://gdi.berlin.de/geonetwork/srv/ger/csw"
+      }
+    ],
+    "gfiAttributes": "showAll"
+  },
+  {
+    "id": "ua_klimabewertung_2022:wfs:fr_ua_phk_m18_2022",
+    "name": "M-18 Regenwasser speichern (Synergie Stadt und Wasser) 2022",
+    "crs": "urn:ogc:def:crs:EPSG::25833",
+    "url": "https://gdi.berlin.de/services/wfs/ua_klimabewertung_2022",
+    "typ": "WFS",
+    "featureType": "ua_klimabewertung_2022:fr_ua_phk_m18_2022",
+    "featureNS": "ua_klimabewertung_2022",
+    "datasets": [
+      {
+        "md_name": "Klimabewertungskarten 2022 (Umweltatlas)",
+        "md_id": "d002e10f-d745-49e5-98b1-bde00700f4e4",
+        "rs_id": "https://registry.gdi-de.org/id/de.be.csw/b12543bc-e79d-3af5-88fa-b54da877b30f",
+        "csw_url": "https://gdi.berlin.de/geonetwork/srv/ger/csw"
+      }
+    ],
+    "gfiAttributes": "showAll"
+  },
+  {
+    "id": "ua_klimabewertung_2022:wfs:fs_ua_phk_m19_2022",
+    "name": "M-19 Versickern (Synergie Stadt und Wasser) 2022",
+    "crs": "urn:ogc:def:crs:EPSG::25833",
+    "url": "https://gdi.berlin.de/services/wfs/ua_klimabewertung_2022",
+    "typ": "WFS",
+    "featureType": "ua_klimabewertung_2022:fs_ua_phk_m19_2022",
+    "featureNS": "ua_klimabewertung_2022",
+    "datasets": [
+      {
+        "md_name": "Klimabewertungskarten 2022 (Umweltatlas)",
+        "md_id": "d002e10f-d745-49e5-98b1-bde00700f4e4",
+        "rs_id": "https://registry.gdi-de.org/id/de.be.csw/b12543bc-e79d-3af5-88fa-b54da877b30f",
+        "csw_url": "https://gdi.berlin.de/geonetwork/srv/ger/csw"
+      }
+    ],
+    "gfiAttributes": "showAll"
+  },
+  {
+    "id": "ua_klimabewertung_2022:wfs:ft_ua_phk_m20_2022",
+    "name": "M-20 Zuf\u00fchren (Synergie Stadt und Wasser) 2022",
+    "crs": "urn:ogc:def:crs:EPSG::25833",
+    "url": "https://gdi.berlin.de/services/wfs/ua_klimabewertung_2022",
+    "typ": "WFS",
+    "featureType": "ua_klimabewertung_2022:ft_ua_phk_m20_2022",
+    "featureNS": "ua_klimabewertung_2022",
+    "datasets": [
+      {
+        "md_name": "Klimabewertungskarten 2022 (Umweltatlas)",
+        "md_id": "d002e10f-d745-49e5-98b1-bde00700f4e4",
+        "rs_id": "https://registry.gdi-de.org/id/de.be.csw/b12543bc-e79d-3af5-88fa-b54da877b30f",
+        "csw_url": "https://gdi.berlin.de/geonetwork/srv/ger/csw"
+      }
+    ],
+    "gfiAttributes": "showAll"
+  },
+  {
+    "id": "ua_klimabewertung_2022:wfs:fu_ua_phk_m21_2022",
+    "name": "M-21 Retentionsr\u00e4ume schaffen (Vorsorge Starkregen + Hochwasser) 2022",
+    "crs": "urn:ogc:def:crs:EPSG::25833",
+    "url": "https://gdi.berlin.de/services/wfs/ua_klimabewertung_2022",
+    "typ": "WFS",
+    "featureType": "ua_klimabewertung_2022:fu_ua_phk_m21_2022",
+    "featureNS": "ua_klimabewertung_2022",
+    "datasets": [
+      {
+        "md_name": "Klimabewertungskarten 2022 (Umweltatlas)",
+        "md_id": "d002e10f-d745-49e5-98b1-bde00700f4e4",
+        "rs_id": "https://registry.gdi-de.org/id/de.be.csw/b12543bc-e79d-3af5-88fa-b54da877b30f",
+        "csw_url": "https://gdi.berlin.de/geonetwork/srv/ger/csw"
+      }
+    ],
+    "gfiAttributes": "showAll"
+  },
+  {
+    "id": "ua_klimabewertung_2022:wfs:fv_ua_phk_m22_2022",
+    "name": "M-22 Starkregenabfl\u00fcsse leiten (Vorsorge Starkregen + Hochwasser) 2022",
+    "crs": "urn:ogc:def:crs:EPSG::25833",
+    "url": "https://gdi.berlin.de/services/wfs/ua_klimabewertung_2022",
+    "typ": "WFS",
+    "featureType": "ua_klimabewertung_2022:fv_ua_phk_m22_2022",
+    "featureNS": "ua_klimabewertung_2022",
+    "datasets": [
+      {
+        "md_name": "Klimabewertungskarten 2022 (Umweltatlas)",
+        "md_id": "d002e10f-d745-49e5-98b1-bde00700f4e4",
+        "rs_id": "https://registry.gdi-de.org/id/de.be.csw/b12543bc-e79d-3af5-88fa-b54da877b30f",
+        "csw_url": "https://gdi.berlin.de/geonetwork/srv/ger/csw"
+      }
+    ],
+    "gfiAttributes": "showAll"
+  },
+  {
+    "id": "ua_klimabewertung_2022:wfs:fw_ua_phk_m23_2022",
+    "name": "M-23 Sch\u00fctzen (Vorsorge Starkregen + Hochwasser) 2022",
+    "crs": "urn:ogc:def:crs:EPSG::25833",
+    "url": "https://gdi.berlin.de/services/wfs/ua_klimabewertung_2022",
+    "typ": "WFS",
+    "featureType": "ua_klimabewertung_2022:fw_ua_phk_m23_2022",
+    "featureNS": "ua_klimabewertung_2022",
+    "datasets": [
+      {
+        "md_name": "Klimabewertungskarten 2022 (Umweltatlas)",
+        "md_id": "d002e10f-d745-49e5-98b1-bde00700f4e4",
+        "rs_id": "https://registry.gdi-de.org/id/de.be.csw/b12543bc-e79d-3af5-88fa-b54da877b30f",
+        "csw_url": "https://gdi.berlin.de/geonetwork/srv/ger/csw"
+      }
+    ],
+    "gfiAttributes": "showAll"
+  },
+  {
+    "id": "ua_klimabewertung_2022:wfs:bk_ua_phk_ausgl_grfrei_2022",
+    "name": "N\u00e4chtliche Ausgleichfunktion von Gr\u00fcn- und Freifl\u00e4chen gegen\u00fcber den Siedlungsfl\u00e4chen 2022",
+    "crs": "urn:ogc:def:crs:EPSG::25833",
+    "url": "https://gdi.berlin.de/services/wfs/ua_klimabewertung_2022",
+    "typ": "WFS",
+    "featureType": "ua_klimabewertung_2022:bk_ua_phk_ausgl_grfrei_2022",
+    "featureNS": "ua_klimabewertung_2022",
+    "datasets": [
+      {
+        "md_name": "Klimabewertungskarten 2022 (Umweltatlas)",
+        "md_id": "d002e10f-d745-49e5-98b1-bde00700f4e4",
+        "rs_id": "https://registry.gdi-de.org/id/de.be.csw/b12543bc-e79d-3af5-88fa-b54da877b30f",
+        "csw_url": "https://gdi.berlin.de/geonetwork/srv/ger/csw"
+      }
+    ],
+    "gfiAttributes": "showAll"
+  },
+  {
+    "id": "ua_klimabewertung_2022:wfs:da_ua_phk_ausgleich_nacht_2022",
+    "name": "N\u00e4chtliche Ausgleichfunktion von Gr\u00fcn- und Freifl\u00e4chen gegen\u00fcber den Siedlungsfl\u00e4chen 2022",
+    "crs": "urn:ogc:def:crs:EPSG::25833",
+    "url": "https://gdi.berlin.de/services/wfs/ua_klimabewertung_2022",
+    "typ": "WFS",
+    "featureType": "ua_klimabewertung_2022:da_ua_phk_ausgleich_nacht_2022",
+    "featureNS": "ua_klimabewertung_2022",
+    "datasets": [
+      {
+        "md_name": "Klimabewertungskarten 2022 (Umweltatlas)",
+        "md_id": "d002e10f-d745-49e5-98b1-bde00700f4e4",
+        "rs_id": "https://registry.gdi-de.org/id/de.be.csw/b12543bc-e79d-3af5-88fa-b54da877b30f",
+        "csw_url": "https://gdi.berlin.de/geonetwork/srv/ger/csw"
+      }
+    ],
+    "gfiAttributes": "showAll"
+  },
+  {
+    "id": "ua_klimabewertung_2022:wfs:cb_ua_phk_bioklim_siedl_tag_2022",
+    "name": "Siedlungsfl\u00e4chen: Bewertung der bioklimatische Situation anhand des mittleren Physiologisch \u00c4quivalenten Temperatur (PET) pro Block(teil)fl\u00e4che um 14:00 Uhr [\u00b0C] 2022",
+    "crs": "urn:ogc:def:crs:EPSG::25833",
+    "url": "https://gdi.berlin.de/services/wfs/ua_klimabewertung_2022",
+    "typ": "WFS",
+    "featureType": "ua_klimabewertung_2022:cb_ua_phk_bioklim_siedl_tag_2022",
+    "featureNS": "ua_klimabewertung_2022",
+    "datasets": [
+      {
+        "md_name": "Klimabewertungskarten 2022 (Umweltatlas)",
+        "md_id": "d002e10f-d745-49e5-98b1-bde00700f4e4",
+        "rs_id": "https://registry.gdi-de.org/id/de.be.csw/b12543bc-e79d-3af5-88fa-b54da877b30f",
+        "csw_url": "https://gdi.berlin.de/geonetwork/srv/ger/csw"
+      }
+    ],
+    "gfiAttributes": "showAll"
+  },
+  {
+    "id": "ua_klimabewertung_2022:wfs:dc_ua_phk_bioklim_siedl_nacht_2022",
+    "name": "Siedlungsfl\u00e4chen: Bioklimatische Bewertung anhand der mittleren Lufttemperatur pro Block(teil)fl\u00e4che um 04:00 Uhr [\u00b0C] 2022",
+    "crs": "urn:ogc:def:crs:EPSG::25833",
+    "url": "https://gdi.berlin.de/services/wfs/ua_klimabewertung_2022",
+    "typ": "WFS",
+    "featureType": "ua_klimabewertung_2022:dc_ua_phk_bioklim_siedl_nacht_2022",
+    "featureNS": "ua_klimabewertung_2022",
+    "datasets": [
+      {
+        "md_name": "Klimabewertungskarten 2022 (Umweltatlas)",
+        "md_id": "d002e10f-d745-49e5-98b1-bde00700f4e4",
+        "rs_id": "https://registry.gdi-de.org/id/de.be.csw/b12543bc-e79d-3af5-88fa-b54da877b30f",
+        "csw_url": "https://gdi.berlin.de/geonetwork/srv/ger/csw"
+      }
+    ],
+    "gfiAttributes": "showAll"
+  },
+  {
+    "id": "ua_klimabewertung_2022:wfs:ab_ua_phk_gebsonst_2022",
+    "name": "Sonstige Geb\u00e4ude",
+    "crs": "urn:ogc:def:crs:EPSG::25833",
+    "url": "https://gdi.berlin.de/services/wfs/ua_klimabewertung_2022",
+    "typ": "WFS",
+    "featureType": "ua_klimabewertung_2022:ab_ua_phk_gebsonst_2022",
+    "featureNS": "ua_klimabewertung_2022",
+    "datasets": [
+      {
+        "md_name": "Klimabewertungskarten 2022 (Umweltatlas)",
+        "md_id": "d002e10f-d745-49e5-98b1-bde00700f4e4",
+        "rs_id": "https://registry.gdi-de.org/id/de.be.csw/b12543bc-e79d-3af5-88fa-b54da877b30f",
+        "csw_url": "https://gdi.berlin.de/geonetwork/srv/ger/csw"
+      }
+    ],
+    "gfiAttributes": "showAll"
+  },
+  {
+    "id": "ua_klimabewertung_2022:wfs:ea_ua_phk_vul_geb_therm_belast_2022",
+    "name": "Stadtgebiete mit sehr ung\u00fcnstiger thermischer Belastung gem\u00e4\u00df Planungshinweiskarte am Tag und Nacht 2022",
+    "crs": "urn:ogc:def:crs:EPSG::25833",
+    "url": "https://gdi.berlin.de/services/wfs/ua_klimabewertung_2022",
+    "typ": "WFS",
+    "featureType": "ua_klimabewertung_2022:ea_ua_phk_vul_geb_therm_belast_2022",
+    "featureNS": "ua_klimabewertung_2022",
+    "datasets": [
+      {
+        "md_name": "Klimabewertungskarten 2022 (Umweltatlas)",
+        "md_id": "d002e10f-d745-49e5-98b1-bde00700f4e4",
+        "rs_id": "https://registry.gdi-de.org/id/de.be.csw/b12543bc-e79d-3af5-88fa-b54da877b30f",
+        "csw_url": "https://gdi.berlin.de/geonetwork/srv/ger/csw"
+      }
+    ],
+    "gfiAttributes": "showAll"
+  },
+  {
+    "id": "ua_klimabewertung_2022:wfs:bg_ua_phk_oschlaf_2022",
+    "name": "Stadtgebiete ohne Schlaffunktion 2022",
+    "crs": "urn:ogc:def:crs:EPSG::25833",
+    "url": "https://gdi.berlin.de/services/wfs/ua_klimabewertung_2022",
+    "typ": "WFS",
+    "featureType": "ua_klimabewertung_2022:bg_ua_phk_oschlaf_2022",
+    "featureNS": "ua_klimabewertung_2022",
+    "datasets": [
+      {
+        "md_name": "Klimabewertungskarten 2022 (Umweltatlas)",
+        "md_id": "d002e10f-d745-49e5-98b1-bde00700f4e4",
+        "rs_id": "https://registry.gdi-de.org/id/de.be.csw/b12543bc-e79d-3af5-88fa-b54da877b30f",
+        "csw_url": "https://gdi.berlin.de/geonetwork/srv/ger/csw"
+      }
+    ],
+    "gfiAttributes": "showAll"
+  },
+  {
+    "id": "ua_klimabewertung_2022:wfs:db_ua_phk_oschlaf_nacht_2022",
+    "name": "Stadtgebiete ohne Schlaffunktion 2022",
+    "crs": "urn:ogc:def:crs:EPSG::25833",
+    "url": "https://gdi.berlin.de/services/wfs/ua_klimabewertung_2022",
+    "typ": "WFS",
+    "featureType": "ua_klimabewertung_2022:db_ua_phk_oschlaf_nacht_2022",
+    "featureNS": "ua_klimabewertung_2022",
+    "datasets": [
+      {
+        "md_name": "Klimabewertungskarten 2022 (Umweltatlas)",
+        "md_id": "d002e10f-d745-49e5-98b1-bde00700f4e4",
+        "rs_id": "https://registry.gdi-de.org/id/de.be.csw/b12543bc-e79d-3af5-88fa-b54da877b30f",
+        "csw_url": "https://gdi.berlin.de/geonetwork/srv/ger/csw"
+      }
+    ],
+    "gfiAttributes": "showAll"
+  },
+  {
+    "id": "ua_klimabewertung_2022:wfs:eb_ua_phk_vul_geb_demog_2022",
+    "name": "Stadtklimatisch besonderes vulnerable Stadtgebiete 2022",
+    "crs": "urn:ogc:def:crs:EPSG::25833",
+    "url": "https://gdi.berlin.de/services/wfs/ua_klimabewertung_2022",
+    "typ": "WFS",
+    "featureType": "ua_klimabewertung_2022:eb_ua_phk_vul_geb_demog_2022",
+    "featureNS": "ua_klimabewertung_2022",
+    "datasets": [
+      {
+        "md_name": "Klimabewertungskarten 2022 (Umweltatlas)",
+        "md_id": "d002e10f-d745-49e5-98b1-bde00700f4e4",
+        "rs_id": "https://registry.gdi-de.org/id/de.be.csw/b12543bc-e79d-3af5-88fa-b54da877b30f",
+        "csw_url": "https://gdi.berlin.de/geonetwork/srv/ger/csw"
+      }
+    ],
+    "gfiAttributes": "showAll"
+  },
+  {
+    "id": "ua_klimabewertung_2022:wfs:cc_ua_phk_bioklim_str_tag_2022",
+    "name": "Verkehrsfl\u00e4chen: Bewertung der bioklimatische Situation anhand des mittleren Physiologisch \u00c4quivalenten Temperatur (PET) pro Block(teil)fl\u00e4che um 14:00 Uhr [\u00b0C] 2022",
+    "crs": "urn:ogc:def:crs:EPSG::25833",
+    "url": "https://gdi.berlin.de/services/wfs/ua_klimabewertung_2022",
+    "typ": "WFS",
+    "featureType": "ua_klimabewertung_2022:cc_ua_phk_bioklim_str_tag_2022",
+    "featureNS": "ua_klimabewertung_2022",
+    "datasets": [
+      {
+        "md_name": "Klimabewertungskarten 2022 (Umweltatlas)",
+        "md_id": "d002e10f-d745-49e5-98b1-bde00700f4e4",
+        "rs_id": "https://registry.gdi-de.org/id/de.be.csw/b12543bc-e79d-3af5-88fa-b54da877b30f",
+        "csw_url": "https://gdi.berlin.de/geonetwork/srv/ger/csw"
+      }
+    ],
+    "gfiAttributes": "showAll"
+  },
+  {
+    "id": "ua_klimabewertung_2022:wfs:dd_ua_phk_bioklim_str_nacht_2022",
+    "name": "Verkehrsfl\u00e4chen: Bioklimatische Bewertung anhand der mittleren Lufttemperatur pro Block(teil)fl\u00e4che um 04:00 Uhr [\u00b0C] 2022",
+    "crs": "urn:ogc:def:crs:EPSG::25833",
+    "url": "https://gdi.berlin.de/services/wfs/ua_klimabewertung_2022",
+    "typ": "WFS",
+    "featureType": "ua_klimabewertung_2022:dd_ua_phk_bioklim_str_nacht_2022",
+    "featureNS": "ua_klimabewertung_2022",
+    "datasets": [
+      {
+        "md_name": "Klimabewertungskarten 2022 (Umweltatlas)",
+        "md_id": "d002e10f-d745-49e5-98b1-bde00700f4e4",
+        "rs_id": "https://registry.gdi-de.org/id/de.be.csw/b12543bc-e79d-3af5-88fa-b54da877b30f",
+        "csw_url": "https://gdi.berlin.de/geonetwork/srv/ger/csw"
+      }
+    ],
+    "gfiAttributes": "showAll"
+  },
+  {
+    "id": "ua_klimabewertung_2022:wfs:bd_ua_phk_klimarelevante_bebauung_2022",
+    "name": "Wohngebiete mit klimarelevanter Funktion 2022",
+    "crs": "urn:ogc:def:crs:EPSG::25833",
+    "url": "https://gdi.berlin.de/services/wfs/ua_klimabewertung_2022",
+    "typ": "WFS",
+    "featureType": "ua_klimabewertung_2022:bd_ua_phk_klimarelevante_bebauung_2022",
+    "featureNS": "ua_klimabewertung_2022",
+    "datasets": [
+      {
+        "md_name": "Klimabewertungskarten 2022 (Umweltatlas)",
+        "md_id": "d002e10f-d745-49e5-98b1-bde00700f4e4",
+        "rs_id": "https://registry.gdi-de.org/id/de.be.csw/b12543bc-e79d-3af5-88fa-b54da877b30f",
+        "csw_url": "https://gdi.berlin.de/geonetwork/srv/ger/csw"
+      }
+    ],
+    "gfiAttributes": "showAll"
+  },
+  {
+    "id": "ua_klimabewertung_2022:ba_ua_phk_luftaust_2022",
+    "name": "Luftaustausch 2022",
+    "name_lang": "Luftaustausch 2022 (Klimabewertungskarten 2022 (Umweltatlas))",
+    "crs": "EPSG:25833",
+    "url": "https://gdi.berlin.de/services/wms/ua_klimabewertung_2022",
+    "typ": "WMS",
+    "gfiAttributes": "showAll",
+    "layers": "ba_ua_phk_luftaust_2022",
+    "legend": true,
+    "datasets": [
+      {
+        "md_name": "Klimabewertungskarten 2022 (Umweltatlas)",
+        "md_id": "d002e10f-d745-49e5-98b1-bde00700f4e4",
+        "rs_id": "https://registry.gdi-de.org/id/de.be.csw/b12543bc-e79d-3af5-88fa-b54da877b30f",
+        "csw_url": "https://gdi.berlin.de/geonetwork/srv/ger/csw"
+      }
+    ],
+    "format": "image/png",
+    "version": "1.3.0",
+    "featureCount": "5",
+    "gfiTheme": "default",
+    "transparent": true,
+    "singleTile": true,
+    "infoFormat": "application/json",
+    "layerAttribution": "F\u00fcr die Nutzung der Daten ist die Datenlizenz Deutschland - Namensnennung - Version 2.0 anzuwenden. Die Lizenz ist \u00fcber https://www.govdata.de/dl-de/by-2-0 abrufbar. Der Quellenvermerk gem\u00e4\u00df (2) der Lizenz lautet \"Umweltatlas Berlin / [Titel des Datensatzes]\"."
+  },
+  {
+    "id": "ua_klimabewertung_2022:bb_ua_phk_belast_tag_grfrei_2022",
+    "name": "Gr\u00fcn-/Freifl\u00e4chen mit einer starken oder extremen thermischen Belastung am Tag 2022",
+    "name_lang": "Gr\u00fcn-/Freifl\u00e4chen mit einer starken oder extremen thermischen Belastung am Tag 2022 (Klimabewertungskarten 2022 (Umweltatlas))",
+    "crs": "EPSG:25833",
+    "url": "https://gdi.berlin.de/services/wms/ua_klimabewertung_2022",
+    "typ": "WMS",
+    "gfiAttributes": "showAll",
+    "layers": "bb_ua_phk_belast_tag_grfrei_2022",
+    "legend": true,
+    "datasets": [
+      {
+        "md_name": "Klimabewertungskarten 2022 (Umweltatlas)",
+        "md_id": "d002e10f-d745-49e5-98b1-bde00700f4e4",
+        "rs_id": "https://registry.gdi-de.org/id/de.be.csw/b12543bc-e79d-3af5-88fa-b54da877b30f",
+        "csw_url": "https://gdi.berlin.de/geonetwork/srv/ger/csw"
+      }
+    ],
+    "maxScale": "10000.0",
+    "format": "image/png",
+    "version": "1.3.0",
+    "featureCount": "5",
+    "gfiTheme": "default",
+    "transparent": true,
+    "singleTile": true,
+    "infoFormat": "application/json",
+    "layerAttribution": "F\u00fcr die Nutzung der Daten ist die Datenlizenz Deutschland - Namensnennung - Version 2.0 anzuwenden. Die Lizenz ist \u00fcber https://www.govdata.de/dl-de/by-2-0 abrufbar. Der Quellenvermerk gem\u00e4\u00df (2) der Lizenz lautet \"Umweltatlas Berlin / [Titel des Datensatzes]\"."
+  },
+  {
+    "id": "ua_klimabewertung_2022:bc_ua_phk_leitbahn_2022",
+    "name": "Leitbahnkorridor 2022",
+    "name_lang": "Leitbahnkorridor 2022 (Klimabewertungskarten 2022 (Umweltatlas))",
+    "crs": "EPSG:25833",
+    "url": "https://gdi.berlin.de/services/wms/ua_klimabewertung_2022",
+    "typ": "WMS",
+    "gfiAttributes": "showAll",
+    "layers": "bc_ua_phk_leitbahn_2022",
+    "legend": true,
+    "datasets": [
+      {
+        "md_name": "Klimabewertungskarten 2022 (Umweltatlas)",
+        "md_id": "d002e10f-d745-49e5-98b1-bde00700f4e4",
+        "rs_id": "https://registry.gdi-de.org/id/de.be.csw/b12543bc-e79d-3af5-88fa-b54da877b30f",
+        "csw_url": "https://gdi.berlin.de/geonetwork/srv/ger/csw"
+      }
+    ],
+    "format": "image/png",
+    "version": "1.3.0",
+    "featureCount": "5",
+    "gfiTheme": "default",
+    "transparent": true,
+    "singleTile": true,
+    "infoFormat": "application/json",
+    "layerAttribution": "F\u00fcr die Nutzung der Daten ist die Datenlizenz Deutschland - Namensnennung - Version 2.0 anzuwenden. Die Lizenz ist \u00fcber https://www.govdata.de/dl-de/by-2-0 abrufbar. Der Quellenvermerk gem\u00e4\u00df (2) der Lizenz lautet \"Umweltatlas Berlin / [Titel des Datensatzes]\"."
+  },
+  {
+    "id": "ua_klimabewertung_2022:bd_ua_phk_klimarelevante_bebauung_2022",
+    "name": "Wohngebiete mit klimarelevanter Funktion 2022",
+    "name_lang": "Wohngebiete mit klimarelevanter Funktion 2022 (Klimabewertungskarten 2022 (Umweltatlas))",
+    "crs": "EPSG:25833",
+    "url": "https://gdi.berlin.de/services/wms/ua_klimabewertung_2022",
+    "typ": "WMS",
+    "gfiAttributes": "showAll",
+    "layers": "bd_ua_phk_klimarelevante_bebauung_2022",
+    "legend": true,
+    "datasets": [
+      {
+        "md_name": "Klimabewertungskarten 2022 (Umweltatlas)",
+        "md_id": "d002e10f-d745-49e5-98b1-bde00700f4e4",
+        "rs_id": "https://registry.gdi-de.org/id/de.be.csw/b12543bc-e79d-3af5-88fa-b54da877b30f",
+        "csw_url": "https://gdi.berlin.de/geonetwork/srv/ger/csw"
+      }
+    ],
+    "format": "image/png",
+    "version": "1.3.0",
+    "featureCount": "5",
+    "gfiTheme": "default",
+    "transparent": true,
+    "singleTile": true,
+    "infoFormat": "application/json",
+    "layerAttribution": "F\u00fcr die Nutzung der Daten ist die Datenlizenz Deutschland - Namensnennung - Version 2.0 anzuwenden. Die Lizenz ist \u00fcber https://www.govdata.de/dl-de/by-2-0 abrufbar. Der Quellenvermerk gem\u00e4\u00df (2) der Lizenz lautet \"Umweltatlas Berlin / [Titel des Datensatzes]\"."
+  },
+  {
+    "id": "ua_klimabewertung_2022:be_ua_phk_kvsd_grfrei_2022",
+    "name": "Fl\u00e4chen der Gr\u00fcn-/Freifl\u00e4chen mit einer \u00fcberdurchschnittlich hohen Kaltluftvolumenstromdichte 2022",
+    "name_lang": "Fl\u00e4chen der Gr\u00fcn-/Freifl\u00e4chen mit einer \u00fcberdurchschnittlich hohen Kaltluftvolumenstromdichte 2022 (Klimabewertungskarten 2022 (Umweltatlas))",
+    "crs": "EPSG:25833",
+    "url": "https://gdi.berlin.de/services/wms/ua_klimabewertung_2022",
+    "typ": "WMS",
+    "gfiAttributes": "showAll",
+    "layers": "be_ua_phk_kvsd_grfrei_2022",
+    "legend": true,
+    "datasets": [
+      {
+        "md_name": "Klimabewertungskarten 2022 (Umweltatlas)",
+        "md_id": "d002e10f-d745-49e5-98b1-bde00700f4e4",
+        "rs_id": "https://registry.gdi-de.org/id/de.be.csw/b12543bc-e79d-3af5-88fa-b54da877b30f",
+        "csw_url": "https://gdi.berlin.de/geonetwork/srv/ger/csw"
+      }
+    ],
+    "format": "image/png",
+    "version": "1.3.0",
+    "featureCount": "5",
+    "gfiTheme": "default",
+    "transparent": true,
+    "singleTile": true,
+    "infoFormat": "application/json",
+    "layerAttribution": "F\u00fcr die Nutzung der Daten ist die Datenlizenz Deutschland - Namensnennung - Version 2.0 anzuwenden. Die Lizenz ist \u00fcber https://www.govdata.de/dl-de/by-2-0 abrufbar. Der Quellenvermerk gem\u00e4\u00df (2) der Lizenz lautet \"Umweltatlas Berlin / [Titel des Datensatzes]\"."
+  },
+  {
+    "id": "ua_klimabewertung_2022:bf_ua_phk_kaltluft_siedl_2022",
+    "name": "Kaltlufteinwirkbereich innerhalb von Siedlungs- und Verkehrsfl\u00e4chen 2022",
+    "name_lang": "Kaltlufteinwirkbereich innerhalb von Siedlungs- und Verkehrsfl\u00e4chen 2022 (Klimabewertungskarten 2022 (Umweltatlas))",
+    "crs": "EPSG:25833",
+    "url": "https://gdi.berlin.de/services/wms/ua_klimabewertung_2022",
+    "typ": "WMS",
+    "gfiAttributes": "showAll",
+    "layers": "bf_ua_phk_kaltluft_siedl_2022",
+    "legend": true,
+    "datasets": [
+      {
+        "md_name": "Klimabewertungskarten 2022 (Umweltatlas)",
+        "md_id": "d002e10f-d745-49e5-98b1-bde00700f4e4",
+        "rs_id": "https://registry.gdi-de.org/id/de.be.csw/b12543bc-e79d-3af5-88fa-b54da877b30f",
+        "csw_url": "https://gdi.berlin.de/geonetwork/srv/ger/csw"
+      }
+    ],
+    "format": "image/png",
+    "version": "1.3.0",
+    "featureCount": "5",
+    "gfiTheme": "default",
+    "transparent": true,
+    "singleTile": true,
+    "infoFormat": "application/json",
+    "layerAttribution": "F\u00fcr die Nutzung der Daten ist die Datenlizenz Deutschland - Namensnennung - Version 2.0 anzuwenden. Die Lizenz ist \u00fcber https://www.govdata.de/dl-de/by-2-0 abrufbar. Der Quellenvermerk gem\u00e4\u00df (2) der Lizenz lautet \"Umweltatlas Berlin / [Titel des Datensatzes]\"."
+  },
+  {
+    "id": "ua_klimabewertung_2022:bg_ua_phk_oschlaf_2022",
+    "name": "Stadtgebiete ohne Schlaffunktion 2022",
+    "name_lang": "Stadtgebiete ohne Schlaffunktion 2022 (Klimabewertungskarten 2022 (Umweltatlas))",
+    "crs": "EPSG:25833",
+    "url": "https://gdi.berlin.de/services/wms/ua_klimabewertung_2022",
+    "typ": "WMS",
+    "gfiAttributes": "showAll",
+    "layers": "bg_ua_phk_oschlaf_2022",
+    "legend": true,
+    "datasets": [
+      {
+        "md_name": "Klimabewertungskarten 2022 (Umweltatlas)",
+        "md_id": "d002e10f-d745-49e5-98b1-bde00700f4e4",
+        "rs_id": "https://registry.gdi-de.org/id/de.be.csw/b12543bc-e79d-3af5-88fa-b54da877b30f",
+        "csw_url": "https://gdi.berlin.de/geonetwork/srv/ger/csw"
+      }
+    ],
+    "format": "image/png",
+    "version": "1.3.0",
+    "featureCount": "5",
+    "gfiTheme": "default",
+    "transparent": true,
+    "singleTile": true,
+    "infoFormat": "application/json",
+    "layerAttribution": "F\u00fcr die Nutzung der Daten ist die Datenlizenz Deutschland - Namensnennung - Version 2.0 anzuwenden. Die Lizenz ist \u00fcber https://www.govdata.de/dl-de/by-2-0 abrufbar. Der Quellenvermerk gem\u00e4\u00df (2) der Lizenz lautet \"Umweltatlas Berlin / [Titel des Datensatzes]\"."
+  },
+  {
+    "id": "ua_klimabewertung_2022:bh_ua_phk_luftbelast_2022",
+    "name": "Index der Luftbelastung durch Kfz-Verkehr 2022",
+    "name_lang": "Index der Luftbelastung durch Kfz-Verkehr 2022 (Klimabewertungskarten 2022 (Umweltatlas))",
+    "crs": "EPSG:25833",
+    "url": "https://gdi.berlin.de/services/wms/ua_klimabewertung_2022",
+    "typ": "WMS",
+    "gfiAttributes": "showAll",
+    "layers": "bh_ua_phk_luftbelast_2022",
+    "legend": true,
+    "datasets": [
+      {
+        "md_name": "Klimabewertungskarten 2022 (Umweltatlas)",
+        "md_id": "d002e10f-d745-49e5-98b1-bde00700f4e4",
+        "rs_id": "https://registry.gdi-de.org/id/de.be.csw/b12543bc-e79d-3af5-88fa-b54da877b30f",
+        "csw_url": "https://gdi.berlin.de/geonetwork/srv/ger/csw"
+      }
+    ],
+    "format": "image/png",
+    "version": "1.3.0",
+    "featureCount": "5",
+    "gfiTheme": "default",
+    "transparent": true,
+    "singleTile": true,
+    "infoFormat": "application/json",
+    "layerAttribution": "F\u00fcr die Nutzung der Daten ist die Datenlizenz Deutschland - Namensnennung - Version 2.0 anzuwenden. Die Lizenz ist \u00fcber https://www.govdata.de/dl-de/by-2-0 abrufbar. Der Quellenvermerk gem\u00e4\u00df (2) der Lizenz lautet \"Umweltatlas Berlin / [Titel des Datensatzes]\"."
+  },
+  {
+    "id": "ua_klimabewertung_2022:bi_ua_phk_biokl_str_2022",
+    "name": "Bioklimatische Gesamtbewertung der Verkehrsfl\u00e4chen anhand der Tag- und Nachtsituation 2022",
+    "name_lang": "Bioklimatische Gesamtbewertung der Verkehrsfl\u00e4chen anhand der Tag- und Nachtsituation 2022 (Klimabewertungskarten 2022 (Umweltatlas))",
+    "crs": "EPSG:25833",
+    "url": "https://gdi.berlin.de/services/wms/ua_klimabewertung_2022",
+    "typ": "WMS",
+    "gfiAttributes": "showAll",
+    "layers": "bi_ua_phk_biokl_str_2022",
+    "legend": true,
+    "datasets": [
+      {
+        "md_name": "Klimabewertungskarten 2022 (Umweltatlas)",
+        "md_id": "d002e10f-d745-49e5-98b1-bde00700f4e4",
+        "rs_id": "https://registry.gdi-de.org/id/de.be.csw/b12543bc-e79d-3af5-88fa-b54da877b30f",
+        "csw_url": "https://gdi.berlin.de/geonetwork/srv/ger/csw"
+      }
+    ],
+    "format": "image/png",
+    "version": "1.3.0",
+    "featureCount": "5",
+    "gfiTheme": "default",
+    "transparent": true,
+    "singleTile": true,
+    "infoFormat": "application/json",
+    "layerAttribution": "F\u00fcr die Nutzung der Daten ist die Datenlizenz Deutschland - Namensnennung - Version 2.0 anzuwenden. Die Lizenz ist \u00fcber https://www.govdata.de/dl-de/by-2-0 abrufbar. Der Quellenvermerk gem\u00e4\u00df (2) der Lizenz lautet \"Umweltatlas Berlin / [Titel des Datensatzes]\"."
+  },
+  {
+    "id": "ua_klimabewertung_2022:bj_ua_phk_biokl_siedl_2022",
+    "name": "Bioklimatische Gesamtbewertung der Siedlungsfl\u00e4chen anhand der Tag- und Nachtsituation 2022",
+    "name_lang": "Bioklimatische Gesamtbewertung der Siedlungsfl\u00e4chen anhand der Tag- und Nachtsituation 2022 (Klimabewertungskarten 2022 (Umweltatlas))",
+    "crs": "EPSG:25833",
+    "url": "https://gdi.berlin.de/services/wms/ua_klimabewertung_2022",
+    "typ": "WMS",
+    "gfiAttributes": "showAll",
+    "layers": "bj_ua_phk_biokl_siedl_2022",
+    "legend": true,
+    "datasets": [
+      {
+        "md_name": "Klimabewertungskarten 2022 (Umweltatlas)",
+        "md_id": "d002e10f-d745-49e5-98b1-bde00700f4e4",
+        "rs_id": "https://registry.gdi-de.org/id/de.be.csw/b12543bc-e79d-3af5-88fa-b54da877b30f",
+        "csw_url": "https://gdi.berlin.de/geonetwork/srv/ger/csw"
+      }
+    ],
+    "format": "image/png",
+    "version": "1.3.0",
+    "featureCount": "5",
+    "gfiTheme": "default",
+    "transparent": true,
+    "singleTile": true,
+    "infoFormat": "application/json",
+    "layerAttribution": "F\u00fcr die Nutzung der Daten ist die Datenlizenz Deutschland - Namensnennung - Version 2.0 anzuwenden. Die Lizenz ist \u00fcber https://www.govdata.de/dl-de/by-2-0 abrufbar. Der Quellenvermerk gem\u00e4\u00df (2) der Lizenz lautet \"Umweltatlas Berlin / [Titel des Datensatzes]\"."
+  },
+  {
+    "id": "ua_klimabewertung_2022:bk_ua_phk_ausgl_grfrei_2022",
+    "name": "N\u00e4chtliche Ausgleichfunktion von Gr\u00fcn- und Freifl\u00e4chen gegen\u00fcber den Siedlungsfl\u00e4chen 2022",
+    "name_lang": "N\u00e4chtliche Ausgleichfunktion von Gr\u00fcn- und Freifl\u00e4chen gegen\u00fcber den Siedlungsfl\u00e4chen 2022 (Klimabewertungskarten 2022 (Umweltatlas))",
+    "crs": "EPSG:25833",
+    "url": "https://gdi.berlin.de/services/wms/ua_klimabewertung_2022",
+    "typ": "WMS",
+    "gfiAttributes": "showAll",
+    "layers": "bk_ua_phk_ausgl_grfrei_2022",
+    "legend": true,
+    "datasets": [
+      {
+        "md_name": "Klimabewertungskarten 2022 (Umweltatlas)",
+        "md_id": "d002e10f-d745-49e5-98b1-bde00700f4e4",
+        "rs_id": "https://registry.gdi-de.org/id/de.be.csw/b12543bc-e79d-3af5-88fa-b54da877b30f",
+        "csw_url": "https://gdi.berlin.de/geonetwork/srv/ger/csw"
+      }
+    ],
+    "format": "image/png",
+    "version": "1.3.0",
+    "featureCount": "5",
+    "gfiTheme": "default",
+    "transparent": true,
+    "singleTile": true,
+    "infoFormat": "application/json",
+    "layerAttribution": "F\u00fcr die Nutzung der Daten ist die Datenlizenz Deutschland - Namensnennung - Version 2.0 anzuwenden. Die Lizenz ist \u00fcber https://www.govdata.de/dl-de/by-2-0 abrufbar. Der Quellenvermerk gem\u00e4\u00df (2) der Lizenz lautet \"Umweltatlas Berlin / [Titel des Datensatzes]\"."
+  },
+  {
+    "id": "ua_klimabewertung_2022:ca_ua_phk_aufenth_grfrei_tag_2022",
+    "name": "Gr\u00fcn- und Freifl\u00e4chen: Bewertung der Aufenthaltsqualit\u00e4t am Tag anhand des mittleren Physiologisch \u00c4quivalenten Temperatur (PET) pro Block(teil)fl\u00e4che um 14:00 Uhr [\u00b0C] 2022",
+    "name_lang": "Gr\u00fcn- und Freifl\u00e4chen: Bewertung der Aufenthaltsqualit\u00e4t am Tag anhand des mittleren Physiologisch \u00c4quivalenten Temperatur (PET) pro Block(teil)fl\u00e4che um 14:00 Uhr [\u00b0C] 2022 (Klimabewertungskarten 2022 (Umweltatlas))",
+    "crs": "EPSG:25833",
+    "url": "https://gdi.berlin.de/services/wms/ua_klimabewertung_2022",
+    "typ": "WMS",
+    "gfiAttributes": "showAll",
+    "layers": "ca_ua_phk_aufenth_grfrei_tag_2022",
+    "legend": true,
+    "datasets": [
+      {
+        "md_name": "Klimabewertungskarten 2022 (Umweltatlas)",
+        "md_id": "d002e10f-d745-49e5-98b1-bde00700f4e4",
+        "rs_id": "https://registry.gdi-de.org/id/de.be.csw/b12543bc-e79d-3af5-88fa-b54da877b30f",
+        "csw_url": "https://gdi.berlin.de/geonetwork/srv/ger/csw"
+      }
+    ],
+    "format": "image/png",
+    "version": "1.3.0",
+    "featureCount": "5",
+    "gfiTheme": "default",
+    "transparent": true,
+    "singleTile": true,
+    "infoFormat": "application/json",
+    "layerAttribution": "F\u00fcr die Nutzung der Daten ist die Datenlizenz Deutschland - Namensnennung - Version 2.0 anzuwenden. Die Lizenz ist \u00fcber https://www.govdata.de/dl-de/by-2-0 abrufbar. Der Quellenvermerk gem\u00e4\u00df (2) der Lizenz lautet \"Umweltatlas Berlin / [Titel des Datensatzes]\"."
+  },
+  {
+    "id": "ua_klimabewertung_2022:cb_ua_phk_bioklim_siedl_tag_2022",
+    "name": "Siedlungsfl\u00e4chen: Bewertung der bioklimatische Situation anhand des mittleren Physiologisch \u00c4quivalenten Temperatur (PET) pro Block(teil)fl\u00e4che um 14:00 Uhr [\u00b0C] 2022",
+    "name_lang": "Siedlungsfl\u00e4chen: Bewertung der bioklimatische Situation anhand des mittleren Physiologisch \u00c4quivalenten Temperatur (PET) pro Block(teil)fl\u00e4che um 14:00 Uhr [\u00b0C] 2022 (Klimabewertungskarten 2022 (Umweltatlas))",
+    "crs": "EPSG:25833",
+    "url": "https://gdi.berlin.de/services/wms/ua_klimabewertung_2022",
+    "typ": "WMS",
+    "gfiAttributes": "showAll",
+    "layers": "cb_ua_phk_bioklim_siedl_tag_2022",
+    "legend": true,
+    "datasets": [
+      {
+        "md_name": "Klimabewertungskarten 2022 (Umweltatlas)",
+        "md_id": "d002e10f-d745-49e5-98b1-bde00700f4e4",
+        "rs_id": "https://registry.gdi-de.org/id/de.be.csw/b12543bc-e79d-3af5-88fa-b54da877b30f",
+        "csw_url": "https://gdi.berlin.de/geonetwork/srv/ger/csw"
+      }
+    ],
+    "format": "image/png",
+    "version": "1.3.0",
+    "featureCount": "5",
+    "gfiTheme": "default",
+    "transparent": true,
+    "singleTile": true,
+    "infoFormat": "application/json",
+    "layerAttribution": "F\u00fcr die Nutzung der Daten ist die Datenlizenz Deutschland - Namensnennung - Version 2.0 anzuwenden. Die Lizenz ist \u00fcber https://www.govdata.de/dl-de/by-2-0 abrufbar. Der Quellenvermerk gem\u00e4\u00df (2) der Lizenz lautet \"Umweltatlas Berlin / [Titel des Datensatzes]\"."
+  },
+  {
+    "id": "ua_klimabewertung_2022:cc_ua_phk_bioklim_str_tag_2022",
+    "name": "Verkehrsfl\u00e4chen: Bewertung der bioklimatische Situation anhand des mittleren Physiologisch \u00c4quivalenten Temperatur (PET) pro Block(teil)fl\u00e4che um 14:00 Uhr [\u00b0C] 2022",
+    "name_lang": "Verkehrsfl\u00e4chen: Bewertung der bioklimatische Situation anhand des mittleren Physiologisch \u00c4quivalenten Temperatur (PET) pro Block(teil)fl\u00e4che um 14:00 Uhr [\u00b0C] 2022 (Klimabewertungskarten 2022 (Umweltatlas))",
+    "crs": "EPSG:25833",
+    "url": "https://gdi.berlin.de/services/wms/ua_klimabewertung_2022",
+    "typ": "WMS",
+    "gfiAttributes": "showAll",
+    "layers": "cc_ua_phk_bioklim_str_tag_2022",
+    "legend": true,
+    "datasets": [
+      {
+        "md_name": "Klimabewertungskarten 2022 (Umweltatlas)",
+        "md_id": "d002e10f-d745-49e5-98b1-bde00700f4e4",
+        "rs_id": "https://registry.gdi-de.org/id/de.be.csw/b12543bc-e79d-3af5-88fa-b54da877b30f",
+        "csw_url": "https://gdi.berlin.de/geonetwork/srv/ger/csw"
+      }
+    ],
+    "format": "image/png",
+    "version": "1.3.0",
+    "featureCount": "5",
+    "gfiTheme": "default",
+    "transparent": true,
+    "singleTile": true,
+    "infoFormat": "application/json",
+    "layerAttribution": "F\u00fcr die Nutzung der Daten ist die Datenlizenz Deutschland - Namensnennung - Version 2.0 anzuwenden. Die Lizenz ist \u00fcber https://www.govdata.de/dl-de/by-2-0 abrufbar. Der Quellenvermerk gem\u00e4\u00df (2) der Lizenz lautet \"Umweltatlas Berlin / [Titel des Datensatzes]\"."
+  },
+  {
+    "id": "ua_klimabewertung_2022:da_ua_phk_ausgleich_nacht_2022",
+    "name": "N\u00e4chtliche Ausgleichfunktion von Gr\u00fcn- und Freifl\u00e4chen gegen\u00fcber den Siedlungsfl\u00e4chen 2022",
+    "name_lang": "N\u00e4chtliche Ausgleichfunktion von Gr\u00fcn- und Freifl\u00e4chen gegen\u00fcber den Siedlungsfl\u00e4chen 2022 (Klimabewertungskarten 2022 (Umweltatlas))",
+    "crs": "EPSG:25833",
+    "url": "https://gdi.berlin.de/services/wms/ua_klimabewertung_2022",
+    "typ": "WMS",
+    "gfiAttributes": "showAll",
+    "layers": "da_ua_phk_ausgleich_nacht_2022",
+    "legend": true,
+    "datasets": [
+      {
+        "md_name": "Klimabewertungskarten 2022 (Umweltatlas)",
+        "md_id": "d002e10f-d745-49e5-98b1-bde00700f4e4",
+        "rs_id": "https://registry.gdi-de.org/id/de.be.csw/b12543bc-e79d-3af5-88fa-b54da877b30f",
+        "csw_url": "https://gdi.berlin.de/geonetwork/srv/ger/csw"
+      }
+    ],
+    "format": "image/png",
+    "version": "1.3.0",
+    "featureCount": "5",
+    "gfiTheme": "default",
+    "transparent": true,
+    "singleTile": true,
+    "infoFormat": "application/json",
+    "layerAttribution": "F\u00fcr die Nutzung der Daten ist die Datenlizenz Deutschland - Namensnennung - Version 2.0 anzuwenden. Die Lizenz ist \u00fcber https://www.govdata.de/dl-de/by-2-0 abrufbar. Der Quellenvermerk gem\u00e4\u00df (2) der Lizenz lautet \"Umweltatlas Berlin / [Titel des Datensatzes]\"."
+  },
+  {
+    "id": "ua_klimabewertung_2022:db_ua_phk_oschlaf_nacht_2022",
+    "name": "Stadtgebiete ohne Schlaffunktion 2022",
+    "name_lang": "Stadtgebiete ohne Schlaffunktion 2022 (Klimabewertungskarten 2022 (Umweltatlas))",
+    "crs": "EPSG:25833",
+    "url": "https://gdi.berlin.de/services/wms/ua_klimabewertung_2022",
+    "typ": "WMS",
+    "gfiAttributes": "showAll",
+    "layers": "db_ua_phk_oschlaf_nacht_2022",
+    "legend": true,
+    "datasets": [
+      {
+        "md_name": "Klimabewertungskarten 2022 (Umweltatlas)",
+        "md_id": "d002e10f-d745-49e5-98b1-bde00700f4e4",
+        "rs_id": "https://registry.gdi-de.org/id/de.be.csw/b12543bc-e79d-3af5-88fa-b54da877b30f",
+        "csw_url": "https://gdi.berlin.de/geonetwork/srv/ger/csw"
+      }
+    ],
+    "format": "image/png",
+    "version": "1.3.0",
+    "featureCount": "5",
+    "gfiTheme": "default",
+    "transparent": true,
+    "singleTile": true,
+    "infoFormat": "application/json",
+    "layerAttribution": "F\u00fcr die Nutzung der Daten ist die Datenlizenz Deutschland - Namensnennung - Version 2.0 anzuwenden. Die Lizenz ist \u00fcber https://www.govdata.de/dl-de/by-2-0 abrufbar. Der Quellenvermerk gem\u00e4\u00df (2) der Lizenz lautet \"Umweltatlas Berlin / [Titel des Datensatzes]\"."
+  },
+  {
+    "id": "ua_klimabewertung_2022:dc_ua_phk_bioklim_siedl_nacht_2022",
+    "name": "Siedlungsfl\u00e4chen: Bioklimatische Bewertung anhand der mittleren Lufttemperatur pro Block(teil)fl\u00e4che um 04:00 Uhr [\u00b0C] 2022",
+    "name_lang": "Siedlungsfl\u00e4chen: Bioklimatische Bewertung anhand der mittleren Lufttemperatur pro Block(teil)fl\u00e4che um 04:00 Uhr [\u00b0C] 2022 (Klimabewertungskarten 2022 (Umweltatlas))",
+    "crs": "EPSG:25833",
+    "url": "https://gdi.berlin.de/services/wms/ua_klimabewertung_2022",
+    "typ": "WMS",
+    "gfiAttributes": "showAll",
+    "layers": "dc_ua_phk_bioklim_siedl_nacht_2022",
+    "legend": true,
+    "datasets": [
+      {
+        "md_name": "Klimabewertungskarten 2022 (Umweltatlas)",
+        "md_id": "d002e10f-d745-49e5-98b1-bde00700f4e4",
+        "rs_id": "https://registry.gdi-de.org/id/de.be.csw/b12543bc-e79d-3af5-88fa-b54da877b30f",
+        "csw_url": "https://gdi.berlin.de/geonetwork/srv/ger/csw"
+      }
+    ],
+    "format": "image/png",
+    "version": "1.3.0",
+    "featureCount": "5",
+    "gfiTheme": "default",
+    "transparent": true,
+    "singleTile": true,
+    "infoFormat": "application/json",
+    "layerAttribution": "F\u00fcr die Nutzung der Daten ist die Datenlizenz Deutschland - Namensnennung - Version 2.0 anzuwenden. Die Lizenz ist \u00fcber https://www.govdata.de/dl-de/by-2-0 abrufbar. Der Quellenvermerk gem\u00e4\u00df (2) der Lizenz lautet \"Umweltatlas Berlin / [Titel des Datensatzes]\"."
+  },
+  {
+    "id": "ua_klimabewertung_2022:dd_ua_phk_bioklim_str_nacht_2022",
+    "name": "Verkehrsfl\u00e4chen: Bioklimatische Bewertung anhand der mittleren Lufttemperatur pro Block(teil)fl\u00e4che um 04:00 Uhr [\u00b0C] 2022",
+    "name_lang": "Verkehrsfl\u00e4chen: Bioklimatische Bewertung anhand der mittleren Lufttemperatur pro Block(teil)fl\u00e4che um 04:00 Uhr [\u00b0C] 2022 (Klimabewertungskarten 2022 (Umweltatlas))",
+    "crs": "EPSG:25833",
+    "url": "https://gdi.berlin.de/services/wms/ua_klimabewertung_2022",
+    "typ": "WMS",
+    "gfiAttributes": "showAll",
+    "layers": "dd_ua_phk_bioklim_str_nacht_2022",
+    "legend": true,
+    "datasets": [
+      {
+        "md_name": "Klimabewertungskarten 2022 (Umweltatlas)",
+        "md_id": "d002e10f-d745-49e5-98b1-bde00700f4e4",
+        "rs_id": "https://registry.gdi-de.org/id/de.be.csw/b12543bc-e79d-3af5-88fa-b54da877b30f",
+        "csw_url": "https://gdi.berlin.de/geonetwork/srv/ger/csw"
+      }
+    ],
+    "format": "image/png",
+    "version": "1.3.0",
+    "featureCount": "5",
+    "gfiTheme": "default",
+    "transparent": true,
+    "singleTile": true,
+    "infoFormat": "application/json",
+    "layerAttribution": "F\u00fcr die Nutzung der Daten ist die Datenlizenz Deutschland - Namensnennung - Version 2.0 anzuwenden. Die Lizenz ist \u00fcber https://www.govdata.de/dl-de/by-2-0 abrufbar. Der Quellenvermerk gem\u00e4\u00df (2) der Lizenz lautet \"Umweltatlas Berlin / [Titel des Datensatzes]\"."
+  },
+  {
+    "id": "ua_klimabewertung_2022:ea_ua_phk_vul_geb_therm_belast_2022",
+    "name": "Stadtgebiete mit sehr ung\u00fcnstiger thermischer Belastung gem\u00e4\u00df Planungshinweiskarte am Tag und Nacht 2022",
+    "name_lang": "Stadtgebiete mit sehr ung\u00fcnstiger thermischer Belastung gem\u00e4\u00df Planungshinweiskarte am Tag und Nacht 2022 (Klimabewertungskarten 2022 (Umweltatlas))",
+    "crs": "EPSG:25833",
+    "url": "https://gdi.berlin.de/services/wms/ua_klimabewertung_2022",
+    "typ": "WMS",
+    "gfiAttributes": "showAll",
+    "layers": "ea_ua_phk_vul_geb_therm_belast_2022",
+    "legend": true,
+    "datasets": [
+      {
+        "md_name": "Klimabewertungskarten 2022 (Umweltatlas)",
+        "md_id": "d002e10f-d745-49e5-98b1-bde00700f4e4",
+        "rs_id": "https://registry.gdi-de.org/id/de.be.csw/b12543bc-e79d-3af5-88fa-b54da877b30f",
+        "csw_url": "https://gdi.berlin.de/geonetwork/srv/ger/csw"
+      }
+    ],
+    "format": "image/png",
+    "version": "1.3.0",
+    "featureCount": "5",
+    "gfiTheme": "default",
+    "transparent": true,
+    "singleTile": true,
+    "infoFormat": "application/json",
+    "layerAttribution": "F\u00fcr die Nutzung der Daten ist die Datenlizenz Deutschland - Namensnennung - Version 2.0 anzuwenden. Die Lizenz ist \u00fcber https://www.govdata.de/dl-de/by-2-0 abrufbar. Der Quellenvermerk gem\u00e4\u00df (2) der Lizenz lautet \"Umweltatlas Berlin / [Titel des Datensatzes]\"."
+  },
+  {
+    "id": "ua_klimabewertung_2022:eb_ua_phk_vul_geb_demog_2022",
+    "name": "Stadtklimatisch besonderes vulnerable Stadtgebiete 2022",
+    "name_lang": "Stadtklimatisch besonderes vulnerable Stadtgebiete 2022 (Klimabewertungskarten 2022 (Umweltatlas))",
+    "crs": "EPSG:25833",
+    "url": "https://gdi.berlin.de/services/wms/ua_klimabewertung_2022",
+    "typ": "WMS",
+    "gfiAttributes": "showAll",
+    "layers": "eb_ua_phk_vul_geb_demog_2022",
+    "legend": true,
+    "datasets": [
+      {
+        "md_name": "Klimabewertungskarten 2022 (Umweltatlas)",
+        "md_id": "d002e10f-d745-49e5-98b1-bde00700f4e4",
+        "rs_id": "https://registry.gdi-de.org/id/de.be.csw/b12543bc-e79d-3af5-88fa-b54da877b30f",
+        "csw_url": "https://gdi.berlin.de/geonetwork/srv/ger/csw"
+      }
+    ],
+    "format": "image/png",
+    "version": "1.3.0",
+    "featureCount": "5",
+    "gfiTheme": "default",
+    "transparent": true,
+    "singleTile": true,
+    "infoFormat": "application/json",
+    "layerAttribution": "F\u00fcr die Nutzung der Daten ist die Datenlizenz Deutschland - Namensnennung - Version 2.0 anzuwenden. Die Lizenz ist \u00fcber https://www.govdata.de/dl-de/by-2-0 abrufbar. Der Quellenvermerk gem\u00e4\u00df (2) der Lizenz lautet \"Umweltatlas Berlin / [Titel des Datensatzes]\"."
+  },
+  {
+    "id": "ua_klimabewertung_2022:fh_ua_phk_m8_2022",
+    "name": "M-08 Durchl\u00fcften (Blau-gr\u00fcne Stadtentwicklung) 2022",
+    "name_lang": "M-08 Durchl\u00fcften (Blau-gr\u00fcne Stadtentwicklung) 2022 (Klimabewertungskarten 2022 (Umweltatlas))",
+    "crs": "EPSG:25833",
+    "url": "https://gdi.berlin.de/services/wms/ua_klimabewertung_2022",
+    "typ": "WMS",
+    "gfiAttributes": "showAll",
+    "layers": "fh_ua_phk_m8_2022",
+    "legend": true,
+    "datasets": [
+      {
+        "md_name": "Klimabewertungskarten 2022 (Umweltatlas)",
+        "md_id": "d002e10f-d745-49e5-98b1-bde00700f4e4",
+        "rs_id": "https://registry.gdi-de.org/id/de.be.csw/b12543bc-e79d-3af5-88fa-b54da877b30f",
+        "csw_url": "https://gdi.berlin.de/geonetwork/srv/ger/csw"
+      }
+    ],
+    "format": "image/png",
+    "version": "1.3.0",
+    "featureCount": "5",
+    "gfiTheme": "default",
+    "transparent": true,
+    "singleTile": true,
+    "infoFormat": "application/json",
+    "layerAttribution": "F\u00fcr die Nutzung der Daten ist die Datenlizenz Deutschland - Namensnennung - Version 2.0 anzuwenden. Die Lizenz ist \u00fcber https://www.govdata.de/dl-de/by-2-0 abrufbar. Der Quellenvermerk gem\u00e4\u00df (2) der Lizenz lautet \"Umweltatlas Berlin / [Titel des Datensatzes]\"."
+  },
+  {
+    "id": "ua_klimabewertung_2022:fi_ua_phk_m9_2022",
+    "name": "M-09 Verschatten (Blau-gr\u00fcne Stadtentwicklung) 2022",
+    "name_lang": "M-09 Verschatten (Blau-gr\u00fcne Stadtentwicklung) 2022 (Klimabewertungskarten 2022 (Umweltatlas))",
+    "crs": "EPSG:25833",
+    "url": "https://gdi.berlin.de/services/wms/ua_klimabewertung_2022",
+    "typ": "WMS",
+    "gfiAttributes": "showAll",
+    "layers": "fi_ua_phk_m9_2022",
+    "legend": true,
+    "datasets": [
+      {
+        "md_name": "Klimabewertungskarten 2022 (Umweltatlas)",
+        "md_id": "d002e10f-d745-49e5-98b1-bde00700f4e4",
+        "rs_id": "https://registry.gdi-de.org/id/de.be.csw/b12543bc-e79d-3af5-88fa-b54da877b30f",
+        "csw_url": "https://gdi.berlin.de/geonetwork/srv/ger/csw"
+      }
+    ],
+    "format": "image/png",
+    "version": "1.3.0",
+    "featureCount": "5",
+    "gfiTheme": "default",
+    "transparent": true,
+    "singleTile": true,
+    "infoFormat": "application/json",
+    "layerAttribution": "F\u00fcr die Nutzung der Daten ist die Datenlizenz Deutschland - Namensnennung - Version 2.0 anzuwenden. Die Lizenz ist \u00fcber https://www.govdata.de/dl-de/by-2-0 abrufbar. Der Quellenvermerk gem\u00e4\u00df (2) der Lizenz lautet \"Umweltatlas Berlin / [Titel des Datensatzes]\"."
+  },
+  {
+    "id": "ua_klimabewertung_2022:fj_ua_phk_m10_2022",
+    "name": "M-10 Begr\u00fcnen (Blau-gr\u00fcne Stadtentwicklung) 2022",
+    "name_lang": "M-10 Begr\u00fcnen (Blau-gr\u00fcne Stadtentwicklung) 2022 (Klimabewertungskarten 2022 (Umweltatlas))",
+    "crs": "EPSG:25833",
+    "url": "https://gdi.berlin.de/services/wms/ua_klimabewertung_2022",
+    "typ": "WMS",
+    "gfiAttributes": "showAll",
+    "layers": "fj_ua_phk_m10_2022",
+    "legend": true,
+    "datasets": [
+      {
+        "md_name": "Klimabewertungskarten 2022 (Umweltatlas)",
+        "md_id": "d002e10f-d745-49e5-98b1-bde00700f4e4",
+        "rs_id": "https://registry.gdi-de.org/id/de.be.csw/b12543bc-e79d-3af5-88fa-b54da877b30f",
+        "csw_url": "https://gdi.berlin.de/geonetwork/srv/ger/csw"
+      }
+    ],
+    "format": "image/png",
+    "version": "1.3.0",
+    "featureCount": "5",
+    "gfiTheme": "default",
+    "transparent": true,
+    "singleTile": true,
+    "infoFormat": "application/json",
+    "layerAttribution": "F\u00fcr die Nutzung der Daten ist die Datenlizenz Deutschland - Namensnennung - Version 2.0 anzuwenden. Die Lizenz ist \u00fcber https://www.govdata.de/dl-de/by-2-0 abrufbar. Der Quellenvermerk gem\u00e4\u00df (2) der Lizenz lautet \"Umweltatlas Berlin / [Titel des Datensatzes]\"."
+  },
+  {
+    "id": "ua_klimabewertung_2022:fk_ua_phk_m11_2022",
+    "name": "M-11 Verdunsten (Blau-gr\u00fcne Stadtentwicklung) 2022",
+    "name_lang": "M-11 Verdunsten (Blau-gr\u00fcne Stadtentwicklung) 2022 (Klimabewertungskarten 2022 (Umweltatlas))",
+    "crs": "EPSG:25833",
+    "url": "https://gdi.berlin.de/services/wms/ua_klimabewertung_2022",
+    "typ": "WMS",
+    "gfiAttributes": "showAll",
+    "layers": "fk_ua_phk_m11_2022",
+    "legend": true,
+    "datasets": [
+      {
+        "md_name": "Klimabewertungskarten 2022 (Umweltatlas)",
+        "md_id": "d002e10f-d745-49e5-98b1-bde00700f4e4",
+        "rs_id": "https://registry.gdi-de.org/id/de.be.csw/b12543bc-e79d-3af5-88fa-b54da877b30f",
+        "csw_url": "https://gdi.berlin.de/geonetwork/srv/ger/csw"
+      }
+    ],
+    "format": "image/png",
+    "version": "1.3.0",
+    "featureCount": "5",
+    "gfiTheme": "default",
+    "transparent": true,
+    "singleTile": true,
+    "infoFormat": "application/json",
+    "layerAttribution": "F\u00fcr die Nutzung der Daten ist die Datenlizenz Deutschland - Namensnennung - Version 2.0 anzuwenden. Die Lizenz ist \u00fcber https://www.govdata.de/dl-de/by-2-0 abrufbar. Der Quellenvermerk gem\u00e4\u00df (2) der Lizenz lautet \"Umweltatlas Berlin / [Titel des Datensatzes]\"."
+  },
+  {
+    "id": "ua_klimabewertung_2022:fl_ua_phk_m12_2022",
+    "name": "M-12 Klimakomfortpl\u00e4tze anlegen (Blau-gr\u00fcne Stadtentwicklung) 2022",
+    "name_lang": "M-12 Klimakomfortpl\u00e4tze anlegen (Blau-gr\u00fcne Stadtentwicklung) 2022 (Klimabewertungskarten 2022 (Umweltatlas))",
+    "crs": "EPSG:25833",
+    "url": "https://gdi.berlin.de/services/wms/ua_klimabewertung_2022",
+    "typ": "WMS",
+    "gfiAttributes": "showAll",
+    "layers": "fl_ua_phk_m12_2022",
+    "legend": true,
+    "datasets": [
+      {
+        "md_name": "Klimabewertungskarten 2022 (Umweltatlas)",
+        "md_id": "d002e10f-d745-49e5-98b1-bde00700f4e4",
+        "rs_id": "https://registry.gdi-de.org/id/de.be.csw/b12543bc-e79d-3af5-88fa-b54da877b30f",
+        "csw_url": "https://gdi.berlin.de/geonetwork/srv/ger/csw"
+      }
+    ],
+    "format": "image/png",
+    "version": "1.3.0",
+    "featureCount": "5",
+    "gfiTheme": "default",
+    "transparent": true,
+    "singleTile": true,
+    "infoFormat": "application/json",
+    "layerAttribution": "F\u00fcr die Nutzung der Daten ist die Datenlizenz Deutschland - Namensnennung - Version 2.0 anzuwenden. Die Lizenz ist \u00fcber https://www.govdata.de/dl-de/by-2-0 abrufbar. Der Quellenvermerk gem\u00e4\u00df (2) der Lizenz lautet \"Umweltatlas Berlin / [Titel des Datensatzes]\"."
+  },
+  {
+    "id": "ua_klimabewertung_2022:fm_ua_phk_m13_2022",
+    "name": "M-13 R\u00fcckstrahlen (Blau-gr\u00fcne Stadtentwicklung) 2022",
+    "name_lang": "M-13 R\u00fcckstrahlen (Blau-gr\u00fcne Stadtentwicklung) 2022 (Klimabewertungskarten 2022 (Umweltatlas))",
+    "crs": "EPSG:25833",
+    "url": "https://gdi.berlin.de/services/wms/ua_klimabewertung_2022",
+    "typ": "WMS",
+    "gfiAttributes": "showAll",
+    "layers": "fm_ua_phk_m13_2022",
+    "legend": true,
+    "datasets": [
+      {
+        "md_name": "Klimabewertungskarten 2022 (Umweltatlas)",
+        "md_id": "d002e10f-d745-49e5-98b1-bde00700f4e4",
+        "rs_id": "https://registry.gdi-de.org/id/de.be.csw/b12543bc-e79d-3af5-88fa-b54da877b30f",
+        "csw_url": "https://gdi.berlin.de/geonetwork/srv/ger/csw"
+      }
+    ],
+    "format": "image/png",
+    "version": "1.3.0",
+    "featureCount": "5",
+    "gfiTheme": "default",
+    "transparent": true,
+    "singleTile": true,
+    "infoFormat": "application/json",
+    "layerAttribution": "F\u00fcr die Nutzung der Daten ist die Datenlizenz Deutschland - Namensnennung - Version 2.0 anzuwenden. Die Lizenz ist \u00fcber https://www.govdata.de/dl-de/by-2-0 abrufbar. Der Quellenvermerk gem\u00e4\u00df (2) der Lizenz lautet \"Umweltatlas Berlin / [Titel des Datensatzes]\"."
+  },
+  {
+    "id": "ua_klimabewertung_2022:fn_ua_phk_m14_2022",
+    "name": "M-14 Ausstattung klimaoptimieren (klimaoptimierte, k\u00fchlende Gr\u00fcn- und Freir\u00e4ume) 2022",
+    "name_lang": "M-14 Ausstattung klimaoptimieren (klimaoptimierte, k\u00fchlende Gr\u00fcn- und Freir\u00e4ume) 2022 (Klimabewertungskarten 2022 (Umweltatlas))",
+    "crs": "EPSG:25833",
+    "url": "https://gdi.berlin.de/services/wms/ua_klimabewertung_2022",
+    "typ": "WMS",
+    "gfiAttributes": "showAll",
+    "layers": "fn_ua_phk_m14_2022",
+    "legend": true,
+    "datasets": [
+      {
+        "md_name": "Klimabewertungskarten 2022 (Umweltatlas)",
+        "md_id": "d002e10f-d745-49e5-98b1-bde00700f4e4",
+        "rs_id": "https://registry.gdi-de.org/id/de.be.csw/b12543bc-e79d-3af5-88fa-b54da877b30f",
+        "csw_url": "https://gdi.berlin.de/geonetwork/srv/ger/csw"
+      }
+    ],
+    "format": "image/png",
+    "version": "1.3.0",
+    "featureCount": "5",
+    "gfiTheme": "default",
+    "transparent": true,
+    "singleTile": true,
+    "infoFormat": "application/json",
+    "layerAttribution": "F\u00fcr die Nutzung der Daten ist die Datenlizenz Deutschland - Namensnennung - Version 2.0 anzuwenden. Die Lizenz ist \u00fcber https://www.govdata.de/dl-de/by-2-0 abrufbar. Der Quellenvermerk gem\u00e4\u00df (2) der Lizenz lautet \"Umweltatlas Berlin / [Titel des Datensatzes]\"."
+  },
+  {
+    "id": "ua_klimabewertung_2022:fo_ua_phk_m15_2022",
+    "name": "M-15 Bew\u00e4ssern (klimaoptimierte, k\u00fchlende Gr\u00fcn- und Freir\u00e4ume) 2022",
+    "name_lang": "M-15 Bew\u00e4ssern (klimaoptimierte, k\u00fchlende Gr\u00fcn- und Freir\u00e4ume) 2022 (Klimabewertungskarten 2022 (Umweltatlas))",
+    "crs": "EPSG:25833",
+    "url": "https://gdi.berlin.de/services/wms/ua_klimabewertung_2022",
+    "typ": "WMS",
+    "gfiAttributes": "showAll",
+    "layers": "fo_ua_phk_m15_2022",
+    "legend": true,
+    "datasets": [
+      {
+        "md_name": "Klimabewertungskarten 2022 (Umweltatlas)",
+        "md_id": "d002e10f-d745-49e5-98b1-bde00700f4e4",
+        "rs_id": "https://registry.gdi-de.org/id/de.be.csw/b12543bc-e79d-3af5-88fa-b54da877b30f",
+        "csw_url": "https://gdi.berlin.de/geonetwork/srv/ger/csw"
+      }
+    ],
+    "format": "image/png",
+    "version": "1.3.0",
+    "featureCount": "5",
+    "gfiTheme": "default",
+    "transparent": true,
+    "singleTile": true,
+    "infoFormat": "application/json",
+    "layerAttribution": "F\u00fcr die Nutzung der Daten ist die Datenlizenz Deutschland - Namensnennung - Version 2.0 anzuwenden. Die Lizenz ist \u00fcber https://www.govdata.de/dl-de/by-2-0 abrufbar. Der Quellenvermerk gem\u00e4\u00df (2) der Lizenz lautet \"Umweltatlas Berlin / [Titel des Datensatzes]\"."
+  },
+  {
+    "id": "ua_klimabewertung_2022:fp_ua_phk_m16_2022",
+    "name": "M-16 Mehrfach nutzen (klimaoptimierte, k\u00fchlende Gr\u00fcn- und Freir\u00e4ume) 2022",
+    "name_lang": "M-16 Mehrfach nutzen (klimaoptimierte, k\u00fchlende Gr\u00fcn- und Freir\u00e4ume) 2022 (Klimabewertungskarten 2022 (Umweltatlas))",
+    "crs": "EPSG:25833",
+    "url": "https://gdi.berlin.de/services/wms/ua_klimabewertung_2022",
+    "typ": "WMS",
+    "gfiAttributes": "showAll",
+    "layers": "fp_ua_phk_m16_2022",
+    "legend": true,
+    "datasets": [
+      {
+        "md_name": "Klimabewertungskarten 2022 (Umweltatlas)",
+        "md_id": "d002e10f-d745-49e5-98b1-bde00700f4e4",
+        "rs_id": "https://registry.gdi-de.org/id/de.be.csw/b12543bc-e79d-3af5-88fa-b54da877b30f",
+        "csw_url": "https://gdi.berlin.de/geonetwork/srv/ger/csw"
+      }
+    ],
+    "format": "image/png",
+    "version": "1.3.0",
+    "featureCount": "5",
+    "gfiTheme": "default",
+    "transparent": true,
+    "singleTile": true,
+    "infoFormat": "application/json",
+    "layerAttribution": "F\u00fcr die Nutzung der Daten ist die Datenlizenz Deutschland - Namensnennung - Version 2.0 anzuwenden. Die Lizenz ist \u00fcber https://www.govdata.de/dl-de/by-2-0 abrufbar. Der Quellenvermerk gem\u00e4\u00df (2) der Lizenz lautet \"Umweltatlas Berlin / [Titel des Datensatzes]\"."
+  },
+  {
+    "id": "ua_klimabewertung_2022:fq_ua_phk_m17_2022",
+    "name": "M-17 CO2 binden und speichern (klimaoptimierte, k\u00fchlende Gr\u00fcn- und Freir\u00e4ume) 2022",
+    "name_lang": "M-17 CO2 binden und speichern (klimaoptimierte, k\u00fchlende Gr\u00fcn- und Freir\u00e4ume) 2022 (Klimabewertungskarten 2022 (Umweltatlas))",
+    "crs": "EPSG:25833",
+    "url": "https://gdi.berlin.de/services/wms/ua_klimabewertung_2022",
+    "typ": "WMS",
+    "gfiAttributes": "showAll",
+    "layers": "fq_ua_phk_m17_2022",
+    "legend": true,
+    "datasets": [
+      {
+        "md_name": "Klimabewertungskarten 2022 (Umweltatlas)",
+        "md_id": "d002e10f-d745-49e5-98b1-bde00700f4e4",
+        "rs_id": "https://registry.gdi-de.org/id/de.be.csw/b12543bc-e79d-3af5-88fa-b54da877b30f",
+        "csw_url": "https://gdi.berlin.de/geonetwork/srv/ger/csw"
+      }
+    ],
+    "format": "image/png",
+    "version": "1.3.0",
+    "featureCount": "5",
+    "gfiTheme": "default",
+    "transparent": true,
+    "singleTile": true,
+    "infoFormat": "application/json",
+    "layerAttribution": "F\u00fcr die Nutzung der Daten ist die Datenlizenz Deutschland - Namensnennung - Version 2.0 anzuwenden. Die Lizenz ist \u00fcber https://www.govdata.de/dl-de/by-2-0 abrufbar. Der Quellenvermerk gem\u00e4\u00df (2) der Lizenz lautet \"Umweltatlas Berlin / [Titel des Datensatzes]\"."
+  },
+  {
+    "id": "ua_klimabewertung_2022:fr_ua_phk_m18_2022",
+    "name": "M-18 Regenwasser speichern (Synergie Stadt und Wasser) 2022",
+    "name_lang": "M-18 Regenwasser speichern (Synergie Stadt und Wasser) 2022 (Klimabewertungskarten 2022 (Umweltatlas))",
+    "crs": "EPSG:25833",
+    "url": "https://gdi.berlin.de/services/wms/ua_klimabewertung_2022",
+    "typ": "WMS",
+    "gfiAttributes": "showAll",
+    "layers": "fr_ua_phk_m18_2022",
+    "legend": true,
+    "datasets": [
+      {
+        "md_name": "Klimabewertungskarten 2022 (Umweltatlas)",
+        "md_id": "d002e10f-d745-49e5-98b1-bde00700f4e4",
+        "rs_id": "https://registry.gdi-de.org/id/de.be.csw/b12543bc-e79d-3af5-88fa-b54da877b30f",
+        "csw_url": "https://gdi.berlin.de/geonetwork/srv/ger/csw"
+      }
+    ],
+    "format": "image/png",
+    "version": "1.3.0",
+    "featureCount": "5",
+    "gfiTheme": "default",
+    "transparent": true,
+    "singleTile": true,
+    "infoFormat": "application/json",
+    "layerAttribution": "F\u00fcr die Nutzung der Daten ist die Datenlizenz Deutschland - Namensnennung - Version 2.0 anzuwenden. Die Lizenz ist \u00fcber https://www.govdata.de/dl-de/by-2-0 abrufbar. Der Quellenvermerk gem\u00e4\u00df (2) der Lizenz lautet \"Umweltatlas Berlin / [Titel des Datensatzes]\"."
+  },
+  {
+    "id": "ua_klimabewertung_2022:fs_ua_phk_m19_2022",
+    "name": "M-19 Versickern (Synergie Stadt und Wasser) 2022",
+    "name_lang": "M-19 Versickern (Synergie Stadt und Wasser) 2022 (Klimabewertungskarten 2022 (Umweltatlas))",
+    "crs": "EPSG:25833",
+    "url": "https://gdi.berlin.de/services/wms/ua_klimabewertung_2022",
+    "typ": "WMS",
+    "gfiAttributes": "showAll",
+    "layers": "fs_ua_phk_m19_2022",
+    "legend": true,
+    "datasets": [
+      {
+        "md_name": "Klimabewertungskarten 2022 (Umweltatlas)",
+        "md_id": "d002e10f-d745-49e5-98b1-bde00700f4e4",
+        "rs_id": "https://registry.gdi-de.org/id/de.be.csw/b12543bc-e79d-3af5-88fa-b54da877b30f",
+        "csw_url": "https://gdi.berlin.de/geonetwork/srv/ger/csw"
+      }
+    ],
+    "format": "image/png",
+    "version": "1.3.0",
+    "featureCount": "5",
+    "gfiTheme": "default",
+    "transparent": true,
+    "singleTile": true,
+    "infoFormat": "application/json",
+    "layerAttribution": "F\u00fcr die Nutzung der Daten ist die Datenlizenz Deutschland - Namensnennung - Version 2.0 anzuwenden. Die Lizenz ist \u00fcber https://www.govdata.de/dl-de/by-2-0 abrufbar. Der Quellenvermerk gem\u00e4\u00df (2) der Lizenz lautet \"Umweltatlas Berlin / [Titel des Datensatzes]\"."
+  },
+  {
+    "id": "ua_klimabewertung_2022:ft_ua_phk_m20_2022",
+    "name": "M-20 Zuf\u00fchren (Synergie Stadt und Wasser) 2022",
+    "name_lang": "M-20 Zuf\u00fchren (Synergie Stadt und Wasser) 2022 (Klimabewertungskarten 2022 (Umweltatlas))",
+    "crs": "EPSG:25833",
+    "url": "https://gdi.berlin.de/services/wms/ua_klimabewertung_2022",
+    "typ": "WMS",
+    "gfiAttributes": "showAll",
+    "layers": "ft_ua_phk_m20_2022",
+    "legend": true,
+    "datasets": [
+      {
+        "md_name": "Klimabewertungskarten 2022 (Umweltatlas)",
+        "md_id": "d002e10f-d745-49e5-98b1-bde00700f4e4",
+        "rs_id": "https://registry.gdi-de.org/id/de.be.csw/b12543bc-e79d-3af5-88fa-b54da877b30f",
+        "csw_url": "https://gdi.berlin.de/geonetwork/srv/ger/csw"
+      }
+    ],
+    "format": "image/png",
+    "version": "1.3.0",
+    "featureCount": "5",
+    "gfiTheme": "default",
+    "transparent": true,
+    "singleTile": true,
+    "infoFormat": "application/json",
+    "layerAttribution": "F\u00fcr die Nutzung der Daten ist die Datenlizenz Deutschland - Namensnennung - Version 2.0 anzuwenden. Die Lizenz ist \u00fcber https://www.govdata.de/dl-de/by-2-0 abrufbar. Der Quellenvermerk gem\u00e4\u00df (2) der Lizenz lautet \"Umweltatlas Berlin / [Titel des Datensatzes]\"."
+  },
+  {
+    "id": "ua_klimabewertung_2022:fu_ua_phk_m21_2022",
+    "name": "M-21 Retentionsr\u00e4ume schaffen (Vorsorge Starkregen + Hochwasser) 2022",
+    "name_lang": "M-21 Retentionsr\u00e4ume schaffen (Vorsorge Starkregen + Hochwasser) 2022 (Klimabewertungskarten 2022 (Umweltatlas))",
+    "crs": "EPSG:25833",
+    "url": "https://gdi.berlin.de/services/wms/ua_klimabewertung_2022",
+    "typ": "WMS",
+    "gfiAttributes": "showAll",
+    "layers": "fu_ua_phk_m21_2022",
+    "legend": true,
+    "datasets": [
+      {
+        "md_name": "Klimabewertungskarten 2022 (Umweltatlas)",
+        "md_id": "d002e10f-d745-49e5-98b1-bde00700f4e4",
+        "rs_id": "https://registry.gdi-de.org/id/de.be.csw/b12543bc-e79d-3af5-88fa-b54da877b30f",
+        "csw_url": "https://gdi.berlin.de/geonetwork/srv/ger/csw"
+      }
+    ],
+    "format": "image/png",
+    "version": "1.3.0",
+    "featureCount": "5",
+    "gfiTheme": "default",
+    "transparent": true,
+    "singleTile": true,
+    "infoFormat": "application/json",
+    "layerAttribution": "F\u00fcr die Nutzung der Daten ist die Datenlizenz Deutschland - Namensnennung - Version 2.0 anzuwenden. Die Lizenz ist \u00fcber https://www.govdata.de/dl-de/by-2-0 abrufbar. Der Quellenvermerk gem\u00e4\u00df (2) der Lizenz lautet \"Umweltatlas Berlin / [Titel des Datensatzes]\"."
+  },
+  {
+    "id": "ua_klimabewertung_2022:fv_ua_phk_m22_2022",
+    "name": "M-22 Starkregenabfl\u00fcsse leiten (Vorsorge Starkregen + Hochwasser) 2022",
+    "name_lang": "M-22 Starkregenabfl\u00fcsse leiten (Vorsorge Starkregen + Hochwasser) 2022 (Klimabewertungskarten 2022 (Umweltatlas))",
+    "crs": "EPSG:25833",
+    "url": "https://gdi.berlin.de/services/wms/ua_klimabewertung_2022",
+    "typ": "WMS",
+    "gfiAttributes": "showAll",
+    "layers": "fv_ua_phk_m22_2022",
+    "legend": true,
+    "datasets": [
+      {
+        "md_name": "Klimabewertungskarten 2022 (Umweltatlas)",
+        "md_id": "d002e10f-d745-49e5-98b1-bde00700f4e4",
+        "rs_id": "https://registry.gdi-de.org/id/de.be.csw/b12543bc-e79d-3af5-88fa-b54da877b30f",
+        "csw_url": "https://gdi.berlin.de/geonetwork/srv/ger/csw"
+      }
+    ],
+    "format": "image/png",
+    "version": "1.3.0",
+    "featureCount": "5",
+    "gfiTheme": "default",
+    "transparent": true,
+    "singleTile": true,
+    "infoFormat": "application/json",
+    "layerAttribution": "F\u00fcr die Nutzung der Daten ist die Datenlizenz Deutschland - Namensnennung - Version 2.0 anzuwenden. Die Lizenz ist \u00fcber https://www.govdata.de/dl-de/by-2-0 abrufbar. Der Quellenvermerk gem\u00e4\u00df (2) der Lizenz lautet \"Umweltatlas Berlin / [Titel des Datensatzes]\"."
+  },
+  {
+    "id": "ua_klimabewertung_2022:fw_ua_phk_m23_2022",
+    "name": "M-23 Sch\u00fctzen (Vorsorge Starkregen + Hochwasser) 2022",
+    "name_lang": "M-23 Sch\u00fctzen (Vorsorge Starkregen + Hochwasser) 2022 (Klimabewertungskarten 2022 (Umweltatlas))",
+    "crs": "EPSG:25833",
+    "url": "https://gdi.berlin.de/services/wms/ua_klimabewertung_2022",
+    "typ": "WMS",
+    "gfiAttributes": "showAll",
+    "layers": "fw_ua_phk_m23_2022",
+    "legend": true,
+    "datasets": [
+      {
+        "md_name": "Klimabewertungskarten 2022 (Umweltatlas)",
+        "md_id": "d002e10f-d745-49e5-98b1-bde00700f4e4",
+        "rs_id": "https://registry.gdi-de.org/id/de.be.csw/b12543bc-e79d-3af5-88fa-b54da877b30f",
+        "csw_url": "https://gdi.berlin.de/geonetwork/srv/ger/csw"
+      }
+    ],
+    "format": "image/png",
+    "version": "1.3.0",
+    "featureCount": "5",
+    "gfiTheme": "default",
+    "transparent": true,
+    "singleTile": true,
+    "infoFormat": "application/json",
+    "layerAttribution": "F\u00fcr die Nutzung der Daten ist die Datenlizenz Deutschland - Namensnennung - Version 2.0 anzuwenden. Die Lizenz ist \u00fcber https://www.govdata.de/dl-de/by-2-0 abrufbar. Der Quellenvermerk gem\u00e4\u00df (2) der Lizenz lautet \"Umweltatlas Berlin / [Titel des Datensatzes]\"."
+  },
+  {
+    "id": "ua_klimabewertung_2022:aa_ua_phk_alkisgeb_2022",
+    "name": "Geb\u00e4ude (ALKIS, Stand 11/2022)",
+    "name_lang": "Geb\u00e4ude (ALKIS, Stand 11/2022) (Klimabewertungskarten 2022 (Umweltatlas))",
+    "crs": "EPSG:25833",
+    "url": "https://gdi.berlin.de/services/wms/ua_klimabewertung_2022",
+    "typ": "WMS",
+    "gfiAttributes": "showAll",
+    "layers": "aa_ua_phk_alkisgeb_2022",
+    "legend": true,
+    "datasets": [
+      {
+        "md_name": "Klimabewertungskarten 2022 (Umweltatlas)",
+        "md_id": "d002e10f-d745-49e5-98b1-bde00700f4e4",
+        "rs_id": "https://registry.gdi-de.org/id/de.be.csw/b12543bc-e79d-3af5-88fa-b54da877b30f",
+        "csw_url": "https://gdi.berlin.de/geonetwork/srv/ger/csw"
+      }
+    ],
+    "maxScale": "25000.0",
+    "format": "image/png",
+    "version": "1.3.0",
+    "featureCount": "5",
+    "gfiTheme": "default",
+    "transparent": true,
+    "singleTile": true,
+    "infoFormat": "application/json",
+    "layerAttribution": "F\u00fcr die Nutzung der Daten ist die Datenlizenz Deutschland - Namensnennung - Version 2.0 anzuwenden. Die Lizenz ist \u00fcber https://www.govdata.de/dl-de/by-2-0 abrufbar. Der Quellenvermerk gem\u00e4\u00df (2) der Lizenz lautet \"Umweltatlas Berlin / [Titel des Datensatzes]\"."
+  },
+  {
+    "id": "ua_klimabewertung_2022:ab_ua_phk_gebsonst_2022",
+    "name": "Sonstige Geb\u00e4ude",
+    "name_lang": "Sonstige Geb\u00e4ude (Klimabewertungskarten 2022 (Umweltatlas))",
+    "crs": "EPSG:25833",
+    "url": "https://gdi.berlin.de/services/wms/ua_klimabewertung_2022",
+    "typ": "WMS",
+    "gfiAttributes": "showAll",
+    "layers": "ab_ua_phk_gebsonst_2022",
+    "legend": true,
+    "datasets": [
+      {
+        "md_name": "Klimabewertungskarten 2022 (Umweltatlas)",
+        "md_id": "d002e10f-d745-49e5-98b1-bde00700f4e4",
+        "rs_id": "https://registry.gdi-de.org/id/de.be.csw/b12543bc-e79d-3af5-88fa-b54da877b30f",
+        "csw_url": "https://gdi.berlin.de/geonetwork/srv/ger/csw"
+      }
+    ],
+    "maxScale": "25000.0",
+    "format": "image/png",
+    "version": "1.3.0",
+    "featureCount": "5",
+    "gfiTheme": "default",
+    "transparent": true,
+    "singleTile": true,
+    "infoFormat": "application/json",
+    "layerAttribution": "F\u00fcr die Nutzung der Daten ist die Datenlizenz Deutschland - Namensnennung - Version 2.0 anzuwenden. Die Lizenz ist \u00fcber https://www.govdata.de/dl-de/by-2-0 abrufbar. Der Quellenvermerk gem\u00e4\u00df (2) der Lizenz lautet \"Umweltatlas Berlin / [Titel des Datensatzes]\"."
+  },
+  {
+    "id": "ua_klimabewertung_2022:g_ua_phk_gew_2022",
+    "name": "Gew\u00e4sser 2022",
+    "name_lang": "Gew\u00e4sser 2022 (Klimabewertungskarten 2022 (Umweltatlas))",
+    "crs": "EPSG:25833",
+    "url": "https://gdi.berlin.de/services/wms/ua_klimabewertung_2022",
+    "typ": "WMS",
+    "gfiAttributes": "showAll",
+    "layers": "g_ua_phk_gew_2022",
+    "legend": true,
+    "datasets": [
+      {
+        "md_name": "Klimabewertungskarten 2022 (Umweltatlas)",
+        "md_id": "d002e10f-d745-49e5-98b1-bde00700f4e4",
+        "rs_id": "https://registry.gdi-de.org/id/de.be.csw/b12543bc-e79d-3af5-88fa-b54da877b30f",
+        "csw_url": "https://gdi.berlin.de/geonetwork/srv/ger/csw"
+      }
+    ],
+    "format": "image/png",
+    "version": "1.3.0",
+    "featureCount": "5",
+    "gfiTheme": "default",
+    "transparent": true,
+    "singleTile": true,
+    "infoFormat": "application/json",
+    "layerAttribution": "F\u00fcr die Nutzung der Daten ist die Datenlizenz Deutschland - Namensnennung - Version 2.0 anzuwenden. Die Lizenz ist \u00fcber https://www.govdata.de/dl-de/by-2-0 abrufbar. Der Quellenvermerk gem\u00e4\u00df (2) der Lizenz lautet \"Umweltatlas Berlin / [Titel des Datensatzes]\"."
+  },
+  {
+    "id": "ua_klimaanalyse_2022:wfs:ta_kak_luftaustausch_2022",
+    "name": "Luftaustausch 2022",
+    "crs": "urn:ogc:def:crs:EPSG::25833",
+    "url": "https://gdi.berlin.de/services/wfs/ua_klimaanalyse_2022",
+    "typ": "WFS",
+    "featureType": "ua_klimaanalyse_2022:ta_kak_luftaustausch_2022",
+    "featureNS": "ua_klimaanalyse_2022",
+    "datasets": [
+      {
+        "md_name": "Klimaanalysekarten 2022 (Umweltatlas)",
+        "md_id": "8ea601b2-9a12-4123-bb19-b5774fe3003b",
+        "rs_id": "https://registry.gdi-de.org/id/de.be.csw/78c87800-446e-3e83-8171-03ca776eaa7f",
+        "csw_url": "https://gdi.berlin.de/geonetwork/srv/ger/csw"
+      }
+    ],
+    "gfiAttributes": "showAll"
+  },
+  {
+    "id": "ua_klimaanalyse_2022:ta_kak_luftaustausch_2022",
+    "name": "Luftaustausch 2022",
+    "name_lang": "Luftaustausch 2022 (Klimaanalysekarten 2022 (Umweltatlas))",
+    "crs": "EPSG:25833",
+    "url": "https://gdi.berlin.de/services/wms/ua_klimaanalyse_2022",
+    "typ": "WMS",
+    "gfiAttributes": "showAll",
+    "layers": "ta_kak_luftaustausch_2022",
+    "legend": true,
+    "datasets": [
+      {
+        "md_name": "Klimaanalysekarten 2022 (Umweltatlas)",
+        "md_id": "8ea601b2-9a12-4123-bb19-b5774fe3003b",
+        "rs_id": "https://registry.gdi-de.org/id/de.be.csw/78c87800-446e-3e83-8171-03ca776eaa7f",
+        "csw_url": "https://gdi.berlin.de/geonetwork/srv/ger/csw"
+      }
+    ],
+    "format": "image/png",
+    "version": "1.3.0",
+    "featureCount": "5",
+    "gfiTheme": "default",
+    "transparent": true,
+    "singleTile": true,
+    "infoFormat": "application/json",
+    "layerAttribution": "Für die Nutzung der Daten ist die Datenlizenz Deutschland - Namensnennung - Version 2.0 anzuwenden. Die Lizenz ist über https://www.govdata.de/dl-de/by-2-0 abrufbar. Der Quellenvermerk gemäß (2) der Lizenz lautet \"Umweltatlas Berlin / [Titel des Datensatzes]\"."
+  },
+  {
+    "id": "s06_05gruenversorg2020",
+    "name": "Versorgung mit öffentlichen, wohnungsnahen Grünanlagen 2020 - Block- und Blockteilflächen (Umweltatlas)",
+    "crs": "urn:ogc:def:crs:EPSG:6.9:25833",
+    "url": "https://fbinter.stadt-berlin.de/fb/wfs/data/senstadt/s06_05gruenversorg2020",
+    "typ": "WFS",
+    "featureType": "fis:s06_05gruenversorg2020",
+    "featureNS": "http://www.berlin.de/broker",
+    "datasets": [
+      {
+        "md_name": "Versorgung mit öffentlichen, wohnungsnahen Grünanlagen 2020 - Block- und Blockteilflächen (Umweltatlas)",
+        "md_id": "e7419261-f29e-403d-a235-41f53fa540f0",
+        "rs_id": "https://registry.gdi-de.org/id/de.be.csw/be9f12f5-5f4f-34ac-9725-7690b644f01c",
+        "csw_url": "https://gdi.berlin.de/geonetwork/srv/ger/csw"
+      }
+    ],
+    "gfiAttributes": "showAll"
+  },
+  {
+    "id": "s06_05gruenversorg2020_gruenanl",
+    "name": "Versorgung mit öffentlichen, wohnungsnahen Grünanlagen 2020 - Grünanlagen (Umweltatlas)",
+    "crs": "urn:ogc:def:crs:EPSG:6.9:25833",
+    "url": "https://fbinter.stadt-berlin.de/fb/wfs/data/senstadt/s06_05gruenversorg2020_gruenanl",
+    "typ": "WFS",
+    "featureType": "fis:s06_05gruenversorg2020_gruenanl",
+    "featureNS": "http://www.berlin.de/broker",
+    "datasets": [
+      {
+        "md_name": "Versorgung mit öffentlichen, wohnungsnahen Grünanlagen 2020 - Grünanlagen (Umweltatlas)",
+        "md_id": "e7419261-f29e-403d-a235-41f53fa540f0",
+        "rs_id": "https://registry.gdi-de.org/id/de.be.csw/be9f12f5-5f4f-34ac-9725-7690b644f01c",
+        "csw_url": "https://gdi.berlin.de/geonetwork/srv/ger/csw"
+      }
+    ],
+    "gfiAttributes": "showAll"
   }
 ]
 
