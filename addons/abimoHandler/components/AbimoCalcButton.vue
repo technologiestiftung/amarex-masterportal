@@ -112,8 +112,7 @@ export default {
         targets: {
           new_green_roof: this.newGreenRoof,
           new_to_swale: this.newToSwale,
-          // new_unpvd: this.newUnpvd,
-          new_pvd: this.newUnpvd,
+          new_unpaved: this.newUnpvd,
         },
       };
 
@@ -126,15 +125,7 @@ export default {
 
       try {
         const data = await getRabimo.getMultiblock(payload);
-        // TODO add real data
-        const dataWithDeltaW = data.map((item) => {
-          return {
-            ...item,
-            delta_w: Math.floor(Math.random() * 100),
-          };
-        });
-        // TODO add real data
-        await this.processAndAddFeatures(mapFeatures, dataWithDeltaW);
+        await this.processAndAddFeatures(mapFeatures, data);
         this.changeCalcState("isCalculated");
       } catch (error) {
         console.error("Fehler beim Abrufen der Daten:", error);
