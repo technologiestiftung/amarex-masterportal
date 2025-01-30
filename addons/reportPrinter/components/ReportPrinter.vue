@@ -1,7 +1,6 @@
 <script>
 import { mapGetters, mapMutations } from "vuex";
-import { jsPDF } from "jspdf";
-import mapCollection from "../../../src/core/maps/js/mapCollection";
+import getReport from "../api/getReport";
 
 /**
  * ReportPrinter
@@ -39,6 +38,7 @@ export default {
         center: [0, 0],
       },
       lineHeight: 10,
+      reportLoading: false,
     };
   },
   computed: {
@@ -62,137 +62,25 @@ export default {
       "setProjectTitle",
       "setProjectDescription",
     ]),
-    splitTextToFit(doc, text, maxWidth, fontSize) {
-      doc.setFontSize(fontSize);
-      const words = text.split(" ");
-      let lines = [],
-        currentLine = words[0];
+    /**
+     * Generate Report
+     * @description Calls the getReport function with the prepared payload and toggles the reportLoading flag accordingly.
+     * @fires getReport
+     */
+    async generateReport() {
+      this.reportLoading = true;
 
-      for (let i = 1; i < words.length; i++) {
-        const word = words[i],
-          width =
-            (doc.getStringUnitWidth(currentLine + " " + word) * fontSize) /
-            doc.internal.scaleFactor;
+      let payload = {};
 
-        if (width < maxWidth) {
-          currentLine += " " + word;
-        } else {
-          lines.push(currentLine);
-          currentLine = word;
-        }
-      }
-      lines.push(currentLine);
-      return lines;
-    },
-    addTextWithWordWrap(doc, text, x, y, maxWidth, fontSize, lineHeight) {
-      const lines = this.splitTextToFit(doc, text, maxWidth, fontSize);
-
-      lines.forEach((line, index) => {
-        doc.text(line, x, y + index * lineHeight);
-      });
-      return y + lines.length * lineHeight;
-    },
-    async takeScreenshot() {
-      const mapElement = document.getElementById("map");
-
-      if (!mapElement) {
-        throw new Error("Kartencontainer nicht gefunden");
-      }
-
-      const canvas = mapElement.querySelector("canvas");
-
-      if (!canvas) {
-        throw new Error("Canvas-Element in der Karte nicht gefunden");
-      }
-
-      try {
-        return canvas.toDataURL("image/png");
-      } catch (e) {
-        console.error("Fehler beim direkten Zugriff auf das Canvas:", e);
-        throw new Error("Konnte keinen Screenshot erstellen");
-      }
-    },
-
-    addHeader(doc) {
-      let y = 1,
-        x = 0;
-
-      doc.setFillColor("#29A992");
-      // rect: x, y, w, h, style
-      doc.rect(x, y, this.pdf.max.width, 8, "F");
-      doc.setFontSize(this.pdf.fontSize.m);
-      y += this.pdf.margin.bottom + 8;
-      doc.text("AMAREX Webtool", 150, y);
-      doc.setFontSize(this.pdf.fontSize.s);
-      y += this.pdf.margin.bottom;
-      doc.text(`Report Nr. xxx, Bearbeiter: ${this.report.editor}`, 100, y);
-      y += this.pdf.margin.bottom;
-
-      return y; // return y position
-    },
-    getData() {
-      const mapView = mapCollection.getMapView("2D");
-
-      this.map.center = mapView.getCenter();
-    },
-
-    async generatePDF() {
-      // set state title and description
-      this.setProjectTitle(this.report.title);
-      this.setProjectDescription(this.report.description);
-
-      const doc = new jsPDF();
-
-      this.getData();
-
-      // start at x = 10, y = 10
-      let x = 10,
-        y = 10;
-
-      // INFO: add new page if needed
-      // const addNewPageIfNeeded = (yPosition, doc) => {
-      //   if (yPosition > this.pdf.max.width - this.pdf.margin.bottom) {
-      //     doc.addPage();
-      //     yPosition = this.addHeader(doc);
-      //   }
-      //   return yPosition;
-      // };
-
-      y = this.addHeader(doc);
-
-      y += this.pdf.margin.top;
-      y = this.addTextWithWordWrap(
-        doc,
-        this.report.title,
-        x,
-        y,
-        this.pdf.max.width - 2 * x,
-        this.pdf.fontSize.m,
-        this.lineHeight,
-      );
-      y += this.pdf.margin.bottom;
-
-      doc
-        .setFontSize(this.pdf.fontSize.m)
-        .text("Steckbrief Untersuchungsgebiet", x, y);
-      y += this.pdf.margin.bottom;
-
-      y += this.pdf.margin.top;
-
-      doc
-        .setFontSize(this.pdf.fontSize.m)
-        .text(`X-Koordinate: ${this.map.center[0].toFixed(2)}`, x, y);
-      y += this.pdf.margin.bottom;
-      doc
-        .setFontSize(this.pdf.fontSize.m)
-        .text(`Y-Koordinate: ${this.map.center[1].toFixed(2)}`, x, y);
-      y += this.pdf.margin.bottom;
-
-      try {
-        doc.save("report.pdf");
-      } catch (error) {
-        console.error("Fehler beim Erstellen des PDFs:", error);
-      }
+      getReport(payload)
+        .then(() => {
+          console.log("Report Data: successfully retrieved");
+          this.reportLoading = false;
+        })
+        .catch((error) => {
+          this.reportLoading = false;
+          console.error("Fehler beim Abrufen des Reports:", error);
+        });
     },
   },
 };
@@ -232,9 +120,14 @@ export default {
     </div>
     <button
       class="btn btn-primary"
-      @click="generatePDF"
+      @click="generateReport"
     >
-      Download Report
+      <div
+        v-if="reportLoading"
+        class="spinner-border"
+        role="status"
+      ></div>
+      Drucke Report
     </button>
   </div>
 </template>
@@ -245,3 +138,4 @@ export default {
   height: 100px;
 }
 </style>
+

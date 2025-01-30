@@ -5,3 +5,4 @@ export default {
   component: component,
   store: store,
 };
+

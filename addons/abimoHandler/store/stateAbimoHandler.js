@@ -43,17 +43,17 @@ export default {
   areaTypesData: [
     {
       id: "unpvd",
-      name: "UNVERSIEGELT",
+      name: "Unversiegelt",
       max: 0,
     },
     {
       id: "roof",
-      name: "BEBAUT VERSIEGELT",
+      name: "Bebaut versiegelt",
       max: 0,
     },
     {
       id: "pvd",
-      name: "UNBEBAUT VERSIEGELT",
+      name: "Unbebaut versiegelt",
       max: 0,
     },
   ],
@@ -114,3 +114,4 @@ export default {
     },
   ],
 };
+
