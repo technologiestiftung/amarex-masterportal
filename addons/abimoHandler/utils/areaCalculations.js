@@ -62,6 +62,8 @@ const getMeanSwaleConnected = createMeanCalculator(getTotalSwaleConnectedArea);
 // Max
 const getMaxGreenRoof = getMeanRoof;
 const getMaxUnpaved = (areas) => calculatePrecisely(1 - getMeanRoof(areas));
+const getMaxUnpavedArea = (areas) => getMaxUnpaved(areas) * getTotalArea(areas);
+
 const getMaxSwaleConnected = (areas, newUnpvd) => {
   if (newUnpvd > 0) {
     return calculatePrecisely(1 - newUnpvd);
@@ -69,6 +71,9 @@ const getMaxSwaleConnected = (areas, newUnpvd) => {
     return calculatePrecisely(1 - getMeanUnpaved(areas));
   }
 };
+const getMaxSwaleConnectedArea = (areas) =>
+  getMaxSwaleConnected(areas) * getTotalArea(areas);
+
 // All Stats
 function calculateAllStats(selectedFeatures, newUnpvd) {
   const totalArea = getTotalArea(selectedFeatures);
@@ -83,6 +88,8 @@ function calculateAllStats(selectedFeatures, newUnpvd) {
     totalUnpavedArea: getTotalUnpavedArea(selectedFeatures),
     totalSwaleConnectedArea: getTotalSwaleConnectedArea(selectedFeatures),
     totalGreenRoofArea: getTotalGreenRoofArea(selectedFeatures),
+    maxUnpavedArea: getMaxUnpavedArea(selectedFeatures),
+    maxSwaleConnectedArea: getMaxSwaleConnectedArea(selectedFeatures),
 
     meanRoof: getMeanRoof(selectedFeatures),
     meanGreenRoof: getMeanGreenRoof(selectedFeatures),
@@ -120,3 +127,4 @@ export default {
   getMaxSwaleConnected,
   calculateAllStats,
 };
+
