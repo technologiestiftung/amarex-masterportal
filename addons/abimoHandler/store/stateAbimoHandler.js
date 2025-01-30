@@ -18,20 +18,21 @@ export default {
     totalArea: 0,
     featuresSelected: 0,
 
-    // Summen bebaut versiegelt -> roof, versiegelt -> pvd, unversiegelt -> unpvd
     totalRoofArea: 0,
     totalPavedArea: 0,
     totalUnpavedArea: 0,
 
     // Other Values
     totalGreenRoofArea: 0,
-    totalSealedArea: 0,
     totalSwaleConnectedArea: 0,
+    maxUnpavedArea: 0,
+    maxSwaleConnectedArea: 0,
+    totalSealedArea: 0,
 
     meanRoof: 0,
     meanUnpaved: 0,
-    meanPaved: 0,
     meanGreenRoof: 0,
+    meanPaved: 0,
     meanSwaleConnected: 0,
 
     maxGreenRoof: 0,
