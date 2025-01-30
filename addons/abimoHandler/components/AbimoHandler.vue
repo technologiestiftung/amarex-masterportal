@@ -76,7 +76,10 @@ export default {
           buttons: [
             {
               text: "Zurück",
-              action: () => (this.activeStep = 1),
+              action: () => {
+                this.resetAbimoCalculation();
+                this.activeStep = 1;
+              },
             },
             {
               text: "Bestätigen",
@@ -155,7 +158,9 @@ export default {
           buttons: [
             {
               text: "Neue Berechnung starten",
-              action: () => this.resetAbimoCalculation(),
+              action: () => {
+                this.resetAbimoCalculation(), (this.activeStep = 0);
+              },
             },
           ],
         },
@@ -178,13 +183,16 @@ export default {
   methods: {
     ...mapActions("Maps", {
       addInteractionToMap: "addInteraction",
+      removeInteractionFromMap: "removeInteraction",
     }),
+    ...mapActions("Modules/AbimoHandler", ["updateAccumulatedStats"]),
     ...mapMutations("Modules/AbimoHandler", [
       "setSelectedFeatures",
       "setNewGreenRoof",
       "setNewUnpvd",
       "setNewToSwale",
       "setResetTargetValues",
+      "setSelectInteraction",
     ]),
     setDisabled() {
       if (this.activeStep === 2) return this.totalArea === 0;
@@ -239,14 +247,14 @@ export default {
         .getArray()
         .find((layer) => layer.get("id") === "abimo_result_delta_w")
         .values_.source.clear();
-      this.addInteractionToMap(this.selectInteraction);
+      this.removeInteractionFromMap(this.selectInteraction);
+      this.setSelectedFeatures([]);
       this.setNewGreenRoof(0);
       this.setNewUnpvd(0);
       this.setNewToSwale(0);
+      this.setSelectInteraction(null);
+      this.updateAccumulatedStats();
       this.setResetTargetValues(true);
-
-      // @luise todo: remove all block area selections
-
       this.activeStep = 0;
     },
     clickOnStepIndicator(stepIndex) {
@@ -254,25 +262,23 @@ export default {
         this.activeStep = stepIndex;
       }
     },
+    handleReset() {
+      this.resetAbimoCalculation();
+      this.calcState = null;
+      this.activeStep = 0;
+    },
   },
   watch: {
     accumulatedAbimoStats(value) {
       this.totalArea = +value.totalArea.toFixed(0);
     },
-    activeStep(step) {
+    activeStep() {
       const contentContainerRef = this.$refs.contentContainerRef;
       if (contentContainerRef) {
         contentContainerRef.scrollTo({
           top: 0,
           behavior: "smooth",
         });
-      }
-      if (step === 2) {
-        // @Luise: Please add the functionality here so that the Block Selection is activated again
-        // when the User goes back to the Block Area Selector
-      }
-      if ((step === 0 || step === 1) && this.totalArea > 0) {
-        // @Luise: the Block Selection should be reset when the User goes back to one of the first two steps
       }
     },
     calcState(state) {
@@ -431,8 +437,9 @@ export default {
       />
       <p class="title">Ihr Ergebnis wird geladen...</p>
     </span>
+
     <span
-      v-else
+      v-if="calcState === 'error'"
       class="error-container d-flex flex-column align-items-center"
     >
       <p>!!!</p>
@@ -443,7 +450,7 @@ export default {
       />
       <button
         class="amarex-btn-primary full"
-        @click="resetAbimoCalculation"
+        @click="handleReset"
       >
         <p>Neue Berechnung starten</p>
       </button>
