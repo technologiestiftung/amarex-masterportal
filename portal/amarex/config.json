@@ -168,19 +168,24 @@
           "type": "folder",
           "elements": [
             {
-              "id": "rabimo_input_2020",
-              "visibility": true,
-              "showInLayerTree": false
-            },
-            {
               "id": "delta_w_wfs",
               "visibility": false,
               "showInLayerTree": true
             },
             {
-              "id": "planung_abimo",
-              "visibility": true,
-              "showInLayerTree": false
+              "id": "abimo_2020_wfs:evaporatio",
+              "visibility": false,
+              "showInLayerTree": true
+            },
+            {
+              "id": "abimo_2020_wfs:surface_ru",
+              "visibility": false,
+              "showInLayerTree": true
+            },
+            {
+              "id": "abimo_2020_wfs:infiltrati",
+              "visibility": false,
+              "showInLayerTree": true
             },
             {
               "id": "abimo_result_infiltration",
@@ -202,19 +207,15 @@
               "visibility": true,
               "showInLayerTree": true
             },
+
             {
-              "id": "abimo_2020_wfs:evaporatio",
-              "visibility": false,
-              "showInLayerTree": true
+              "id": "planung_abimo",
+              "visibility": true,
+              "showInLayerTree": false
             },
             {
-              "id": "abimo_2020_wfs:surface_ru",
-              "visibility": false,
-              "showInLayerTree": true
-            },
-            {
-              "id": "abimo_2020_wfs:infiltrati",
-              "visibility": false,
+              "id": "rabimo_input_2020",
+              "visibility": true,
               "showInLayerTree": true
             }
           ]
