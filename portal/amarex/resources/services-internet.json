@@ -1971,7 +1971,7 @@
     "typ": "WMS",
     "gfiAttributes": "showAll",
     "layers": "a_modellgebiete",
-    "legend": true,
+    "legend": "https://gdi.berlin.de/services/wms/ua_srgk?service=WMS&version=1.3.0&request=GetLegendGraphic&format=image%2Fpng&width=192&height=61&layer=a_modellgebiete",
     "datasets": [
       {
         "md_name": "Starkregengefahrenkarte",
@@ -1998,7 +1998,7 @@
     "typ": "WMS",
     "gfiAttributes": "showAll",
     "layers": "ba_fliessgeschwindigkeit_selten",
-    "legend": true,
+    "legend": "https://gdi.berlin.de/services/wms/ua_srgk?service=WMS&version=1.3.0&request=GetLegendGraphic&format=image%2Fpng&width=224&height=154&layer=ba_fliessgeschwindigkeit_selten",
     "datasets": [
       {
         "md_name": "Starkregengefahrenkarte",
@@ -3141,24 +3141,6 @@
     "gfiAttributes": "showAll"
   },
   {
-    "id": "ua_klimabewertung_2022:wfs:dc_ua_phk_bioklim_siedl_nacht_2022",
-    "name": "Siedlungsfl\u00e4chen: Bioklimatische Bewertung anhand der mittleren Lufttemperatur pro Block(teil)fl\u00e4che um 04:00 Uhr [\u00b0C] 2022",
-    "crs": "urn:ogc:def:crs:EPSG::25833",
-    "url": "https://gdi.berlin.de/services/wfs/ua_klimabewertung_2022",
-    "typ": "WFS",
-    "featureType": "ua_klimabewertung_2022:dc_ua_phk_bioklim_siedl_nacht_2022",
-    "featureNS": "ua_klimabewertung_2022",
-    "datasets": [
-      {
-        "md_name": "Klimabewertungskarten 2022 (Umweltatlas)",
-        "md_id": "d002e10f-d745-49e5-98b1-bde00700f4e4",
-        "rs_id": "https://registry.gdi-de.org/id/de.be.csw/b12543bc-e79d-3af5-88fa-b54da877b30f",
-        "csw_url": "https://gdi.berlin.de/geonetwork/srv/ger/csw"
-      }
-    ],
-    "gfiAttributes": "showAll"
-  },
-  {
     "id": "ua_klimabewertung_2022:wfs:ab_ua_phk_gebsonst_2022",
     "name": "Sonstige Geb\u00e4ude",
     "crs": "urn:ogc:def:crs:EPSG::25833",
@@ -3255,24 +3237,6 @@
     "url": "https://gdi.berlin.de/services/wfs/ua_klimabewertung_2022",
     "typ": "WFS",
     "featureType": "ua_klimabewertung_2022:cc_ua_phk_bioklim_str_tag_2022",
-    "featureNS": "ua_klimabewertung_2022",
-    "datasets": [
-      {
-        "md_name": "Klimabewertungskarten 2022 (Umweltatlas)",
-        "md_id": "d002e10f-d745-49e5-98b1-bde00700f4e4",
-        "rs_id": "https://registry.gdi-de.org/id/de.be.csw/b12543bc-e79d-3af5-88fa-b54da877b30f",
-        "csw_url": "https://gdi.berlin.de/geonetwork/srv/ger/csw"
-      }
-    ],
-    "gfiAttributes": "showAll"
-  },
-  {
-    "id": "ua_klimabewertung_2022:wfs:dd_ua_phk_bioklim_str_nacht_2022",
-    "name": "Verkehrsfl\u00e4chen: Bioklimatische Bewertung anhand der mittleren Lufttemperatur pro Block(teil)fl\u00e4che um 04:00 Uhr [\u00b0C] 2022",
-    "crs": "urn:ogc:def:crs:EPSG::25833",
-    "url": "https://gdi.berlin.de/services/wfs/ua_klimabewertung_2022",
-    "typ": "WFS",
-    "featureType": "ua_klimabewertung_2022:dd_ua_phk_bioklim_str_nacht_2022",
     "featureNS": "ua_klimabewertung_2022",
     "datasets": [
       {
@@ -3744,7 +3708,7 @@
     "typ": "WMS",
     "gfiAttributes": "showAll",
     "layers": "dc_ua_phk_bioklim_siedl_nacht_2022",
-    "legend": true,
+    "legend": "https://gdi.berlin.de/services/wms/ua_klimabewertung_2022?service=WMS&version=1.3.0&request=GetLegendGraphic&format=image%2Fpng&width=579&height=568&layer=dc_ua_phk_bioklim_siedl_nacht_2022",
     "datasets": [
       {
         "md_name": "Klimabewertungskarten 2022 (Umweltatlas)",
@@ -3771,7 +3735,7 @@
     "typ": "WMS",
     "gfiAttributes": "showAll",
     "layers": "dd_ua_phk_bioklim_str_nacht_2022",
-    "legend": true,
+    "legend": "https://gdi.berlin.de/services/wms/ua_klimabewertung_2022?service=WMS&version=1.3.0&request=GetLegendGraphic&format=image%2Fpng&width=579&height=568&layer=dd_ua_phk_bioklim_str_nacht_2022",
     "datasets": [
       {
         "md_name": "Klimabewertungskarten 2022 (Umweltatlas)",
@@ -4385,7 +4349,7 @@
     "typ": "WMS",
     "gfiAttributes": "showAll",
     "layers": "ta_kak_luftaustausch_2022",
-    "legend": true,
+    "legend": "https://gdi.berlin.de/services/wms/ua_klimaanalyse_2022?service=WMS&version=1.3.0&request=GetLegendGraphic&format=image%2Fpng&width=325&height=137&layer=ta_kak_luftaustausch_2022",
     "datasets": [
       {
         "md_name": "Klimaanalysekarten 2022 (Umweltatlas)",
@@ -4438,6 +4402,90 @@
       }
     ],
     "gfiAttributes": "showAll"
+  },
+  {
+    "id": "k06_05gruenversorg2020:0",
+    "name": "Versorgungsgrad mit \u00f6ffentlichen, wohnungsnahen Gr\u00fcnanlagen",
+    "name_lang": "Versorgungsgrad mit \u00f6ffentlichen, wohnungsnahen Gr\u00fcnanlagen (Versorgung mit \u00f6ffentlichen, wohnungsnahen Gr\u00fcnanlagen 2020 (Umweltatlas))",
+    "crs": "EPSG:25833",
+    "url": "https://fbinter.stadt-berlin.de/fb/wms/senstadt/k06_05gruenversorg2020",
+    "typ": "WMS",
+    "gfiAttributes": "ignore",
+    "layers": "0",
+    "legend": "https://fbinter.stadt-berlin.de/fb_daten/legenden/umweltatlas/leg_06_05_gruenversorg2020_versorg.png",
+    "datasets": [
+      {
+        "md_name": "Versorgung mit \u00f6ffentlichen, wohnungsnahen Gr\u00fcnanlagen 2020 (Umweltatlas)",
+        "md_id": "e7419261-f29e-403d-a235-41f53fa540f0",
+        "rs_id": "https://registry.gdi-de.org/id/de.be.csw/be9f12f5-5f4f-34ac-9725-7690b644f01c",
+        "csw_url": "https://gdi.berlin.de/geonetwork/srv/ger/csw"
+      }
+    ],
+    "minScale": "600",
+    "maxScale": "250000",
+    "format": "image/png",
+    "version": "1.3.0",
+    "featureCount": "5",
+    "gfiTheme": "default",
+    "transparent": true,
+    "singleTile": true,
+    "layerAttribution": "F\u00fcr die Nutzung der Daten ist die  Datenlizenz Deutschland - Namensnennung - Version 2.0 anzuwenden. Die Lizenz ist \u00fcber https://www.govdata.de/dl-de/by-2-0 abrufbar. Der Quellenvermerk gem\u00e4\u00df (2) der Lizenz lautet \"Umweltatlas Berlin / [Titel des Datensatzes]\"."
+  },
+  {
+    "id": "k06_05gruenversorg2020:1",
+    "name": "Wald (\u00fcberwiegend f\u00fcr die Erholung nutzbar)",
+    "name_lang": "Wald (\u00fcberwiegend f\u00fcr die Erholung nutzbar) (Versorgung mit \u00f6ffentlichen, wohnungsnahen Gr\u00fcnanlagen 2020 (Umweltatlas))",
+    "crs": "EPSG:25833",
+    "url": "https://fbinter.stadt-berlin.de/fb/wms/senstadt/k06_05gruenversorg2020",
+    "typ": "WMS",
+    "gfiAttributes": "ignore",
+    "layers": "1",
+    "legend": "https://fbinter.stadt-berlin.de/fb_daten/legenden/umweltatlas/leg_06_05gruenversorg2020_wald.png",
+    "datasets": [
+      {
+        "md_name": "Versorgung mit \u00f6ffentlichen, wohnungsnahen Gr\u00fcnanlagen 2020 (Umweltatlas)",
+        "md_id": "e7419261-f29e-403d-a235-41f53fa540f0",
+        "rs_id": "https://registry.gdi-de.org/id/de.be.csw/be9f12f5-5f4f-34ac-9725-7690b644f01c",
+        "csw_url": "https://gdi.berlin.de/geonetwork/srv/ger/csw"
+      }
+    ],
+    "minScale": "600",
+    "maxScale": "250000",
+    "format": "image/png",
+    "version": "1.3.0",
+    "featureCount": "5",
+    "gfiTheme": "default",
+    "transparent": true,
+    "singleTile": true,
+    "layerAttribution": "F\u00fcr die Nutzung der Daten ist die  Datenlizenz Deutschland - Namensnennung - Version 2.0 anzuwenden. Die Lizenz ist \u00fcber https://www.govdata.de/dl-de/by-2-0 abrufbar. Der Quellenvermerk gem\u00e4\u00df (2) der Lizenz lautet \"Umweltatlas Berlin / [Titel des Datensatzes]\"."
+  },
+  {
+    "id": "k06_05gruenversorg2020:2",
+    "name": "\u00d6ffentliche Gr\u00fcnanlage (Erf\u00fcllung bestimmter Mindestanforderungen)",
+    "name_lang": "\u00d6ffentliche Gr\u00fcnanlage (Erf\u00fcllung bestimmter Mindestanforderungen) (Versorgung mit \u00f6ffentlichen, wohnungsnahen Gr\u00fcnanlagen 2020 (Umweltatlas))",
+    "crs": "EPSG:25833",
+    "url": "https://fbinter.stadt-berlin.de/fb/wms/senstadt/k06_05gruenversorg2020",
+    "typ": "WMS",
+    "gfiAttributes": "ignore",
+    "layers": "2",
+    "legend": "https://fbinter.stadt-berlin.de/fb_daten/legenden/umweltatlas/leg_06_05gruenversorg2020_oeffgruen.png",
+    "datasets": [
+      {
+        "md_name": "Versorgung mit \u00f6ffentlichen, wohnungsnahen Gr\u00fcnanlagen 2020 (Umweltatlas)",
+        "md_id": "e7419261-f29e-403d-a235-41f53fa540f0",
+        "rs_id": "https://registry.gdi-de.org/id/de.be.csw/be9f12f5-5f4f-34ac-9725-7690b644f01c",
+        "csw_url": "https://gdi.berlin.de/geonetwork/srv/ger/csw"
+      }
+    ],
+    "minScale": "600",
+    "maxScale": "250000",
+    "format": "image/png",
+    "version": "1.3.0",
+    "featureCount": "5",
+    "gfiTheme": "default",
+    "transparent": true,
+    "singleTile": true,
+    "layerAttribution": "F\u00fcr die Nutzung der Daten ist die  Datenlizenz Deutschland - Namensnennung - Version 2.0 anzuwenden. Die Lizenz ist \u00fcber https://www.govdata.de/dl-de/by-2-0 abrufbar. Der Quellenvermerk gem\u00e4\u00df (2) der Lizenz lautet \"Umweltatlas Berlin / [Titel des Datensatzes]\"."
   }
 ]
 
