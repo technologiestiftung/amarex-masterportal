@@ -99,7 +99,7 @@ export default {
             {
               text: "Zurück",
               action: () => {
-                this.$refs.componentRef?.updateAbimoData();
+                this.resetBlockArea();
                 this.activeStep = 2;
               },
             },
@@ -175,6 +175,8 @@ export default {
     ...mapGetters("Modules/AbimoHandler", [
       "selectInteraction",
       "accumulatedAbimoStats",
+      "blockAreaConfirmed",
+      "selectedFeatures",
     ]),
     activeComponent() {
       return this.steps[this.activeStep] || {};
@@ -193,6 +195,8 @@ export default {
       "setNewToSwale",
       "setResetTargetValues",
       "setSelectInteraction",
+      "setBlockAreaConfirmed",
+      "setPreselectedFeatures",
     ]),
     setDisabled() {
       if (this.activeStep === 2) return this.totalArea === 0;
@@ -255,7 +259,23 @@ export default {
       this.setSelectInteraction(null);
       this.updateAccumulatedStats();
       this.setResetTargetValues(true);
+      this.setBlockAreaConfirmed(false);
       this.activeStep = 0;
+    },
+    async resetBlockArea() {
+      if (this.blockAreaConfirmed) {
+        await mapCollection
+          .getMap("2D")
+          .getLayers()
+          .getArray()
+          .find((layer) => layer.get("id") === "planung_abimo")
+          .values_.source.clear();
+
+        await this.setPreselectedFeatures(this.selectedFeatures);
+        await this.setSelectedFeatures([]);
+        await this.updateAccumulatedStats();
+        this.setBlockAreaConfirmed(false);
+      }
     },
     clickOnStepIndicator(stepIndex) {
       if (stepIndex < this.activeStep) {
@@ -445,7 +465,7 @@ export default {
       <p>!!!</p>
       <p class="title">Es ist leider ein Fehler aufgetreten.</p>
       <AbimoCalcButton
-        :wording="'Nochmal probieren'"
+        :content="'Nochmal probieren'"
         :changeCalcState="changeCalcState"
       />
       <button

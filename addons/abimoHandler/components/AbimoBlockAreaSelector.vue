@@ -27,6 +27,8 @@ export default {
       "accumulatedAbimoStats",
       "areaTypesData",
       "selectInteraction",
+      "blockAreaConfirmed",
+      "preselectedFeatures",
     ]),
   },
   mounted() {
@@ -46,6 +48,7 @@ export default {
     ...mapMutations("Modules/AbimoHandler", [
       "setSelectedFeatures",
       "setSelectInteraction",
+      "setBlockAreaConfirmed",
     ]),
     createInteractions: function () {
       // From open layers we imported the Select class. This adds the possibility to add "blocks" to our feature layer. For further info check OpenLayers Docs
@@ -64,16 +67,24 @@ export default {
       // Add the interaction to the components methods
       this.setSelectInteraction(selectInteraction);
 
-      // Checks for condition "is selected" loads data from abimo and rabimo_input and creates a merged feature out of them
       selectInteraction.on("select", (event) => {
         event.selected.forEach((feature) => {
           const inputFeature = new Feature({
             geometry: feature.getGeometry(),
             ...feature.getProperties(),
           });
-          this.selectedFeatures.push(inputFeature);
-          this.setSelectedFeatures(this.selectedFeatures);
-          this.selectedCount++;
+
+          // Check if feature is already selected
+          const isFeatureAlreadySelected = this.selectedFeatures.some(
+            (f) => f.values_.code === inputFeature.values_.code,
+          );
+
+          if (!isFeatureAlreadySelected) {
+            this.selectedFeatures.push(inputFeature);
+            this.selectedCount++;
+          } else {
+            return;
+          }
         });
 
         event.deselected.forEach((feature) => {
@@ -92,7 +103,7 @@ export default {
       // registers interaction in module - check masterportal docu
       this.addInteractionToMap(selectInteraction);
     },
-    handleBlockAreaConfirm() {
+    addSelectedFeatures() {
       const olFeatures = this.selectedFeatures.map((featureData) => {
         return new Feature({
           ...featureData.values_,
@@ -102,6 +113,14 @@ export default {
 
       this.layer_abimo_calculated.values_.source.addFeatures(olFeatures);
       this.removeInteractionFromMap(this.selectInteraction);
+      this.setBlockAreaConfirmed(true);
+    },
+    handleBlockAreaConfirm() {
+      if (this.blockAreaConfirmed) {
+        this.setBlockAreaConfirmed(false);
+      } else {
+        this.addSelectedFeatures();
+      }
     },
   },
 };
