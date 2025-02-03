@@ -12,6 +12,7 @@ export default {
   hasMouseMapInteractions: true,
   supportedMapModes: ["2D"],
   selectedFeatures: [],
+  preselectedFeatures: [],
   selectInteraction: null,
   resetTargetValues: false,
   blockAreaConfirmed: false,
