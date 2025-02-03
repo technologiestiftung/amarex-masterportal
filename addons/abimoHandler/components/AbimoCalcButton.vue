@@ -9,6 +9,16 @@ import getRabimo from "../api/getRabimo";
  */
 export default {
   name: "AbimoCalcButton",
+  props: {
+    content: {
+      type: String,
+      default: "Berechnen",
+    },
+    changeCalcState: {
+      type: Function,
+      required: true,
+    },
+  },
   computed: {
     ...mapGetters("Modules/AbimoHandler", [
       "selectedFeatures",
@@ -136,16 +146,6 @@ export default {
       }
     },
   },
-  props: {
-    wording: {
-      type: String,
-      default: "Berechnen",
-    },
-    changeCalcState: {
-      type: Function,
-      required: true,
-    },
-  },
 };
 </script>
 
@@ -154,7 +154,7 @@ export default {
     class="amarex-btn-primary full accent"
     @click="fetchCalculateMultiblock"
   >
-    <p>{{ wording }}</p>
+    <p>{{ content }}</p>
   </button>
 </template>
 
