@@ -82,6 +82,31 @@ export default {
 <template lang="html">
   <div class="result-container d-flex flex-column">
     <p class="title">Ergebnisse Berechnung</p>
+    <!-- @Luise: Please add all the 4 missing [Ergebnis]-->
+    <div
+      class="stats-container d-flex justify-content-between w-100 align-items-center"
+    >
+      <p class="description">Oberflächenabfluss</p>
+      <p class="description">[Ergebnis]</p>
+    </div>
+    <div
+      class="stats-container d-flex justify-content-between w-100 align-items-center"
+    >
+      <p class="description">Infiltration</p>
+      <p class="description">[Ergebnis]</p>
+    </div>
+    <div
+      class="stats-container d-flex justify-content-between w-100 align-items-center"
+    >
+      <p class="description">Verdunstung</p>
+      <p class="description">[Ergebnis]</p>
+    </div>
+    <div
+      class="stats-container d-flex justify-content-between w-100 align-items-center last"
+    >
+      <p class="description">Delta ∆W</p>
+      <p class="description">[Ergebnis]</p>
+    </div>
     <span class="line"></span>
     <!-- @Luise: Please add all the missing XX value -->
     <p
