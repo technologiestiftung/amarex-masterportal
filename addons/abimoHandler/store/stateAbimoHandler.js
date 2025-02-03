@@ -14,6 +14,7 @@ export default {
   selectedFeatures: [],
   selectInteraction: null,
   resetTargetValues: false,
+  blockAreaConfirmed: false,
   accumulatedAbimoStats: {
     totalArea: 0,
     featuresSelected: 0,
