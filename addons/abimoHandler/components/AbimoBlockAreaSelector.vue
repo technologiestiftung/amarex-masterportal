@@ -4,9 +4,6 @@ import mapCollection from "../../../src/core/maps/js/mapCollection";
 import AbimoSlider from "./AbimoSlider.vue";
 import Feature from "ol/Feature";
 import { Select } from "ol/interaction";
-import Style from "ol/style/Style";
-import Fill from "ol/style/Fill";
-import Stroke from "ol/style/Stroke";
 import { singleClick, never } from "ol/events/condition.js";
 
 /**
@@ -103,19 +100,6 @@ export default {
         });
       });
 
-      for (const feature of olFeatures) {
-        feature.setStyle(
-          new Style({
-            stroke: new Stroke({
-              color: `rgba(84, 187, 168, 1)`,
-              width: 2,
-            }),
-            fill: new Fill({
-              color: `rgba(84, 187, 168, 0.4)`,
-            }),
-          }),
-        );
-      }
       this.layer_abimo_calculated.values_.source.addFeatures(olFeatures);
       this.removeInteractionFromMap(this.selectInteraction);
     },
