@@ -299,7 +299,7 @@
     "typ": "WMS",
     "gfiAttributes": "showAll",
     "layers": "flurstuecke",
-    "legend": true,
+    "legend": "https://gdi.berlin.de/services/wms/alkis_flurstuecke?service=WMS&version=1.3.0&request=GetLegendGraphic&format=image%2Fpng&width=256&height=57&layer=flurstuecke",
     "datasets": [
       {
         "md_name": "ALKIS Berlin Flurstücke",
@@ -2026,7 +2026,7 @@
     "typ": "WMS",
     "gfiAttributes": "showAll",
     "layers": "bb_fliessgeschwindigkeit_aussergewoehnlich",
-    "legend": true,
+    "legend": "https://gdi.berlin.de/services/wms/ua_srgk?service=WMS&version=1.3.0&request=GetLegendGraphic&format=image%2Fpng&width=224&height=154&layer=bb_fliessgeschwindigkeit_aussergewoehnlich",
     "datasets": [
       {
         "md_name": "Starkregengefahrenkarte",
@@ -2054,7 +2054,7 @@
     "typ": "WMS",
     "gfiAttributes": "showAll",
     "layers": "bc_fliessgeschwindigkeit_extrem",
-    "legend": true,
+    "legend": "https://gdi.berlin.de/services/wms/ua_srgk?service=WMS&version=1.3.0&request=GetLegendGraphic&format=image%2Fpng&width=224&height=154&layer=bc_fliessgeschwindigkeit_extrem",
     "datasets": [
       {
         "md_name": "Starkregengefahrenkarte",
@@ -2082,7 +2082,7 @@
     "typ": "WMS",
     "gfiAttributes": "showAll",
     "layers": "ca_wasserstand_selten",
-    "legend": true,
+    "legend": "https://gdi.berlin.de/services/wms/ua_srgk?service=WMS&version=1.3.0&request=GetLegendGraphic&format=image%2Fpng&width=266&height=197&layer=ca_wasserstand_selten",
     "datasets": [
       {
         "md_name": "Starkregengefahrenkarte",
@@ -2109,7 +2109,7 @@
     "typ": "WMS",
     "gfiAttributes": "showAll",
     "layers": "cb_wasserstand_aussergewoehnlich",
-    "legend": true,
+    "legend": "https://gdi.berlin.de/services/wms/ua_srgk?service=WMS&version=1.3.0&request=GetLegendGraphic&format=image%2Fpng&width=266&height=197&layer=cb_wasserstand_aussergewoehnlich",
     "datasets": [
       {
         "md_name": "Starkregengefahrenkarte",
@@ -2136,7 +2136,7 @@
     "typ": "WMS",
     "gfiAttributes": "showAll",
     "layers": "cc_wassersand_extrem",
-    "legend": true,
+    "legend": "https://gdi.berlin.de/services/wms/ua_srgk?service=WMS&version=1.3.0&request=GetLegendGraphic&format=image%2Fpng&width=266&height=197&layer=cc_wassersand_extrem",
     "datasets": [
       {
         "md_name": "Starkregengefahrenkarte",
@@ -2163,7 +2163,7 @@
     "typ": "WMS",
     "gfiAttributes": "ignore",
     "layers": "da_baumscheibe",
-    "legend": true,
+    "legend": "https://gdi.berlin.de/services/wms/ua_srgk?service=WMS&version=1.3.0&request=GetLegendGraphic&format=image%2Fpng&width=450&height=36&layer=da_baumscheibe",
     "datasets": [
       {
         "md_name": "Starkregengefahrenkarte",
@@ -2191,7 +2191,7 @@
     "typ": "WMS",
     "gfiAttributes": "ignore",
     "layers": "db_bordstein",
-    "legend": true,
+    "legend": "https://gdi.berlin.de/services/wms/ua_srgk?service=WMS&version=1.3.0&request=GetLegendGraphic&format=image%2Fpng&width=450&height=31&layer=db_bordstein",
     "datasets": [
       {
         "md_name": "Starkregengefahrenkarte",
@@ -2219,7 +2219,7 @@
     "typ": "WMS",
     "gfiAttributes": "ignore",
     "layers": "dc_fahrbahn",
-    "legend": true,
+    "legend": "https://gdi.berlin.de/services/wms/ua_srgk?service=WMS&version=1.3.0&request=GetLegendGraphic&format=image%2Fpng&width=450&height=40&layer=dc_fahrbahn",
     "datasets": [
       {
         "md_name": "Starkregengefahrenkarte",
@@ -2247,7 +2247,7 @@
     "typ": "WMS",
     "gfiAttributes": "ignore",
     "layers": "dd_gebaeudefunktion",
-    "legend": true,
+    "legend": "https://gdi.berlin.de/services/wms/ua_srgk?service=WMS&version=1.3.0&request=GetLegendGraphic&format=image%2Fpng&width=356&height=142&layer=dd_gebaeudefunktion",
     "datasets": [
       {
         "md_name": "Starkregengefahrenkarte",
@@ -2275,7 +2275,7 @@
     "typ": "WMS",
     "gfiAttributes": "ignore",
     "layers": "de_gehweg",
-    "legend": true,
+    "legend": "https://gdi.berlin.de/services/wms/ua_srgk?service=WMS&version=1.3.0&request=GetLegendGraphic&format=image%2Fpng&width=450&height=40&layer=de_gehweg",
     "datasets": [
       {
         "md_name": "Starkregengefahrenkarte",
@@ -2303,7 +2303,7 @@
     "typ": "WMS",
     "gfiAttributes": "ignore",
     "layers": "df_gehwegueberfahrt",
-    "legend": true,
+    "legend": "https://gdi.berlin.de/services/wms/ua_srgk?service=WMS&version=1.3.0&request=GetLegendGraphic&format=image%2Fpng&width=450&height=39&layer=df_gehwegueberfahrt",
     "datasets": [
       {
         "md_name": "Starkregengefahrenkarte",
@@ -2331,7 +2331,7 @@
     "typ": "WMS",
     "gfiAttributes": "ignore",
     "layers": "dg_gleiskoerper",
-    "legend": true,
+    "legend": "https://gdi.berlin.de/services/wms/ua_srgk?service=WMS&version=1.3.0&request=GetLegendGraphic&format=image%2Fpng&width=450&height=39&layer=dg_gleiskoerper",
     "datasets": [
       {
         "md_name": "Starkregengefahrenkarte",
@@ -2359,7 +2359,7 @@
     "typ": "WMS",
     "gfiAttributes": "showAll",
     "layers": "dh_parkflaeche",
-    "legend": true,
+    "legend": "https://gdi.berlin.de/services/wms/ua_srgk?service=WMS&version=1.3.0&request=GetLegendGraphic&format=image%2Fpng&width=450&height=38&layer=dh_parkflaeche",
     "datasets": [
       {
         "md_name": "Starkregengefahrenkarte",
@@ -2387,7 +2387,7 @@
     "typ": "WMS",
     "gfiAttributes": "ignore",
     "layers": "di_sonstigebefestfl",
-    "legend": true,
+    "legend": "https://gdi.berlin.de/services/wms/ua_srgk?service=WMS&version=1.3.0&request=GetLegendGraphic&format=image%2Fpng&width=450&height=39&layer=di_sonstigebefestfl",
     "datasets": [
       {
         "md_name": "Starkregengefahrenkarte",
@@ -2415,7 +2415,7 @@
     "typ": "WMS",
     "gfiAttributes": "ignore",
     "layers": "dj_trennstreifen",
-    "legend": true,
+    "legend": "https://gdi.berlin.de/services/wms/ua_srgk?service=WMS&version=1.3.0&request=GetLegendGraphic&format=image%2Fpng&width=450&height=37&layer=dj_trennstreifen",
     "datasets": [
       {
         "md_name": "Starkregengefahrenkarte",
@@ -2443,7 +2443,7 @@
     "typ": "WMS",
     "gfiAttributes": "showAll",
     "layers": "dk_vegetationsflaechen",
-    "legend": true,
+    "legend": "https://gdi.berlin.de/services/wms/ua_srgk?service=WMS&version=1.3.0&request=GetLegendGraphic&format=image%2Fpng&width=450&height=41&layer=dk_vegetationsflaechen",
     "datasets": [
       {
         "md_name": "Starkregengefahrenkarte",
@@ -2471,7 +2471,7 @@
     "typ": "WMS",
     "gfiAttributes": "showAll",
     "layers": "a_srhk_starkregengefahrenkarten_vorhanden",
-    "legend": true,
+    "legend": "https://gdi.berlin.de/services/wms/ua_srhk?service=WMS&version=1.3.0&request=GetLegendGraphic&format=image%2Fpng&width=500&height=106&layer=a_srhk_starkregengefahrenkarten_vorhanden",
     "datasets": [
       {
         "md_name": "Starkregenhinweiskarte",
@@ -2498,7 +2498,7 @@
     "typ": "WMS",
     "gfiAttributes": "showAll",
     "layers": "versieg2021",
-    "legend": true,
+    "legend": "https://gdi.berlin.de/services/wms/ua_versiegelung_2021?service=WMS&version=1.3.0&request=GetLegendGraphic&format=image%2Fpng&width=450&height=440&layer=versieg2021",
     "datasets": [
       {
         "md_name": "Versiegelung 2021 (Umweltatlas)",
@@ -2525,7 +2525,7 @@
     "typ": "WMS",
     "gfiAttributes": "showAll",
     "layers": "versieg2021_str",
-    "legend": true,
+    "legend": "https://gdi.berlin.de/services/wms/ua_versiegelung_2021?service=WMS&version=1.3.0&request=GetLegendGraphic&format=image%2Fpng&width=450&height=440&layer=versieg2021_str",
     "datasets": [
       {
         "md_name": "Versiegelung 2021 (Umweltatlas)",
@@ -2552,7 +2552,7 @@
     "typ": "WMS",
     "gfiAttributes": "showAll",
     "layers": "versieg2021_veraenderung",
-    "legend": true,
+    "legend": "https://gdi.berlin.de/services/wms/ua_versiegelung_2021?service=WMS&version=1.3.0&request=GetLegendGraphic&format=image%2Fpng&width=450&height=311&layer=versieg2021_veraenderung",
     "datasets": [
       {
         "md_name": "Versiegelung 2021 (Umweltatlas)",
@@ -2579,7 +2579,7 @@
     "typ": "WMS",
     "gfiAttributes": "showAll",
     "layers": "versiegelung_2021_raster",
-    "legend": true,
+    "legend": "https://gdi.berlin.de/services/wms/ua_versiegelung_2021?service=WMS&version=1.3.0&request=GetLegendGraphic&format=image%2Fpng&width=325&height=707&layer=versiegelung_2021_raster",
     "datasets": [
       {
         "md_name": "Versiegelung 2021 (Umweltatlas)",
