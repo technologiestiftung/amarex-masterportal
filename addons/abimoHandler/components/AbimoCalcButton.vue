@@ -124,12 +124,15 @@ export default {
       }
 
       try {
-        const data = await getRabimo.getMultiblock(payload);
-        await this.processAndAddFeatures(mapFeatures, data);
+        const response = await getRabimo.getMultiblock(payload);
+        if (response.error) {
+          this.changeCalcState("error");
+          return;
+        }
+        await this.processAndAddFeatures(mapFeatures, response);
         this.changeCalcState("isCalculated");
       } catch (error) {
-        console.error("Fehler beim Abrufen der Daten:", error);
-        this.changeCalcState("error");
+        this.changeCalcState("error fetching data", error);
       }
     },
   },
