@@ -22,6 +22,33 @@ export default {
       required: true,
     },
   },
+  data() {
+    return {
+      colors,
+      resultLayers: [],
+      selectedThemeMap: null,
+    };
+  },
+  computed: {
+    ...mapGetters(["allLayerConfigs"]),
+  },
+  mounted() {
+    // result layers
+    this.resultLayers = this.allLayerConfigs.filter(
+      (layer) =>
+        layer.id === "abimo_result_delta_w" ||
+        layer.id === "abimo_result_surface_run_off" ||
+        layer.id === "abimo_result_infiltration" ||
+        layer.id === "abimo_result_evaporation",
+    );
+
+    this.resultLayers.forEach((layer) => {
+      const isLayerVisible = layer.visibility;
+      if (!isLayerVisible) {
+        this.changeVisibility({ layerId: layer.id, value: true });
+      }
+    });
+  },
   methods: {
     ...mapActions("Modules/LayerSelection", ["changeVisibility"]),
     ...mapActions("Modules/LayerTree", ["updateTransparency"]),
@@ -43,38 +70,6 @@ export default {
         this.selectedThemeMap = themeMap;
       }
     },
-  },
-  data() {
-    return {
-      colors,
-      resultLayers: [],
-      selectedThemeMap: null,
-    };
-  },
-  mounted() {
-    // result layers
-    this.resultLayers = this.allLayerConfigs
-      .filter(
-        (layer) =>
-          layer.id === "abimo_result_delta_w" ||
-          layer.id === "abimo_result_surface_run_off" ||
-          layer.id === "abimo_result_infiltration" ||
-          layer.id === "abimo_result_evaporation",
-      )
-      .sort((a, b) => {
-        if (a.id === "abimo_result_delta_w") return 1;
-        if (b.id === "abimo_result_delta_w") return -1;
-        return 0;
-      });
-    this.resultLayers.forEach((layer) => {
-      const isLayerVisible = layer.visibility;
-      if (!isLayerVisible) {
-        this.changeVisibility({ layerId: layer.id, value: true });
-      }
-    });
-  },
-  computed: {
-    ...mapGetters(["allLayerConfigs"]),
   },
 };
 </script>
