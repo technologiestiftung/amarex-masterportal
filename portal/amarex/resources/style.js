@@ -20,8 +20,9 @@ const abimoStyleList = [
     rules: [
       {
         style: {
-          ...abimoStroke,
-          polygonFillColor: [84, 187, 168, 0.5],
+          polygonStrokeWidth: 2,
+          polygonStrokeColor: [192, 90, 255, 1],
+          polygonFillColor: [192, 90, 255, 0.75],
         },
       },
     ],
