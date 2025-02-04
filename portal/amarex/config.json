@@ -168,11 +168,6 @@
           "type": "folder",
           "elements": [
             {
-              "id": "delta_w_wfs",
-              "visibility": false,
-              "showInLayerTree": true
-            },
-            {
               "id": "abimo_2020_wfs:evaporatio",
               "visibility": false,
               "showInLayerTree": true
@@ -184,6 +179,11 @@
             },
             {
               "id": "abimo_2020_wfs:infiltrati",
+              "visibility": false,
+              "showInLayerTree": true
+            },
+            {
+              "id": "delta_w_wfs",
               "visibility": false,
               "showInLayerTree": true
             },

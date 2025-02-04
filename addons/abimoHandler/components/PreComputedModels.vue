@@ -72,11 +72,6 @@ export default {
           layer.id === "abimo_2020_wfs:surface_ru" ||
           layer.id === "abimo_2020_wfs:infiltrati",
       )
-      .sort((a, b) => {
-        if (a.id === "delta_w_wfs") return 1;
-        if (b.id === "delta_w_wfs") return -1;
-        return 0;
-      });
     this.preComputedModels.forEach((layer) => {
       const isLayerVisible = layer.visibility;
       if (!isLayerVisible) {
