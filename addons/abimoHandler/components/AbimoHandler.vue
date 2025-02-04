@@ -272,6 +272,9 @@ export default {
           .values_.source.clear();
 
         await this.setPreselectedFeatures(this.selectedFeatures);
+        this.setNewGreenRoof(0);
+        this.setNewUnpvd(0);
+        this.setNewToSwale(0);
         await this.setSelectedFeatures([]);
         await this.updateAccumulatedStats();
         this.setBlockAreaConfirmed(false);
