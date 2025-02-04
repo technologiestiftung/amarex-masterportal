@@ -1,5 +1,5 @@
 <script>
-import { mapGetters } from "vuex";
+import { mapGetters, mapActions } from "vuex";
 import Feature from "ol/Feature";
 import getRabimo from "../api/getRabimo";
 
@@ -59,6 +59,7 @@ export default {
       .find((layer) => layer.get("id") === "abimo_result_delta_w");
   },
   methods: {
+    ...mapActions("Modules/AbimoHandler", ["updateResultStats"]),
     async processAndAddFeatures(features, response) {
       const layers = [
         this.layer_abimo_result_infiltration,
@@ -140,6 +141,7 @@ export default {
           return;
         }
         await this.processAndAddFeatures(mapFeatures, response);
+        await this.updateResultStats(response);
         this.changeCalcState("isCalculated");
       } catch (error) {
         this.changeCalcState("error fetching data", error);

@@ -43,6 +43,7 @@ export default {
     maxGreenRoofToRoof: 0,
     maxSwaleConnectedToPvd: 0,
   },
+
   areaTypesData: [
     {
       id: "unpvd",
@@ -60,12 +61,18 @@ export default {
       max: 0,
     },
   ],
+  preComputedModelsShown: false,
+  preComputedModels: [],
 
   newGreenRoof: 0,
   newUnpvd: 0,
   newToSwale: 0,
 
-  preComputedModelsShown: false,
-  preComputedModels: [],
+  resultAbimoStats: {
+    deltaW: 0,
+    evaporation: 0,
+    runoff: 0,
+    infiltration: 0,
+  },
 };
 

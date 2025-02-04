@@ -31,6 +31,7 @@ export default {
   },
   computed: {
     ...mapGetters(["allLayerConfigs"]),
+    ...mapGetters("Modules/AbimoHandler", ["resultAbimoStats"]),
   },
   mounted() {
     // result layers
@@ -77,33 +78,35 @@ export default {
 <template lang="html">
   <div class="result-container d-flex flex-column">
     <p class="title">Ergebnisse Berechnung</p>
-    <!-- @Luise: Please add all the 4 missing [Ergebnis]-->
     <div
       class="stats-container d-flex justify-content-between w-100 align-items-center"
     >
       <p class="description">Oberflächenabfluss</p>
-      <p class="description">[Ergebnis]</p>
+      <p class="description">{{ this.resultAbimoStats.runoff.toFixed(0) }}</p>
     </div>
     <div
       class="stats-container d-flex justify-content-between w-100 align-items-center"
     >
       <p class="description">Infiltration</p>
-      <p class="description">[Ergebnis]</p>
+      <p class="description">
+        {{ this.resultAbimoStats.infiltration.toFixed(0) }}
+      </p>
     </div>
     <div
       class="stats-container d-flex justify-content-between w-100 align-items-center"
     >
       <p class="description">Verdunstung</p>
-      <p class="description">[Ergebnis]</p>
+      <p class="description">
+        {{ this.resultAbimoStats.evaporation.toFixed(0) }}
+      </p>
     </div>
     <div
       class="stats-container d-flex justify-content-between w-100 align-items-center last"
     >
       <p class="description">Delta ∆W</p>
-      <p class="description">[Ergebnis]</p>
+      <p class="description">{{ this.resultAbimoStats.deltaW.toFixed(0) }}</p>
     </div>
     <span class="line"></span>
-    <!-- @Luise: Please add all the missing XX value -->
     <p
       class="description"
       v-html="

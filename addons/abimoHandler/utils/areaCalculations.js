@@ -141,6 +141,22 @@ function calculateAllStats(selectedFeatures, newUnpvd) {
       : 0,
   };
 }
+function calculateResultStats(data) {
+  const totalArea = data.reduce((sum, item) => sum + item.area, 0);
+  const getWeightedAverage = (fieldName) => {
+    const weightedSum = data.reduce(
+      (sum, item) => sum + item[fieldName] * item.area,
+      0,
+    );
+    return totalArea ? weightedSum / totalArea : 0;
+  };
+  return {
+    deltaW: getWeightedAverage("delta_w"),
+    runoff: getWeightedAverage("runoff"),
+    evaporation: getWeightedAverage("evapor"),
+    infiltration: getWeightedAverage("infiltr"),
+  };
+}
 
 export default {
   getTotalArea,
@@ -159,5 +175,6 @@ export default {
   getMaxUnpaved,
   getMaxSwaleConnected,
   calculateAllStats,
+  calculateResultStats,
 };
 
