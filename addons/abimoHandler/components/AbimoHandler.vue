@@ -341,7 +341,7 @@ export default {
   >
     <!-- PRE COMPUTED MODELS -->
     <PreComputedModels
-      v-if="preComputedModelsAdded && activeStep < 6"
+      v-if="preComputedModelsAdded"
       :openInfo="openInfo"
     />
     <!-- TITLE & DESCRIPTION IN EACH STEP -->
