@@ -1,5 +1,5 @@
 <script>
-import { mapActions, mapGetters } from "vuex";
+import { mapActions, mapGetters, mapMutations } from "vuex";
 import {
   ChevronDown,
   EyeOff,
@@ -33,14 +33,16 @@ export default {
   data() {
     return {
       colors,
-      preComputedModelsShown: true,
-      preComputedModels: [],
       selectedThemeMap: null,
     };
   },
   methods: {
     ...mapActions("Modules/LayerSelection", ["changeVisibility"]),
     ...mapActions("Modules/LayerTree", ["updateTransparency"]),
+    ...mapMutations("Modules/AbimoHandler", [
+      "setPreComputedModels",
+      "setPreComputedModelsShown",
+    ]),
     themeMapClick(conf) {
       const isLayerVisible = conf.visibility;
       this.changeVisibility({ layerId: conf.id, value: !isLayerVisible });
@@ -59,19 +61,28 @@ export default {
         this.selectedThemeMap = themeMap;
       }
     },
+    handleAccordionClick() {
+      this.setPreComputedModelsShown(!this.preComputedModelsShown);
+    },
   },
   computed: {
     ...mapGetters(["allLayerConfigs"]),
+    ...mapGetters("Modules/AbimoHandler", [
+      "preComputedModels",
+      "preComputedModelsShown",
+    ]),
   },
   mounted() {
-    this.preComputedModels = this.allLayerConfigs
-      .filter(
+    this.setPreComputedModelsShown(true);
+    this.setPreComputedModels(
+      this.allLayerConfigs.filter(
         (layer) =>
           layer.id === "delta_w_wfs" ||
           layer.id === "abimo_2020_wfs:evaporatio" ||
           layer.id === "abimo_2020_wfs:surface_ru" ||
           layer.id === "abimo_2020_wfs:infiltrati",
-      )
+      ),
+    );
     this.preComputedModels.forEach((layer) => {
       const isLayerVisible = layer.visibility;
       if (!isLayerVisible) {
@@ -87,7 +98,7 @@ export default {
     <div
       class="toggle-container d-flex justify-content-between align-items-center"
       :class="{ active: preComputedModelsShown }"
-      @click="preComputedModelsShown = !preComputedModelsShown"
+      @click="handleAccordionClick"
     >
       <p class="title">Vorberechnete Modelle</p>
       <ChevronDown

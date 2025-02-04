@@ -46,7 +46,10 @@ export default {
             },
             {
               text: "Überspringen",
-              action: () => (this.activeStep = 1),
+              action: () => {
+                this.activeStep = 1;
+                this.setPreComputedModelsShown(false);
+              },
             },
           ],
           upperButtons: true,
@@ -63,7 +66,11 @@ export default {
           buttons: [
             {
               text: "Zurück",
-              action: () => (this.activeStep = 0),
+              action: () => {
+                this.activeStep = 0;
+                this.preComputedModelsAdded = false;
+                this.resetPreComputedModels();
+              },
             },
           ],
         },
@@ -158,8 +165,10 @@ export default {
           buttons: [
             {
               text: "Neue Berechnung starten",
-              action: () => {
-                this.resetAbimoCalculation(), (this.activeStep = 0);
+              action: async () => {
+                await this.resetAbimoCalculation();
+                await this.resetPreComputedModels();
+                this.activeStep = 0;
               },
             },
           ],
@@ -177,7 +186,9 @@ export default {
       "accumulatedAbimoStats",
       "blockAreaConfirmed",
       "selectedFeatures",
+      "preComputedModels",
     ]),
+    ...mapGetters(["allLayerConfigs"]),
     activeComponent() {
       return this.steps[this.activeStep] || {};
     },
@@ -187,6 +198,7 @@ export default {
       addInteractionToMap: "addInteraction",
       removeInteractionFromMap: "removeInteraction",
     }),
+    ...mapActions("Modules/LayerSelection", ["changeVisibility"]),
     ...mapActions("Modules/AbimoHandler", ["updateAccumulatedStats"]),
     ...mapMutations("Modules/AbimoHandler", [
       "setSelectedFeatures",
@@ -197,6 +209,8 @@ export default {
       "setSelectInteraction",
       "setBlockAreaConfirmed",
       "setPreselectedFeatures",
+      "setPreComputedModelsShown",
+      "setPreComputedModels",
     ]),
     setDisabled() {
       if (this.activeStep === 2) return this.totalArea === 0;
@@ -279,6 +293,14 @@ export default {
         await this.updateAccumulatedStats();
         this.setBlockAreaConfirmed(false);
       }
+    },
+    async resetPreComputedModels() {
+      this.setPreComputedModelsShown(false);
+      this.preComputedModelsAdded = false;
+      await this.preComputedModels.forEach((layer) => {
+        this.changeVisibility({ layerId: layer.id, value: false });
+      });
+      await this.setPreComputedModels([]);
     },
     handleReset() {
       this.resetAbimoCalculation();

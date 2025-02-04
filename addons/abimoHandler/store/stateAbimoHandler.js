@@ -64,5 +64,8 @@ export default {
   newGreenRoof: 0,
   newUnpvd: 0,
   newToSwale: 0,
+
+  preComputedModelsShown: false,
+  preComputedModels: [],
 };
 
