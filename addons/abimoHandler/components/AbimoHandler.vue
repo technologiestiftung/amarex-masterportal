@@ -30,7 +30,6 @@ export default {
   data() {
     return {
       colors,
-      activeStep: 0,
       steps: [
         {
           id: "PreComputedModels",
@@ -47,7 +46,7 @@ export default {
             {
               text: "Überspringen",
               action: () => {
-                this.activeStep = 1;
+                this.setActiveStep(1);
                 this.setPreComputedModelsShown(false);
               },
             },
@@ -58,7 +57,7 @@ export default {
           id: "ViewSelector",
           component: markRaw(AbimoViewSelector),
           props: {
-            nextStep: () => (this.activeStep = 2),
+            nextStep: () => this.setActiveStep(2),
           },
           title: "Betrachtungsraum wählen",
           description:
@@ -67,7 +66,7 @@ export default {
             {
               text: "Zurück",
               action: () => {
-                this.activeStep = 0;
+                this.setActiveStep(0);
                 this.preComputedModelsAdded = false;
                 this.resetPreComputedModels();
               },
@@ -85,14 +84,14 @@ export default {
               text: "Zurück",
               action: () => {
                 this.resetAbimoCalculation();
-                this.activeStep = 1;
+                this.setActiveStep(1);
               },
             },
             {
               text: "Bestätigen",
               action: () => {
                 this.$refs.componentRef?.handleBlockAreaConfirm();
-                this.activeStep = 3;
+                this.setActiveStep(3);
               },
               accent: true,
             },
@@ -107,14 +106,14 @@ export default {
               text: "Zurück",
               action: () => {
                 this.resetBlockArea();
-                this.activeStep = 2;
+                this.setActiveStep(2);
               },
             },
             {
               text: "Bestätigen",
               action: () => {
                 this.$refs.componentRef?.updateAbimoData();
-                this.activeStep = 4;
+                this.setActiveStep(4);
               },
               accent: true,
             },
@@ -129,14 +128,14 @@ export default {
               text: "Zurück",
               action: () => {
                 this.$refs.componentRef?.updateAbimoData();
-                this.activeStep = 3;
+                this.setActiveStep(3);
               },
             },
             {
               text: "Bestätigen",
               action: () => {
                 this.$refs.componentRef?.updateAbimoData();
-                this.activeStep = 5;
+                this.setActiveStep(5);
               },
               accent: true,
             },
@@ -151,7 +150,7 @@ export default {
               text: "Zurück",
               action: () => {
                 this.$refs.componentRef?.updateAbimoData();
-                this.activeStep = 4;
+                this.setActiveStep(4);
               },
             },
           ],
@@ -168,7 +167,7 @@ export default {
               action: async () => {
                 await this.resetAbimoCalculation();
                 await this.resetPreComputedModels();
-                this.activeStep = 0;
+                this.setActiveStep(0);
               },
             },
           ],
@@ -187,10 +186,31 @@ export default {
       "blockAreaConfirmed",
       "selectedFeatures",
       "preComputedModels",
+      "activeStep",
     ]),
     ...mapGetters(["allLayerConfigs"]),
     activeComponent() {
       return this.steps[this.activeStep] || {};
+    },
+  },
+  watch: {
+    accumulatedAbimoStats(value) {
+      this.totalArea = +value.totalArea.toFixed(0);
+    },
+    activeStep() {
+      const contentContainerRef = this.$refs.contentContainerRef;
+      if (contentContainerRef) {
+        contentContainerRef.scrollTo({
+          top: 0,
+          behavior: "smooth",
+        });
+      }
+    },
+    calcState(state) {
+      if (state === "isCalculated") {
+        this.calcState = null;
+        this.setActiveStep(6);
+      }
     },
   },
   methods: {
@@ -211,6 +231,7 @@ export default {
       "setPreselectedFeatures",
       "setPreComputedModelsShown",
       "setPreComputedModels",
+      "setActiveStep",
     ]),
     setDisabled() {
       if (this.activeStep === 2) return this.totalArea === 0;
@@ -274,7 +295,7 @@ export default {
       this.updateAccumulatedStats();
       this.setResetTargetValues(true);
       this.setBlockAreaConfirmed(false);
-      this.activeStep = 0;
+      this.setActiveStep(0);
     },
     async resetBlockArea() {
       if (this.blockAreaConfirmed) {
@@ -305,27 +326,7 @@ export default {
     handleReset() {
       this.resetAbimoCalculation();
       this.calcState = null;
-      this.activeStep = 0;
-    },
-  },
-  watch: {
-    accumulatedAbimoStats(value) {
-      this.totalArea = +value.totalArea.toFixed(0);
-    },
-    activeStep() {
-      const contentContainerRef = this.$refs.contentContainerRef;
-      if (contentContainerRef) {
-        contentContainerRef.scrollTo({
-          top: 0,
-          behavior: "smooth",
-        });
-      }
-    },
-    calcState(state) {
-      if (state === "isCalculated") {
-        this.calcState = null;
-        this.activeStep = 6;
-      }
+      this.setActiveStep(0);
     },
   },
 };

@@ -16,6 +16,7 @@ export default {
   selectInteraction: null,
   resetTargetValues: false,
   blockAreaConfirmed: false,
+  activeStep: 0,
   accumulatedAbimoStats: {
     totalArea: 0,
     featuresSelected: 0,
