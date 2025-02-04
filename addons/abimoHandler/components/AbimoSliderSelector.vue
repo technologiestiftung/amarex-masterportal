@@ -153,17 +153,23 @@ export default {
     ]),
     updateAbimoData() {
       switch (this.type) {
-        // todo: check that values can never be higher then currentBaseData.toFixed(0)!!
-        // targetValue can never be higher then currentBaseData.toFixed(0)
-
         case "greenRoof":
+          if (this.targetValue > this.currentBaseData.toFixed(0)) {
+            this.targetValue = this.currentBaseData.toFixed(0);
+          }
           this.setNewGreenRoof(this.targetValue / 100);
           break;
         case "unsealed":
+          if (this.targetValue > this.currentBaseData.toFixed(0)) {
+            this.targetValue = this.currentBaseData.toFixed(0);
+          }
           this.setNewUnpvd(this.targetValue / 100);
           this.updateMaxSwaleConnected();
           break;
         case "swaleConnected":
+          if (this.targetValue > this.currentBaseData.toFixed(0)) {
+            this.targetValue = this.currentBaseData.toFixed(0);
+          }
           this.setNewToSwale(this.targetValue / 100);
           break;
       }
