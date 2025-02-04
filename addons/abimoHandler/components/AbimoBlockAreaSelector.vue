@@ -12,12 +12,6 @@ import { singleClick, never } from "ol/events/condition.js";
  */
 export default {
   name: "AbimoBlockAreaSelector",
-  data() {
-    return {
-      layer: null,
-      selectedCount: 0,
-    };
-  },
   components: {
     AbimoSlider,
   },
@@ -29,9 +23,11 @@ export default {
       "selectInteraction",
       "blockAreaConfirmed",
       "preselectedFeatures",
+      "selectedCount",
     ]),
   },
   mounted() {
+    if (this.selectInteraction) return;
     this.createInteractions();
     this.layer_abimo_calculated = mapCollection
       .getMap("2D")
@@ -49,6 +45,7 @@ export default {
       "setSelectedFeatures",
       "setSelectInteraction",
       "setBlockAreaConfirmed",
+      "setSelectedCount",
     ]),
     createInteractions: function () {
       // From open layers we imported the Select class. This adds the possibility to add "blocks" to our feature layer. For further info check OpenLayers Docs
@@ -81,7 +78,7 @@ export default {
 
           if (!isFeatureAlreadySelected) {
             this.selectedFeatures.push(inputFeature);
-            this.selectedCount++;
+            this.setSelectedCount(this.selectedCount + 1);
           } else {
             return;
           }
@@ -89,7 +86,7 @@ export default {
 
         event.deselected.forEach((feature) => {
           const featureCode = feature.values_.code;
-          this.selectedCount--;
+          this.setSelectedCount(this.selectedCount - 1);
           if (!this.selectedCount) {
             this.selectedFeatures.splice(0, this.selectedFeatures.length);
           } else {
