@@ -280,11 +280,6 @@ export default {
         this.setBlockAreaConfirmed(false);
       }
     },
-    clickOnStepIndicator(stepIndex) {
-      if (stepIndex < this.activeStep) {
-        this.activeStep = stepIndex;
-      }
-    },
     handleReset() {
       this.resetAbimoCalculation();
       this.calcState = null;
@@ -407,7 +402,6 @@ export default {
             active: stepIndex === activeStep,
             click: stepIndex < activeStep,
           }"
-          @click="clickOnStepIndicator(stepIndex)"
           :key="stepIndex"
         ></div>
       </div>
@@ -516,9 +510,6 @@ export default {
         height: 13px;
         &.active {
           background: $amarex_secondary;
-        }
-        &.click {
-          cursor: pointer;
         }
       }
     }
