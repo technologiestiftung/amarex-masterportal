@@ -140,7 +140,13 @@ export default {
         this.initializeTargetValue();
       },
     },
+    targetValue(newValue) {
+      if (newValue > this.currentBaseData.toFixed(0)) {
+        this.targetValue = this.currentBaseData.toFixed(0);
+      }
+    },
   },
+
   methods: {
     ...mapMutations("Modules/AbimoHandler", [
       "setNewGreenRoof",
