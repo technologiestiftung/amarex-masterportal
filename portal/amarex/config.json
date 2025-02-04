@@ -188,7 +188,7 @@
               "showInLayerTree": true
             },
             {
-              "id": "abimo_result_infiltration",
+              "id": "abimo_result_evaporation",
               "visibility": true,
               "showInLayerTree": true
             },
@@ -198,7 +198,7 @@
               "showInLayerTree": true
             },
             {
-              "id": "abimo_result_evaporation",
+              "id": "abimo_result_infiltration",
               "visibility": true,
               "showInLayerTree": true
             },
@@ -207,7 +207,6 @@
               "visibility": true,
               "showInLayerTree": true
             },
-
             {
               "id": "planung_abimo",
               "visibility": true,
