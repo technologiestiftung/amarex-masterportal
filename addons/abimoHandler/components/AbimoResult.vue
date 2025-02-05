@@ -25,7 +25,6 @@ export default {
   data() {
     return {
       colors,
-      // resultLayers: [],
       selectedThemeMap: null,
     };
   },
@@ -35,7 +34,7 @@ export default {
   },
   mounted() {
     this.setPreComputedModelsShown(false);
-
+    
     if (this.resultLayers.length === 0) {
       // result layers
       let resultLayers = this.allLayerConfigs.filter(

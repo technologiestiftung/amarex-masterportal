@@ -41,7 +41,7 @@ export default {
           buttons: [
             {
               text: "Vorberechnete Modelle hinzufügen",
-              action: () => (this.preComputedModelsAdded = true),
+              action: () => this.setPreComputedModelsAdded(true),
             },
             {
               text: "Überspringen",
@@ -67,7 +67,7 @@ export default {
               text: "Zurück",
               action: () => {
                 this.setActiveStep(0);
-                this.preComputedModelsAdded = false;
+                this.setPreComputedModelsAdded(false);
                 this.resetPreComputedModels();
               },
             },
@@ -173,7 +173,6 @@ export default {
           ],
         },
       ],
-      preComputedModelsAdded: false,
       showInfo: null,
       calcState: null,
     };
@@ -187,6 +186,7 @@ export default {
       "preComputedModels",
       "activeStep",
       "preComputedModelsShown",
+      "preComputedModelsAdded",
     ]),
     ...mapGetters(["allLayerConfigs"]),
     activeComponent() {
@@ -230,6 +230,8 @@ export default {
       "setPreComputedModels",
       "setActiveStep",
       "setResultLayers",
+      "setPreComputedModels",
+      "setPreComputedModelsAdded",
     ]),
     setDisabled() {
       if (this.activeStep === 2) return this.selectedFeatures.length === 0;
@@ -316,7 +318,7 @@ export default {
     },
     async resetPreComputedModels() {
       this.setPreComputedModelsShown(false);
-      this.preComputedModelsAdded = false;
+      this.setPreComputedModelsAdded(false);
       await this.preComputedModels.forEach((layer) => {
         this.changeVisibility({ layerId: layer.id, value: false });
       });
@@ -352,7 +354,7 @@ export default {
     >
       <span
         v-if="
-          preComputedModelsAdded || (preComputedModelsShown && activeStep === 0)
+          (preComputedModelsAdded || preComputedModelsShown) && activeStep === 0
         "
       ></span>
       <p
@@ -379,15 +381,15 @@ export default {
         class="upper-btn-container"
         :class="{
           continue:
-            (activeStep === 0 && preComputedModelsAdded) ||
-            preComputedModelsShown,
+            activeStep === 0 &&
+            (preComputedModelsAdded || preComputedModelsShown),
         }"
       >
         <button
           class="amarex-btn-primary full accent"
           v-if="
-            (activeStep === 0 && preComputedModelsAdded) ||
-            preComputedModelsShown
+            activeStep === 0 &&
+            (preComputedModelsAdded || preComputedModelsShown)
           "
           @click="steps[activeStep]?.buttons[1].action"
           :style="{

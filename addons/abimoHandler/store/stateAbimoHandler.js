@@ -65,6 +65,7 @@ export default {
   ],
   preComputedModelsShown: false,
   preComputedModels: [],
+  preComputedModelsAdded: false,
 
   newGreenRoof: 0,
   newUnpvd: 0,

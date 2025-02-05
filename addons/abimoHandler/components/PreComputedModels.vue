@@ -76,21 +76,23 @@ export default {
   mounted() {
     this.setPreComputedModelsShown(true);
 
-    this.setPreComputedModels(
-      this.allLayerConfigs.filter(
-        (layer) =>
-          layer.id === "delta_w_wfs" ||
-          layer.id === "abimo_2020_wfs:evaporatio" ||
-          layer.id === "abimo_2020_wfs:surface_ru" ||
-          layer.id === "abimo_2020_wfs:infiltrati",
-      ),
-    );
-    this.preComputedModels.forEach((layer) => {
-      const isLayerVisible = layer.visibility;
-      if (!isLayerVisible) {
-        this.changeVisibility({ layerId: layer.id, value: true });
-      }
-    });
+    if (this.preComputedModels.length === 0) {
+      this.setPreComputedModels(
+        this.allLayerConfigs.filter(
+          (layer) =>
+            layer.id === "delta_w_wfs" ||
+            layer.id === "abimo_2020_wfs:evaporatio" ||
+            layer.id === "abimo_2020_wfs:surface_ru" ||
+            layer.id === "abimo_2020_wfs:infiltrati",
+        ),
+      );
+      this.preComputedModels.forEach((layer) => {
+        const isLayerVisible = layer.visibility;
+        if (!isLayerVisible) {
+          this.changeVisibility({ layerId: layer.id, value: true });
+        }
+      });
+    }
   },
 };
 </script>
