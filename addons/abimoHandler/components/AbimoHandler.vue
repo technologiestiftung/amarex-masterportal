@@ -324,8 +324,9 @@ export default {
       });
       await this.setPreComputedModels([]);
     },
-    handleReset() {
-      this.resetAbimoCalculation();
+    async handleReset() {
+      await this.resetAbimoCalculation();
+      await this.resetPreComputedModels();
       this.calcState = null;
       this.setActiveStep(0);
     },
