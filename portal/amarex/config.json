@@ -444,12 +444,17 @@
               "description": "Grünversorgung",
               "elements": [
                 {
-                  "id": "s06_05gruenversorg2020",
+                  "id": "k06_05gruenversorg2020:0",
                   "visibility": false,
                   "showInLayerTree": false
                 },
                 {
-                  "id": "s06_05gruenversorg2020_gruenanl",
+                  "id": "k06_05gruenversorg2020:1",
+                  "visibility": false,
+                  "showInLayerTree": false
+                },
+                {
+                  "id": "k06_05gruenversorg2020:2",
                   "visibility": false,
                   "showInLayerTree": false
                 }
@@ -461,12 +466,12 @@
               "description": "Klimabewertungskarten",
               "elements": [
                 {
-                  "id": "ua_klimabewertung_2022:wfs:bj_ua_phk_biokl_siedl_2022",
+                  "id": "ua_klimabewertung_2022:dd_ua_phk_bioklim_str_nacht_2022",
                   "visibility": false,
                   "showInLayerTree": false
                 },
                 {
-                  "id": "ua_klimabewertung_2022:wfs:bi_ua_phk_biokl_str_2022",
+                  "id": "ua_klimabewertung_2022:dc_ua_phk_bioklim_siedl_nacht_2022",
                   "visibility": false,
                   "showInLayerTree": false
                 },
