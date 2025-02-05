@@ -164,62 +164,6 @@
     "subjectlayer": {
       "elements": [
         {
-          "name": "Abimo",
-          "type": "folder",
-          "elements": [
-            {
-              "id": "abimo_2020_wfs:evaporatio",
-              "visibility": false,
-              "showInLayerTree": true
-            },
-            {
-              "id": "abimo_2020_wfs:surface_ru",
-              "visibility": false,
-              "showInLayerTree": true
-            },
-            {
-              "id": "abimo_2020_wfs:infiltrati",
-              "visibility": false,
-              "showInLayerTree": true
-            },
-            {
-              "id": "delta_w_wfs",
-              "visibility": false,
-              "showInLayerTree": true
-            },
-            {
-              "id": "abimo_result_evaporation",
-              "visibility": true,
-              "showInLayerTree": true
-            },
-            {
-              "id": "abimo_result_surface_run_off",
-              "visibility": true,
-              "showInLayerTree": true
-            },
-            {
-              "id": "abimo_result_infiltration",
-              "visibility": true,
-              "showInLayerTree": true
-            },
-            {
-              "id": "abimo_result_delta_w",
-              "visibility": true,
-              "showInLayerTree": true
-            },
-            {
-              "id": "planung_abimo",
-              "visibility": true,
-              "showInLayerTree": false
-            },
-            {
-              "id": "rabimo_input_2020",
-              "visibility": true,
-              "showInLayerTree": true
-            }
-          ]
-        },
-        {
           "name": "Potentialkarten",
           "type": "folder",
           "elements": []
@@ -661,6 +605,62 @@
                   "showInLayerTree": false
                 }
               ]
+            }
+          ]
+        },
+        {
+          "name": "Abimo",
+          "type": "folder",
+          "elements": [
+            {
+              "id": "abimo_2020_wfs:evaporatio",
+              "visibility": false,
+              "showInLayerTree": true
+            },
+            {
+              "id": "abimo_2020_wfs:surface_ru",
+              "visibility": false,
+              "showInLayerTree": true
+            },
+            {
+              "id": "abimo_2020_wfs:infiltrati",
+              "visibility": false,
+              "showInLayerTree": true
+            },
+            {
+              "id": "delta_w_wfs",
+              "visibility": false,
+              "showInLayerTree": true
+            },
+            {
+              "id": "abimo_result_evaporation",
+              "visibility": true,
+              "showInLayerTree": true
+            },
+            {
+              "id": "abimo_result_surface_run_off",
+              "visibility": true,
+              "showInLayerTree": true
+            },
+            {
+              "id": "abimo_result_infiltration",
+              "visibility": true,
+              "showInLayerTree": true
+            },
+            {
+              "id": "abimo_result_delta_w",
+              "visibility": true,
+              "showInLayerTree": true
+            },
+            {
+              "id": "planung_abimo",
+              "visibility": true,
+              "showInLayerTree": false
+            },
+            {
+              "id": "rabimo_input_2020",
+              "visibility": true,
+              "showInLayerTree": true
             }
           ]
         }
