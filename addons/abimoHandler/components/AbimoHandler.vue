@@ -229,6 +229,7 @@ export default {
       "setPreComputedModelsShown",
       "setPreComputedModels",
       "setActiveStep",
+      "setResultLayers",
     ]),
     setDisabled() {
       if (this.activeStep === 2) return this.selectedFeatures.length === 0;
@@ -292,6 +293,7 @@ export default {
       this.updateAccumulatedStats();
       this.setResetTargetValues(true);
       this.setBlockAreaConfirmed(false);
+      this.setResultLayers([]);
       this.setActiveStep(0);
     },
     async resetBlockArea() {
@@ -348,7 +350,11 @@ export default {
       ref="contentContainerRef"
       @click="handleParentClick"
     >
-      <span v-if="preComputedModelsAdded || preComputedModelsShown && activeStep === 0"></span>
+      <span
+        v-if="
+          preComputedModelsAdded || (preComputedModelsShown && activeStep === 0)
+        "
+      ></span>
       <p
         v-else-if="steps[activeStep]?.title"
         class="title"
@@ -372,12 +378,17 @@ export default {
         v-if="steps[activeStep]?.upperButtons"
         class="upper-btn-container"
         :class="{
-          continue: activeStep === 0 && preComputedModelsAdded || preComputedModelsShown,
+          continue:
+            (activeStep === 0 && preComputedModelsAdded) ||
+            preComputedModelsShown,
         }"
       >
         <button
           class="amarex-btn-primary full accent"
-          v-if="activeStep === 0 && preComputedModelsAdded || preComputedModelsShown"
+          v-if="
+            (activeStep === 0 && preComputedModelsAdded) ||
+            preComputedModelsShown
+          "
           @click="steps[activeStep]?.buttons[1].action"
           :style="{
             marginBottom: '16px',
