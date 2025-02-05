@@ -25,37 +25,42 @@ export default {
   data() {
     return {
       colors,
-      resultLayers: [],
+      // resultLayers: [],
       selectedThemeMap: null,
     };
   },
   computed: {
     ...mapGetters(["allLayerConfigs"]),
-    ...mapGetters("Modules/AbimoHandler", ["resultAbimoStats"]),
+    ...mapGetters("Modules/AbimoHandler", ["resultAbimoStats", "resultLayers"]),
   },
   mounted() {
     this.setPreComputedModelsShown(false);
 
-    // result layers
-    this.resultLayers = this.allLayerConfigs.filter(
-      (layer) =>
-        layer.id === "abimo_result_delta_w" ||
-        layer.id === "abimo_result_surface_run_off" ||
-        layer.id === "abimo_result_infiltration" ||
-        layer.id === "abimo_result_evaporation",
-    );
-
-    this.resultLayers.forEach((layer) => {
-      const isLayerVisible = layer.visibility;
-      if (!isLayerVisible) {
-        this.changeVisibility({ layerId: layer.id, value: true });
-      }
-    });
+    if (this.resultLayers.length === 0) {
+      // result layers
+      let resultLayers = this.allLayerConfigs.filter(
+        (layer) =>
+          layer.id === "abimo_result_delta_w" ||
+          layer.id === "abimo_result_surface_run_off" ||
+          layer.id === "abimo_result_infiltration" ||
+          layer.id === "abimo_result_evaporation",
+      );
+      resultLayers.forEach((layer) => {
+        const isLayerVisible = layer.visibility;
+        if (!isLayerVisible) {
+          this.changeVisibility({ layerId: layer.id, value: true });
+        }
+      });
+      this.setResultLayers(resultLayers);
+    }
   },
   methods: {
     ...mapActions("Modules/LayerSelection", ["changeVisibility"]),
     ...mapActions("Modules/LayerTree", ["updateTransparency"]),
-    ...mapMutations("Modules/AbimoHandler", ["setPreComputedModelsShown"]),
+    ...mapMutations("Modules/AbimoHandler", [
+      "setPreComputedModelsShown",
+      "setResultLayers",
+    ]),
     themeMapClick(conf) {
       const isLayerVisible = conf.visibility;
       this.changeVisibility({ layerId: conf.id, value: !isLayerVisible });

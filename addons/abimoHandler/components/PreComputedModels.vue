@@ -33,7 +33,6 @@ export default {
   data() {
     return {
       colors,
-      selectedThemeMap: null,
     };
   },
   methods: {
@@ -42,6 +41,7 @@ export default {
     ...mapMutations("Modules/AbimoHandler", [
       "setPreComputedModels",
       "setPreComputedModelsShown",
+      "setSelectedThemeMap",
     ]),
     themeMapClick(conf) {
       const isLayerVisible = conf.visibility;
@@ -56,9 +56,9 @@ export default {
     openTransparencySubMenu(themeMap) {
       if (!themeMap.visibility) return;
       if (this.selectedThemeMap?.id === themeMap.id) {
-        this.selectedThemeMap = null;
+        this.setSelectedThemeMap(null);
       } else {
-        this.selectedThemeMap = themeMap;
+        this.setSelectedThemeMap(themeMap);
       }
     },
     handleAccordionClick() {
@@ -70,10 +70,12 @@ export default {
     ...mapGetters("Modules/AbimoHandler", [
       "preComputedModels",
       "preComputedModelsShown",
+      "selectedThemeMap",
     ]),
   },
   mounted() {
     this.setPreComputedModelsShown(true);
+
     this.setPreComputedModels(
       this.allLayerConfigs.filter(
         (layer) =>

@@ -70,6 +70,8 @@ export default {
   newUnpvd: 0,
   newToSwale: 0,
 
+  resultLayers: [],
+  selectedThemeMap: null,
   resultAbimoStats: {
     deltaW: 0,
     evaporation: 0,
