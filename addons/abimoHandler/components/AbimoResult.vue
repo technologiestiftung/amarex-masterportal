@@ -4,11 +4,11 @@ import { EyeOff, EyeIcon, Settings, Map as MapIcon } from "lucide-vue-next";
 import colors from "../../../src/shared/js/utils/amarex-colors.json";
 import SliderItem from "../../../src/shared/modules/slider/components/SliderItem.vue";
 /**
- * AbimoCalcResult
- * @module modules/AbimoCalcResult
+ * AbimoResult
+ * @module modules/AbimoResult
  */
 export default {
-  name: "AbimoCalcResult",
+  name: "AbimoResult",
   components: {
     EyeOff,
     EyeIcon,

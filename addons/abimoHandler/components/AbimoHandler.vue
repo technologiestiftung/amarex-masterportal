@@ -1,7 +1,7 @@
 <script>
 import AbimoBlockAreaSelector from "./AbimoBlockAreaSelector.vue";
 import AbimoCalcButton from "./AbimoCalcButton.vue";
-import AbimoCalcResult from "./AbimoCalcResult.vue";
+import AbimoResult from "./AbimoResult.vue";
 import AbimoSliderSelector from "./AbimoSliderSelector.vue";
 import { markRaw } from "vue";
 import PreComputedModels from "./PreComputedModels.vue";
@@ -25,7 +25,7 @@ export default {
     AbimoLayerInfoAmarex,
     AbimoViewSelector,
     LoaderCircle,
-    AbimoCalcResult,
+    AbimoResult,
   },
   data() {
     return {
@@ -157,7 +157,7 @@ export default {
         },
         {
           id: "AbimoResult",
-          component: markRaw(AbimoCalcResult),
+          component: markRaw(AbimoResult),
           props: {
             openInfoFromResults: (info) => this.openInfo(info),
           },
