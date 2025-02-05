@@ -186,6 +186,7 @@ export default {
       "selectedFeatures",
       "preComputedModels",
       "activeStep",
+      "preComputedModelsShown",
     ]),
     ...mapGetters(["allLayerConfigs"]),
     activeComponent() {
@@ -332,13 +333,13 @@ export default {
   <div
     id="abimo-amarex"
     :class="{
-      'three-columns': preComputedModelsAdded,
+      'three-columns': preComputedModelsAdded || preComputedModelsShown,
     }"
     v-if="!calcState"
   >
     <!-- PRE COMPUTED MODELS -->
     <PreComputedModels
-      v-if="preComputedModelsAdded"
+      v-if="preComputedModelsAdded || preComputedModelsShown"
       :openInfo="openInfo"
     />
     <!-- TITLE & DESCRIPTION IN EACH STEP -->
@@ -347,7 +348,7 @@ export default {
       ref="contentContainerRef"
       @click="handleParentClick"
     >
-      <span v-if="preComputedModelsAdded && activeStep === 0"></span>
+      <span v-if="preComputedModelsAdded || preComputedModelsShown && activeStep === 0"></span>
       <p
         v-else-if="steps[activeStep]?.title"
         class="title"
@@ -371,12 +372,12 @@ export default {
         v-if="steps[activeStep]?.upperButtons"
         class="upper-btn-container"
         :class="{
-          continue: activeStep === 0 && preComputedModelsAdded,
+          continue: activeStep === 0 && preComputedModelsAdded || preComputedModelsShown,
         }"
       >
         <button
           class="amarex-btn-primary full accent"
-          v-if="activeStep === 0 && preComputedModelsAdded"
+          v-if="activeStep === 0 && preComputedModelsAdded || preComputedModelsShown"
           @click="steps[activeStep]?.buttons[1].action"
           :style="{
             marginBottom: '16px',
