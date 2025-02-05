@@ -27,13 +27,14 @@ export default {
     ]),
   },
   mounted() {
-    if (this.selectInteraction) return;
-    this.createInteractions();
     this.layer_abimo_calculated = mapCollection
       .getMap("2D")
       .getLayers()
       .getArray()
       .find((layer) => layer.get("id") === "planung_abimo");
+
+    if (this.selectInteraction && !this.blockAreaConfirmed) return;
+    this.createInteractions();
   },
   methods: {
     ...mapActions("Maps", {
@@ -71,26 +72,19 @@ export default {
             ...feature.getProperties(),
           });
 
-          // Check if feature is already selected
-          const isFeatureAlreadySelected = this.selectedFeatures.some(
-            (f) => f.values_.code === inputFeature.values_.code,
-          );
-
-          if (!isFeatureAlreadySelected) {
-            this.selectedFeatures.push(inputFeature);
-            this.setSelectedCount(this.selectedCount + 1);
-          } else {
-            return;
-          }
+          this.selectedFeatures.push(inputFeature);
+          this.setSelectedFeatures(this.selectedFeatures);
+          this.setSelectedCount(this.selectedCount + 1);
         });
 
         event.deselected.forEach((feature) => {
           const featureCode = feature.values_.code;
-          this.setSelectedCount(this.selectedCount - 1);
-          if (!this.selectedCount) {
-            this.selectedFeatures.splice(0, this.selectedFeatures.length);
-          } else {
-            this.selectedFeatures.filter((f) => f.values_.code !== featureCode);
+          const index = this.selectedFeatures.findIndex(
+            (f) => f.values_.code === featureCode,
+          );
+          if (index !== -1) {
+            this.selectedFeatures.splice(index, 1)[0];
+            this.setSelectedCount(this.selectedCount - 1);
           }
           this.setSelectedFeatures(this.selectedFeatures);
         });
