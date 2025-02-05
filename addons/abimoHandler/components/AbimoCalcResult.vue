@@ -1,5 +1,5 @@
 <script>
-import { mapActions, mapGetters } from "vuex";
+import { mapActions, mapGetters, mapMutations } from "vuex";
 import { EyeOff, EyeIcon, Settings, Map as MapIcon } from "lucide-vue-next";
 import colors from "../../../src/shared/js/utils/amarex-colors.json";
 import SliderItem from "../../../src/shared/modules/slider/components/SliderItem.vue";
@@ -34,6 +34,8 @@ export default {
     ...mapGetters("Modules/AbimoHandler", ["resultAbimoStats"]),
   },
   mounted() {
+    this.setPreComputedModelsShown(false);
+
     // result layers
     this.resultLayers = this.allLayerConfigs.filter(
       (layer) =>
@@ -53,6 +55,7 @@ export default {
   methods: {
     ...mapActions("Modules/LayerSelection", ["changeVisibility"]),
     ...mapActions("Modules/LayerTree", ["updateTransparency"]),
+    ...mapMutations("Modules/AbimoHandler", ["setPreComputedModelsShown"]),
     themeMapClick(conf) {
       const isLayerVisible = conf.visibility;
       this.changeVisibility({ layerId: conf.id, value: !isLayerVisible });
