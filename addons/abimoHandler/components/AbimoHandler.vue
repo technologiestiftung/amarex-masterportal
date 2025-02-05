@@ -173,7 +173,6 @@ export default {
           ],
         },
       ],
-      totalArea: 0,
       preComputedModelsAdded: false,
       showInfo: null,
       calcState: null,
@@ -194,9 +193,6 @@ export default {
     },
   },
   watch: {
-    accumulatedAbimoStats(value) {
-      this.totalArea = +value.totalArea.toFixed(0);
-    },
     activeStep() {
       const contentContainerRef = this.$refs.contentContainerRef;
       if (contentContainerRef) {
@@ -234,7 +230,7 @@ export default {
       "setActiveStep",
     ]),
     setDisabled() {
-      if (this.activeStep === 2) return this.totalArea === 0;
+      if (this.activeStep === 2) return this.selectedFeatures.length === 0;
       return false;
     },
     openInfo(info) {
