@@ -4,7 +4,11 @@ import mapCollection from "../../../src/core/maps/js/mapCollection";
 import AbimoSlider from "./AbimoSlider.vue";
 import Feature from "ol/Feature";
 import { Select } from "ol/interaction";
+import Style from "ol/style/Style";
+import Fill from "ol/style/Fill";
+import Stroke from "ol/style/Stroke";
 import { singleClick, never } from "ol/events/condition.js";
+import { toRaw } from "vue";
 
 /**
  * AbimoBlockAreaSelector
@@ -35,6 +39,9 @@ export default {
 
     if (this.selectInteraction && !this.blockAreaConfirmed) return;
     this.createInteractions();
+    if (this.preselectedFeatures.length > 0) {
+      this.createPreselectSelection();
+    }
   },
   methods: {
     ...mapActions("Maps", {
@@ -48,6 +55,45 @@ export default {
       "setBlockAreaConfirmed",
       "setSelectedCount",
     ]),
+    createPreselectSelection() {
+      const rawFeatures = toRaw(this.preselectedFeatures); // Remove Proxy wrapping
+
+      this.setSelectedFeatures([]);
+      const selectedFeatures = this.selectInteraction.getFeatures();
+      selectedFeatures.clear();
+
+      rawFeatures.forEach((feature) => {
+        const _inputFeature = new Feature({
+          geometry: feature.getGeometry(),
+          ...feature.getProperties(),
+        });
+        const layer = (this.layer_abimo_calculated = mapCollection
+          .getMap("2D")
+          .getLayers()
+          .getArray()
+          .find((layer) => layer.get("id") === "rabimo_input_2020"));
+
+        const layerFeature = layer
+          .getSource()
+          .getFeatures()
+          .find((feat) => feat.values_.code === _inputFeature.values_.code);
+
+        // 2. Manually triggering a select event
+        this.selectInteraction.dispatchEvent({
+          type: "select",
+          selected: [layerFeature],
+          deselected: [],
+          target: this.selectInteraction, // Reference to the interaction itself
+        });
+
+        this.selectInteraction.getFeatures().push(layerFeature);
+        this.selectedFeatures.push(layerFeature);
+        this.setSelectedFeatures(this.selectedFeatures);
+        this.setSelectedCount(this.selectedCount + 1);
+      });
+
+      this.updateAccumulatedStats();
+    },
     createInteractions: function () {
       // From open layers we imported the Select class. This adds the possibility to add "blocks" to our feature layer. For further info check OpenLayers Docs
       const selectInteraction = new Select({
@@ -60,6 +106,15 @@ export default {
         layers: function (layer) {
           return layer.get("id") === "rabimo_input_2020";
         },
+        style: new Style({
+          stroke: new Stroke({
+            color: "pink",
+            width: 3,
+          }),
+          fill: new Fill({
+            color: "rgba(0, 0, 255, 0.3)",
+          }),
+        }),
       });
 
       // Add the interaction to the components methods
@@ -71,7 +126,13 @@ export default {
             geometry: feature.getGeometry(),
             ...feature.getProperties(),
           });
-
+          const featureCode = feature.values_.code;
+          const index = this.selectedFeatures.findIndex(
+            (f) => f.values_.code === featureCode,
+          );
+          if (index !== -1) {
+            return;
+          }
           this.selectedFeatures.push(inputFeature);
           this.setSelectedFeatures(this.selectedFeatures);
           this.setSelectedCount(this.selectedCount + 1);
