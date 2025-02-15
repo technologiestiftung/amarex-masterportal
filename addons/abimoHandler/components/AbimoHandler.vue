@@ -84,6 +84,7 @@ export default {
               text: "Zurück",
               action: () => {
                 this.resetAbimoCalculation();
+                this.setPreselectedFeatures([]);
                 this.setActiveStep(1);
               },
             },
@@ -308,11 +309,11 @@ export default {
           .values_.source.clear();
 
         await this.setPreselectedFeatures(this.selectedFeatures);
-        this.setNewGreenRoof(0);
-        this.setNewUnpvd(0);
-        this.setNewToSwale(0);
-        await this.setSelectedFeatures([]);
-        await this.updateAccumulatedStats();
+        // this.setNewGreenRoof(0);
+        // this.setNewUnpvd(0);
+        // this.setNewToSwale(0);
+        // await this.setSelectedFeatures([]);
+        // await this.updateAccumulatedStats();
         this.setBlockAreaConfirmed(false);
       }
     },

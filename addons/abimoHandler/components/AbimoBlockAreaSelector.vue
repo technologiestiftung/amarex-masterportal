@@ -8,7 +8,6 @@ import Style from "ol/style/Style";
 import Fill from "ol/style/Fill";
 import Stroke from "ol/style/Stroke";
 import { singleClick, never } from "ol/events/condition.js";
-import { toRaw } from "vue";
 
 /**
  * AbimoBlockAreaSelector
@@ -54,19 +53,14 @@ export default {
       "setSelectInteraction",
       "setBlockAreaConfirmed",
       "setSelectedCount",
+      "setPreselectedFeatures",
     ]),
     createPreselectSelection() {
-      const rawFeatures = toRaw(this.preselectedFeatures); // Remove Proxy wrapping
-
       this.setSelectedFeatures([]);
       const selectedFeatures = this.selectInteraction.getFeatures();
       selectedFeatures.clear();
 
-      rawFeatures.forEach((feature) => {
-        const _inputFeature = new Feature({
-          geometry: feature.getGeometry(),
-          ...feature.getProperties(),
-        });
+      this.preselectedFeatures.forEach((feature) => {
         const layer = (this.layer_abimo_calculated = mapCollection
           .getMap("2D")
           .getLayers()
@@ -76,7 +70,7 @@ export default {
         const layerFeature = layer
           .getSource()
           .getFeatures()
-          .find((feat) => feat.values_.code === _inputFeature.values_.code);
+          .find((feat) => feat.values_.code === feature.values_.code);
 
         // 2. Manually triggering a select event
         this.selectInteraction.dispatchEvent({
@@ -87,11 +81,12 @@ export default {
         });
 
         this.selectInteraction.getFeatures().push(layerFeature);
-        this.selectedFeatures.push(layerFeature);
-        this.setSelectedFeatures(this.selectedFeatures);
-        this.setSelectedCount(this.selectedCount + 1);
+        // this.selectedFeatures.push(layerFeature);
+        // this.setSelectedFeatures(this.selectedFeatures);
+        // this.setSelectedCount(this.selectedCount + 1);
       });
 
+      this.setPreselectedFeatures([]);
       this.updateAccumulatedStats();
     },
     createInteractions: function () {
@@ -156,13 +151,17 @@ export default {
       this.addInteractionToMap(selectInteraction);
     },
     addSelectedFeatures() {
+      console.log(
+        "[AbimoBlockAreaSelector] add Selected Features this.selectedFeatures::",
+        this.selectedFeatures,
+      );
+
       const olFeatures = this.selectedFeatures.map((featureData) => {
         return new Feature({
           ...featureData.values_,
           geometry: featureData.getGeometry(),
         });
       });
-
       this.layer_abimo_calculated.values_.source.addFeatures(olFeatures);
       this.removeInteractionFromMap(this.selectInteraction);
       this.setBlockAreaConfirmed(true);
