@@ -81,9 +81,6 @@ export default {
         });
 
         this.selectInteraction.getFeatures().push(layerFeature);
-        // this.selectedFeatures.push(layerFeature);
-        // this.setSelectedFeatures(this.selectedFeatures);
-        // this.setSelectedCount(this.selectedCount + 1);
       });
 
       this.setPreselectedFeatures([]);
@@ -151,20 +148,21 @@ export default {
       this.addInteractionToMap(selectInteraction);
     },
     addSelectedFeatures() {
-      console.log(
-        "[AbimoBlockAreaSelector] add Selected Features this.selectedFeatures::",
-        this.selectedFeatures,
-      );
-
+      const layer = mapCollection
+        .getMap("2D")
+        .getLayers()
+        .getArray()
+        .find((layer) => layer.get("id") === "planung_abimo");
       const olFeatures = this.selectedFeatures.map((featureData) => {
         return new Feature({
           ...featureData.values_,
           geometry: featureData.getGeometry(),
         });
       });
-      this.layer_abimo_calculated.values_.source.addFeatures(olFeatures);
+      layer.values_.source.addFeatures(olFeatures);
       this.removeInteractionFromMap(this.selectInteraction);
       this.setBlockAreaConfirmed(true);
+      this.updateAccumulatedStats();
     },
     handleBlockAreaConfirm() {
       if (this.blockAreaConfirmed) {

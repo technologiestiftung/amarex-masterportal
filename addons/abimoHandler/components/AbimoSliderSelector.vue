@@ -141,12 +141,35 @@ export default {
       },
     },
     targetValue(newValue) {
-      if (newValue > this.currentBaseData.toFixed(0)) {
-        this.targetValue = this.currentBaseData.toFixed(0);
+      switch (this.type) {
+        case "greenRoof":
+          if (newValue > this.accumulatedAbimoStats.maxGreenRoof * 100) {
+            this.targetValue = (
+              this.accumulatedAbimoStats.maxGreenRoof * 100
+            ).toFixed(0);
+          }
+          break;
+        case "unsealed":
+          if (newValue > this.accumulatedAbimoStats.maxUnpaved * 100) {
+            this.targetValue = (
+              this.accumulatedAbimoStats.maxUnpaved * 100
+            ).toFixed(0);
+          }
+          break;
+        case "swaleConnected":
+          if (newValue > this.accumulatedAbimoStats.maxSwaleConnected * 100) {
+            this.targetValue = (
+              this.accumulatedAbimoStats.maxSwaleConnected * 100
+            ).toFixed(0);
+          }
+          break;
+        default:
+          if (newValue > this.currentBaseData.toFixed(0)) {
+            this.targetValue = this.currentBaseData.toFixed(0);
+          }
       }
     },
   },
-
   methods: {
     ...mapMutations("Modules/AbimoHandler", [
       "setNewGreenRoof",
