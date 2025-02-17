@@ -4,9 +4,6 @@ import mapCollection from "../../../src/core/maps/js/mapCollection";
 import AbimoSlider from "./AbimoSlider.vue";
 import Feature from "ol/Feature";
 import { Select } from "ol/interaction";
-import Style from "ol/style/Style";
-import Fill from "ol/style/Fill";
-import Stroke from "ol/style/Stroke";
 import { singleClick, never } from "ol/events/condition.js";
 
 /**
@@ -61,11 +58,11 @@ export default {
       selectedFeatures.clear();
 
       this.preselectedFeatures.forEach((feature) => {
-        const layer = (this.layer_abimo_calculated = mapCollection
+        const layer = mapCollection
           .getMap("2D")
           .getLayers()
           .getArray()
-          .find((layer) => layer.get("id") === "rabimo_input_2020"));
+          .find((layer) => layer.get("id") === "rabimo_input_2020");
 
         const layerFeature = layer
           .getSource()
@@ -98,15 +95,6 @@ export default {
         layers: function (layer) {
           return layer.get("id") === "rabimo_input_2020";
         },
-        style: new Style({
-          stroke: new Stroke({
-            color: "pink",
-            width: 3,
-          }),
-          fill: new Fill({
-            color: "rgba(0, 0, 255, 0.3)",
-          }),
-        }),
       });
 
       // Add the interaction to the components methods
@@ -148,21 +136,15 @@ export default {
       this.addInteractionToMap(selectInteraction);
     },
     addSelectedFeatures() {
-      const layer = mapCollection
-        .getMap("2D")
-        .getLayers()
-        .getArray()
-        .find((layer) => layer.get("id") === "planung_abimo");
       const olFeatures = this.selectedFeatures.map((featureData) => {
         return new Feature({
           ...featureData.values_,
           geometry: featureData.getGeometry(),
         });
       });
-      layer.values_.source.addFeatures(olFeatures);
+      this.layer_abimo_calculated.values_.source.addFeatures(olFeatures);
       this.removeInteractionFromMap(this.selectInteraction);
       this.setBlockAreaConfirmed(true);
-      this.updateAccumulatedStats();
     },
     handleBlockAreaConfirm() {
       if (this.blockAreaConfirmed) {
