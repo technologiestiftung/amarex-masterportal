@@ -88,14 +88,13 @@
       }
     ]
   },
-
   {
-    "styleId": "abimo_infiltrati",
+    "styleId": "abimo_infiltr",
     "rules": [
       {
         "conditions": {
           "properties": {
-            "infiltrati": [-400, 0]
+            "infiltr": [-400, 0]
           }
         },
         "style": {
@@ -105,7 +104,7 @@
       {
         "conditions": {
           "properties": {
-            "infiltrati": [0, 60]
+            "infiltr": [0, 60]
           }
         },
         "style": {
@@ -115,7 +114,7 @@
       {
         "conditions": {
           "properties": {
-            "infiltrati": [60, 80]
+            "infiltr": [60, 80]
           }
         },
         "style": {
@@ -125,7 +124,7 @@
       {
         "conditions": {
           "properties": {
-            "infiltrati": [80, 100]
+            "infiltr": [80, 100]
           }
         },
         "style": {
@@ -135,7 +134,7 @@
       {
         "conditions": {
           "properties": {
-            "infiltrati": [100, 120]
+            "infiltr": [100, 120]
           }
         },
         "style": {
@@ -145,7 +144,7 @@
       {
         "conditions": {
           "properties": {
-            "infiltrati": [120, 140]
+            "infiltr": [120, 140]
           }
         },
         "style": {
@@ -155,7 +154,7 @@
       {
         "conditions": {
           "properties": {
-            "infiltrati": [140, 160]
+            "infiltr": [140, 160]
           }
         },
         "style": {
@@ -165,7 +164,7 @@
       {
         "conditions": {
           "properties": {
-            "infiltrati": [160, 180]
+            "infiltr": [160, 180]
           }
         },
         "style": {
@@ -175,7 +174,7 @@
       {
         "conditions": {
           "properties": {
-            "infiltrati": [180, 200]
+            "infiltr": [180, 200]
           }
         },
         "style": {
@@ -185,7 +184,7 @@
       {
         "conditions": {
           "properties": {
-            "infiltrati": [200, 220]
+            "infiltr": [200, 220]
           }
         },
         "style": {
@@ -195,7 +194,7 @@
       {
         "conditions": {
           "properties": {
-            "infiltrati": [220, 240]
+            "infiltr": [220, 240]
           }
         },
         "style": {
@@ -205,7 +204,7 @@
       {
         "conditions": {
           "properties": {
-            "infiltrati": [240, 260]
+            "infiltr": [240, 260]
           }
         },
         "style": {
@@ -215,7 +214,7 @@
       {
         "conditions": {
           "properties": {
-            "infiltrati": [260, 280]
+            "infiltr": [260, 280]
           }
         },
         "style": {
@@ -225,7 +224,7 @@
       {
         "conditions": {
           "properties": {
-            "infiltrati": [280, 300]
+            "infiltr": [280, 300]
           }
         },
         "style": {
@@ -235,7 +234,7 @@
       {
         "conditions": {
           "properties": {
-            "infiltrati": [300, 400]
+            "infiltr": [300, 400]
           }
         },
         "style": {
@@ -245,7 +244,7 @@
       {
         "conditions": {
           "properties": {
-            "infiltrati": [400, 500]
+            "infiltr": [400, 500]
           }
         },
         "style": {
@@ -255,7 +254,7 @@
       {
         "conditions": {
           "properties": {
-            "infiltrati": [500, 800]
+            "infiltr": [500, 800]
           }
         },
         "style": {
@@ -265,12 +264,12 @@
     ]
   },
   {
-    "styleId": "abimo_surface_ru",
+    "styleId": "abimo_runoff",
     "rules": [
       {
         "conditions": {
           "properties": {
-            "surface_ru": [0, 50]
+            "runoff": [0, 50]
           }
         },
         "style": {
@@ -280,7 +279,7 @@
       {
         "conditions": {
           "properties": {
-            "surface_ru": [50, 100]
+            "runoff": [50, 100]
           }
         },
         "style": {
@@ -290,7 +289,7 @@
       {
         "conditions": {
           "properties": {
-            "surface_ru": [100, 150]
+            "runoff": [100, 150]
           }
         },
         "style": {
@@ -300,7 +299,7 @@
       {
         "conditions": {
           "properties": {
-            "surface_ru": [150, 200]
+            "runoff": [150, 200]
           }
         },
         "style": {
@@ -310,7 +309,7 @@
       {
         "conditions": {
           "properties": {
-            "surface_ru": [200, 250]
+            "runoff": [200, 250]
           }
         },
         "style": {
@@ -320,7 +319,7 @@
       {
         "conditions": {
           "properties": {
-            "surface_ru": [250, 270]
+            "runoff": [250, 270]
           }
         },
         "style": {
@@ -330,7 +329,7 @@
       {
         "conditions": {
           "properties": {
-            "surface_ru": [270, 290]
+            "runoff": [270, 290]
           }
         },
         "style": {
@@ -340,7 +339,7 @@
       {
         "conditions": {
           "properties": {
-            "surface_ru": [290, 310]
+            "runoff": [290, 310]
           }
         },
         "style": {
@@ -350,7 +349,7 @@
       {
         "conditions": {
           "properties": {
-            "surface_ru": [310, 330]
+            "runoff": [310, 330]
           }
         },
         "style": {
@@ -360,7 +359,7 @@
       {
         "conditions": {
           "properties": {
-            "surface_ru": [330, 350]
+            "runoff": [330, 350]
           }
         },
         "style": {
@@ -370,7 +369,7 @@
       {
         "conditions": {
           "properties": {
-            "surface_ru": [350, 370]
+            "runoff": [350, 370]
           }
         },
         "style": {
@@ -380,7 +379,7 @@
       {
         "conditions": {
           "properties": {
-            "surface_ru": [370, 390]
+            "runoff": [370, 390]
           }
         },
         "style": {
@@ -390,7 +389,7 @@
       {
         "conditions": {
           "properties": {
-            "surface_ru": [390, 410]
+            "runoff": [390, 410]
           }
         },
         "style": {
@@ -400,7 +399,7 @@
       {
         "conditions": {
           "properties": {
-            "surface_ru": [410, 450]
+            "runoff": [410, 450]
           }
         },
         "style": {
@@ -410,7 +409,7 @@
       {
         "conditions": {
           "properties": {
-            "surface_ru": [450, 500]
+            "runoff": [450, 500]
           }
         },
         "style": {
@@ -420,7 +419,7 @@
       {
         "conditions": {
           "properties": {
-            "surface_ru": [500, 800]
+            "runoff": [500, 800]
           }
         },
         "style": {
@@ -430,12 +429,12 @@
     ]
   },
   {
-    "styleId": "abimo_evaporatio",
+    "styleId": "abimo_evapor",
     "rules": [
       {
         "conditions": {
           "properties": {
-            "evaporatio": [0, 50]
+            "evapor": [0, 50]
           }
         },
         "style": {
@@ -445,7 +444,7 @@
       {
         "conditions": {
           "properties": {
-            "evaporatio": [50, 100]
+            "evapor": [50, 100]
           }
         },
         "style": {
@@ -455,7 +454,7 @@
       {
         "conditions": {
           "properties": {
-            "evaporatio": [100, 120]
+            "evapor": [100, 120]
           }
         },
         "style": {
@@ -465,7 +464,7 @@
       {
         "conditions": {
           "properties": {
-            "evaporatio": [120, 140]
+            "evapor": [120, 140]
           }
         },
         "style": {
@@ -475,7 +474,7 @@
       {
         "conditions": {
           "properties": {
-            "evaporatio": [140, 160]
+            "evapor": [140, 160]
           }
         },
         "style": {
@@ -485,7 +484,7 @@
       {
         "conditions": {
           "properties": {
-            "evaporatio": [160, 180]
+            "evapor": [160, 180]
           }
         },
         "style": {
@@ -495,7 +494,7 @@
       {
         "conditions": {
           "properties": {
-            "evaporatio": [180, 200]
+            "evapor": [180, 200]
           }
         },
         "style": {
@@ -505,7 +504,7 @@
       {
         "conditions": {
           "properties": {
-            "evaporatio": [200, 220]
+            "evapor": [200, 220]
           }
         },
         "style": {
@@ -515,7 +514,7 @@
       {
         "conditions": {
           "properties": {
-            "evaporatio": [220, 240]
+            "evapor": [220, 240]
           }
         },
         "style": {
@@ -525,7 +524,7 @@
       {
         "conditions": {
           "properties": {
-            "evaporatio": [240, 260]
+            "evapor": [240, 260]
           }
         },
         "style": {
@@ -535,7 +534,7 @@
       {
         "conditions": {
           "properties": {
-            "evaporatio": [260, 280]
+            "evapor": [260, 280]
           }
         },
         "style": {
@@ -545,7 +544,7 @@
       {
         "conditions": {
           "properties": {
-            "evaporatio": [280, 300]
+            "evapor": [280, 300]
           }
         },
         "style": {
@@ -555,7 +554,7 @@
       {
         "conditions": {
           "properties": {
-            "evaporatio": [300, 400]
+            "evapor": [300, 400]
           }
         },
         "style": {
@@ -565,7 +564,7 @@
       {
         "conditions": {
           "properties": {
-            "evaporatio": [400, 500]
+            "evapor": [400, 500]
           }
         },
         "style": {
@@ -575,7 +574,7 @@
       {
         "conditions": {
           "properties": {
-            "evaporatio": [500, 800]
+            "evapor": [500, 800]
           }
         },
         "style": {

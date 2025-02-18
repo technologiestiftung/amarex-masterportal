@@ -55,6 +55,8 @@ export default {
     ...mapGetters("Modules/AbimoHandler", [
       "accumulatedAbimoStats",
       "newUnpvd",
+      "newGreenRoof",
+      "newToSwale",
     ]),
     currentBaseData() {
       switch (this.type) {
@@ -82,6 +84,30 @@ export default {
           return {};
       }
     },
+    currentBaseArea() {
+      switch (this.type) {
+        case "greenRoof":
+          return Math.round(this.accumulatedAbimoStats.totalRoofArea);
+        case "unsealed":
+          return Math.round(this.accumulatedAbimoStats.maxUnpavedArea);
+        case "swaleConnected":
+          return Math.round(this.accumulatedAbimoStats.maxSwaleConnectedArea);
+        default:
+          return {};
+      }
+    },
+    currentTargetValue() {
+      switch (this.type) {
+        case "greenRoof":
+          return Math.round(this.accumulatedAbimoStats.totalRoofArea);
+        case "unsealed":
+          return Math.round(this.accumulatedAbimoStats.maxUnpavedArea);
+        case "swaleConnected":
+          return Math.round(this.accumulatedAbimoStats.maxSwaleConnectedArea);
+        default:
+          return {};
+      }
+    },
     sliderContent() {
       switch (this.type) {
         case "greenRoof":
@@ -104,9 +130,44 @@ export default {
       }
     },
   },
+  created() {
+    this.initializeTargetValue();
+  },
   watch: {
-    type() {
-      this.targetValue = 0;
+    type: {
+      immediate: true,
+      handler() {
+        this.initializeTargetValue();
+      },
+    },
+    targetValue(newValue) {
+      switch (this.type) {
+        case "greenRoof":
+          if (newValue > this.accumulatedAbimoStats.maxGreenRoof * 100) {
+            this.targetValue = (
+              this.accumulatedAbimoStats.maxGreenRoof * 100
+            ).toFixed(0);
+          }
+          break;
+        case "unsealed":
+          if (newValue > this.accumulatedAbimoStats.maxUnpaved * 100) {
+            this.targetValue = (
+              this.accumulatedAbimoStats.maxUnpaved * 100
+            ).toFixed(0);
+          }
+          break;
+        case "swaleConnected":
+          if (newValue > this.accumulatedAbimoStats.maxSwaleConnected * 100) {
+            this.targetValue = (
+              this.accumulatedAbimoStats.maxSwaleConnected * 100
+            ).toFixed(0);
+          }
+          break;
+        default:
+          if (newValue > this.currentBaseData.toFixed(0)) {
+            this.targetValue = this.currentBaseData.toFixed(0);
+          }
+      }
     },
   },
   methods: {
@@ -122,14 +183,48 @@ export default {
     updateAbimoData() {
       switch (this.type) {
         case "greenRoof":
+          if (this.targetValue > this.currentBaseData.toFixed(0)) {
+            this.targetValue = this.currentBaseData.toFixed(0);
+          }
           this.setNewGreenRoof(this.targetValue / 100);
           break;
         case "unsealed":
+          if (this.targetValue > this.currentBaseData.toFixed(0)) {
+            this.targetValue = this.currentBaseData.toFixed(0);
+          }
           this.setNewUnpvd(this.targetValue / 100);
           this.updateMaxSwaleConnected();
           break;
         case "swaleConnected":
+          if (this.targetValue > this.currentBaseData.toFixed(0)) {
+            this.targetValue = this.currentBaseData.toFixed(0);
+          }
           this.setNewToSwale(this.targetValue / 100);
+          break;
+      }
+    },
+    initializeTargetValue() {
+      switch (this.type) {
+        case "greenRoof":
+          this.targetValue =
+            (this.newGreenRoof * 100).toFixed() > 0
+              ? (this.newGreenRoof * 100).toFixed()
+              : this.currentStatusQuo;
+          break;
+        case "unsealed":
+          this.targetValue =
+            (this.newUnpvd * 100).toFixed() > 0
+              ? (this.newUnpvd * 100).toFixed()
+              : this.currentStatusQuo;
+          break;
+        case "swaleConnected":
+          this.targetValue =
+            (this.newToSwale * 100).toFixed() > 0
+              ? (this.newToSwale * 100).toFixed()
+              : this.currentStatusQuo;
+          break;
+        default:
+          this.targetValue = this.currentStatusQuo;
           break;
       }
     },
@@ -142,7 +237,12 @@ export default {
     <span :style="{ marginBottom: '16px' }">
       <p class="title">{{ content[type].title }}</p>
       <p
-        v-html="content[type].description()"
+        v-html="
+          content[type].description(
+            (area = currentBaseArea.toFixed(0)),
+            (percentage = currentBaseData.toFixed(0)),
+          )
+        "
         class="description"
       ></p>
     </span>
@@ -217,6 +317,8 @@ export default {
         {{ currentStatusQuo.toFixed(0) }} %
       </p>
     </div>
+
+    <!-- Green Roof -->
     <div
       class="d-flex stats-wrapper align-items-center"
       v-if="type === 'greenRoof'"
@@ -226,8 +328,7 @@ export default {
         maximale Dachfläche
       </p>
       <p class="description-with-smaller-lineheight">
-        XX %
-        <!-- @Luise: Please input maximale Dachfläche -->
+        {{ currentBaseData.toFixed(0) }} %
       </p>
     </div>
     <div
@@ -239,10 +340,11 @@ export default {
         nicht nutzbare Fläche
       </p>
       <p class="description-with-smaller-lineheight">
-        XX %
-        <!-- @Luise: Please input nicht nutzbare Fläche -->
+        {{ (100 - currentBaseData).toFixed(0) }} %
       </p>
     </div>
+
+    <!-- Unsealed -->
     <div
       class="d-flex stats-wrapper align-items-center"
       v-if="type === 'unsealed'"
@@ -252,8 +354,7 @@ export default {
         <strong>Nicht bebaut</strong><br />unversiegelt und unbebaut
       </p>
       <p class="description-with-smaller-lineheight">
-        XX %
-        <!-- @Luise: Please input Nicht bebaute Fläche -->
+        {{ currentBaseData.toFixed(0) }} %
       </p>
     </div>
     <div
@@ -265,10 +366,11 @@ export default {
         <strong>Nicht nutzbarer Bereich</strong><br />bebaute Flächen
       </p>
       <p class="description-with-smaller-lineheight">
-        XX %
-        <!-- @Luise: Please input nicht nutzbare Fläche -->
+        {{ (100 - currentBaseData).toFixed(0) }} %
       </p>
     </div>
+
+    <!-- Swale Connected -->
     <div
       class="d-flex stats-wrapper align-items-center"
       v-if="type === 'swaleConnected'"
@@ -278,8 +380,7 @@ export default {
         <strong>Versiegelt</strong><br />unbebaut und bebaut
       </p>
       <p class="description-with-smaller-lineheight">
-        XX %
-        <!-- @Luise: Please input Nicht bebaute Fläche -->
+        {{ currentBaseData.toFixed(0) }} %
       </p>
     </div>
     <div
@@ -291,8 +392,7 @@ export default {
         nicht nutzbare Fläche
       </p>
       <p class="description-with-smaller-lineheight">
-        XX %
-        <!-- @Luise: Please input nicht nutzbare Fläche -->
+        {{ (100 - currentBaseData).toFixed(0) }} %
       </p>
     </div>
   </div>

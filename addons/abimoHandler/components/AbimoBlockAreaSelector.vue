@@ -4,9 +4,6 @@ import mapCollection from "../../../src/core/maps/js/mapCollection";
 import AbimoSlider from "./AbimoSlider.vue";
 import Feature from "ol/Feature";
 import { Select } from "ol/interaction";
-import Style from "ol/style/Style";
-import Fill from "ol/style/Fill";
-import Stroke from "ol/style/Stroke";
 import { singleClick, never } from "ol/events/condition.js";
 
 /**
@@ -15,12 +12,6 @@ import { singleClick, never } from "ol/events/condition.js";
  */
 export default {
   name: "AbimoBlockAreaSelector",
-  data() {
-    return {
-      layer: null,
-      selectedCount: 0,
-    };
-  },
   components: {
     AbimoSlider,
   },
@@ -30,15 +21,23 @@ export default {
       "accumulatedAbimoStats",
       "areaTypesData",
       "selectInteraction",
+      "blockAreaConfirmed",
+      "preselectedFeatures",
+      "selectedCount",
     ]),
   },
   mounted() {
-    this.createInteractions();
     this.layer_abimo_calculated = mapCollection
       .getMap("2D")
       .getLayers()
       .getArray()
       .find((layer) => layer.get("id") === "planung_abimo");
+
+    if (this.selectInteraction && !this.blockAreaConfirmed) return;
+    this.createInteractions();
+    if (this.preselectedFeatures.length > 0) {
+      this.createPreselectSelection();
+    }
   },
   methods: {
     ...mapActions("Maps", {
@@ -49,7 +48,41 @@ export default {
     ...mapMutations("Modules/AbimoHandler", [
       "setSelectedFeatures",
       "setSelectInteraction",
+      "setBlockAreaConfirmed",
+      "setSelectedCount",
+      "setPreselectedFeatures",
     ]),
+    createPreselectSelection() {
+      this.setSelectedFeatures([]);
+      const selectedFeatures = this.selectInteraction.getFeatures();
+      selectedFeatures.clear();
+
+      this.preselectedFeatures.forEach((feature) => {
+        const layer = mapCollection
+          .getMap("2D")
+          .getLayers()
+          .getArray()
+          .find((layer) => layer.get("id") === "rabimo_input_2020");
+
+        const layerFeature = layer
+          .getSource()
+          .getFeatures()
+          .find((feat) => feat.values_.code === feature.values_.code);
+
+        // 2. Manually triggering a select event
+        this.selectInteraction.dispatchEvent({
+          type: "select",
+          selected: [layerFeature],
+          deselected: [],
+          target: this.selectInteraction, // Reference to the interaction itself
+        });
+
+        this.selectInteraction.getFeatures().push(layerFeature);
+      });
+
+      this.setPreselectedFeatures([]);
+      this.updateAccumulatedStats();
+    },
     createInteractions: function () {
       // From open layers we imported the Select class. This adds the possibility to add "blocks" to our feature layer. For further info check OpenLayers Docs
       const selectInteraction = new Select({
@@ -67,25 +100,32 @@ export default {
       // Add the interaction to the components methods
       this.setSelectInteraction(selectInteraction);
 
-      // Checks for condition "is selected" loads data from abimo and rabimo_input and creates a merged feature out of them
       selectInteraction.on("select", (event) => {
         event.selected.forEach((feature) => {
           const inputFeature = new Feature({
             geometry: feature.getGeometry(),
             ...feature.getProperties(),
           });
+          const featureCode = feature.values_.code;
+          const index = this.selectedFeatures.findIndex(
+            (f) => f.values_.code === featureCode,
+          );
+          if (index !== -1) {
+            return;
+          }
           this.selectedFeatures.push(inputFeature);
           this.setSelectedFeatures(this.selectedFeatures);
-          this.selectedCount++;
+          this.setSelectedCount(this.selectedCount + 1);
         });
 
         event.deselected.forEach((feature) => {
           const featureCode = feature.values_.code;
-          this.selectedCount--;
-          if (!this.selectedCount) {
-            this.selectedFeatures.splice(0, this.selectedFeatures.length);
-          } else {
-            this.selectedFeatures.filter((f) => f.values_.code !== featureCode);
+          const index = this.selectedFeatures.findIndex(
+            (f) => f.values_.code === featureCode,
+          );
+          if (index !== -1) {
+            this.selectedFeatures.splice(index, 1)[0];
+            this.setSelectedCount(this.selectedCount - 1);
           }
           this.setSelectedFeatures(this.selectedFeatures);
         });
@@ -95,29 +135,23 @@ export default {
       // registers interaction in module - check masterportal docu
       this.addInteractionToMap(selectInteraction);
     },
-    handleBlockAreaConfirm() {
+    addSelectedFeatures() {
       const olFeatures = this.selectedFeatures.map((featureData) => {
         return new Feature({
           ...featureData.values_,
           geometry: featureData.getGeometry(),
         });
       });
-
-      for (const feature of olFeatures) {
-        feature.setStyle(
-          new Style({
-            stroke: new Stroke({
-              color: `rgba(84, 187, 168, 1)`,
-              width: 2,
-            }),
-            fill: new Fill({
-              color: `rgba(84, 187, 168, 0.4)`,
-            }),
-          }),
-        );
-      }
       this.layer_abimo_calculated.values_.source.addFeatures(olFeatures);
       this.removeInteractionFromMap(this.selectInteraction);
+      this.setBlockAreaConfirmed(true);
+    },
+    handleBlockAreaConfirm() {
+      if (this.blockAreaConfirmed) {
+        this.setBlockAreaConfirmed(false);
+      } else {
+        this.addSelectedFeatures();
+      }
     },
   },
 };

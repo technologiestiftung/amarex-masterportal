@@ -1,5 +1,5 @@
 <script>
-import { mapGetters } from "vuex";
+import { mapGetters, mapActions } from "vuex";
 import Feature from "ol/Feature";
 import getRabimo from "../api/getRabimo";
 
@@ -9,6 +9,16 @@ import getRabimo from "../api/getRabimo";
  */
 export default {
   name: "AbimoCalcButton",
+  props: {
+    content: {
+      type: String,
+      default: "Berechnen",
+    },
+    changeCalcState: {
+      type: Function,
+      required: true,
+    },
+  },
   computed: {
     ...mapGetters("Modules/AbimoHandler", [
       "selectedFeatures",
@@ -49,6 +59,7 @@ export default {
       .find((layer) => layer.get("id") === "abimo_result_delta_w");
   },
   methods: {
+    ...mapActions("Modules/AbimoHandler", ["updateResultStats"]),
     async processAndAddFeatures(features, response) {
       const layers = [
         this.layer_abimo_result_infiltration,
@@ -124,23 +135,17 @@ export default {
       }
 
       try {
-        const data = await getRabimo.getMultiblock(payload);
-        await this.processAndAddFeatures(mapFeatures, data);
+        const response = await getRabimo.getMultiblock(payload);
+        if (response.error) {
+          this.changeCalcState("error");
+          return;
+        }
+        await this.processAndAddFeatures(mapFeatures, response);
+        await this.updateResultStats(response);
         this.changeCalcState("isCalculated");
       } catch (error) {
-        console.error("Fehler beim Abrufen der Daten:", error);
-        this.changeCalcState("error");
+        this.changeCalcState("error fetching data", error);
       }
-    },
-  },
-  props: {
-    wording: {
-      type: String,
-      default: "Berechnen",
-    },
-    changeCalcState: {
-      type: Function,
-      required: true,
     },
   },
 };
@@ -151,7 +156,7 @@ export default {
     class="amarex-btn-primary full accent"
     @click="fetchCalculateMultiblock"
   >
-    <p>{{ wording }}</p>
+    <p>{{ content }}</p>
   </button>
 </template>
 

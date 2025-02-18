@@ -1,14 +1,14 @@
 <script>
-import { mapActions, mapGetters } from "vuex";
+import { mapActions, mapGetters, mapMutations } from "vuex";
 import { EyeOff, EyeIcon, Settings, Map as MapIcon } from "lucide-vue-next";
 import colors from "../../../src/shared/js/utils/amarex-colors.json";
 import SliderItem from "../../../src/shared/modules/slider/components/SliderItem.vue";
 /**
- * AbimoCalcResult
- * @module modules/AbimoCalcResult
+ * AbimoResult
+ * @module modules/AbimoResult
  */
 export default {
-  name: "AbimoCalcResult",
+  name: "AbimoResult",
   components: {
     EyeOff,
     EyeIcon,
@@ -22,9 +22,44 @@ export default {
       required: true,
     },
   },
+  data() {
+    return {
+      colors,
+      selectedThemeMap: null,
+    };
+  },
+  computed: {
+    ...mapGetters(["allLayerConfigs"]),
+    ...mapGetters("Modules/AbimoHandler", ["resultAbimoStats", "resultLayers"]),
+  },
+  mounted() {
+    this.setPreComputedModelsShown(false);
+    
+    if (this.resultLayers.length === 0) {
+      // result layers
+      let resultLayers = this.allLayerConfigs.filter(
+        (layer) =>
+          layer.id === "abimo_result_delta_w" ||
+          layer.id === "abimo_result_surface_run_off" ||
+          layer.id === "abimo_result_infiltration" ||
+          layer.id === "abimo_result_evaporation",
+      );
+      resultLayers.forEach((layer) => {
+        const isLayerVisible = layer.visibility;
+        if (!isLayerVisible) {
+          this.changeVisibility({ layerId: layer.id, value: true });
+        }
+      });
+      this.setResultLayers(resultLayers);
+    }
+  },
   methods: {
     ...mapActions("Modules/LayerSelection", ["changeVisibility"]),
     ...mapActions("Modules/LayerTree", ["updateTransparency"]),
+    ...mapMutations("Modules/AbimoHandler", [
+      "setPreComputedModelsShown",
+      "setResultLayers",
+    ]),
     themeMapClick(conf) {
       const isLayerVisible = conf.visibility;
       this.changeVisibility({ layerId: conf.id, value: !isLayerVisible });
@@ -43,85 +78,42 @@ export default {
         this.selectedThemeMap = themeMap;
       }
     },
-    setNames(id) {
-      // @Luise: Please check if these are the correct names of the needed result layers
-      if (id === "delta_w_wfs")
-        return "∆W - Abweichung vom natürlichen Wasserhaushalt";
-      if (id === "abimo_result_infiltration") return "Infiltration";
-      if (id === "abimo_evaporatio") return "Verdunstung";
-      return "Abimo";
-    },
-  },
-  data() {
-    return {
-      colors,
-      resultLayers: [],
-      selectedThemeMap: null,
-    };
-  },
-  mounted() {
-    // @Luise: Please check if these are the correct names of the needed result layers
-    this.resultLayers = this.allLayerConfigs.filter(
-      (layer) =>
-        layer.id === "delta_w_wfs" ||
-        layer.id === "rabimo_input_2020" ||
-        layer.id === "abimo_result_infiltration" ||
-        layer.id === "abimo_evaporatio",
-    );
-    //
-    // @Luise: Do the layers need to be sorted?
-    // If yes, adjust the sort function accordingly
-    //
-    /* .sort((a, b) => {
-        if (a.id === "delta_w_wfs") return -1;
-        if (b.id === "delta_w_wfs") return 1;
-        return 0;
-      }); */
-    this.resultLayers.forEach((layer) => {
-      const isLayerVisible = layer.visibility;
-      if (!isLayerVisible) {
-        this.changeVisibility({ layerId: layer.id, value: true });
-      }
-    });
-  },
-  computed: {
-    ...mapGetters(["allLayerConfigs"]),
   },
 };
 </script>
 
-<!-- @Luise: Please remove the Result Overlay on the Map -->
-
 <template lang="html">
   <div class="result-container d-flex flex-column">
     <p class="title">Ergebnisse Berechnung</p>
-    <!-- @Luise: Please add all the 4 missing [Ergebnis]-->
     <div
       class="stats-container d-flex justify-content-between w-100 align-items-center"
     >
       <p class="description">Oberflächenabfluss</p>
-      <p class="description">[Ergebnis]</p>
+      <p class="description">{{ this.resultAbimoStats.runoff.toFixed(0) }}</p>
     </div>
     <div
       class="stats-container d-flex justify-content-between w-100 align-items-center"
     >
       <p class="description">Infiltration</p>
-      <p class="description">[Ergebnis]</p>
+      <p class="description">
+        {{ this.resultAbimoStats.infiltration.toFixed(0) }}
+      </p>
     </div>
     <div
       class="stats-container d-flex justify-content-between w-100 align-items-center"
     >
       <p class="description">Verdunstung</p>
-      <p class="description">[Ergebnis]</p>
+      <p class="description">
+        {{ this.resultAbimoStats.evaporation.toFixed(0) }}
+      </p>
     </div>
     <div
       class="stats-container d-flex justify-content-between w-100 align-items-center last"
     >
       <p class="description">Delta ∆W</p>
-      <p class="description">[Ergebnis]</p>
+      <p class="description">{{ this.resultAbimoStats.deltaW.toFixed(0) }}</p>
     </div>
     <span class="line"></span>
-    <!-- @Luise: Please add all the missing XX value -->
     <p
       class="description"
       v-html="
@@ -162,7 +154,7 @@ export default {
             </button>
             <p
               class="thememap-name"
-              v-html="setNames(themeMap?.id)"
+              v-html="themeMap.name"
             ></p>
             <button @click="openTransparencySubMenu(themeMap)">
               <Settings

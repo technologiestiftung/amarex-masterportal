@@ -1,5 +1,5 @@
 <script>
-import { mapActions, mapGetters } from "vuex";
+import { mapActions, mapGetters, mapMutations } from "vuex";
 import {
   ChevronDown,
   EyeOff,
@@ -33,14 +33,16 @@ export default {
   data() {
     return {
       colors,
-      preComputedModelsShown: true,
-      preComputedModels: [],
-      selectedThemeMap: null,
     };
   },
   methods: {
     ...mapActions("Modules/LayerSelection", ["changeVisibility"]),
     ...mapActions("Modules/LayerTree", ["updateTransparency"]),
+    ...mapMutations("Modules/AbimoHandler", [
+      "setPreComputedModels",
+      "setPreComputedModelsShown",
+      "setSelectedThemeMap",
+    ]),
     themeMapClick(conf) {
       const isLayerVisible = conf.visibility;
       this.changeVisibility({ layerId: conf.id, value: !isLayerVisible });
@@ -54,39 +56,43 @@ export default {
     openTransparencySubMenu(themeMap) {
       if (!themeMap.visibility) return;
       if (this.selectedThemeMap?.id === themeMap.id) {
-        this.selectedThemeMap = null;
+        this.setSelectedThemeMap(null);
       } else {
-        this.selectedThemeMap = themeMap;
+        this.setSelectedThemeMap(themeMap);
       }
     },
-    setNames(id) {
-      // @Luise: Please check if these are the correct names of the needed result layers
-      if (id === "delta_w_wfs")
-        return "∆W - Abweichung vom natürlichen Wasserhaushalt";
-      return "Abimo";
+    handleAccordionClick() {
+      this.setPreComputedModelsShown(!this.preComputedModelsShown);
     },
   },
   computed: {
     ...mapGetters(["allLayerConfigs"]),
+    ...mapGetters("Modules/AbimoHandler", [
+      "preComputedModels",
+      "preComputedModelsShown",
+      "selectedThemeMap",
+    ]),
   },
   mounted() {
-    // @Luise: Please check if these are the correct names of the needed result layers
-    this.preComputedModels = this.allLayerConfigs
-      .filter(
-        (layer) =>
-          layer.id === "delta_w_wfs" || layer.id === "rabimo_input_2020",
-      )
-      .sort((a, b) => {
-        if (a.id === "delta_w_wfs") return -1;
-        if (b.id === "delta_w_wfs") return 1;
-        return 0;
+    this.setPreComputedModelsShown(true);
+
+    if (this.preComputedModels.length === 0) {
+      this.setPreComputedModels(
+        this.allLayerConfigs.filter(
+          (layer) =>
+            layer.id === "delta_w_wfs" ||
+            layer.id === "abimo_2020_wfs:evaporatio" ||
+            layer.id === "abimo_2020_wfs:surface_ru" ||
+            layer.id === "abimo_2020_wfs:infiltrati",
+        ),
+      );
+      this.preComputedModels.forEach((layer) => {
+        const isLayerVisible = layer.visibility;
+        if (!isLayerVisible) {
+          this.changeVisibility({ layerId: layer.id, value: true });
+        }
       });
-    this.preComputedModels.forEach((layer) => {
-      const isLayerVisible = layer.visibility;
-      if (!isLayerVisible) {
-        this.changeVisibility({ layerId: layer.id, value: true });
-      }
-    });
+    }
   },
 };
 </script>
@@ -96,7 +102,7 @@ export default {
     <div
       class="toggle-container d-flex justify-content-between align-items-center"
       :class="{ active: preComputedModelsShown }"
-      @click="preComputedModelsShown = !preComputedModelsShown"
+      @click="handleAccordionClick"
     >
       <p class="title">Vorberechnete Modelle</p>
       <ChevronDown
@@ -129,7 +135,7 @@ export default {
           </button>
           <p
             class="thememap-name"
-            v-html="setNames(themeMap?.id)"
+            v-html="themeMap.name"
           ></p>
           <button @click="openTransparencySubMenu(themeMap)">
             <Settings

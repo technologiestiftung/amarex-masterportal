@@ -23,6 +23,10 @@ const actions = {
       maxSwaleConnected,
     });
   },
+  updateResultStats({ commit }, data) {
+    const stats = areaCalc.calculateResultStats(data);
+    commit("setResultAbimoStats", stats);
+  },
   updateAccordionSteps({ commit, state }, stepToSetActive) {
     if (!stepToSetActive) {
       const resetSteps = state.steps.map((step) => ({
@@ -51,7 +55,6 @@ const actions = {
       commit("setSteps", steps);
     }
   },
-
   toggleStep({ commit, state }, stepToToggle) {
     const steps = state.steps.map((step) => ({
       ...step,
@@ -62,3 +65,4 @@ const actions = {
 };
 
 export default actions;
+
