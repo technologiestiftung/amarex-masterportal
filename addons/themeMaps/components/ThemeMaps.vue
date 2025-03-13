@@ -206,12 +206,12 @@ export default {
               clickedSelectAll(themeMapGroup, `#collapse${indexThemeMapGroup}`)
             "
           >
-            <EyeOff
+            <EyeIcon
               v-if="checkIfAllAreChecked(themeMapGroup)"
               :color="colors.amarex_secondary"
               :size="20"
             />
-            <EyeIcon
+            <EyeOff
               v-else
               :color="colors.amarex_secondary"
               :size="20"
@@ -265,12 +265,12 @@ export default {
               }"
             >
               <button @click="themeMapClick(themeMap)">
-                <EyeOff
+                <EyeIcon
                   v-if="themeMap.visibility"
                   :color="colors.amarex_secondary"
                   :size="20"
                 />
-                <EyeIcon
+                <EyeOff
                   v-else
                   :color="colors.amarex_secondary"
                   :size="20"

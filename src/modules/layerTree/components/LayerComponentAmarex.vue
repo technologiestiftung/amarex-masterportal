@@ -130,7 +130,7 @@ export default {
             </p>
             <div class="d-flex">
                 <div class="clickable" @click="toggleVisibility">
-                    <Eye
+                    <EyeIcon
                         v-if="conf.transparency === 0"
                         :color="colors.amarex_secondary"
                         :size="24"

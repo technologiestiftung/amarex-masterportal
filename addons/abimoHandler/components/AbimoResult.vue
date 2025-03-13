@@ -141,12 +141,12 @@ export default {
             }"
           >
             <button @click="themeMapClick(themeMap)">
-              <EyeOff
+              <EyeIcon
                 v-if="themeMap?.visibility"
                 :color="colors.amarex_secondary"
                 :size="20"
               />
-              <EyeIcon
+              <EyeOff
                 v-else
                 :color="colors.amarex_secondary"
                 :size="20"
