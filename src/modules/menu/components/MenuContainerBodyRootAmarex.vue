@@ -16,6 +16,7 @@ export default {
                 { label: 'Hintergrundkarten', component: 'baseMaps' },
                 { label: 'Themenkarten', component: 'themeMaps' },
                 { label: 'Wasserhaushalt berechnen', component: 'abimoHandler' },
+                { label: 'Report erstellen', component: 'reportPrinter' },
                 // { label: 'Maßnahmenpotentiale', component: 'actionPotentials' },
                 // { label: 'Eigene Ebenen', component: '?' },
                 // { label: '6. Geodaten importieren', component: 'fileImporter' },
@@ -26,7 +27,6 @@ export default {
                 // { label: 'X. ESB Tool', component: 'esbTool' },
                 // { label: 'Report', component: 'print' },
                 // { label: 'X. Multikriterien Analyse', component: 'multiCriteria' },
-                // { label: 'X. Report zusammenstellen', component: 'reportPrinter' },
                 // { label: 'X. Projekt speichern/exportieren', component: 'projectDownloader' }
             ],
             currentStepIndex: 0

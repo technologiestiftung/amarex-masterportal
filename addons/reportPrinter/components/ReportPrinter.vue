@@ -1,6 +1,9 @@
 <script>
-import { mapGetters, mapMutations } from "vuex";
+import { mapGetters } from "vuex";
 import getReport from "../api/getReport";
+import colors from "../../../src/shared/js/utils/amarex-colors.json";
+import { Info as InfoIcon, FileDown, LoaderCircle } from "lucide-vue-next";
+import ToggleBTN from "./ToggleBTN.vue";
 
 /**
  * ReportPrinter
@@ -11,75 +14,57 @@ export default {
   name: "ReportPrinter",
   data() {
     return {
-      projectData: [
-        { name: "Projekt A", value: 100 },
-        { name: "Projekt B", value: 200 },
-        { name: "Projekt C", value: 300 },
-      ],
+      colors,
       report: {
         title: "",
         description: "",
-        editor: "Nachname, Vorname",
         date: new Date().toDateString(),
       },
-      layerData: [],
-      pdf: {
-        fontSize: {
-          xs: 10,
-          s: 12,
-          m: 16,
-          l: 20,
-          xl: 24,
-        },
-        max: { height: 300, width: 210 },
-        margin: { top: 8, right: 8, bottom: 9, left: 8 },
-      },
-      map: {
-        center: [0, 0],
-      },
-      lineHeight: 10,
       reportLoading: false,
+      automaticallyAdjustPrintScale: true,
+      withLegend: false,
+      warning: null,
     };
   },
+  components: {
+    InfoIcon,
+    ToggleBTN,
+    FileDown,
+    LoaderCircle,
+  },
   computed: {
-    ...mapGetters([
-      "allLayerConfigs",
-      "Maps/projectionCode",
-      "layerConfig",
-      "portalConfig",
-    ]),
     ...mapGetters("Modules/ProjectStarter", [
       "projectTitle",
       "projectDescription",
     ]),
   },
   created() {
-    this.report.title = this.projectTitle;
+    this.report.title = this.projectTitle || "Amarex Report";
     this.report.description = this.projectDescription;
   },
   methods: {
-    ...mapMutations("Modules/ProjectStarter", [
-      "setProjectTitle",
-      "setProjectDescription",
-    ]),
     /**
      * Generate Report
      * @description Calls the getReport function with the prepared payload and toggles the reportLoading flag accordingly.
      * @fires getReport
      */
     async generateReport() {
+      this.warning = null;
+      if (!this.report.title) {
+        this.warning = "Bitte einen Titel eingeben";
+        return;
+      }
       this.reportLoading = true;
-
       let payload = {};
 
       getReport(payload)
-        .then(() => {
-          console.log("Report Data: successfully retrieved");
+        .then((data) => {
+          console.log("Report Data: successfully retrieved", data);
           this.reportLoading = false;
         })
         .catch((error) => {
           this.reportLoading = false;
-          console.error("Fehler beim Abrufen des Reports:", error);
+          this.warning = "Fehler beim Abrufen des Reports:" + error;
         });
     },
   },
@@ -92,50 +77,181 @@ export default {
     ref="test"
     class="ReportPrinter-root mb-3"
   >
-    <div class="mb-3">
-      <label
-        for="reportTitle"
-        class="form-label"
-        >Reporttitel:</label
-      >
-      <textarea
-        id="reportTitle"
+    <p class="title">Report-Datei herunterladen</p>
+    <p class="description with-margin">
+      Hier können Sie eine Reportdatei Ihrer Ergebnisse erstellen.<br /><br />Wählen
+      Sie dafür einen Kartenausschnitt und füllen Sie die unterstehenden Felder
+      aus. Sie können im Anschluss Ihren Report als pdf-Datei herunterladen.<br /><br />Hinweis:
+      Der Report enthält keine Ergebnisse, wenn Sie keine
+      Wasserhaushaltsberechnungen durchgeführt haben
+    </p>
+    <div class="input-wrapper">
+      <p class="input-wrapper-title">Titel des Reports</p>
+      <input
+        type="text"
+        name="title"
+        id="title"
         v-model="report.title"
-        class="form-control"
-        rows="2"
+        placeholder="Gib einen Titel für deinen Report ein..."
       />
     </div>
-    <div class="mb-3">
-      <label
-        for="projectDescription"
-        class="form-label"
-        >Projektbeschreibung:</label
-      >
+    <div class="input-wrapper">
+      <p class="input-wrapper-title">Kommentar (Optional)</p>
       <textarea
-        id="projectDescription"
+        name="title"
+        id="title"
+        rows="10"
         v-model="report.description"
-        class="form-control"
-        rows="3"
-      />
+        placeholder="Gib einen Kommentar für deinen Report ein..."
+      ></textarea>
     </div>
+    <div class="d-flex align-items-center justify-content-center custom-gap">
+      <div class="flex-grow-1">
+        <InfoIcon
+          :color="colors.amarex_secondary"
+          :size="20"
+        />
+      </div>
+      <p class="description">
+        Wenn der ausgewählte Druckmaßstab vom Maßstab im Kartenfenster abweicht,
+        kann dies zu einem veränderten Kartenlayout im Druck führen.
+      </p>
+    </div>
+    <div
+      class="d-flex align-items-center custom-gap mt-3 toggle-container"
+      @click="automaticallyAdjustPrintScale = !automaticallyAdjustPrintScale"
+    >
+      <ToggleBTN
+        :isActive="automaticallyAdjustPrintScale"
+        :size="32"
+      />
+      <p class="description bold">Druckmaßstab automatisch anpassen</p>
+    </div>
+    <div
+      class="d-flex align-items-center custom-gap mt-3 mb-4 toggle-container"
+      @click="withLegend = !withLegend"
+    >
+      <ToggleBTN
+        :isActive="withLegend"
+        :size="32"
+      />
+      <p class="description bold">Mit Legende</p>
+    </div>
+    <p
+      v-if="warning"
+      class="description bold mb-3 warning"
+    >
+      {{ warning }}
+    </p>
     <button
-      class="btn btn-primary"
+      class="amarex-btn-primary accent full-with-icon"
+      v-if="!reportLoading"
       @click="generateReport"
     >
-      <div
-        v-if="reportLoading"
-        class="spinner-border"
-        role="status"
-      ></div>
-      Drucke Report
+      <FileDown
+        :color="colors.secondary"
+        :size="24"
+      />
+      <p>Neues Projekt</p>
     </button>
+    <span
+      v-else
+      class="loading-container d-flex flex-column align-items-center"
+    >
+      <LoaderCircle
+        :color="colors.amarex_secondary"
+        :size="24"
+      />
+      <p class="title">Ihr Report wird geladen...</p>
+    </span>
+    <div></div>
   </div>
 </template>
 
 <style lang="scss">
-.ReportPrinter-root {
-  width: 100%;
-  height: 100px;
+@import "~variables";
+#report-printer {
+  .title {
+    color: $amarex_secondary;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 32px;
+  }
+  .description {
+    color: $amarex_secondary;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 22px;
+    &.with-margin {
+      margin-bottom: 32px;
+    }
+    &.bold {
+      font-weight: 700;
+    }
+  }
+  .input-wrapper {
+    padding: 12px 16px;
+    border: 1px solid $amarex_grey_dark;
+    margin-bottom: 32px;
+    .input-wrapper-title {
+      color: $amarex_secondary;
+      font-size: 14px;
+      font-weight: 400;
+      line-height: 16px;
+      margin-bottom: 5px;
+    }
+    input,
+    textarea {
+      width: 100%;
+      border: none !important;
+      color: $amarex_secondary;
+      font-size: 16px;
+      font-weight: 700;
+      line-height: 16px;
+      padding: 0 !important;
+      resize: none;
+      &:focus {
+        outline: none !important;
+        box-shadow: none !important;
+      }
+      &::placeholder {
+        color: $amarex_grey_dark;
+        font-size: 16px;
+        font-weight: 700;
+        line-height: 16px;
+      }
+    }
+  }
+  .custom-gap {
+    gap: 10px;
+  }
+  .toggle-container {
+    cursor: pointer;
+  }
+  .warning {
+    color: $amarex_red;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 22px;
+  }
+  .loading-container {
+    gap: 16px;
+    margin-top: 48px;
+    svg {
+      animation: spin 1s linear infinite;
+    }
+    p {
+      text-align: center;
+    }
+  }
+  @keyframes spin {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
 }
 </style>
 
