@@ -1570,12 +1570,12 @@ async function monitorJobStatus(statusURL) {
   }
 }
 
-async function downloadReport(downloadURL, dontDownload) {
+async function downloadReport(downloadURL) {
   const response = await fetchWithErrorHandling(
     `${CONFIG.API_BASE}${downloadURL}`,
   );
   const blob = await response.blob();
-  const url = URL.createObjectURL(blob);
+  // const url = URL.createObjectURL(blob);
 
   /*  if (!dontDownload) {
     const link = document.createElement("a");
