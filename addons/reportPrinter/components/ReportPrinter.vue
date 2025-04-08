@@ -1,6 +1,6 @@
 <script>
 import { mapGetters } from "vuex";
-import getReport from "../api/getReport";
+import { getReport, writePDF } from "../api/getReport";
 import colors from "../../../src/shared/js/utils/amarex-colors.json";
 import { Info as InfoIcon, FileDown, LoaderCircle } from "lucide-vue-next";
 import ToggleBTN from "./ToggleBTN.vue";
@@ -54,18 +54,26 @@ export default {
         this.warning = "Bitte einen Titel eingeben";
         return;
       }
-      this.reportLoading = true;
-      let payload = {};
 
-      getReport(payload)
-        .then((data) => {
-          console.log("Report Data: successfully retrieved", data);
-          this.reportLoading = false;
-        })
-        .catch((error) => {
-          this.reportLoading = false;
-          this.warning = "Fehler beim Abrufen des Reports:" + error;
-        });
+      this.reportLoading = true;
+
+      const payload = {
+        title: this.report.title,
+        description: this.report.description,
+        date: this.report.date,
+        automaticallyAdjustPrintScale: this.automaticallyAdjustPrintScale,
+        withLegend: this.withLegend,
+      };
+
+      try {
+        await getReport(payload);
+        this.reportLoading = false;
+        return;
+      } catch (error) {
+        this.reportLoading = false;
+        this.warning = "Fehler beim Erstellen des Reports:" + error;
+        return;
+      }
     },
   },
 };
@@ -77,7 +85,7 @@ export default {
     ref="test"
     class="ReportPrinter-root mb-3"
   >
-    <p class="title">Report-Datei herunterladen</p>
+    <p class="title">Report erstellen</p>
     <p class="description with-margin">
       Hier können Sie eine Reportdatei Ihrer Ergebnisse erstellen.<br /><br />Wählen
       Sie dafür einen Kartenausschnitt und füllen Sie die unterstehenden Felder
@@ -92,7 +100,7 @@ export default {
         name="title"
         id="title"
         v-model="report.title"
-        placeholder="Gib einen Titel für deinen Report ein..."
+        placeholder="Hier können Sie einen Kommentar für Ihren Report eingeben ..."
       />
     </div>
     <div class="input-wrapper">
@@ -152,7 +160,7 @@ export default {
         :color="colors.secondary"
         :size="24"
       />
-      <p>Neues Projekt</p>
+      <p>Datei herunterladen</p>
     </button>
     <span
       v-else
