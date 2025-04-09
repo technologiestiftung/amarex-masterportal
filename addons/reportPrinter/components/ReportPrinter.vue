@@ -91,7 +91,7 @@ export default {
       Sie dafür einen Kartenausschnitt und füllen Sie die unten stehenden Felder
       aus. Sie können im Anschluss Ihren Report als pdf-Datei herunterladen.<br /><br />Hinweis:
       Der Report enthält keine Ergebnisse, wenn Sie keine
-      Wasserhaushaltsberechnungen durchgeführt haben.
+      Wasserhaushalts&shy;berechnungen durchgeführt haben.
     </p>
     <div class="input-wrapper">
       <p class="input-wrapper-title">Titel des Reports</p>
