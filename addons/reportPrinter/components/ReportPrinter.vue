@@ -1,9 +1,10 @@
 <script>
 import { mapGetters } from "vuex";
-import { writePDF } from "../api/getReport";
+import { getReport, writePDF } from "../api/getReport";
 import colors from "../../../src/shared/js/utils/amarex-colors.json";
 import { Info as InfoIcon, FileDown, LoaderCircle } from "lucide-vue-next";
 import ToggleBTN from "./ToggleBTN.vue";
+import mapCollection from "../../../src/core/maps/js/mapCollection";
 
 /**
  * ReportPrinter
@@ -39,17 +40,25 @@ export default {
     ]),
     ...mapGetters("Modules/AbimoHandler", [
       "areaTypesData",
-      // "selectedFeatures",
-      // "accumulatedAbimoStats",
-      // "selectInteraction",
-      // "blockAreaConfirmed",
-      // "preselectedFeatures",
-      // "selectedCount",
+      "accumulatedAbimoStats",
+      "selectedFeatures",
+      "selectInteraction",
+      "blockAreaConfirmed",
+      "preselectedFeatures",
+      "selectedCount",
+      "newGreenRoof",
+      "newUnpvd",
+      "newToSwale",
+      "resultAbimoStats",
+      "resultLayers",
     ]),
   },
   created() {
-    this.report.title = this.projectTitle || "Amarex Report";
+    this.report.title = this.projectTitle || "Amarex Report PDF";
     this.report.description = this.projectDescription;
+  },
+  mounted() {
+    // this.generateReport();
   },
   methods: {
     /**
@@ -74,6 +83,21 @@ export default {
         seite_1_kennzahlen_flaechenanteil_prozente?.max * 100,
       ).toFixed(0);
 
+      console.log("log all", {
+        areaTypesData: this.areaTypesData,
+        accumulatedAbimoStats: this.accumulatedAbimoStats,
+        selectedFeatures: this.selectedFeatures,
+        selectInteraction: this.selectInteraction,
+        blockAreaConfirmed: this.blockAreaConfirmed,
+        preselectedFeatures: this.preselectedFeatures,
+        selectedCount: this.selectedCount,
+        newGreenRoof: this.newGreenRoof,
+        newUnpvd: this.newUnpvd,
+        newToSwale: this.newToSwale,
+        resultAbimoStats: this.resultAbimoStats,
+        resultLayers: this.resultLayers,
+      });
+
       const payload = {
         title: this.report.title,
         description: this.report.description,
@@ -81,17 +105,14 @@ export default {
         automaticallyAdjustPrintScale: this.automaticallyAdjustPrintScale,
         withLegend: this.withLegend,
         // Data
-        seite_1_kennzahlen_flaechenanteil_flaeche: "1",
-        seite_1_kennzahlen_flaechenanteil_prozente,
-        seite_1_kennzahlen_dachflaeche_flaeche: "3",
+        seite_1_kennzahlen_dachflaeche_flaeche: "3", // accumulatedAbimoStats
         seite_1_kennzahlen_dachflaeche_prozente: "4",
-        seite_1_kennzahlen_davonbegruent_flaeche: "5",
+        seite_1_kennzahlen_davonbegruent_flaeche: "5", // accumulatedAbimoStats
         seite_1_kennzahlen_davonbegruent_prozente: "6",
-        seite_1_kennzahlen_versiegelteflaeche_flaeche: "7",
+        seite_1_kennzahlen_versiegelteflaeche_flaeche: "7", // accumulatedAbimoStats
         seite_1_kennzahlen_versiegelteflaeche_prozente: "8",
-        seite_1_kennzahlen_unversiegelteflaeche_flaeche: "9",
+        seite_1_kennzahlen_unversiegelteflaeche_flaeche: "9", // accumulatedAbimoStats
         seite_1_kennzahlen_unversiegelteflaeche_prozente: "10",
-        seite_1_kennzahlen_anschlussgradkanalisation: "11",
         seite_3_status_quo_oberflaechenabfluss: "12",
         seite_3_status_quo_versickerung: "13",
         seite_3_status_quo_evapotranspiration: "14",
@@ -109,7 +130,6 @@ export default {
         seite_5_status_quo_versiegelteflaeche_prozente: "26",
         seite_5_status_quo_unversiegelteflaeche_flaeche: "27",
         seite_5_status_quo_unversiegelteflaeche_prozente: "28",
-        seite_5_status_quo_anschlussgradkanalisation: "29",
         seite_5_simulation_dachflaeche_flaeche: "30",
         seite_5_simulation_dachflaeche_prozente: "31",
         seite_5_simulation_davonbegruent_flaeche: "32",
@@ -118,8 +138,6 @@ export default {
         seite_5_simulation_versiegelteflaeche_prozente: "35",
         seite_5_simulation_unversiegelteflaeche_flaeche: "36",
         seite_5_simulation_unversiegelteflaeche_prozente: "37",
-        seite_5_simulation_anschlussgradkanalisation: "38",
-        seite_5_simulation_variante: "39",
         seite_5_status_quo_oberflaechenabfluss_mma: "40",
         seite_5_status_quo_oberflaechenabfluss_prozente: "41",
         seite_5_status_quo_versickerung_mma: "42",
@@ -178,18 +196,20 @@ export default {
         seite_7_simulation_deltaw: "95",
       };
 
-      console.log("payload :>> ", payload);
-      /* if (true) {
-        return (this.reportLoading = false);
-      } */
-
       try {
-        await writePDF(payload, "_blank");
+        const mapView = await mapCollection.getMapView("2D");
+        const getZoom = mapView.getZoom();
+        const getCenter = mapView.getCenter();
+        payload.mapView = {
+          zoomLevel: getZoom,
+          center: getCenter,
+        };
+        await getReport(payload, "gebiet", "_blank"); // "lokal" | "gebiet"
         this.reportLoading = false;
         return;
       } catch (error) {
         this.reportLoading = false;
-        this.warning = "Fehler beim Erstellen des Reports:" + error;
+        this.warning = "Fehler beim Erstellen des Reports: " + error;
         return;
       }
     },
@@ -219,6 +239,7 @@ export default {
         id="title"
         v-model="report.title"
         placeholder="Hier können Sie einen Titel eingeben ..."
+        maxlength="40"
       />
     </div>
     <div class="input-wrapper">
@@ -228,7 +249,8 @@ export default {
         id="title"
         rows="10"
         v-model="report.description"
-        placeholder="Hier können Sie einen Kommentar für Ihren Report eingeben ..."
+        placeholder="Hier können Sie einen Kommentar für Ihren Report eingeben (max. 300 Zeichen) ..."
+        maxlength="300"
       ></textarea>
     </div>
     <div class="d-flex align-items-center justify-content-center custom-gap">
@@ -290,7 +312,7 @@ export default {
         :color="colors.amarex_secondary"
         :size="24"
       />
-      <p class="title">Ihr Report wird geladen...</p>
+      <p class="title">Ihr Report wird erstellt...</p>
     </span>
     <div></div>
   </div>
