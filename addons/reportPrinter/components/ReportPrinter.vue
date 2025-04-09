@@ -218,7 +218,7 @@ export default {
         name="title"
         id="title"
         v-model="report.title"
-        placeholder="Hier können Sie einen Titel für Ihren Report eingeben ..."
+        placeholder="Hier können Sie einen Titel eingeben ..."
       />
     </div>
     <div class="input-wrapper">
