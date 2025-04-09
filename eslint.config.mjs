@@ -4,6 +4,7 @@ import pluginVue from "eslint-plugin-vue";
 import globals from "globals";
 
 export default [
+  // Ignored files
   {
     ignores: [
       "**/node_modules/",
@@ -28,8 +29,11 @@ export default [
       ".venv/",
     ],
   },
-  { files: ["**/*.{js,mjs,cjs,vue}"] },
+
+  // Main rule config
   {
+    files: ["**/*.{js,mjs,cjs,vue}"],
+
     languageOptions: {
       globals: {
         ...globals.browser,
@@ -47,12 +51,13 @@ export default [
         moduleCollection: true,
       },
     },
-  },
-  {
+
     rules: {
-      "no-unused-vars": ["error", { argsIgnorePattern: "^_" }], // This allows unused variables prefixed with underscore
+      "no-unused-vars": ["error", { argsIgnorePattern: "^_" }],
     },
   },
+
+  // ESLint + Vue + Prettier configs
   pluginJs.configs.recommended,
   ...pluginVue.configs["flat/essential"],
   eslintConfigPrettier,
