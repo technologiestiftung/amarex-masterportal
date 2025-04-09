@@ -18,6 +18,7 @@ export default {
   blockAreaConfirmed: false,
   selectedCount: 0,
   activeStep: 0,
+  isMeasurePlanning: false,
   accumulatedAbimoStats: {
     totalArea: 0,
     featuresSelected: 0,

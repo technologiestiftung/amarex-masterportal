@@ -24,6 +24,7 @@ export default {
       "blockAreaConfirmed",
       "preselectedFeatures",
       "selectedCount",
+      "isMeasurePlanning",
     ]),
   },
   mounted() {
@@ -38,6 +39,11 @@ export default {
     if (this.preselectedFeatures.length > 0) {
       this.createPreselectSelection();
     }
+    // TODO: remove this log
+    console.log(
+      "[AbimoBlockAreaSelector] this.isMeasurePlanning::",
+      this.isMeasurePlanning,
+    );
   },
   methods: {
     ...mapActions("Maps", {
@@ -57,7 +63,11 @@ export default {
       const selectedFeatures = this.selectInteraction.getFeatures();
       selectedFeatures.clear();
 
-      this.preselectedFeatures.forEach((feature) => {
+      const featuresToProcess = this.isMeasurePlanning
+        ? this.preselectedFeatures.slice(0, 1)
+        : this.preselectedFeatures;
+
+      featuresToProcess.forEach((feature) => {
         const layer = mapCollection
           .getMap("2D")
           .getLayers()
@@ -86,7 +96,7 @@ export default {
     createInteractions: function () {
       // From open layers we imported the Select class. This adds the possibility to add "blocks" to our feature layer. For further info check OpenLayers Docs
       const selectInteraction = new Select({
-        multi: true,
+        multi: !this.isMeasurePlanning,
         condition: singleClick,
         addCondition: singleClick,
         removeCondition: singleClick,
@@ -101,6 +111,32 @@ export default {
       this.setSelectInteraction(selectInteraction);
 
       selectInteraction.on("select", (event) => {
+        if (this.isMeasurePlanning && event.selected.length > 0) {
+          const currentFeatures = [...this.selectedFeatures];
+          currentFeatures.forEach((feature) => {
+            const featureCode = feature.values_.code;
+            const layer = mapCollection
+              .getMap("2D")
+              .getLayers()
+              .getArray()
+              .find((layer) => layer.get("id") === "rabimo_input_2020");
+
+            if (layer) {
+              const layerFeature = layer
+                .getSource()
+                .getFeatures()
+                .find((feat) => feat.values_.code === featureCode);
+
+              if (layerFeature && !event.selected.includes(layerFeature)) {
+                selectInteraction.getFeatures().remove(layerFeature);
+              }
+            }
+          });
+
+          this.setSelectedFeatures([]);
+          this.setSelectedCount(0);
+        }
+
         event.selected.forEach((feature) => {
           const inputFeature = new Feature({
             geometry: feature.getGeometry(),
@@ -113,9 +149,14 @@ export default {
           if (index !== -1) {
             return;
           }
+          
+          if (this.isMeasurePlanning && this.selectedFeatures.length > 0) {
+            this.selectedFeatures.splice(0, this.selectedFeatures.length);
+          }
+
           this.selectedFeatures.push(inputFeature);
           this.setSelectedFeatures(this.selectedFeatures);
-          this.setSelectedCount(this.selectedCount + 1);
+          this.setSelectedCount(this.selectedFeatures.length);
         });
 
         event.deselected.forEach((feature) => {

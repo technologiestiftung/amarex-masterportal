@@ -58,6 +58,10 @@ export default {
           component: markRaw(AbimoViewSelector),
           props: {
             nextStep: () => this.setActiveStep(2),
+            nextStepMnpl: () => {
+              this.setActiveStep(2);
+              this.setIsMeasurePlanning(true);
+            },
           },
           title: "Betrachtungsraum wählen",
           description:
@@ -69,6 +73,7 @@ export default {
                 this.setActiveStep(0);
                 this.setPreComputedModelsAdded(false);
                 this.resetPreComputedModels();
+                this.setIsMeasurePlanning(false);
               },
             },
           ],
@@ -86,6 +91,7 @@ export default {
                 this.resetAbimoCalculation();
                 this.setPreselectedFeatures([]);
                 this.setActiveStep(1);
+                this.setIsMeasurePlanning(false);
               },
             },
             {
@@ -233,6 +239,7 @@ export default {
       "setResultLayers",
       "setPreComputedModels",
       "setPreComputedModelsAdded",
+      "setIsMeasurePlanning",
     ]),
     setDisabled() {
       if (this.activeStep === 2) return this.selectedFeatures.length === 0;
