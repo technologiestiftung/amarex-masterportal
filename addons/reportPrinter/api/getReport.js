@@ -6,6 +6,7 @@ import logo from "./assets/amarex_logo_webtool.png";
 import EntsiegelungIcon from "./assets/EntsiegelungIcon.jpg";
 import GruendachIcon from "./assets/GruendachIcon.jpg";
 import MuldeIcon from "./assets/MuldeIcon.jpg";
+import PlaceholderMap from "./assets/Map.jpg";
 import autoTable from "jspdf-autotable";
 
 let requestData = {
@@ -1599,6 +1600,25 @@ function toFileSlug(str) {
     .substring(0, 100);
 }
 
+async function getAspectRatio(imageSrc) {
+  return new Promise((resolve, reject) => {
+    const img = new Image();
+    img.onload = function () {
+      const originalWidth = img.naturalWidth;
+      const originalHeight = img.naturalHeight;
+      const aspectRatio = originalWidth / originalHeight;
+
+      resolve({
+        aspectRatio,
+      });
+    };
+    img.onerror = function () {
+      reject(new Error("Failed to load image."));
+    };
+    img.src = imageSrc;
+  });
+}
+
 async function writePDF(payload, savingType, blob) {
   if (!payload) {
     throw new Error("🚨 payload fehlt");
@@ -1613,6 +1633,7 @@ async function writePDF(payload, savingType, blob) {
   const paddingHorizontal = 40 * pixelsToMM;
   const paddingVertical = 30 * pixelsToMM;
   const pageInnerWidth = 515 * pixelsToMM;
+  const pageInnerHeight = 782 * pixelsToMM;
   const iconSizes = 28 * pixelsToMM;
 
   let vertical = paddingVertical;
@@ -1628,7 +1649,6 @@ async function writePDF(payload, savingType, blob) {
     const {
       text,
       size,
-      lineHeight,
       weight,
       x,
       y,
@@ -1644,7 +1664,7 @@ async function writePDF(payload, savingType, blob) {
     const posX = x ?? paddingHorizontal;
     const posY = y ?? vertical;
     const setSize = size ?? 14;
-    const setLineHeight = lineHeight ?? 24;
+    const setLineHeight = 24;
     const setlineHeightFactor = setLineHeight / setSize;
     const setMaxWidth = maxWidth ?? pageInnerWidth;
 
@@ -1758,7 +1778,7 @@ async function writePDF(payload, savingType, blob) {
     noLineBreak: true,
   });
   text({
-    text: ` ${"XX"} m² (${"XX"} %)`,
+    text: ` ${payload.seite_1_kennzahlen_flaechenanteil_flaeche} m² (${payload.seite_1_kennzahlen_flaechenanteil_prozente} %)`,
     x: paddingHorizontal + doc.getTextWidth(" • Flächenanteile:"),
   });
   text({
@@ -1766,7 +1786,7 @@ async function writePDF(payload, savingType, blob) {
     noLineBreak: true,
   });
   text({
-    text: ` ${"XX"} m² (${"XX"} %)`,
+    text: ` ${payload.seite_1_kennzahlen_dachflaeche_flaeche} m² (${payload.seite_1_kennzahlen_dachflaeche_prozente} %)`,
     x: paddingHorizontal + doc.getTextWidth(" • Dachfläche:"),
   });
   text({
@@ -1774,7 +1794,7 @@ async function writePDF(payload, savingType, blob) {
     noLineBreak: true,
   });
   text({
-    text: ` ${"XX"} m² (${"XX"} %)`,
+    text: ` ${payload.seite_1_kennzahlen_davonbegruent_flaeche} m² (${payload.seite_1_kennzahlen_davonbegruent_prozente} %)`,
     x: paddingHorizontal + doc.getTextWidth(" • Davon begrünt:"),
   });
   text({
@@ -1782,7 +1802,7 @@ async function writePDF(payload, savingType, blob) {
     noLineBreak: true,
   });
   text({
-    text: ` ${"XX"} m² (${"XX"} %)`,
+    text: ` ${payload.seite_1_kennzahlen_versiegelteflaeche_flaeche} m² (${payload.seite_1_kennzahlen_versiegelteflaeche_prozente} %)`,
     x: paddingHorizontal + doc.getTextWidth(" • Versiegelte Fläche:"),
   });
   text({
@@ -1790,19 +1810,31 @@ async function writePDF(payload, savingType, blob) {
     noLineBreak: true,
   });
   text({
-    text: ` ${"XX"} m² (${"XX"} %)`,
+    text: ` ${payload.seite_1_kennzahlen_unversiegelteflaeche_flaeche} m² (${payload.seite_1_kennzahlen_unversiegelteflaeche_prozente} %)`,
     x: paddingHorizontal + doc.getTextWidth(" • Unversiegelte Fläche:"),
     extraMarginBottom: 28,
   });
   text({
-    text: `Anschlussgrad Kanalisation: ${"XX"} %`,
+    text: `Anschlussgrad Kanalisation: ${payload.seite_1_kennzahlen_anschlussgradkanalisation} %`,
   });
 
   // 2. Page
   makeHeader("Eigene Karte");
   text({
     text: "Ausgewählter Kartenbereich:",
+    weight: "b",
   });
+  const imgAspect = await getAspectRatio(PlaceholderMap);
+  const mapHeight = pageInnerHeight - vertical;
+  const mapWidth = imgAspect.aspectRatio * mapHeight;
+  doc.addImage(
+    PlaceholderMap,
+    "JPEG",
+    paddingHorizontal + (pageInnerWidth - mapWidth) / 2,
+    vertical,
+    mapWidth,
+    mapHeight,
+  );
 
   if (blob) {
     console.log("blob :>> ", blob);
@@ -1822,13 +1854,13 @@ async function writePDF(payload, savingType, blob) {
     extraMarginBottom: 14,
   });
   text({
-    text: `Oberflächenabfluss: ${"XX"} %`,
+    text: `Oberflächenabfluss: ${payload.seite_3_status_quo_oberflaechenabfluss} %`,
   });
   text({
-    text: `Versickerung: ${"XX"} %`,
+    text: `Versickerung: ${payload.seite_3_status_quo_versickerung} %`,
   });
   text({
-    text: `Evapotranspiration: ${"XX"} %`,
+    text: `Evapotranspiration: ${payload.seite_3_status_quo_evapotranspiration} %`,
     extraMarginBottom: 14,
   });
   text({
@@ -1840,7 +1872,7 @@ async function writePDF(payload, savingType, blob) {
     extraMarginBottom: 14,
   });
   text({
-    text: `Für Ihr ausgewähltes Untersuchungsgebiet liegt Delta-W bei ${"XX"} %`,
+    text: `Für Ihr ausgewähltes Untersuchungsgebiet liegt Delta-W bei ${payload.seite_3_status_quo_deltaw} %`,
   });
 
   // 4. Page
@@ -1848,7 +1880,7 @@ async function writePDF(payload, savingType, blob) {
   vertical += mm(40);
 
   text({
-    text: `Betrachtete Blockteilflächen: ${"XX"}`,
+    text: `Betrachtete Blockteilflächen: ${payload.seite_4_gebietsbetrachtung_betrachteteblockteilflaechen}`,
     extraMarginBottom: 14,
   });
   text({
@@ -1874,7 +1906,7 @@ async function writePDF(payload, savingType, blob) {
     weight: "i",
   });
   text({
-    text: `Umsetzungsgrad: ${"XX"} %`,
+    text: `Umsetzungsgrad: ${payload.seite_4_gebietsbetrachtung_mulde_percentage} %`,
     extraMarginBottom: 14,
   });
   doc.addImage(
@@ -1896,7 +1928,7 @@ async function writePDF(payload, savingType, blob) {
     weight: "i",
   });
   text({
-    text: `Umsetzungsgrad: ${"XX"} %`,
+    text: `Umsetzungsgrad: ${payload.seite_4_gebietsbetrachtung_entsiegelung_percentage} %`,
     extraMarginBottom: 14,
   });
   doc.addImage(
@@ -1918,11 +1950,11 @@ async function writePDF(payload, savingType, blob) {
     weight: "i",
   });
   text({
-    text: `Umsetzungsgrad: ${"XX"} %`,
+    text: `Umsetzungsgrad: ${payload.seite_4_gebietsbetrachtung_dachbegruenung_percentage} %`,
     extraMarginBottom: 28,
   });
   text({
-    text: "(Link zu Maßnahmenkatalog)",
+    text: `Link zu Maßnahmenkatalog: ${payload.seite_4_gebietsbetrachtung_linkmaßnahmenkatalog}`,
     weight: "i",
   });
 
@@ -1944,48 +1976,48 @@ async function writePDF(payload, savingType, blob) {
     x: paddingVertical + pageInnerWidth / 2,
   });
   text({
-    text: `Dachfläche: ${"XX"} m² (${"XX"} %)`,
+    text: `Dachfläche: ${payload.seite_5_status_quo_dachflaeche_flaeche} m² (${payload.seite_5_status_quo_dachflaeche_prozente} %)`,
     noLineBreak: true,
   });
   text({
-    text: `Dachfläche: ${"XX"} m² (${"XX"} %)`,
+    text: `Dachfläche: ${payload.seite_5_simulation_dachflaeche_flaeche} m² (${payload.seite_5_simulation_dachflaeche_prozente} %)`,
     x: paddingVertical + pageInnerWidth / 2,
   });
   text({
-    text: `Davon begrünt: ${"XX"} m² (${"XX"} %)`,
+    text: `Davon begrünt: ${payload.seite_5_status_quo_davonbegruent_flaeche} m² (${payload.seite_5_status_quo_davonbegruent_prozente} %)`,
     noLineBreak: true,
   });
   text({
-    text: `Davon begrünt: ${"XX"} m² (${"XX"} %)`,
+    text: `Davon begrünt: ${payload.seite_5_simulation_davonbegruent_flaeche} m² (${payload.seite_5_simulation_davonbegruent_prozente} %)`,
     x: paddingVertical + pageInnerWidth / 2,
   });
   text({
-    text: `Versiegelte Fläche: ${"XX"} m² (${"XX"} %)`,
+    text: `Versiegelte Fläche: ${payload.seite_5_status_quo_versiegelteflaeche_flaeche} m² (${payload.seite_5_status_quo_versiegelteflaeche_prozente} %)`,
     noLineBreak: true,
   });
   text({
-    text: `Versiegelte Fläche: ${"XX"} m² (${"XX"} %)`,
+    text: `Versiegelte Fläche: ${payload.seite_5_simulation_versiegelteflaeche_flaeche} m² (${payload.seite_5_simulation_versiegelteflaeche_prozente} %)`,
     x: paddingVertical + pageInnerWidth / 2,
   });
   text({
-    text: `Unversiegelte Fläche: ${"XX"} m² (${"XX"} %)`,
+    text: `Unversiegelte Fläche: ${payload.seite_5_status_quo_unversiegelteflaeche_flaeche} m² (${payload.seite_5_status_quo_unversiegelteflaeche_prozente} %)`,
     noLineBreak: true,
   });
   text({
-    text: `Unversiegelte Fläche: ${"XX"} m² (${"XX"} %)`,
+    text: `Unversiegelte Fläche: ${payload.seite_5_simulation_unversiegelteflaeche_flaeche} m² (${payload.seite_5_simulation_unversiegelteflaeche_prozente} %)`,
     x: paddingVertical + pageInnerWidth / 2,
     extraMarginBottom: 28,
   });
   text({
-    text: `Anschlussgrad Kanalisation: ${"XX"} %`,
+    text: `Anschlussgrad Kanalisation: ${payload.seite_5_status_quo_anschlussgradkanalisation} %`,
     noLineBreak: true,
   });
   text({
-    text: `Anschlussgrad Kanalisation: ${"XX"} %`,
+    text: `Anschlussgrad Kanalisation: ${payload.seite_5_simulation_anschlussgradkanalisation} %`,
     x: paddingVertical + pageInnerWidth / 2,
   });
   text({
-    text: `(Variante): ${"XX"} %`,
+    text: `(Variante): ${payload.seite_5_simulation_variante} %`,
     x: paddingVertical + pageInnerWidth / 2,
     extraMarginBottom: 28,
   });
@@ -2008,58 +2040,58 @@ async function writePDF(payload, savingType, blob) {
     x: paddingVertical + pageInnerWidth / 2,
   });
   text({
-    text: ` • Oberflächenabfluss: ${"XX"} mm/a (${"XX"} %)`,
+    text: ` • Oberflächenabfluss: ${payload.seite_5_status_quo_oberflaechenabfluss_mma} mm/a (${payload.seite_5_status_quo_oberflaechenabfluss_prozente} %)`,
     noLineBreak: true,
     // maxWidth: pageInnerWidth / 3,
   });
   text({
-    text: ` • Oberflächenabfluss: ${"XX"} mm/a (${"XX"} %)`,
+    text: ` • Oberflächenabfluss: ${payload.seite_5_simulation_oberflaechenabfluss_mma} mm/a (${payload.seite_5_simulation_oberflaechenabfluss_prozente} %)`,
     x: paddingVertical + pageInnerWidth / 2,
   });
   text({
-    text: ` • Versickerung: ${"XX"} mm/a (${"XX"} %)`,
+    text: ` • Versickerung: ${payload.seite_5_status_quo_versickerung_mma} mm/a (${payload.seite_5_status_quo_versickerung_prozente} %)`,
     noLineBreak: true,
     // maxWidth: pageInnerWidth / 3,
   });
   text({
-    text: ` • Versickerung: ${"XX"} mm/a (${"XX"} %)`,
+    text: ` • Versickerung: ${payload.seite_5_simulation_versickerung_mma} mm/a (${payload.seite_5_simulation_versickerung_prozente} %)`,
     x: paddingVertical + pageInnerWidth / 2,
   });
   text({
-    text: ` • Evapotranspiration: ${"XX"} mm/a (${"XX"} %)`,
+    text: ` • Evapotranspiration: ${payload.seite_5_status_quo_evapotranspiration_mma} mm/a (${payload.seite_5_status_quo_evapotranspiration_prozente} %)`,
     noLineBreak: true,
     // maxWidth: pageInnerWidth / 3,
   });
   text({
-    text: ` • Evapotranspiration: ${"XX"} mm/a (${"XX"} %)`,
+    text: ` • Evapotranspiration: ${payload.seite_5_simulation_evapotranspiration_mma} mm/a (${payload.seite_5_simulation_evapotranspiration_prozente} %)`,
     x: paddingVertical + pageInnerWidth / 2,
   });
   text({
-    text: ` • Delta W: ${"XX"} %`,
+    text: ` • Delta W: ${payload.seite_5_status_quo_deltaw} %`,
     noLineBreak: true,
   });
   text({
-    text: ` • Delta W: ${"XX"} %`,
+    text: ` • Delta W: ${payload.seite_5_simulation_deltaw} %`,
     x: paddingVertical + pageInnerWidth / 2,
   });
 
   // 6. Page
   makeHeader("Maßnahmenplanung: Lokale Betrachtung");
   text({
-    text: `Betrachtete Blockteilfläche: Blockteilnummer ${"XX"}`,
+    text: `Betrachtete Blockteilfläche: Blockteilnummer ${payload.seite_6_betrachteteblockteilflaeche_blockteilnummer}`,
     extraMarginBottom: 14,
   });
   text({
     text: "Gewählte Maßnahmen in Ihrem Untersuchungsgebiet:",
   });
   text({
-    text: ` • Dachbegrünung Anzahl: ${"XX"}`,
+    text: ` • Dachbegrünung Anzahl: ${payload.seite_6_dachbegruenung_anzahl}`,
   });
   text({
-    text: ` • Entsiegelung Anzahl: ${"XX"}`,
+    text: ` • Entsiegelung Anzahl: ${payload.seite_6_entsiegelung_anzahl}`,
   });
   text({
-    text: ` • Muldenversickerung Anzahl: ${"XX"}`,
+    text: ` • Muldenversickerung Anzahl: ${payload.seite_6_muldenversickerung_anzahl}`,
     extraMarginBottom: 28,
   });
   text({
@@ -2075,18 +2107,18 @@ async function writePDF(payload, savingType, blob) {
     x: paddingVertical + pageInnerWidth / 2,
   });
   text({
-    text: ` • Oberfläche: ${"XX"} m²`,
+    text: ` • Oberfläche: ${payload.seite_6_summe_mulde_flaeche} m²`,
     noLineBreak: true,
   });
   text({
-    text: ` • Oberfläche: ${"XX"} m²`,
+    text: ` • Oberfläche: ${payload.seite_6_summe_dachbegruenung_flaeche} m²`,
     x: paddingVertical + pageInnerWidth / 2,
   });
   text({
-    text: ` • Volumen: ${"XX"} m²`,
+    text: ` • Volumen: ${payload.seite_6_summe_mulde_volumen} m²`,
   });
   text({
-    text: ` • angeschlossene Fläche: ${"XX"} m²`,
+    text: ` • angeschlossene Fläche: ${payload.seite_6_summe_mulde_angeschlosseneflaeche} m²`,
     noLineBreak: true,
   });
   text({
@@ -2094,7 +2126,7 @@ async function writePDF(payload, savingType, blob) {
     x: paddingVertical + pageInnerWidth / 2,
   });
   text({
-    text: ` • Oberfläche: ${"XX"} m²`,
+    text: ` • Oberfläche: ${payload.seite_6_summe_entsiegelung_flaeche} m²`,
     x: paddingVertical + pageInnerWidth / 2,
   });
 
@@ -2116,48 +2148,48 @@ async function writePDF(payload, savingType, blob) {
     x: paddingVertical + pageInnerWidth / 2,
   });
   text({
-    text: `Dachfläche: ${"XX"} m² (${"XX"} %)`,
+    text: `Dachfläche: ${payload.seite_7_status_quo_dachflaeche_flaeche} m² (${payload.seite_7_status_quo_dachflaeche_prozente} %)`,
     noLineBreak: true,
   });
   text({
-    text: `Dachfläche: ${"XX"} m² (${"XX"} %)`,
+    text: `Dachfläche: ${payload.seite_7_simulation_dachflaeche_flaeche} m² (${payload.seite_7_simulation_dachflaeche_prozente} %)`,
     x: paddingVertical + pageInnerWidth / 2,
   });
   text({
-    text: `Davon begrünt: ${"XX"} m² (${"XX"} %)`,
+    text: `Davon begrünt: ${payload.seite_7_status_quo_davonbegruent_flaeche} m² (${payload.seite_7_status_quo_davonbegruent_prozente} %)`,
     noLineBreak: true,
   });
   text({
-    text: `Davon begrünt: ${"XX"} m² (${"XX"} %)`,
+    text: `Davon begrünt: ${payload.seite_7_simulation_davonbegruent_flaeche} m² (${payload.seite_7_simulation_davonbegruent_prozente} %)`,
     x: paddingVertical + pageInnerWidth / 2,
   });
   text({
-    text: `Versiegelte Fläche: ${"XX"} m² (${"XX"} %)`,
+    text: `Versiegelte Fläche: ${payload.seite_7_status_quo_versiegelteflaeche_flaeche} m² (${payload.seite_7_status_quo_versiegelteflaeche_prozente} %)`,
     noLineBreak: true,
   });
   text({
-    text: `Versiegelte Fläche: ${"XX"} m² (${"XX"} %)`,
+    text: `Versiegelte Fläche: ${payload.seite_7_simulation_versiegelteflaeche_flaeche} m² (${payload.seite_7_simulation_versiegelteflaeche_prozente} %)`,
     x: paddingVertical + pageInnerWidth / 2,
   });
   text({
-    text: `Unversiegelte Fläche: ${"XX"} m² (${"XX"} %)`,
+    text: `Unversiegelte Fläche: ${payload.seite_7_status_quo_unversiegelteflaeche_flaeche} m² (${payload.seite_7_status_quo_unversiegelteflaeche_prozente} %)`,
     noLineBreak: true,
   });
   text({
-    text: `Unversiegelte Fläche: ${"XX"} m² (${"XX"} %)`,
+    text: `Unversiegelte Fläche: ${payload.seite_7_simulation_unversiegelteflaeche_flaeche} m² (${payload.seite_7_simulation_unversiegelteflaeche_prozente} %)`,
     x: paddingVertical + pageInnerWidth / 2,
     extraMarginBottom: 28,
   });
   text({
-    text: `Anschlussgrad Kanalisation: ${"XX"} %`,
+    text: `Anschlussgrad Kanalisation: ${payload.seite_7_status_quo_anschlussgradkanalisation} %`,
     noLineBreak: true,
   });
   text({
-    text: `Anschlussgrad Kanalisation: ${"XX"} %`,
+    text: `Anschlussgrad Kanalisation: ${payload.seite_7_simulation_anschlussgradkanalisation} %`,
     x: paddingVertical + pageInnerWidth / 2,
   });
   text({
-    text: `(Variante): ${"XX"} %`,
+    text: `(Variante): ${payload.seite_7_simulation_variante} %`,
     x: paddingVertical + pageInnerWidth / 2,
     extraMarginBottom: 28,
   });
@@ -2180,38 +2212,38 @@ async function writePDF(payload, savingType, blob) {
     x: paddingVertical + pageInnerWidth / 2,
   });
   text({
-    text: ` • Oberflächenabfluss: ${"XX"} mm/a (${"XX"} %)`,
+    text: ` • Oberflächenabfluss: ${payload.seite_7_status_quo_oberflaechenabfluss_mma} mm/a (${payload.seite_7_status_quo_oberflaechenabfluss_prozente} %)`,
     noLineBreak: true,
     // maxWidth: pageInnerWidth / 3,
   });
   text({
-    text: ` • Oberflächenabfluss: ${"XX"} mm/a (${"XX"} %)`,
+    text: ` • Oberflächenabfluss: ${payload.seite_7_simulation_oberflaechenabfluss_mma} mm/a (${payload.seite_7_simulation_oberflaechenabfluss_prozente} %)`,
     x: paddingVertical + pageInnerWidth / 2,
   });
   text({
-    text: ` • Versickerung: ${"XX"} mm/a (${"XX"} %)`,
+    text: ` • Versickerung: ${payload.seite_7_status_quo_versickerung_mma} mm/a (${payload.seite_7_status_quo_versickerung_prozente} %)`,
     noLineBreak: true,
     // maxWidth: pageInnerWidth / 3,
   });
   text({
-    text: ` • Versickerung: ${"XX"} mm/a (${"XX"} %)`,
+    text: ` • Versickerung: ${payload.seite_7_simulation_versickerung_mma} mm/a (${payload.seite_7_simulation_versickerung_prozente} %)`,
     x: paddingVertical + pageInnerWidth / 2,
   });
   text({
-    text: ` • Evapotranspiration: ${"XX"} mm/a (${"XX"} %)`,
+    text: ` • Evapotranspiration: ${payload.seite_7_status_quo_evapotranspiration_mma} mm/a (${payload.seite_7_status_quo_evapotranspiration_prozente} %)`,
     noLineBreak: true,
     // maxWidth: pageInnerWidth / 3,
   });
   text({
-    text: ` • Evapotranspiration: ${"XX"} mm/a (${"XX"} %)`,
+    text: ` • Evapotranspiration: ${payload.seite_7_simulation_evapotranspiration_mma} mm/a (${payload.seite_7_simulation_evapotranspiration_prozente} %)`,
     x: paddingVertical + pageInnerWidth / 2,
   });
   text({
-    text: ` • Delta W: ${"XX"} %`,
+    text: ` • Delta W: ${payload.seite_7_status_quo_deltaw} %`,
     noLineBreak: true,
   });
   text({
-    text: ` • Delta W: ${"XX"} %`,
+    text: ` • Delta W: ${payload.seite_7_simulation_deltaw} %`,
     x: paddingVertical + pageInnerWidth / 2,
   });
 

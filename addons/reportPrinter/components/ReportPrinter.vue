@@ -1,6 +1,6 @@
 <script>
 import { mapGetters } from "vuex";
-import { getReport } from "../api/getReport";
+import { getReport, writePDF } from "../api/getReport";
 import colors from "../../../src/shared/js/utils/amarex-colors.json";
 import { Info as InfoIcon, FileDown, LoaderCircle } from "lucide-vue-next";
 import ToggleBTN from "./ToggleBTN.vue";
@@ -37,6 +37,15 @@ export default {
       "projectTitle",
       "projectDescription",
     ]),
+    ...mapGetters("Modules/AbimoHandler", [
+      "areaTypesData",
+      // "selectedFeatures",
+      // "accumulatedAbimoStats",
+      // "selectInteraction",
+      // "blockAreaConfirmed",
+      // "preselectedFeatures",
+      // "selectedCount",
+    ]),
   },
   created() {
     this.report.title = this.projectTitle || "Amarex Report";
@@ -57,16 +66,125 @@ export default {
 
       this.reportLoading = true;
 
+      // Gather Data
+      let seite_1_kennzahlen_flaechenanteil_prozente = this.areaTypesData.find(
+        (findAreaTypeData) => findAreaTypeData.id === "unpvd",
+      );
+      seite_1_kennzahlen_flaechenanteil_prozente = Math.round(
+        seite_1_kennzahlen_flaechenanteil_prozente?.max * 100,
+      ).toFixed(0);
+
       const payload = {
         title: this.report.title,
         description: this.report.description,
         date: this.report.date,
         automaticallyAdjustPrintScale: this.automaticallyAdjustPrintScale,
         withLegend: this.withLegend,
+        // Data
+        seite_1_kennzahlen_flaechenanteil_flaeche: "1",
+        seite_1_kennzahlen_flaechenanteil_prozente,
+        seite_1_kennzahlen_dachflaeche_flaeche: "3",
+        seite_1_kennzahlen_dachflaeche_prozente: "4",
+        seite_1_kennzahlen_davonbegruent_flaeche: "5",
+        seite_1_kennzahlen_davonbegruent_prozente: "6",
+        seite_1_kennzahlen_versiegelteflaeche_flaeche: "7",
+        seite_1_kennzahlen_versiegelteflaeche_prozente: "8",
+        seite_1_kennzahlen_unversiegelteflaeche_flaeche: "9",
+        seite_1_kennzahlen_unversiegelteflaeche_prozente: "10",
+        seite_1_kennzahlen_anschlussgradkanalisation: "11",
+        seite_3_status_quo_oberflaechenabfluss: "12",
+        seite_3_status_quo_versickerung: "13",
+        seite_3_status_quo_evapotranspiration: "14",
+        seite_3_status_quo_deltaw: "15",
+        seite_4_gebietsbetrachtung_betrachteteblockteilflaechen: "16",
+        seite_4_gebietsbetrachtung_mulde_percentage: "17",
+        seite_4_gebietsbetrachtung_entsiegelung_percentage: "18",
+        seite_4_gebietsbetrachtung_dachbegruenung_percentage: "19",
+        seite_4_gebietsbetrachtung_linkmaßnahmenkatalog: "20",
+        seite_5_status_quo_dachflaeche_flaeche: "21",
+        seite_5_status_quo_dachflaeche_prozente: "22",
+        seite_5_status_quo_davonbegruent_flaeche: "23",
+        seite_5_status_quo_davonbegruent_prozente: "24",
+        seite_5_status_quo_versiegelteflaeche_flaeche: "25",
+        seite_5_status_quo_versiegelteflaeche_prozente: "26",
+        seite_5_status_quo_unversiegelteflaeche_flaeche: "27",
+        seite_5_status_quo_unversiegelteflaeche_prozente: "28",
+        seite_5_status_quo_anschlussgradkanalisation: "29",
+        seite_5_simulation_dachflaeche_flaeche: "30",
+        seite_5_simulation_dachflaeche_prozente: "31",
+        seite_5_simulation_davonbegruent_flaeche: "32",
+        seite_5_simulation_davonbegruent_prozente: "33",
+        seite_5_simulation_versiegelteflaeche_flaeche: "34",
+        seite_5_simulation_versiegelteflaeche_prozente: "35",
+        seite_5_simulation_unversiegelteflaeche_flaeche: "36",
+        seite_5_simulation_unversiegelteflaeche_prozente: "37",
+        seite_5_simulation_anschlussgradkanalisation: "38",
+        seite_5_simulation_variante: "39",
+        seite_5_status_quo_oberflaechenabfluss_mma: "40",
+        seite_5_status_quo_oberflaechenabfluss_prozente: "41",
+        seite_5_status_quo_versickerung_mma: "42",
+        seite_5_status_quo_versickerung_prozente: "43",
+        seite_5_status_quo_evapotranspiration_mma: "44",
+        seite_5_status_quo_evapotranspiration_prozente: "45",
+        seite_5_status_quo_deltaw: "46",
+        seite_5_simulation_oberflaechenabfluss_mma: "47",
+        seite_5_simulation_oberflaechenabfluss_prozente: "48",
+        seite_5_simulation_versickerung_mma: "49",
+        seite_5_simulation_versickerung_prozente: "50",
+        seite_5_simulation_evapotranspiration_mma: "51",
+        seite_5_simulation_evapotranspiration_prozente: "52",
+        seite_5_simulation_deltaw: "53",
+        seite_6_betrachteteblockteilflaeche_blockteilnummer: "54",
+        seite_6_dachbegruenung_anzahl: "55",
+        seite_6_entsiegelung_anzahl: "56",
+        seite_6_muldenversickerung_anzahl: "57",
+        seite_6_summe_mulde_flaeche: "58",
+        seite_6_summe_mulde_volumen: "59",
+        seite_6_summe_mulde_angeschlosseneflaeche: "60",
+        seite_6_summe_dachbegruenung_flaeche: "61",
+        seite_6_summe_entsiegelung_flaeche: "62",
+        seite_7_status_quo_dachflaeche_flaeche: "63",
+        seite_7_status_quo_dachflaeche_prozente: "64",
+        seite_7_status_quo_davonbegruent_flaeche: "65",
+        seite_7_status_quo_davonbegruent_prozente: "66",
+        seite_7_status_quo_versiegelteflaeche_flaeche: "67",
+        seite_7_status_quo_versiegelteflaeche_prozente: "68",
+        seite_7_status_quo_unversiegelteflaeche_flaeche: "69",
+        seite_7_status_quo_unversiegelteflaeche_prozente: "70",
+        seite_7_status_quo_anschlussgradkanalisation: "71",
+        seite_7_simulation_dachflaeche_flaeche: "72",
+        seite_7_simulation_dachflaeche_prozente: "73",
+        seite_7_simulation_davonbegruent_flaeche: "74",
+        seite_7_simulation_davonbegruent_prozente: "75",
+        seite_7_simulation_versiegelteflaeche_flaeche: "76",
+        seite_7_simulation_versiegelteflaeche_prozente: "77",
+        seite_7_simulation_unversiegelteflaeche_flaeche: "78",
+        seite_7_simulation_unversiegelteflaeche_prozente: "79",
+        seite_7_simulation_anschlussgradkanalisation: "80",
+        seite_7_simulation_variante: "81",
+        seite_7_status_quo_oberflaechenabfluss_mma: "82",
+        seite_7_status_quo_oberflaechenabfluss_prozente: "83",
+        seite_7_status_quo_versickerung_mma: "84",
+        seite_7_status_quo_versickerung_prozente: "85",
+        seite_7_status_quo_evapotranspiration_mma: "86",
+        seite_7_status_quo_evapotranspiration_prozente: "87",
+        seite_7_status_quo_deltaw: "88",
+        seite_7_simulation_oberflaechenabfluss_mma: "89",
+        seite_7_simulation_oberflaechenabfluss_prozente: "90",
+        seite_7_simulation_versickerung_mma: "91",
+        seite_7_simulation_versickerung_prozente: "92",
+        seite_7_simulation_evapotranspiration_mma: "93",
+        seite_7_simulation_evapotranspiration_prozente: "94",
+        seite_7_simulation_deltaw: "95",
       };
 
+      console.log("payload :>> ", payload);
+      /* if (true) {
+        return (this.reportLoading = false);
+      } */
+
       try {
-        await getReport(payload);
+        await writePDF(payload, "_blank");
         this.reportLoading = false;
         return;
       } catch (error) {
@@ -133,7 +251,9 @@ export default {
         :isActive="automaticallyAdjustPrintScale"
         :size="32"
       />
-      <p class="description bold">Druckmaßstab automatisch anpassen</p>
+      <p class="description bold user-select-none">
+        Druckmaßstab automatisch anpassen
+      </p>
     </div>
     <div
       class="d-flex align-items-center custom-gap mt-3 mb-4 toggle-container"
@@ -143,7 +263,7 @@ export default {
         :isActive="withLegend"
         :size="32"
       />
-      <p class="description bold">Mit Legende</p>
+      <p class="description bold user-select-none">Mit Legende</p>
     </div>
     <p
       v-if="warning"
