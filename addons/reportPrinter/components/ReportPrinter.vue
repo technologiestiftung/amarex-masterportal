@@ -1,6 +1,6 @@
 <script>
 import { mapGetters } from "vuex";
-import { getReport, writePDF } from "../api/getReport";
+import { writePDF } from "../api/getReport";
 import colors from "../../../src/shared/js/utils/amarex-colors.json";
 import { Info as InfoIcon, FileDown, LoaderCircle } from "lucide-vue-next";
 import ToggleBTN from "./ToggleBTN.vue";
