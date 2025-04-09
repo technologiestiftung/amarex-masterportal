@@ -88,10 +88,10 @@ export default {
     <p class="title">Report erstellen</p>
     <p class="description with-margin">
       Hier können Sie eine Reportdatei Ihrer Ergebnisse erstellen.<br /><br />Wählen
-      Sie dafür einen Kartenausschnitt und füllen Sie die unterstehenden Felder
+      Sie dafür einen Kartenausschnitt und füllen Sie die unten stehenden Felder
       aus. Sie können im Anschluss Ihren Report als pdf-Datei herunterladen.<br /><br />Hinweis:
       Der Report enthält keine Ergebnisse, wenn Sie keine
-      Wasserhaushaltsberechnungen durchgeführt haben
+      Wasserhaushaltsberechnungen durchgeführt haben.
     </p>
     <div class="input-wrapper">
       <p class="input-wrapper-title">Titel des Reports</p>
@@ -100,7 +100,7 @@ export default {
         name="title"
         id="title"
         v-model="report.title"
-        placeholder="Hier können Sie einen Kommentar für Ihren Report eingeben ..."
+        placeholder="Hier können Sie einen Titel für Ihren Report eingeben ..."
       />
     </div>
     <div class="input-wrapper">
@@ -110,7 +110,7 @@ export default {
         id="title"
         rows="10"
         v-model="report.description"
-        placeholder="Gib einen Kommentar für deinen Report ein..."
+        placeholder="Hier können Sie einen Kommentar für Ihren Report eingeben ..."
       ></textarea>
     </div>
     <div class="d-flex align-items-center justify-content-center custom-gap">
