@@ -1808,10 +1808,10 @@ async function writePDF(payload, planung, savingType, blob) {
       text: payload.description,
       weight: "i",
       noLineBreak: true,
-      extraMarginBottom: 48,
+      extraMarginBottom: 94,
     });
   }
-  drawLine(48);
+  drawLine(36);
   text({
     text: "Siedlungswasserwirtschaftliche Kennzahlen zum Gebiet im Status Quo:",
     weight: "b",
