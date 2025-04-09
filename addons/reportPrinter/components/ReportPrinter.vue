@@ -1,6 +1,6 @@
 <script>
 import { mapGetters } from "vuex";
-import { getReport, writePDF } from "../api/getReport";
+import { getReport } from "../api/getReport";
 import colors from "../../../src/shared/js/utils/amarex-colors.json";
 import { Info as InfoIcon, FileDown, LoaderCircle } from "lucide-vue-next";
 import ToggleBTN from "./ToggleBTN.vue";
@@ -82,6 +82,11 @@ export default {
       seite_1_kennzahlen_flaechenanteil_prozente = Math.round(
         seite_1_kennzahlen_flaechenanteil_prozente?.max * 100,
       ).toFixed(0);
+
+      console.log(
+        "seite_1_kennzahlen_flaechenanteil_prozente :>> ",
+        seite_1_kennzahlen_flaechenanteil_prozente,
+      );
 
       console.log("log all", {
         areaTypesData: this.areaTypesData,
