@@ -11,6 +11,7 @@ import { LoaderCircle } from "lucide-vue-next";
 import colors from "../../../src/shared/js/utils/amarex-colors.json";
 import mapCollection from "../../../src/core/maps/js/mapCollection";
 import { mapActions, mapGetters, mapMutations } from "vuex";
+import MeasurePlanning from "./MeasurePlanning.vue";
 
 /**
  * Abimo
@@ -26,6 +27,7 @@ export default {
     AbimoViewSelector,
     LoaderCircle,
     AbimoResult,
+    MeasurePlanning,
   },
   data() {
     return {
@@ -98,7 +100,11 @@ export default {
               text: "Bestätigen",
               action: () => {
                 this.$refs.componentRef?.handleBlockAreaConfirm();
-                this.setActiveStep(3);
+                if (this.isMeasurePlanning) {
+                  this.setActiveStep(7);
+                } else {
+                  this.setActiveStep(3);
+                }
               },
               accent: true,
             },
@@ -179,9 +185,26 @@ export default {
             },
           ],
         },
+        {
+          id: "MeasurePlanning",
+          component: markRaw(MeasurePlanning),
+          title: "",
+          description: "",
+          buttons: [
+            {
+              text: "Zurück",
+              action: () => {
+                this.resetAbimoCalculation();
+                this.setPreselectedFeatures([]);
+                this.setActiveStep(2);
+              },
+            },
+          ],
+        },
       ],
       showInfo: null,
       calcState: null,
+      stepperCount: 2,
     };
   },
   computed: {
@@ -194,6 +217,7 @@ export default {
       "activeStep",
       "preComputedModelsShown",
       "preComputedModelsAdded",
+      "isMeasurePlanning",
     ]),
     ...mapGetters(["allLayerConfigs"]),
     activeComponent() {
@@ -468,8 +492,8 @@ export default {
             <p>{{ steps[activeStep]?.buttons[btnIndex].text }}</p>
           </button>
         </span>
-        <span v-if="activeStep === 5"
-          ><AbimoCalcButton :changeCalcState="changeCalcState"
+        <span v-if="activeStep === 5">
+          <AbimoCalcButton :changeCalcState="changeCalcState"
         /></span>
       </div>
     </div>
