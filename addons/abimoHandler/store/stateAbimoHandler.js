@@ -19,6 +19,7 @@ export default {
   selectedCount: 0,
   activeStep: 0,
   isMeasurePlanning: false,
+  isMeasureDrawing: false,
   accumulatedAbimoStats: {
     totalArea: 0,
     featuresSelected: 0,
