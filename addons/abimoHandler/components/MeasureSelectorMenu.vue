@@ -1,24 +1,22 @@
 <script>
-import { mapGetters, mapMutations, mapActions } from "vuex";
-
+import { mapGetters, mapMutations } from "vuex";
 import MeasureDrawer from "./MeasureDrawer.vue";
-// TODOS:
-// set Measures and add to MeasureDrawer
-
-// Auswahl der Measures treffen
-// add state selectedMeasures => Array mit den ausgewählten Maßnahmen
-// bei jeder Auswahl ein Item auf die Karte an der Position zeichnen -> MeasureDrawer
-// beim löschen der Auswahl das Item von der Karte entfernen
-// update new values in the map: this.setNewGreenRoof(0); this.setNewUnpvd(0); this.setNewToSwale(0);
+import { MEASURE_DIMENSIONS } from "../utils/constants.js";
 
 /**
- * Abimo Measure Selector
+ * Abimo Measure Selector Menu
  * @module modules/MeasureSelectorMenu
  */
 export default {
   name: "MeasureSelectorMenu",
   components: {
     MeasureDrawer,
+  },
+  props: {
+    position: {
+      type: Array,
+      default: null,
+    },
   },
   data() {
     return {
@@ -28,77 +26,91 @@ export default {
         },
         {
           id: "setNewToSwale",
-          icon: "",
+          icon: "img/icons/measures/toSwale.png",
+          title: "Versickerung",
         },
         {
           id: "setNewUnpvd",
-          icon: "",
+          icon: "img/icons/measures/unpvd.png",
+          title: "Entsiegelung",
         },
         {
           id: "setGreenRoof",
-          icon: "",
+          icon: "img/icons/measures/greenRoof.png",
+          title: "Gründach",
         },
       ],
       activeStep: 0,
+      addMeasure: false,
     };
   },
   computed: {
-    ...mapGetters(["allLayerConfigs"]),
+    ...mapGetters("Modules/AbimoHandler", [
+      "isMeasurePlanning",
+      "selectedMeasures",
+      "isMeasureDrawing",
+    ]),
   },
   mounted() {
-    this.layer_abimo_btf = mapCollection
-      .getMap("2D")
-      .getLayers()
-      .getArray()
-      .find((layer) => layer.get("id") === "planung_abimo");
-
-    this.layer_abimo_measures = mapCollection
-      .getMap("2D")
-      .getLayers()
-      .getArray()
-      .find((layer) => layer.get("id") === "abimo_measures");
-
-    let measureLayer = this.allLayerConfigs.find(
-      (layer) => layer.id === "abimo_measures",
+    console.log(
+      "[MeasureSelectorMenu] MEASURE_DIMENSIONS::",
+      MEASURE_DIMENSIONS,
     );
-    let selectedBTF = this.allLayerConfigs.find(
-      (layer) => layer.id === "planung_abimo",
-    );
-
-    this.createInteractions();
-    console.log("[MeasureSelectorMenu] measureLayer::", measureLayer);
-    console.log("[MeasureSelectorMenu] selectedBTF::", selectedBTF);
   },
-  watch: {},
+  watch: {
+    activeStep(newStep) {
+      console.log("[MeasureSelectorMenu] newStep::", newStep);
+    },
+  },
   methods: {
-    ...mapMutations("Modules/AbimoHandler", ["setIsMeasureDrawing"]),
-    ...mapActions("Maps", {
-      addInteractionToMap: "addInteraction",
-      removeInteractionFromMap: "removeInteraction",
-    }),
+    ...mapMutations("Modules/AbimoHandler", ["setSelectedMeasures"]),
 
-    createInteractions: function () {
-      console.log(
-        "[MeasureSelectorMenu] this.layer_abimo_btf::",
-        this.layer_abimo_btf,
-      );
-      console.log(
-        "[MeasureSelectorMenu] this.layer_abimo_measures::",
-        this.layer_abimo_measures,
-      );
-      // const selectedInteraction = new
+    selectMeasure(stepIndex) {
+      this.activeStep = stepIndex;
+    },
+
+    updateMapValues(measureType) {
+      // Je nach Maßnahmentyp den entsprechenden Wert setzen
+      switch (measureType) {
+        case "setNewToSwale":
+          // Wert für Versickerung erhöhen
+          // Hier müsstest du deinen Vuex-Store-Action oder Mutation aufrufen
+          break;
+        case "setNewUnpvd":
+          // Wert für Entsiegelung erhöhen
+          break;
+        case "setGreenRoof":
+          // Wert für Gründach erhöhen
+          break;
+      }
     },
   },
 };
 </script>
 
 <template lang="html">
-  <div class="measure-selector-container">
-    <MeasureDrawer />
-  </div>
+  <!-- the menu should be placed below the click point -->
+  <div class="menu"></div>
+
+  <MeasureDrawer
+    v-if="addMeasure"
+    :measures="steps.slice(1)"
+    :position="clickedCoordinates"
+    @select-measure="selectMeasure"
+    @close="resetSelection"
+  />
 </template>
 
 <style lang="scss" scoped>
 @import "~variables";
+.menu {
+  width: 100px;
+  height: 100px;
+  background-color: red;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 99;
+}
 </style>
 
