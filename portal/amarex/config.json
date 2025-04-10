@@ -668,7 +668,7 @@
               "showInLayerTree": true
             },
             {
-              "id": "measures_abimo",
+              "id": "abimo_measures",
               "visibility": true,
               "showInLayerTree": false
             }
@@ -678,4 +678,5 @@
     }
   }
 }
+
 

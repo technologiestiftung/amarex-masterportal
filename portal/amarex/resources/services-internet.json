@@ -1747,7 +1747,7 @@
     "maxScale": "25000"
   },
   {
-    "id": "measures_abimo",
+    "id": "abimo_measures",
     "styleId": "abimo",
     "name": "Abimo gesetzte Maßnahmen",
     "crs": "urn:ogc:def:crs:EPSG::25833",
@@ -4493,5 +4493,4 @@
     "layerAttribution": "F\u00fcr die Nutzung der Daten ist die  Datenlizenz Deutschland - Namensnennung - Version 2.0 anzuwenden. Die Lizenz ist \u00fcber https://www.govdata.de/dl-de/by-2-0 abrufbar. Der Quellenvermerk gem\u00e4\u00df (2) der Lizenz lautet \"Umweltatlas Berlin / [Titel des Datensatzes]\"."
   }
 ]
-
 
