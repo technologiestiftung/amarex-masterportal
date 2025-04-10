@@ -1,16 +1,14 @@
 <script>
-import { mapGetters, mapMutations } from "vuex";
+import { mapGetters, mapMutations, mapActions } from "vuex";
 
 import MeasureDrawer from "./MeasureDrawer.vue";
 // TODOS:
 // set Measures and add to MeasureDrawer
 
-// klick in Karte
-// hier checken dass sich das Menu nur öffnet wenn man auf die BTF klickt
-// Menu öffnen
 // Auswahl der Measures treffen
-// add state selectedMeasures
+// add state selectedMeasures => Array mit den ausgewählten Maßnahmen
 // bei jeder Auswahl ein Item auf die Karte an der Position zeichnen -> MeasureDrawer
+// beim löschen der Auswahl das Item von der Karte entfernen
 // update new values in the map: this.setNewGreenRoof(0); this.setNewUnpvd(0); this.setNewToSwale(0);
 
 /**

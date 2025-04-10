@@ -2,7 +2,9 @@
 // TODOS:
 // add draw layer to map
 // draw measure features on Map https://openlayers.org/en/latest/examples/draw-features-style.html
-// only draw on the selected BTF
+// option 9 verschiedene Versionen/Maßnahmen
+// die Maßnahmen müssen dem layer hinzugefügt und gelöscht werden können
+
 
 /**
  * Abimo Draws Measures onto the Map

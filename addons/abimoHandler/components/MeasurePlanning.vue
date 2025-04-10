@@ -4,14 +4,15 @@ import MeasureSelectionDisplay from "./MeasureSelectionDisplay.vue";
 import MeasureSelectorMenu from "./MeasureSelectorMenu.vue";
 
 // TODOS:
-// add draw layer to map
-// draw measure features on Map https://openlayers.org/en/latest/examples/draw-features-style.html
-// only draw on the selected BTF
-// update new values in the map: this.setNewGreenRoof(0); this.setNewUnpvd(0); this.setNewToSwale(0);
+
+// klick in Karte
+// hier checken dass sich das Menu nur öffnet wenn man auf die BTF klickt
+// das Menu muss togglebar sein 
+// im State festlegen, dass man sich im measure planing Modus befindet
+// Menu öffnen (MeasureSelectorMenu) passend zu der geklickten Postion im Kartenbereich und auf der BTF
+// dann den calc button anzeigen
 // display calc button (der Abimo Calc button kann dann genauso angezeigt werden wie er ist.)
-// display selected Measures values (Status Quo)
-// display MeasureSelector component
-// display MeasureSelectionDisplay component
+// anzeigen des step MeasureSelectionDisplay
 
 /**
  * Abimo Measure Planning
