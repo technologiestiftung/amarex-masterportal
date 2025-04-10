@@ -1,7 +1,7 @@
 <script>
 import src2 from "../../../portal/amarex/resources/img/Placeholder-Tutorial-Tools.jpg";
 import MeasureSelectionDisplay from "./MeasureSelectionDisplay.vue";
-import MeasureSelector from "./MeasureSelector.vue";
+import MeasureSelectorMenu from "./MeasureSelectorMenu.vue";
 
 // TODOS:
 // add draw layer to map
@@ -20,7 +20,7 @@ import MeasureSelector from "./MeasureSelector.vue";
 export default {
   name: "MeasurePlanning",
   components: {
-    MeasureSelector,
+    MeasureSelectorMenu,
     MeasureSelectionDisplay,
   },
   data() {
@@ -44,11 +44,7 @@ export default {
     };
   },
   computed: {},
-  watch: {
-    // check if user clicks on the BTF
-    // if so open the measure planning step and options
-    // if clicked on the layer
-  },
+  watch: {},
   methods: {},
 };
 </script>
@@ -83,7 +79,7 @@ export default {
       <MeasureSelectionDisplay />
     </div>
   </div>
-  <MeasureSelector />
+  <MeasureSelectorMenu />
 </template>
 
 <style lang="scss" scoped>
