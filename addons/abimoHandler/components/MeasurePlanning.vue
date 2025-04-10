@@ -1,13 +1,13 @@
 <script>
 import src2 from "../../../portal/amarex/resources/img/Placeholder-Tutorial-Tools.jpg";
 import MeasureSelectionDisplay from "./MeasureSelectionDisplay.vue";
-import MeasureSelectorMenu from "./MeasureSelectorMenu.vue";
+import MeasureSelectorHandler from "./MeasureSelectorHandler.vue";
 
 // TODOS:
 
 // klick in Karte
 // hier checken dass sich das Menu nur öffnet wenn man auf die BTF klickt
-// das Menu muss togglebar sein 
+// das Menu muss togglebar sein
 // im State festlegen, dass man sich im measure planing Modus befindet
 // Menu öffnen (MeasureSelectorMenu) passend zu der geklickten Postion im Kartenbereich und auf der BTF
 // dann den calc button anzeigen
@@ -21,7 +21,7 @@ import MeasureSelectorMenu from "./MeasureSelectorMenu.vue";
 export default {
   name: "MeasurePlanning",
   components: {
-    MeasureSelectorMenu,
+    MeasureSelectorHandler,
     MeasureSelectionDisplay,
   },
   data() {
@@ -80,7 +80,7 @@ export default {
       <MeasureSelectionDisplay />
     </div>
   </div>
-  <MeasureSelectorMenu />
+  <MeasureSelectorHandler />
 </template>
 
 <style lang="scss" scoped>
