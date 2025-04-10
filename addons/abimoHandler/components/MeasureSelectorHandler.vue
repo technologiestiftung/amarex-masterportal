@@ -2,6 +2,9 @@
 import { mapGetters, mapMutations, mapActions } from "vuex";
 import { singleClick } from "ol/events/condition.js";
 import { Select } from "ol/interaction";
+import Feature from "ol/Feature";
+import Point from "ol/geom/Point";
+import { Style, Icon } from "ol/style";
 import MeasureSelectorMenu from "./MeasureSelectorMenu.vue";
 
 // MeasureSelectorHandler -> setzt die interaktion
@@ -10,7 +13,7 @@ import MeasureSelectorMenu from "./MeasureSelectorMenu.vue";
 // es muss alles im Store gespeichert werden
 
 /**
- * Abimo Measure Selector Menu
+ * Abimo Measure Selector Handler
  * @module modules/MeasureSelectorHandler
  */
 export default {
@@ -20,28 +23,6 @@ export default {
   },
   data() {
     return {
-      steps: [
-        {
-          id: "initalDisplay",
-        },
-        {
-          id: "setNewToSwale",
-          icon: "img/icons/measures/toSwale.png",
-          title: "Versickerung",
-        },
-        {
-          id: "setNewUnpvd",
-          icon: "img/icons/measures/unpvd.png",
-          title: "Entsiegelung",
-        },
-        {
-          id: "setGreenRoof",
-          icon: "img/icons/measures/greenRoof.png",
-          title: "Gründach",
-        },
-      ],
-      activeStep: 0,
-      addMeasure: false,
       showMeasureMenu: false,
       selectedBTF: null,
       clickedCoordinates: null,
@@ -71,14 +52,6 @@ export default {
 
     this.createInteractions();
   },
-  watch: {
-    activeStep(newStep) {
-      // Wenn ein Schritt ausgewählt wurde und wir ein Feature ausgewählt haben
-      if (newStep > 0 && this.selectedBTF) {
-        this.addMeasureToMap(this.steps[newStep]);
-      }
-    },
-  },
   methods: {
     ...mapMutations("Modules/AbimoHandler", [
       "setIsMeasureDrawing",
@@ -89,6 +62,7 @@ export default {
       addInteractionToMap: "addInteraction",
       removeInteractionFromMap: "removeInteraction",
     }),
+
     createInteractions() {
       this.selectInteraction = new Select({
         multi: true,
@@ -118,9 +92,7 @@ export default {
           // Position für MeasureDrawer setzen oder direkt hier das Menü anzeigen
           this.setIsMeasureDrawing(true);
         } else {
-          this.selectedBTF = null;
-          this.showMeasureMenu = false;
-          this.setIsMeasureDrawing(false);
+          this.resetSelection();
         }
       });
 
@@ -128,11 +100,55 @@ export default {
       this.addInteractionToMap(this.selectInteraction);
     },
 
+    addMeasureToMap(measure, position) {
+      if (!position || !this.selectedBTF) {
+        return;
+      }
+
+      console.log("[MeasureSelectorHandler] Adding measure to map:", measure);
+
+      // Neue Feature für die Maßnahme erstellen
+      const measureFeature = new Feature({
+        geometry: new Point(position),
+        type: measure.id,
+        featureId: this.selectedBTF.getId(), // Verknüpfung mit dem BTF-Feature
+      });
+
+      // Icon-Style basierend auf der Maßnahme setzen
+      measureFeature.setStyle(
+        new Style({
+          image: new Icon({
+            src: measure.icon,
+            scale: 0.5, // Anpassen nach Bedarf
+          }),
+        }),
+      );
+
+      // Feature zum Measures-Layer hinzufügen
+      this.layer_abimo_measures.getSource().addFeature(measureFeature);
+
+      // Maßnahme zum Array hinzufügen (über Vuex)
+      const newMeasure = {
+        id: Date.now(), // Eindeutige ID
+        type: measure.id,
+        featureId: measureFeature.getId(),
+        btfFeatureId: this.selectedBTF.getId(),
+        position: position,
+      };
+
+      // Hinzufügen zum Vuex Store
+      let currentMeasures = [...this.selectedMeasures];
+      currentMeasures.push(newMeasure);
+      this.setSelectedMeasures(currentMeasures);
+
+      // Zurücksetzen nach dem Hinzufügen
+      this.resetSelection();
+    },
+
     resetSelection() {
       this.showMeasureMenu = false;
       this.selectedBTF = null;
       this.clickedCoordinates = null;
-      this.activeStep = 0;
       this.setIsMeasureDrawing(false);
 
       // Interaktion zurücksetzen
@@ -154,10 +170,11 @@ export default {
   <MeasureSelectorMenu
     v-if="showMeasureMenu"
     :position="clickedCoordinates"
+    @add-measure="addMeasureToMap"
+    @close="resetSelection"
   />
 </template>
 
 <style lang="scss" scoped>
 @import "~variables";
 </style>
-
