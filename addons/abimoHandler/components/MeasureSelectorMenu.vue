@@ -1,5 +1,5 @@
 <script>
-import { mapGetters, mapMutations } from "vuex";
+import { mapGetters, mapMutations, mapActions } from "vuex";
 
 import MeasureDrawer from "./MeasureDrawer.vue";
 // TODOS:
@@ -46,14 +46,48 @@ export default {
     ...mapGetters(["allLayerConfigs"]),
   },
   mounted() {
-    console.log(
-      "[MeasureSelectorMenu] this.allLayerConfigs::",
-      this.allLayerConfigs,
+    this.layer_abimo_btf = mapCollection
+      .getMap("2D")
+      .getLayers()
+      .getArray()
+      .find((layer) => layer.get("id") === "planung_abimo");
+
+    this.layer_abimo_measures = mapCollection
+      .getMap("2D")
+      .getLayers()
+      .getArray()
+      .find((layer) => layer.get("id") === "abimo_measures");
+
+    let measureLayer = this.allLayerConfigs.find(
+      (layer) => layer.id === "abimo_measures",
     );
+    let selectedBTF = this.allLayerConfigs.find(
+      (layer) => layer.id === "planung_abimo",
+    );
+
+    this.createInteractions();
+    console.log("[MeasureSelectorMenu] measureLayer::", measureLayer);
+    console.log("[MeasureSelectorMenu] selectedBTF::", selectedBTF);
   },
   watch: {},
   methods: {
     ...mapMutations("Modules/AbimoHandler", ["setIsMeasureDrawing"]),
+    ...mapActions("Maps", {
+      addInteractionToMap: "addInteraction",
+      removeInteractionFromMap: "removeInteraction",
+    }),
+
+    createInteractions: function () {
+      console.log(
+        "[MeasureSelectorMenu] this.layer_abimo_btf::",
+        this.layer_abimo_btf,
+      );
+      console.log(
+        "[MeasureSelectorMenu] this.layer_abimo_measures::",
+        this.layer_abimo_measures,
+      );
+      // const selectedInteraction = new
+    },
   },
 };
 </script>
