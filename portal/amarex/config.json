@@ -666,6 +666,11 @@
               "id": "rabimo_input_2020",
               "visibility": true,
               "showInLayerTree": true
+            },
+            {
+              "id": "measures_abimo",
+              "visibility": true,
+              "showInLayerTree": false
             }
           ]
         }
