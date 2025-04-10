@@ -1,5 +1,5 @@
 <script>
-import { mapGetters, mapMutations, mapActions } from "vuex";
+import { mapGetters, mapMutations } from "vuex";
 
 import MeasureDrawer from "./MeasureDrawer.vue";
 // TODOS:
