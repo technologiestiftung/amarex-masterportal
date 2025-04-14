@@ -1,9 +1,4 @@
 <script>
-// TODOS:
-// add draw layer to map
-// draw measure features on Map https://openlayers.org/en/latest/examples/draw-features-style.html
-// only draw on the selected BTF
-// update new values in the map: this.setNewGreenRoof(0); this.setNewUnpvd(0); this.setNewToSwale(0);
 
 /**
  * Abimo Measure Selection Display
