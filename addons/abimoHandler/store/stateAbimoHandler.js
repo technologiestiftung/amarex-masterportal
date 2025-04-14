@@ -12,15 +12,12 @@ export default {
   hasMouseMapInteractions: true,
   supportedMapModes: ["2D"],
   selectedFeatures: [],
-  selectedMeasures: [],
   preselectedFeatures: [],
   selectInteraction: null,
   resetTargetValues: false,
   blockAreaConfirmed: false,
   selectedCount: 0,
   activeStep: 0,
-  isMeasurePlanning: false,
-  isMeasureDrawing: false,
   accumulatedAbimoStats: {
     totalArea: 0,
     featuresSelected: 0,
@@ -82,5 +79,32 @@ export default {
     runoff: 0,
     infiltration: 0,
   },
+
+  // Measure Planning
+  isMeasurePlanning: false,
+  isMeasureDrawing: false,
+  selectedMeasures: [],
+  measureSteps: [
+    {
+      id: "initalDisplay",
+    },
+    {
+      id: "setNewToSwale",
+      icon: "../../../portal/amarex/resources/img/measure-swale.svg",
+      title: "Versickerung",
+    },
+    {
+      id: "setNewUnpvd",
+      icon: "../../../portal/amarex/resources/img/measure-unpvd.svg",
+      title: "Entsiegelung",
+    },
+    {
+      id: "setGreenRoof",
+      icon: "../../../portal/amarex/resources/img/measure-greenroof.svg",
+      title: "Gründach",
+    },
+  ],
+  selectedBTF: null,
+  clickedCoordinates: null,
 };
 

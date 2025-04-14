@@ -37,8 +37,8 @@ export default {
           dimensionKey: "greenRoof",
         },
       ],
-      // "maßnahmen" oder "dimensionierung"
-      currentView: "maßnahmen",
+      // "measure" oder "dimensioning"
+      currentView: "measure",
       selectedMeasure: null,
       activeMeasureSize: "small",
       menuPosition: {
@@ -65,14 +65,14 @@ export default {
       };
     },
     menuTitle() {
-      if (this.currentView === "maßnahmen") {
+      if (this.currentView === "measure") {
         return "Maßnahme auswählen";
       } else {
         return this.selectedMeasure ? `${this.selectedMeasure.title}` : "";
       }
     },
     menuSubTitle() {
-      if (this.currentView === "dimensionierung") {
+      if (this.currentView === "dimensioning") {
         return "Wählen Sie eine Dimensionierung";
       }
       return "";
@@ -135,9 +135,6 @@ export default {
     },
   },
   mounted() {
-    console.log("[MeasureSelectorMenu] position::", this.position);
-
-    // Berechne die Position, falls die position-Prop gesetzt ist
     if (this.position) {
       this.calculateMenuPosition();
     }
@@ -180,7 +177,7 @@ export default {
     selectMeasure(measure) {
       this.selectedMeasure = measure;
       this.activeMeasureSize = "small"; // Standardwert zurücksetzen
-      this.currentView = "dimensionierung";
+      this.currentView = "dimensioning";
     },
 
     selectSize(size) {
@@ -189,7 +186,6 @@ export default {
 
     confirmSelection() {
       if (this.selectedMeasure && this.activeMeasureSize) {
-        // Maßnahme hinzufügen mit Größe
         this.$emit(
           "add-measure",
           this.selectedMeasure,
@@ -201,12 +197,12 @@ export default {
     },
 
     resetToInitialView() {
-      this.currentView = "maßnahmen";
+      this.currentView = "measure";
       this.selectedMeasure = null;
     },
 
     goBack() {
-      if (this.currentView === "dimensionierung") {
+      if (this.currentView === "dimensioning") {
         this.resetToInitialView();
       } else {
         this.resetSelection();
@@ -218,7 +214,6 @@ export default {
       this.$emit("close");
     },
 
-    // Helper-Methode, um zusätzliche Info für eine Größe zu bekommen
     getSizeDetails(size) {
       if (!this.selectedMeasure) return "";
 
@@ -230,7 +225,6 @@ export default {
 
       if (!sizeData) return "";
 
-      // Erstellen eines spezifischen Informationstextes je nach Maßnahmentyp
       switch (dimensionKey) {
         case "swale":
           return `Volumen: ${sizeData.volume}m³, Angeschlossene Fläche: ${sizeData.connectedArea}m²`;
@@ -265,7 +259,7 @@ export default {
       <div class="measure-menu-content">
         <div class="menu-header">
           <button
-            v-if="currentView === 'dimensionierung'"
+            v-if="currentView === 'dimensioning'"
             @click="goBack"
             class="back-btn"
           >
@@ -288,9 +282,9 @@ export default {
           </button>
         </div>
 
-        <!-- Maßnahmen-Auswahl -->
+        <!-- measure-selection -->
         <div
-          v-if="currentView === 'maßnahmen'"
+          v-if="currentView === 'measure'"
           class="measures-list"
         >
           <div
@@ -310,9 +304,9 @@ export default {
           </div>
         </div>
 
-        <!-- Dimensionierung-Auswahl -->
+        <!-- dimensioning-selection -->
         <div
-          v-else-if="currentView === 'dimensionierung'"
+          v-else-if="currentView === 'dimensioning'"
           class="size-selection"
         >
           <div class="measure-info">
