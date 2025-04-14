@@ -4,7 +4,7 @@ import { singleClick } from "ol/events/condition.js";
 import { Select } from "ol/interaction";
 import Feature from "ol/Feature";
 import Point from "ol/geom/Point";
-import { Style, Icon } from "ol/style";
+import { Style, Icon, Fill, Circle } from "ol/style";
 import MeasureSelectorMenu from "./MeasureSelectorMenu.vue";
 
 // MeasureSelectorHandler -> setzt die interaktion
@@ -71,77 +71,87 @@ export default {
         style: null,
       });
 
-      // Event-Listener für die Auswahl
       this.selectInteraction.on("select", (event) => {
-        console.log("[MeasureSelectorHandler] event::", event);
-        console.log(
-          "[MeasureSelectorHandler] event.selected ::",
-          event.selected,
-        );
-
         if (event.selected.length > 0) {
           this.selectedBTF = event.selected[0];
           this.clickedCoordinates = event.mapBrowserEvent.coordinate;
-
-          console.log(
-            "[MeasureSelectorHandler] this.clickedCoordinates::",
-            this.clickedCoordinates,
-          );
-
           this.showMeasureMenu = true;
-          // Position für MeasureDrawer setzen oder direkt hier das Menü anzeigen
           this.setIsMeasureDrawing(true);
         } else {
           this.resetSelection();
         }
       });
-
-      // Interaktion zur Karte hinzufügen
       this.addInteractionToMap(this.selectInteraction);
     },
 
-    addMeasureToMap(measure, position) {
+    addMeasureToMap(measure, position, size) {
       if (!position || !this.selectedBTF) {
         return;
       }
 
-      console.log("[MeasureSelectorHandler] Adding measure to map:", measure);
+      let circleRadius;
+      let iconScale = 1;
+
+      switch (size) {
+        case "small":
+          circleRadius = 20;
+          iconScale = 0.8;
+          break;
+        case "medium":
+          circleRadius = 30;
+          iconScale = 1;
+          break;
+        case "large":
+          circleRadius = 40;
+          iconScale = 1;
+          break;
+        default:
+          circleRadius = 20;
+          iconScale = 0.8;
+      }
 
       // Neue Feature für die Maßnahme erstellen
       const measureFeature = new Feature({
         geometry: new Point(position),
         type: measure.id,
-        featureId: this.selectedBTF.getId(), // Verknüpfung mit dem BTF-Feature
+        featureId: this.selectedBTF.getId(),
       });
 
-      // Icon-Style basierend auf der Maßnahme setzen
-      measureFeature.setStyle(
+      measureFeature.setStyle([
+        new Style({
+          image: new Circle({
+            radius: circleRadius,
+            fill: new Fill({
+              color: "rgba(255, 255, 255, 0.75)",
+            }),
+          }),
+        }),
         new Style({
           image: new Icon({
             src: measure.icon,
-            scale: 0.5, // Anpassen nach Bedarf
+            scale: iconScale,
+            anchor: [0.5, 0.5],
+            anchorXUnits: "fraction",
+            anchorYUnits: "fraction",
           }),
         }),
-      );
+      ]);
 
-      // Feature zum Measures-Layer hinzufügen
       this.layer_abimo_measures.getSource().addFeature(measureFeature);
 
-      // Maßnahme zum Array hinzufügen (über Vuex)
       const newMeasure = {
-        id: Date.now(), // Eindeutige ID
+        id: Date.now(),
         type: measure.id,
         featureId: measureFeature.getId(),
         btfFeatureId: this.selectedBTF.getId(),
         position: position,
+        size: size,
       };
 
-      // Hinzufügen zum Vuex Store
       let currentMeasures = [...this.selectedMeasures];
       currentMeasures.push(newMeasure);
       this.setSelectedMeasures(currentMeasures);
 
-      // Zurücksetzen nach dem Hinzufügen
       this.resetSelection();
     },
 
@@ -151,14 +161,12 @@ export default {
       this.clickedCoordinates = null;
       this.setIsMeasureDrawing(false);
 
-      // Interaktion zurücksetzen
       if (this.selectInteraction) {
         this.selectInteraction.getFeatures().clear();
       }
     },
   },
   beforeUnmount() {
-    // Interaktion entfernen, wenn die Komponente zerstört wird
     if (this.selectInteraction) {
       this.removeInteractionFromMap(this.selectInteraction);
     }
@@ -178,3 +186,4 @@ export default {
 <style lang="scss" scoped>
 @import "~variables";
 </style>
+

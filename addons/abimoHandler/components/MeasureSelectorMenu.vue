@@ -1,6 +1,6 @@
 <script>
 import { mapGetters, mapMutations } from "vuex";
-import { MEASURE_DIMENSIONS } from "../utils/constants.js";
+import measureCalculations from "../utils/measureCalculations.js"; // Angepasst an deinen Import-Pfad
 
 /**
  * Abimo Measure Selector Menu
@@ -17,31 +17,38 @@ export default {
   },
   data() {
     return {
-      steps: [
-        {
-          id: "initalDisplay",
-        },
+      measures: [
         {
           id: "setNewToSwale",
-          icon: "../../../portal/amarex/resources/img/3d-controls-north.png",
-          title: "Versickerung",
+          icon: "../../../portal/amarex/resources/img/measure-swale.svg",
+          title: "Muldenversickerung",
+          dimensionKey: "swale",
         },
         {
           id: "setNewUnpvd",
-          icon: "../../../portal/amarex/resources/img/3d-controls-north.png",
+          icon: "../../../portal/amarex/resources/img/measure-unpvd.svg",
           title: "Entsiegelung",
+          dimensionKey: "unpaved",
         },
         {
           id: "setGreenRoof",
-          icon: "../../../portal/amarex/resources/img/3d-controls-north.png",
-          title: "Gründach",
+          icon: "../../../portal/amarex/resources/img/measure-greenroof.svg",
+          title: "Dachbegrünung",
+          dimensionKey: "greenRoof",
         },
       ],
-      activeStep: 0,
-      addMeasure: false,
+      // "maßnahmen" oder "dimensionierung"
+      currentView: "maßnahmen",
+      selectedMeasure: null,
+      activeMeasureSize: "small",
       menuPosition: {
         left: 0,
         top: 0,
+      },
+      defaultSizesConfig: {
+        small: { label: "Klein", value: "small" },
+        medium: { label: "Mittel", value: "medium" },
+        large: { label: "Groß", value: "large" },
       },
     };
   },
@@ -53,20 +60,82 @@ export default {
     ]),
     menuStyle() {
       return {
-        left: `${this.menuPosition.left - 323 / 2}px`,
+        left: `${this.menuPosition.left - 200}px`,
         top: `${this.menuPosition.top}px`,
       };
     },
+    menuTitle() {
+      if (this.currentView === "maßnahmen") {
+        return "Maßnahme auswählen";
+      } else {
+        return this.selectedMeasure ? `${this.selectedMeasure.title}` : "";
+      }
+    },
+    menuSubTitle() {
+      if (this.currentView === "dimensionierung") {
+        return "Wählen Sie eine Dimensionierung";
+      }
+      return "";
+    },
+    sizesConfig() {
+      if (!this.selectedMeasure) return this.defaultSizesConfig;
+
+      const dimensionKey = this.selectedMeasure.dimensionKey;
+      const result = {};
+
+      // Verwenden der importierten getMeasureDimension-Funktion
+      const smallDimension = measureCalculations.getMeasureDimension(
+        dimensionKey,
+        "small",
+      );
+      const mediumDimension = measureCalculations.getMeasureDimension(
+        dimensionKey,
+        "medium",
+      );
+      const largeDimension = measureCalculations.getMeasureDimension(
+        dimensionKey,
+        "large",
+      );
+
+      console.log("[MeasureSelectorMenu] smallDimension::", smallDimension);
+      console.log("[MeasureSelectorMenu] mediumDimension::", mediumDimension);
+      console.log("[MeasureSelectorMenu] largeDimension::", largeDimension);
+
+      if (smallDimension) {
+        result.small = {
+          label: `Klein (${smallDimension.area}m²)`,
+          value: "small",
+          data: smallDimension,
+        };
+      } else {
+        result.small = this.defaultSizesConfig.small;
+      }
+
+      if (mediumDimension) {
+        result.medium = {
+          label: `Mittel (${mediumDimension.area}m²)`,
+          value: "medium",
+          data: mediumDimension,
+        };
+      } else {
+        result.medium = this.defaultSizesConfig.medium;
+      }
+
+      if (largeDimension) {
+        result.large = {
+          label: `Groß (${largeDimension.area}m²)`,
+          value: "large",
+          data: largeDimension,
+        };
+      } else {
+        result.large = this.defaultSizesConfig.large;
+      }
+
+      return result;
+    },
   },
   mounted() {
-    console.log(
-      "[MeasureSelectorMenu] MEASURE_DIMENSIONS::",
-      MEASURE_DIMENSIONS,
-    );
     console.log("[MeasureSelectorMenu] position::", this.position);
-
-    // Setze addMeasure auf true, damit das Menü angezeigt wird
-    this.addMeasure = true;
 
     // Berechne die Position, falls die position-Prop gesetzt ist
     if (this.position) {
@@ -74,18 +143,11 @@ export default {
     }
   },
   watch: {
-    activeStep(newStep) {
-      console.log("[MeasureSelectorMenu] newStep::", newStep);
-      if (newStep > 0) {
-        // Wenn ein Schritt ausgewählt wurde, dann die Maßnahme hinzufügen
-        // this.$emit("add-measure", this.steps[newStep], this.position);
-        this.resetSelection();
-      }
-    },
     position(newPosition) {
       if (newPosition) {
         this.calculateMenuPosition();
-        this.addMeasure = true;
+        // Zurücksetzen zum initialen Zustand
+        this.resetToInitialView();
       }
     },
   },
@@ -93,61 +155,91 @@ export default {
     ...mapMutations("Modules/AbimoHandler", ["setSelectedMeasures"]),
 
     calculateMenuPosition() {
-      // Hier können wir prüfen, ob das Menü innerhalb des sichtbaren Bereichs der Karte liegt
-      // und die Position entsprechend anpassen
+      // todo: needs to be refactored
       const map = mapCollection.getMap("2D");
       const mapSize = map.getSize();
       const pixelPosition = map.getPixelFromCoordinate(this.position);
-      console.log("[MeasureSelectorMenu] mapSize::", mapSize);
-      console.log("[MeasureSelectorMenu] pixelPosition::", pixelPosition);
 
       if (pixelPosition) {
-        // Sicherstellen, dass das Menü komplett im sichtbaren Bereich angezeigt wird
-        // const menuWidth = MEASURE_DIMENSIONS.width || 200; // Standardwert, falls nicht definiert
-        // const menuHeight = MEASURE_DIMENSIONS.height || 300; // Standardwert, falls nicht definiert
+        const menuWidth = 400;
+        const menuHeight = 300;
 
         let left = pixelPosition[0];
         let top = pixelPosition[1];
-        // let left = 0;
-        // let top = 0;
 
-        // Überprüfen, ob das Menü rechts aus dem Bildschirm ragt
-        // if (left + menuWidth > mapSize[0]) {
-        //   left = left - menuWidth;
-        // }
-
-        // Überprüfen, ob das Menü unten aus dem Bildschirm ragt
-        // if (top + menuHeight > mapSize[1]) {
-        //   top = top - menuHeight;
-        // }
-
+        if (left + menuWidth > mapSize[0]) {
+          left = left - menuWidth;
+        }
+        if (top + menuHeight > mapSize[1]) {
+          top = top - menuHeight;
+        }
         this.menuPosition = { left, top };
       }
     },
 
-    selectMeasure(stepIndex) {
-      this.activeStep = stepIndex;
+    selectMeasure(measure) {
+      this.selectedMeasure = measure;
+      this.activeMeasureSize = "small"; // Standardwert zurücksetzen
+      this.currentView = "dimensionierung";
+    },
+
+    selectSize(size) {
+      this.activeMeasureSize = size;
+    },
+
+    confirmSelection() {
+      if (this.selectedMeasure && this.activeMeasureSize) {
+        // Maßnahme hinzufügen mit Größe
+        this.$emit(
+          "add-measure",
+          this.selectedMeasure,
+          this.position,
+          this.activeMeasureSize,
+        );
+        this.resetSelection();
+      }
+    },
+
+    resetToInitialView() {
+      this.currentView = "maßnahmen";
+      this.selectedMeasure = null;
+    },
+
+    goBack() {
+      if (this.currentView === "dimensionierung") {
+        this.resetToInitialView();
+      } else {
+        this.resetSelection();
+      }
     },
 
     resetSelection() {
-      this.addMeasure = false;
-      this.activeStep = 0;
+      this.resetToInitialView();
       this.$emit("close");
     },
 
-    updateMapValues(measureType) {
-      // Je nach Maßnahmentyp den entsprechenden Wert setzen
-      switch (measureType) {
-        case "setNewToSwale":
-          // Wert für Versickerung erhöhen
-          // Hier müsstest du deinen Vuex-Store-Action oder Mutation aufrufen
-          break;
-        case "setNewUnpvd":
-          // Wert für Entsiegelung erhöhen
-          break;
-        case "setGreenRoof":
-          // Wert für Gründach erhöhen
-          break;
+    // Helper-Methode, um zusätzliche Info für eine Größe zu bekommen
+    getSizeDetails(size) {
+      if (!this.selectedMeasure) return "";
+
+      const dimensionKey = this.selectedMeasure.dimensionKey;
+      const sizeData = measureCalculations.getMeasureDimension(
+        dimensionKey,
+        size,
+      );
+
+      if (!sizeData) return "";
+
+      // Erstellen eines spezifischen Informationstextes je nach Maßnahmentyp
+      switch (dimensionKey) {
+        case "swale":
+          return `Volumen: ${sizeData.volume}m³, Angeschlossene Fläche: ${sizeData.connectedArea}m²`;
+        case "greenRoof":
+          return `Länge: ${sizeData.length}m, Breite: ${sizeData.width}m, Höhe: ${sizeData.height}m`;
+        case "unpaved":
+          return `Länge: ${sizeData.length}m, Breite: ${sizeData.width}m`;
+        default:
+          return "";
       }
     },
   },
@@ -160,74 +252,179 @@ export default {
     v-if="position"
   >
     <div
-      class="measure-menu-content"
+      class="measure-menu-container"
       :style="menuStyle"
     >
-      <div class="menu-header">
-        <h3>Maßnahme auswählen</h3>
-        <button
-          @click="resetSelection"
-          class="close-btn"
-        >
-          &times;
-        </button>
-      </div>
+      <button
+        @click="resetSelection"
+        class="icon-btn"
+      >
+        &times;
+      </button>
 
-      <div class="measures-list">
+      <div class="measure-menu-content">
+        <div class="menu-header">
+          <button
+            v-if="currentView === 'dimensionierung'"
+            @click="goBack"
+            class="back-btn"
+          >
+            <span class="back-arrow">&larr;</span>
+          </button>
+          <div class="title-container">
+            <h3>{{ menuTitle }}</h3>
+            <p
+              v-if="menuSubTitle"
+              class="subtitle"
+            >
+              {{ menuSubTitle }}
+            </p>
+          </div>
+          <button
+            @click="resetSelection"
+            class="close-btn"
+          >
+            &times;
+          </button>
+        </div>
+
+        <!-- Maßnahmen-Auswahl -->
         <div
-          v-for="(measure, index) in steps.slice(1)"
-          :key="measure.id"
-          class="measure-item"
-          @click="selectMeasure(index + 1)"
+          v-if="currentView === 'maßnahmen'"
+          class="measures-list"
         >
-          <img
-            v-if="measure.icon"
-            :src="measure.icon"
-            alt="Maßnahme Icon"
-            class="measure-icon"
-          />
-          <span class="measure-title">{{ measure.title }}</span>
+          <div
+            v-for="measure in measures"
+            :key="measure.id"
+            class="measure-item"
+            @click="selectMeasure(measure)"
+          >
+            <img
+              v-if="measure.icon"
+              :src="measure.icon"
+              alt="Maßnahme Icon"
+              class="measure-icon"
+            />
+            <span class="measure-title">{{ measure.title }}</span>
+            <span class="next-arrow">&rarr;</span>
+          </div>
+        </div>
+
+        <!-- Dimensionierung-Auswahl -->
+        <div
+          v-else-if="currentView === 'dimensionierung'"
+          class="size-selection"
+        >
+          <div class="measure-info">
+            <img
+              v-if="selectedMeasure?.icon"
+              :src="selectedMeasure.icon"
+              alt="Maßnahme Icon"
+              class="measure-icon-large"
+            />
+          </div>
+
+          <div class="size-options">
+            <div
+              v-for="(config, size) in sizesConfig"
+              :key="size"
+              class="size-option"
+              :class="{ selected: activeMeasureSize === size }"
+              @click="selectSize(size)"
+            >
+              <div class="size-option-main">{{ config.label }}</div>
+              <div
+                class="size-option-details"
+                v-if="activeMeasureSize === size"
+              >
+                {{ getSizeDetails(size) }}
+              </div>
+            </div>
+          </div>
+
+          <button
+            @click="confirmSelection"
+            class="confirm-btn"
+          >
+            Bestätigen
+          </button>
         </div>
       </div>
     </div>
   </Teleport>
-
-  <!-- Optional: Du kannst den MeasureDrawer verwenden, wenn du eine separate Komponente für das Menü bevorzugst -->
-  <!-- <MeasureDrawer
-    v-if="addMeasure"
-    :measures="steps.slice(1)"
-    :position="position"
-    @select-measure="selectMeasure"
-    @close="resetSelection"
-  /> -->
 </template>
 
 <style lang="scss" scoped>
 @import "~variables";
 
-.measure-menu-content {
-  background-color: white;
-  border-radius: 4px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
-  width: 323px;
+.measure-menu-container {
   overflow: hidden;
   position: absolute;
   left: 50px;
   top: 50px;
   z-index: 99;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.icon-btn {
+  border-radius: 50%;
+  box-shadow: 0px 0px 8px 0px rgba(0, 0, 0, 0.24);
+  width: 40px;
+  height: 40px;
+  background-color: $amarex_secondary_mid;
+  border: none;
+  margin-bottom: 16px;
+  cursor: pointer;
+}
+
+.measure-menu-content {
+  background-color: white;
+  border-radius: 4px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  width: 400px;
+  overflow: hidden;
 }
 
 .menu-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 8px 12px;
+  padding: 12px 16px;
   background-color: #f5f5f5;
   border-bottom: 1px solid #e0e0e0;
 
-  h3 {
-    margin: 0;
-    font-size: 16px;
+  .back-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    margin-right: 10px;
+    color: #333;
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+
+    .back-arrow {
+      font-weight: bold;
+    }
+  }
+
+  .title-container {
+    flex-grow: 1;
+
+    h3 {
+      margin: 0;
+      font-size: 18px;
+      color: #24305e;
+    }
+
+    .subtitle {
+      margin: 4px 0 0;
+      font-size: 14px;
+      color: #666;
+    }
   }
 
   .close-btn {
@@ -245,28 +442,105 @@ export default {
 }
 
 .measures-list {
-  padding: 8px 0;
-
   .measure-item {
     display: flex;
     align-items: center;
-    padding: 8px 12px;
+    padding: 16px;
     cursor: pointer;
     transition: background-color 0.2s;
+    border-bottom: 1px solid #eee;
 
     &:hover {
-      background-color: #f5f5f5;
+      background-color: #f9f9f9;
     }
 
     .measure-icon {
-      width: 24px;
-      height: 24px;
-      margin-right: 8px;
+      width: 32px;
+      height: 32px;
+      margin-right: 16px;
       object-fit: contain;
     }
 
     .measure-title {
-      font-size: 14px;
+      flex-grow: 1;
+      font-size: 16px;
+      color: #333;
+    }
+
+    .next-arrow {
+      color: #999;
+      font-size: 16px;
+      font-weight: bold;
+    }
+  }
+}
+
+.size-selection {
+  padding: 16px;
+
+  .measure-info {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+
+    .measure-icon-large {
+      width: 48px;
+      height: 48px;
+      margin-right: 16px;
+    }
+  }
+
+  .size-options {
+    margin-bottom: 24px;
+
+    .size-option {
+      padding: 12px 16px;
+      border-radius: 4px;
+      background-color: #f5f7fa;
+      margin-bottom: 8px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      border: 1px solid transparent;
+
+      &:hover {
+        background-color: #e8eef7;
+      }
+
+      &.selected {
+        background-color: #e8f0ff;
+        border-color: #6a89cc;
+
+        .size-option-main {
+          font-weight: 500;
+        }
+      }
+
+      .size-option-main {
+        font-size: 15px;
+      }
+
+      .size-option-details {
+        font-size: 13px;
+        color: #666;
+        margin-top: 4px;
+      }
+    }
+  }
+
+  .confirm-btn {
+    width: 100%;
+    padding: 12px;
+    background-color: #24305e;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.2s;
+
+    &:hover {
+      background-color: #1a2348;
     }
   }
 }
