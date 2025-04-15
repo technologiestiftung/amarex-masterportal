@@ -528,7 +528,7 @@ async function writePDF(payload, planung, savingType, blob) {
         text: "Durch die Variierung der Parameter für die Regenwasserbewirtschaftungsmaßnahmen haben Sie den Wasserhaushalt beeinflusst. Die Ergebnisse Ihrer Simulation sind im Folgenden dem Status Quo Wasserhaushalt für das Untersuchungsgebiet gegenübergestellt.",
         extraMarginBottom: 10,
       });
-      /* text({
+      text({
         text: "Status Quo-Szenario:",
         noLineBreak: true,
       });
@@ -537,40 +537,40 @@ async function writePDF(payload, planung, savingType, blob) {
         x: paddingVertical + pageInnerWidth / 2,
       });
       text({
-        text: ` • Oberflächenabfluss: ${payload.seite_5_status_quo_oberflaechenabfluss_mma} mm/a (${payload.seite_5_status_quo_oberflaechenabfluss_prozente} %)`,
+        text: ` • Oberflächenabfluss: ${"XX"} mm/a (${"XX"} %)`,
         noLineBreak: true,
         maxWidth: pageInnerWidth / 2 - mm(24),
       });
       text({
-        text: ` • Oberflächenabfluss: ${payload.seite_5_simulation_oberflaechenabfluss_mma} mm/a (${payload.seite_5_simulation_oberflaechenabfluss_prozente} %)`,
+        text: ` • Oberflächenabfluss: ${payload.abimo_result.runoff} mm/a (${payload.abimo_result.runoff_prozente} %)`,
         x: paddingVertical + pageInnerWidth / 2,
       });
       text({
-        text: ` • Infiltration: ${payload.seite_5_status_quo_versickerung_mma} mm/a (${payload.seite_5_status_quo_versickerung_prozente} %)`,
+        text: ` • Infiltration: ${"XX"} mm/a (${"XX"} %)`,
         noLineBreak: true,
         maxWidth: pageInnerWidth / 2 - mm(24),
       });
       text({
-        text: ` • Infiltration: ${payload.seite_5_simulation_versickerung_mma} mm/a (${payload.seite_5_simulation_versickerung_prozente} %)`,
+        text: ` • Infiltration: ${payload.abimo_result.infiltration} mm/a (${payload.abimo_result.infiltration_prozente} %)`,
         x: paddingVertical + pageInnerWidth / 2,
       });
       text({
-        text: ` • Verdunstung: ${payload.seite_5_status_quo_evapotranspiration_mma} mm/a (${payload.seite_5_status_quo_evapotranspiration_prozente} %)`,
+        text: ` • Verdunstung: ${"XX"} mm/a (${"XX"} %)`,
         noLineBreak: true,
         maxWidth: pageInnerWidth / 2 - mm(24),
       });
       text({
-        text: ` • Verdunstung: ${payload.seite_5_simulation_evapotranspiration_mma} mm/a (${payload.seite_5_simulation_evapotranspiration_prozente} %)`,
+        text: ` • Verdunstung: ${payload.abimo_result.evaporation} mm/a (${payload.abimo_result.evaporation_prozente} %)`,
         x: paddingVertical + pageInnerWidth / 2,
       });
       text({
-        text: ` • Delta W: ${payload.seite_5_status_quo_deltaw} %`,
+        text: ` • Delta W: ${"XX"} %`,
         noLineBreak: true,
       });
       text({
-        text: ` • Delta W: ${payload.seite_5_simulation_deltaw} %`,
+        text: ` • Delta W: ${payload.abimo_result.deltaW} %`,
         x: paddingVertical + pageInnerWidth / 2,
-      }); */
+      });
   } else {
     // "lokal"
 

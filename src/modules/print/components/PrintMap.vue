@@ -56,17 +56,13 @@ export default {
         ]),
         ...mapGetters("Modules/Print", [
             "capabilitiesFilter",
-            "currentFormat",
             "currentLayout",
-            "currentMapScale",
             "defaultCapabilitiesFilter",
             "fileDownloads",
             "filename",
             "formatList",
             "is3d",
-            "isGfiSelected",
             "isIncreased3DResolutionSelected",
-            "isScaleSelectedManually",
             "layoutList",
             "overviewmapLayerId",
             "printMapMarker",
@@ -85,15 +81,7 @@ export default {
             "areaTypesData",
             "accumulatedAbimoStats",
             "selectedFeatures",
-            "selectInteraction",
-            "blockAreaConfirmed",
-            "preselectedFeatures",
-            "selectedCount",
-            "newGreenRoof",
-            "newUnpvd",
-            "newToSwale",
-            "resultAbimoStats",
-            "resultLayers",
+            "resultAbimoStats"
         ]),
         currentScale: {
             get () {
@@ -432,6 +420,15 @@ export default {
             
             // Versiegelte Fläche "V" => 1.1 - U - D
             const versiegelteFläche = this.mathRoundAndToFixed(gesamtFläche - unversiegelteFläche - dachFläche)
+
+            const abimo_result_runoff = this.mathRoundAndToFixed(this.resultAbimoStats.runoff)
+            const abimo_result_infiltration = this.mathRoundAndToFixed(this.resultAbimoStats.infiltration)
+            const abimo_result_evaporation = this.mathRoundAndToFixed(this.resultAbimoStats.evaporation)
+            const abimo_results_added = abimo_result_runoff + abimo_result_infiltration + abimo_result_evaporation
+
+            const makePercentageForAbimo = (value) => {
+                return this.mathRoundAndToFixed((100 / abimo_results_added) * value)
+            }
             
             const payload = {
                 title: this.report.title,
@@ -452,11 +449,22 @@ export default {
                 flächenanteile_unversiegelte_flächen_status_quo: `${this.mathRoundAndToFixed(gesamtFläche * unversiegelt)} m² (${this.fullPercentage(unversiegelt)}) %`,
                 // "U" => m² | 3.1 => % 
                 flächenanteile_unversiegelte_flächen_simulation: `${unversiegelteFläche} m² (${zielwertUnversiegelt}) %`,
-                // 
+                // gesetzte Maßnahmen
                 an_mulde_angeschlossene_fläche: this.accumulatedAbimoStats.targetValueSwaleConnected || 0,
                 dachbegrünung_prozente: this.accumulatedAbimoStats.targetValueGreenRoof || 0,
                 entsiegelung_prozente: this.accumulatedAbimoStats.targetValueUnsealed || 0,
+                // Abimo Result
+                abimo_result: {
+                    runoff: abimo_result_runoff,
+                    runoff_prozente: makePercentageForAbimo(abimo_result_runoff),
+                    infiltration: abimo_result_infiltration,
+                    infiltration_prozente: makePercentageForAbimo(abimo_result_infiltration),
+                    evaporation: abimo_result_evaporation,
+                    evaporation_prozente: makePercentageForAbimo(abimo_result_evaporation),
+                    deltaW: this.mathRoundAndToFixed(this.resultAbimoStats.deltaW),
+                },
             }
+
 
             try {
                 await getReport(payload, "gebiet", "_blank"); // "lokal" | "gebiet"
