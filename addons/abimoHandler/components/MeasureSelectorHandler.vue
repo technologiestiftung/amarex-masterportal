@@ -21,9 +21,9 @@ export default {
       clickedCoordinates: null,
       selectedMeasureFeature: null,
       markedForDeletion: null,
-      isProcessingClick: false, // Flag to prevent multiple event processing
+      isProcessingClick: false,
       trashIconPath:
-        "../../../portal/amarex/resources/img/measure-trash-bin.svg", // Hier deinen Pfad zum Papierkorb-Icon einfügen
+        "../../../portal/amarex/resources/img/measure-trash-bin.svg",
     };
   },
   computed: {
@@ -287,10 +287,10 @@ export default {
         return;
       }
 
-      // Feature aus der Karte entfernen
+      // remove feature from map
       this.layer_abimo_measures.getSource().removeFeature(feature);
 
-      // Feature aus dem Store entfernen
+      // remove feature from selected measures
       const featureId = feature.getId();
       let currentMeasures = [...this.selectedMeasures];
       currentMeasures = currentMeasures.filter(
@@ -298,10 +298,9 @@ export default {
       );
       this.setSelectedMeasures(currentMeasures);
 
-      // Zurücksetzen
       this.markedForDeletion = null;
 
-      // Hier könntest du die Statistiken aktualisieren
+      // todo: add updateMeasureStats()
       // this.updateMeasureStats()
     },
   },
