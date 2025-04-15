@@ -198,6 +198,13 @@ export default {
               action: () => {
                 this.resetAbimoCalculation();
                 this.setPreselectedFeatures([]);
+                this.setSelectedMeasures([]);
+                mapCollection
+                  .getMap("2D")
+                  .getLayers()
+                  .getArray()
+                  .find((layer) => layer.get("id") === "abimo_measures")
+                  .values_.source.clear();
                 this.setActiveStep(2);
               },
             },
@@ -220,6 +227,7 @@ export default {
       "preComputedModelsShown",
       "preComputedModelsAdded",
       "isMeasurePlanning",
+      "selectedMeasures",
     ]),
     ...mapGetters(["allLayerConfigs"]),
     activeComponent() {
@@ -266,6 +274,7 @@ export default {
       "setPreComputedModels",
       "setPreComputedModelsAdded",
       "setIsMeasurePlanning",
+      "setSelectedMeasures",
     ]),
     setDisabled() {
       if (this.activeStep === 2) return this.selectedFeatures.length === 0;
@@ -320,8 +329,15 @@ export default {
         .getArray()
         .find((layer) => layer.get("id") === "abimo_result_delta_w")
         .values_.source.clear();
+      mapCollection
+        .getMap("2D")
+        .getLayers()
+        .getArray()
+        .find((layer) => layer.get("id") === "abimo_measures")
+        .values_.source.clear();
       this.removeInteractionFromMap(this.selectInteraction);
       this.setSelectedFeatures([]);
+      this.setSelectedMeasures([]);
       this.setNewGreenRoof(0);
       this.setNewUnpvd(0);
       this.setNewToSwale(0);
