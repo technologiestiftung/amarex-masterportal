@@ -13,10 +13,10 @@ export default {
             // Masterportal origin Menu Steps
             steps: [
                 // { label: 'Projekt Starten', component: 'projectStarter' },
-                { label: 'Report erstellen', component: 'reportPrinter' },
                 { label: 'Hintergrundkarten', component: 'baseMaps' },
                 { label: 'Themenkarten', component: 'themeMaps' },
                 { label: 'Wasserhaushalt berechnen', component: 'abimoHandler' },
+                { label: 'Report erstellen', component: 'print' },
                 // { label: 'Maßnahmenpotentiale', component: 'actionPotentials' },
                 // { label: 'Eigene Ebenen', component: '?' },
                 // { label: '6. Geodaten importieren', component: 'fileImporter' },
@@ -25,7 +25,6 @@ export default {
                 // { label: '9. Eigene Notizen', component: 'draw' },
                 // { label: 'X. Eigene Notizen', component: 'draw_old' },
                 // { label: 'X. ESB Tool', component: 'esbTool' },
-                // { label: 'Report', component: 'print' },
                 // { label: 'X. Multikriterien Analyse', component: 'multiCriteria' },
                 // { label: 'X. Projekt speichern/exportieren', component: 'projectDownloader' }
             ],
@@ -42,6 +41,7 @@ export default {
     },
     computed: {
         ...mapGetters("Menu", [
+            "currentComponentName",
             "mainMenu",
             "secondaryMenu",
             "titleBySide", 
@@ -117,6 +117,7 @@ export default {
                 :key="index"
                 class="step-indicator"
                 :class="{ 'active': index === currentStepIndex }"
+                :id="step.component.toString()"
                 @click="selectStep(step, index, true)"
             >
                 <p>{{ step.label }}</p>

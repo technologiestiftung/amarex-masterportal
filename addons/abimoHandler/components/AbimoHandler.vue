@@ -162,7 +162,18 @@ export default {
           props: {
             openInfoFromResults: (info) => this.openInfo(info),
           },
+          buttonsFullWidth: true,
           buttons: [
+            {
+              text: "Report erstellen",
+              action: async () => {
+                const button = document.querySelector(".stepper-root #print");
+                if (button) {
+                  button.click();
+                }
+              },
+              accent: true,
+            },
             {
               text: "Neue Berechnung starten",
               action: async () => {
@@ -441,6 +452,7 @@ export default {
       <div
         v-if="!steps[activeStep]?.upperButtons"
         class="btn-container d-flex"
+        :class="{ 'flex-column': steps[activeStep]?.buttonsFullWidth }"
       >
         <span
           v-for="(btn, btnIndex) in steps[activeStep]?.buttons"

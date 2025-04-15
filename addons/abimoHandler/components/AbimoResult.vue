@@ -34,7 +34,7 @@ export default {
   },
   mounted() {
     this.setPreComputedModelsShown(false);
-    
+
     if (this.resultLayers.length === 0) {
       // result layers
       let resultLayers = this.allLayerConfigs.filter(
@@ -117,12 +117,12 @@ export default {
     <p
       class="description"
       v-html="
-        `Durch die von Ihnen vorgenommenen Planungs-maßnahmen würde sich der Wert <strong>∆W um ${'XX'}</strong> verändern.`
+        `Durch die von Ihnen vorgenommenen Planungs&shy;maßnahmen würde sich der Wert <strong>∆W um ${'XX'}</strong> verändern.`
       "
     ></p>
     <p class="description">
       <strong>∆W</strong> bezeichnet die Abweichung vom natürlichen
-      Wasser-haushalt in Prozent.
+      Wasser&shy;haushalt in Prozent.
     </p>
     <div class="layer-container d-flex flex-column">
       <p class="title">Berechnete Ergebnislayer</p>
