@@ -81,12 +81,17 @@ export default {
   },
 
   // Measure Planning
-
   isMeasurePlanning: false,
   isMeasureDrawing: false,
   selectedMeasures: [],
   readyForCalculation: false,
   selectedBTF: null,
-  clickedCoordinates: null,
+  // clickedCoordinates: null,
+
+  accumulatedMeasureStats: {
+    greenRoofMeasuresAmount: 0,
+    unpavedMeasuresAmount: 0,
+    swaleMeasuresAmount: 0,
+  },
 };
 
