@@ -81,29 +81,11 @@ export default {
   },
 
   // Measure Planning
+
   isMeasurePlanning: false,
   isMeasureDrawing: false,
   selectedMeasures: [],
-  measureSteps: [
-    {
-      id: "initalDisplay",
-    },
-    {
-      id: "setNewToSwale",
-      icon: "../../../portal/amarex/resources/img/measure-swale.svg",
-      title: "Versickerung",
-    },
-    {
-      id: "setNewUnpvd",
-      icon: "../../../portal/amarex/resources/img/measure-unpvd.svg",
-      title: "Entsiegelung",
-    },
-    {
-      id: "setGreenRoof",
-      icon: "../../../portal/amarex/resources/img/measure-greenroof.svg",
-      title: "Gründach",
-    },
-  ],
+  readyForCalculation: false,
   selectedBTF: null,
   clickedCoordinates: null,
 };
