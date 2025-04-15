@@ -63,13 +63,18 @@ const actions = {
     }));
     commit("setSteps", steps);
   },
-  updateMeasureStats({ state, commit }) {
-    const stats = measureCalc.calculateAllMeasureStats(
+  async updateMeasureStats({ state, commit }) {
+    const stats = await measureCalc.calculateAllMeasureStats(
       state.selectedFeatures,
       state.newUnpvd,
       state.selectedMeasures,
     );
     commit("setAccumulatedMeasureStats", stats);
+    commit("setNewGreenRoof", stats.newGreenRoof);
+    commit("setNewUnpvd", stats.newUnpvd);
+    commit("setNewToSwale", stats.newToSwale);
+
+    console.log("[actionsAbimoHandler] stats::", stats);
   },
 };
 

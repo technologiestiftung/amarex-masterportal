@@ -510,7 +510,7 @@ export default {
             <p>{{ steps[activeStep]?.buttons[btnIndex].text }}</p>
           </button>
         </span>
-        <span v-if="activeStep === 5">
+        <span v-if="activeStep === 5 || activeStep === 7">
           <AbimoCalcButton :changeCalcState="changeCalcState"
         /></span>
       </div>
