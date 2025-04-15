@@ -1,5 +1,4 @@
 <script>
-
 /**
  * Abimo Measure Selection Display
  * @module modules/MeasureSelectionDisplay
