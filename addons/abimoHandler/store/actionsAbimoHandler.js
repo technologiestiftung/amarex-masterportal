@@ -1,4 +1,5 @@
 import areaCalc from "../utils/areaCalculations";
+import measureCalc from "../utils/measureCalculations";
 
 const actions = {
   updateAccumulatedStats({ commit, state }) {
@@ -61,6 +62,14 @@ const actions = {
       isActive: step.id === stepToToggle.id ? !stepToToggle.isActive : false,
     }));
     commit("setSteps", steps);
+  },
+  updateMeasureStats({ state, commit }) {
+    const stats = measureCalc.calculateAllMeasureStats(
+      state.selectedFeatures,
+      state.newUnpvd,
+      state.selectedMeasures,
+    );
+    commit("setAccumulatedMeasureStats", stats);
   },
 };
 

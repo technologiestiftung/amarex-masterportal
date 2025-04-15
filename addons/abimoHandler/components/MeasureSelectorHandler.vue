@@ -60,6 +60,7 @@ export default {
       addInteractionToMap: "addInteraction",
       removeInteractionFromMap: "removeInteraction",
     }),
+    ...mapActions("Modules/AbimoHandler", ["updateMeasureStats"]),
 
     handleMapClick(event) {
       if (this.isProcessingClick) {
@@ -231,9 +232,6 @@ export default {
 
       const measureFeature = new Feature({
         geometry: new Point(position),
-        type: measure.id,
-        featureId: this.selectedBTF.getId(),
-        size: size,
       });
 
       measureFeature.setStyle([
@@ -260,19 +258,17 @@ export default {
 
       const newMeasure = {
         id: Date.now(),
-        type: measure.id,
+        ...measure,
         featureId: measureFeature.getId(),
-        btfFeatureId: this.selectedBTF.getId(),
-        position: position,
         size: size,
+        measureFeature: measureFeature,
       };
 
       let currentMeasures = [...this.selectedMeasures];
       currentMeasures.push(newMeasure);
       this.setSelectedMeasures(currentMeasures);
 
-      // todo: add updateMeasureStats
-      // this.updateMeasureStats()
+      this.updateMeasureStats();
       this.resetSelection();
     },
 
@@ -293,15 +289,20 @@ export default {
       // remove feature from selected measures
       const featureId = feature.getId();
       let currentMeasures = [...this.selectedMeasures];
+
+      // FIXME: featureId is undefined! deshalb sind die SelectedMeasures leer!
       currentMeasures = currentMeasures.filter(
         (measure) => measure.featureId !== featureId,
       );
+
+      console.log(
+        "[MeasureSelectorHandler] currentMeasures::",
+        currentMeasures,
+      );
+
       this.setSelectedMeasures(currentMeasures);
-
       this.markedForDeletion = null;
-
-      // todo: add updateMeasureStats()
-      // this.updateMeasureStats()
+      this.updateMeasureStats();
     },
   },
   beforeUnmount() {

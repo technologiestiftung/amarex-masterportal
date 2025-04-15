@@ -1,17 +1,15 @@
 <script>
+import { mapGetters } from "vuex";
+
 /**
  * Abimo Measure Selection Display
  * @module modules/MeasureSelectionDisplay
  */
 export default {
   name: "MeasureSelectionDisplay",
-  components: {},
-  data() {
-    return {};
+  computed: {
+    ...mapGetters("Modules/AbimoHandler", ["accumulatedMeasureStats"]),
   },
-  computed: {},
-  watch: {},
-  methods: {},
 };
 </script>
 
@@ -25,24 +23,31 @@ export default {
         <h6 class="title">Muldenversickerung</h6>
         <div class="d-flex justify-content-between">
           <span>Anzahl</span>
-          <span class="fw-bold">{{ 0 }}</span>
+          <span class="fw-bold">{{
+            this.accumulatedMeasureStats.swaleMeasuresAmount
+          }}</span>
         </div>
         <div class="d-flex justify-content-between">
           <span>Oberfläche</span>
           <span class="fw-bold"
-            ><span>{{ 0 }}</span> m²</span
+            ><span>{{ this.accumulatedMeasureStats.totalSwaleArea }}</span>
+            m²</span
           >
         </div>
         <div class="d-flex justify-content-between">
           <span>Volumen</span>
           <span class="fw-bold"
-            ><span>{{ 0 }}</span> m³</span
+            ><span>{{ this.accumulatedMeasureStats.totalSwaleVolume }}</span>
+            m³</span
           >
         </div>
         <div class="d-flex justify-content-between">
           <span>Angeschlossene Fläche</span>
           <span class="fw-bold"
-            ><span>{{ 0 }}</span> m²</span
+            ><span>{{
+              this.accumulatedMeasureStats.totalSwaleConnectedArea
+            }}</span>
+            m²</span
           >
         </div>
       </section>
@@ -54,12 +59,15 @@ export default {
         <h6 class="title">Entsiegelung</h6>
         <div class="d-flex justify-content-between">
           <span>Anzahl</span>
-          <span class="fw-bold">{{ 0 }}</span>
+          <span class="fw-bold">{{
+            this.accumulatedMeasureStats.unpavedMeasuresAmount
+          }}</span>
         </div>
         <div class="d-flex justify-content-between">
           <span>Oberfläche</span>
           <span class="fw-bold"
-            ><span>{{ 0 }}</span> m²</span
+            ><span>{{ this.accumulatedMeasureStats.totalUnpavedArea }}</span>
+            m²</span
           >
         </div>
       </section>
@@ -71,12 +79,15 @@ export default {
         <h6 class="title">Dachbegrünung</h6>
         <div class="d-flex justify-content-between">
           <span>Anzahl</span>
-          <span class="fw-bold">{{ 0 }}</span>
+          <span class="fw-bold">{{
+            this.accumulatedMeasureStats.greenRoofMeasuresAmount
+          }}</span>
         </div>
         <div class="d-flex justify-content-between">
           <span>Oberfläche</span>
           <span class="fw-bold"
-            ><span>{{ 0 }}</span> m²</span
+            ><span>{{ this.accumulatedMeasureStats.totalGreenRoofArea }}</span>
+            m²</span
           >
         </div>
       </section>

@@ -19,22 +19,19 @@ export default {
     return {
       measures: [
         {
-          id: "setNewToSwale",
           icon: "../../../portal/amarex/resources/img/measure-swale.svg",
           title: "Muldenversickerung",
-          dimensionKey: "swale",
+          type: "swale",
         },
         {
-          id: "setNewUnpvd",
           icon: "../../../portal/amarex/resources/img/measure-unpvd.svg",
           title: "Entsiegelung",
-          dimensionKey: "unpaved",
+          type: "unpaved",
         },
         {
-          id: "setGreenRoof",
           icon: "../../../portal/amarex/resources/img/measure-greenroof.svg",
           title: "Dachbegrünung",
-          dimensionKey: "greenRoof",
+          type: "greenRoof",
         },
       ],
       // "measure" oder "dimensioning"
@@ -80,26 +77,22 @@ export default {
     sizesConfig() {
       if (!this.selectedMeasure) return this.defaultSizesConfig;
 
-      const dimensionKey = this.selectedMeasure.dimensionKey;
+      const type = this.selectedMeasure.type;
       const result = {};
 
       // Verwenden der importierten getMeasureDimension-Funktion
       const smallDimension = measureCalculations.getMeasureDimension(
-        dimensionKey,
+        type,
         "small",
       );
       const mediumDimension = measureCalculations.getMeasureDimension(
-        dimensionKey,
+        type,
         "medium",
       );
       const largeDimension = measureCalculations.getMeasureDimension(
-        dimensionKey,
+        type,
         "large",
       );
-
-      console.log("[MeasureSelectorMenu] smallDimension::", smallDimension);
-      console.log("[MeasureSelectorMenu] mediumDimension::", mediumDimension);
-      console.log("[MeasureSelectorMenu] largeDimension::", largeDimension);
 
       if (smallDimension) {
         result.small = {
@@ -217,15 +210,15 @@ export default {
     getSizeDetails(size) {
       if (!this.selectedMeasure) return "";
 
-      const dimensionKey = this.selectedMeasure.dimensionKey;
+      const type = this.selectedMeasure.type;
       const sizeData = measureCalculations.getMeasureDimension(
-        dimensionKey,
+        type,
         size,
       );
 
       if (!sizeData) return "";
 
-      switch (dimensionKey) {
+      switch (type) {
         case "swale":
           return `Volumen: ${sizeData.volume}m³, Angeschlossene Fläche: ${sizeData.connectedArea}m²`;
         case "greenRoof":

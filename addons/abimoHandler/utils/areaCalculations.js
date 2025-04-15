@@ -176,5 +176,6 @@ export default {
   getMaxSwaleConnected,
   calculateAllStats,
   calculateResultStats,
+  calculatePrecisely,
 };
 
