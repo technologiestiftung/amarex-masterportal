@@ -205,8 +205,7 @@ export default {
         isIncreased3DResolutionSelected: function (value) {
             this.update3DResolutionScale(value);
         },
-        firstFinishState(newVal, oldVal) {
-            console.log('finishState changed from', oldVal, 'to', newVal);
+        firstFinishState(newVal) {
             if (newVal) {
                 const newPrintFile = this.fileDownloads[0]
                 if (newPrintFile && newPrintFile?.finishState) {
@@ -400,128 +399,64 @@ export default {
             }
             return defaultLayerId;
         },
-
         mathRoundAndToFixed(num) {
-            return Math.round(num * 100).toFixed(0)
+            return Number(Math.round(num).toFixed(0))
         },
-        makeToFixed(num) {
-            return num.toFixed(0)
+        fullPercentage(num) {
+            return Number(Math.round(num * 100).toFixed(0))
         },
 
         /* Report PDF Amarex */
         async generateReport(downloadURL) {
 
-            const gesamtFläche = this.makeToFixed(this.accumulatedAbimoStats.totalArea)
-            const unversiegelt = this.areaTypesData.find((areaType) => areaType.id === "unpvd")
-            const bebautVersiegelt = this.areaTypesData.find((areaType) => areaType.id === "roof")
-            const unbebautVersiegelt = this.areaTypesData.find((areaType) => areaType.id === "pvd")
+            // 1.1 => Gesamtfläche
+            const gesamtFläche = this.accumulatedAbimoStats.totalArea;
+            // 1.2 => Unversiegelt
+            const unversiegelt = this.areaTypesData.find((areaType) => areaType.id === "unpvd").max // < 1
+            // 1.3 => Bebaut versiegelt
+            const bebautVersiegelt = this.areaTypesData.find((areaType) => areaType.id === "roof").max // < 1
+            // 1.4 => Unbebaut versiegelt
+            const unbebautVersiegelt = this.areaTypesData.find((areaType) => areaType.id === "pvd").max // < 1
+            // 1.5 => % von Dachfläche
+            const begrünteDachfläche = this.accumulatedAbimoStats.maxGreenRoofToRoof // < 1
+            // 2.1 => Zielwert Dachbegrünung
+            const zielwertDachbegrünung = this.accumulatedAbimoStats.targetValueGreenRoof || 0 // < 100
+            // 3.1 => Zielwert unversiegelte Fläche
+            const zielwertUnversiegelt = this.accumulatedAbimoStats.targetValueUnsealed || 0 // < 100
 
-            const dachFläche = Math.round(this.accumulatedAbimoStats.totalRoofArea);
-            const maximalerDachFlächenAnteilVonGesamtFläche = Math.round(this.accumulatedAbimoStats.maxGreenRoof * 100);
+            // Dachfläche "D" => 1.1 * 1.3
+            const dachFläche = this.mathRoundAndToFixed(gesamtFläche * bebautVersiegelt)
 
+            // Unversiegelte Fläche "U" => 1.1 * 3.1
+            const unversiegelteFläche = this.mathRoundAndToFixed(gesamtFläche * (zielwertUnversiegelt / 100))
+            
+            // Versiegelte Fläche "V" => 1.1 - U - D
+            const versiegelteFläche = this.mathRoundAndToFixed(gesamtFläche - unversiegelteFläche - dachFläche)
+            
             const payload = {
                 title: this.report.title,
                 description: this.report.description,
                 date: this.report.date,
                 downloadURL,
-                // Basic Werte
-                dachFläche,
-                maximalerDachFlächenAnteilVonGesamtFläche,
-                // ✅ Seite 1 
-                seite_1_kennzahlen_dachflaeche_flaeche: dachFläche,
-                seite_1_kennzahlen_dachflaeche_prozente: maximalerDachFlächenAnteilVonGesamtFläche,
-                seite_1_kennzahlen_davonbegruent_flaeche: this.mathRoundAndToFixed(gesamtFläche * unversiegelt.max),
-                seite_1_kennzahlen_davonbegruent_prozente: this.mathRoundAndToFixed(unversiegelt.max),
-                seite_1_kennzahlen_versiegelteflaeche_flaeche:this.mathRoundAndToFixed(gesamtFläche * bebautVersiegelt.max),
-                seite_1_kennzahlen_versiegelteflaeche_prozente: this.mathRoundAndToFixed(bebautVersiegelt.max),
-                seite_1_kennzahlen_unversiegelteflaeche_flaeche: this.mathRoundAndToFixed(gesamtFläche * unbebautVersiegelt.max),
-                seite_1_kennzahlen_unversiegelteflaeche_prozente: this.mathRoundAndToFixed(unbebautVersiegelt.max),
-                // Seite 3
-                seite_3_status_quo_oberflaechenabfluss: "XX", // this.resultAbimoStats.runoff,
-                seite_3_status_quo_versickerung: "XX", // this.resultAbimoStats.infiltration,
-                seite_3_status_quo_evapotranspiration: "XX", // this.resultAbimoStats.evaporation,
-                seite_3_status_quo_deltaw: "XX", // this.resultAbimoStats.deltaW,
-                // ✅ Seite 4 | Gebietsplanung
-                seite_4_gebietsbetrachtung_betrachteteblockteilflaechen: this.selectedFeatures?.length,
-                seite_4_gebietsbetrachtung_dachbegruenung_percentage: this.accumulatedAbimoStats.targetValueGreenRoof,
-                seite_4_gebietsbetrachtung_entsiegelung_percentage: this.accumulatedAbimoStats.targetValueUnsealed,
-                seite_4_gebietsbetrachtung_mulde_percentage: this.accumulatedAbimoStats.targetValueSwaleConnected,
-                // Seite 5
-                seite_5_status_quo_davonbegruent_flaeche: Math.round(dachFläche * (this.accumulatedAbimoStats.initialTargetValueGreenRoof / 100)),
-                seite_5_status_quo_davonbegruent_prozente: this.accumulatedAbimoStats.initialTargetValueGreenRoof,
-                // initialTargetValueGreenRoof
-                seite_5_status_quo_versiegelteflaeche_flaeche: Math.round(gesamtFläche * (this.accumulatedAbimoStats.initialTargetValueSwaleConnected / 100)),
-                seite_5_status_quo_versiegelteflaeche_prozente: this.accumulatedAbimoStats.maxSwaleConnected,
-                // initialTargetValueSwaleConnected,
-                seite_5_status_quo_unversiegelteflaeche_flaeche: Math.round(gesamtFläche * (this.accumulatedAbimoStats.initialTargetValueUnsealed / 100)),
-                seite_5_status_quo_unversiegelteflaeche_prozente: this.accumulatedAbimoStats.maxUnpaved,
-                // initialTargetValueUnsealed
-                seite_5_simulation_davonbegruent_flaeche: this.accumulatedAbimoStats.targetValueGreenRoof,
-                seite_5_simulation_davonbegruent_prozente: Math.round(this.accumulatedAbimoStats.totalRoofArea) * (this.accumulatedAbimoStats.targetValueGreenRoof / 100),
-                seite_5_simulation_versiegelteflaeche_flaeche: Math.round(this.accumulatedAbimoStats.maxSwaleConnected * 100),
-                seite_5_simulation_versiegelteflaeche_prozente: Math.round(this.accumulatedAbimoStats.totalRoofArea) * (this.accumulatedAbimoStats.targetValueSwaleConnected / 100),
-                seite_5_simulation_unversiegelteflaeche_flaeche: Math.round(this.accumulatedAbimoStats.maxUnpavedArea * 100),
-                seite_5_simulation_unversiegelteflaeche_prozente: Math.round(this.accumulatedAbimoStats.totalRoofArea) * (this.accumulatedAbimoStats.targetValueUnsealed / 100),
-                // Status QUO wie auf Seite 3
-                seite_5_status_quo_oberflaechenabfluss_mma: "XX",
-                seite_5_status_quo_oberflaechenabfluss_prozente: "XX",
-                seite_5_status_quo_versickerung_mma: "XX",
-                seite_5_status_quo_versickerung_prozente: "XX",
-                seite_5_status_quo_evapotranspiration_mma: "XX",
-                seite_5_status_quo_evapotranspiration_prozente: "XX",
-                seite_5_status_quo_deltaw: "XX",
-                // SIMULATION
-                seite_5_simulation_oberflaechenabfluss_mma: "XX",
-                seite_5_simulation_oberflaechenabfluss_prozente: "XX",
-                seite_5_simulation_versickerung_mma: "XX",
-                seite_5_simulation_versickerung_prozente: "XX",
-                seite_5_simulation_evapotranspiration_mma: "XX",
-                seite_5_simulation_evapotranspiration_prozente: "XX",
-                seite_5_simulation_deltaw: "XX",
-                // Seite 6 + 7 | Lokale Betrachtung
-                seite_6_betrachteteblockteilflaeche_blockteilnummer: "XX",
-                seite_6_dachbegruenung_anzahl: "XX",
-                seite_6_entsiegelung_anzahl: "XX",
-                seite_6_muldenversickerung_anzahl: "XX",
-                seite_6_summe_mulde_flaeche: "XX",
-                seite_6_summe_mulde_volumen: "XX",
-                seite_6_summe_mulde_angeschlosseneflaeche: "XX",
-                seite_6_summe_dachbegruenung_flaeche: "XX",
-                seite_6_summe_entsiegelung_flaeche: "XX",
-                seite_7_status_quo_dachflaeche_flaeche: "XX",
-                seite_7_status_quo_dachflaeche_prozente: "XX",
-                seite_7_status_quo_davonbegruent_flaeche: "XX",
-                seite_7_status_quo_davonbegruent_prozente: "XX",
-                seite_7_status_quo_versiegelteflaeche_flaeche: "XX",
-                seite_7_status_quo_versiegelteflaeche_prozente: "XX",
-                seite_7_status_quo_unversiegelteflaeche_flaeche: "XX",
-                seite_7_status_quo_unversiegelteflaeche_prozente: "XX",
-                seite_7_status_quo_anschlussgradkanalisation: "XX",
-                seite_7_simulation_dachflaeche_flaeche: "XX",
-                seite_7_simulation_dachflaeche_prozente: "XX",
-                seite_7_simulation_davonbegruent_flaeche: "XX",
-                seite_7_simulation_davonbegruent_prozente: "XX",
-                seite_7_simulation_versiegelteflaeche_flaeche: "XX",
-                seite_7_simulation_versiegelteflaeche_prozente: "XX",
-                seite_7_simulation_unversiegelteflaeche_flaeche: "XX",
-                seite_7_simulation_unversiegelteflaeche_prozente: "XX",
-                seite_7_simulation_anschlussgradkanalisation: "XX",
-                seite_7_simulation_variante: "XX",
-                seite_7_status_quo_oberflaechenabfluss_mma: "XX",
-                seite_7_status_quo_oberflaechenabfluss_prozente: "XX",
-                seite_7_status_quo_versickerung_mma: "XX",
-                seite_7_status_quo_versickerung_prozente: "XX",
-                seite_7_status_quo_evapotranspiration_mma: "XX",
-                seite_7_status_quo_evapotranspiration_prozente: "XX",
-                seite_7_status_quo_deltaw: "XX",
-                seite_7_simulation_oberflaechenabfluss_mma: "XX",
-                seite_7_simulation_oberflaechenabfluss_prozente: "XX",
-                seite_7_simulation_versickerung_mma: "XX",
-                seite_7_simulation_versickerung_prozente: "XX",
-                seite_7_simulation_evapotranspiration_mma: "XX",
-                seite_7_simulation_evapotranspiration_prozente: "XX",
-                seite_7_simulation_deltaw: "XX",
-            };
+                // 1.1 * 1.3 => m² | 1.3 => % 
+                flächenanteile_dachfläche: `${dachFläche} m² (${this.fullPercentage(bebautVersiegelt)}) %`,
+                // 1.5 * dachFläche "D" => m² | 1.5 => %
+                flächenanteile_davon_begrünt_status_quo: `${this.mathRoundAndToFixed(dachFläche * begrünteDachfläche)} m² ${this.fullPercentage(begrünteDachfläche)} %`,
+                // 2.1 * 1.1 => m² | 2.1 / 1.3 => % 
+                flächenanteile_davon_begrünt_simulation: `${this.mathRoundAndToFixed(gesamtFläche * (zielwertDachbegrünung / 100))} m² ${this.fullPercentage((zielwertDachbegrünung / 100) / bebautVersiegelt)} %`,
+                // 1.4 * 1.1 => m² | 1.4 => %
+                flächenanteile_unbebaut_versiegelte_flächen_status_quo: `${this.mathRoundAndToFixed(gesamtFläche * unbebautVersiegelt)} m² (${this.fullPercentage(unbebautVersiegelt)}) %`,
+                // "V" => m² | V / 1.1 => %
+                flächenanteile_unbebaut_versiegelte_flächen_simulation: `${versiegelteFläche} m² (${this.mathRoundAndToFixed(versiegelteFläche / gesamtFläche)}) %`,
+                // 1.2 * 1.1 => m² | 1.2 => %
+                flächenanteile_unversiegelte_flächen_status_quo: `${this.mathRoundAndToFixed(gesamtFläche * unversiegelt)} m² (${this.fullPercentage(unversiegelt)}) %`,
+                // "U" => m² | 3.1 => % 
+                flächenanteile_unversiegelte_flächen_simulation: `${unversiegelteFläche} m² (${zielwertUnversiegelt}) %`,
+                // 
+                an_mulde_angeschlossene_fläche: this.accumulatedAbimoStats.targetValueSwaleConnected || 0,
+                dachbegrünung_prozente: this.accumulatedAbimoStats.targetValueGreenRoof || 0,
+                entsiegelung_prozente: this.accumulatedAbimoStats.targetValueUnsealed || 0,
+            }
 
             try {
                 await getReport(payload, "gebiet", "_blank"); // "lokal" | "gebiet"
