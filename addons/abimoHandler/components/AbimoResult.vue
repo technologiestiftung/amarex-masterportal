@@ -34,7 +34,7 @@ export default {
   },
   mounted() {
     this.setPreComputedModelsShown(false);
-    
+
     if (this.resultLayers.length === 0) {
       // result layers
       let resultLayers = this.allLayerConfigs.filter(
@@ -89,7 +89,9 @@ export default {
       class="stats-container d-flex justify-content-between w-100 align-items-center"
     >
       <p class="description">Oberflächenabfluss</p>
-      <p class="description">{{ this.resultAbimoStats.runoff.toFixed(0) }}</p>
+      <p class="description">
+        {{ this.resultAbimoStats.runoff.toFixed(0) }} mm/Jahr
+      </p>
     </div>
     <div
       class="stats-container d-flex justify-content-between w-100 align-items-center"
@@ -97,6 +99,7 @@ export default {
       <p class="description">Infiltration</p>
       <p class="description">
         {{ this.resultAbimoStats.infiltration.toFixed(0) }}
+        mm/Jahr
       </p>
     </div>
     <div
@@ -104,14 +107,14 @@ export default {
     >
       <p class="description">Verdunstung</p>
       <p class="description">
-        {{ this.resultAbimoStats.evaporation.toFixed(0) }}
+        {{ this.resultAbimoStats.evaporation.toFixed(0) }} mm/Jahr
       </p>
     </div>
     <div
       class="stats-container d-flex justify-content-between w-100 align-items-center last"
     >
       <p class="description">Delta ∆W</p>
-      <p class="description">{{ this.resultAbimoStats.deltaW.toFixed(0) }}</p>
+      <p class="description">{{ this.resultAbimoStats.deltaW.toFixed(0) }} %</p>
     </div>
     <span class="line"></span>
     <p
