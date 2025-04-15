@@ -1,16 +1,9 @@
 <script>
 import { mapGetters, mapMutations, mapActions } from "vuex";
-import { singleClick } from "ol/events/condition.js";
-import { Select } from "ol/interaction";
 import Feature from "ol/Feature";
 import Point from "ol/geom/Point";
 import { Style, Icon, Fill, Circle } from "ol/style";
 import MeasureSelectorMenu from "./MeasureSelectorMenu.vue";
-
-// MeasureSelectorHandler -> setzt die interaktion
-// MeasureSelectorMenu -> zeigt das Menü an und setzt die Maßnahme
-// MeasureDrawer -> zeigt die Maßnahme an und setzt sie in die Karte ein
-// es muss alles im Store gespeichert werden
 
 /**
  * Abimo Measure Selector Handler
@@ -26,7 +19,11 @@ export default {
       showMeasureMenu: false,
       selectedBTF: null,
       clickedCoordinates: null,
-      selectInteraction: null,
+      selectedMeasureFeature: null,
+      markedForDeletion: null,
+      isProcessingClick: false, // Flag to prevent multiple event processing
+      trashIconPath:
+        "../../../portal/amarex/resources/img/measure-trash-bin.svg", // Hier deinen Pfad zum Papierkorb-Icon einfügen
     };
   },
   computed: {
@@ -50,7 +47,8 @@ export default {
       .getArray()
       .find((layer) => layer.get("id") === "abimo_measures");
 
-    this.createInteractions();
+    // click handler to manage interactions manually
+    mapCollection.getMap("2D").on("click", this.handleMapClick);
   },
   methods: {
     ...mapMutations("Modules/AbimoHandler", [
@@ -63,25 +61,146 @@ export default {
       removeInteractionFromMap: "removeInteraction",
     }),
 
-    createInteractions() {
-      this.selectInteraction = new Select({
-        multi: true,
-        condition: singleClick,
-        layers: [this.layer_abimo_btf],
-        style: null,
-      });
+    handleMapClick(event) {
+      if (this.isProcessingClick) {
+        return;
+      }
 
-      this.selectInteraction.on("select", (event) => {
-        if (event.selected.length > 0) {
-          this.selectedBTF = event.selected[0];
-          this.clickedCoordinates = event.mapBrowserEvent.coordinate;
-          this.showMeasureMenu = true;
-          this.setIsMeasureDrawing(true);
+      this.isProcessingClick = true;
+
+      // Get features at click position
+      const clickedFeatures = [];
+      mapCollection
+        .getMap("2D")
+        .forEachFeatureAtPixel(event.pixel, (feature, layer) => {
+          if (layer === this.layer_abimo_measures) {
+            clickedFeatures.push({ feature, layer, type: "measure" });
+          } else if (layer === this.layer_abimo_btf) {
+            clickedFeatures.push({ feature, layer, type: "btf" });
+          }
+        });
+
+      // store clicked coordinates
+      this.clickedCoordinates = event.coordinate;
+
+      // First check if we clicked on a measure
+      const clickedMeasure = clickedFeatures.find(
+        (item) => item.type === "measure",
+      );
+      if (clickedMeasure) {
+        const feature = clickedMeasure.feature;
+
+        // Check if this is the feature we already marked for deletion
+        if (
+          this.markedForDeletion &&
+          this.markedForDeletion.getId() === feature.getId()
+        ) {
+          // Second click on the same feature - delete it
+          this.deleteMeasure(feature);
         } else {
+          // First click - reset any previous selection
           this.resetSelection();
+
+          // Mark this feature for deletion and replace its icon
+          this.markFeatureForDeletion(feature);
         }
-      });
-      this.addInteractionToMap(this.selectInteraction);
+
+        this.isProcessingClick = false;
+        return;
+      }
+
+      // If no measure was clicked, reset the trash icon if any
+      if (this.markedForDeletion) {
+        this.restoreOriginalIcon();
+      }
+
+      // If no measure was clicked, check for BTF
+      const clickedBtf = clickedFeatures.find((item) => item.type === "btf");
+      if (clickedBtf) {
+        this.selectedBTF = clickedBtf.feature;
+        this.showMeasureMenu = true;
+        this.setIsMeasureDrawing(true);
+      } else {
+        // Clicked on nothing, reset everything
+        this.resetSelection();
+      }
+
+      this.isProcessingClick = false;
+    },
+
+    markFeatureForDeletion(feature) {
+      // Store the feature marked for deletion
+      this.markedForDeletion = feature;
+
+      // Save original properties for restoration if needed
+      const size = feature.get("size") || "medium";
+      const originalProps = {
+        originalSize: size,
+        originalStyle: feature.getStyle(),
+      };
+
+      // Set properties on the feature to restore later
+      feature.set("_deleteProps", originalProps);
+
+      // Get the appropriate circle radius based on size
+      let circleRadius;
+      let iconScale = 1;
+
+      switch (size) {
+        case "small":
+          circleRadius = 20;
+          iconScale = 0.8;
+          break;
+        case "medium":
+          circleRadius = 30;
+          iconScale = 1;
+          break;
+        case "large":
+          circleRadius = 40;
+          iconScale = 1;
+          break;
+        default:
+          circleRadius = 20;
+          iconScale = 0.8;
+      }
+
+      // Set the trash icon style
+      feature.setStyle([
+        new Style({
+          image: new Circle({
+            radius: circleRadius,
+            fill: new Fill({
+              color: "rgba(255, 255, 255, 0.75)",
+            }),
+          }),
+        }),
+        new Style({
+          image: new Icon({
+            src: this.trashIconPath,
+            scale: iconScale,
+            anchor: [0.5, 0.5],
+            anchorXUnits: "fraction",
+            anchorYUnits: "fraction",
+          }),
+        }),
+      ]);
+
+      // Trigger a map redraw to show the new icon
+      mapCollection.getMap("2D").render();
+    },
+
+    restoreOriginalIcon() {
+      if (this.markedForDeletion) {
+        const deleteProps = this.markedForDeletion.get("_deleteProps");
+        if (deleteProps && deleteProps.originalStyle) {
+          this.markedForDeletion.setStyle(deleteProps.originalStyle);
+          this.markedForDeletion.unset("_deleteProps");
+        }
+        this.markedForDeletion = null;
+
+        // Trigger a map redraw to show the original icon
+        mapCollection.getMap("2D").render();
+      }
     },
 
     addMeasureToMap(measure, position, size) {
@@ -110,11 +229,11 @@ export default {
           iconScale = 0.8;
       }
 
-      // Neue Feature für die Maßnahme erstellen
       const measureFeature = new Feature({
         geometry: new Point(position),
         type: measure.id,
         featureId: this.selectedBTF.getId(),
+        size: size,
       });
 
       measureFeature.setStyle([
@@ -152,23 +271,44 @@ export default {
       currentMeasures.push(newMeasure);
       this.setSelectedMeasures(currentMeasures);
 
+      // todo: add updateMeasureStats
+      // this.updateMeasureStats()
       this.resetSelection();
     },
 
     resetSelection() {
       this.showMeasureMenu = false;
       this.selectedBTF = null;
-      this.clickedCoordinates = null;
       this.setIsMeasureDrawing(false);
+    },
 
-      if (this.selectInteraction) {
-        this.selectInteraction.getFeatures().clear();
+    deleteMeasure(feature) {
+      if (!feature) {
+        return;
       }
+
+      // Feature aus der Karte entfernen
+      this.layer_abimo_measures.getSource().removeFeature(feature);
+
+      // Feature aus dem Store entfernen
+      const featureId = feature.getId();
+      let currentMeasures = [...this.selectedMeasures];
+      currentMeasures = currentMeasures.filter(
+        (measure) => measure.featureId !== featureId,
+      );
+      this.setSelectedMeasures(currentMeasures);
+
+      // Zurücksetzen
+      this.markedForDeletion = null;
+
+      // Hier könntest du die Statistiken aktualisieren
+      // this.updateMeasureStats()
     },
   },
   beforeUnmount() {
-    if (this.selectInteraction) {
-      this.removeInteractionFromMap(this.selectInteraction);
+    // Remove map click handler
+    if (mapCollection && mapCollection.getMap("2D")) {
+      mapCollection.getMap("2D").un("click", this.handleMapClick);
     }
   },
 };
@@ -185,5 +325,47 @@ export default {
 
 <style lang="scss" scoped>
 @import "~variables";
+
+.delete-option {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1000;
+}
+
+.delete-button {
+  width: 60px;
+  height: 60px;
+  background-color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+  pointer-events: auto;
+
+  &:hover {
+    background-color: #f8f8f8;
+  }
+}
+
+.delete-icon-wrapper {
+  width: 40px;
+  height: 40px;
+  background-color: #444;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  i {
+    color: white;
+    font-size: 20px;
+  }
+}
 </style>
 
