@@ -66,7 +66,6 @@ const actions = {
   async updateMeasureStats({ state, commit }) {
     const stats = await measureCalc.calculateAllMeasureStats(
       state.selectedFeatures,
-      state.newUnpvd,
       state.selectedMeasures,
     );
     commit("setAccumulatedMeasureStats", stats);
