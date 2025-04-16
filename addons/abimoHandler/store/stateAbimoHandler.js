@@ -92,6 +92,11 @@ export default {
     greenRoofMeasuresAmount: 0,
     unpavedMeasuresAmount: 0,
     swaleMeasuresAmount: 0,
+    totalGreenRoofArea: 0,
+    totalUnpavedArea: 0,
+    totalSwaleArea: 0,
+    totalSwaleVolume: 0,
+    totalSwaleConnectedArea: 0,
   },
 };
 

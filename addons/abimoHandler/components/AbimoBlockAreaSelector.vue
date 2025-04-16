@@ -39,11 +39,6 @@ export default {
     if (this.preselectedFeatures.length > 0) {
       this.createPreselectSelection();
     }
-    // TODO: remove this log
-    console.log(
-      "[AbimoBlockAreaSelector] this.isMeasurePlanning::",
-      this.isMeasurePlanning,
-    );
   },
   methods: {
     ...mapActions("Maps", {
@@ -149,7 +144,7 @@ export default {
           if (index !== -1) {
             return;
           }
-          
+
           if (this.isMeasurePlanning && this.selectedFeatures.length > 0) {
             this.selectedFeatures.splice(0, this.selectedFeatures.length);
           }

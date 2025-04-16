@@ -1,5 +1,5 @@
-import areaCalc from "./areaCalculations.js"; // Importiere die Funktion
-import Constants from "./constants.js"; // Importiere das gesamte Objekt
+import areaCalc from "./areaCalculations.js";
+import Constants from "./constants.js";
 
 function getMeasureDimension(type, size) {
   if (
@@ -23,25 +23,47 @@ function calculateAllMeasureStats(
   newUnpvd,
   selectedMeasures,
 ) {
+  if (!selectedMeasures || selectedMeasures.length === 0) {
+    return {
+      greenRoofMeasuresAmount: 0,
+      unpavedMeasuresAmount: 0,
+      swaleMeasuresAmount: 0,
+
+      totalGreenRoofArea: 0,
+      totalUnpavedArea: 0,
+      totalSwaleArea: 0,
+      totalSwaleVolume: 0,
+      totalSwaleConnectedArea: 0,
+
+      newGreenRoof: 0,
+      newUnpvd: 0,
+      newToSwale: 0,
+    };
+  }
+
+  // Enhance measures with their dimensions from constants
   selectedMeasures = selectedMeasures.map((measure) => {
     const measureDimension = getMeasureDimension(measure.type, measure.size);
     return { ...measure, ...measureDimension }; // Creates a new object with combined properties
   });
 
-  let greenRoofMeasures = selectedMeasures.filter(
+  // Filter measures by type
+  const greenRoofMeasures = selectedMeasures.filter(
     (measure) => measure.type === "greenRoof",
   );
-  let unpavedMeasures = selectedMeasures.filter(
+  const unpavedMeasures = selectedMeasures.filter(
     (measure) => measure.type === "unpaved",
   );
-  let swaleMeasures = selectedMeasures.filter(
+  const swaleMeasures = selectedMeasures.filter(
     (measure) => measure.type === "swale",
   );
 
-  // Berechnungsschritt 1: Summe der Flächen der einzelnen Maßnahmen in m²
+  // Step 1: Calculate total area of each measure type in m²
   const totalGreenRoofArea = calculateTotalMeasureArea(greenRoofMeasures); // Ag = Ag_1 + Ag_2 + ...
   const totalUnpavedArea = calculateTotalMeasureArea(unpavedMeasures); // Ae = Ae_1 + Ae_2 + ...
   const totalSwaleArea = calculateTotalMeasureArea(swaleMeasures); // Am = Am_1 + Am_2 + ...
+
+  // Calculate total swale volume and connected area
   const totalSwaleVolume = areaCalc.calculatePrecisely(
     swaleMeasures.reduce((sum, measure) => sum + (measure.volume || 0), 0),
   );
@@ -52,47 +74,39 @@ function calculateAllMeasureStats(
     ),
   );
 
-  // Schritt 2: Einbeziehung bereits vorhandener Maßnahmen
+  // Step 2: Include existing measures
   const stats = areaCalc.calculateAllStats(selectedFeatures, newUnpvd);
-
   console.log("[measureCalculations] stats::", stats);
 
-  // featuresSelected: 1;
-  // maxGreenRoof: 0.8005333;
-  // maxGreenRoofToRoof: 0;
-  // maxSwaleConnected: 0.9636923;
-  // maxSwaleConnectedArea: 22887.11101775769;
-  // maxSwaleConnectedToPvd: 0;
-  // maxUnpaved: 0.1994667;
-  // maxUnpavedArea: 4737.213846417334;
-  // meanGreenRoof: 0;
-  // meanPaved: 0.163159;
-  // meanRoof: 0.8005333;
-  // meanSwaleConnected: 0;
-  // meanUnpaved: 0.0363077;
-  // totalArea: 23749.396999185;
-  // totalGreenRoofArea: 0;
-  // totalPavedArea: 3874.92786499;
-  // totalRoofArea: 19012.183152768;
-  // totalSealedArea: 22887.111017758;
-  // totalSwaleConnectedArea: 0;
-  // totalUnpavedArea: 862.285981427;
+  const mainFrac = 1; // Assumption: main_frac = 1
 
-  const mainFrac = 1; // Annahme: main_frac = 1
+  // total_area	main_frac	roof	green_roof	pvd	to_swale
+  let total_area = stats.totalArea || 1; // Avoid division by zero
+  let main_frac = 1;
+  let roof = stats.meanRoof || 0; // Avoid division by zero
+  let green_roof = stats.meanGreenRoof || 0; // Avoid division by zero
+  let pvd = stats.meanPaved || 0; // Avoid division by zero
+  let to_swale = stats.meanSwaleConnected || 0; // Avoid division by zero
 
-  // Berechnungsschritt 2.1: Bereits vorhandene Maßnahmen gemäß den angegebenen Formeln
+  console.log(
+    "[measureCalculations] total_area, main_frac, roof, green_roof, pvd, to_swale::",
+    total_area,
+    main_frac,
+    roof,
+    green_roof,
+    pvd,
+    to_swale,
+  );
 
-  // Ag_0 = green_roof * roof * main_frac * total_area
+  // Step 2.1: Calculate existing measures according to formulas
   const existingGreenRoofArea = areaCalc.calculatePrecisely(
     stats.meanGreenRoof * stats.meanRoof * mainFrac * stats.totalArea,
   );
 
-  // Ae_0 = (1 - roof - pvd) * main_frac * total_area
   const existingUnpavedArea = areaCalc.calculatePrecisely(
     (1 - stats.meanRoof - stats.meanPaved) * mainFrac * stats.totalArea,
   );
 
-  // Am_0 = to_swale * (pvd + roof) * main_frac * total_area
   const existingSwaleConnectedArea = areaCalc.calculatePrecisely(
     stats.meanSwaleConnected *
       (stats.meanPaved + stats.meanRoof) *
@@ -100,7 +114,7 @@ function calculateAllMeasureStats(
       stats.totalArea,
   );
 
-  // 2.2 Gesamtsumme: neue Maßnahmen + bereits vorhandene Maßnahmen
+  // Step 2.2: Total sum: new measures + existing measures
   const totalGreenRoofAreaWithExisting = areaCalc.calculatePrecisely(
     totalGreenRoofArea + existingGreenRoofArea,
   );
@@ -118,111 +132,114 @@ function calculateAllMeasureStats(
     totalGreenRoofAreaWithExisting,
   );
 
-  // Alternative Step 3.1 using stats directly
-  const Ag_max_alt = stats.totalRoofArea;
-  const Ae_max_alt = stats.maxUnpavedArea;
-  const Am_max_alt = stats.maxSwaleConnectedArea; // or stats.totalSealedArea
+  // Step 3.1: Calculate maximum possible area values
+  const maxGreenRoofAreaPossible = stats.totalRoofArea;
+  const maxUnpavedAreaPossible = stats.maxUnpavedArea;
+  const maxSwaleConnectedAreaPossible = stats.maxSwaleConnectedArea;
 
-  // Step 3.2 would then use these _alt values
-  const Ag_neu = Math.min(totalGreenRoofAreaWithExisting, Ag_max_alt);
-  const Ae_neu = Math.min(totalUnpavedAreaWithExisting, Ae_max_alt);
-  const Am_neu = Math.min(totalSwaleConnectedAreaWithExisting, Am_max_alt);
-
-  console.log(
-    "[measureCalculations] Final Limited Areas (Ag_neu, Ae_neu, Am_neu)::",
-    Ag_neu,
-    Ae_neu,
-    Am_neu,
+  // Step 3.2: Limit the calculated areas to their maximum possible values
+  const finalLimitedGreenRoofArea = Math.min(
+    totalGreenRoofAreaWithExisting,
+    maxGreenRoofAreaPossible,
+  );
+  const finalLimitedUnpavedArea = Math.min(
+    totalUnpavedAreaWithExisting,
+    maxUnpavedAreaPossible,
+  );
+  const finalLimitedSwaleConnectedArea = Math.min(
+    totalSwaleConnectedAreaWithExisting,
+    maxSwaleConnectedAreaPossible,
   );
 
-  // --- Berechnungsschritt 4: Berechnung der Flächenanteile ---
+  console.log(
+    "[measureCalculations] Final Limited Areas::",
+    finalLimitedGreenRoofArea,
+    finalLimitedUnpavedArea,
+    finalLimitedSwaleConnectedArea,
+  );
+
+  // Step 4: Calculate area fractions
   let finalFractionGreenRoof = 0;
   let finalFractionUnpaved = 0;
   let finalFractionToSwale = 0;
-  let finalFractionPaved = 0; // pvd_neu
+  let finalFractionPaved = 0;
 
-  // Use the initial total area for calculating fractions
-  const totalAreaForFraction = stats.totalArea || 1; // Avoid division by zero
+  // Use the initial total area for calculating fractions (avoid division by zero)
+  const totalAreaForFraction = Math.max(stats.totalArea || 1, 1);
 
-  if (totalAreaForFraction > 0) {
-    // green_roof = Ag_neu / total_area
-    finalFractionGreenRoof = areaCalc.calculatePrecisely(
-      Ag_neu / totalAreaForFraction,
-    );
+  // Calculate all fractions using the area values
+  finalFractionGreenRoof = areaCalc.calculatePrecisely(
+    finalLimitedGreenRoofArea / totalAreaForFraction,
+  );
 
-    // unpaved = Ae_neu / total_area
-    finalFractionUnpaved = areaCalc.calculatePrecisely(
-      Ae_neu / totalAreaForFraction,
-    );
+  finalFractionUnpaved = areaCalc.calculatePrecisely(
+    finalLimitedUnpavedArea / totalAreaForFraction,
+  );
 
-    // to_swale = Am_neu / total_area
-    finalFractionToSwale = areaCalc.calculatePrecisely(
-      Am_neu / totalAreaForFraction,
-    );
+  finalFractionToSwale = areaCalc.calculatePrecisely(
+    finalLimitedSwaleConnectedArea / totalAreaForFraction,
+  );
 
-    // pvd_neu = 1 - roof - unpaved (using final unpaved fraction and initial roof fraction)
-    // Clamp at 0, as theoretically rounding could make it slightly negative if unpaved + roof > 1
-    finalFractionPaved = Math.max(
-      0,
-      areaCalc.calculatePrecisely(1 - stats.meanRoof - finalFractionUnpaved),
-    );
+  // Calculate paved fraction (ensure it's not negative due to rounding errors)
+  finalFractionPaved = Math.max(
+    0,
+    areaCalc.calculatePrecisely(1 - stats.meanRoof - finalFractionUnpaved),
+  );
 
-    console.log(
-      "[measureCalculations] Final Fractions (GreenRoof, Unpaved, ToSwale, Paved)::",
-      finalFractionGreenRoof,
-      finalFractionUnpaved,
-      finalFractionToSwale,
-      finalFractionPaved,
-    );
-    // Optional Sanity Check: Fractions should ideally sum close to 1
-    console.log(
-      "[measureCalculations] Sanity Check: finalFractionPaved + finalFractionUnpaved + stats.meanRoof =",
-      areaCalc.calculatePrecisely(
-        finalFractionPaved + finalFractionUnpaved + stats.meanRoof,
-      ),
-    );
-  } else {
-    console.warn(
-      "[measureCalculations] Total area is zero, cannot calculate final fractions.",
-    );
-  }
+  console.log(
+    "[measureCalculations] Final Fractions::",
+    finalFractionGreenRoof,
+    finalFractionUnpaved,
+    finalFractionToSwale,
+    finalFractionPaved,
+  );
+
+  // Sanity check: Fractions should sum to approximately 1
+  console.log(
+    "[measureCalculations] Sanity Check Sum:",
+    areaCalc.calculatePrecisely(
+      finalFractionPaved + finalFractionUnpaved + stats.meanRoof,
+    ),
+  );
 
   return {
-    // Anzahl der Maßnahmen
+    // Number of measures
     greenRoofMeasuresAmount: greenRoofMeasures.length,
     unpavedMeasuresAmount: unpavedMeasures.length,
     swaleMeasuresAmount: swaleMeasures.length,
 
-    // Schritt 1: Gesamtflächen der NEUEN Maßnahmen
-    totalGreenRoofArea, // Ag
-    totalUnpavedArea, // Ae
-    totalSwaleArea, // Area of swales themselves
-    totalSwaleVolume, // Volume of swales
-    totalSwaleConnectedArea, // Am (Connected area for NEW swales)
+    // Step 1: Total areas of NEW measures
+    totalGreenRoofArea,
+    totalUnpavedArea,
+    totalSwaleArea,
+    totalSwaleVolume,
+    totalSwaleConnectedArea,
 
-    // Schritt 2.1: Bereits vorhandene Maßnahmen
-    existingGreenRoofArea, // Ag_0
-    existingUnpavedArea, // Ae_0
-    existingSwaleConnectedArea, // Am_0
-
-    // Schritt 2.2: Gesamtsumme inkl. bereits vorhandener (VOR Begrenzung)
-    totalGreenRoofAreaWithExisting, // Ag + Ag_0
-    totalUnpavedAreaWithExisting, // Ae + Ae_0
-    totalSwaleConnectedAreaWithExisting, // Am + Am_0
-
-    // Schritt 3.1: Maximalwerte
-    maxGreenRoofAreaPossible: Ag_max_alt, // Ag_max
-    maxUnpavedAreaPossible: Ae_max_alt, // Ae_max
-    maxSwaleConnectedAreaPossible: Am_max_alt, // Am_max
-
-    // Schritt 3.2: Begrenzte Gesamtflächen (Finale absolute Werte)
-    finalLimitedGreenRoofArea: Ag_neu, // Ag_neu
-    finalLimitedUnpavedArea: Ae_neu, // Ae_neu
-    finalLimitedSwaleConnectedArea: Am_neu, // Am_neu
-
+    // Final calculated fractions
     newGreenRoof: finalFractionGreenRoof,
     newUnpvd: finalFractionUnpaved,
     newToSwale: finalFractionToSwale,
+
+    // TODO: remove when done checking calculations
+    // Step 2.1: Existing measures
+    existingGreenRoofArea,
+    existingUnpavedArea,
+    existingSwaleConnectedArea,
+
+    // Step 2.2: Total sum including existing measures (BEFORE limitation)
+    totalGreenRoofAreaWithExisting,
+    totalUnpavedAreaWithExisting,
+    totalSwaleConnectedAreaWithExisting,
+
+    // Step 3.1: Maximum possible values
+    maxGreenRoofAreaPossible,
+    maxUnpavedAreaPossible,
+    maxSwaleConnectedAreaPossible,
+
+    // Step 3.2: Limited total areas (Final absolute values)
+    finalLimitedGreenRoofArea,
+    finalLimitedUnpavedArea,
+    finalLimitedSwaleConnectedArea,
   };
 }
 
