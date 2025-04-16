@@ -14,10 +14,10 @@ export default {
 </script>
 
 <template lang="html">
-  <div class="measure-selection-display-container w-100 d-flex flex-column">
+  <div class="measure-selection-display w-100 d-flex flex-column">
     <span class="line"></span>
 
-    <div class="container py-4 w-100">
+    <div class="py-2 w-100">
       <!-- Muldenversickerung -->
       <section class="mb-4">
         <h6 class="title">Muldenversickerung</h6>
@@ -55,7 +55,7 @@ export default {
       <span class="line"></span>
 
       <!-- Entsiegelung -->
-      <section class="mb-4">
+      <section class="mb-4 pt-2">
         <h6 class="title">Entsiegelung</h6>
         <div class="d-flex justify-content-between">
           <span>Anzahl</span>
@@ -75,7 +75,7 @@ export default {
       <span class="line"></span>
 
       <!-- Dachbegrünung -->
-      <section>
+      <section class="pt-2">
         <h6 class="title">Dachbegrünung</h6>
         <div class="d-flex justify-content-between">
           <span>Anzahl</span>
@@ -98,6 +98,7 @@ export default {
 <style lang="scss" scoped>
 @import "~variables";
 .line {
+  display: block;
   height: 1px;
   width: 100%;
   background: $amarex_grey_mid;

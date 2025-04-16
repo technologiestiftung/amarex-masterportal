@@ -2,17 +2,7 @@
 import src2 from "../../../portal/amarex/resources/img/Placeholder-Tutorial-Tools.jpg";
 import MeasureSelectionDisplay from "./MeasureSelectionDisplay.vue";
 import MeasureSelectorHandler from "./MeasureSelectorHandler.vue";
-
-// TODOS:
-
-// klick in Karte
-// hier checken dass sich das Menu nur öffnet wenn man auf die BTF klickt
-// das Menu muss togglebar sein
-// im State festlegen, dass man sich im measure planing Modus befindet
-// Menu öffnen (MeasureSelectorMenu) passend zu der geklickten Postion im Kartenbereich und auf der BTF
-// dann den calc button anzeigen
-// display calc button (der Abimo Calc button kann dann genauso angezeigt werden wie er ist.)
-// anzeigen des step MeasureSelectionDisplay
+import { mapGetters } from "vuex";
 
 /**
  * Abimo Measure Planning
@@ -32,19 +22,27 @@ export default {
         {
           id: "initalDisplay",
           title: "Maßnahmen setzen",
-          description:
+          subtitle:
             "Nun können Sie mittels Ihres Mouse-Cursers  Maßnahmen frei in der gewählten Blockteilfläche platzieren.",
+          description:
+            "Bitte beachten Sie, dass die Maßnahmeneffekte auf die gesamte Einzelblockteilfläche heruntergerechnet werden. Daher sind Überschneidungen mit nicht geeigneten Flächen irrelevant für die Effektberechnung.",
         },
         {
           id: "setMeasures",
           title: "Maßnahmen setzen",
-          description: "",
+          subtitle:
+            "Wählen Sie eine der Maßnahmen aus. Sie können nun die Größe der Maßnahme wählen.",
         },
       ],
-      activeStep: 0,
     };
   },
-  computed: {},
+  computed: {
+    ...mapGetters("Modules/AbimoHandler", [
+      "selectedMeasures",
+      "isMeasureDrawing",
+      "hasMeasures",
+    ]),
+  },
   watch: {},
   methods: {},
 };
@@ -52,31 +50,32 @@ export default {
 
 <template lang="html">
   <div class="measure-planning-container">
-    <div>
-      <p
-        v-if="steps[activeStep]"
-        class="title"
-      >
-        {{ steps[activeStep]?.title }}
+    <div
+      v-if="!isMeasureDrawing && !hasMeasures"
+      class="step-container"
+    >
+      <p class="title">
+        {{ steps[0].title }}
       </p>
-      <p
-        v-if="steps[activeStep]"
-        class="description"
-      >
-        {{ steps[activeStep]?.description }}
+      <p class="subtitle">
+        {{ steps[0].subtitle }}
+      </p>
+      <img :src="src2" />
+      <p class="description">
+        {{ steps[0].description }}
       </p>
     </div>
 
-    <!-- STEP CONTAINER -->
-    <div class="step-container">
-      <img :src="src2" />
-      <p
-        v-if="steps[activeStep]"
-        class="description"
-      >
-        {{ steps[activeStep]?.description }}
+    <div
+      v-if="isMeasureDrawing || hasMeasures"
+      class="step-container"
+    >
+      <p class="title">
+        {{ steps[1].title }}
       </p>
-
+      <p class="description">
+        {{ steps[1].subtitle }}
+      </p>
       <MeasureSelectionDisplay />
     </div>
   </div>
@@ -85,24 +84,33 @@ export default {
 
 <style lang="scss" scoped>
 @import "~variables";
+
+.step-container {
+  img {
+    max-width: 250px;
+    margin: 5px 0;
+  }
+}
 .title {
   color: $amarex_secondary;
   font-size: 16px;
   font-weight: 700;
   line-height: 32px;
 }
+.subtitle {
+  color: $amarex_secondary;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 22px;
+  margin-bottom: 32px;
+}
 .description {
   color: $amarex_secondary;
   font-size: 16px;
   font-weight: 400;
   line-height: 22px;
-}
-.step-container {
-  margin-top: 32px;
-  img {
-    max-width: 250px;
-    margin: 5px 0;
-  }
+  margin-top: 12px;
+  margin-bottom: 12px;
 }
 </style>
 
