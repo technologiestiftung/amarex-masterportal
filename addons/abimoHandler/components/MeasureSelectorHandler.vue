@@ -22,8 +22,7 @@ export default {
       selectedMeasureFeature: null,
       markedForDeletion: null,
       isProcessingClick: false,
-      trashIconPath:
-        "../../../portal/amarex/resources/img/measure-trash-bin.svg",
+      trashIconPath: "./resources/img/measure-trash-bin.svg",
     };
   },
   computed: {

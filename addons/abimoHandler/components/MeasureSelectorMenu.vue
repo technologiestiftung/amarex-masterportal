@@ -19,17 +19,17 @@ export default {
     return {
       measures: [
         {
-          icon: "../../../portal/amarex/resources/img/measure-swale.svg",
+          icon: "./resources/img/measure-swale.svg",
           title: "Muldenversickerung",
           type: "swale",
         },
         {
-          icon: "../../../portal/amarex/resources/img/measure-unpvd.svg",
+          icon: "./resources/img/measure-unpvd.svg",
           title: "Entsiegelung",
           type: "unpaved",
         },
         {
-          icon: "../../../portal/amarex/resources/img/measure-greenroof.svg",
+          icon: "./resources/img/measure-greenroof.svg",
           title: "Dachbegrünung",
           type: "greenRoof",
         },
@@ -211,10 +211,7 @@ export default {
       if (!this.selectedMeasure) return "";
 
       const type = this.selectedMeasure.type;
-      const sizeData = measureCalculations.getMeasureDimension(
-        type,
-        size,
-      );
+      const sizeData = measureCalculations.getMeasureDimension(type, size);
 
       if (!sizeData) return "";
 
