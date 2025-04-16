@@ -438,13 +438,13 @@ export default {
                 // 1.1 * 1.3 => m² | 1.3 => % 
                 flächenanteile_dachfläche: `${dachFläche} m² (${this.fullPercentage(bebautVersiegelt)}) %`,
                 // 1.5 * dachFläche "D" => m² | 1.5 => %
-                flächenanteile_davon_begrünt_status_quo: `${this.mathRoundAndToFixed(dachFläche * begrünteDachfläche)} m² ${this.fullPercentage(begrünteDachfläche)} %`,
+                flächenanteile_davon_begrünt_status_quo: `${this.mathRoundAndToFixed(dachFläche * begrünteDachfläche)} m² (${this.fullPercentage(begrünteDachfläche)}) %`,
                 // 2.1 * 1.1 => m² | 2.1 / 1.3 => % 
-                flächenanteile_davon_begrünt_simulation: `${this.mathRoundAndToFixed(gesamtFläche * (zielwertDachbegrünung / 100))} m² ${this.fullPercentage((zielwertDachbegrünung / 100) / bebautVersiegelt)} %`,
+                flächenanteile_davon_begrünt_simulation: `${this.mathRoundAndToFixed(gesamtFläche * (zielwertDachbegrünung / 100))} m² (${this.fullPercentage((zielwertDachbegrünung / 100) / bebautVersiegelt)}) %`,
                 // 1.4 * 1.1 => m² | 1.4 => %
                 flächenanteile_unbebaut_versiegelte_flächen_status_quo: `${this.mathRoundAndToFixed(gesamtFläche * unbebautVersiegelt)} m² (${this.fullPercentage(unbebautVersiegelt)}) %`,
                 // "V" => m² | V / 1.1 => %
-                flächenanteile_unbebaut_versiegelte_flächen_simulation: `${versiegelteFläche} m² (${this.mathRoundAndToFixed(versiegelteFläche / gesamtFläche)}) %`,
+                flächenanteile_unbebaut_versiegelte_flächen_simulation: `${versiegelteFläche} m² (${this.fullPercentage(versiegelteFläche / gesamtFläche)}) %`,
                 // 1.2 * 1.1 => m² | 1.2 => %
                 flächenanteile_unversiegelte_flächen_status_quo: `${this.mathRoundAndToFixed(gesamtFläche * unversiegelt)} m² (${this.fullPercentage(unversiegelt)}) %`,
                 // "U" => m² | 3.1 => % 
