@@ -228,6 +228,7 @@ export default {
       "preComputedModelsAdded",
       "isMeasurePlanning",
       "selectedMeasures",
+      "hasMeasures",
     ]),
     ...mapGetters(["allLayerConfigs"]),
     activeComponent() {
@@ -510,7 +511,7 @@ export default {
             <p>{{ steps[activeStep]?.buttons[btnIndex].text }}</p>
           </button>
         </span>
-        <span v-if="activeStep === 5 || activeStep === 7">
+        <span v-if="activeStep === 5 || (activeStep === 7 && hasMeasures)">
           <AbimoCalcButton :changeCalcState="changeCalcState"
         /></span>
       </div>

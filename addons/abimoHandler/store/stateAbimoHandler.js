@@ -86,7 +86,7 @@ export default {
   selectedMeasures: [],
   readyForCalculation: false,
   selectedBTF: null,
-  // clickedCoordinates: null,
+  hasMeasures: false,
 
   accumulatedMeasureStats: {
     greenRoofMeasuresAmount: 0,
