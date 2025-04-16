@@ -32,6 +32,7 @@ export default {
       "isMeasurePlanning",
       "selectedMeasures",
       "isMeasureDrawing",
+      "hasMeasures",
     ]),
   },
   mounted() {
@@ -50,11 +51,21 @@ export default {
     // click handler to manage interactions manually
     mapCollection.getMap("2D").on("click", this.handleMapClick);
   },
+  watch: {
+    selectedMeasures: {
+      handler(newMeasures) {
+        this.setHasMeasures(newMeasures && newMeasures.length > 0);
+      },
+      immediate: true,
+      deep: true,
+    },
+  },
   methods: {
     ...mapMutations("Modules/AbimoHandler", [
       "setIsMeasureDrawing",
       "setIsMeasurePlanning",
       "setSelectedMeasures",
+      "setHasMeasures",
     ]),
     ...mapActions("Maps", {
       addInteractionToMap: "addInteraction",
@@ -69,7 +80,6 @@ export default {
 
       this.isProcessingClick = true;
 
-      // Get features at click position
       const clickedFeatures = [];
       mapCollection
         .getMap("2D")
@@ -81,7 +91,6 @@ export default {
           }
         });
 
-      // store clicked coordinates
       this.clickedCoordinates = event.coordinate;
 
       // First check if we clicked on a measure
@@ -91,7 +100,6 @@ export default {
       if (clickedMeasure) {
         const feature = clickedMeasure.feature;
 
-        // Check if this is the feature we already marked for deletion
         if (
           this.markedForDeletion &&
           this.markedForDeletion.getId() === feature.getId()
@@ -109,20 +117,16 @@ export default {
         this.isProcessingClick = false;
         return;
       }
-
-      // If no measure was clicked, reset the trash icon if any
       if (this.markedForDeletion) {
         this.restoreOriginalIcon();
       }
 
-      // If no measure was clicked, check for BTF
       const clickedBtf = clickedFeatures.find((item) => item.type === "btf");
       if (clickedBtf) {
         this.selectedBTF = clickedBtf.feature;
         this.showMeasureMenu = true;
         this.setIsMeasureDrawing(true);
       } else {
-        // Clicked on nothing, reset everything
         this.resetSelection();
       }
 
@@ -130,20 +134,16 @@ export default {
     },
 
     markFeatureForDeletion(feature) {
-      // Store the feature marked for deletion
       this.markedForDeletion = feature;
 
-      // Save original properties for restoration if needed
       const size = feature.get("size") || "medium";
       const originalProps = {
         originalSize: size,
         originalStyle: feature.getStyle(),
       };
 
-      // Set properties on the feature to restore later
       feature.set("_deleteProps", originalProps);
 
-      // Get the appropriate circle radius based on size
       let circleRadius;
       let iconScale = 1;
 
@@ -165,7 +165,6 @@ export default {
           iconScale = 0.8;
       }
 
-      // Set the trash icon style
       feature.setStyle([
         new Style({
           image: new Circle({
@@ -186,7 +185,6 @@ export default {
         }),
       ]);
 
-      // Trigger a map redraw to show the new icon
       mapCollection.getMap("2D").render();
     },
 
@@ -199,7 +197,6 @@ export default {
         }
         this.markedForDeletion = null;
 
-        // Trigger a map redraw to show the original icon
         mapCollection.getMap("2D").render();
       }
     },
@@ -234,6 +231,9 @@ export default {
         geometry: new Point(position),
       });
 
+      const uniqueId = "measure-" + Date.now();
+      measureFeature.setId(uniqueId);
+
       measureFeature.setStyle([
         new Style({
           image: new Circle({
@@ -256,10 +256,12 @@ export default {
 
       this.layer_abimo_measures.getSource().addFeature(measureFeature);
 
+      const featureId = measureFeature.getId();
+
       const newMeasure = {
         id: Date.now(),
         ...measure,
-        featureId: measureFeature.getId(),
+        featureId: featureId,
         size: size,
         measureFeature: measureFeature,
       };
@@ -283,30 +285,20 @@ export default {
         return;
       }
 
-      // remove feature from map
       this.layer_abimo_measures.getSource().removeFeature(feature);
 
-      // remove feature from selected measures
       const featureId = feature.getId();
       let currentMeasures = [...this.selectedMeasures];
 
-      // FIXME: featureId is undefined! deshalb sind die SelectedMeasures leer!
       currentMeasures = currentMeasures.filter(
         (measure) => measure.featureId !== featureId,
       );
-
-      console.log(
-        "[MeasureSelectorHandler] currentMeasures::",
-        currentMeasures,
-      );
-
       this.setSelectedMeasures(currentMeasures);
       this.markedForDeletion = null;
       this.updateMeasureStats();
     },
   },
   beforeUnmount() {
-    // Remove map click handler
     if (mapCollection && mapCollection.getMap("2D")) {
       mapCollection.getMap("2D").un("click", this.handleMapClick);
     }
