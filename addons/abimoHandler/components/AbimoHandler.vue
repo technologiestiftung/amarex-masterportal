@@ -103,7 +103,7 @@ export default {
               action: () => {
                 this.$refs.componentRef?.handleBlockAreaConfirm();
                 if (this.isMeasurePlanning) {
-                  this.setActiveStep(7);
+                  this.setActiveStep(6);
                 } else {
                   this.setActiveStep(3);
                 }
@@ -171,23 +171,6 @@ export default {
           ],
         },
         {
-          id: "AbimoResult",
-          component: markRaw(AbimoResult),
-          props: {
-            openInfoFromResults: (info) => this.openInfo(info),
-          },
-          buttons: [
-            {
-              text: "Neue Berechnung starten",
-              action: async () => {
-                await this.resetAbimoCalculation();
-                await this.resetPreComputedModels();
-                this.setActiveStep(0);
-              },
-            },
-          ],
-        },
-        {
           id: "MeasurePlanning",
           component: markRaw(MeasurePlanning),
           title: "",
@@ -206,6 +189,23 @@ export default {
                   .find((layer) => layer.get("id") === "abimo_measures")
                   .values_.source.clear();
                 this.setActiveStep(2);
+              },
+            },
+          ],
+        },
+        {
+          id: "AbimoResult",
+          component: markRaw(AbimoResult),
+          props: {
+            openInfoFromResults: (info) => this.openInfo(info),
+          },
+          buttons: [
+            {
+              text: "Neue Berechnung starten",
+              action: async () => {
+                await this.resetAbimoCalculation();
+                await this.resetPreComputedModels();
+                this.setActiveStep(0);
               },
             },
           ],
@@ -248,7 +248,7 @@ export default {
     calcState(state) {
       if (state === "isCalculated") {
         this.calcState = null;
-        this.setActiveStep(6);
+        this.setActiveStep(7);
       }
     },
   },
@@ -258,7 +258,10 @@ export default {
       removeInteractionFromMap: "removeInteraction",
     }),
     ...mapActions("Modules/LayerSelection", ["changeVisibility"]),
-    ...mapActions("Modules/AbimoHandler", ["updateAccumulatedStats"]),
+    ...mapActions("Modules/AbimoHandler", [
+      "updateAccumulatedStats",
+      "updateMeasureStats",
+    ]),
     ...mapMutations("Modules/AbimoHandler", [
       "setSelectedFeatures",
       "setNewGreenRoof",
@@ -276,6 +279,7 @@ export default {
       "setPreComputedModelsAdded",
       "setIsMeasurePlanning",
       "setSelectedMeasures",
+      "setHasMeasures",
     ]),
     setDisabled() {
       if (this.activeStep === 2) return this.selectedFeatures.length === 0;
@@ -338,7 +342,6 @@ export default {
         .values_.source.clear();
       this.removeInteractionFromMap(this.selectInteraction);
       this.setSelectedFeatures([]);
-      this.setSelectedMeasures([]);
       this.setNewGreenRoof(0);
       this.setNewUnpvd(0);
       this.setNewToSwale(0);
@@ -348,6 +351,10 @@ export default {
       this.setBlockAreaConfirmed(false);
       this.setResultLayers([]);
       this.setActiveStep(0);
+      this.setSelectedMeasures([]);
+      this.updateMeasureStats();
+      this.setHasMeasures(false);
+      this.setIsMeasurePlanning(false);
     },
     async resetBlockArea() {
       if (this.blockAreaConfirmed) {
@@ -511,7 +518,7 @@ export default {
             <p>{{ steps[activeStep]?.buttons[btnIndex].text }}</p>
           </button>
         </span>
-        <span v-if="activeStep === 5 || (activeStep === 7 && hasMeasures)">
+        <span v-if="activeStep === 5 || (activeStep === 6 && hasMeasures)">
           <AbimoCalcButton :changeCalcState="changeCalcState"
         /></span>
       </div>
