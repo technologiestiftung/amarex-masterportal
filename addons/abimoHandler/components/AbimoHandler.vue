@@ -211,6 +211,8 @@ export default {
           ],
         },
       ],
+      standardStepSequence: [0, 1, 2, 3, 4, 5, 7],
+      planningStepSequence: [0, 1, 2, 6, 7],
       showInfo: null,
       calcState: null,
       stepperCount: 2,
@@ -233,6 +235,19 @@ export default {
     ...mapGetters(["allLayerConfigs"]),
     activeComponent() {
       return this.steps[this.activeStep] || {};
+    },
+    displayStepCount() {
+      return this.isMeasurePlanning
+        ? this.planningStepSequence.length
+        : this.standardStepSequence.length;
+    },
+    currentStepSequence() {
+      return this.isMeasurePlanning
+        ? this.planningStepSequence
+        : this.standardStepSequence;
+    },
+    currentStepIndex() {
+      return this.currentStepSequence.indexOf(this.activeStep);
     },
   },
   watch: {
@@ -302,6 +317,12 @@ export default {
     },
     changeCalcState(state) {
       this.calcState = state;
+    },
+    isStepActive(displayIndex) {
+      return displayIndex === this.currentStepIndex;
+    },
+    isStepClickable(displayIndex) {
+      return displayIndex < this.currentStepIndex;
     },
     resetAbimoCalculation() {
       mapCollection
@@ -482,19 +503,22 @@ export default {
     </div>
     <!-- STEP CONTAINER -->
     <div class="step-container">
+      <!-- STEPS -->
       <div
         class="steps d-flex justify-content-center"
         v-if="activeStep !== null"
       >
         <div
-          v-for="(step, stepIndex) in steps"
+          v-for="stepIndex in displayStepCount"
           :class="{
-            active: stepIndex === activeStep,
-            click: stepIndex < activeStep,
+            active: isStepActive(stepIndex - 1),
+            click: isStepClickable(stepIndex - 1),
           }"
           :key="stepIndex"
         ></div>
       </div>
+
+      <!-- BUTTONS -->
       <div
         v-if="!steps[activeStep]?.upperButtons"
         class="btn-container d-flex"
