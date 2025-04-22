@@ -4,6 +4,8 @@
  * @returns {Promise} - a promise that resolves to the response data
  */
 async function getMultiblock(payload) {
+  console.log("[getRabimo] payload::", payload);
+
   try {
     const response = await fetch(
       `${process.env.API_URL}/calculate_multiblock`,

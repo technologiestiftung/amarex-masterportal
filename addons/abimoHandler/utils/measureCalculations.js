@@ -75,6 +75,7 @@ function calculateAllMeasureStats(selectedFeatures, selectedMeasures) {
   let pvd = parseFloat(stats.pvd);
   let to_swale = parseFloat(stats.to_swale);
 
+  // NOTE: GREEN ROOF
   // 1. Calculate Green Roof first
   // 1.1. Calculate total area of each measure type in m²
   const totalGreenRoofArea = calculateTotalMeasureArea(greenRoofMeasures); // Ag = Ag_1 + Ag_2 + ...
@@ -92,6 +93,9 @@ function calculateAllMeasureStats(selectedFeatures, selectedMeasures) {
   // 1.4. Calculate new area of green roofs in m²
   const newGreenRoof = areaCalc.calculatePrecisely(Ag_neu / total_area);
 
+  const Agt = areaCalc.calculatePrecisely(totalGreenRoofArea + Ag_0);
+
+  // NOTE: ENTSIEGELUNG
   // 2. Calculate Entsiegelung/Unpaved second
 
   // 2.1. Calculate total area of each measure type in m²
@@ -116,6 +120,9 @@ function calculateAllMeasureStats(selectedFeatures, selectedMeasures) {
   // 2.6. Calculate new area of unpaved areas in m²
   const pvd_neu = areaCalc.calculatePrecisely(1 - unpaved - roof);
 
+  const Aet = areaCalc.calculatePrecisely(totalUnpavedArea + Ae_0);
+
+  // NOTE: SWALE/MULDE
   // 3. Calculate Swale/Mulde third
 
   // 3.1. Calculate total area of each measure type in m²
@@ -136,6 +143,8 @@ function calculateAllMeasureStats(selectedFeatures, selectedMeasures) {
 
   // 3.5. Calculate new area of swales in m²
   const newToSwale = areaCalc.calculatePrecisely(Am_neu / total_area);
+
+  const Amt = areaCalc.calculatePrecisely(totalSwaleArea + Am_0);
 
   return {
     // Number of measures
@@ -159,13 +168,16 @@ function calculateAllMeasureStats(selectedFeatures, selectedMeasures) {
     Ag_0,
     Ag_max,
     Ag_neu,
+    Agt,
 
     Ae_0,
     Ae_max,
     Ae_neu,
+    Aet,
 
     Am_0,
     Am_max,
+    Amt,
   };
 }
 

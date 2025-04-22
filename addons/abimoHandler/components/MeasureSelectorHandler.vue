@@ -4,6 +4,7 @@ import Feature from "ol/Feature";
 import Point from "ol/geom/Point";
 import { Style, Icon, Fill, Circle } from "ol/style";
 import MeasureSelectorMenu from "./MeasureSelectorMenu.vue";
+import Alerting from "../../../src/modules/alerting/components/AlertingItem.vue";
 
 /**
  * Abimo Measure Selector Handler
@@ -13,6 +14,7 @@ export default {
   name: "MeasureSelectorHandler",
   components: {
     MeasureSelectorMenu,
+    Alerting,
   },
   data() {
     return {
@@ -23,6 +25,7 @@ export default {
       markedForDeletion: null,
       isProcessingClick: false,
       trashIconPath: "./resources/img/measure-trash-bin.svg",
+      showAlert: false,
     };
   },
   computed: {
@@ -70,7 +73,11 @@ export default {
       addInteractionToMap: "addInteraction",
       removeInteractionFromMap: "removeInteraction",
     }),
-    ...mapActions("Modules/AbimoHandler", ["updateMeasureStats"]),
+    ...mapActions("Modules/AbimoHandler", [
+      "updateMeasureStats",
+      "canAddMeasure",
+    ]),
+    ...mapActions("Alerting", ["addSingleAlert"]),
 
     handleMapClick(event) {
       if (this.isProcessingClick) {
@@ -200,8 +207,42 @@ export default {
       }
     },
 
-    addMeasureToMap(measure, position, size) {
+    async addMeasureToMap(measure, position, size) {
       if (!position || !this.selectedBTF) {
+        return;
+      }
+
+      const measureFeature = new Feature({
+        geometry: new Point(position),
+      });
+
+      const uniqueId = "measure-" + Date.now();
+      measureFeature.setId(uniqueId);
+      const featureId = measureFeature.getId();
+
+      const tempMeasure = {
+        id: Date.now(),
+        ...measure,
+        size: size,
+        measureFeature: measureFeature,
+        featureId: featureId,
+      };
+
+      // Check if we can add this measure
+      const { canAdd, message } = await this.canAddMeasure({
+        tempMeasure,
+        measureType: measure.type,
+      });
+
+      if (!canAdd) {
+        console.log("[MeasureSelectorHandler] display error message::");
+        this.showAlert = true;
+
+        this.addSingleAlert({
+          category: "error",
+          content: message,
+        });
+
         return;
       }
 
@@ -226,13 +267,6 @@ export default {
           iconScale = 0.8;
       }
 
-      const measureFeature = new Feature({
-        geometry: new Point(position),
-      });
-
-      const uniqueId = "measure-" + Date.now();
-      measureFeature.setId(uniqueId);
-
       measureFeature.setStyle([
         new Style({
           image: new Circle({
@@ -254,8 +288,6 @@ export default {
       ]);
 
       this.layer_abimo_measures.getSource().addFeature(measureFeature);
-
-      const featureId = measureFeature.getId();
 
       const newMeasure = {
         id: Date.now(),
@@ -312,6 +344,10 @@ export default {
     @add-measure="addMeasureToMap"
     @close="resetSelection"
   />
+
+  <div v-if="showAlert">
+    <Alerting />
+  </div>
 </template>
 
 <style lang="scss" scoped>
