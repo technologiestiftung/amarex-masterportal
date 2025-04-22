@@ -1,6 +1,8 @@
 <script>
 import { mapGetters, mapMutations } from "vuex";
-import measureCalculations from "../utils/measureCalculations.js"; // Angepasst an deinen Import-Pfad
+import measureCalculations from "../utils/measureCalculations.js";
+import { CircleArrowRight, CircleArrowLeft } from "lucide-vue-next";
+import colors from "../../../src/shared/js/utils/amarex-colors.json";
 
 /**
  * Abimo Measure Selector Menu
@@ -8,7 +10,10 @@ import measureCalculations from "../utils/measureCalculations.js"; // Angepasst 
  */
 export default {
   name: "MeasureSelectorMenu",
-  components: {},
+  components: {
+    CircleArrowRight,
+    CircleArrowLeft,
+  },
   props: {
     position: {
       type: Array,
@@ -17,6 +22,7 @@ export default {
   },
   data() {
     return {
+      colors,
       measures: [
         {
           icon: "./resources/img/measure-swale.svg",
@@ -247,31 +253,6 @@ export default {
       </button>
 
       <div class="measure-menu-content">
-        <div class="menu-header">
-          <button
-            v-if="currentView === 'dimensioning'"
-            @click="goBack"
-            class="back-btn"
-          >
-            <span class="back-arrow">&larr;</span>
-          </button>
-          <div class="title-container">
-            <h3>{{ menuTitle }}</h3>
-            <p
-              v-if="menuSubTitle"
-              class="subtitle"
-            >
-              {{ menuSubTitle }}
-            </p>
-          </div>
-          <button
-            @click="resetSelection"
-            class="close-btn"
-          >
-            &times;
-          </button>
-        </div>
-
         <!-- measure-selection -->
         <div
           v-if="currentView === 'measure'"
@@ -290,48 +271,67 @@ export default {
               class="measure-icon"
             />
             <span class="measure-title">{{ measure.title }}</span>
-            <span class="next-arrow">&rarr;</span>
+            <CircleArrowRight
+              :color="colors.amarex_secondary"
+              :size="24"
+            />
           </div>
         </div>
 
         <!-- dimensioning-selection -->
-        <div
-          v-else-if="currentView === 'dimensioning'"
-          class="size-selection"
-        >
-          <div class="measure-info">
-            <img
-              v-if="selectedMeasure?.icon"
-              :src="selectedMeasure.icon"
-              alt="Maßnahme Icon"
-              class="measure-icon-large"
+        <div v-if="currentView === 'dimensioning'">
+          <div class="menu-header">
+            <CircleArrowLeft
+              :color="colors.amarex_secondary"
+              :size="24"
+              @click="goBack"
             />
-          </div>
 
-          <div class="size-options">
-            <div
-              v-for="(config, size) in sizesConfig"
-              :key="size"
-              class="size-option"
-              :class="{ selected: activeMeasureSize === size }"
-              @click="selectSize(size)"
-            >
-              <div class="size-option-main">{{ config.label }}</div>
-              <div
-                class="size-option-details"
-                v-if="activeMeasureSize === size"
-              >
-                {{ getSizeDetails(size) }}
+            <div class="title-container">
+              <img
+                v-if="selectedMeasure?.icon"
+                :src="selectedMeasure.icon"
+                alt="Maßnahme Icon"
+                class="measure-icon-large"
+              />
+              <div>
+                <h3>{{ menuTitle }}</h3>
+                <p
+                  v-if="menuSubTitle"
+                  class="subtitle"
+                >
+                  {{ menuSubTitle }}
+                </p>
               </div>
             </div>
           </div>
 
-          <button
-            @click="confirmSelection"
-            class="confirm-btn"
-          >
-            Bestätigen
-          </button>
+          <div class="size-selection">
+            <div class="size-options">
+              <div
+                v-for="(config, size) in sizesConfig"
+                :key="size"
+                class="size-option"
+                :class="{ selected: activeMeasureSize === size }"
+                @click="selectSize(size)"
+              >
+                <div class="size-option-main">{{ config.label }}</div>
+                <div
+                  class="size-option-details"
+                  v-if="activeMeasureSize === size"
+                >
+                  {{ getSizeDetails(size) }}
+                </div>
+              </div>
+            </div>
+
+            <button
+              @click="confirmSelection"
+              class="confirm-btn"
+            >
+              Bestätigen
+            </button>
+          </div>
         </div>
       </div>
     </div>
@@ -375,57 +375,33 @@ export default {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 12px 16px;
-  background-color: #f5f5f5;
+  gap: 12px;
+  padding: 16px 24px;
+  background-color: $amarex_secondary_mid;
   border-bottom: 1px solid #e0e0e0;
 
-  .back-btn {
-    background: none;
-    border: none;
-    cursor: pointer;
-    padding: 0;
-    margin-right: 10px;
-    color: #333;
-    font-size: 18px;
-    display: flex;
-    align-items: center;
-
-    .back-arrow {
-      font-weight: bold;
-    }
-  }
-
   .title-container {
+    display: flex;
     flex-grow: 1;
+    gap: 12px;
 
     h3 {
       margin: 0;
       font-size: 18px;
-      color: #24305e;
+      line-height: 20px;
+      font-weight: 700;
+      color: $amarex_secondary;
     }
-
     .subtitle {
-      margin: 4px 0 0;
-      font-size: 14px;
-      color: #666;
-    }
-  }
-
-  .close-btn {
-    background: none;
-    border: none;
-    font-size: 20px;
-    cursor: pointer;
-    padding: 0;
-    color: #666;
-
-    &:hover {
-      color: #333;
+      font-size: 16px;
+      line-height: 20px;
+      color: $amarex_secondary;
     }
   }
 }
 
 .measures-list {
+  background-color: $amarex_secondary_mid;
   .measure-item {
     display: flex;
     align-items: center;
@@ -450,32 +426,20 @@ export default {
       font-size: 16px;
       color: #333;
     }
-
-    .next-arrow {
-      color: #999;
-      font-size: 16px;
-      font-weight: bold;
-    }
   }
 }
 
 .size-selection {
   padding: 16px;
 
-  .measure-info {
-    display: flex;
-    align-items: center;
-    margin-bottom: 20px;
-
-    .measure-icon-large {
-      width: 48px;
-      height: 48px;
-      margin-right: 16px;
-    }
+  .measure-icon-large {
+    width: 48px;
+    height: 48px;
+    margin-right: 12px;
   }
 
   .size-options {
-    margin-bottom: 24px;
+    margin-bottom: 16px;
 
     .size-option {
       padding: 12px 16px;
@@ -492,7 +456,7 @@ export default {
 
       &.selected {
         background-color: #e8f0ff;
-        border-color: #6a89cc;
+        border-color: $amarex_secondary_mid;
 
         .size-option-main {
           font-weight: 500;
@@ -514,7 +478,7 @@ export default {
   .confirm-btn {
     width: 100%;
     padding: 12px;
-    background-color: #24305e;
+    background-color: $amarex_secondary;
     color: white;
     border: none;
     border-radius: 4px;
@@ -524,7 +488,7 @@ export default {
     transition: background-color 0.2s;
 
     &:hover {
-      background-color: #1a2348;
+      background-color: $amarex_secondary;
     }
   }
 }
