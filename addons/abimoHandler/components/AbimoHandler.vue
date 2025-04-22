@@ -205,6 +205,7 @@ export default {
               action: async () => {
                 await this.resetAbimoCalculation();
                 await this.resetPreComputedModels();
+                this.setIsMeasurePlanning(false);
                 this.setActiveStep(0);
               },
             },
@@ -375,7 +376,6 @@ export default {
       this.setSelectedMeasures([]);
       this.updateMeasureStats();
       this.setHasMeasures(false);
-      this.setIsMeasurePlanning(false);
     },
     async resetBlockArea() {
       if (this.blockAreaConfirmed) {
