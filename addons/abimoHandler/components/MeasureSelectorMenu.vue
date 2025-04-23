@@ -14,6 +14,7 @@ export default {
     CircleArrowRight,
     CircleArrowLeft,
   },
+  emits: ["addMeasure", "close"],
   props: {
     position: {
       type: Array,
@@ -186,7 +187,7 @@ export default {
     confirmSelection() {
       if (this.selectedMeasure && this.activeMeasureSize) {
         this.$emit(
-          "add-measure",
+          "addMeasure",
           this.selectedMeasure,
           this.position,
           this.activeMeasureSize,

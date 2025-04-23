@@ -339,7 +339,7 @@ export default {
   <MeasureSelectorMenu
     v-if="showMeasureMenu"
     :position="clickedCoordinates"
-    @add-measure="addMeasureToMap"
+    @addMeasure="addMeasureToMap"
     @close="resetSelection"
   />
 </template>
