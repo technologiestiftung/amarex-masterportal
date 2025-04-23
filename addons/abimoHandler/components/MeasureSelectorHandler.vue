@@ -4,7 +4,6 @@ import Feature from "ol/Feature";
 import Point from "ol/geom/Point";
 import { Style, Icon, Fill, Circle } from "ol/style";
 import MeasureSelectorMenu from "./MeasureSelectorMenu.vue";
-import Alerting from "../../../src/modules/alerting/components/AlertingItem.vue";
 
 /**
  * Abimo Measure Selector Handler
@@ -14,7 +13,6 @@ export default {
   name: "MeasureSelectorHandler",
   components: {
     MeasureSelectorMenu,
-    Alerting,
   },
   data() {
     return {
@@ -344,10 +342,6 @@ export default {
     @add-measure="addMeasureToMap"
     @close="resetSelection"
   />
-
-  <div v-if="showAlert">
-    <Alerting />
-  </div>
 </template>
 
 <style lang="scss" scoped>
