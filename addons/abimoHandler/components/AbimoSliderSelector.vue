@@ -143,23 +143,30 @@ export default {
     targetValue(newValue) {
       switch (this.type) {
         case "greenRoof":
-          if (newValue > Math.floor(this.accumulatedAbimoStats.maxGreenRoof * 100)) {
-            this.targetValue = (
-              this.accumulatedAbimoStats.maxGreenRoof * 100
+          if (
+            newValue > Math.floor(this.accumulatedAbimoStats.maxGreenRoof * 100)
+          ) {
+            this.targetValue = Math.floor(
+              this.accumulatedAbimoStats.maxGreenRoof * 100,
             ).toFixed(0);
           }
           break;
         case "unsealed":
-          if (newValue > Math.floor(this.accumulatedAbimoStats.maxUnpaved * 100)) {
-            this.targetValue = (
-              this.accumulatedAbimoStats.maxUnpaved * 100
+          if (
+            newValue > Math.floor(this.accumulatedAbimoStats.maxUnpaved * 100)
+          ) {
+            this.targetValue = Math.floor(
+              this.accumulatedAbimoStats.maxUnpaved * 100,
             ).toFixed(0);
           }
           break;
         case "swaleConnected":
-          if (newValue > Math.floor(this.accumulatedAbimoStats.maxSwaleConnected * 100)) {
-            this.targetValue = (
-              this.accumulatedAbimoStats.maxSwaleConnected * 100
+          if (
+            newValue >
+            Math.floor(this.accumulatedAbimoStats.maxSwaleConnected * 100)
+          ) {
+            this.targetValue = Math.floor(
+              this.accumulatedAbimoStats.maxSwaleConnected * 100,
             ).toFixed(0);
           }
           break;
