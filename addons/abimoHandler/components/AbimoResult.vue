@@ -3,6 +3,8 @@ import { mapActions, mapGetters, mapMutations } from "vuex";
 import { EyeOff, EyeIcon, Settings, Map as MapIcon } from "lucide-vue-next";
 import colors from "../../../src/shared/js/utils/amarex-colors.json";
 import SliderItem from "../../../src/shared/modules/slider/components/SliderItem.vue";
+import areaCalc from "../utils/areaCalculations";
+
 /**
  * AbimoResult
  * @module modules/AbimoResult
@@ -30,11 +32,15 @@ export default {
   },
   computed: {
     ...mapGetters(["allLayerConfigs"]),
-    ...mapGetters("Modules/AbimoHandler", ["resultAbimoStats", "resultLayers"]),
+    ...mapGetters("Modules/AbimoHandler", [
+      "resultAbimoStats",
+      "resultLayers",
+      "preComputedStats",
+    ]),
   },
   mounted() {
     this.setPreComputedModelsShown(false);
-    
+
     if (this.resultLayers.length === 0) {
       // result layers
       let resultLayers = this.allLayerConfigs.filter(
@@ -78,6 +84,26 @@ export default {
         this.selectedThemeMap = themeMap;
       }
     },
+    calculateDeltaW() {
+      const deltaWResult = this.resultAbimoStats.deltaW;
+      const preComputedDeltaW = this.preComputedStats.deltaW;
+
+      // todo: remove when all calculations are correct
+      console.log(
+        "[AbimoResult] deltaWResult, preComputedDeltaW::",
+        deltaWResult,
+        preComputedDeltaW,
+      );
+      if (deltaWResult > preComputedDeltaW) {
+        return areaCalc.calculatePrecisely(
+          Math.abs(deltaWResult - preComputedDeltaW),
+        );
+      } else {
+        return areaCalc.calculatePrecisely(
+          Math.abs(preComputedDeltaW - deltaWResult),
+        );
+      }
+    },
   },
 };
 </script>
@@ -89,7 +115,9 @@ export default {
       class="stats-container d-flex justify-content-between w-100 align-items-center"
     >
       <p class="description">Oberflächenabfluss</p>
-      <p class="description">{{ this.resultAbimoStats.runoff.toFixed(0) }}</p>
+      <p class="description">
+        {{ this.resultAbimoStats.runoff.toFixed(0) }} mm/Jahr
+      </p>
     </div>
     <div
       class="stats-container d-flex justify-content-between w-100 align-items-center"
@@ -97,6 +125,7 @@ export default {
       <p class="description">Infiltration</p>
       <p class="description">
         {{ this.resultAbimoStats.infiltration.toFixed(0) }}
+        mm/Jahr
       </p>
     </div>
     <div
@@ -104,25 +133,25 @@ export default {
     >
       <p class="description">Verdunstung</p>
       <p class="description">
-        {{ this.resultAbimoStats.evaporation.toFixed(0) }}
+        {{ this.resultAbimoStats.evaporation.toFixed(0) }} mm/Jahr
       </p>
     </div>
     <div
       class="stats-container d-flex justify-content-between w-100 align-items-center last"
     >
       <p class="description">Delta ∆W</p>
-      <p class="description">{{ this.resultAbimoStats.deltaW.toFixed(0) }}</p>
+      <p class="description">{{ this.resultAbimoStats.deltaW.toFixed(0) }} %</p>
     </div>
     <span class="line"></span>
     <p
       class="description"
       v-html="
-        `Durch die von Ihnen vorgenommenen Planungs-maßnahmen würde sich der Wert <strong>∆W um ${'XX'}</strong> verändern.`
+        `Durch die von Ihnen vorgenommenen Planungsmaßnahmen würde sich der Wert <strong>∆W um ${calculateDeltaW().toFixed(2)} %</strong> verändern.`
       "
     ></p>
     <p class="description">
       <strong>∆W</strong> bezeichnet die Abweichung vom natürlichen
-      Wasser-haushalt in Prozent.
+      Wasserhaushalt in Prozent.
     </p>
     <div class="layer-container d-flex flex-column">
       <p class="title">Berechnete Ergebnislayer</p>

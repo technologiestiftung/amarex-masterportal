@@ -24,6 +24,8 @@ export default {
       "blockAreaConfirmed",
       "preselectedFeatures",
       "selectedCount",
+      "isMeasurePlanning",
+      "preComputedStats",
     ]),
   },
   mounted() {
@@ -44,7 +46,10 @@ export default {
       addInteractionToMap: "addInteraction",
       removeInteractionFromMap: "removeInteraction",
     }),
-    ...mapActions("Modules/AbimoHandler", ["updateAccumulatedStats"]),
+    ...mapActions("Modules/AbimoHandler", [
+      "updateAccumulatedStats",
+      "updatePreComputedStats",
+    ]),
     ...mapMutations("Modules/AbimoHandler", [
       "setSelectedFeatures",
       "setSelectInteraction",
@@ -57,12 +62,16 @@ export default {
       const selectedFeatures = this.selectInteraction.getFeatures();
       selectedFeatures.clear();
 
-      this.preselectedFeatures.forEach((feature) => {
+      const featuresToProcess = this.isMeasurePlanning
+        ? this.preselectedFeatures.slice(0, 1)
+        : this.preselectedFeatures;
+
+      featuresToProcess.forEach((feature) => {
         const layer = mapCollection
           .getMap("2D")
           .getLayers()
           .getArray()
-          .find((layer) => layer.get("id") === "rabimo_input_2020");
+          .find((layer) => layer.get("id") === "rabimo_input_2025");
 
         const layerFeature = layer
           .getSource()
@@ -86,14 +95,14 @@ export default {
     createInteractions: function () {
       // From open layers we imported the Select class. This adds the possibility to add "blocks" to our feature layer. For further info check OpenLayers Docs
       const selectInteraction = new Select({
-        multi: true,
+        multi: !this.isMeasurePlanning,
         condition: singleClick,
         addCondition: singleClick,
         removeCondition: singleClick,
         // Disable the default toggle behavior
         toggleCondition: never,
         layers: function (layer) {
-          return layer.get("id") === "rabimo_input_2020";
+          return layer.get("id") === "rabimo_input_2025";
         },
       });
 
@@ -101,6 +110,32 @@ export default {
       this.setSelectInteraction(selectInteraction);
 
       selectInteraction.on("select", (event) => {
+        if (this.isMeasurePlanning && event.selected.length > 0) {
+          const currentFeatures = [...this.selectedFeatures];
+          currentFeatures.forEach((feature) => {
+            const featureCode = feature.values_.code;
+            const layer = mapCollection
+              .getMap("2D")
+              .getLayers()
+              .getArray()
+              .find((layer) => layer.get("id") === "rabimo_input_2025");
+
+            if (layer) {
+              const layerFeature = layer
+                .getSource()
+                .getFeatures()
+                .find((feat) => feat.values_.code === featureCode);
+
+              if (layerFeature && !event.selected.includes(layerFeature)) {
+                selectInteraction.getFeatures().remove(layerFeature);
+              }
+            }
+          });
+
+          this.setSelectedFeatures([]);
+          this.setSelectedCount(0);
+        }
+
         event.selected.forEach((feature) => {
           const inputFeature = new Feature({
             geometry: feature.getGeometry(),
@@ -113,9 +148,14 @@ export default {
           if (index !== -1) {
             return;
           }
+
+          if (this.isMeasurePlanning && this.selectedFeatures.length > 0) {
+            this.selectedFeatures.splice(0, this.selectedFeatures.length);
+          }
+
           this.selectedFeatures.push(inputFeature);
           this.setSelectedFeatures(this.selectedFeatures);
-          this.setSelectedCount(this.selectedCount + 1);
+          this.setSelectedCount(this.selectedFeatures.length);
         });
 
         event.deselected.forEach((feature) => {
@@ -144,7 +184,76 @@ export default {
       });
       this.layer_abimo_calculated.values_.source.addFeatures(olFeatures);
       this.removeInteractionFromMap(this.selectInteraction);
+      this.updatePreComputed();
       this.setBlockAreaConfirmed(true);
+    },
+    updatePreComputed() {
+      const selectedFeatures = this.layer_abimo_calculated
+        .getSource()
+        .getFeatures()
+        .filter((feature) =>
+          this.selectedFeatures.some(
+            (selectedFeature) =>
+              selectedFeature.values_.code === feature.values_.code,
+          ),
+        );
+
+      const allLayers = mapCollection.getMap("2D").getLayers().getArray();
+      const preComputedLayer = allLayers.find(
+        (layer) => layer.get("id") === "abimo_2025_wfs:preCompute",
+      );
+      const deltaWLayer = allLayers.find(
+        (layer) => layer.get("id") === "delta_w_2025_wfs:preCompute",
+      );
+
+      const preComputedData = selectedFeatures.map((feature) => {
+        const featureCode = feature.values_.code;
+        const defaultData = {
+          code: featureCode,
+          area: 0,
+          runoff: 0,
+          infiltr: 0,
+          evapor: 0,
+          delta_w: 0,
+        };
+
+        // Get data from preComputed layer
+        if (preComputedLayer?.getSource()) {
+          const preComputedFeature = preComputedLayer
+            .getSource()
+            .getFeatures()
+            .find((f) => f.get("code") === featureCode);
+
+          if (preComputedFeature) {
+            defaultData.infiltr = parseFloat(
+              preComputedFeature.get("infiltr") || 0,
+            );
+            defaultData.evapor = parseFloat(
+              preComputedFeature.get("evapor") || 0,
+            );
+            defaultData.runoff = parseFloat(
+              preComputedFeature.get("runoff") || 0,
+            );
+            defaultData.area = parseFloat(preComputedFeature.get("area") || 0);
+          }
+        }
+
+        // Get delta_w value
+        if (deltaWLayer?.getSource()) {
+          const deltaWFeature = deltaWLayer
+            .getSource()
+            .getFeatures()
+            .find((f) => f.get("code") === featureCode);
+
+          if (deltaWFeature) {
+            defaultData.delta_w = parseFloat(deltaWFeature.get("delta_w") || 0);
+          }
+        }
+
+        return defaultData;
+      });
+
+      this.updatePreComputedStats(preComputedData);
     },
     handleBlockAreaConfirm() {
       if (this.blockAreaConfirmed) {
