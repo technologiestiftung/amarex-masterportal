@@ -76,8 +76,6 @@ const actions = {
     commit("setNewGreenRoof", stats.newGreenRoof);
     commit("setNewUnpvd", stats.newUnpvd);
     commit("setNewToSwale", stats.newToSwale);
-
-    console.log("[actionsAbimoHandler] stats::", stats);
   },
   // New action to check if a measure can be added
   async canAddMeasure({ state }, { tempMeasure, measureType }) {
