@@ -142,6 +142,15 @@ function calculateAllStats(selectedFeatures, newUnpvd) {
   };
 }
 function calculateResultStats(data) {
+  if (!data || data.length === 0) {
+    return {
+      deltaW: 0,
+      runoff: 0,
+      evaporation: 0,
+      infiltration: 0,
+    };
+  }
+  
   const totalArea = data.reduce((sum, item) => sum + item.area, 0);
   const getWeightedAverage = (fieldName) => {
     const weightedSum = data.reduce(

@@ -277,6 +277,7 @@ export default {
     ...mapActions("Modules/AbimoHandler", [
       "updateAccumulatedStats",
       "updateMeasureStats",
+      "updatePreComputedStats",
     ]),
     ...mapMutations("Modules/AbimoHandler", [
       "setSelectedFeatures",
@@ -376,6 +377,7 @@ export default {
       this.setSelectedMeasures([]);
       this.updateMeasureStats();
       this.setHasMeasures(false);
+      this.updatePreComputedStats([]);
     },
     async resetBlockArea() {
       if (this.blockAreaConfirmed) {
