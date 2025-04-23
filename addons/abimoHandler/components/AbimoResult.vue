@@ -30,7 +30,11 @@ export default {
   },
   computed: {
     ...mapGetters(["allLayerConfigs"]),
-    ...mapGetters("Modules/AbimoHandler", ["resultAbimoStats", "resultLayers"]),
+    ...mapGetters("Modules/AbimoHandler", [
+      "resultAbimoStats",
+      "resultLayers",
+      "preComputedStats",
+    ]),
   },
   mounted() {
     this.setPreComputedModelsShown(false);
@@ -78,6 +82,22 @@ export default {
         this.selectedThemeMap = themeMap;
       }
     },
+    calculateDeltaW() {
+      const deltaWResult = this.resultAbimoStats.deltaW;
+      const preComputedDeltaW = this.preComputedStats.deltaW;
+
+      // todo: remove when all calculations are correct
+      console.log(
+        "[AbimoResult] deltaWResult, preComputedDeltaW::",
+        deltaWResult,
+        preComputedDeltaW,
+      );
+      if (deltaWResult > preComputedDeltaW) {
+        return Math.abs(deltaWResult - preComputedDeltaW);
+      } else {
+        return Math.abs(preComputedDeltaW - deltaWResult);
+      }
+    },
   },
 };
 </script>
@@ -120,12 +140,12 @@ export default {
     <p
       class="description"
       v-html="
-        `Durch die von Ihnen vorgenommenen Planungs-maßnahmen würde sich der Wert <strong>∆W um ${'XX'}</strong> verändern.`
+        `Durch die von Ihnen vorgenommenen Planungsmaßnahmen würde sich der Wert <strong>∆W um ${calculateDeltaW().toFixed(2)} %</strong> verändern.`
       "
     ></p>
     <p class="description">
       <strong>∆W</strong> bezeichnet die Abweichung vom natürlichen
-      Wasser-haushalt in Prozent.
+      Wasserhaushalt in Prozent.
     </p>
     <div class="layer-container d-flex flex-column">
       <p class="title">Berechnete Ergebnislayer</p>
