@@ -80,10 +80,10 @@ export default {
       this.setPreComputedModels(
         this.allLayerConfigs.filter(
           (layer) =>
-            layer.id === "delta_w_wfs" ||
-            layer.id === "abimo_2020_wfs:evaporatio" ||
-            layer.id === "abimo_2020_wfs:surface_ru" ||
-            layer.id === "abimo_2020_wfs:infiltrati",
+            layer.id === "delta_w_2025_wfs" ||
+            layer.id === "abimo_2025_wfs:evaporatio" ||
+            layer.id === "abimo_2025_wfs:surface_ru" ||
+            layer.id === "abimo_2025_wfs:infiltrati",
         ),
       );
       this.preComputedModels.forEach((layer) => {

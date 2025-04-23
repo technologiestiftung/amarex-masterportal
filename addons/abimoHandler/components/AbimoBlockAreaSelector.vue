@@ -67,7 +67,7 @@ export default {
           .getMap("2D")
           .getLayers()
           .getArray()
-          .find((layer) => layer.get("id") === "rabimo_input_2020");
+          .find((layer) => layer.get("id") === "rabimo_input_2025");
 
         const layerFeature = layer
           .getSource()
@@ -98,7 +98,7 @@ export default {
         // Disable the default toggle behavior
         toggleCondition: never,
         layers: function (layer) {
-          return layer.get("id") === "rabimo_input_2020";
+          return layer.get("id") === "rabimo_input_2025";
         },
       });
 
@@ -114,7 +114,7 @@ export default {
               .getMap("2D")
               .getLayers()
               .getArray()
-              .find((layer) => layer.get("id") === "rabimo_input_2020");
+              .find((layer) => layer.get("id") === "rabimo_input_2025");
 
             if (layer) {
               const layerFeature = layer

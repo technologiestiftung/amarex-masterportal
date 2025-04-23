@@ -62,7 +62,7 @@ export default {
       .getMap("2D")
       .getLayers()
       .getArray()
-      .find((layer) => layer.get("id") === "delta_w_wfs");
+      .find((layer) => layer.get("id") === "delta_w_2025_wfs");
   },
   methods: {
     ...mapActions("Modules/AbimoHandler", ["updateResultStats"]),
