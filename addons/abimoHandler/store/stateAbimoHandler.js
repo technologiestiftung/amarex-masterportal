@@ -66,6 +66,12 @@ export default {
   preComputedModelsShown: false,
   preComputedModels: [],
   preComputedModelsAdded: false,
+  preComputedStats: {
+    deltaW: 0,
+    evaporation: 0,
+    runoff: 0,
+    infiltration: 0,
+  },
 
   newGreenRoof: 0,
   newUnpvd: 0,

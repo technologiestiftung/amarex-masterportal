@@ -28,6 +28,10 @@ const actions = {
     const stats = areaCalc.calculateResultStats(data);
     commit("setResultAbimoStats", stats);
   },
+  updatePreComputedStats({ commit }, data) {
+    const stats = areaCalc.calculateResultStats(data);
+    commit("setPreComputedStats", stats);
+  },
   updateAccordionSteps({ commit, state }, stepToSetActive) {
     if (!stepToSetActive) {
       const resetSteps = state.steps.map((step) => ({
@@ -77,7 +81,6 @@ const actions = {
   },
   // New action to check if a measure can be added
   async canAddMeasure({ state }, { tempMeasure, measureType }) {
-
     const tempMeasures = [...state.selectedMeasures, tempMeasure];
 
     const statsWithNewMeasure = await measureCalc.calculateAllMeasureStats(
