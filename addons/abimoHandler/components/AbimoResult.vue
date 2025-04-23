@@ -3,6 +3,8 @@ import { mapActions, mapGetters, mapMutations } from "vuex";
 import { EyeOff, EyeIcon, Settings, Map as MapIcon } from "lucide-vue-next";
 import colors from "../../../src/shared/js/utils/amarex-colors.json";
 import SliderItem from "../../../src/shared/modules/slider/components/SliderItem.vue";
+import areaCalc from "../utils/areaCalculations";
+
 /**
  * AbimoResult
  * @module modules/AbimoResult
@@ -93,9 +95,13 @@ export default {
         preComputedDeltaW,
       );
       if (deltaWResult > preComputedDeltaW) {
-        return Math.abs(deltaWResult - preComputedDeltaW);
+        return areaCalc.calculatePrecisely(
+          Math.abs(deltaWResult - preComputedDeltaW),
+        );
       } else {
-        return Math.abs(preComputedDeltaW - deltaWResult);
+        return areaCalc.calculatePrecisely(
+          Math.abs(preComputedDeltaW - deltaWResult),
+        );
       }
     },
   },
