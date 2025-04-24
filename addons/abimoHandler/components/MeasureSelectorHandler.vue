@@ -23,7 +23,6 @@ export default {
       markedForDeletion: null,
       isProcessingClick: false,
       trashIconPath: "./resources/img/measure-trash-bin.svg",
-      showAlert: false,
     };
   },
   computed: {
@@ -233,9 +232,6 @@ export default {
       });
 
       if (!canAdd) {
-        console.log("[MeasureSelectorHandler] display error message::");
-        this.showAlert = true;
-
         this.addSingleAlert({
           category: "error",
           content: message,
