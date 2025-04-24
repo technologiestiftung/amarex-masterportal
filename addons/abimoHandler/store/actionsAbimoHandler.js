@@ -72,12 +72,9 @@ const actions = {
     commit("setNewGreenRoof", stats.newGreenRoof);
     commit("setNewUnpvd", stats.newUnpvd);
     commit("setNewToSwale", stats.newToSwale);
-
-    console.log("[actionsAbimoHandler] stats::", stats);
   },
   // New action to check if a measure can be added
   async canAddMeasure({ state }, { tempMeasure, measureType }) {
-
     const tempMeasures = [...state.selectedMeasures, tempMeasure];
 
     const statsWithNewMeasure = await measureCalc.calculateAllMeasureStats(
@@ -92,19 +89,19 @@ const actions = {
       case "greenRoof":
         if (statsWithNewMeasure.Agt > statsWithNewMeasure.Ag_max) {
           canAdd = false;
-          message = "Maximum area for Green Roof has been reached.";
+          message = "Die Maximale Gründachfläche wurde erreicht.";
         }
         break;
       case "unpaved":
         if (statsWithNewMeasure.Aet > statsWithNewMeasure.Ae_max) {
           canAdd = false;
-          message = "Maximum area for Unpaved has been reached.";
+          message = "Die Maximale Entsiegelungsfläche wurde erreicht.";
         }
         break;
       case "swale":
         if (statsWithNewMeasure.Amt > statsWithNewMeasure.Am_max) {
           canAdd = false;
-          message = "Maximum area for Swale has been reached.";
+          message = "Die Maximale Muldenfläche wurde erreicht.";
         }
         break;
     }
