@@ -1788,6 +1788,37 @@
     "searchField": "delta_w"
   },
   {
+    "id": "Überflutungskarten"
+  },
+  {
+    "id": "flooding_wfs:flooding_reference_100a_60min",
+    "styleId": "flooding",
+    "name": "Überflutungskarten",
+    "crs": "EPSG:25833",
+    "url": "https://geoserver.ionos.ds-apps.tsb-berlin.de/geoserver/amarex/wfs",
+    "typ": "WFS",
+    "featureType": "amarex:flooding_reference_100a_60min",
+    "featureNS": "http://geoserver.org",
+    "datasets": false,
+    "layers": "DEPTH2D",
+    "gfiAttributes": "showAll",
+    "maxScale": "25000"
+  },
+  {
+    "id": "flooding_wfs:flooding_swale_100a_60min_100",
+    "styleId": "flooding",
+    "name": "Überflutungskarten",
+    "crs": "EPSG:25833",
+    "url": "https://geoserver.ionos.ds-apps.tsb-berlin.de/geoserver/amarex/wfs",
+    "typ": "WFS",
+    "featureType": "amarex:flooding_swale_100a_60min_100",
+    "featureNS": "http://geoserver.org",
+    "datasets": false,
+    "layers": "DEPTH2D",
+    "gfiAttributes": "showAll",
+    "maxScale": "25000"
+  },
+  {
     "id": "Themenkarten:"
   },
   {

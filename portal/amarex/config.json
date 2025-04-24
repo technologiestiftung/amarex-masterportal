@@ -610,6 +610,23 @@
                   "showInLayerTree": false
                 }
               ]
+            },
+            {
+              "name": "Überflutungskarten",
+              "type": "folder",
+              "description": "Überflutungskarten",
+              "elements": [
+                {
+                  "id": "flooding_wfs:flooding_reference_100a_60min",
+                  "visibility": false,
+                  "showInLayerTree": false
+                },
+                {
+                  "id": "flooding_wfs:flooding_swale_100a_60min_100",
+                  "visibility": false,
+                  "showInLayerTree": false
+                }
+              ]
             }
           ]
         },
