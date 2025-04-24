@@ -46,10 +46,6 @@ export default {
       currentView: "measure",
       selectedMeasure: null,
       activeMeasureSize: "small",
-      menuPosition: {
-        left: 0,
-        top: 0,
-      },
       defaultSizesConfig: {
         small: { label: "Klein", value: "small" },
         medium: { label: "Mittel", value: "medium" },
@@ -63,12 +59,6 @@ export default {
       "selectedMeasures",
       "isMeasureDrawing",
     ]),
-    menuStyle() {
-      return {
-        left: `${this.menuPosition.left - 200}px`,
-        top: `${this.menuPosition.top}px`,
-      };
-    },
     menuTitle() {
       if (this.currentView === "measure") {
         return "Maßnahme auswählen";
@@ -150,6 +140,7 @@ export default {
           duration: 250,
         },
         id: "measure-menu-overlay",
+        className: "measure-menu-overlay",
       });
       map.addOverlay(overlay);
 
@@ -158,40 +149,14 @@ export default {
         overlay.setPosition(coordinate);
       });
     },
-
-    // calculateMenuPosition() {
-    //   // todo: needs to be refactored
-    //   const map = mapCollection.getMap("2D");
-    //   const mapSize = map.getSize();
-    //   const pixelPosition = map.getPixelFromCoordinate(this.position);
-
-    //   if (pixelPosition) {
-    //     const menuWidth = 400;
-    //     const menuHeight = 300;
-
-    //     let left = pixelPosition[0];
-    //     let top = pixelPosition[1];
-
-    //     if (left + menuWidth > mapSize[0]) {
-    //       left = left - menuWidth;
-    //     }
-    //     if (top + menuHeight > mapSize[1]) {
-    //       top = top - menuHeight;
-    //     }
-    //     this.menuPosition = { left, top };
-    //   }
-    // },
-
     selectMeasure(measure) {
       this.selectedMeasure = measure;
-      this.activeMeasureSize = "small"; // Standardwert zurücksetzen
+      this.activeMeasureSize = "small";
       this.currentView = "dimensioning";
     },
-
     selectSize(size) {
       this.activeMeasureSize = size;
     },
-
     confirmSelection() {
       if (this.selectedMeasure && this.activeMeasureSize) {
         this.$emit(
@@ -203,12 +168,10 @@ export default {
         this.resetSelection();
       }
     },
-
     resetToInitialView() {
       this.currentView = "measure";
       this.selectedMeasure = null;
     },
-
     goBack() {
       if (this.currentView === "dimensioning") {
         this.resetToInitialView();
@@ -216,12 +179,10 @@ export default {
         this.resetSelection();
       }
     },
-
     resetSelection() {
       this.resetToInitialView();
       this.$emit("close");
     },
-
     getSizeDetails(size) {
       if (!this.selectedMeasure) return "";
 
@@ -250,10 +211,7 @@ export default {
     to="#map-wrapper"
     v-if="position"
   >
-    <div
-      class="measure-menu-container"
-      :style="menuStyle"
-    >
+    <div class="measure-menu-container">
       <button
         @click="resetSelection"
         class="icon-btn"
@@ -352,13 +310,17 @@ export default {
 
 .measure-menu-container {
   position: absolute;
-  left: 50px;
-  top: 50px;
+  left: -200px;
+  top: 0;
   z-index: 999;
   display: flex;
   flex-direction: column;
   align-items: center;
   height: 450px;
+}
+
+.measure-menu-overlay {
+  z-index: 99;
 }
 
 .icon-btn {
