@@ -311,7 +311,7 @@ export default {
 .measure-menu-container {
   position: absolute;
   left: -200px;
-  top: 0;
+  top: -20px;
   z-index: 999;
   display: flex;
   flex-direction: column;
