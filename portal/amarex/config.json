@@ -671,6 +671,44 @@
         }
       ]
     }
+  },
+  "addOnConfig": {
+    "sections": [
+      {
+        "toolDownloader": {
+          "id": "esb-tool",
+          "title": "ESB Tool",
+          "description": "Tool Downloader",
+          "top-btn": {
+            "src": "./resources/tools/esb-tool/anleitung-esb-pdf.pdf",
+            "text": "Anleitung ESB Tool",
+            "alt": "Anleitung ESB Tool"
+          },
+          "bttom-btn": {
+            "src": "./resources/tools/esb-tool/esb-tool.xlsx",
+            "text": "ESB Tool",
+            "alt": "ESB Tool"
+          }
+        }
+      },
+      {
+        "toolDownloader": {
+          "id": "rwb-tool",
+          "title": "RWB+ Tool",
+          "description": "Tool Downloader",
+          "top-btn": {
+            "src": "./resources/tools/esb-tool/anleitung-esb-pdf.pdf",
+            "text": "Anleitung ESB Tool",
+            "alt": "Anleitung ESB Tool"
+          },
+          "bttom-btn": {
+            "src": "./resources/tools/esb-tool/esb-tool.xlsx",
+            "text": "ESB Tool",
+            "alt": "ESB Tool"
+          }
+        }
+      }
+    ]
   }
 }
 
