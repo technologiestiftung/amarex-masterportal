@@ -193,9 +193,9 @@ export default {
         class="masterportal-container"
     >
         <!-- Masterportal origin Alert display -->
-        <!-- <div v-if="allConfigsLoaded && addonsLoaded">
+        <div v-if="allConfigsLoaded && addonsLoaded">
             <Alerting />
-        </div> -->
+        </div>
         <MenuContainerAmarex
             v-if="allConfigsLoaded && addonsLoaded && mainMenu && uiStyle !== 'SIMPLE'"
             side="mainMenu"
