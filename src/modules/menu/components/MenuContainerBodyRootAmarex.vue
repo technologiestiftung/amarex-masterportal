@@ -94,8 +94,6 @@ export default {
                         id: step.id ? step.id : undefined
                     }
                 });
-                console.log('[MenuContainerBodyRootAmarex] click::', step);
-
             }
             const targetElement = document.querySelector('.gfi');
             if (targetElement) {

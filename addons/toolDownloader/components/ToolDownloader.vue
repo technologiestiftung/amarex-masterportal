@@ -9,16 +9,29 @@ export default {
   name: "ToolDownloader",
   components: {},
   data() {
-    return {};
+    return {
+      id: null,
+    };
   },
   computed: {
-    ...mapGetters("Menu", ["currentComponent", "currentComponentName"]),
+    ...mapGetters("Menu", ["currentComponent"]),
+    secondaryMenuProps() {
+      return this.currentComponent("secondaryMenu").props;
+    },
+  },
+  watch: {
+    secondaryMenuProps: {
+      handler(newVal) {
+        console.log("[ToolDownloader] Props changed:", newVal);
+      },
+      deep: true,
+      immediate: true,
+    },
   },
   created() {
     console.log(
       "[ToolDownloader] toolDownloader currentComponent::",
-      this.currentComponent("secondaryMenu"),
-      this.currentComponentName("secondaryMenu"),
+      this.currentComponent("secondaryMenu").props,
     );
   },
   methods: {},
