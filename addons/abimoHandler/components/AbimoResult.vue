@@ -94,15 +94,10 @@ export default {
         deltaWResult,
         preComputedDeltaW,
       );
-      if (deltaWResult > preComputedDeltaW) {
-        return areaCalc.calculatePrecisely(
-          Math.abs(deltaWResult - preComputedDeltaW),
-        );
-      } else {
-        return areaCalc.calculatePrecisely(
-          Math.abs(preComputedDeltaW - deltaWResult),
-        );
-      }
+      
+      return areaCalc.calculatePrecisely(
+        Math.abs(deltaWResult - preComputedDeltaW),
+      );
     },
   },
 };
