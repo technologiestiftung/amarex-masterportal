@@ -3,6 +3,7 @@ import { mapGetters, mapMutations } from "vuex";
 import measureCalculations from "../utils/measureCalculations.js";
 import { CircleArrowRight, CircleArrowLeft } from "lucide-vue-next";
 import colors from "../../../src/shared/js/utils/amarex-colors.json";
+import Overlay from "ol/Overlay.js";
 
 /**
  * Abimo Measure Selector Menu
@@ -45,10 +46,6 @@ export default {
       currentView: "measure",
       selectedMeasure: null,
       activeMeasureSize: "small",
-      menuPosition: {
-        left: 0,
-        top: 0,
-      },
       defaultSizesConfig: {
         small: { label: "Klein", value: "small" },
         medium: { label: "Mittel", value: "medium" },
@@ -62,12 +59,6 @@ export default {
       "selectedMeasures",
       "isMeasureDrawing",
     ]),
-    menuStyle() {
-      return {
-        left: `${this.menuPosition.left - 200}px`,
-        top: `${this.menuPosition.top}px`,
-      };
-    },
     menuTitle() {
       if (this.currentView === "measure") {
         return "Maßnahme auswählen";
@@ -135,55 +126,37 @@ export default {
     },
   },
   mounted() {
-    if (this.position) {
-      this.calculateMenuPosition();
-    }
-  },
-  watch: {
-    position(newPosition) {
-      if (newPosition) {
-        this.calculateMenuPosition();
-        // Zurücksetzen zum initialen Zustand
-        this.resetToInitialView();
-      }
-    },
+    this.initOverlay();
   },
   methods: {
     ...mapMutations("Modules/AbimoHandler", ["setSelectedMeasures"]),
 
-    calculateMenuPosition() {
-      // todo: needs to be refactored
+    initOverlay() {
       const map = mapCollection.getMap("2D");
-      const mapSize = map.getSize();
-      const pixelPosition = map.getPixelFromCoordinate(this.position);
+      let overlay = new Overlay({
+        element: document.querySelector(".measure-menu-container"),
+        autoPan: true,
+        autoPanAnimation: {
+          duration: 250,
+        },
+        id: "measure-menu-overlay",
+        className: "measure-menu-overlay",
+      });
+      map.addOverlay(overlay);
 
-      if (pixelPosition) {
-        const menuWidth = 400;
-        const menuHeight = 300;
-
-        let left = pixelPosition[0];
-        let top = pixelPosition[1];
-
-        if (left + menuWidth > mapSize[0]) {
-          left = left - menuWidth;
-        }
-        if (top + menuHeight > mapSize[1]) {
-          top = top - menuHeight;
-        }
-        this.menuPosition = { left, top };
-      }
+      map.on("singleclick", function (evt) {
+        const coordinate = evt.coordinate;
+        overlay.setPosition(coordinate);
+      });
     },
-
     selectMeasure(measure) {
       this.selectedMeasure = measure;
-      this.activeMeasureSize = "small"; // Standardwert zurücksetzen
+      this.activeMeasureSize = "small";
       this.currentView = "dimensioning";
     },
-
     selectSize(size) {
       this.activeMeasureSize = size;
     },
-
     confirmSelection() {
       if (this.selectedMeasure && this.activeMeasureSize) {
         this.$emit(
@@ -195,12 +168,10 @@ export default {
         this.resetSelection();
       }
     },
-
     resetToInitialView() {
       this.currentView = "measure";
       this.selectedMeasure = null;
     },
-
     goBack() {
       if (this.currentView === "dimensioning") {
         this.resetToInitialView();
@@ -208,12 +179,10 @@ export default {
         this.resetSelection();
       }
     },
-
     resetSelection() {
       this.resetToInitialView();
       this.$emit("close");
     },
-
     getSizeDetails(size) {
       if (!this.selectedMeasure) return "";
 
@@ -242,10 +211,7 @@ export default {
     to="#map-wrapper"
     v-if="position"
   >
-    <div
-      class="measure-menu-container"
-      :style="menuStyle"
-    >
+    <div class="measure-menu-container">
       <button
         @click="resetSelection"
         class="icon-btn"
@@ -343,14 +309,18 @@ export default {
 @import "~variables";
 
 .measure-menu-container {
-  overflow: hidden;
   position: absolute;
-  left: 50px;
-  top: 50px;
-  z-index: 99;
+  left: -200px;
+  top: -20px;
+  z-index: 999;
   display: flex;
   flex-direction: column;
   align-items: center;
+  height: 450px;
+}
+
+.measure-menu-overlay {
+  z-index: 99;
 }
 
 .icon-btn {
