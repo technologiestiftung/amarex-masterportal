@@ -1791,18 +1791,16 @@
     "id": "Überflutungskarten"
   },
   {
-    "id": "flooding_wfs:flooding_reference_100a_60min",
-    "styleId": "flooding",
+    "id": "flooding_wms:flooding_reference_100a_60min",
     "name": "Überflutungskarten",
     "crs": "EPSG:25833",
-    "url": "https://geoserver.ionos.ds-apps.tsb-berlin.de/geoserver/amarex/wfs",
-    "typ": "WFS",
-    "featureType": "amarex:flooding_reference_100a_60min",
-    "featureNS": "http://geoserver.org",
-    "datasets": false,
-    "layers": "DEPTH2D",
-    "gfiAttributes": "showAll",
-    "maxScale": "25000"
+    "url": "https://geoserver.ionos.ds-apps.tsb-berlin.de/geoserver/amarex/wms",
+    "capabilitiesUrl": "https://geoserver.ionos.ds-apps.tsb-berlin.de/geoserver/amarex/wms?service=wms&request=GetCapabilities",
+    "typ": "WMS",
+    "format": "image/png",
+    "layers": "amarex:flooding_reference_100a_60min",
+    "gfiAttributes": "ignore",
+    "maxScale": "2500"
   },
   {
     "id": "flooding_wfs:flooding_swale_100a_60min_100",
