@@ -6,7 +6,7 @@ import { exportLayerAsGeoJSON } from "../utils/download";
 import layerCollection from "../../../src/core/layers/js/layerCollection";
 import mapCollection from "../../../src/core/maps/js/mapCollection";
 import VectorLayer from "ol/layer/Vector";
-import { File as FileIcon, Save as SaveIcon, FileDown } from "lucide-vue-next";
+import { Save as SaveIcon, FileDown } from "lucide-vue-next";
 import colors from "../../../src/shared/js/utils/amarex-colors.json";
 
 /**
@@ -26,7 +26,6 @@ export default {
     };
   },
   components: {
-    FileIcon,
     SaveIcon,
     FileDown,
   },
