@@ -25,6 +25,7 @@ export default {
       "preselectedFeatures",
       "selectedCount",
       "isMeasurePlanning",
+      "preComputedStats",
     ]),
   },
   mounted() {
@@ -45,7 +46,10 @@ export default {
       addInteractionToMap: "addInteraction",
       removeInteractionFromMap: "removeInteraction",
     }),
-    ...mapActions("Modules/AbimoHandler", ["updateAccumulatedStats"]),
+    ...mapActions("Modules/AbimoHandler", [
+      "updateAccumulatedStats",
+      "updatePreComputedStats",
+    ]),
     ...mapMutations("Modules/AbimoHandler", [
       "setSelectedFeatures",
       "setSelectInteraction",
@@ -180,7 +184,76 @@ export default {
       });
       this.layer_abimo_calculated.values_.source.addFeatures(olFeatures);
       this.removeInteractionFromMap(this.selectInteraction);
+      this.updatePreComputed();
       this.setBlockAreaConfirmed(true);
+    },
+    updatePreComputed() {
+      const selectedFeatures = this.layer_abimo_calculated
+        .getSource()
+        .getFeatures()
+        .filter((feature) =>
+          this.selectedFeatures.some(
+            (selectedFeature) =>
+              selectedFeature.values_.code === feature.values_.code,
+          ),
+        );
+
+      const allLayers = mapCollection.getMap("2D").getLayers().getArray();
+      const preComputedLayer = allLayers.find(
+        (layer) => layer.get("id") === "abimo_2025_wfs:preCompute",
+      );
+      const deltaWLayer = allLayers.find(
+        (layer) => layer.get("id") === "delta_w_2025_wfs:preCompute",
+      );
+
+      const preComputedData = selectedFeatures.map((feature) => {
+        const featureCode = feature.values_.code;
+        const defaultData = {
+          code: featureCode,
+          area: 0,
+          runoff: 0,
+          infiltr: 0,
+          evapor: 0,
+          delta_w: 0,
+        };
+
+        // Get data from preComputed layer
+        if (preComputedLayer?.getSource()) {
+          const preComputedFeature = preComputedLayer
+            .getSource()
+            .getFeatures()
+            .find((f) => f.get("code") === featureCode);
+
+          if (preComputedFeature) {
+            defaultData.infiltr = parseFloat(
+              preComputedFeature.get("infiltr") || 0,
+            );
+            defaultData.evapor = parseFloat(
+              preComputedFeature.get("evapor") || 0,
+            );
+            defaultData.runoff = parseFloat(
+              preComputedFeature.get("runoff") || 0,
+            );
+            defaultData.area = parseFloat(preComputedFeature.get("area") || 0);
+          }
+        }
+
+        // Get delta_w value
+        if (deltaWLayer?.getSource()) {
+          const deltaWFeature = deltaWLayer
+            .getSource()
+            .getFeatures()
+            .find((f) => f.get("code") === featureCode);
+
+          if (deltaWFeature) {
+            defaultData.delta_w = parseFloat(deltaWFeature.get("delta_w") || 0);
+          }
+        }
+
+        return defaultData;
+      });
+
+      this.updatePreComputedStats(preComputedData);
     },
     handleBlockAreaConfirm() {
       if (this.blockAreaConfirmed) {

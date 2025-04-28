@@ -638,6 +638,16 @@
               "showInLayerTree": true
             },
             {
+              "id": "abimo_2025_wfs:preCompute",
+              "visibility": true,
+              "showInLayerTree": true
+            },
+            {
+              "id": "delta_w_2025_wfs:preCompute",
+              "visibility": true,
+              "showInLayerTree": true
+            },
+            {
               "id": "abimo_result_evaporation",
               "visibility": true,
               "showInLayerTree": true
