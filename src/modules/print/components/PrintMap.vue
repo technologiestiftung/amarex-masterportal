@@ -434,6 +434,8 @@ export default {
                 title: this.report.title,
                 description: this.report.description,
                 date: this.report.date,
+                // @Luise: please add in isMeasurePlanning value from store
+                isMeasurePlanning: null,
                 downloadURL,
                 // 1.1 * 1.3 => m² | 1.3 => % 
                 flächenanteile_dachfläche: `${dachFläche} m² (${this.fullPercentage(bebautVersiegelt)}) %`,
@@ -453,6 +455,16 @@ export default {
                 an_mulde_angeschlossene_fläche: this.accumulatedAbimoStats.targetValueSwaleConnected || 0,
                 dachbegrünung_prozente: this.accumulatedAbimoStats.targetValueGreenRoof || 0,
                 entsiegelung_prozente: this.accumulatedAbimoStats.targetValueUnsealed || 0,
+                // @Luise: please add in the 4 "Status Quo Analyse" values for page 3 of the report
+                oberflächenabfluss_status_quo: "XX",
+                infiltration_status_quo: "XX",
+                verdunstung_status_quo: "XX",
+                delta_w_status_quo: "XX",
+                // @Luise: please add in the 8 "Status Quo Analyse" values for page 5 of the report
+                wasserhaushalt_oberflächenabfluss_status_quo: `${"XX"} mm/a (${"XX"} %)`,
+                wasserhaushalt_infiltration_status_quo: `${"XX"} mm/a (${"XX"} %)`,
+                wasserhaushalt_verdunstung_status_quo: `${"XX"} mm/a (${"XX"} %)`,
+                wasserhaushalt_delta_w_status_quo: `${"XX"} mm/a (${"XX"} %)`,
                 // Abimo Result
                 abimo_result: {
                     runoff: abimo_result_runoff,
@@ -467,7 +479,7 @@ export default {
 
 
             try {
-                await getReport(payload, "gebiet", "_blank"); // "lokal" | "gebiet"
+                await getReport(payload, "_blank"); // "_blank" | undefined => _blank opens the pdf in new tab | undefined downloads the pdf
                 this.reportLoading = false;
                 this.setFileDownloads([]);
                 return;
