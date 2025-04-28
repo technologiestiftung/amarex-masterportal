@@ -67,7 +67,6 @@ function calculateAllMeasureStats(selectedFeatures, selectedMeasures) {
 
   const stats = selectedFeatures[0].getProperties();
 
-  const mainFrac = 1; // Assumption: main_frac = 1
   let total_area = parseFloat(stats.total_area);
   let main_frac = 1;
   let roof = parseFloat(stats.roof);
@@ -82,7 +81,7 @@ function calculateAllMeasureStats(selectedFeatures, selectedMeasures) {
 
   // 1.2. Calculate total area of existing green roofs in m²
   const Ag_0 = areaCalc.calculatePrecisely(
-    green_roof * roof * mainFrac * total_area,
+    green_roof * roof * main_frac * total_area,
   );
   // max possible area of green roofs in m²
   const Ag_max = areaCalc.calculatePrecisely(roof * main_frac * total_area);
@@ -103,7 +102,7 @@ function calculateAllMeasureStats(selectedFeatures, selectedMeasures) {
 
   // 2.2. Calculate total area of existing unpaved areas in m²
   const Ae_0 = areaCalc.calculatePrecisely(
-    (1 - roof - pvd) * mainFrac * total_area,
+    (1 - roof - pvd) * main_frac * total_area,
   );
 
   // 2.3. Calculate maximum possible area of unpaved areas in m²
