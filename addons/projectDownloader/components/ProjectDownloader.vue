@@ -6,6 +6,8 @@ import { exportLayerAsGeoJSON } from "../utils/download";
 import layerCollection from "../../../src/core/layers/js/layerCollection";
 import mapCollection from "../../../src/core/maps/js/mapCollection";
 import VectorLayer from "ol/layer/Vector";
+import { File as FileIcon, Save as SaveIcon, FileDown } from "lucide-vue-next";
+import colors from "../../../src/shared/js/utils/amarex-colors.json";
 
 /**
  * ProjectDownloader
@@ -19,7 +21,14 @@ export default {
       configToExport: null,
       fileSources: [],
       projectTitle: "",
+      colors,
+      projectDownloaderOpen: false,
     };
+  },
+  components: {
+    FileIcon,
+    SaveIcon,
+    FileDown,
   },
   computed: {
     ...mapGetters([
@@ -130,38 +139,65 @@ export default {
 };
 </script>
 
-// todo: add locals
 <template lang="html">
-  <div
-    id="exporter-addon"
-    class="ProjectDownloader-root mb-3"
-  >
-    <div class="d-flex flex-column gap-3">
-      <label
-        for="projectTitle"
-        class="form-label"
-        >Projekt Titel</label
-      >
-      <input
-        id="projectTitle"
-        v-model="projectTitle"
-        type="text"
-        class="form-control"
-        placeholder="Gib einen Projekttitel ein"
+  <div id="exporter-addon">
+    <button
+      v-if="!projectDownloaderOpen"
+      class="amarex-btn-primary full-with-icon"
+      @click="projectDownloaderOpen = !projectDownloaderOpen"
+    >
+      <SaveIcon
+        :color="colors.secondary"
+        :size="16"
       />
+      <p>Herunterladen</p>
+    </button>
+    <div
+      v-else
+      class="expanded-project-downloader"
+    >
+      <div
+        class="button-overview d-flex align-items-center justify-content-center"
+        @click="projectDownloaderOpen = !projectDownloaderOpen"
+      >
+        <SaveIcon
+          :color="colors.secondary"
+          :size="16"
+        />
+        <p>Herunterladen</p>
+      </div>
+      <p>
+        Laden Sie hier Ihr Projekt als ZIP-Datei herunter, um sie später erneut
+        im AMAREX-Webtool zu öffnen oder um einzelne Layer in einer
+        GIS-Anwendung zu laden und zu bearbeiten.
+      </p>
       <button
-        class="btn btn-primary"
+        class="amarex-btn-primary accent full-with-icon"
         @click="downloadWithFetch(projectTitle || 'amarex-download')"
       >
-        Download Project ZIP
+        <FileDown
+          :color="colors.amarex_primary"
+          :size="16"
+        />
+        <p>ZIP-Datei herunterladen</p>
       </button>
     </div>
   </div>
 </template>
 
 <style lang="scss">
-.ProjectDownloader-root {
-  width: 100%;
-  height: 100px;
+@import "~variables";
+.expanded-project-downloader {
+  padding: 10px 15px 25px 15px;
+  background: $amarex_secondary_mid;
+  .button-overview {
+    cursor: pointer;
+    gap: 8px;
+    margin-bottom: 25px;
+  }
+  & > p {
+    margin-bottom: 15px;
+  }
 }
 </style>
+
