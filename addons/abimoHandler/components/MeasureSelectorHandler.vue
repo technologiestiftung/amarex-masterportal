@@ -243,6 +243,7 @@ export default {
       let circleRadius;
       let iconScale = 1;
 
+      // FIXME: refactor make it DRY
       switch (size) {
         case "small":
           circleRadius = 20;

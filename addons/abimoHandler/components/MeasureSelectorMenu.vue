@@ -46,6 +46,7 @@ export default {
       currentView: "measure",
       selectedMeasure: null,
       activeMeasureSize: "small",
+      // FIXME: add icon size
       defaultSizesConfig: {
         small: { label: "Klein", value: "small" },
         medium: { label: "Mittel", value: "medium" },

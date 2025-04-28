@@ -13,8 +13,6 @@ import mapCollection from "../../../src/core/maps/js/mapCollection";
 import { mapActions, mapGetters, mapMutations } from "vuex";
 import MeasurePlanning from "./MeasurePlanning.vue";
 
-// TODOS: update stepper points display
-
 /**
  * Abimo
  * @module modules/AbimoHandler
