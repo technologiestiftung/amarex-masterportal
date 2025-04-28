@@ -53,7 +53,7 @@ function blobToBase64(blob) {
   });
 }
 
-async function writePDF(payload, planung, savingType, blob) {
+async function writePDF(payload, savingType, blob) {
   if (!payload) {
     throw new Error("🚨 payload fehlt");
   }
@@ -306,13 +306,13 @@ async function writePDF(payload, planung, savingType, blob) {
     extraMarginBottom: 14,
   });
   text({
-    text: `Oberflächenabfluss: ${payload.seite_3_status_quo_oberflaechenabfluss} mm`,
+    text: `Oberflächenabfluss: ${payload.oberflächenabfluss_status_quo} mm`,
   });
   text({
-    text: `Infiltration: ${payload.seite_3_status_quo_versickerung} mm`,
+    text: `Infiltration: ${payload.infiltration_status_quo} mm`,
   });
   text({
-    text: `Verdunstung: ${payload.seite_3_status_quo_evapotranspiration} mm`,
+    text: `Verdunstung: ${payload.verdunstung_status_quo} mm`,
     extraMarginBottom: 14,
   });
   text({
@@ -328,253 +328,272 @@ async function writePDF(payload, planung, savingType, blob) {
     noLineBreak: true,
   });
   text({
-    text: `${payload.seite_3_status_quo_deltaw} %`,
+    text: `${payload.delta_w_status_quo} %`,
     x: paddingHorizontal + doc.getTextWidth("Für Ihr ausgewähltes Untersuchungsgebiet liegt Delta-W bei "),
     weight: "b",
   });
 
-  if (planung === "gebiet") {
-      // 4. Page
-      makeHeader("Maßnahmenplanung: Gebietsbetrachtung");
-      // vertical += mm(20);
-  
-      text({
-        text: `Betrachtete Blockteilflächen: ${payload.seite_4_gebietsbetrachtung_betrachteteblockteilflaechen}`,
-        extraMarginBottom: 14,
-      });
-      text({
-        text: "Gewählte Maßnahmen:",
-      });
+  // 4. Page
+  makeHeader(payload.isMeasurePlanning ? "Maßnahmenplanung: Lokale Betrachtung" : "Maßnahmenplanung: Gebietsbetrachtung");
+  // vertical += mm(20);
 
-      doc.addImage(
-        GruendachIcon,
-        "JPEG",
-        paddingHorizontal,
-        vertical,
-        iconSizes,
-        iconSizes,
-      );
-      vertical += mm(18);
-      text({
-        text: "Dachbegrünung",
-        extraMarginBottom: 14,
-        x: paddingVertical + iconSizes + 6,
-      });
-      text({
-        text: "Dachbegrünungen existieren in verschiedener Bauweise und umfassen das Auftragen von Vegetation auf Gebäudedächern. Die Begrünung nimmt das anfallende Regenwasser auf und bringt es durch gezielte Retention (Verdunstung) verzögert zum Abfluss.",
-        weight: "i",
-      });
-      text({
-        text: `Anteil der Gesamtfläche: ${payload.dachbegrünung_prozente || 0} %`,
-        extraMarginBottom: 14,
-        weight: "b"
-      });
+  text({
+    text: `Betrachtete Blockteilflächen: ${payload.seite_4_gebietsbetrachtung_betrachteteblockteilflaechen}`,
+    extraMarginBottom: 14,
+  });
+  text({
+    text: "Gewählte Maßnahmen:",
+  });
+
+  doc.addImage(
+    GruendachIcon,
+    "JPEG",
+    paddingHorizontal,
+    vertical,
+    iconSizes,
+    iconSizes,
+  );
+  vertical += mm(18);
+  text({
+    text: "Dachbegrünung",
+    extraMarginBottom: 14,
+    x: paddingVertical + iconSizes + 6,
+  });
+  text({
+    text: "Dachbegrünungen existieren in verschiedener Bauweise und umfassen das Auftragen von Vegetation auf Gebäudedächern. Die Begrünung nimmt das anfallende Regenwasser auf und bringt es durch gezielte Retention (Verdunstung) verzögert zum Abfluss.",
+    weight: "i",
+  });
+  text({
+    text: `Anteil der Gesamtfläche: ${payload.dachbegrünung_prozente || 0} %`,
+    extraMarginBottom: 14,
+    weight: "b"
+  });
 
 
-      doc.addImage(
-        EntsiegelungIcon,
-        "JPEG",
-        paddingHorizontal,
-        vertical,
-        iconSizes,
-        iconSizes,
-      );
-      vertical += mm(18);
-      text({
-        text: "Entsiegelung",
-        extraMarginBottom: 14,
-        x: paddingVertical + iconSizes + 6,
-      });
-      text({
-        text: "Entsieglung bezeichnet das Abtragen von wasserundurchlässigen Flächen wie Beton und Asphalt, um Regenwasser im Untergrund versickern zu lassen. ",
-        weight: "i",
-      });
-      text({
-        text: `Anteil der Gesamtfläche: ${payload.entsiegelung_prozente || 0} %`,
-        extraMarginBottom: 14,
-        weight: "b"
-      });
+  doc.addImage(
+    EntsiegelungIcon,
+    "JPEG",
+    paddingHorizontal,
+    vertical,
+    iconSizes,
+    iconSizes,
+  );
+  vertical += mm(18);
+  text({
+    text: "Entsiegelung",
+    extraMarginBottom: 14,
+    x: paddingVertical + iconSizes + 6,
+  });
+  text({
+    text: "Entsieglung bezeichnet das Abtragen von wasserundurchlässigen Flächen wie Beton und Asphalt, um Regenwasser im Untergrund versickern zu lassen. ",
+    weight: "i",
+  });
+  text({
+    text: `Anteil der Gesamtfläche: ${payload.entsiegelung_prozente || 0} %`,
+    extraMarginBottom: 14,
+    weight: "b"
+  });
 
-      doc.addImage(
-        MuldeIcon,
-        "JPEG",
-        paddingHorizontal,
-        vertical,
-        iconSizes,
-        iconSizes,
-      );
-      vertical += mm(18);
-      text({
-        text: "Mulde",
-        extraMarginBottom: 14,
-        x: paddingVertical + iconSizes + 6,
-      });
-      text({
-        text: "Mulden sind dauerhaft begrünte Versickerungsanlagen, die durch ihre Einstautiefe einen kurzfristigen oberirdischen Speicher vorweisen.",
-        weight: "i",
-      });
-      text({
-        text: `An Mulde angeschlossene Fläche: ${payload.an_mulde_angeschlossene_fläche || 0} %`,
-        extraMarginBottom: 28,
-        weight: "b"
-      });
+  doc.addImage(
+    MuldeIcon,
+    "JPEG",
+    paddingHorizontal,
+    vertical,
+    iconSizes,
+    iconSizes,
+  );
+  vertical += mm(18);
+  text({
+    text: "Mulde",
+    extraMarginBottom: 14,
+    x: paddingVertical + iconSizes + 6,
+  });
+  text({
+    text: "Mulden sind dauerhaft begrünte Versickerungsanlagen, die durch ihre Einstautiefe einen kurzfristigen oberirdischen Speicher vorweisen.",
+    weight: "i",
+  });
+  text({
+    text: `An Mulde angeschlossene Fläche: ${payload.an_mulde_angeschlossene_fläche || 0} %`,
+    extraMarginBottom: 28,
+    weight: "b"
+  });
 
-      text({
-        text: "Link zu Maßnahmenkatalog",
-        url: "https://amarex-projekt.de/media/pages/news/rwb-rwb-n-steckbriefe/a9cf3eab08-1715671445/massnahmenkatalog-mit-steckbriefen.pdf",
-      });
-  
-      // 5. Page
-      makeHeader("Maßnahmenplanung: Gebietsbetrachtung");
-  
-      text({
-        text: "Status Quo/Simulation",
-        size: 18,
-        weight: "b",
-        extraMarginBottom: 10,
-      });
-      text({
-        text: "Flächenanteile:",
-        noLineBreak: true,
-      });
-      text({
-        text: "Flächenanteile (Ihre Simulation):",
-        x: paddingVertical + pageInnerWidth / 2,
-      });
-      text({
-        text: ` • Dachfläche:`,
-        noLineBreak: true,
-      });
-      text({
-        text: ` • Dachfläche:`,
-        x: paddingVertical + pageInnerWidth / 2,
-      });
-      text({
-        text: `     ${payload.flächenanteile_dachfläche}`,
-        noLineBreak: true,
-      });
-      text({
-        text: `     ${payload.flächenanteile_dachfläche}`,
-        x: paddingVertical + pageInnerWidth / 2,
-      });
-      text({
-        text: ` • Davon begrünt:`,
-        noLineBreak: true,
-        maxWidth: pageInnerWidth / 2 - mm(24),
-      });
-      text({
-        text: ` • Davon begrünt:`,
-        x: paddingVertical + pageInnerWidth / 2,
-        maxWidth: pageInnerWidth / 2 - mm(24),
-      });
-      text({
-        text: `     ${payload.flächenanteile_davon_begrünt_status_quo}`,
-        noLineBreak: true,
-        maxWidth: pageInnerWidth / 2 - mm(24),
-      });
-      text({
-        text: `     ${payload.flächenanteile_davon_begrünt_simulation}`,
-        x: paddingVertical + pageInnerWidth / 2,
-        maxWidth: pageInnerWidth / 2 - mm(24),
-      });
-      text({
-        text: ` • Unbebaut Versiegelte Fläche:`,
-        noLineBreak: true,
-        maxWidth: pageInnerWidth / 2 - mm(24),
-      });
-      text({
-        text: ` • Unbebaut Versiegelte Fläche:`,
-        x: paddingVertical + pageInnerWidth / 2,
-        maxWidth: pageInnerWidth / 2 - mm(24),
-      });
-      text({
-        text: `     ${payload.flächenanteile_unbebaut_versiegelte_flächen_status_quo}`,
-        noLineBreak: true,
-        maxWidth: pageInnerWidth / 2 - mm(24),
-      });
-      text({
-        text: `     ${payload.flächenanteile_unbebaut_versiegelte_flächen_simulation}`,
-        x: paddingVertical + pageInnerWidth / 2,
-        maxWidth: pageInnerWidth / 2 - mm(24),
-      });
-      text({
-        text: ` • Unversiegelte Fläche:`,
-        noLineBreak: true,
-        maxWidth: pageInnerWidth / 2 - mm(24),
-      });
-      text({
-        text: ` • Unversiegelte Fläche:`,
-        x: paddingVertical + pageInnerWidth / 2,
-        maxWidth: pageInnerWidth / 2 - mm(24),
-      });
-      text({
-        text: `     ${payload.flächenanteile_unversiegelte_flächen_status_quo}`,
-        noLineBreak: true,
-        maxWidth: pageInnerWidth / 2 - mm(24),
-      });
-      text({
-        text: `     ${payload.flächenanteile_unversiegelte_flächen_simulation}`,
-        x: paddingVertical + pageInnerWidth / 2,
-        maxWidth: pageInnerWidth / 2 - mm(24),
-        extraMarginBottom: 28,
-      });
-      text({
-        text: "Wasserhaushalt",
-        size: 18,
-        weight: "b",
-        extraMarginBottom: 10,
-      });
-      text({
-        text: "Durch die Variierung der Parameter für die Regenwasserbewirtschaftungsmaßnahmen haben Sie den Wasserhaushalt beeinflusst. Die Ergebnisse Ihrer Simulation sind im Folgenden dem Status Quo Wasserhaushalt für das Untersuchungsgebiet gegenübergestellt.",
-        extraMarginBottom: 10,
-      });
-      text({
-        text: "Status Quo-Szenario:",
-        noLineBreak: true,
-      });
-      text({
-        text: "Ihre Simulation:",
-        x: paddingVertical + pageInnerWidth / 2,
-      });
-      text({
-        text: ` • Oberflächenabfluss: ${"XX"} mm/a (${"XX"} %)`,
-        noLineBreak: true,
-        maxWidth: pageInnerWidth / 2 - mm(24),
-      });
-      text({
-        text: ` • Oberflächenabfluss: ${payload.abimo_result.runoff} mm/a (${payload.abimo_result.runoff_prozente} %)`,
-        x: paddingVertical + pageInnerWidth / 2,
-      });
-      text({
-        text: ` • Infiltration: ${"XX"} mm/a (${"XX"} %)`,
-        noLineBreak: true,
-        maxWidth: pageInnerWidth / 2 - mm(24),
-      });
-      text({
-        text: ` • Infiltration: ${payload.abimo_result.infiltration} mm/a (${payload.abimo_result.infiltration_prozente} %)`,
-        x: paddingVertical + pageInnerWidth / 2,
-      });
-      text({
-        text: ` • Verdunstung: ${"XX"} mm/a (${"XX"} %)`,
-        noLineBreak: true,
-        maxWidth: pageInnerWidth / 2 - mm(24),
-      });
-      text({
-        text: ` • Verdunstung: ${payload.abimo_result.evaporation} mm/a (${payload.abimo_result.evaporation_prozente} %)`,
-        x: paddingVertical + pageInnerWidth / 2,
-      });
-      text({
-        text: ` • Delta W: ${"XX"} %`,
-        noLineBreak: true,
-      });
-      text({
-        text: ` • Delta W: ${payload.abimo_result.deltaW} %`,
-        x: paddingVertical + pageInnerWidth / 2,
-      });
-  } else {
-    // "lokal"
+  text({
+    text: "Link zu Maßnahmenkatalog",
+    url: "https://amarex-projekt.de/media/pages/news/rwb-rwb-n-steckbriefe/a9cf3eab08-1715671445/massnahmenkatalog-mit-steckbriefen.pdf",
+  });
 
-  }
+  // 5. Page
+  makeHeader(payload.isMeasurePlanning ? "Maßnahmenplanung: Lokale Betrachtung" : "Maßnahmenplanung: Gebietsbetrachtung");
+
+  text({
+    text: "Status Quo/Simulation",
+    size: 18,
+    weight: "b",
+    extraMarginBottom: 10,
+  });
+  text({
+    text: "Flächenanteile:",
+    noLineBreak: true,
+  });
+  text({
+    text: "Flächenanteile (Ihre Simulation):",
+    x: paddingVertical + pageInnerWidth / 2,
+  });
+  text({
+    text: ` • Dachfläche:`,
+    noLineBreak: true,
+  });
+  text({
+    text: ` • Dachfläche:`,
+    x: paddingVertical + pageInnerWidth / 2,
+  });
+  text({
+    text: `     ${payload.flächenanteile_dachfläche}`,
+    noLineBreak: true,
+  });
+  text({
+    text: `     ${payload.flächenanteile_dachfläche}`,
+    x: paddingVertical + pageInnerWidth / 2,
+  });
+  text({
+    text: ` • Davon begrünt:`,
+    noLineBreak: true,
+    maxWidth: pageInnerWidth / 2 - mm(24),
+  });
+  text({
+    text: ` • Davon begrünt:`,
+    x: paddingVertical + pageInnerWidth / 2,
+    maxWidth: pageInnerWidth / 2 - mm(24),
+  });
+  text({
+    text: `     ${payload.flächenanteile_davon_begrünt_status_quo}`,
+    noLineBreak: true,
+    maxWidth: pageInnerWidth / 2 - mm(24),
+  });
+  text({
+    text: `     ${payload.flächenanteile_davon_begrünt_simulation}`,
+    x: paddingVertical + pageInnerWidth / 2,
+    maxWidth: pageInnerWidth / 2 - mm(24),
+  });
+  text({
+    text: ` • Unbebaut Versiegelte Fläche:`,
+    noLineBreak: true,
+    maxWidth: pageInnerWidth / 2 - mm(24),
+  });
+  text({
+    text: ` • Unbebaut Versiegelte Fläche:`,
+    x: paddingVertical + pageInnerWidth / 2,
+    maxWidth: pageInnerWidth / 2 - mm(24),
+  });
+  text({
+    text: `     ${payload.flächenanteile_unbebaut_versiegelte_flächen_status_quo}`,
+    noLineBreak: true,
+    maxWidth: pageInnerWidth / 2 - mm(24),
+  });
+  text({
+    text: `     ${payload.flächenanteile_unbebaut_versiegelte_flächen_simulation}`,
+    x: paddingVertical + pageInnerWidth / 2,
+    maxWidth: pageInnerWidth / 2 - mm(24),
+  });
+  text({
+    text: ` • Unversiegelte Fläche:`,
+    noLineBreak: true,
+    maxWidth: pageInnerWidth / 2 - mm(24),
+  });
+  text({
+    text: ` • Unversiegelte Fläche:`,
+    x: paddingVertical + pageInnerWidth / 2,
+    maxWidth: pageInnerWidth / 2 - mm(24),
+  });
+  text({
+    text: `     ${payload.flächenanteile_unversiegelte_flächen_status_quo}`,
+    noLineBreak: true,
+    maxWidth: pageInnerWidth / 2 - mm(24),
+  });
+  text({
+    text: `     ${payload.flächenanteile_unversiegelte_flächen_simulation}`,
+    x: paddingVertical + pageInnerWidth / 2,
+    maxWidth: pageInnerWidth / 2 - mm(24),
+    extraMarginBottom: 28,
+  });
+  text({
+    text: "Wasserhaushalt",
+    size: 18,
+    weight: "b",
+    extraMarginBottom: 10,
+  });
+  text({
+    text: "Durch die Variierung der Parameter für die Regenwasserbewirtschaftungsmaßnahmen haben Sie den Wasserhaushalt beeinflusst. Die Ergebnisse Ihrer Simulation sind im Folgenden dem Status Quo Wasserhaushalt für das Untersuchungsgebiet gegenübergestellt.",
+    extraMarginBottom: 10,
+  });
+  text({
+    text: "Status Quo-Szenario:",
+    noLineBreak: true,
+  });
+  text({
+    text: "Ihre Simulation:",
+    x: paddingVertical + pageInnerWidth / 2,
+  });
+  text({
+    text: ` • Oberflächenabfluss:`,
+    noLineBreak: true,
+    maxWidth: pageInnerWidth / 2 - mm(24),
+  });
+  text({
+    text: ` • Oberflächenabfluss: `,
+    x: paddingVertical + pageInnerWidth / 2,
+  });
+  text({
+    text: `     ${payload.oberflächenabfluss_status_quo}`,
+    noLineBreak: true
+  });
+  text({
+    text: `     ${payload.abimo_result.runoff} mm/a (${payload.abimo_result.runoff_prozente} %)`,
+    x: paddingVertical + pageInnerWidth / 2,
+  });
+  text({
+    text: ` • Infiltration:`,
+    noLineBreak: true,
+    maxWidth: pageInnerWidth / 2 - mm(24),
+  });
+  text({
+    text: ` • Infiltration:`,
+    x: paddingVertical + pageInnerWidth / 2,
+  });
+  text({
+    text: `     ${payload.wasserhaushalt_infiltration_status_quo}`,
+    noLineBreak: true
+  });
+  text({
+    text: `     ${payload.abimo_result.infiltration} mm/a (${payload.abimo_result.infiltration_prozente} %)`,
+    x: paddingVertical + pageInnerWidth / 2,
+  });
+  text({
+    text: ` • Verdunstung:`,
+    noLineBreak: true,
+    maxWidth: pageInnerWidth / 2 - mm(24),
+  });
+  text({
+    text: ` • Verdunstung:`,
+    x: paddingVertical + pageInnerWidth / 2,
+  });
+  text({
+    text: `     ${payload.wasserhaushalt_verdunstung_status_quo}`,
+    noLineBreak: true
+  });
+  text({
+    text: `     ${payload.abimo_result.evaporation} mm/a (${payload.abimo_result.evaporation_prozente} %)`,
+    x: paddingVertical + pageInnerWidth / 2,
+  });
+  text({
+    text: ` • Delta W: ${payload.delta_w_status_quo} %`,
+    noLineBreak: true,
+  });
+  text({
+    text: ` • Delta W: ${payload.abimo_result.deltaW} %`,
+    x: paddingVertical + pageInnerWidth / 2,
+  });
 
   // 8. Page
   makeHeader("Anlage");
@@ -595,17 +614,17 @@ async function writePDF(payload, planung, savingType, blob) {
     text: "Link zum Katalog",
     url: "https://amarex-projekt.de/de/news/rwb-rwb-n-steckbriefe",
     x: paddingHorizontal + doc.getTextWidth("Maßnahmenkatalog: "),
-    extraMarginBottom: 28,
   });
-  /* text({
+  text({
     text: "Zisternenrechner:",
     noLineBreak: true,
   });
   text({
     text: "Link zum Rechner",
-    url: "tbd...",
+    url: "tbd...", // @Luise: please add the link for the Zisternenrechner
     x: paddingHorizontal + doc.getTextWidth("Zisternenrechner: "),
-  }); */
+    extraMarginBottom: 28,
+  });
   text({
     text: "Auflistung der Maßnahmendimensionen:"
   });
@@ -615,7 +634,7 @@ async function writePDF(payload, planung, savingType, blob) {
     headStyles: {
       fillColor: [220, 220, 220],
       textColor: 0,
-      fontSize: 14,
+      fontSize: 12,
       cellPadding: 2,
       font: "Arial",
       fontStyle: "bold",
@@ -623,7 +642,7 @@ async function writePDF(payload, planung, savingType, blob) {
       lineWidth: 0.5,
     },
     styles: {
-      fontSize: 14,
+      fontSize: 12,
       cellPadding: 2,
       textColor: 0,
       font: "Arial",
@@ -660,7 +679,7 @@ async function writePDF(payload, planung, savingType, blob) {
     ],
   });
 
-  vertical += 75;
+  vertical += 70;
 
   autoTable(doc, {
     ...tableStyle,
@@ -699,10 +718,10 @@ async function writePDF(payload, planung, savingType, blob) {
   return "pdfWritten & downloaded ✅";
 }
 
-async function getReport(payload, planung, download) {
+async function getReport(payload, download) {
   try {
     const pngBlob = await getPngBlobFromUrl(payload.downloadURL);
-    await writePDF(payload, planung, download, pngBlob);
+    await writePDF(payload, download, pngBlob);
     return "Report created successfully, yeayi 🎉🎉🎉";
   } catch (error) {
     console.error("Fehler bei der Berichtserstellung:", error);
