@@ -297,7 +297,7 @@ export default {
         class="stats-container d-flex justify-content-between w-100 align-items-center"
       >
         <p>{{ areaType.name }}</p>
-        <p>{{ Math.round(areaType.max * 100).toFixed(0) }} %</p>
+        <p>{{ Math.floor(areaType.max * 100).toFixed(0) }} %</p>
       </div>
     </div>
     <span class="line"></span>
@@ -311,7 +311,7 @@ export default {
       <p>% von Dachfläche</p>
       <p>
         {{
-          Math.round(accumulatedAbimoStats.maxGreenRoofToRoof * 100).toFixed(0)
+          Math.floor(accumulatedAbimoStats.maxGreenRoofToRoof * 100).toFixed(0)
         }}
         %
       </p>
@@ -321,7 +321,7 @@ export default {
     >
       <p>% von Gesamtfläche</p>
       <p>
-        {{ Math.round(accumulatedAbimoStats.meanGreenRoof * 100).toFixed(0) }}
+        {{ Math.floor(accumulatedAbimoStats.meanGreenRoof * 100).toFixed(0) }}
         %
       </p>
     </div>
@@ -338,7 +338,7 @@ export default {
       <p>% versiegelter Fläche</p>
       <p>
         {{
-          Math.round(
+          Math.floor(
             accumulatedAbimoStats.maxSwaleConnectedToPvd * 100,
           ).toFixed(0)
         }}
@@ -351,7 +351,7 @@ export default {
       <p>% von Gesamtfläche</p>
       <p>
         {{
-          Math.round(accumulatedAbimoStats.meanSwaleConnected * 100).toFixed(0)
+          Math.floor(accumulatedAbimoStats.meanSwaleConnected * 100).toFixed(0)
         }}
         %
       </p>
