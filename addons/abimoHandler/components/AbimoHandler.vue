@@ -85,7 +85,7 @@ export default {
           component: markRaw(AbimoBlockAreaSelector),
           title: "Untersuchungsgebiet wählen",
           description:
-            "Wählen Sie in der Karte die zu untersuchende Blockteilfläche via Mausklick aus.",
+            "Wählen Sie in der Karte die zu untersuchenden Blockteilflächen via Mausklick aus.",
           buttons: [
             {
               text: "Zurück",
