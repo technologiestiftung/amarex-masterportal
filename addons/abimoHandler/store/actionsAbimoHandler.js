@@ -9,6 +9,8 @@ const actions = {
     );
     commit("setAccumulatedAbimoStats", stats);
 
+    console.log("[actionsAbimoHandler] accumulatedAbimoStats::", stats);
+
     state.areaTypesData.find((area) => area.id === "unpvd").max =
       stats.meanUnpaved;
     state.areaTypesData.find((area) => area.id === "roof").max = stats.meanRoof;
@@ -27,10 +29,12 @@ const actions = {
   updateResultStats({ commit }, data) {
     const stats = areaCalc.calculateResultStats(data);
     commit("setResultAbimoStats", stats);
+    console.log("[actionsAbimoHandler] resultStats::", stats);
   },
   updatePreComputedStats({ commit }, data) {
     const stats = areaCalc.calculateResultStats(data);
     commit("setPreComputedStats", stats);
+    console.log("[actionsAbimoHandler] preComputedStats::", stats);
   },
   updateAccordionSteps({ commit, state }, stepToSetActive) {
     if (!stepToSetActive) {
@@ -93,19 +97,19 @@ const actions = {
       case "greenRoof":
         if (statsWithNewMeasure.Agt > statsWithNewMeasure.Ag_max) {
           canAdd = false;
-          message = "Die Maximale Gründachfläche wurde erreicht.";
+          message = "Die maximale Gründachfläche wurde erreicht.";
         }
         break;
       case "unpaved":
         if (statsWithNewMeasure.Aet > statsWithNewMeasure.Ae_max) {
           canAdd = false;
-          message = "Die Maximale Entsiegelungsfläche wurde erreicht.";
+          message = "Die maximale Entsiegelungsfläche wurde erreicht.";
         }
         break;
       case "swale":
         if (statsWithNewMeasure.Amt > statsWithNewMeasure.Am_max) {
           canAdd = false;
-          message = "Die Maximale Muldenfläche wurde erreicht.";
+          message = "Die maximale Muldenfläche wurde erreicht.";
         }
         break;
     }
