@@ -190,7 +190,7 @@
               "alt": "RWB+ Tool herunterladen"
             },
             "bottom-btn": {
-              "src": "./resources/tools/rwb-tool/rwb-tool.xlsx",
+              "src": "./resources/tools/rwb-tool/rwb-tool.xlsm",
               "text": "Anleitung RWB+ Tool herunterladen",
               "alt": "Anleitung RWB+ Tool herunterladen"
             }
