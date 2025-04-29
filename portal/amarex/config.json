@@ -620,6 +620,11 @@
                   "id": "flooding_wms:flooding_reference_100a_60min",
                   "visibility": false,
                   "showInLayerTree": false
+                },
+                {
+                  "id": "flooding_wms:flooding_swale_100a_60min_100",
+                  "visibility": false,
+                  "showInLayerTree": false
                 }
               ]
             }

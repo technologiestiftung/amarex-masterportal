@@ -1792,7 +1792,7 @@
   },
   {
     "id": "flooding_wms:flooding_reference_100a_60min",
-    "name": "Überflutungskarten",
+    "name": "Überflutungskarten. Maximale Wasserstände infolge eines 100-jährlichen Niederschlagsereignisses. Referenzmodell: Keine Berücksichtigung von Regenwasser-bewirtschaftungsanlagen.",
     "crs": "EPSG:25833",
     "url": "https://geoserver.ionos.ds-apps.tsb-berlin.de/geoserver/amarex/wms",
     "capabilitiesUrl": "https://geoserver.ionos.ds-apps.tsb-berlin.de/geoserver/amarex/wms?service=wms&request=GetCapabilities",
@@ -1800,21 +1800,21 @@
     "format": "image/png",
     "layers": "amarex:flooding_reference_100a_60min",
     "gfiAttributes": "ignore",
-    "maxScale": "2500"
+    "maxScale": "2500",
+    "legend": "./resources/img/legend_flooding.svg"
   },
   {
-    "id": "flooding_wfs:flooding_swale_100a_60min_100",
-    "styleId": "flooding",
-    "name": "Überflutungskarten",
+    "id": "flooding_wms:flooding_swale_100a_60min_100",
+    "name": "Überflutungskarten. Maximale Wasserstände infolge eines 100-jährlichen Niederschlagsereignisses. Mulden 100 a: Alle Dachflächen an Mulden (dimensioniert auf T = 100 a) angeschlossen.",
     "crs": "EPSG:25833",
-    "url": "https://geoserver.ionos.ds-apps.tsb-berlin.de/geoserver/amarex/wfs",
-    "typ": "WFS",
-    "featureType": "amarex:flooding_swale_100a_60min_100",
-    "featureNS": "http://geoserver.org",
-    "datasets": false,
-    "layers": "DEPTH2D",
-    "gfiAttributes": "showAll",
-    "maxScale": "25000"
+    "url": "https://geoserver.ionos.ds-apps.tsb-berlin.de/geoserver/amarex/wms",
+    "capabilitiesUrl": "https://geoserver.ionos.ds-apps.tsb-berlin.de/geoserver/amarex/wms?service=wms&request=GetCapabilities",
+    "typ": "WMS",
+    "format": "image/png",
+    "layers": "amarex:flooding_swale_100a_60min_100",
+    "gfiAttributes": "ignore",
+    "maxScale": "2500",
+    "legend": "./resources/img/legend_flooding.svg"
   },
   {
     "id": "Themenkarten:"
