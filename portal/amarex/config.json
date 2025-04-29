@@ -78,7 +78,23 @@
       "startingMapMode": "2D"
     },
     "portalFooter": {
-      "urls": []
+      "urls": [
+        {
+          "url": "https://www.technologiestiftung-berlin.de/impressum/",
+          "alias": "Impressum",
+          "alias_mobile": "Impressum"
+        },
+        {
+          "url": "https://www.technologiestiftung-berlin.de/datenschutz/",
+          "alias": "Datenschutz",
+          "alias_mobile": "Datenschutz"
+        },
+        {
+          "url": "https://github.com/technologiestiftung/amarex-masterportal",
+          "alias": "Code on Github",
+          "alias_mobile": "Code on Github"
+        }
+      ]
     },
     "tree": {
       "addLayerButton": {
