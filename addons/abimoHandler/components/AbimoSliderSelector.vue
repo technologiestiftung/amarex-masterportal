@@ -19,6 +19,7 @@ export default {
   data() {
     return {
       targetValue: 0,
+      targetWidth: 0,
       content: {
         greenRoof: {
           title: "Dachbegrünung",
@@ -192,6 +193,7 @@ export default {
       console.log("[AbimoSliderSelector] value::", value);
 
       if (value === "") {
+        this.targetWidth = 0;
         return null;
       }
       if (numValue % 1 !== 0) {
@@ -200,6 +202,7 @@ export default {
       if (numValue > maxValue) {
         numValue = maxValue;
       }
+      this.targetWidth = numValue;
       return numValue;
     },
     updateAbimoData() {
@@ -238,6 +241,18 @@ export default {
       }
     },
     initializeTargetValue() {
+      console.log("[AbimoSliderSelector] this.targetValue::", this.targetValue);
+
+      console.log('[AbimoSliderSelector] this.newGreenRoof::', this.newGreenRoof);
+
+      if (!this.targetValue) {
+        console.log(
+          "[AbimoSliderSelector] this.targetValue::",
+          this.targetValue,
+        );
+        this.targetValue = 0;
+      }
+
       switch (this.type) {
         case "greenRoof":
           this.targetValue =
@@ -261,6 +276,8 @@ export default {
           this.targetValue = this.currentStatusQuo;
           break;
       }
+
+      this.targetWidth = this.targetValue;
     },
   },
 };
@@ -304,8 +321,8 @@ export default {
         <div
           class="target"
           :style="{
-            width: `${targetValue ? targetValue.toFixed(0) : 0}%`,
-            borderWidth: targetValue > 0 ? '2px' : '0',
+            width: `${targetWidth}%`,
+            borderWidth: targetWidth > 0 ? '2px' : '0',
           }"
         ></div>
       </div>
