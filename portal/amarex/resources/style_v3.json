@@ -12,6 +12,18 @@
     ]
   },
   {
+    "styleId": "preCompute",
+    "rules": [
+      {
+        "style": {
+          "polygonStrokeWidth": 0,
+          "polygonStrokeColor": [0, 0, 0, 0],
+          "polygonFillColor": [0, 0, 0, 0]
+        }
+      }
+    ]
+  },
+  {
     "styleId": "abimo_input",
     "rules": [
       {

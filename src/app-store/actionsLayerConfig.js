@@ -171,7 +171,7 @@ export default {
     showLayerAttributions ({dispatch}, layerAttributes) {
         const layerAttribution = layerAttributes?.layerAttribution;
 
-        if (layerAttributes?.visibility && typeof layerAttribution !== "undefined" && layerAttribution !== "nicht vorhanden") {
+        if (layerAttributes?.visibility && typeof layerAttribution !== "undefined" && layerAttribution !== "nicht vorhanden" && layerAttributes.displayLayerAlert) {
             dispatch("Alerting/addSingleAlert", {
                 content: layerAttribution,
                 category: "info",

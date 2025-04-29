@@ -1,4 +1,5 @@
 import areaCalc from "../utils/areaCalculations";
+import measureCalc from "../utils/measureCalculations";
 
 const actions = {
   updateAccumulatedStats({ commit, state }) {
@@ -26,6 +27,10 @@ const actions = {
   updateResultStats({ commit }, data) {
     const stats = areaCalc.calculateResultStats(data);
     commit("setResultAbimoStats", stats);
+  },
+  updatePreComputedStats({ commit }, data) {
+    const stats = areaCalc.calculateResultStats(data);
+    commit("setPreComputedStats", stats);
   },
   updateAccordionSteps({ commit, state }, stepToSetActive) {
     if (!stepToSetActive) {
@@ -61,6 +66,51 @@ const actions = {
       isActive: step.id === stepToToggle.id ? !stepToToggle.isActive : false,
     }));
     commit("setSteps", steps);
+  },
+  async updateMeasureStats({ state, commit }) {
+    const stats = await measureCalc.calculateAllMeasureStats(
+      state.selectedFeatures,
+      state.selectedMeasures,
+    );
+    commit("setAccumulatedMeasureStats", stats);
+    commit("setNewGreenRoof", stats.newGreenRoof);
+    commit("setNewUnpvd", stats.newUnpvd);
+    commit("setNewToSwale", stats.newToSwale);
+  },
+  // New action to check if a measure can be added
+  async canAddMeasure({ state }, { tempMeasure, measureType }) {
+    const tempMeasures = [...state.selectedMeasures, tempMeasure];
+
+    const statsWithNewMeasure = await measureCalc.calculateAllMeasureStats(
+      state.selectedFeatures,
+      tempMeasures,
+    );
+
+    let canAdd = true;
+    let message = "";
+
+    switch (measureType) {
+      case "greenRoof":
+        if (statsWithNewMeasure.Agt > statsWithNewMeasure.Ag_max) {
+          canAdd = false;
+          message = "Die Maximale Gründachfläche wurde erreicht.";
+        }
+        break;
+      case "unpaved":
+        if (statsWithNewMeasure.Aet > statsWithNewMeasure.Ae_max) {
+          canAdd = false;
+          message = "Die Maximale Entsiegelungsfläche wurde erreicht.";
+        }
+        break;
+      case "swale":
+        if (statsWithNewMeasure.Amt > statsWithNewMeasure.Am_max) {
+          canAdd = false;
+          message = "Die Maximale Muldenfläche wurde erreicht.";
+        }
+        break;
+    }
+
+    return { canAdd, message, stats: statsWithNewMeasure };
   },
 };
 
