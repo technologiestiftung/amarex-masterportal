@@ -142,6 +142,45 @@
           }
         ]
       ]
+    },
+    "addons": {
+      "sections": [
+        {
+          "toolDownloader": {
+            "id": "esb-tool",
+            "title": "ESB Tool",
+            "content": "Das ESB Tool ist ein in Excel umgesetzter Zisternenrechner. Er ermöglicht die Berechnung des erforderlichen Speichernutzvolumens einer Zisterne und ist anwendbar für die Standorte Berlin und Köln.<br><br>Sie können im ESB Tool verschiedene Auffangflächen und deren spezifische Ertragsbeiwerte als Eingabedaten eingeben, um den Speicherzulauf zu berechnen. Zusätzlich können Sie Bewässerungsflächen mit spezifischen Wasserbedarfen definieren, um die Entnahme aus dem Speicher zu berechnen.<br><br>Weitere Informationen zum ESB Tool finden Sie in der Excel-Datei und der Anleitung.<br><br>Über die Download-Buttons können Sie sich die Excel-Datei und die zugehörige Anleitung herunterladen.",
+            "top-btn": {
+              "src": "./resources/tools/esb-tool/esb-tool.xlsx",
+              "text": "ESB Tool herunterladen",
+              "alt": "ESB Tool herunterladen"
+            },
+            "bottom-btn": {
+              "src": "./resources/tools/esb-tool/anleitung-esb-tool.pdf",
+              "text": "Anleitung ESB Tool herunterladen",
+              "alt": "Anleitung ESB Tool herunterladen"
+            }
+          }
+        },
+        {
+          "toolDownloader": {
+            "id": "rwb-tool",
+            "title": "RWB+ Tool",
+            "description": "Tool Downloader",
+            "content": "Das RWB+ Tool ist ein Excel-Tool mit dem Sie für Ihr eigenes Untersuchungsgebiet abschätzen können, welchen Effekt Regenwasserbewirtschaftungsanlagen (RWBA) auf die Überflutungsminderung haben.<br><br>Als Eingangsdaten werden die Gesamtgebietsgröße, die Größe der Dachflächen und das Potenzial für die Umsetzung von RWBA im Gebiet benötigt.<br><br>Weitere Informationen zum RWB+ Tool finden Sie in der Excel-Datei und der dazugehörigen Anleitung.<br><br>Über die Download-Buttons können Sie die Excel-Datei und die zugehörige Anleitung herunterladen.",
+            "top-btn": {
+              "src": "./resources/tools/esb-tool/anleitung-esb.pdf",
+              "text": "RWB+ Tool herunterladen",
+              "alt": "RWB+ Tool herunterladen"
+            },
+            "bottom-btn": {
+              "src": "./resources/tools/esb-tool/esb-tool.xlsx",
+              "text": "Anleitung RWB+ Tool herunterladen",
+              "alt": "Anleitung RWB+ Tool herunterladen"
+            }
+          }
+        }
+      ]
     }
   },
   "layerConfig": {
@@ -671,44 +710,5 @@
         }
       ]
     }
-  },
-  "addOnConfig": {
-    "sections": [
-      {
-        "toolDownloader": {
-          "id": "esb-tool",
-          "title": "ESB Tool",
-          "description": "Tool Downloader",
-          "top-btn": {
-            "src": "./resources/tools/esb-tool/anleitung-esb-pdf.pdf",
-            "text": "Anleitung ESB Tool",
-            "alt": "Anleitung ESB Tool"
-          },
-          "bttom-btn": {
-            "src": "./resources/tools/esb-tool/esb-tool.xlsx",
-            "text": "ESB Tool",
-            "alt": "ESB Tool"
-          }
-        }
-      },
-      {
-        "toolDownloader": {
-          "id": "rwb-tool",
-          "title": "RWB+ Tool",
-          "description": "Tool Downloader",
-          "top-btn": {
-            "src": "./resources/tools/esb-tool/anleitung-esb-pdf.pdf",
-            "text": "Anleitung ESB Tool",
-            "alt": "Anleitung ESB Tool"
-          },
-          "bttom-btn": {
-            "src": "./resources/tools/esb-tool/esb-tool.xlsx",
-            "text": "ESB Tool",
-            "alt": "ESB Tool"
-          }
-        }
-      }
-    ]
   }
 }
-
