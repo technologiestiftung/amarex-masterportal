@@ -141,30 +141,35 @@ export default {
       },
     },
     targetValue(newValue) {
+      let sanitizedValue = this.sanitizeTargetValue(newValue);
+
       switch (this.type) {
         case "greenRoof":
-          if (newValue > this.accumulatedAbimoStats.maxGreenRoof * 100) {
+          if (sanitizedValue > this.accumulatedAbimoStats.maxGreenRoof * 100) {
             this.targetValue = Math.floor(
               this.accumulatedAbimoStats.maxGreenRoof * 100,
             );
           }
           break;
         case "unsealed":
-          if (newValue > this.accumulatedAbimoStats.maxUnpaved * 100) {
+          if (sanitizedValue > this.accumulatedAbimoStats.maxUnpaved * 100) {
             this.targetValue = Math.floor(
               this.accumulatedAbimoStats.maxUnpaved * 100,
             );
           }
           break;
         case "swaleConnected":
-          if (newValue > this.accumulatedAbimoStats.maxSwaleConnected * 100) {
+          if (
+            sanitizedValue >
+            this.accumulatedAbimoStats.maxSwaleConnected * 100
+          ) {
             this.targetValue = Math.floor(
               this.accumulatedAbimoStats.maxSwaleConnected * 100,
             );
           }
           break;
         default:
-          if (newValue > this.currentBaseData) {
+          if (sanitizedValue > this.currentBaseData) {
             this.targetValue = this.currentBaseData;
           }
       }
@@ -180,6 +185,23 @@ export default {
       "updateMaxSwaleConnected",
       "updateAccordionSteps",
     ]),
+    sanitizeTargetValue(value) {
+      let numValue = typeof value === "string" ? Number(value) : value;
+      const maxValue = Math.min(Math.floor(this.currentBaseData), 100);
+
+      console.log("[AbimoSliderSelector] value::", value);
+
+      if (value === "") {
+        return null;
+      }
+      if (numValue % 1 !== 0) {
+        numValue = Math.round(numValue);
+      }
+      if (numValue > maxValue) {
+        numValue = maxValue;
+      }
+      return numValue;
+    },
     updateAbimoData() {
       switch (this.type) {
         case "greenRoof":
@@ -282,7 +304,7 @@ export default {
         <div
           class="target"
           :style="{
-            width: `${targetValue}%`,
+            width: `${targetValue ? targetValue.toFixed(0) : 0}%`,
             borderWidth: targetValue > 0 ? '2px' : '0',
           }"
         ></div>
@@ -313,10 +335,12 @@ export default {
         <input
           id="targetValue"
           v-model="targetValue"
+          @input="targetValue = sanitizeTargetValue($event.target.value)"
           class="target-input"
           type="number"
           min="0"
           :max="Math.floor(currentBaseData)"
+          step="1"
         />
         <p class="percentage">%</p>
       </div>
@@ -487,7 +511,7 @@ export default {
     .input-wrapper {
       position: relative;
       .target-input {
-        width: 73px;
+        width: 85px;
         padding: 7px 7px 7px 10px;
         border-radius: 0 !important;
         border: 1px solid $amarex_grey_light;
