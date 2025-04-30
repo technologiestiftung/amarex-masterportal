@@ -1970,7 +1970,7 @@
     "format": "image/png",
     "layers": "amarex:flooding_reference_100a_60min",
     "gfiAttributes": "ignore",
-    "maxScale": "2500",
+    "maxScale": "25000",
     "legend": "./resources/img/legend_flooding.svg"
   },
   {
@@ -1983,7 +1983,7 @@
     "format": "image/png",
     "layers": "amarex:flooding_swale_100a_60min_100",
     "gfiAttributes": "ignore",
-    "maxScale": "2500",
+    "maxScale": "25000",
     "legend": "./resources/img/legend_flooding.svg"
   },
   {
