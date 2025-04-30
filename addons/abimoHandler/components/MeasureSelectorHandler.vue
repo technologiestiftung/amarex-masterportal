@@ -113,6 +113,11 @@ export default {
           // First click - reset any previous selection
           this.resetSelection();
 
+          // Restore original icon if there was a previously marked feature
+          if (this.markedForDeletion) {
+            this.restoreOriginalIcon();
+          }
+
           // Mark this feature for deletion and replace its icon
           this.markFeatureForDeletion(feature);
         }
@@ -120,6 +125,8 @@ export default {
         this.isProcessingClick = false;
         return;
       }
+
+      // If clicked elsewhere and we have a marked feature, restore it
       if (this.markedForDeletion) {
         this.restoreOriginalIcon();
       }
