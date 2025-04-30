@@ -177,8 +177,8 @@ export default {
             {
               text: "Zurück",
               action: () => {
+                this.setPreselectedFeatures(this.selectedFeatures);
                 this.resetAbimoCalculation();
-                this.setPreselectedFeatures([]);
                 this.setSelectedMeasures([]);
                 mapCollection
                   .getMap("2D")
