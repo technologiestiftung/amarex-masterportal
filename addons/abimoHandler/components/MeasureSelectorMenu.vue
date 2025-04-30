@@ -284,12 +284,12 @@ export default {
                 @click="selectSize(size)"
               >
                 <div class="size-option-main">{{ config.label }}</div>
-                <div
+                <!-- <div
                   class="size-option-details"
                   v-if="activeMeasureSize === size"
                 >
                   {{ getSizeDetails(size) }}
-                </div>
+                </div> -->
               </div>
             </div>
 
