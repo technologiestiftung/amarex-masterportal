@@ -1962,7 +1962,7 @@
   },
   {
     "id": "flooding_wms:flooding_reference_100a_60min",
-    "name": "Überflutungskarten. Maximale Wasserstände infolge eines 100-jährlichen Niederschlagsereignisses. Referenzmodell: Keine Berücksichtigung von Regenwasser-bewirtschaftungsanlagen.",
+    "name": "Referenzmodell ohne RWBA, Regenbelastung T = 100 a, D = 60 min",
     "crs": "EPSG:25833",
     "url": "https://geoserver.ionos.ds-apps.tsb-berlin.de/geoserver/amarex/wms",
     "capabilitiesUrl": "https://geoserver.ionos.ds-apps.tsb-berlin.de/geoserver/amarex/wms?service=wms&request=GetCapabilities",
