@@ -309,6 +309,10 @@ export default {
 <style lang="scss" scoped>
 @import "~variables";
 
+:global(.ol-overlaycontainer-stopevent) {
+  z-index: 1000 !important;
+}
+
 .measure-menu-container {
   position: absolute;
   left: -200px;
