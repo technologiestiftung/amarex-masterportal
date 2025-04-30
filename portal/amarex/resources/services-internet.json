@@ -1975,7 +1975,7 @@
   },
   {
     "id": "flooding_wms:flooding_swale_100a_60min_100",
-    "name": "Überflutungskarten. Maximale Wasserstände infolge eines 100-jährlichen Niederschlagsereignisses. Mulden 100 a: Alle Dachflächen an Mulden (dimensioniert auf T = 100 a) angeschlossen.",
+    "name": "Mulden 100 a, Implementierungsgrad 100 %, Regenbelastung T = 100 a, D = 60 min.",
     "crs": "EPSG:25833",
     "url": "https://geoserver.ionos.ds-apps.tsb-berlin.de/geoserver/amarex/wms",
     "capabilitiesUrl": "https://geoserver.ionos.ds-apps.tsb-berlin.de/geoserver/amarex/wms?service=wms&request=GetCapabilities",
