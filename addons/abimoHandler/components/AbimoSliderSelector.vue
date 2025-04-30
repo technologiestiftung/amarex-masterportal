@@ -190,8 +190,6 @@ export default {
       let numValue = typeof value === "string" ? Number(value) : value;
       const maxValue = Math.min(Math.floor(this.currentBaseData), 100);
 
-      console.log("[AbimoSliderSelector] value::", value);
-
       if (value === "") {
         this.targetWidth = 0;
         return null;
@@ -206,8 +204,6 @@ export default {
       return numValue;
     },
     updateAbimoData() {
-      console.log("[AbimoSliderSelector] this.targetValue::", this.targetValue);
-
       switch (this.type) {
         case "greenRoof":
           if (
@@ -243,38 +239,30 @@ export default {
       }
     },
     initializeTargetValue() {
-      console.log("[AbimoSliderSelector] this.targetValue::", this.targetValue);
-
-      console.log(
-        "[AbimoSliderSelector] this.newGreenRoof::",
-        this.newGreenRoof,
-      );
-
-      if (!this.targetValue) {
-        console.log(
-          "[AbimoSliderSelector] this.targetValue INSIDE !this.targetValue::",
-          this.targetValue,
-        );
+      if (this.targetValue == null || this.targetValue === "") {
         this.targetValue = 0;
       }
 
       switch (this.type) {
         case "greenRoof":
           this.targetValue =
-            (this.newGreenRoof * 100).toFixed() > 0
-              ? (this.newGreenRoof * 100).toFixed()
+            this.newGreenRoof !== null &&
+            parseFloat((this.newGreenRoof * 100).toFixed()) >= 0
+              ? parseFloat((this.newGreenRoof * 100).toFixed())
               : this.currentStatusQuo;
           break;
         case "unsealed":
           this.targetValue =
-            (this.newUnpvd * 100).toFixed() > 0
-              ? (this.newUnpvd * 100).toFixed()
+            this.newUnpvd !== null &&
+            parseFloat((this.newUnpvd * 100).toFixed()) >= 0
+              ? parseFloat((this.newUnpvd * 100).toFixed())
               : this.currentStatusQuo;
           break;
         case "swaleConnected":
           this.targetValue =
-            (this.newToSwale * 100).toFixed() > 0
-              ? (this.newToSwale * 100).toFixed()
+            this.newToSwale !== null &&
+            parseFloat((this.newToSwale * 100).toFixed()) >= 0
+              ? parseFloat((this.newToSwale * 100).toFixed())
               : this.currentStatusQuo;
           break;
         default:

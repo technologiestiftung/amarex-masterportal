@@ -363,9 +363,9 @@ export default {
         .values_.source.clear();
       this.removeInteractionFromMap(this.selectInteraction);
       this.setSelectedFeatures([]);
-      this.setNewGreenRoof(0);
-      this.setNewUnpvd(0);
-      this.setNewToSwale(0);
+      this.setNewGreenRoof(null);
+      this.setNewUnpvd(null);
+      this.setNewToSwale(null);
       this.setSelectInteraction(null);
       this.updateAccumulatedStats();
       this.setResetTargetValues(true);
@@ -386,9 +386,9 @@ export default {
           .find((layer) => layer.get("id") === "planung_abimo")
           .values_.source.clear();
         await this.setPreselectedFeatures(this.selectedFeatures);
-        this.setNewGreenRoof(0);
-        this.setNewUnpvd(0);
-        this.setNewToSwale(0);
+        this.setNewGreenRoof(null);
+        this.setNewUnpvd(null);
+        this.setNewToSwale(null);
         this.updateAccumulatedStats();
         this.setBlockAreaConfirmed(false);
       }
@@ -573,7 +573,6 @@ export default {
       v-if="calcState === 'error'"
       class="error-container d-flex flex-column align-items-center"
     >
-      <p>!!!</p>
       <p class="title">Es ist leider ein Fehler aufgetreten.</p>
       <AbimoCalcButton
         :content="'Nochmal probieren'"
