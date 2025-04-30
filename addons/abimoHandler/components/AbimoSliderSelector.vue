@@ -206,6 +206,8 @@ export default {
       return numValue;
     },
     updateAbimoData() {
+      console.log("[AbimoSliderSelector] this.targetValue::", this.targetValue);
+
       switch (this.type) {
         case "greenRoof":
           if (
@@ -243,11 +245,14 @@ export default {
     initializeTargetValue() {
       console.log("[AbimoSliderSelector] this.targetValue::", this.targetValue);
 
-      console.log('[AbimoSliderSelector] this.newGreenRoof::', this.newGreenRoof);
+      console.log(
+        "[AbimoSliderSelector] this.newGreenRoof::",
+        this.newGreenRoof,
+      );
 
       if (!this.targetValue) {
         console.log(
-          "[AbimoSliderSelector] this.targetValue::",
+          "[AbimoSliderSelector] this.targetValue INSIDE !this.targetValue::",
           this.targetValue,
         );
         this.targetValue = 0;
