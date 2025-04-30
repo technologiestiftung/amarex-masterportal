@@ -5,7 +5,7 @@ const actions = {
   updateAccumulatedStats({ commit, state }) {
     const stats = areaCalc.calculateAllStats(
       state.selectedFeatures,
-      state.newUnpvd,
+      state.newUnpvd || 0,
     );
     commit("setAccumulatedAbimoStats", stats);
 

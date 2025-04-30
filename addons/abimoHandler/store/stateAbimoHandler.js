@@ -73,9 +73,9 @@ export default {
     infiltration: 0,
   },
 
-  newGreenRoof: 0,
-  newUnpvd: 0,
-  newToSwale: 0,
+  newGreenRoof: null,
+  newUnpvd: null,
+  newToSwale: null,
 
   resultLayers: [],
   selectedThemeMap: null,

@@ -3,7 +3,6 @@ import { mapActions, mapGetters, mapMutations } from "vuex";
 import { EyeOff, EyeIcon, Settings, Map as MapIcon } from "lucide-vue-next";
 import colors from "../../../src/shared/js/utils/amarex-colors.json";
 import SliderItem from "../../../src/shared/modules/slider/components/SliderItem.vue";
-import areaCalc from "../utils/areaCalculations";
 
 /**
  * AbimoResult
@@ -84,21 +83,6 @@ export default {
         this.selectedThemeMap = themeMap;
       }
     },
-    calculateDeltaW() {
-      const deltaWResult = this.resultAbimoStats.deltaW;
-      const preComputedDeltaW = this.preComputedStats.deltaW;
-
-      // todo: remove when all calculations are correct
-      console.log(
-        "[AbimoResult] deltaWResult, preComputedDeltaW::",
-        deltaWResult,
-        preComputedDeltaW,
-      );
-      
-      return areaCalc.calculatePrecisely(
-        Math.abs(deltaWResult - preComputedDeltaW),
-      );
-    },
   },
 };
 </script>
@@ -141,7 +125,7 @@ export default {
     <p
       class="description"
       v-html="
-        `Durch die von Ihnen vorgenommenen Planungsmaßnahmen würde sich der Wert <strong>∆W um ${calculateDeltaW().toFixed(2)} %</strong> verändern.`
+        `Durch die von Ihnen vorgenommenen Planungsmaßnahmen würde sich der Wert ∆W von <strong>${this.preComputedStats.deltaW.toFixed(2)}%</strong> auf <strong>${this.resultAbimoStats.deltaW.toFixed(2)}% </strong> verändern.`
       "
     ></p>
     <p class="description">
