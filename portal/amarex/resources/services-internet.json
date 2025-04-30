@@ -1958,6 +1958,35 @@
     "searchField": "delta_w"
   },
   {
+    "id": "Überflutungskarten"
+  },
+  {
+    "id": "flooding_wms:flooding_reference_100a_60min",
+    "name": "Referenzmodell ohne RWBA, Regenbelastung T = 100 a, D = 60 min",
+    "crs": "EPSG:25833",
+    "url": "https://geoserver.ionos.ds-apps.tsb-berlin.de/geoserver/amarex/wms",
+    "capabilitiesUrl": "https://geoserver.ionos.ds-apps.tsb-berlin.de/geoserver/amarex/wms?service=wms&request=GetCapabilities",
+    "typ": "WMS",
+    "format": "image/png",
+    "layers": "amarex:flooding_reference_100a_60min",
+    "gfiAttributes": "ignore",
+    "maxScale": "2500",
+    "legend": "./resources/img/legend_flooding.svg"
+  },
+  {
+    "id": "flooding_wms:flooding_swale_100a_60min_100",
+    "name": "Mulden 100 a, Implementierungsgrad 100 %, Regenbelastung T = 100 a, D = 60 min.",
+    "crs": "EPSG:25833",
+    "url": "https://geoserver.ionos.ds-apps.tsb-berlin.de/geoserver/amarex/wms",
+    "capabilitiesUrl": "https://geoserver.ionos.ds-apps.tsb-berlin.de/geoserver/amarex/wms?service=wms&request=GetCapabilities",
+    "typ": "WMS",
+    "format": "image/png",
+    "layers": "amarex:flooding_swale_100a_60min_100",
+    "gfiAttributes": "ignore",
+    "maxScale": "2500",
+    "legend": "./resources/img/legend_flooding.svg"
+  },
+  {
     "id": "Themenkarten:"
   },
   {
