@@ -1545,9 +1545,9 @@ async function monitorJobStatus(statusURL) {
     );
     const statusData = await response.json();
 
-    console.log(
-      `Status: ${statusData.status}, Zeit: ${statusData.elapsedTime}ms`,
-    );
+    // console.log(
+    //   `Status: ${statusData.status}, Zeit: ${statusData.elapsedTime}ms`,
+    // );
 
     if (statusData.done) {
       if (statusData.status !== "finished") {
