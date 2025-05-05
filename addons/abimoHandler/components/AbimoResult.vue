@@ -40,6 +40,7 @@ export default {
   mounted() {
     this.setPreComputedModelsShown(false);
 
+
     if (this.resultLayers.length === 0) {
       // result layers
       let resultLayers = this.allLayerConfigs.filter(
@@ -125,12 +126,12 @@ export default {
     <p
       class="description"
       v-html="
-        `Durch die von Ihnen vorgenommenen Planungsmaßnahmen würde sich der Wert ∆W von <strong>${this.preComputedStats.deltaW.toFixed(2)}%</strong> auf <strong>${this.resultAbimoStats.deltaW.toFixed(2)}% </strong> verändern.`
+        `Durch die von Ihnen vorgenommenen Planungs&shy;maßnahmen würde sich der Wert ∆W von <strong>${this.preComputedStats.deltaW.toFixed(2)}%</strong> auf <strong>${this.resultAbimoStats.deltaW.toFixed(2)}% </strong> verändern.`
       "
     ></p>
     <p class="description">
       <strong>∆W</strong> bezeichnet die Abweichung vom natürlichen
-      Wasserhaushalt in Prozent.
+      Wasser&shy;haushalt in Prozent.
     </p>
     <div class="layer-container d-flex flex-column">
       <p class="title">Berechnete Ergebnislayer</p>

@@ -125,6 +125,48 @@ const actions = {
 
     return { canAdd, message, stats: statsWithNewMeasure };
   },
+  storeTargetSliderValue({ commit, state }, { type, value }) {
+    const keyMap = {
+      greenRoof: "targetValueGreenRoof",
+      unsealed: "targetValueUnsealed",
+      swaleConnected: "targetValueSwaleConnected",
+    };
+
+    const targetKey = keyMap[type];
+
+    if (!targetKey) {
+      console.warn(`Invalid type passed to storeTargetSliderValue: ${type}`);
+      return;
+    }
+
+    const updatedState = {
+      ...state.accumulatedAbimoStats,
+      [targetKey]: value,
+    };
+
+    commit("setAccumulatedAbimoStats", updatedState);
+  },
+  storeInitalTargetSliderValue({ commit, state }, { type, value }) {
+    const keyMap = {
+      greenRoof: "initialTargetValueGreenRoof",
+      unsealed: "initialTargetValueUnsealed",
+      swaleConnected: "initialTargetValueSwaleConnected",
+    };
+
+    const targetKey = keyMap[type];
+
+    if (!targetKey) {
+      console.warn(`Invalid type passed to storeTargetSliderValue: ${type}`);
+      return;
+    }
+
+    const updatedState = {
+      ...state.accumulatedAbimoStats,
+      [targetKey]: value,
+    };
+
+    commit("setAccumulatedAbimoStats", updatedState);
+  },
 };
 
 export default actions;

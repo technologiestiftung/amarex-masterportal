@@ -33,7 +33,7 @@ export default {
       <p class="title">Gebietsplanung</p>
       <img :src="src1" />
       <p class="description">
-        Für die Gebietsplanungstellen wir Ihnen unsere Schieberelger zur
+        Für die Gebietsplanung stellen wir Ihnen unsere Schieberelger zur
         Verfügung, mit welchen Sie auf relativer Ebene Maßnahmen vergeben
         können.
       </p>
@@ -48,7 +48,7 @@ export default {
       <p class="title">Lokale Planung</p>
       <img :src="src2" />
       <p class="description">
-        Mit unserem Maßnahmentool, können Sie mehrere Maßnahmen frei innerhalb
+        Mit unserem Maßnahmentool können Sie mehrere Maßnahmen frei innerhalb
         einer Blockteilfläche verorten.
       </p>
       <button

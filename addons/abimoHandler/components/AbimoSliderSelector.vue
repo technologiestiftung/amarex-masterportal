@@ -45,7 +45,7 @@ export default {
           description: (area = "XXXX", percentage = "XX") => {
             // @Luise: Please input the correct area and percentage for swaleConnected
             if (!area || !percentage)
-              return "Welchen Anteil möchten Sie an Mulden anschliessen?";
+              return "Welchen Anteil möchten Sie an Mulden anschließen?";
             return `Bei den von Ihnen gewählten Flächen stehen ${area} m² (${percentage}%) unbebaut versiegelte Fläche zur Verfügung.`;
           },
         },
@@ -174,6 +174,7 @@ export default {
             this.targetValue = this.currentBaseData;
           }
       }
+      this.storeTargetSliderValue({ type: this.type, value: this.targetValue });
     },
   },
   methods: {
@@ -185,6 +186,8 @@ export default {
     ...mapActions("Modules/AbimoHandler", [
       "updateMaxSwaleConnected",
       "updateAccordionSteps",
+      "storeTargetSliderValue",
+      "storeInitalTargetSliderValue",
     ]),
     sanitizeTargetValue(value) {
       let numValue = typeof value === "string" ? Number(value) : value;
@@ -271,6 +274,10 @@ export default {
       }
 
       this.targetWidth = this.targetValue;
+      this.storeInitalTargetSliderValue({
+        type: this.type,
+        value: this.targetValue,
+      });
     },
   },
 };

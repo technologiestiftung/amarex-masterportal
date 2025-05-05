@@ -5,9 +5,6 @@
   "projectDownloader": {
     "type": "tool"
   },
-  "reportPrinter": {
-    "type": "tool"
-  },
   "fileImporter": {
     "type": "tool"
   },

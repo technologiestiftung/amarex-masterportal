@@ -37,7 +37,7 @@ export default {
           id: "PreComputedModels",
           title: "Vorberechnete Modelle",
           description:
-            "Zur Status Quo Analyse können Sie mit den vorberechneten Karten aus dem Kartenkatalog starten.<br><br>Möchten Sie diese ihrer Bearbeitung hinzufügen?",
+            "Zur Status Quo Analyse können Sie mit den vorberechneten Karten aus dem Kartenkatalog starten.<br><br>Möchten Sie diese Ihrer Bearbeitung hinzufügen?",
           continueDescription:
             "Sie haben jetzt die vorberechneten Modelle Delta W und Abimo hinzugefügt.",
           buttons: [
@@ -197,7 +197,18 @@ export default {
           props: {
             openInfoFromResults: (info) => this.openInfo(info),
           },
+          buttonsFullWidth: true,
           buttons: [
+            {
+              text: "Report erstellen",
+              action: async () => {
+                const button = document.querySelector(".stepper-root #print");
+                if (button) {
+                  button.click();
+                }
+              },
+              accent: true,
+            },
             {
               text: "Neue Berechnung starten",
               action: async () => {
@@ -463,19 +474,31 @@ export default {
             (preComputedModelsAdded || preComputedModelsShown),
         }"
       >
-        <button
-          class="amarex-btn-primary full accent"
+        <span
           v-if="
             activeStep === 0 &&
             (preComputedModelsAdded || preComputedModelsShown)
           "
-          @click="steps[activeStep]?.buttons[1].action"
-          :style="{
-            marginBottom: '16px',
-          }"
         >
-          <p>Weiter</p>
-        </button>
+          <button
+            class="amarex-btn-primary full accent"
+            @click="steps[activeStep]?.buttons[1].action"
+            :style="{
+              marginBottom: '16px',
+            }"
+          >
+            <p>Weiter</p>
+          </button>
+          <button
+            class="amarex-btn-primary full"
+            @click="resetPreComputedModels"
+            :style="{
+              marginBottom: '16px',
+            }"
+          >
+            <p>Zurück</p>
+          </button>
+        </span>
         <span v-else>
           <button
             class="amarex-btn-primary full accent"
@@ -522,6 +545,7 @@ export default {
       <div
         v-if="!steps[activeStep]?.upperButtons"
         class="btn-container d-flex"
+        :class="{ 'flex-column': steps[activeStep]?.buttonsFullWidth }"
       >
         <span
           v-for="(btn, btnIndex) in steps[activeStep]?.buttons"

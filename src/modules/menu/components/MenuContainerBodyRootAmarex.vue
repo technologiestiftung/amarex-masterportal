@@ -16,6 +16,7 @@ export default {
                 { label: 'Hintergrundkarten', component: 'baseMaps' },
                 { label: 'Themenkarten', component: 'themeMaps' },
                 { label: 'Wasserhaushalt berechnen', component: 'abimoHandler' },
+                { label: 'Report erstellen', component: 'print' },
                 // { label: 'Maßnahmenpotentiale', component: 'actionPotentials' },
                 // { label: 'Eigene Ebenen', component: '?' },
                 // { label: '6. Geodaten importieren', component: 'fileImporter' },
@@ -25,9 +26,7 @@ export default {
                 // { label: 'X. Eigene Notizen', component: 'draw_old' },
                 { label: 'ESB Tool', component: 'toolDownloader', id: 'esb-tool' },
                 { label: 'RWB+ Tool', component: 'toolDownloader', id: 'rwb-tool' },
-                // { label: 'Report', component: 'print' },
                 // { label: 'X. Multikriterien Analyse', component: 'multiCriteria' },
-                // { label: 'X. Report zusammenstellen', component: 'reportPrinter' },
                 // { label: 'X. Projekt speichern/exportieren', component: 'projectDownloader' }
             ],
             currentStepIndex: 0
@@ -43,6 +42,7 @@ export default {
     },
     computed: {
         ...mapGetters("Menu", [
+            "currentComponentName",
             "mainMenu",
             "secondaryMenu",
             "titleBySide", 
@@ -120,6 +120,7 @@ export default {
                 :key="index"
                 class="step-indicator"
                 :class="{ 'active': index === currentStepIndex }"
+                :id="step.component.toString()"
                 @click="selectStep(step, index, true)"
             >
                 <p>{{ step.label }}</p>

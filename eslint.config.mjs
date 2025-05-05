@@ -57,3 +57,4 @@ export default [
   ...pluginVue.configs["flat/essential"],
   eslintConfigPrettier,
 ];
+
