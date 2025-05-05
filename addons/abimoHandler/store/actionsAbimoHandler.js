@@ -80,6 +80,8 @@ const actions = {
     commit("setNewGreenRoof", stats.newGreenRoof);
     commit("setNewUnpvd", stats.newUnpvd);
     commit("setNewToSwale", stats.newToSwale);
+
+    console.log("[actionsAbimoHandler] updateMeasureStats::", stats);
   },
   // New action to check if a measure can be added
   async canAddMeasure({ state }, { tempMeasure, measureType }) {
@@ -97,19 +99,26 @@ const actions = {
       case "greenRoof":
         if (statsWithNewMeasure.Agt > statsWithNewMeasure.Ag_max) {
           canAdd = false;
-          message = "Die maximale Gründachfläche wurde erreicht.";
+          message = "Gründach: die verfügbare Dachfläche wurde überschritten.";
         }
         break;
       case "unpaved":
+        if (statsWithNewMeasure.Amt > statsWithNewMeasure.Am_max) {
+          canAdd = false;
+          message =
+            "Diese Fläche entwässert bereits in eine Versickerungsmulde. Eine weitere Entsiegelung ist nicht möglich.";
+        }
         if (statsWithNewMeasure.Aet > statsWithNewMeasure.Ae_max) {
           canAdd = false;
-          message = "Die maximale Entsiegelungsfläche wurde erreicht.";
+          message =
+            "Entsiegelung: die verfügbare unbebaute abflusswirksame Fläche wurde überschritten.";
         }
         break;
       case "swale":
         if (statsWithNewMeasure.Amt > statsWithNewMeasure.Am_max) {
           canAdd = false;
-          message = "Die maximale Muldenfläche wurde erreicht.";
+          message =
+            "Versickerungsmulden: Sie haben die maximale Anschlussfläche überschritten.";
         }
         break;
     }

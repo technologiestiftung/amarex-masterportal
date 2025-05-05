@@ -66,6 +66,7 @@ function calculateAllMeasureStats(selectedFeatures, selectedMeasures) {
   );
 
   const stats = selectedFeatures[0].getProperties();
+  console.log("[measureCalculations] stats::", stats);
 
   let total_area = parseFloat(stats.total_area);
   let main_frac = 1;
@@ -99,6 +100,7 @@ function calculateAllMeasureStats(selectedFeatures, selectedMeasures) {
 
   // 2.1. Calculate total area of each measure type in m²
   const totalUnpavedArea = calculateTotalMeasureArea(unpavedMeasures); // Ae = Ae_1 + Ae_2 + ...
+  // const Ae = calculateTotalMeasureArea(unpavedMeasures);
 
   // 2.2. Calculate total area of existing unpaved areas in m²
   const Ae_0 = areaCalc.calculatePrecisely(
@@ -109,6 +111,9 @@ function calculateAllMeasureStats(selectedFeatures, selectedMeasures) {
   const Ae_max = areaCalc.calculatePrecisely(
     (1 - roof) * main_frac * total_area,
   );
+  
+  // const Ae_max_pvd = areaCalc.calculatePrecisely(pvd * main_frac * total_area);
+  // console.log("[measureCalculations] Ae_max_pvd::", Ae_max_pvd);
 
   // 2.4. Calculate new area of unpaved areas in m²
   const Ae_neu = Math.min(totalUnpavedArea + Ae_0, Ae_max);
@@ -134,16 +139,16 @@ function calculateAllMeasureStats(selectedFeatures, selectedMeasures) {
 
   // 3.3. Calculate maximum possible area of swales in m²
   const Am_max = areaCalc.calculatePrecisely(
-    (pvd + pvd_neu) * main_frac * total_area,
+    (roof + pvd_neu) * main_frac * total_area,
   );
 
   // 3.4. Calculate new area of swales in m²
-  const Am_neu = Math.min(totalSwaleArea + Am_0, Am_max);
+  const Am_neu = Math.min(totalSwaleConnectedArea + Am_0, Am_max);
 
   // 3.5. Calculate new area of swales in m²
   const newToSwale = areaCalc.calculatePrecisely(Am_neu / total_area);
 
-  const Amt = areaCalc.calculatePrecisely(totalSwaleArea + Am_0);
+  const Amt = areaCalc.calculatePrecisely(totalSwaleConnectedArea + Am_0);
 
   return {
     // Number of measures
