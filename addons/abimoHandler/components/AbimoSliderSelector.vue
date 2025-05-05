@@ -36,7 +36,7 @@ export default {
           description: (area = "XXXX", percentage = "XX") => {
             // @Luise: Please input the correct area and percentage for unsealed
             if (!area || !percentage)
-              return "Möchten Sie diesen Anteil variieren?";
+              return "Möchten Sie den Anteil unversiegelter Flächen variieren?";
             return `Bei den von Ihnen gewählten Flächen stehen ${area} m² (${percentage}%) unbebaute Fläche zur Verfügung.<br><br>Möchten Sie diesen Anteil variieren?`;
           },
         },
@@ -46,7 +46,7 @@ export default {
             // @Luise: Please input the correct area and percentage for swaleConnected
             if (!area || !percentage)
               return "Welchen Anteil möchten Sie an Mulden anschliessen?";
-            return `Bei den von Ihnen gewählten Flächen stehen ${area} m² (${percentage}%) unverbaute Fläche zur Verfügung.Dieser Wert ist abhängig von der im vorhergehenden Schritt gewählten unversiegelten Fläche.<br><br>Welchen Anteil möchten Sie an Mulden anschliessen?`;
+            return `Bei den von Ihnen gewählten Flächen stehen ${area} m² (${percentage}%) unbebaut versiegelte Fläche zur Verfügung.`;
           },
         },
       },
@@ -383,7 +383,7 @@ export default {
     >
       <div class="color-indicator notUsable"></div>
       <p class="description-with-smaller-lineheight flex-fill">
-        nicht nutzbare Fläche
+        nicht anschließbare Fläche
       </p>
       <p class="description-with-smaller-lineheight">
         {{ (100 - currentBaseData).toFixed(0) }} %
@@ -435,7 +435,7 @@ export default {
     >
       <div class="color-indicator notUsable"></div>
       <p class="description-with-smaller-lineheight flex-fill">
-        nicht nutzbare Fläche
+        nicht anschließbare Fläche
       </p>
       <p class="description-with-smaller-lineheight">
         {{ (100 - currentBaseData).toFixed(0) }} %

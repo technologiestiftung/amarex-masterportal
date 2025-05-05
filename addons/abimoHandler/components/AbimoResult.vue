@@ -118,7 +118,7 @@ export default {
     <div
       class="stats-container d-flex justify-content-between w-100 align-items-center last"
     >
-      <p class="description">Delta ∆W</p>
+      <p class="description">∆W</p>
       <p class="description">{{ this.resultAbimoStats.deltaW.toFixed(0) }} %</p>
     </div>
     <span class="line"></span>
