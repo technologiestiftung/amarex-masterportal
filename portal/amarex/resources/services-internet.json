@@ -1814,7 +1814,7 @@
   {
     "id": "abimo_2025_wfs:evaporatio",
     "styleId": "abimo_evapor",
-    "name": "Verdunstung 2025",
+    "name": "Verdunstung",
     "crs": "EPSG:25833",
     "url": "https://geoserver.ionos.ds-apps.tsb-berlin.de/geoserver/amarex/wfs",
     "typ": "WFS",
@@ -1829,7 +1829,7 @@
   {
     "id": "abimo_2025_wfs:surface_ru",
     "styleId": "abimo_runoff",
-    "name": "Oberflächenabfluss 2025",
+    "name": "Oberflächenabfluss",
     "crs": "EPSG:25833",
     "url": "https://geoserver.ionos.ds-apps.tsb-berlin.de/geoserver/amarex/wfs",
     "typ": "WFS",
@@ -1843,7 +1843,7 @@
   },
   {
     "id": "abimo_2025_wfs:infiltrati",
-    "name": "Infiltration 2025",
+    "name": "Infiltration",
     "styleId": "abimo_infiltr",
     "crs": "EPSG:25833",
     "url": "https://geoserver.ionos.ds-apps.tsb-berlin.de/geoserver/amarex/wfs",
@@ -1859,7 +1859,7 @@
   {
     "id": "delta_w_2025_wfs",
     "styleId": "delta_w",
-    "name": "∆W - Abweichung vom natürlichen Wasserhaushalt 2025",
+    "name": "∆W - Abweichung vom natürlichen Wasserhaushalt",
     "crs": "EPSG:25833",
     "url": "https://geoserver.ionos.ds-apps.tsb-berlin.de/geoserver/amarex/wfs",
     "typ": "WFS",
@@ -1873,7 +1873,7 @@
   {
     "id": "abimo_2025_wfs:preCompute",
     "styleId": "preCompute",
-    "name": "Verdunstung 2025",
+    "name": "Verdunstung",
     "crs": "EPSG:25833",
     "url": "https://geoserver.ionos.ds-apps.tsb-berlin.de/geoserver/amarex/wfs",
     "typ": "WFS",
