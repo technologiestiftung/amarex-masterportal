@@ -194,11 +194,11 @@ export default {
 
       switch (type) {
         case "swale":
-          return `Volumen: ${sizeData.volume}m³, Angeschlossene Fläche: ${sizeData.connectedArea}m²`;
+          return `Angeschlossene Fläche: ${sizeData.connectedArea}m²`;
         case "greenRoof":
-          return `Länge: ${sizeData.length}m, Breite: ${sizeData.width}m, Höhe: ${sizeData.height}m`;
+          return ``;
         case "unpaved":
-          return `Länge: ${sizeData.length}m, Breite: ${sizeData.width}m`;
+          return ``;
         default:
           return "";
       }
@@ -284,12 +284,12 @@ export default {
                 @click="selectSize(size)"
               >
                 <div class="size-option-main">{{ config.label }}</div>
-                <!-- <div
+                <div
                   class="size-option-details"
-                  v-if="activeMeasureSize === size"
+                  v-if="activeMeasureSize === size && selectedMeasure.type === 'swale'"
                 >
                   {{ getSizeDetails(size) }}
-                </div> -->
+                </div>
               </div>
             </div>
 
