@@ -578,6 +578,111 @@ const abimoStyleList = [
       },
     ],
   },
+  {
+    styleId: "measure_placements",
+    // rules are beeing added to the map printer
+    rules: [
+      {
+        conditions: { properties: { style: "greenRoof_small" } },
+        style: {
+          type: "icon",
+          imageName: "measure-greenroof.svg",
+          imageWidth: 30,
+          imageHeight: 30,
+          imageScale: 0.8,
+          anchor: [0.5, 0.5],
+        },
+      },
+      {
+        conditions: { properties: { style: "greenRoof_medium" } },
+        style: {
+          type: "icon",
+          imageName: "measure-greenroof.svg",
+          imageWidth: 30,
+          imageHeight: 30,
+          imageScale: 1,
+          anchor: [0.5, 0.5],
+        },
+      },
+      {
+        conditions: { properties: { style: "greenRoof_large" } },
+        style: {
+          type: "icon",
+          imageName: "measure-greenroof.svg",
+          imageWidth: 30,
+          imageHeight: 30,
+          imageScale: 1,
+          anchor: [0.5, 0.5],
+        },
+      },
+      {
+        conditions: { properties: { style: "swale_small" } },
+        style: {
+          type: "icon",
+          imageName: "measure-swale.svg",
+          imageWidth: 30,
+          imageHeight: 30,
+          imageScale: 0.8,
+          anchor: [0.5, 0.5],
+        },
+      },
+      {
+        conditions: { properties: { style: "swale_medium" } },
+        style: {
+          type: "icon",
+          imageName: "measure-swale.svg",
+          imageWidth: 30,
+          imageHeight: 30,
+          imageScale: 1,
+          anchor: [0.5, 0.5],
+        },
+      },
+      {
+        conditions: { properties: { style: "swale_large" } },
+        style: {
+          type: "icon",
+          imageName: "measure-swale.svg",
+          imageWidth: 30,
+          imageHeight: 30,
+          imageScale: 1,
+          anchor: [0.5, 0.5],
+        },
+      },
+      {
+        conditions: { properties: { style: "unpavd_small" } },
+        style: {
+          type: "icon",
+          imageName: "measure-unpvd.svg",
+          imageWidth: 30,
+          imageHeight: 30,
+          imageScale: 0.8,
+          anchor: [0.5, 0.5],
+        },
+      },
+      {
+        conditions: { properties: { style: "unpavd_medium" } },
+        style: {
+          type: "icon",
+          imageName: "measure-unpvd.svg",
+          imageWidth: 30,
+          imageHeight: 30,
+          imageScale: 1,
+          anchor: [0.5, 0.5],
+        },
+      },
+      {
+        conditions: { properties: { style: "unpavd_large" } },
+        style: {
+          type: "icon",
+          imageName: "measure-unpvd.svg",
+          imageWidth: 30,
+          imageHeight: 30,
+          imageScale: 1,
+          anchor: [0.5, 0.5],
+        },
+      },
+    ],
+  },
 ];
 
 export default abimoStyleList;
