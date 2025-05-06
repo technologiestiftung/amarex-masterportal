@@ -740,7 +740,6 @@ const BuildSpecModel = {
         if (feature.get("styleId")) {
             // If styleId is an object with property field, use that property
             if (typeof feature.get("styleId") === 'object' && feature.get("styleId").property) {
-                console.log('[getStylingRules] styleId is an object with property:', feature.get("styleId").property);
                 styleAttr = [feature.get("styleId").property];
             } else {
                 // Otherwise use "styleId" as the attribute name
@@ -831,10 +830,8 @@ const BuildSpecModel = {
                 // If we're using styleId as the attribute but it's actually an object with a property field
                 const propertyName = feature.get("styleId").property;
                 attrValue = feature.get(propertyName);
-                console.log(`[buildSpec] Using styleId.property: ${propertyName} with value ${attrValue}`);
             } else {
                 attrValue = feature.get(curr);
-                console.log(`[buildSpec] Processing attribute ${curr} with value ${attrValue}`);
             }
             
             return acc + `${curr}='${attrValue}',`;
