@@ -259,7 +259,7 @@ export default {
           image: new Circle({
             radius: circleRadius,
             fill: new Fill({
-              color: "rgba(255, 255, 255, 0.75)",
+              color: [255, 255, 255, 0.75],
             }),
           }),
         }),
@@ -281,6 +281,7 @@ export default {
         ...measure,
         featureId: featureId,
         size: size,
+        style: `${measure.type}_${size}`,
         measureFeature: measureFeature,
       };
 
