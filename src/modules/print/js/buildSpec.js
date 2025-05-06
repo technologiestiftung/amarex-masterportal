@@ -734,8 +734,21 @@ const BuildSpecModel = {
         if (Object.prototype.hasOwnProperty.call(feature.getProperties(), "masterportal_attributes") && feature.get("masterportal_attributes").styleId) {
             feature.set("styleId", feature.get("masterportal_attributes").styleId);
         }
-
-        styleAttr = feature.get("styleId") ? "styleId" : styleAttributes;
+        
+        // Modified version that ensures consistent type handling
+        // Check if styleId exists and if it's a string or an object
+        if (feature.get("styleId")) {
+            // If styleId is an object with property field, use that property
+            if (typeof feature.get("styleId") === 'object' && feature.get("styleId").property) {
+                console.log('[getStylingRules] styleId is an object with property:', feature.get("styleId").property);
+                styleAttr = [feature.get("styleId").property];
+            } else {
+                // Otherwise use "styleId" as the attribute name
+                styleAttr = ["styleId"];
+            }
+        } else {
+            styleAttr = Array.isArray(styleAttributes) ? styleAttributes : [styleAttributes];
+        }
 
         if (styleAttr.length === 1 && styleAttr[0] === "") {
             if (feature.get("features") && feature.get("features").length === 1) {
@@ -783,7 +796,7 @@ const BuildSpecModel = {
             if ((style !== undefined && style?.getText()?.getText() !== undefined) || feature.get("features").length > 1) {
                 const value = feature.get("features")[0].get(styleAttr[0])
                     + "_"
-                    + style !== undefined && style.getText()?.getText() !== undefined ? style.getText()?.getText() : "cluster";
+                    + (style !== undefined && style.getText()?.getText() !== undefined ? style.getText()?.getText() : "cluster");
 
                 feature.set(styleAttr[0], value);
                 return `[${styleAttr[0]}='${value}']`;
@@ -809,13 +822,23 @@ const BuildSpecModel = {
             return styleAttr.reduce((acc, curr) => acc + `${curr}='${feature.get(curr)}' AND ${labelField}='${feature.get(labelField)}',`, "[").slice(0, -1)
                 + "]";
         }
-        // feature with geometry style
-        if (styleAttr instanceof Array) {
-            return styleAttr.reduce((acc, curr) => acc + `${curr}='${feature.get(curr)}',`, "[").slice(0, -1)
-            + "]";
-        }
-
-        return "[" + styleAttr + "='" + feature.get(styleAttr) + "']";
+        
+        // Build the filter expression
+        return styleAttr.reduce((acc, curr) => {
+            // Check if we need to use feature.get("styleId").property value instead of feature.get(curr)
+            let attrValue;
+            if (curr === "styleId" && typeof feature.get("styleId") === 'object' && feature.get("styleId").property) {
+                // If we're using styleId as the attribute but it's actually an object with a property field
+                const propertyName = feature.get("styleId").property;
+                attrValue = feature.get(propertyName);
+                console.log(`[buildSpec] Using styleId.property: ${propertyName} with value ${attrValue}`);
+            } else {
+                attrValue = feature.get(curr);
+                console.log(`[buildSpec] Processing attribute ${curr} with value ${attrValue}`);
+            }
+            
+            return acc + `${curr}='${attrValue}',`;
+        }, "[").slice(0, -1) + "]";
     },
     /**
      * Unsets all properties of type string of the given feature.
