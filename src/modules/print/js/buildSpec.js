@@ -504,20 +504,13 @@ const BuildSpecModel = {
                 return;
             }
 
-            console.log('[buildSpec] styles::', styles);
             styles.forEach((style, index) => {
                 if (style !== null) {
-                    console.log('[buildSpec] layer.get("styleId")::', layer.get("styleId"));
-                    console.log('[buildSpec] styleList::', styleList);
                     
                     const styleObjectFromStyleList = styleList.returnStyleObject(layer.get("styleId"));
 
-                    console.log('[buildSpec] styleObjectFromStyleList::', styleObjectFromStyleList);
-
                     let limiter = ",",
                         styleFromStyleList = styleObjectFromStyleList ? createStyle.getGeometryStyle(feature, styleObjectFromStyleList.rules, false, Config.wfsImgPath) : undefined;
-
-                    console.log('[buildSpec] styleFromStyleList::', styleFromStyleList);
 
                     if (Array.isArray(styleFromStyleList)) {
                         styleFromStyleList = styleFromStyleList[0];
@@ -639,15 +632,11 @@ const BuildSpecModel = {
                         finalStylingRules = newKey;
                     }
 
-                    console.log('[buildSpec]  styleObject.symbolizers::', styleObject.symbolizers);
-                    console.log('[buildSpec] finalStylingRules::', finalStylingRules);
-
                     // Add the style object to the mapfish style object
                     mapfishStyleObject[finalStylingRules] = styleObject;
                 }
             });
         });
-        console.log('[buildSpec] mapfishStyleObject::', mapfishStyleObject);
         return mapfishStyleObject;
     },
     /**
