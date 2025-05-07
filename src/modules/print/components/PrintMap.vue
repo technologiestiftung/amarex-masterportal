@@ -207,7 +207,7 @@ export default {
     },
     created () {
         this.setServiceId(this.printServiceId);
-        this.report.title = this.projectTitle || "Amarex Report PDF";
+        this.report.title = this.projectTitle;
         this.report.description = this.projectDescription;
     },
     mounted () {
