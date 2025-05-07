@@ -485,12 +485,14 @@ const BuildSpecModel = {
      * @param {ol.extent} extent  Extent uses to filter the feature by extent.
      * @returns {Object} - style for mapfish print.
      */
-    buildStyle: function (layer, features, geojsonList, extent) {
+    buildStyle: function (layer, features, geojsonList, extent) {        
         const mapfishStyleObject = {
-                "version": "2"
+            "version": "2"
             },
             layersToNotReverse = ["measureLayer", "importDrawLayer"],
             featuresInExtent = layer.getSource() ? layer.getSource().getFeaturesInExtent(extent) : features;
+            
+        const layerOpacity = layer.get("opacity") !== undefined ? layer.get("opacity") : 1;
 
         if (!layersToNotReverse.includes(layer.values_.id)) {
             features.reverse();
@@ -603,26 +605,45 @@ const BuildSpecModel = {
                     
                     if (finalGeometryType === "Point" || finalGeometryType === "MultiPoint") {
                         if (style.getImage() !== null || style.getText() !== null) {
-                            console.log("this.buildPointStyle(style, layer)", this.buildPointStyle(style, layer))
-                            styleObject.symbolizers.push(this.buildPointStyle(style, layer));
+                            
+                            const pointStyle = this.buildPointStyle(style, layer);
+                            this.applyOpacityToSymbolizer(pointStyle, layerOpacity);
+
+                            styleObject.symbolizers.push(pointStyle);
                         }
                     }
                     else if (finalGeometryType === "Polygon" || finalGeometryType === "MultiPolygon") {
-                        styleObject.symbolizers.push(this.buildPolygonStyle(style, layer));
+                        
+                        const polygonStyle = this.buildPolygonStyle(style, layer);
+                        this.applyOpacityToSymbolizer(polygonStyle, layerOpacity);
+
+                        styleObject.symbolizers.push(polygonStyle);
                     }
                     else if (finalGeometryType === "Circle") {
-                        styleObject.symbolizers.push(this.buildPolygonStyle(style, layer));
+
+                        const circleStyle = this.buildPolygonStyle(style, layer);
+                        this.applyOpacityToSymbolizer(circleStyle, layerOpacity);
+                    
+                        styleObject.symbolizers.push(circleStyle);
                     }
                     else if (finalGeometryType === "LineString" || finalGeometryType === "MultiLineString") {
                         if (layer.values_.id === "measureLayer" && style.stroke_ === null) {
                             return;
                         }
-                        styleObject.symbolizers.push(this.buildLineStringStyle(style, layer));
+
+                        const lineStyle = this.buildLineStringStyle(style, layer);
+                        this.applyOpacityToSymbolizer(lineStyle, layerOpacity);
+                        
+                        styleObject.symbolizers.push(lineStyle);
                     }
                     
                     // label styling
                     if (style.getText() !== null && style.getText() !== undefined) {
-                        styleObject.symbolizers.push(this.buildTextStyle(style.getText()));
+
+                        const textStyle = this.buildTextStyle(style.getText());
+                        this.applyOpacityToSymbolizer(textStyle, layerOpacity);
+                    
+                        styleObject.symbolizers.push(textStyle);
                     }
                     
                     // Handle Datastreams in styling rules
@@ -638,6 +659,30 @@ const BuildSpecModel = {
             });
         });
         return mapfishStyleObject;
+    },
+    /**
+     * Applys the given layer opacity to the given symbolizer.
+     * @param {Object} symbolizer - The symbolizer to apply the opacity to.
+     * @param {number} layerOpacity - The opacity to apply.
+     * @return {Object} the modified symbolizer
+     */
+    applyOpacityToSymbolizer: function(symbolizer, layerOpacity) {
+        if (symbolizer.fillOpacity !== undefined) {
+            symbolizer.fillOpacity *= layerOpacity;
+        }
+        if (symbolizer.strokeOpacity !== undefined) {
+            symbolizer.strokeOpacity *= layerOpacity;
+        }
+        if (symbolizer.graphicOpacity !== undefined) {
+            symbolizer.graphicOpacity *= layerOpacity;
+        }
+        if (symbolizer.fontOpacity !== undefined) {
+            symbolizer.fontOpacity *= layerOpacity;
+        }
+        if (symbolizer.haloOpacity !== undefined) {
+            symbolizer.haloOpacity *= layerOpacity;
+        }
+        return symbolizer;
     },
     /**
      * @param {ol.Feature} feature -
