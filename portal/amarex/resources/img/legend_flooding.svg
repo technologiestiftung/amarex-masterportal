@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 220">
+  <style>
+    text { font-family: Arial, sans-serif; font-size: 14px; }
+    .title { font-size: 16px; font-weight: bold; }
+  </style>
+
+  <!-- Titel -->
+  <text x="10" y="20" class="title">Wasserstand [m]</text>
+
+  <!-- Farbbalken und Beschriftungen -->
+  <g transform="translate(10, 40)">
+    <rect x="0" y="0" width="20" height="20" fill="#f7fbff"/>
+    <text x="30" y="15">0,1 - 0,2</text>
+
+    <rect x="0" y="25" width="20" height="20" fill="#d7e6f5"/>
+    <text x="30" y="40">0,2 - 0,3</text>
+
+    <rect x="0" y="50" width="20" height="20" fill="#afd1e7"/>
+    <text x="30" y="65">0,3 - 0,4</text>
+
+    <rect x="0" y="75" width="20" height="20" fill="#73b2d8"/>
+    <text x="30" y="90">0,4 - 0,5</text>
+
+    <rect x="0" y="100" width="20" height="20" fill="#3e8ec4"/>
+    <text x="30" y="115">0,5 - 0,6</text>
+
+    <rect x="0" y="125" width="20" height="20" fill="#1663aa"/>
+    <text x="30" y="140">0,6 - 0,7</text>
+
+    <rect x="0" y="150" width="20" height="20" fill="#08306b"/>
+    <text x="30" y="165">&gt; 0,7</text>
+  </g>
+</svg>
