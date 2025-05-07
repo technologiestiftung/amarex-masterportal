@@ -186,6 +186,10 @@ export default {
       this.removeInteractionFromMap(this.selectInteraction);
       this.updatePreComputed();
       this.setBlockAreaConfirmed(true);
+      console.log(
+        "[AbimoBlockAreaSelector] this.selectedFeatures::",
+        this.selectedFeatures,
+      );
     },
     updatePreComputed() {
       const selectedFeatures = this.layer_abimo_calculated

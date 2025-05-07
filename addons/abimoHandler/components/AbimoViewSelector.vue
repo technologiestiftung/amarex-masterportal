@@ -55,7 +55,7 @@ export default {
         class="amarex-btn-primary full accent"
         @click="nextStepMnpl()"
       >
-        <p>Zum Massnahmentool</p>
+        <p>Zum Maßnahmentool</p>
       </button>
     </div>
   </div>

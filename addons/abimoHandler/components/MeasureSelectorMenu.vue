@@ -194,11 +194,11 @@ export default {
 
       switch (type) {
         case "swale":
-          return `Volumen: ${sizeData.volume}m³, Angeschlossene Fläche: ${sizeData.connectedArea}m²`;
+          return `Angeschlossene Fläche: ${sizeData.connectedArea}m²`;
         case "greenRoof":
-          return `Länge: ${sizeData.length}m, Breite: ${sizeData.width}m, Höhe: ${sizeData.height}m`;
+          return ``;
         case "unpaved":
-          return `Länge: ${sizeData.length}m, Breite: ${sizeData.width}m`;
+          return ``;
         default:
           return "";
       }
@@ -286,7 +286,7 @@ export default {
                 <div class="size-option-main">{{ config.label }}</div>
                 <div
                   class="size-option-details"
-                  v-if="activeMeasureSize === size"
+                  v-if="activeMeasureSize === size && selectedMeasure.type === 'swale'"
                 >
                   {{ getSizeDetails(size) }}
                 </div>
@@ -308,6 +308,10 @@ export default {
 
 <style lang="scss" scoped>
 @import "~variables";
+
+:global(.ol-overlaycontainer-stopevent) {
+  z-index: 1000 !important;
+}
 
 .measure-menu-container {
   position: absolute;

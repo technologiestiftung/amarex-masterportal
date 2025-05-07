@@ -113,6 +113,11 @@ export default {
           // First click - reset any previous selection
           this.resetSelection();
 
+          // Restore original icon if there was a previously marked feature
+          if (this.markedForDeletion) {
+            this.restoreOriginalIcon();
+          }
+
           // Mark this feature for deletion and replace its icon
           this.markFeatureForDeletion(feature);
         }
@@ -120,6 +125,8 @@ export default {
         this.isProcessingClick = false;
         return;
       }
+
+      // If clicked elsewhere and we have a marked feature, restore it
       if (this.markedForDeletion) {
         this.restoreOriginalIcon();
       }
@@ -136,6 +143,29 @@ export default {
       this.isProcessingClick = false;
     },
 
+    getIconSizes(size) {
+      let circleRadius, iconScale;
+
+      switch (size) {
+        case "small":
+          circleRadius = 20;
+          iconScale = 0.8;
+          break;
+        case "medium":
+          circleRadius = 30;
+          iconScale = 1.0;
+          break;
+        case "large":
+          circleRadius = 40;
+          iconScale = 1.0;
+          break;
+        default:
+          circleRadius = 20;
+          iconScale = 0.8;
+      }
+
+      return { circleRadius, iconScale };
+    },
     markFeatureForDeletion(feature) {
       this.markedForDeletion = feature;
 
@@ -147,26 +177,7 @@ export default {
 
       feature.set("_deleteProps", originalProps);
 
-      let circleRadius;
-      let iconScale = 1;
-
-      switch (size) {
-        case "small":
-          circleRadius = 20;
-          iconScale = 0.8;
-          break;
-        case "medium":
-          circleRadius = 30;
-          iconScale = 1;
-          break;
-        case "large":
-          circleRadius = 40;
-          iconScale = 1;
-          break;
-        default:
-          circleRadius = 20;
-          iconScale = 0.8;
-      }
+      const { circleRadius, iconScale } = this.getIconSizes(size);
 
       feature.setStyle([
         new Style({
@@ -215,6 +226,7 @@ export default {
 
       const uniqueId = "measure-" + Date.now();
       measureFeature.setId(uniqueId);
+      measureFeature.set("size", size);
       const featureId = measureFeature.getId();
 
       const tempMeasure = {
@@ -240,27 +252,7 @@ export default {
         return;
       }
 
-      let circleRadius;
-      let iconScale = 1;
-
-      // FIXME: refactor make it DRY
-      switch (size) {
-        case "small":
-          circleRadius = 20;
-          iconScale = 0.8;
-          break;
-        case "medium":
-          circleRadius = 30;
-          iconScale = 1;
-          break;
-        case "large":
-          circleRadius = 40;
-          iconScale = 1;
-          break;
-        default:
-          circleRadius = 20;
-          iconScale = 0.8;
-      }
+      const { circleRadius, iconScale } = this.getIconSizes(size);
 
       measureFeature.setStyle([
         new Style({
