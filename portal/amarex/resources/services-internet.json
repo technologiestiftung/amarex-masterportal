@@ -4665,7 +4665,8 @@
         "csw_url": "https://gdi.berlin.de/geonetwork/srv/ger/csw"
       }
     ],
-    "gfiAttributes": "showAll"
+    "gfiAttributes": "showAll",
+    "displayLayerAlert": false
   },
   {
     "id": "k06_05gruenversorg2020:0",
