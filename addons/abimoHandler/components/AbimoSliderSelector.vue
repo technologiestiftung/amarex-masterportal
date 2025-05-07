@@ -19,6 +19,7 @@ export default {
   data() {
     return {
       targetValue: 0,
+      targetWidth: 0,
       content: {
         greenRoof: {
           title: "Dachbegrünung",
@@ -141,30 +142,35 @@ export default {
       },
     },
     targetValue(newValue) {
+      let sanitizedValue = this.sanitizeTargetValue(newValue);
+
       switch (this.type) {
         case "greenRoof":
-          if (newValue > this.accumulatedAbimoStats.maxGreenRoof * 100) {
+          if (sanitizedValue > this.accumulatedAbimoStats.maxGreenRoof * 100) {
             this.targetValue = Math.floor(
               this.accumulatedAbimoStats.maxGreenRoof * 100,
             );
           }
           break;
         case "unsealed":
-          if (newValue > this.accumulatedAbimoStats.maxUnpaved * 100) {
+          if (sanitizedValue > this.accumulatedAbimoStats.maxUnpaved * 100) {
             this.targetValue = Math.floor(
               this.accumulatedAbimoStats.maxUnpaved * 100,
             );
           }
           break;
         case "swaleConnected":
-          if (newValue > this.accumulatedAbimoStats.maxSwaleConnected * 100) {
+          if (
+            sanitizedValue >
+            this.accumulatedAbimoStats.maxSwaleConnected * 100
+          ) {
             this.targetValue = Math.floor(
               this.accumulatedAbimoStats.maxSwaleConnected * 100,
             );
           }
           break;
         default:
-          if (newValue > this.currentBaseData) {
+          if (sanitizedValue > this.currentBaseData) {
             this.targetValue = this.currentBaseData;
           }
       }
@@ -180,6 +186,23 @@ export default {
       "updateMaxSwaleConnected",
       "updateAccordionSteps",
     ]),
+    sanitizeTargetValue(value) {
+      let numValue = typeof value === "string" ? Number(value) : value;
+      const maxValue = Math.min(Math.floor(this.currentBaseData), 100);
+
+      if (value === "") {
+        this.targetWidth = 0;
+        return null;
+      }
+      if (numValue % 1 !== 0) {
+        numValue = Math.round(numValue);
+      }
+      if (numValue > maxValue) {
+        numValue = maxValue;
+      }
+      this.targetWidth = numValue;
+      return numValue;
+    },
     updateAbimoData() {
       switch (this.type) {
         case "greenRoof":
@@ -216,29 +239,38 @@ export default {
       }
     },
     initializeTargetValue() {
+      if (this.targetValue == null || this.targetValue === "") {
+        this.targetValue = 0;
+      }
+
       switch (this.type) {
         case "greenRoof":
           this.targetValue =
-            (this.newGreenRoof * 100).toFixed() > 0
-              ? (this.newGreenRoof * 100).toFixed()
+            this.newGreenRoof !== null &&
+            parseFloat((this.newGreenRoof * 100).toFixed()) >= 0
+              ? parseFloat((this.newGreenRoof * 100).toFixed())
               : this.currentStatusQuo;
           break;
         case "unsealed":
           this.targetValue =
-            (this.newUnpvd * 100).toFixed() > 0
-              ? (this.newUnpvd * 100).toFixed()
+            this.newUnpvd !== null &&
+            parseFloat((this.newUnpvd * 100).toFixed()) >= 0
+              ? parseFloat((this.newUnpvd * 100).toFixed())
               : this.currentStatusQuo;
           break;
         case "swaleConnected":
           this.targetValue =
-            (this.newToSwale * 100).toFixed() > 0
-              ? (this.newToSwale * 100).toFixed()
+            this.newToSwale !== null &&
+            parseFloat((this.newToSwale * 100).toFixed()) >= 0
+              ? parseFloat((this.newToSwale * 100).toFixed())
               : this.currentStatusQuo;
           break;
         default:
           this.targetValue = this.currentStatusQuo;
           break;
       }
+
+      this.targetWidth = this.targetValue;
     },
   },
 };
@@ -282,8 +314,8 @@ export default {
         <div
           class="target"
           :style="{
-            width: `${targetValue}%`,
-            borderWidth: targetValue > 0 ? '2px' : '0',
+            width: `${targetWidth}%`,
+            borderWidth: targetWidth > 0 ? '2px' : '0',
           }"
         ></div>
       </div>
@@ -313,10 +345,12 @@ export default {
         <input
           id="targetValue"
           v-model="targetValue"
+          @input="targetValue = sanitizeTargetValue($event.target.value)"
           class="target-input"
           type="number"
           min="0"
           :max="Math.floor(currentBaseData)"
+          step="1"
         />
         <p class="percentage">%</p>
       </div>
@@ -487,7 +521,7 @@ export default {
     .input-wrapper {
       position: relative;
       .target-input {
-        width: 73px;
+        width: 85px;
         padding: 7px 7px 7px 10px;
         border-radius: 0 !important;
         border: 1px solid $amarex_grey_light;

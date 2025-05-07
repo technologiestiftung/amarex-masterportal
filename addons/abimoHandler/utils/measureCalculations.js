@@ -31,9 +31,9 @@ function calculateAllMeasureStats(selectedFeatures, selectedMeasures) {
       totalSwaleVolume: 0,
       totalSwaleConnectedArea: 0,
 
-      newGreenRoof: 0,
-      newUnpvd: 0,
-      newToSwale: 0,
+      newGreenRoof: null,
+      newUnpvd: null,
+      newToSwale: null,
     };
   }
 
