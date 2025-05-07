@@ -274,6 +274,8 @@ export default {
         }),
       ]);
 
+      measureFeature.set("style", `${measure.type}_${size}`);
+
       this.layer_abimo_measures.getSource().addFeature(measureFeature);
 
       const newMeasure = {
