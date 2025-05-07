@@ -181,13 +181,11 @@ const actions = {
                     // NOTE: Masterportal origin more attributes can be added here, it is very important, 
                     // that the attributes match the attributes on the mapfish config
                     "subtitle": "Report Subtitle",
-
-
                     "map": {
                         "dpi": state.dpiForPdf,
                         "projection": mapCollection.getMapView("2D").getProjection().getCode(),
                         "center": mapCollection.getMapView("2D").getCenter(),
-                        "scale": state.currentScale
+                        "scale": state.currentMapScale
                     }
                 }
             };
