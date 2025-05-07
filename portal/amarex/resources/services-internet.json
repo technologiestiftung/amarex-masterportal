@@ -1909,7 +1909,7 @@
   },
   {
     "id": "abimo_measures",
-    "styleId": "default",
+    "styleId": "measure_placements",
     "name": "Abimo gesetzte Maßnahmen",
     "crs": "urn:ogc:def:crs:EPSG::25833",
     "typ": "GEOJSON",
