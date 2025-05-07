@@ -669,7 +669,7 @@
             {
               "name": "Überflutungskarten",
               "type": "folder",
-              "description": "Maximale Wasserstände infolge eines 100-jährlichen Niederschlagsereignisses. Referenzmodell: Keine Berücksichtigung von Regenwasserbewirtschaftungsanlagen. Mulden 100 a: Alle Dachflächen an Mulden (dimensioniert auf T = 100 a) angeschlossen.",
+              "description": "Maximale Wasserstände infolge eines 100-jährlichen Niederschlagsereignisses.<br> Referenzmodell: Keine Berücksichtigung von Regenwasserbewirtschaftungsanlagen.<br> Mulden 100 a: Alle Dachflächen an Mulden (dimensioniert auf T = 100 a) angeschlossen.",
               "elements": [
                 {
                   "id": "flooding_wms:flooding_reference_100a_60min",
@@ -760,6 +760,4 @@
     }
   }
 }
-
-
 

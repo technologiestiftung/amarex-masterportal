@@ -39,7 +39,7 @@ export default {
         },
         secondaryMenuWidth: {
             type: Number,
-            default: 380
+            default: 480
         }
     },
     computed: {

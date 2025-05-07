@@ -348,9 +348,8 @@ export default {
       <p
         v-if="showInfo?.description"
         class="description"
-      >
-        {{ showInfo?.description }}
-      </p>
+        v-html="showInfo?.description"
+      ></p>
       <p
         v-if="showInfo?.legend"
         class="description"
