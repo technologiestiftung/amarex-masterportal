@@ -8,6 +8,7 @@ import ProjectStarter from "../projectStarter/store/indexProjectStarter";
 import ProjectUploader from "../projectUploader/store/indexProjectUploader";
 import ReportPrinter from "../reportPrinter/store/indexReportPrinter";
 import ThemeMaps from "../themeMaps/store/indexThemeMaps";
+import ToolDownloader from "../toolDownloader/store/indexToolDownloader";
 
 export default {
   namespaced: true,
@@ -22,5 +23,7 @@ export default {
     ProjectStarter: { ...ProjectStarter },
     BaseMaps: { ...BaseMaps },
     ThemeMaps: { ...ThemeMaps },
+    ToolDownloader: { ...ToolDownloader },
   },
 };
+

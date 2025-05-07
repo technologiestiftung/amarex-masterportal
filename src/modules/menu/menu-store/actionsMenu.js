@@ -44,7 +44,7 @@ export default {
             commit("setCurrentComponent", {type, side, props});
             dispatch("changeCurrentMouseMapInteractionsComponent", {type, side});
         }
-        else if (props?.name !== currentProps?.name) {
+        else if (props?.name !== currentProps?.name || props?.id !== currentProps?.id) {
             commit("setCurrentComponentProps", {side, props});
         }
         if (type !== "getFeatureInfo" && type !== "searchbar" && type !== "layerSelection") {

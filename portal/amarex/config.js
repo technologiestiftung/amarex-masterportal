@@ -75,5 +75,6 @@ const Config = {
     "projectStarter",
     "baseMaps",
     "themeMaps",
+    "toolDownloader",
   ],
 };
