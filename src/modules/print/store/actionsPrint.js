@@ -180,7 +180,7 @@ const actions = {
 
                     // NOTE: Masterportal origin more attributes can be added here, it is very important, 
                     // that the attributes match the attributes on the mapfish config
-                    "subtitle": "Report Subtitle",
+                    "subtitle": print.layoutAttributes.subtitle,
                     "map": {
                         "dpi": state.dpiForPdf,
                         "projection": mapCollection.getMapView("2D").getProjection().getCode(),
