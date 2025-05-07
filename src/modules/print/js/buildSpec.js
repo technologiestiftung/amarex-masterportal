@@ -504,43 +504,53 @@ const BuildSpecModel = {
                 return;
             }
 
-            let clonedFeature,
-                stylingRules,
-                stylingRulesSplit,
-                styleObject,
-                geometryType,
-                styleGeometryFunction;
-
+            console.log('[buildSpec] styles::', styles);
             styles.forEach((style, index) => {
                 if (style !== null) {
+                    console.log('[buildSpec] layer.get("styleId")::', layer.get("styleId"));
+                    console.log('[buildSpec] styleList::', styleList);
+                    
                     const styleObjectFromStyleList = styleList.returnStyleObject(layer.get("styleId"));
+
+                    console.log('[buildSpec] styleObjectFromStyleList::', styleObjectFromStyleList);
+
                     let limiter = ",",
                         styleFromStyleList = styleObjectFromStyleList ? createStyle.getGeometryStyle(feature, styleObjectFromStyleList.rules, false, Config.wfsImgPath) : undefined;
+
+                    console.log('[buildSpec] styleFromStyleList::', styleFromStyleList);
 
                     if (Array.isArray(styleFromStyleList)) {
                         styleFromStyleList = styleFromStyleList[0];
                     }
-                    clonedFeature = feature.clone();
+                    
+                    // Clone the feature for this specific style
+                    const clonedFeature = feature.clone();
+                    
+                    // Create a unique identifier for this style
+                    const styleIdentifier = `_${index}`;
+                    
                     styleAttributes.forEach(attribute => {
                         const singleFeature = clonedFeature.get("features") ? clonedFeature.get("features")[0] : clonedFeature;
 
                         if (attribute.includes("Datastreams")) {
-                            clonedFeature.set(attribute, attribute === "default" && !singleFeature.get(attribute) ? "style" : `${singleFeature.getProperties().Datastreams[0].Observations[0].result}_${index}`);
+                            clonedFeature.set(attribute, attribute === "default" && !singleFeature.get(attribute) ? `style${styleIdentifier}` : `${singleFeature.getProperties().Datastreams[0].Observations[0].result}${styleIdentifier}`);
                         }
                         else if (style.type && style.type === "CIRCLESEGMENTS") {
                             clonedFeature.setId(`${feature.ol_uid}__${index}`);
-                            clonedFeature.set(attribute, `${style.type}_${style.scalingAttribute.replace(" | ", "_")}_${index}`);
+                            clonedFeature.set(attribute, `${style.type}_${style.scalingAttribute.replace(" | ", "_")}${styleIdentifier}`);
                         }
                         else if (style.type && style.type === "imageStyle") {
                             clonedFeature.setId(`${feature.ol_uid}__${index}`);
-                            clonedFeature.set(attribute, `${style.type}_${index}`);
+                            clonedFeature.set(attribute, `${style.type}${styleIdentifier}`);
                         }
                         else {
-                            clonedFeature.set(attribute, attribute === "default" && !singleFeature.get(attribute) ? "style" : `${singleFeature.get(attribute)}_${index}`);
+                            // Ensure each style gets a unique attribute value by appending the index
+                            clonedFeature.set(attribute, attribute === "default" && !singleFeature.get(attribute) ? `style${styleIdentifier}` : `${singleFeature.get(attribute)}${styleIdentifier}`);
                         }
                         clonedFeature.ol_uid = feature.ol_uid;
                     });
-                    geometryType = feature.getGeometry().getType();
+                    
+                    const geometryType = feature.getGeometry().getType();
 
                     // if an icon is shown, apply style offsets to geometry
                     if (geometryType === "Point" && style.getImage() instanceof Icon && style.getImage().getScale() > 0) {
@@ -555,20 +565,27 @@ const BuildSpecModel = {
                     }
 
                     // if style has geometryFunction, take geometry from style Function
-                    styleGeometryFunction = style.getGeometryFunction();
+                    const styleGeometryFunction = style.getGeometryFunction();
+                    let finalGeometryType = geometryType;
+                    
                     if (styleGeometryFunction !== null && styleGeometryFunction !== undefined) {
                         clonedFeature.setGeometry(styleGeometryFunction(clonedFeature));
-                        geometryType = styleGeometryFunction(clonedFeature).getType();
-                        if (geometryType === "Polygon") {
+                        finalGeometryType = styleGeometryFunction(clonedFeature).getType();
+                        if (finalGeometryType === "Polygon") {
                             this.checkPolygon(clonedFeature);
                         }
                     }
-                    stylingRules = this.getStylingRules(layer, clonedFeature, styleAttributes, style);
+                    
+                    // Get styling rules with the unique identifier
+                    const stylingRules = this.getStylingRules(layer, clonedFeature, styleAttributes, style);
+                    
+                    let formattedStylingRules = stylingRules;
                     if (styleFromStyleList !== undefined && styleFromStyleList.attributes?.labelField && styleFromStyleList.attributes?.labelField.length > 0) {
-                        stylingRules = stylingRules.replaceAll(limiter, " AND ");
+                        formattedStylingRules = stylingRules.replaceAll(limiter, " AND ");
                         limiter = " AND ";
                     }
-                    stylingRulesSplit = stylingRules
+                    
+                    const stylingRulesSplit = formattedStylingRules
                         .replaceAll("[", "")
                         .replaceAll("]", "")
                         .replaceAll("*", "")
@@ -583,47 +600,54 @@ const BuildSpecModel = {
                             [])
                         );
                     }
+                    
                     this.addFeatureToGeoJsonList(clonedFeature, geojsonList, style);
 
-                    // do nothing if we already have a style object for this CQL rule
-                    if (Object.prototype.hasOwnProperty.call(mapfishStyleObject, stylingRules)) {
-                        return;
-                    }
-
-                    styleObject = {
+                    // Create a style object for this style
+                    const styleObject = {
                         symbolizers: []
                     };
-                    if (geometryType === "Point" || geometryType === "MultiPoint") {
+                    
+                    if (finalGeometryType === "Point" || finalGeometryType === "MultiPoint") {
                         if (style.getImage() !== null || style.getText() !== null) {
+                            console.log("this.buildPointStyle(style, layer)", this.buildPointStyle(style, layer))
                             styleObject.symbolizers.push(this.buildPointStyle(style, layer));
                         }
                     }
-                    else if (geometryType === "Polygon" || geometryType === "MultiPolygon") {
+                    else if (finalGeometryType === "Polygon" || finalGeometryType === "MultiPolygon") {
                         styleObject.symbolizers.push(this.buildPolygonStyle(style, layer));
                     }
-                    else if (geometryType === "Circle") {
+                    else if (finalGeometryType === "Circle") {
                         styleObject.symbolizers.push(this.buildPolygonStyle(style, layer));
                     }
-                    else if (geometryType === "LineString" || geometryType === "MultiLineString") {
+                    else if (finalGeometryType === "LineString" || finalGeometryType === "MultiLineString") {
                         if (layer.values_.id === "measureLayer" && style.stroke_ === null) {
                             return;
                         }
                         styleObject.symbolizers.push(this.buildLineStringStyle(style, layer));
                     }
+                    
                     // label styling
                     if (style.getText() !== null && style.getText() !== undefined) {
                         styleObject.symbolizers.push(this.buildTextStyle(style.getText()));
                     }
-                    if (stylingRules.includes("@Datastreams")) {
-                        const newKey = stylingRules.replaceAll("@", "").replaceAll(".", "");
-
-                        stylingRules = newKey;
+                    
+                    // Handle Datastreams in styling rules
+                    let finalStylingRules = formattedStylingRules;
+                    if (finalStylingRules.includes("@Datastreams")) {
+                        const newKey = finalStylingRules.replaceAll("@", "").replaceAll(".", "");
+                        finalStylingRules = newKey;
                     }
 
-                    mapfishStyleObject[stylingRules] = styleObject;
+                    console.log('[buildSpec]  styleObject.symbolizers::', styleObject.symbolizers);
+                    console.log('[buildSpec] finalStylingRules::', finalStylingRules);
+
+                    // Add the style object to the mapfish style object
+                    mapfishStyleObject[finalStylingRules] = styleObject;
                 }
             });
         });
+        console.log('[buildSpec] mapfishStyleObject::', mapfishStyleObject);
         return mapfishStyleObject;
     },
     /**
