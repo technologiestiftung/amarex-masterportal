@@ -5,6 +5,7 @@ import ResizeHandle from "../../../shared/modules/resize/components/ResizeHandle
 import MenuContainerBodyRootLogo from "./MenuContainerBodyRootLogo.vue";
 import SearchBar from "../../searchBar/components/SearchBar.vue";
 import ProjectDownloader from "../../../../addons/projectDownloader/components/ProjectDownloader.vue";
+import ProjectUploader from "../../../../addons/projectUploader/components/ProjectUploader.vue";
 import colors from "../../../shared/js/utils/amarex-colors.json";
 import { FileIcon } from "lucide-vue-next";
 
@@ -22,6 +23,7 @@ export default {
     ResizeHandle,
     SearchBar,
     ProjectDownloader,
+    ProjectUploader,
     FileIcon,
   },
   props: {
@@ -215,11 +217,8 @@ export default {
       v-if="side === 'mainMenu' && currentComponent?.name !== 'SearchBar'"
       class="project-management-amarex-container"
     >
-      <button class="amarex-btn-primary">
-        <FileIcon :color="colors.secondary" :size="16" />
-        <p>Projekt öffnen</p>
-      </button>
-      <ProjectDownloader />
+      <ProjectUploader :mainMenuWidth="mainMenuWidth - 24 * 2" />
+      <ProjectDownloader :mainMenuWidth="mainMenuWidth - 24 * 2" />
     </div>
     <ResizeHandle
       v-if="!isMobile && side !== 'mainMenu'"
@@ -342,6 +341,9 @@ export default {
 }
 
 .project-management-amarex-container {
+  position: absolute;
+  bottom: 24px;
+  background-color: white;
   display: grid;
   gap: 8px;
   grid-template-columns: 1fr;
