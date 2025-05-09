@@ -135,11 +135,20 @@ export default {
       this.forceFileDownload(zip, sanitizeSelector(zipName));
     },
   },
+  props: {
+    mainMenuWidth: {
+      type: Number,
+      required: true,
+    },
+  },
 };
 </script>
 
 <template lang="html">
-  <div id="exporter-addon">
+  <div
+    id="exporter-addon"
+    :style="{ width: mainMenuWidth + 'px' }"
+  >
     <button
       v-if="!projectDownloaderOpen"
       class="amarex-btn-primary full-with-icon"
