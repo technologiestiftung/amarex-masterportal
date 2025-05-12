@@ -38,6 +38,14 @@ export default {
       type: Number,
       required: true,
     },
+    openProjectManagement: {
+      type: String,
+      required: true,
+    },
+    setOpenProjectManagement: {
+      type: Function,
+      required: true,
+    },
   },
   computed: {
     ...mapGetters("Modules/ProjectUploader", [
@@ -347,6 +355,27 @@ export default {
 
       this.setFeatureExtents(modifiedFeatureExtents);
     },
+    toggleProjectUploader() {
+      this.projectUploaderOpen = !this.projectUploaderOpen;
+    },
+  },
+  watch: {
+    openProjectManagement: {
+      immediate: true,
+      handler(newValue) {
+        if (newValue !== "projectUploader") {
+          this.projectUploaderOpen = false;
+        }
+      },
+    },
+    projectUploaderOpen: {
+      immediate: true,
+      handler(newValue) {
+        if (newValue) {
+          this.setOpenProjectManagement("projectUploader");
+        }
+      },
+    },
   },
 };
 </script>
@@ -375,7 +404,7 @@ export default {
     <button
       v-if="!projectUploaderOpen"
       class="amarex-btn-primary full-with-icon"
-      @click="projectUploaderOpen = !projectUploaderOpen"
+      @click="toggleProjectUploader"
     >
       <FileIcon
         :color="colors.secondary"
@@ -386,10 +415,11 @@ export default {
     <div
       v-else
       class="expanded-project-uploader"
+      id="project-uploader-expanded"
     >
       <div
         class="button-overview d-flex align-items-center justify-content-center"
-        @click="projectUploaderOpen = !projectUploaderOpen"
+        @click="toggleProjectUploader"
       >
         <FileIcon
           :color="colors.secondary"
@@ -398,10 +428,10 @@ export default {
         <p>Projekt öffnen</p>
       </div>
       <p
-        class="mb-3"
+        class="description"
         v-html="
           $t(
-            'Laden Sie hier Ihr Projekt, dass Sie im Amarex Webtool erstellt haben, hoch. Es können Projektdatein (.zip), und Config-Dateien (.json) importiert werden.',
+            'Laden Sie hier Ihr Projekt hoch, dass Sie im Amarex Webtool erstellt haben. Es können Projektdateien (.zip), und Config-Dateien (.json) importiert werden.',
           )
         "
       />
@@ -419,10 +449,10 @@ export default {
             v-for="file in filesToUpload"
             :key="file"
             :class="enableZoomToExtend ? 'hasZoom' : ''"
-            class="row d-flex mb-1"
+            class="row d-flex mb-2 flex-nowrap align-items-center"
           >
             <p
-              class="text-truncate w-100 text-start"
+              class="text-truncate flex-fill text-start"
               style="overflow: hidden; white-space: nowrap"
             >
               {{ file.name }}
@@ -438,7 +468,7 @@ export default {
       </FileUpload>
       <button
         v-if="filesToUpload?.length > 0 && !loading"
-        class="amarex-btn-primary accent full-with-icon"
+        class="amarex-btn-primary accent full-with-icon mt-3"
         @click="addProject"
       >
         <p>Ausgewählte Dateien importieren</p>
@@ -472,15 +502,29 @@ export default {
 }
 
 .expanded-project-uploader {
-  padding: 10px 15px 25px 15px;
+  padding: 10px 16px 16px 16px;
   background: $amarex_secondary_mid;
   .button-overview {
     cursor: pointer;
     gap: 8px;
-    margin-bottom: 25px;
+    margin-bottom: 8px;
   }
   & > p {
-    margin-bottom: 15px;
+    margin-bottom: 16px;
+  }
+  .description {
+    overflow: hidden;
+    color: $amarex_grey_dark;
+    font-family: Arial;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 16px;
+    user-select: none;
+  }
+  .btn {
+    width: 1rem !important;
+    height: 1rem !important;
   }
 }
 

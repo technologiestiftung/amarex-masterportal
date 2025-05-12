@@ -134,11 +134,40 @@ export default {
       await Promise.all(fetchPromises);
       this.forceFileDownload(zip, sanitizeSelector(zipName));
     },
+    toggleProjectDownloader() {
+      this.projectDownloaderOpen = !this.projectDownloaderOpen;
+    },
   },
   props: {
     mainMenuWidth: {
       type: Number,
       required: true,
+    },
+    openProjectManagement: {
+      type: String,
+      required: true,
+    },
+    setOpenProjectManagement: {
+      type: Function,
+      required: true,
+    },
+  },
+  watch: {
+    openProjectManagement: {
+      immediate: true,
+      handler(newValue) {
+        if (newValue !== "projectDownloader") {
+          this.projectDownloaderOpen = false;
+        }
+      },
+    },
+    projectDownloaderOpen: {
+      immediate: true,
+      handler(newValue) {
+        if (newValue) {
+          this.setOpenProjectManagement("projectDownloader");
+        }
+      },
     },
   },
 };
@@ -152,7 +181,7 @@ export default {
     <button
       v-if="!projectDownloaderOpen"
       class="amarex-btn-primary full-with-icon"
-      @click="projectDownloaderOpen = !projectDownloaderOpen"
+      @click="toggleProjectDownloader"
     >
       <SaveIcon
         :color="colors.secondary"
@@ -163,10 +192,11 @@ export default {
     <div
       v-else
       class="expanded-project-downloader"
+      id="project-downloader-expanded"
     >
       <div
         class="button-overview d-flex align-items-center justify-content-center"
-        @click="projectDownloaderOpen = !projectDownloaderOpen"
+        @click="toggleProjectDownloader"
       >
         <SaveIcon
           :color="colors.secondary"
@@ -174,7 +204,7 @@ export default {
         />
         <p>Herunterladen</p>
       </div>
-      <p>
+      <p class="description">
         Laden Sie hier Ihr Projekt als ZIP-Datei herunter, um sie später erneut
         im AMAREX-Webtool zu öffnen oder um einzelne Layer in einer
         GIS-Anwendung zu laden und zu bearbeiten.
@@ -196,15 +226,25 @@ export default {
 <style lang="scss">
 @import "~variables";
 .expanded-project-downloader {
-  padding: 10px 15px 25px 15px;
+  padding: 10px 16px 25px 16px;
   background: $amarex_secondary_mid;
   .button-overview {
     cursor: pointer;
     gap: 8px;
-    margin-bottom: 25px;
+    margin-bottom: 8px;
   }
   & > p {
-    margin-bottom: 15px;
+    margin-bottom: 16px;
+  }
+  .description {
+    overflow: hidden;
+    color: $amarex_grey_dark;
+    font-family: Arial;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 16px;
+    user-select: none;
   }
 }
 </style>
