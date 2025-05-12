@@ -449,20 +449,25 @@ export default {
             v-for="file in filesToUpload"
             :key="file"
             :class="enableZoomToExtend ? 'hasZoom' : ''"
-            class="row d-flex mb-2 flex-nowrap align-items-center"
+            class="d-flex flex-nowrap align-items-center gap-1 mb-2"
           >
-            <p
-              class="text-truncate flex-fill text-start"
-              style="overflow: hidden; white-space: nowrap"
-            >
-              {{ file.name }}
-            </p>
             <IconButton
               :aria="$t('common:modules.fileImport.removeAttachment')"
               :icon="'bi-trash'"
               :interaction="() => removeFile(file)"
-              class="remove-btn col-3"
+              class="remove-btn flex-shrink-0"
             />
+            <p
+              class="text-truncate text-start mb-0"
+              style="
+                overflow: hidden;
+                white-space: nowrap;
+                text-overflow: ellipsis;
+                min-width: 0;
+              "
+            >
+              {{ file.name }}
+            </p>
           </div>
         </div>
       </FileUpload>
@@ -523,8 +528,11 @@ export default {
     user-select: none;
   }
   .btn {
-    width: 1rem !important;
-    height: 1rem !important;
+    width: 24px !important;
+    height: 24px !important;
+    border-radius: 0 !important;
+    border: none !important;
+    padding: 0 !important;
   }
 }
 
