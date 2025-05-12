@@ -134,10 +134,14 @@ export default {
         type: "searchbar",
       });
     },
+    setOpenProjectManagement(value) {
+      this.openProjectManagement = value;
+    },
   },
   data() {
     return {
       colors,
+      openProjectManagement: ""
     };
   },
 };
@@ -217,8 +221,8 @@ export default {
       v-if="side === 'mainMenu' && currentComponent?.name !== 'SearchBar'"
       class="project-management-amarex-container"
     >
-      <ProjectUploader :mainMenuWidth="mainMenuWidth - 24 * 2" />
-      <ProjectDownloader :mainMenuWidth="mainMenuWidth - 24 * 2" />
+      <ProjectUploader :mainMenuWidth="mainMenuWidth - 24 * 2" :openProjectManagement="openProjectManagement" :setOpenProjectManagement="setOpenProjectManagement"/>
+      <ProjectDownloader :mainMenuWidth="mainMenuWidth - 24 * 2" :openProjectManagement="openProjectManagement" :setOpenProjectManagement="setOpenProjectManagement"/>
     </div>
     <ResizeHandle
       v-if="!isMobile && side !== 'mainMenu'"
