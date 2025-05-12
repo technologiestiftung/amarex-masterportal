@@ -24,7 +24,9 @@ export default {
                 // { label: 'X. Features untersuchen', component: 'getFeatureInfo' },
                 // { label: '9. Eigene Notizen', component: 'draw' },
                 // { label: 'X. Eigene Notizen', component: 'draw_old' },
-                // { label: 'X. ESB Tool', component: 'esbTool' },
+                { label: 'ESB Tool', component: 'toolDownloader', id: 'esb-tool' },
+                { label: 'RWB+ Tool', component: 'toolDownloader', id: 'rwb-tool' },
+                // { label: 'Report', component: 'print' },
                 // { label: 'X. Multikriterien Analyse', component: 'multiCriteria' },
                 // { label: 'X. Projekt speichern/exportieren', component: 'projectDownloader' }
             ],
@@ -89,7 +91,9 @@ export default {
                 this.$store.dispatch('Menu/changeCurrentComponent', {
                     type: step.component,
                     side: 'secondaryMenu',
-                    props: { name: step.label }
+                    props: { name: step.label ,
+                        id: step.id ? step.id : undefined
+                    }
                 });
             }
             const targetElement = document.querySelector('.gfi');

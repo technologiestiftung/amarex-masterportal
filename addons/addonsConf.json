@@ -19,6 +19,9 @@
   },
   "themeMaps": {
     "type": "tool"
+  },
+  "toolDownloader": {
+    "type": "tool"
   }
 }
 

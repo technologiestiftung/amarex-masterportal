@@ -11,6 +11,7 @@ import { LoaderCircle } from "lucide-vue-next";
 import colors from "../../../src/shared/js/utils/amarex-colors.json";
 import mapCollection from "../../../src/core/maps/js/mapCollection";
 import { mapActions, mapGetters, mapMutations } from "vuex";
+import MeasurePlanning from "./MeasurePlanning.vue";
 
 /**
  * Abimo
@@ -26,6 +27,7 @@ export default {
     AbimoViewSelector,
     LoaderCircle,
     AbimoResult,
+    MeasurePlanning,
   },
   data() {
     return {
@@ -58,6 +60,10 @@ export default {
           component: markRaw(AbimoViewSelector),
           props: {
             nextStep: () => this.setActiveStep(2),
+            nextStepMnpl: () => {
+              this.setActiveStep(2);
+              this.setIsMeasurePlanning(true);
+            },
           },
           title: "Betrachtungsraum wählen",
           description:
@@ -69,6 +75,7 @@ export default {
                 this.setActiveStep(0);
                 this.setPreComputedModelsAdded(false);
                 this.resetPreComputedModels();
+                this.setIsMeasurePlanning(false);
               },
             },
           ],
@@ -78,7 +85,7 @@ export default {
           component: markRaw(AbimoBlockAreaSelector),
           title: "Untersuchungsgebiet wählen",
           description:
-            "Wählen Sie in der Karte die zu untersuchende Blockteilfläche via Mausklick aus.",
+            "Wählen Sie in der Karte die zu untersuchenden Blockteilflächen via Mausklick aus.",
           buttons: [
             {
               text: "Zurück",
@@ -86,13 +93,18 @@ export default {
                 this.resetAbimoCalculation();
                 this.setPreselectedFeatures([]);
                 this.setActiveStep(1);
+                this.setIsMeasurePlanning(false);
               },
             },
             {
               text: "Bestätigen",
               action: () => {
                 this.$refs.componentRef?.handleBlockAreaConfirm();
-                this.setActiveStep(3);
+                if (this.isMeasurePlanning) {
+                  this.setActiveStep(6);
+                } else {
+                  this.setActiveStep(3);
+                }
               },
               accent: true,
             },
@@ -157,6 +169,29 @@ export default {
           ],
         },
         {
+          id: "MeasurePlanning",
+          component: markRaw(MeasurePlanning),
+          title: "",
+          description: "",
+          buttons: [
+            {
+              text: "Zurück",
+              action: () => {
+                this.setPreselectedFeatures(this.selectedFeatures);
+                this.resetAbimoCalculation();
+                this.setSelectedMeasures([]);
+                mapCollection
+                  .getMap("2D")
+                  .getLayers()
+                  .getArray()
+                  .find((layer) => layer.get("id") === "abimo_measures")
+                  .values_.source.clear();
+                this.setActiveStep(2);
+              },
+            },
+          ],
+        },
+        {
           id: "AbimoResult",
           component: markRaw(AbimoResult),
           props: {
@@ -179,14 +214,18 @@ export default {
               action: async () => {
                 await this.resetAbimoCalculation();
                 await this.resetPreComputedModels();
+                this.setIsMeasurePlanning(false);
                 this.setActiveStep(0);
               },
             },
           ],
         },
       ],
+      standardStepSequence: [0, 1, 2, 3, 4, 5, 7],
+      planningStepSequence: [0, 1, 2, 6, 7],
       showInfo: null,
       calcState: null,
+      stepperCount: 2,
     };
   },
   computed: {
@@ -199,10 +238,26 @@ export default {
       "activeStep",
       "preComputedModelsShown",
       "preComputedModelsAdded",
+      "isMeasurePlanning",
+      "selectedMeasures",
+      "hasMeasures",
     ]),
     ...mapGetters(["allLayerConfigs"]),
     activeComponent() {
       return this.steps[this.activeStep] || {};
+    },
+    displayStepCount() {
+      return this.isMeasurePlanning
+        ? this.planningStepSequence.length
+        : this.standardStepSequence.length;
+    },
+    currentStepSequence() {
+      return this.isMeasurePlanning
+        ? this.planningStepSequence
+        : this.standardStepSequence;
+    },
+    currentStepIndex() {
+      return this.currentStepSequence.indexOf(this.activeStep);
     },
   },
   watch: {
@@ -218,7 +273,7 @@ export default {
     calcState(state) {
       if (state === "isCalculated") {
         this.calcState = null;
-        this.setActiveStep(6);
+        this.setActiveStep(7);
       }
     },
   },
@@ -228,7 +283,11 @@ export default {
       removeInteractionFromMap: "removeInteraction",
     }),
     ...mapActions("Modules/LayerSelection", ["changeVisibility"]),
-    ...mapActions("Modules/AbimoHandler", ["updateAccumulatedStats"]),
+    ...mapActions("Modules/AbimoHandler", [
+      "updateAccumulatedStats",
+      "updateMeasureStats",
+      "updatePreComputedStats",
+    ]),
     ...mapMutations("Modules/AbimoHandler", [
       "setSelectedFeatures",
       "setNewGreenRoof",
@@ -244,6 +303,9 @@ export default {
       "setResultLayers",
       "setPreComputedModels",
       "setPreComputedModelsAdded",
+      "setIsMeasurePlanning",
+      "setSelectedMeasures",
+      "setHasMeasures",
     ]),
     setDisabled() {
       if (this.activeStep === 2) return this.selectedFeatures.length === 0;
@@ -266,6 +328,12 @@ export default {
     },
     changeCalcState(state) {
       this.calcState = state;
+    },
+    isStepActive(displayIndex) {
+      return displayIndex === this.currentStepIndex;
+    },
+    isStepClickable(displayIndex) {
+      return displayIndex < this.currentStepIndex;
     },
     resetAbimoCalculation() {
       mapCollection
@@ -298,17 +366,27 @@ export default {
         .getArray()
         .find((layer) => layer.get("id") === "abimo_result_delta_w")
         .values_.source.clear();
+      mapCollection
+        .getMap("2D")
+        .getLayers()
+        .getArray()
+        .find((layer) => layer.get("id") === "abimo_measures")
+        .values_.source.clear();
       this.removeInteractionFromMap(this.selectInteraction);
       this.setSelectedFeatures([]);
-      this.setNewGreenRoof(0);
-      this.setNewUnpvd(0);
-      this.setNewToSwale(0);
+      this.setNewGreenRoof(null);
+      this.setNewUnpvd(null);
+      this.setNewToSwale(null);
       this.setSelectInteraction(null);
       this.updateAccumulatedStats();
       this.setResetTargetValues(true);
       this.setBlockAreaConfirmed(false);
       this.setResultLayers([]);
       this.setActiveStep(0);
+      this.setSelectedMeasures([]);
+      this.updateMeasureStats();
+      this.setHasMeasures(false);
+      this.updatePreComputedStats([]);
     },
     async resetBlockArea() {
       if (this.blockAreaConfirmed) {
@@ -319,9 +397,9 @@ export default {
           .find((layer) => layer.get("id") === "planung_abimo")
           .values_.source.clear();
         await this.setPreselectedFeatures(this.selectedFeatures);
-        this.setNewGreenRoof(0);
-        this.setNewUnpvd(0);
-        this.setNewToSwale(0);
+        this.setNewGreenRoof(null);
+        this.setNewUnpvd(null);
+        this.setNewToSwale(null);
         this.updateAccumulatedStats();
         this.setBlockAreaConfirmed(false);
       }
@@ -448,19 +526,22 @@ export default {
     </div>
     <!-- STEP CONTAINER -->
     <div class="step-container">
+      <!-- STEPS -->
       <div
         class="steps d-flex justify-content-center"
         v-if="activeStep !== null"
       >
         <div
-          v-for="(step, stepIndex) in steps"
+          v-for="stepIndex in displayStepCount"
           :class="{
-            active: stepIndex === activeStep,
-            click: stepIndex < activeStep,
+            active: isStepActive(stepIndex - 1),
+            click: isStepClickable(stepIndex - 1),
           }"
           :key="stepIndex"
         ></div>
       </div>
+
+      <!-- BUTTONS -->
       <div
         v-if="!steps[activeStep]?.upperButtons"
         class="btn-container d-flex"
@@ -485,8 +566,8 @@ export default {
             <p>{{ steps[activeStep]?.buttons[btnIndex].text }}</p>
           </button>
         </span>
-        <span v-if="activeStep === 5"
-          ><AbimoCalcButton :changeCalcState="changeCalcState"
+        <span v-if="activeStep === 5 || (activeStep === 6 && hasMeasures)">
+          <AbimoCalcButton :changeCalcState="changeCalcState"
         /></span>
       </div>
     </div>
@@ -516,7 +597,6 @@ export default {
       v-if="calcState === 'error'"
       class="error-container d-flex flex-column align-items-center"
     >
-      <p>!!!</p>
       <p class="title">Es ist leider ein Fehler aufgetreten.</p>
       <AbimoCalcButton
         :content="'Nochmal probieren'"

@@ -5,6 +5,7 @@ import ProjectDownloader from "../projectDownloader/components/ProjectDownloader
 import ProjectStarter from "../projectStarter/components/ProjectStarter.vue";
 import ProjectUploader from "../projectUploader/components/ProjectUploader.vue";
 import ThemeMaps from "../themeMaps/components/ThemeMaps.vue";
+import ToolDownloader from "../toolDownloader/components/ToolDownloader.vue";
 
 const getters = {
   componentMap: () => {
@@ -16,6 +17,7 @@ const getters = {
       projectStarter: ProjectStarter,
       baseMaps: BaseMaps,
       themeMaps: ThemeMaps,
+      toolDownloader: ToolDownloader,
     };
 
     moduleCollection = { ...coreModules, ...moduleCollection };

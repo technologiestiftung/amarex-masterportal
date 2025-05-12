@@ -7,6 +7,7 @@ import ProjectDownloader from "../projectDownloader/store/indexProjectDownloader
 import ProjectStarter from "../projectStarter/store/indexProjectStarter";
 import ProjectUploader from "../projectUploader/store/indexProjectUploader";
 import ThemeMaps from "../themeMaps/store/indexThemeMaps";
+import ToolDownloader from "../toolDownloader/store/indexToolDownloader";
 
 export default {
   namespaced: true,
@@ -20,6 +21,7 @@ export default {
     ProjectStarter: { ...ProjectStarter },
     BaseMaps: { ...BaseMaps },
     ThemeMaps: { ...ThemeMaps },
+    ToolDownloader: { ...ToolDownloader },
   },
 };
 

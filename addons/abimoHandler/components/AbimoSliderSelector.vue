@@ -19,6 +19,7 @@ export default {
   data() {
     return {
       targetValue: 0,
+      targetWidth: 0,
       content: {
         greenRoof: {
           title: "Dachbegrünung",
@@ -35,7 +36,7 @@ export default {
           description: (area = "XXXX", percentage = "XX") => {
             // @Luise: Please input the correct area and percentage for unsealed
             if (!area || !percentage)
-              return "Möchten Sie diesen Anteil variieren?";
+              return "Möchten Sie den Anteil unversiegelter Flächen variieren?";
             return `Bei den von Ihnen gewählten Flächen stehen ${area} m² (${percentage}%) unbebaute Fläche zur Verfügung.<br><br>Möchten Sie diesen Anteil variieren?`;
           },
         },
@@ -44,8 +45,8 @@ export default {
           description: (area = "XXXX", percentage = "XX") => {
             // @Luise: Please input the correct area and percentage for swaleConnected
             if (!area || !percentage)
-              return "Welchen Anteil möchten Sie an Mulden anschließen?";
-            return `Bei den von Ihnen gewählten Flächen stehen ${area} m² (${percentage}%) unverbaute Fläche zur Verfügung.<br><br>Dieser Wert ist abhängig von der im vorhergehenden Schritt gewählten unversiegelten Fläche.<br><br>Welchen Anteil möchten Sie an Mulden anschließen?`;
+              return "Welchen Anteil möchten Sie an Mulden anschliessen?";
+            return `Bei den von Ihnen gewählten Flächen stehen ${area} m² (${percentage}%) unbebaut versiegelte Fläche zur Verfügung.`;
           },
         },
       },
@@ -61,11 +62,11 @@ export default {
     currentBaseData() {
       switch (this.type) {
         case "greenRoof":
-          return Math.round(this.accumulatedAbimoStats.maxGreenRoof * 100);
+          return Math.floor(this.accumulatedAbimoStats.maxGreenRoof * 100);
         case "unsealed":
-          return Math.round(this.accumulatedAbimoStats.maxUnpaved * 100);
+          return Math.floor(this.accumulatedAbimoStats.maxUnpaved * 100);
         case "swaleConnected":
-          return Math.round(this.accumulatedAbimoStats.maxSwaleConnected * 100);
+          return Math.floor(this.accumulatedAbimoStats.maxSwaleConnected * 100);
         default:
           return {};
       }
@@ -73,11 +74,11 @@ export default {
     currentStatusQuo() {
       switch (this.type) {
         case "greenRoof":
-          return Math.round(this.accumulatedAbimoStats.meanGreenRoof * 100);
+          return Math.floor(this.accumulatedAbimoStats.meanGreenRoof * 100);
         case "unsealed":
-          return Math.round(this.accumulatedAbimoStats.meanUnpaved * 100);
+          return Math.floor(this.accumulatedAbimoStats.meanUnpaved * 100);
         case "swaleConnected":
-          return Math.round(
+          return Math.floor(
             this.accumulatedAbimoStats.meanSwaleConnected * 100,
           );
         default:
@@ -87,11 +88,11 @@ export default {
     currentBaseArea() {
       switch (this.type) {
         case "greenRoof":
-          return Math.round(this.accumulatedAbimoStats.totalRoofArea);
+          return Math.floor(this.accumulatedAbimoStats.totalRoofArea);
         case "unsealed":
-          return Math.round(this.accumulatedAbimoStats.maxUnpavedArea);
+          return Math.floor(this.accumulatedAbimoStats.maxUnpavedArea);
         case "swaleConnected":
-          return Math.round(this.accumulatedAbimoStats.maxSwaleConnectedArea);
+          return Math.floor(this.accumulatedAbimoStats.maxSwaleConnectedArea);
         default:
           return {};
       }
@@ -99,11 +100,11 @@ export default {
     currentTargetValue() {
       switch (this.type) {
         case "greenRoof":
-          return Math.round(this.accumulatedAbimoStats.totalRoofArea);
+          return Math.floor(this.accumulatedAbimoStats.totalRoofArea);
         case "unsealed":
-          return Math.round(this.accumulatedAbimoStats.maxUnpavedArea);
+          return Math.floor(this.accumulatedAbimoStats.maxUnpavedArea);
         case "swaleConnected":
-          return Math.round(this.accumulatedAbimoStats.maxSwaleConnectedArea);
+          return Math.floor(this.accumulatedAbimoStats.maxSwaleConnectedArea);
         default:
           return {};
       }
@@ -141,31 +142,36 @@ export default {
       },
     },
     targetValue(newValue) {
+      let sanitizedValue = this.sanitizeTargetValue(newValue);
+
       switch (this.type) {
         case "greenRoof":
-          if (newValue > this.accumulatedAbimoStats.maxGreenRoof * 100) {
-            this.targetValue = (
-              this.accumulatedAbimoStats.maxGreenRoof * 100
-            ).toFixed(0);
+          if (sanitizedValue > this.accumulatedAbimoStats.maxGreenRoof * 100) {
+            this.targetValue = Math.floor(
+              this.accumulatedAbimoStats.maxGreenRoof * 100,
+            );
           }
           break;
         case "unsealed":
-          if (newValue > this.accumulatedAbimoStats.maxUnpaved * 100) {
-            this.targetValue = (
-              this.accumulatedAbimoStats.maxUnpaved * 100
-            ).toFixed(0);
+          if (sanitizedValue > this.accumulatedAbimoStats.maxUnpaved * 100) {
+            this.targetValue = Math.floor(
+              this.accumulatedAbimoStats.maxUnpaved * 100,
+            );
           }
           break;
         case "swaleConnected":
-          if (newValue > this.accumulatedAbimoStats.maxSwaleConnected * 100) {
-            this.targetValue = (
-              this.accumulatedAbimoStats.maxSwaleConnected * 100
-            ).toFixed(0);
+          if (
+            sanitizedValue >
+            this.accumulatedAbimoStats.maxSwaleConnected * 100
+          ) {
+            this.targetValue = Math.floor(
+              this.accumulatedAbimoStats.maxSwaleConnected * 100,
+            );
           }
           break;
         default:
-          if (newValue > this.currentBaseData.toFixed(0)) {
-            this.targetValue = this.currentBaseData.toFixed(0);
+          if (sanitizedValue > this.currentBaseData) {
+            this.targetValue = this.currentBaseData;
           }
       }
       this.storeTargetSliderValue({ type: this.type, value: this.targetValue });
@@ -183,53 +189,91 @@ export default {
       "storeTargetSliderValue",
       "storeInitalTargetSliderValue",
     ]),
+    sanitizeTargetValue(value) {
+      let numValue = typeof value === "string" ? Number(value) : value;
+      const maxValue = Math.min(Math.floor(this.currentBaseData), 100);
+
+      if (value === "") {
+        this.targetWidth = 0;
+        return null;
+      }
+      if (numValue % 1 !== 0) {
+        numValue = Math.round(numValue);
+      }
+      if (numValue > maxValue) {
+        numValue = maxValue;
+      }
+      this.targetWidth = numValue;
+      return numValue;
+    },
     updateAbimoData() {
       switch (this.type) {
         case "greenRoof":
-          if (this.targetValue > this.currentBaseData.toFixed(0)) {
-            this.targetValue = this.currentBaseData.toFixed(0);
+          if (
+            this.targetValue >
+            this.accumulatedAbimoStats.maxGreenRoof * 100
+          ) {
+            this.targetValue = Math.floor(
+              this.accumulatedAbimoStats.maxGreenRoof * 100,
+            );
           }
           this.setNewGreenRoof(this.targetValue / 100);
           break;
         case "unsealed":
-          if (this.targetValue > this.currentBaseData.toFixed(0)) {
-            this.targetValue = this.currentBaseData.toFixed(0);
+          if (this.targetValue > this.accumulatedAbimoStats.maxUnpaved * 100) {
+            this.targetValue = Math.floor(
+              this.accumulatedAbimoStats.maxUnpaved * 100,
+            );
           }
           this.setNewUnpvd(this.targetValue / 100);
           this.updateMaxSwaleConnected();
           break;
         case "swaleConnected":
-          if (this.targetValue > this.currentBaseData.toFixed(0)) {
-            this.targetValue = this.currentBaseData.toFixed(0);
+          if (
+            this.targetValue >
+            this.accumulatedAbimoStats.maxSwaleConnected * 100
+          ) {
+            this.targetValue = Math.floor(
+              this.accumulatedAbimoStats.maxSwaleConnected * 100,
+            );
           }
           this.setNewToSwale(this.targetValue / 100);
           break;
       }
     },
     initializeTargetValue() {
+      if (this.targetValue == null || this.targetValue === "") {
+        this.targetValue = 0;
+      }
+
       switch (this.type) {
         case "greenRoof":
           this.targetValue =
-            (this.newGreenRoof * 100).toFixed() > 0
-              ? (this.newGreenRoof * 100).toFixed()
+            this.newGreenRoof !== null &&
+            parseFloat((this.newGreenRoof * 100).toFixed()) >= 0
+              ? parseFloat((this.newGreenRoof * 100).toFixed())
               : this.currentStatusQuo;
           break;
         case "unsealed":
           this.targetValue =
-            (this.newUnpvd * 100).toFixed() > 0
-              ? (this.newUnpvd * 100).toFixed()
+            this.newUnpvd !== null &&
+            parseFloat((this.newUnpvd * 100).toFixed()) >= 0
+              ? parseFloat((this.newUnpvd * 100).toFixed())
               : this.currentStatusQuo;
           break;
         case "swaleConnected":
           this.targetValue =
-            (this.newToSwale * 100).toFixed() > 0
-              ? (this.newToSwale * 100).toFixed()
+            this.newToSwale !== null &&
+            parseFloat((this.newToSwale * 100).toFixed()) >= 0
+              ? parseFloat((this.newToSwale * 100).toFixed())
               : this.currentStatusQuo;
           break;
         default:
           this.targetValue = this.currentStatusQuo;
           break;
       }
+
+      this.targetWidth = this.targetValue;
       this.storeInitalTargetSliderValue({
         type: this.type,
         value: this.targetValue,
@@ -277,8 +321,8 @@ export default {
         <div
           class="target"
           :style="{
-            width: `${targetValue}%`,
-            borderWidth: targetValue > 0 ? '2px' : '0',
+            width: `${targetWidth}%`,
+            borderWidth: targetWidth > 0 ? '2px' : '0',
           }"
         ></div>
       </div>
@@ -308,10 +352,12 @@ export default {
         <input
           id="targetValue"
           v-model="targetValue"
+          @input="targetValue = sanitizeTargetValue($event.target.value)"
           class="target-input"
           type="number"
           min="0"
-          :max="currentBaseData.toFixed(0)"
+          :max="Math.floor(currentBaseData)"
+          step="1"
         />
         <p class="percentage">%</p>
       </div>
@@ -344,7 +390,7 @@ export default {
     >
       <div class="color-indicator notUsable"></div>
       <p class="description-with-smaller-lineheight flex-fill">
-        nicht nutzbare Fläche
+        nicht anschließbare Fläche
       </p>
       <p class="description-with-smaller-lineheight">
         {{ (100 - currentBaseData).toFixed(0) }} %
@@ -396,7 +442,7 @@ export default {
     >
       <div class="color-indicator notUsable"></div>
       <p class="description-with-smaller-lineheight flex-fill">
-        nicht nutzbare Fläche
+        nicht anschließbare Fläche
       </p>
       <p class="description-with-smaller-lineheight">
         {{ (100 - currentBaseData).toFixed(0) }} %
@@ -482,7 +528,7 @@ export default {
     .input-wrapper {
       position: relative;
       .target-input {
-        width: 73px;
+        width: 85px;
         padding: 7px 7px 7px 10px;
         border-radius: 0 !important;
         border: 1px solid $amarex_grey_light;
