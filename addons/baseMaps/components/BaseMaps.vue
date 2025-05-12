@@ -16,7 +16,10 @@ export default {
       "allBaselayerConfigs",
       "layerConfigsByAttributes",
     ]),
-    ...mapGetters("Modules/BaseMaps", ["baselayerIds", "topBaselayerId"]),
+    ...mapGetters("Modules/BaselayerSwitcher", [
+      "baselayerIds",
+      "topBaselayerId",
+    ]),
   },
   watch: {
     visibleBaselayerConfigs: {
@@ -72,23 +75,39 @@ export default {
     this.setBaselayerIds(baselayerConfigIds);
   },
   methods: {
-    ...mapMutations("Modules/BaseMaps", [
+    ...mapMutations("Modules/BaselayerSwitcher", [
+      "setActivatedExpandable",
       "setBaselayerIds",
       "setTopBaselayerId",
     ]),
-    ...mapActions("Modules/BaseMaps", ["updateLayerVisibilityAndZIndex"]),
+    ...mapActions("Modules/BaselayerSwitcher", [
+      "updateLayerVisibilityAndZIndex",
+    ]),
     switchActiveBaselayer(layerId) {
-      const selectableBackroundLayerIds = this.baselayerIds;
       this.updateLayerVisibilityAndZIndex(layerId);
-      selectableBackroundLayerIds.splice(
-        selectableBackroundLayerIds.indexOf(layerId),
-        1,
-      );
+
+      const selectableBackroundLayerIds = this.baselayerIds,
+        index = selectableBackroundLayerIds
+          .map((id) => {
+            return id;
+          })
+          .indexOf(layerId);
+
+      selectableBackroundLayerIds.splice(index, 1);
       if (this.topBaselayerId !== null) {
         selectableBackroundLayerIds.push(this.topBaselayerId);
+        if (this.singleBaseLayer) {
+          this.layerConfigsByAttributes({
+            id: this.topBaselayerId,
+          }).forEach((layer) => {
+            layer.visibility = false;
+          });
+        }
       }
       this.setBaselayerIds(selectableBackroundLayerIds);
+
       this.setTopBaselayerId(layerId);
+      this.setActivatedExpandable(false);
     },
     selectItem(layer, index) {
       this.switchActiveBaselayer(layer.id);
@@ -216,3 +235,4 @@ export default {
   }
 }
 </style>
+
