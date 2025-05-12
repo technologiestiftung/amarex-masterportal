@@ -37,7 +37,7 @@ export default {
             // @Luise: Please input the correct area and percentage for unsealed
             if (!area || !percentage)
               return "Möchten Sie den Anteil unversiegelter Flächen variieren?";
-            return `Bei den von Ihnen gewählten Flächen stehen ${area} m² (${percentage}%) unbebaute Fläche zur Verfügung.<br><br>Möchten Sie diesen Anteil variieren?`;
+            return `Bei den von Ihnen gewählten Flächen stehen ${area} m² (${percentage}%) unbebaute Fläche zur Verfügung.<br><br>Möchten Sie den Anteil unversiegelter Flächen variieren?`;
           },
         },
         swaleConnected: {
