@@ -171,7 +171,7 @@ export default {
 
 .base-layer-list {
   display: flex;
-  flex-direction: column;
+  flex-direction: column-reverse;
   .base-layer-item {
     border-bottom: 2px solid $amarex_grey_light;
     border-left: 2px solid $amarex_primary;
