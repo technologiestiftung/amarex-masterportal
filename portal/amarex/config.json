@@ -203,16 +203,16 @@
     "baselayer": {
       "elements": [
         {
-          "id": "basemap_default_grau",
-          "visibility": true
+          "id": "truedop_2024",
+          "visibility": false
         },
         {
           "id": "basemap_raster_color",
           "visibility": false
         },
         {
-          "id": "truedop_2024",
-          "visibility": false
+          "id": "basemap_default_grau",
+          "visibility": true
         }
       ]
     },
