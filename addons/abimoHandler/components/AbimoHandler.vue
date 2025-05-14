@@ -86,6 +86,8 @@ export default {
           title: "Untersuchungsgebiet wählen",
           description:
             "Wählen Sie in der Karte die zu untersuchenden Blockteilflächen via Mausklick aus.",
+          mnplDescription:
+            "Wählen Sie in der Karte die zu untersuchende Blockteilfläche via Mausklick aus.",
           buttons: [
             {
               text: "Zurück",
@@ -441,8 +443,14 @@ export default {
       >
         {{ steps[activeStep]?.title }}
       </p>
+
       <p
-        v-if="steps[activeStep]?.description"
+        v-if="steps[activeStep]?.mnplDescription && isMeasurePlanning"
+        v-html="steps[activeStep]?.mnplDescription"
+        class="description"
+      ></p>
+      <p
+        v-else-if="steps[activeStep]?.description"
         v-html="steps[activeStep]?.description"
         class="description"
       ></p>
