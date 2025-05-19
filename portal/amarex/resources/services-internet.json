@@ -4668,91 +4668,84 @@
     "gfiAttributes": "showAll"
   },
   {
-    "id": "k06_05gruenversorg2020:0",
-    "name": "Versorgungsgrad mit \u00f6ffentlichen, wohnungsnahen Gr\u00fcnanlagen",
-    "name_lang": "Versorgungsgrad mit \u00f6ffentlichen, wohnungsnahen Gr\u00fcnanlagen (Versorgung mit \u00f6ffentlichen, wohnungsnahen Gr\u00fcnanlagen 2020 (Umweltatlas))",
+    "id": "ua_versorggruen_2020:versorggruen_2020",
+    "name": "Versorgungsgrad mit öffentlichen, wohnungsnahen Grünanlagen",
+    "name_lang": "Versorgungsgrad mit öffentlichen, wohnungsnahen Grünanlagen (Versorgung mit öffentlichen, wohnungsnahen Grünanlagen 2020 (Umweltatlas))",
     "crs": "EPSG:25833",
-    "url": "https://fbinter.stadt-berlin.de/fb/wms/senstadt/k06_05gruenversorg2020",
+    "url": "https://gdi.berlin.de/services/wms/ua_versorggruen_2020",
     "typ": "WMS",
-    "gfiAttributes": "ignore",
-    "layers": "0",
-    "legend": "https://fbinter.stadt-berlin.de/fb_daten/legenden/umweltatlas/leg_06_05_gruenversorg2020_versorg.png",
+    "gfiAttributes": "showAll",
+    "layers": "versorggruen_2020",
+    "legend": true,
     "datasets": [
       {
-        "md_name": "Versorgung mit \u00f6ffentlichen, wohnungsnahen Gr\u00fcnanlagen 2020 (Umweltatlas)",
-        "md_id": "e7419261-f29e-403d-a235-41f53fa540f0",
-        "rs_id": "https://registry.gdi-de.org/id/de.be.csw/be9f12f5-5f4f-34ac-9725-7690b644f01c",
+        "md_name": "Versorgung mit öffentlichen, wohnungsnahen Grünanlagen 2020 (Umweltatlas)",
+        "md_id": "f09ec55a-3ee5-469b-9821-8265ed4171fd",
+        "rs_id": "https://registry.gdi-de.org/id/de.be.csw/2ca09ee6-3073-3774-a18e-0af49675d95a",
         "csw_url": "https://gdi.berlin.de/geonetwork/srv/ger/csw"
       }
     ],
-    "minScale": "600",
-    "maxScale": "250000",
     "format": "image/png",
     "version": "1.3.0",
     "featureCount": "5",
     "gfiTheme": "default",
     "transparent": true,
     "singleTile": true,
-    "layerAttribution": "F\u00fcr die Nutzung der Daten ist die  Datenlizenz Deutschland - Namensnennung - Version 2.0 anzuwenden. Die Lizenz ist \u00fcber https://www.govdata.de/dl-de/by-2-0 abrufbar. Der Quellenvermerk gem\u00e4\u00df (2) der Lizenz lautet \"Umweltatlas Berlin / [Titel des Datensatzes]\".",
-    "displayLayerAlert": false
+    "infoFormat": "application/json",
+    "layerAttribution": "Für die Nutzung der Daten ist die Datenlizenz Deutschland - Zero - Version 2.0 anzuwenden. Die Lizenz ist über https://www.govdata.de/dl-de/zero-2-0 abrufbar."
   },
   {
-    "id": "k06_05gruenversorg2020:1",
-    "name": "Wald (\u00fcberwiegend f\u00fcr die Erholung nutzbar)",
-    "name_lang": "Wald (\u00fcberwiegend f\u00fcr die Erholung nutzbar) (Versorgung mit \u00f6ffentlichen, wohnungsnahen Gr\u00fcnanlagen 2020 (Umweltatlas))",
+    "id": "ua_versorggruen_2020:versorggruen_oeff_2020",
+    "name": "Öffentliche Grünanlage (Erfüllung bestimmter Mindestanforderungen)",
+    "name_lang": "Öffentliche Grünanlage (Erfüllung bestimmter Mindestanforderungen) (Versorgung mit öffentlichen, wohnungsnahen Grünanlagen 2020 (Umweltatlas))",
     "crs": "EPSG:25833",
-    "url": "https://fbinter.stadt-berlin.de/fb/wms/senstadt/k06_05gruenversorg2020",
+    "url": "https://gdi.berlin.de/services/wms/ua_versorggruen_2020",
     "typ": "WMS",
-    "gfiAttributes": "ignore",
-    "layers": "1",
-    "legend": "https://fbinter.stadt-berlin.de/fb_daten/legenden/umweltatlas/leg_06_05gruenversorg2020_wald.png",
+    "gfiAttributes": "showAll",
+    "layers": "versorggruen_oeff_2020",
+    "legend": true,
     "datasets": [
       {
-        "md_name": "Versorgung mit \u00f6ffentlichen, wohnungsnahen Gr\u00fcnanlagen 2020 (Umweltatlas)",
-        "md_id": "e7419261-f29e-403d-a235-41f53fa540f0",
-        "rs_id": "https://registry.gdi-de.org/id/de.be.csw/be9f12f5-5f4f-34ac-9725-7690b644f01c",
+        "md_name": "Versorgung mit öffentlichen, wohnungsnahen Grünanlagen 2020 (Umweltatlas)",
+        "md_id": "f09ec55a-3ee5-469b-9821-8265ed4171fd",
+        "rs_id": "https://registry.gdi-de.org/id/de.be.csw/2ca09ee6-3073-3774-a18e-0af49675d95a",
         "csw_url": "https://gdi.berlin.de/geonetwork/srv/ger/csw"
       }
     ],
-    "minScale": "600",
-    "maxScale": "250000",
     "format": "image/png",
     "version": "1.3.0",
     "featureCount": "5",
     "gfiTheme": "default",
     "transparent": true,
     "singleTile": true,
-    "layerAttribution": "F\u00fcr die Nutzung der Daten ist die  Datenlizenz Deutschland - Namensnennung - Version 2.0 anzuwenden. Die Lizenz ist \u00fcber https://www.govdata.de/dl-de/by-2-0 abrufbar. Der Quellenvermerk gem\u00e4\u00df (2) der Lizenz lautet \"Umweltatlas Berlin / [Titel des Datensatzes]\".",
-    "displayLayerAlert": false
+    "infoFormat": "application/json",
+    "layerAttribution": "Für die Nutzung der Daten ist die Datenlizenz Deutschland - Zero - Version 2.0 anzuwenden. Die Lizenz ist über https://www.govdata.de/dl-de/zero-2-0 abrufbar."
   },
   {
-    "id": "k06_05gruenversorg2020:2",
-    "name": "\u00d6ffentliche Gr\u00fcnanlage (Erf\u00fcllung bestimmter Mindestanforderungen)",
-    "name_lang": "\u00d6ffentliche Gr\u00fcnanlage (Erf\u00fcllung bestimmter Mindestanforderungen) (Versorgung mit \u00f6ffentlichen, wohnungsnahen Gr\u00fcnanlagen 2020 (Umweltatlas))",
+    "id": "ua_versorggruen_2020:versorggruen_wald_2020",
+    "name": "Wald (überwiegend für die Erholung nutzbar)",
+    "name_lang": "Wald (überwiegend für die Erholung nutzbar) (Versorgung mit öffentlichen, wohnungsnahen Grünanlagen 2020 (Umweltatlas))",
     "crs": "EPSG:25833",
-    "url": "https://fbinter.stadt-berlin.de/fb/wms/senstadt/k06_05gruenversorg2020",
+    "url": "https://gdi.berlin.de/services/wms/ua_versorggruen_2020",
     "typ": "WMS",
-    "gfiAttributes": "ignore",
-    "layers": "2",
-    "legend": "https://fbinter.stadt-berlin.de/fb_daten/legenden/umweltatlas/leg_06_05gruenversorg2020_oeffgruen.png",
+    "gfiAttributes": "showAll",
+    "layers": "versorggruen_wald_2020",
+    "legend": true,
     "datasets": [
       {
-        "md_name": "Versorgung mit \u00f6ffentlichen, wohnungsnahen Gr\u00fcnanlagen 2020 (Umweltatlas)",
-        "md_id": "e7419261-f29e-403d-a235-41f53fa540f0",
-        "rs_id": "https://registry.gdi-de.org/id/de.be.csw/be9f12f5-5f4f-34ac-9725-7690b644f01c",
+        "md_name": "Versorgung mit öffentlichen, wohnungsnahen Grünanlagen 2020 (Umweltatlas)",
+        "md_id": "f09ec55a-3ee5-469b-9821-8265ed4171fd",
+        "rs_id": "https://registry.gdi-de.org/id/de.be.csw/2ca09ee6-3073-3774-a18e-0af49675d95a",
         "csw_url": "https://gdi.berlin.de/geonetwork/srv/ger/csw"
       }
     ],
-    "minScale": "600",
-    "maxScale": "250000",
     "format": "image/png",
     "version": "1.3.0",
     "featureCount": "5",
     "gfiTheme": "default",
     "transparent": true,
     "singleTile": true,
-    "layerAttribution": "F\u00fcr die Nutzung der Daten ist die  Datenlizenz Deutschland - Namensnennung - Version 2.0 anzuwenden. Die Lizenz ist \u00fcber https://www.govdata.de/dl-de/by-2-0 abrufbar. Der Quellenvermerk gem\u00e4\u00df (2) der Lizenz lautet \"Umweltatlas Berlin / [Titel des Datensatzes]\".",
-    "displayLayerAlert": false
+    "infoFormat": "application/json",
+    "layerAttribution": "Für die Nutzung der Daten ist die Datenlizenz Deutschland - Zero - Version 2.0 anzuwenden. Die Lizenz ist über https://www.govdata.de/dl-de/zero-2-0 abrufbar."
   }
 ]
-

@@ -499,17 +499,17 @@
               "description": "Grünversorgung",
               "elements": [
                 {
-                  "id": "k06_05gruenversorg2020:0",
+                  "id": "ua_versorggruen_2020:versorggruen_oeff_2020",
                   "visibility": false,
                   "showInLayerTree": false
                 },
                 {
-                  "id": "k06_05gruenversorg2020:1",
+                  "id": "ua_versorggruen_2020:versorggruen_wald_2020",
                   "visibility": false,
                   "showInLayerTree": false
                 },
                 {
-                  "id": "k06_05gruenversorg2020:2",
+                  "id": "ua_versorggruen_2020:versorggruen_2020",
                   "visibility": false,
                   "showInLayerTree": false
                 }
