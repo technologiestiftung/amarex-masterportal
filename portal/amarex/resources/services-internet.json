@@ -4676,7 +4676,7 @@
     "typ": "WMS",
     "gfiAttributes": "showAll",
     "layers": "versorggruen_2020",
-    "legend": true,
+    "legend": "https://gdi.berlin.de/services/wms/ua_versorggruen_2020?service=WMS&version=1.3.0&request=GetLegendGraphic&format=image%2Fpng&width=482&height=317&layer=versorggruen_2020",
     "datasets": [
       {
         "md_name": "Versorgung mit öffentlichen, wohnungsnahen Grünanlagen 2020 (Umweltatlas)",
@@ -4703,7 +4703,7 @@
     "typ": "WMS",
     "gfiAttributes": "showAll",
     "layers": "versorggruen_oeff_2020",
-    "legend": true,
+    "legend": "https://gdi.berlin.de/services/wms/ua_versorggruen_2020?service=WMS&version=1.3.0&request=GetLegendGraphic&format=image%2Fpng&width=482&height=97&layer=versorggruen_oeff_2020",
     "datasets": [
       {
         "md_name": "Versorgung mit öffentlichen, wohnungsnahen Grünanlagen 2020 (Umweltatlas)",
@@ -4730,7 +4730,7 @@
     "typ": "WMS",
     "gfiAttributes": "showAll",
     "layers": "versorggruen_wald_2020",
-    "legend": true,
+    "legend": "https://gdi.berlin.de/services/wms/ua_versorggruen_2020?service=WMS&version=1.3.0&request=GetLegendGraphic&format=image%2Fpng&width=487&height=74&layer=versorggruen_wald_2020",
     "datasets": [
       {
         "md_name": "Versorgung mit öffentlichen, wohnungsnahen Grünanlagen 2020 (Umweltatlas)",
@@ -4749,3 +4749,4 @@
     "layerAttribution": "Für die Nutzung der Daten ist die Datenlizenz Deutschland - Zero - Version 2.0 anzuwenden. Die Lizenz ist über https://www.govdata.de/dl-de/zero-2-0 abrufbar."
   }
 ]
+
