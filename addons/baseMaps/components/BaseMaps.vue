@@ -25,28 +25,34 @@ export default {
     visibleBaselayerConfigs: {
       handler(newVal) {
         const baselayerConfigIds = Object.values(this.allBaselayerConfigs).map(
-          (layer) => layer.id,
-        );
+            (layer) => layer.id,
+          ),
+          zIndex = [];
         let maxZIndex = null,
           topLayer = null;
 
         newVal.forEach((val) => {
-          maxZIndex = Math.max(maxZIndex, val.zIndex);
-          if (val.zIndex === maxZIndex) {
-            topLayer = val;
-          }
+          zIndex.push(val.zIndex);
         });
 
-        if (topLayer?.id !== undefined) {
-          const baselayerIds = baselayerConfigIds.filter(
-            (layerId) => layerId !== topLayer.id,
-          );
-          this.setTopBaselayerId(topLayer.id);
+        maxZIndex = Math.max(...zIndex);
+        topLayer = newVal.filter((layer) => layer.zIndex === maxZIndex);
+
+        if (topLayer[0]?.id !== undefined) {
+          const baselayerIds = [];
+
+          baselayerConfigIds.forEach((layerId) => {
+            if (layerId !== topLayer[0].id) {
+              baselayerIds.push(layerId);
+            }
+          });
+          this.setTopBaselayerId(topLayer[0].id);
           this.setBaselayerIds(baselayerIds);
         } else {
           this.setTopBaselayerId(null);
           this.setBaselayerIds(baselayerConfigIds);
         }
+        this.setActivatedExpandable(false);
       },
       deep: true,
     },
@@ -96,13 +102,12 @@ export default {
       selectableBackroundLayerIds.splice(index, 1);
       if (this.topBaselayerId !== null) {
         selectableBackroundLayerIds.push(this.topBaselayerId);
-        if (this.singleBaseLayer) {
-          this.layerConfigsByAttributes({
-            id: this.topBaselayerId,
-          }).forEach((layer) => {
-            layer.visibility = false;
-          });
-        }
+
+        this.layerConfigsByAttributes({
+          id: this.topBaselayerId,
+        }).forEach((layer) => {
+          layer.visibility = false;
+        });
       }
       this.setBaselayerIds(selectableBackroundLayerIds);
 
