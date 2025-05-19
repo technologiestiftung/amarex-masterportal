@@ -244,7 +244,7 @@ export default {
 </script>
 
 <template>
-    <div>
+    <div class="bounded">
         <!-- Masterportal origin: give the FeatureInfoContainer a new Title Element -->
         <div class="close-container w-100 d-flex justify-content-end align-items-center" @click="closeFeatureInfo">
             <p>Schließen</p>
@@ -254,76 +254,17 @@ export default {
             />
         </div>
         <hr>
-        <h5 class="my-4">LAYER: Topographische Senkenanalyse</h5>
-        <table
-            class="table table-hover"
-        >
-            <tbody v-if="mappedPropertiesExists(feature) && !hasMappedProperties(feature)">
-                <tr>
-                    <td>
-                        {{ $t("common:modules.getFeatureInfo.themes.default.noAttributeAvailable") }}
-                    </td>
-                </tr>
-            </tbody>
-            <tbody v-else-if="mappedPropertiesExists(feature)">
-                <tr>
-                    <td>
-                        ID
-                    </td>
-                    <td>
-                        XXXXXXXX
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        Fläche Einzugsgebiet [m²]
-                    </td>
-                    <td>
-                        XXXXXXXX
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        Fläche Senke [m²]
-                    </td>
-                    <td>
-                        XXXXXXXX
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        Maximale Tiefe der Senke [cm]
-                    </td>
-                    <td>
-                        XXXXXXXX
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        Geländehöhe Senkenbasis [m]
-                    </td>
-                    <td>
-                        XXXXXXXX
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        Geländehöhe maximaler Füllstand [m]
-                    </td>
-                    <td>
-                        XXXXXXXX
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        Füllvolumen [m³]
-                    </td>
-                    <td>
-                        XXXXXXXX
-                    </td>
-                </tr>
-            </tbody>
-        </table>
+        <div class="d-flex align-items-center justify-content-between mt-3 mb-4">
+            <slot name="pager-left" />
+            <h5 class="my-4 px-2 w-100">{{ translate(title) }}</h5>
+            <slot name="pager-right" />
+        </div>
+        <div class="w-100">
+            <component
+                :is="theme"
+                :feature="feature"
+            />
+        </div>
     </div>
 </template>
 
@@ -333,17 +274,6 @@ export default {
 .gfi-title {
     font-size: 1.5rem;
  }
- .table {
-    margin-bottom: 0;
-    border: 1px solid $amarex_secondary;
-    td {
-        border: 1px solid $amarex_secondary;
-        padding: 0.5rem;
-    }
-    @include media-breakpoint-up(sm) {
-        max-width: 400px;
-    }
-}
 .close-container {
     p, svg {
         cursor: pointer;
