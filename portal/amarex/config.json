@@ -682,6 +682,23 @@
                   "showInLayerTree": false
                 }
               ]
+            },
+            {
+              "name": "Potentialanalyse für Maßnahmen",
+              "type": "folder",
+              "description": "Potentialanalyse für Maßnahmen",
+              "elements": [
+                {
+                  "id": "potenziale_regenwasserbewirtschaftung:bb_abkopplungspotenzial_gp",
+                  "visibility": false,
+                  "showInLayerTree": false
+                },
+                {
+                  "id": "potenziale_regenwasserbewirtschaftung:ab_versickerungspotenzial_gp",
+                  "visibility": false,
+                  "showInLayerTree": false
+                }
+              ]
             }
           ]
         },
@@ -760,4 +777,3 @@
     }
   }
 }
-

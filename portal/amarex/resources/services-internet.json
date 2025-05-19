@@ -4747,6 +4747,199 @@
     "singleTile": true,
     "infoFormat": "application/json",
     "layerAttribution": "Für die Nutzung der Daten ist die Datenlizenz Deutschland - Zero - Version 2.0 anzuwenden. Die Lizenz ist über https://www.govdata.de/dl-de/zero-2-0 abrufbar."
+  },
+  {
+    "id": "potenziale_regenwasserbewirtschaftung:aa_versickerungspotenzial_eu",
+    "name": "Versickerungspotenzial: Szenario „Einfache Umsetzung“",
+    "name_lang": "Versickerungspotenzial: Szenario „Einfache Umsetzung“ (Potenziale der dezentralen Regenwasserbewirtschaftung)",
+    "crs": "EPSG:25833",
+    "url": "https://gdi.berlin.de/services/wms/potenziale_regenwasserbewirtschaftung",
+    "typ": "WMS",
+    "gfiAttributes": "showAll",
+    "layers": "aa_versickerungspotenzial_eu",
+    "legend": true,
+    "datasets": [
+      {
+        "md_name": "Potenziale der dezentralen Regenwasserbewirtschaftung",
+        "md_id": "4b84fdbc-ac77-48ef-a1ec-4f7c75c777d3",
+        "rs_id": "https://registry.gdi-de.org/id/de.be.csw/d69e4c33-2334-37a9-8644-cfe963807a33",
+        "csw_url": "https://gdi.berlin.de/geonetwork/srv/ger/csw"
+      }
+    ],
+    "maxScale": "2500.0",
+    "format": "image/png",
+    "version": "1.3.0",
+    "featureCount": "5",
+    "gfiTheme": "default",
+    "transparent": true,
+    "singleTile": true,
+    "infoFormat": "application/json",
+    "layerAttribution": "Der Datenbestand wird unter der Lizenz CC-BY-4.0-Namensnennung International Public License veröffentlicht (vgl. https://creativecommons.org/licenses/by/4.0/legalcode.de). Der Quellenvermerk gemäß Abschnitt 3a der Lizenz lautet \"Berliner Regenwasseragentur/ Potenziale der dezentralen Regenwasserbewirtschaftung\"."
+  },
+  {
+    "id": "potenziale_regenwasserbewirtschaftung:ab_versickerungspotenzial_gp",
+    "name": "Versickerungspotenzial: Szenario „Gängige Praxis“",
+    "name_lang": "Versickerungspotenzial: Szenario „Gängige Praxis“ (Potenziale der dezentralen Regenwasserbewirtschaftung)",
+    "crs": "EPSG:25833",
+    "url": "https://gdi.berlin.de/services/wms/potenziale_regenwasserbewirtschaftung",
+    "typ": "WMS",
+    "gfiAttributes": "showAll",
+    "layers": "ab_versickerungspotenzial_gp",
+    "legend": "https://gdi.berlin.de/services/wms/potenziale_regenwasserbewirtschaftung?service=WMS&version=1.3.0&request=GetLegendGraphic&format=image%2Fpng&width=499&height=397&layer=ab_versickerungspotenzial_gp",
+    "datasets": [
+      {
+        "md_name": "Potenziale der dezentralen Regenwasserbewirtschaftung",
+        "md_id": "4b84fdbc-ac77-48ef-a1ec-4f7c75c777d3",
+        "rs_id": "https://registry.gdi-de.org/id/de.be.csw/d69e4c33-2334-37a9-8644-cfe963807a33",
+        "csw_url": "https://gdi.berlin.de/geonetwork/srv/ger/csw"
+      }
+    ],
+    "maxScale": "2500.0",
+    "format": "image/png",
+    "version": "1.3.0",
+    "featureCount": "5",
+    "gfiTheme": "default",
+    "transparent": true,
+    "singleTile": true,
+    "infoFormat": "application/json",
+    "layerAttribution": "Der Datenbestand wird unter der Lizenz CC-BY-4.0-Namensnennung International Public License veröffentlicht (vgl. https://creativecommons.org/licenses/by/4.0/legalcode.de). Der Quellenvermerk gemäß Abschnitt 3a der Lizenz lautet \"Berliner Regenwasseragentur/ Potenziale der dezentralen Regenwasserbewirtschaftung\"."
+  },
+  {
+    "id": "potenziale_regenwasserbewirtschaftung:ac_versickerungspotenzial_au",
+    "name": "Versickerungspotenzial: Szenario „Aufwendige Umsetzung“",
+    "name_lang": "Versickerungspotenzial: Szenario „Aufwendige Umsetzung“ (Potenziale der dezentralen Regenwasserbewirtschaftung)",
+    "crs": "EPSG:25833",
+    "url": "https://gdi.berlin.de/services/wms/potenziale_regenwasserbewirtschaftung",
+    "typ": "WMS",
+    "gfiAttributes": "showAll",
+    "layers": "ac_versickerungspotenzial_au",
+    "legend": true,
+    "datasets": [
+      {
+        "md_name": "Potenziale der dezentralen Regenwasserbewirtschaftung",
+        "md_id": "4b84fdbc-ac77-48ef-a1ec-4f7c75c777d3",
+        "rs_id": "https://registry.gdi-de.org/id/de.be.csw/d69e4c33-2334-37a9-8644-cfe963807a33",
+        "csw_url": "https://gdi.berlin.de/geonetwork/srv/ger/csw"
+      }
+    ],
+    "maxScale": "2500.0",
+    "format": "image/png",
+    "version": "1.3.0",
+    "featureCount": "5",
+    "gfiTheme": "default",
+    "transparent": true,
+    "singleTile": true,
+    "infoFormat": "application/json",
+    "layerAttribution": "Der Datenbestand wird unter der Lizenz CC-BY-4.0-Namensnennung International Public License veröffentlicht (vgl. https://creativecommons.org/licenses/by/4.0/legalcode.de). Der Quellenvermerk gemäß Abschnitt 3a der Lizenz lautet \"Berliner Regenwasseragentur/ Potenziale der dezentralen Regenwasserbewirtschaftung\"."
+  },
+  {
+    "id": "potenziale_regenwasserbewirtschaftung:ba_abkopplungspotenzial_eu",
+    "name": "Abkopplungspotenzial: Szenario „Einfache Umsetzung“",
+    "name_lang": "Abkopplungspotenzial: Szenario „Einfache Umsetzung“ (Potenziale der dezentralen Regenwasserbewirtschaftung)",
+    "crs": "EPSG:25833",
+    "url": "https://gdi.berlin.de/services/wms/potenziale_regenwasserbewirtschaftung",
+    "typ": "WMS",
+    "gfiAttributes": "showAll",
+    "layers": "ba_abkopplungspotenzial_eu",
+    "legend": true,
+    "datasets": [
+      {
+        "md_name": "Potenziale der dezentralen Regenwasserbewirtschaftung",
+        "md_id": "4b84fdbc-ac77-48ef-a1ec-4f7c75c777d3",
+        "rs_id": "https://registry.gdi-de.org/id/de.be.csw/d69e4c33-2334-37a9-8644-cfe963807a33",
+        "csw_url": "https://gdi.berlin.de/geonetwork/srv/ger/csw"
+      }
+    ],
+    "format": "image/png",
+    "version": "1.3.0",
+    "featureCount": "5",
+    "gfiTheme": "default",
+    "transparent": true,
+    "singleTile": true,
+    "infoFormat": "application/json",
+    "layerAttribution": "Der Datenbestand wird unter der Lizenz CC-BY-4.0-Namensnennung International Public License veröffentlicht (vgl. https://creativecommons.org/licenses/by/4.0/legalcode.de). Der Quellenvermerk gemäß Abschnitt 3a der Lizenz lautet \"Berliner Regenwasseragentur/ Potenziale der dezentralen Regenwasserbewirtschaftung\"."
+  },
+  {
+    "id": "potenziale_regenwasserbewirtschaftung:bb_abkopplungspotenzial_gp",
+    "name": "Abkopplungspotenzial: Szenario „Gängige Praxis“",
+    "name_lang": "Abkopplungspotenzial: Szenario „Gängige Praxis“ (Potenziale der dezentralen Regenwasserbewirtschaftung)",
+    "crs": "EPSG:25833",
+    "url": "https://gdi.berlin.de/services/wms/potenziale_regenwasserbewirtschaftung",
+    "typ": "WMS",
+    "gfiAttributes": "showAll",
+    "layers": "bb_abkopplungspotenzial_gp",
+    "legend": "https://gdi.berlin.de/services/wms/potenziale_regenwasserbewirtschaftung?service=WMS&version=1.3.0&request=GetLegendGraphic&format=image%2Fpng&width=499&height=499&layer=bb_abkopplungspotenzial_gp",
+    "datasets": [
+      {
+        "md_name": "Potenziale der dezentralen Regenwasserbewirtschaftung",
+        "md_id": "4b84fdbc-ac77-48ef-a1ec-4f7c75c777d3",
+        "rs_id": "https://registry.gdi-de.org/id/de.be.csw/d69e4c33-2334-37a9-8644-cfe963807a33",
+        "csw_url": "https://gdi.berlin.de/geonetwork/srv/ger/csw"
+      }
+    ],
+    "format": "image/png",
+    "version": "1.3.0",
+    "featureCount": "5",
+    "gfiTheme": "default",
+    "transparent": true,
+    "singleTile": true,
+    "infoFormat": "application/json",
+    "layerAttribution": "Der Datenbestand wird unter der Lizenz CC-BY-4.0-Namensnennung International Public License veröffentlicht (vgl. https://creativecommons.org/licenses/by/4.0/legalcode.de). Der Quellenvermerk gemäß Abschnitt 3a der Lizenz lautet \"Berliner Regenwasseragentur/ Potenziale der dezentralen Regenwasserbewirtschaftung\"."
+  },
+  {
+    "id": "potenziale_regenwasserbewirtschaftung:bc_abkopplungspotenzial_au",
+    "name": "Abkopplungspotenzial: Szenario „Aufwendige Umsetzung“",
+    "name_lang": "Abkopplungspotenzial: Szenario „Aufwendige Umsetzung“ (Potenziale der dezentralen Regenwasserbewirtschaftung)",
+    "crs": "EPSG:25833",
+    "url": "https://gdi.berlin.de/services/wms/potenziale_regenwasserbewirtschaftung",
+    "typ": "WMS",
+    "gfiAttributes": "showAll",
+    "layers": "bc_abkopplungspotenzial_au",
+    "legend": true,
+    "datasets": [
+      {
+        "md_name": "Potenziale der dezentralen Regenwasserbewirtschaftung",
+        "md_id": "4b84fdbc-ac77-48ef-a1ec-4f7c75c777d3",
+        "rs_id": "https://registry.gdi-de.org/id/de.be.csw/d69e4c33-2334-37a9-8644-cfe963807a33",
+        "csw_url": "https://gdi.berlin.de/geonetwork/srv/ger/csw"
+      }
+    ],
+    "format": "image/png",
+    "version": "1.3.0",
+    "featureCount": "5",
+    "gfiTheme": "default",
+    "transparent": true,
+    "singleTile": true,
+    "infoFormat": "application/json",
+    "layerAttribution": "Der Datenbestand wird unter der Lizenz CC-BY-4.0-Namensnennung International Public License veröffentlicht (vgl. https://creativecommons.org/licenses/by/4.0/legalcode.de). Der Quellenvermerk gemäß Abschnitt 3a der Lizenz lautet \"Berliner Regenwasseragentur/ Potenziale der dezentralen Regenwasserbewirtschaftung\"."
+  },
+  {
+    "id": "potenziale_regenwasserbewirtschaftung:ca_dachbegruenungspotenzial",
+    "name": "Dachbegrünungspotenzial",
+    "name_lang": "Dachbegrünungspotenzial (Potenziale der dezentralen Regenwasserbewirtschaftung)",
+    "crs": "EPSG:25833",
+    "url": "https://gdi.berlin.de/services/wms/potenziale_regenwasserbewirtschaftung",
+    "typ": "WMS",
+    "gfiAttributes": "showAll",
+    "layers": "ca_dachbegruenungspotenzial",
+    "legend": true,
+    "datasets": [
+      {
+        "md_name": "Potenziale der dezentralen Regenwasserbewirtschaftung",
+        "md_id": "4b84fdbc-ac77-48ef-a1ec-4f7c75c777d3",
+        "rs_id": "https://registry.gdi-de.org/id/de.be.csw/d69e4c33-2334-37a9-8644-cfe963807a33",
+        "csw_url": "https://gdi.berlin.de/geonetwork/srv/ger/csw"
+      }
+    ],
+    "maxScale": "2500.0",
+    "format": "image/png",
+    "version": "1.3.0",
+    "featureCount": "5",
+    "gfiTheme": "default",
+    "transparent": true,
+    "singleTile": true,
+    "infoFormat": "application/json",
+    "layerAttribution": "Der Datenbestand wird unter der Lizenz CC-BY-4.0-Namensnennung International Public License veröffentlicht (vgl. https://creativecommons.org/licenses/by/4.0/legalcode.de). Der Quellenvermerk gemäß Abschnitt 3a der Lizenz lautet \"Berliner Regenwasseragentur/ Potenziale der dezentralen Regenwasserbewirtschaftung\"."
   }
 ]
 
