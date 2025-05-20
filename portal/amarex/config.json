@@ -684,9 +684,9 @@
               ]
             },
             {
-              "name": "Potentialanalyse für Maßnahmen",
+              "name": "Potentiale der dezentralen Regenwasserbewirtschaftung",
               "type": "folder",
-              "description": "Potentialanalyse für Maßnahmen",
+              "description": "Potentiale der dezentralen Regenwasserbewirtschaftung",
               "elements": [
                 {
                   "id": "potenziale_regenwasserbewirtschaftung:bb_abkopplungspotenzial_gp",
@@ -777,3 +777,5 @@
     }
   }
 }
+
+
