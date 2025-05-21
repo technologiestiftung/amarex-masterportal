@@ -51,7 +51,8 @@ export default {
             "showAllResultsSearchCategory",
             "addLayerButtonSearchActive",
             "type",
-            "currentSide"
+            "currentSide",
+            "searchError",
         ]),
         ...mapGetters("Menu",
             {menuCurrentComponent: "currentComponent", previousNavigationEntryText: "previousNavigationEntryText"}
@@ -180,6 +181,7 @@ export default {
         */
         searchInputValue: {
             handler (value) {
+                this.setSearchError(null);
                 if (value === "") {
                     this.removePointMarker();
                     this.removePolygonMarker();
@@ -220,7 +222,8 @@ export default {
             "setSearchResultsActive",
             "setCurrentAvailableCategories",
             "setSearchSuggestions",
-            "setCurrentSide"
+            "setCurrentSide",
+            "setSearchError",
         ]),
         ...mapMutations("Menu", [
             "switchToRoot"
@@ -325,6 +328,7 @@ export default {
         <!-- Masterportal origin: added empty states for user to input text to be able to search -->
         <p v-if="!searchInputValue.length && currentComponentSide === 'searchbar'" class="p-3">Bitte gib eine Adresse ein, die du suchen willst...</p>
         <p v-else-if="!!searchInputValue.length && searchInputValue.length < minCharacters && currentComponentSide === 'searchbar'" class="p-3">Bitte gib min. {{ minCharacters }} Zeichen ein...</p>
+        <div v-else-if="searchError && currentComponentSide === 'searchbar'" class="p-3 flex flex-col gap-2 error"><span>{{ searchError.message}}</span><p> Leider ist die Suche fehlgeschlagen. Bitte versuche es später erneut.</p></div>
     </div>
 </template>
 
@@ -370,6 +374,9 @@ export default {
                 font-weight: 400;
                 line-height: 16px;
             }
+        }
+        .error {
+            color: $amarex_red;
         }
     }
 </style>

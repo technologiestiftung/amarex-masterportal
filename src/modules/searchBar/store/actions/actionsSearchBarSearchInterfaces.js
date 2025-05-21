@@ -8,8 +8,8 @@ import SearchInterfaceGazetteer from "../../searchInterfaces/searchInterfaceGaze
 import SearchInterfaceKomootPhoton from "../../searchInterfaces/searchInterfaceKomootPhoton";
 import SearchInterfaceLocationFinder from "../../searchInterfaces/searchInterfaceLocationFinder";
 import SearchInterfaceOsmNominatim from "../../searchInterfaces/searchInterfaceOsmNominatim";
-import SearchInterfaceTopicTree from "../../searchInterfaces/searchInterfaceTopicTree";
 import SearchInterfaceSpecialWfs from "../../searchInterfaces/searchInterfaceSpecialWfs";
+import SearchInterfaceTopicTree from "../../searchInterfaces/searchInterfaceTopicTree";
 import SearchInterfaceVisibleVector from "../../searchInterfaces/searchInterfaceVisibleVector";
 
 export default {
@@ -84,6 +84,7 @@ export default {
                     commit("addSearchResults", {searchResults});
                 })
                 .catch(error => {
+                    commit("setSearchError", error);
                     if (String(error) !== "AbortError: The user aborted a request." && error.name !== "AbortError" && error.code !== "ERR_CANCELED") {
                         console.error(error);
                     }
