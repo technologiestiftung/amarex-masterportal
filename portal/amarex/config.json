@@ -709,66 +709,66 @@
             {
               "id": "abimo_2025_wfs:evaporatio",
               "visibility": false,
-              "showInLayerTree": true
+              "showInLayerTree": false
             },
             {
               "id": "abimo_2025_wfs:surface_ru",
               "visibility": false,
-              "showInLayerTree": true
+              "showInLayerTree": false
             },
             {
               "id": "abimo_2025_wfs:infiltrati",
               "visibility": false,
-              "showInLayerTree": true
+              "showInLayerTree": false
             },
             {
               "id": "delta_w_2025_wfs",
               "visibility": false,
-              "showInLayerTree": true
+              "showInLayerTree": false
             },
             {
               "id": "abimo_2025_wfs:preCompute",
-              "visibility": true,
-              "showInLayerTree": true
+              "visibility": false,
+              "showInLayerTree": false
             },
             {
               "id": "delta_w_2025_wfs:preCompute",
-              "visibility": true,
-              "showInLayerTree": true
+              "visibility": false,
+              "showInLayerTree": false
             },
             {
               "id": "abimo_result_evaporation",
-              "visibility": true,
-              "showInLayerTree": true
+              "visibility": false,
+              "showInLayerTree": false
             },
             {
               "id": "abimo_result_surface_run_off",
-              "visibility": true,
-              "showInLayerTree": true
+              "visibility": false,
+              "showInLayerTree": false
             },
             {
               "id": "abimo_result_infiltration",
-              "visibility": true,
-              "showInLayerTree": true
+              "visibility": false,
+              "showInLayerTree": false
             },
             {
               "id": "abimo_result_delta_w",
-              "visibility": true,
-              "showInLayerTree": true
+              "visibility": false,
+              "showInLayerTree": false
             },
             {
               "id": "planung_abimo",
-              "visibility": true,
+              "visibility": false,
               "showInLayerTree": false
             },
             {
               "id": "rabimo_input_2025",
-              "visibility": true,
-              "showInLayerTree": true
+              "visibility": false,
+              "showInLayerTree": false
             },
             {
               "id": "abimo_measures",
-              "visibility": true,
+              "visibility": false,
               "showInLayerTree": false
             }
           ]
@@ -777,5 +777,3 @@
     }
   }
 }
-
-

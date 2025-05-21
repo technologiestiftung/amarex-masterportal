@@ -1734,7 +1734,7 @@
     "featureNS": "http://geoserver.org",
     "datasets": false,
     "gfiAttributes": "showAll",
-    "maxScale": "10000"
+    "maxScale": "200000"
   },
   {
     "id": "abimo_2020_wfs:evaporatio",
@@ -1748,7 +1748,7 @@
     "datasets": false,
     "layers": "evapor",
     "gfiAttributes": "showAll",
-    "maxScale": "10000",
+    "maxScale": "200000",
     "legend": "./resources/img/legend_evaporation.svg"
   },
   {
@@ -1763,7 +1763,7 @@
     "datasets": false,
     "layers": "runoff",
     "gfiAttributes": "showAll",
-    "maxScale": "10000",
+    "maxScale": "200000",
     "legend": "./resources/img/legend_surface_runoff.svg"
   },
   {
@@ -1778,7 +1778,7 @@
     "datasets": false,
     "layers": "infiltr",
     "gfiAttributes": "showAll",
-    "maxScale": "10000",
+    "maxScale": "200000",
     "legend": "./resources/img/legend_infiltration.svg"
   },
   {
@@ -1792,7 +1792,7 @@
     "featureNS": "http://geoserver.org",
     "datasets": false,
     "gfiAttributes": "showAll",
-    "maxScale": "10000",
+    "maxScale": "200000",
     "legend": "./resources/img/legend_delta_w.svg"
   },
   {
@@ -1809,7 +1809,7 @@
     "featureNS": "http://geoserver.org",
     "datasets": false,
     "gfiAttributes": "showAll",
-    "maxScale": "10000"
+    "maxScale": "25000"
   },
   {
     "id": "abimo_2025_wfs:evaporatio",
@@ -1823,7 +1823,7 @@
     "datasets": false,
     "layers": "evapor",
     "gfiAttributes": "showAll",
-    "maxScale": "10000",
+    "maxScale": "25000",
     "legend": "./resources/img/legend_evaporation.svg"
   },
   {
@@ -1838,7 +1838,7 @@
     "datasets": false,
     "layers": "runoff",
     "gfiAttributes": "showAll",
-    "maxScale": "10000",
+    "maxScale": "25000",
     "legend": "./resources/img/legend_surface_runoff.svg"
   },
   {
@@ -1853,7 +1853,7 @@
     "datasets": false,
     "layers": "infiltr",
     "gfiAttributes": "showAll",
-    "maxScale": "10000",
+    "maxScale": "25000",
     "legend": "./resources/img/legend_infiltration.svg"
   },
   {
@@ -1867,7 +1867,7 @@
     "featureNS": "http://geoserver.org",
     "datasets": false,
     "gfiAttributes": "showAll",
-    "maxScale": "10000",
+    "maxScale": "25000",
     "legend": "./resources/img/legend_delta_w.svg"
   },
   {
@@ -1881,7 +1881,7 @@
     "featureNS": "http://geoserver.org",
     "datasets": false,
     "gfiAttributes": "showAll",
-    "maxScale": "10000",
+    "maxScale": "25000",
     "legend": "./resources/img/legend_evaporation.svg"
   },
   {
@@ -1895,7 +1895,7 @@
     "featureNS": "http://geoserver.org",
     "datasets": false,
     "gfiAttributes": "showAll",
-    "maxScale": "10000",
+    "maxScale": "25000",
     "legend": "./resources/img/legend_delta_w.svg"
   },
   {
@@ -1905,7 +1905,7 @@
     "crs": "urn:ogc:def:crs:EPSG::25833",
     "typ": "GEOJSON",
     "gfiAttributes": "showAll",
-    "maxScale": "10000"
+    "maxScale": "25000"
   },
   {
     "id": "abimo_measures",
@@ -1914,7 +1914,7 @@
     "crs": "urn:ogc:def:crs:EPSG::25833",
     "typ": "GEOJSON",
     "gfiAttributes": "showAll",
-    "maxScale": "10000"
+    "maxScale": "25000"
   },
   {
     "id": "abimo_result_surface_run_off",
@@ -1923,7 +1923,7 @@
     "crs": "urn:ogc:def:crs:EPSG::25833",
     "typ": "GEOJSON",
     "gfiAttributes": "showAll",
-    "maxScale": "10000",
+    "maxScale": "25000",
     "legend": "./resources/img/legend_surface_runoff.svg"
   },
   {
@@ -1933,7 +1933,7 @@
     "crs": "urn:ogc:def:crs:EPSG::25833",
     "typ": "GEOJSON",
     "gfiAttributes": "showAll",
-    "maxScale": "10000",
+    "maxScale": "25000",
     "legend": "./resources/img/legend_evaporation.svg"
   },
   {
@@ -1943,7 +1943,7 @@
     "crs": "urn:ogc:def:crs:EPSG::25833",
     "typ": "GEOJSON",
     "gfiAttributes": "showAll",
-    "maxScale": "10000",
+    "maxScale": "25000",
     "legend": "./resources/img/legend_infiltration.svg"
   },
   {
@@ -1953,7 +1953,7 @@
     "crs": "urn:ogc:def:crs:EPSG::25833",
     "typ": "GEOJSON",
     "gfiAttributes": "showAll",
-    "maxScale": "10000",
+    "maxScale": "25000",
     "legend": "./resources/img/legend_delta_w.svg",
     "searchField": "delta_w"
   },
