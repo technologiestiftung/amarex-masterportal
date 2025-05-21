@@ -249,7 +249,6 @@ export default {
          */
         zoomAndCenter (position) {
             // Masterportal origin log position - remove when not needed
-            console.log('[OrientationItem] position::', position);
             this.zoomToCoordinates({center: position, zoom: 6});
         },
 
