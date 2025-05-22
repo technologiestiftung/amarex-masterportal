@@ -12,7 +12,7 @@ export default {
         return {
             // Masterportal origin Menu Steps
             steps: [
-                // { label: 'Projekt Starten', component: 'projectStarter' },
+                { label: 'Über Amarex', component: 'aboutAmarex' },
                 { label: 'Hintergrundkarten', component: 'baseMaps' },
                 { label: 'Themenkarten', component: 'themeMaps' },
                 { label: 'Wasserhaushalt berechnen', component: 'abimoHandler' },

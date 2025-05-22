@@ -25,6 +25,9 @@
   },
   "toolDownloader": {
     "type": "tool"
+  },
+  "aboutAmarex": {
+    "type": "tool"
   }
 }
 
