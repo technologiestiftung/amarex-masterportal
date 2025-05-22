@@ -122,16 +122,40 @@ export default {
       <p class="description">{{ this.resultAbimoStats.deltaW.toFixed(2) }} %</p>
     </div>
     <span class="line"></span>
-    <p
-      class="description"
-      v-html="
-        `Durch die von Ihnen vorgenommenen Planungsmaßnahmen würde sich der Wert ∆W von <strong>${this.preComputedStats.deltaW.toFixed(2)}%</strong> auf <strong>${this.resultAbimoStats.deltaW.toFixed(2)}% </strong> verändern.`
-      "
-    ></p>
-    <p class="description">
-      <strong>∆W</strong> bezeichnet die Abweichung vom natürlichen
-      Wasserhaushalt in Prozent.
-    </p>
+    <div>
+      <p
+        class="description"
+        v-html="
+          `Durch die von Ihnen vorgenommenen Planungsmaßnahmen würde sich der Wert ∆W von <strong>${this.preComputedStats.deltaW.toFixed(2)}%</strong> auf <strong>${this.resultAbimoStats.deltaW.toFixed(2)}% </strong> verändern,`
+        "
+      ></p>
+      <p
+        class="description"
+        v-html="
+          `der Oberflächenabfluss von <strong>${this.preComputedStats.runoff.toFixed(0)}</strong> auf <strong>${this.resultAbimoStats.runoff.toFixed(0)} mm/Jahr</strong>,`
+        "
+      ></p>
+      <p
+        class="description"
+        v-html="
+          `die Infiltration von <strong>${this.preComputedStats.infiltration.toFixed(0)}</strong> auf <strong>${this.resultAbimoStats.infiltration.toFixed(0)} mm/Jahr</strong>,`
+        "
+      ></p>
+      <p
+        class="description"
+        v-html="
+          `und die Verdunstung von <strong>${this.preComputedStats.evaporation.toFixed(0)}</strong> auf <strong>${this.resultAbimoStats.evaporation.toFixed(0)} mm/Jahr</strong>.`
+        "
+      ></p>
+    </div>
+
+    <div>
+      <p class="description">
+        <strong>∆W</strong> bezeichnet die Abweichung vom natürlichen
+        Wasserhaushalt in Prozent.
+      </p>
+    </div>
+
     <div class="layer-container d-flex flex-column">
       <p class="title">Berechnete Ergebnislayer</p>
       <p class="description">
