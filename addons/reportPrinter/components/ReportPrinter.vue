@@ -74,7 +74,6 @@ export default {
 
       getReport(payload)
         .then(() => {
-          console.log("Report Data: successfully retrieved");
           this.reportLoading = false;
         })
         .catch((error) => {

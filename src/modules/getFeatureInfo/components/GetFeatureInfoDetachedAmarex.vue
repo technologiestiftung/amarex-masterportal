@@ -79,8 +79,6 @@ export default {
         }
     },
     mounted () {
-        console.log('GetFeatureInfoDetachedAmarex mounted :>> ', this.feature);
-        console.log('GetFeatureInfoDetachedAmarex mounted :>> ', this.feature.getMappedProperties());
         this.highlightVectorFeature();
         this.setMarker();
     },
@@ -228,7 +226,6 @@ export default {
             return Object.keys(feature.getMappedProperties()).length !== 0;
         },
         closeFeatureInfo() {
-            console.log('closeFeatureInfo');
             this.setVisible(false);
             const targetElement = document.querySelector('.step-indicator.active');
             if (targetElement) {

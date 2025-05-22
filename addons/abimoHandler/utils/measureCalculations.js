@@ -66,7 +66,6 @@ function calculateAllMeasureStats(selectedFeatures, selectedMeasures) {
   );
 
   const stats = selectedFeatures[0].getProperties();
-  console.log("[measureCalculations] stats::", stats);
 
   let total_area = parseFloat(stats.total_area);
   let main_frac = 1;
@@ -111,9 +110,6 @@ function calculateAllMeasureStats(selectedFeatures, selectedMeasures) {
   const Ae_max = areaCalc.calculatePrecisely(
     (1 - roof) * main_frac * total_area,
   );
-  
-  // const Ae_max_pvd = areaCalc.calculatePrecisely(pvd * main_frac * total_area);
-  // console.log("[measureCalculations] Ae_max_pvd::", Ae_max_pvd);
 
   // 2.4. Calculate new area of unpaved areas in m²
   const Ae_neu = Math.min(totalUnpavedArea + Ae_0, Ae_max);
