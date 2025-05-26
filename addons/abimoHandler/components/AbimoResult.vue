@@ -90,61 +90,63 @@ export default {
 <template lang="html">
   <div class="result-container d-flex flex-column">
     <p class="title">Ergebnisse Berechnung</p>
-    <div
-      class="stats-container d-flex justify-content-between w-100 align-items-center"
-    >
-      <p class="description">Oberflächenabfluss</p>
-      <p class="description">
-        {{ this.resultAbimoStats.runoff.toFixed(0) }} mm/Jahr
-      </p>
+
+    <div class="comparison-table">
+      <!-- Header row -->
+      <div class="comparison-header">
+        <div class="metric-label"></div>
+        <div class="status-quo-header">Status Quo</div>
+        <div class="berechnung-header">Berechnung</div>
+      </div>
+
+      <!-- Data rows -->
+      <div class="comparison-row">
+        <div class="metric-label">∆W</div>
+        <div class="status-quo-value">
+          {{ this.preComputedStats.deltaW.toFixed(2) }} %
+        </div>
+        <div class="berechnung-value">
+          {{ this.resultAbimoStats.deltaW.toFixed(2) }} %
+        </div>
+      </div>
+
+      <div class="comparison-row">
+        <div class="metric-label">Verdunstung</div>
+        <div class="status-quo-value">
+          {{ this.preComputedStats.evaporation.toFixed(0) }} mm/Jahr
+        </div>
+        <div class="berechnung-value">
+          {{ this.resultAbimoStats.evaporation.toFixed(0) }} mm/Jahr
+        </div>
+      </div>
+
+      <div class="comparison-row">
+        <div class="metric-label">Infiltration</div>
+        <div class="status-quo-value">
+          {{ this.preComputedStats.infiltration.toFixed(0) }} mm/Jahr
+        </div>
+        <div class="berechnung-value">
+          {{ this.resultAbimoStats.infiltration.toFixed(0) }} mm/Jahr
+        </div>
+      </div>
+
+      <div class="comparison-row">
+        <div class="metric-label">Oberflächenabfluss</div>
+        <div class="status-quo-value">
+          {{ this.preComputedStats.runoff.toFixed(0) }} mm/Jahr
+        </div>
+        <div class="berechnung-value">
+          {{ this.resultAbimoStats.runoff.toFixed(0) }} mm/Jahr
+        </div>
+      </div>
     </div>
-    <div
-      class="stats-container d-flex justify-content-between w-100 align-items-center"
-    >
-      <p class="description">Infiltration</p>
-      <p class="description">
-        {{ this.resultAbimoStats.infiltration.toFixed(0) }}
-        mm/Jahr
-      </p>
-    </div>
-    <div
-      class="stats-container d-flex justify-content-between w-100 align-items-center"
-    >
-      <p class="description">Verdunstung</p>
-      <p class="description">
-        {{ this.resultAbimoStats.evaporation.toFixed(0) }} mm/Jahr
-      </p>
-    </div>
-    <div
-      class="stats-container d-flex justify-content-between w-100 align-items-center last"
-    >
-      <p class="description">∆W</p>
-      <p class="description">{{ this.resultAbimoStats.deltaW.toFixed(2) }} %</p>
-    </div>
+
     <span class="line"></span>
     <div>
       <p
         class="description"
         v-html="
           `Durch die von Ihnen vorgenommenen Planungsmaßnahmen würde sich der Wert ∆W von <strong>${this.preComputedStats.deltaW.toFixed(2)}%</strong> auf <strong>${this.resultAbimoStats.deltaW.toFixed(2)}% </strong> verändern,`
-        "
-      ></p>
-      <p
-        class="description"
-        v-html="
-          `der Oberflächenabfluss von <strong>${this.preComputedStats.runoff.toFixed(0)}</strong> auf <strong>${this.resultAbimoStats.runoff.toFixed(0)} mm/Jahr</strong>,`
-        "
-      ></p>
-      <p
-        class="description"
-        v-html="
-          `die Infiltration von <strong>${this.preComputedStats.infiltration.toFixed(0)}</strong> auf <strong>${this.resultAbimoStats.infiltration.toFixed(0)} mm/Jahr</strong>,`
-        "
-      ></p>
-      <p
-        class="description"
-        v-html="
-          `und die Verdunstung von <strong>${this.preComputedStats.evaporation.toFixed(0)}</strong> auf <strong>${this.resultAbimoStats.evaporation.toFixed(0)} mm/Jahr</strong>.`
         "
       ></p>
     </div>
@@ -242,6 +244,58 @@ export default {
 @import "~variables";
 .result-container {
   gap: 16px;
+
+  .comparison-table {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    overflow: hidden;
+    margin-bottom: 16px;
+  }
+
+  .comparison-header {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    > div {
+      text-align: end;
+      font-weight: 700;
+      color: $amarex_secondary;
+
+      &:first-child {
+        text-align: end;
+        color: $amarex_secondary;
+        background-color: transparent;
+      }
+    }
+  }
+
+  .comparison-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    &:last-child {
+      border-bottom: none;
+    }
+    > div {
+      font-size: 16px;
+      line-height: 20px;
+      color: $amarex_secondary;
+    }
+
+    .metric-label {
+      color: $amarex_secondary;
+    }
+
+    .status-quo-value {
+      text-align: end;
+      color: $amarex_secondary;
+    }
+
+    .berechnung-value {
+      text-align: end;
+      color: $amarex_secondary;
+    }
+  }
+
   .stats-container {
     p {
       line-height: 20px;
