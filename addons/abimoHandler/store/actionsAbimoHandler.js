@@ -9,8 +9,6 @@ const actions = {
     );
     commit("setAccumulatedAbimoStats", stats);
 
-    console.log("[actionsAbimoHandler] accumulatedAbimoStats::", stats);
-
     state.areaTypesData.find((area) => area.id === "unpvd").max =
       stats.meanUnpaved;
     state.areaTypesData.find((area) => area.id === "roof").max = stats.meanRoof;
@@ -29,12 +27,10 @@ const actions = {
   updateResultStats({ commit }, data) {
     const stats = areaCalc.calculateResultStats(data);
     commit("setResultAbimoStats", stats);
-    console.log("[actionsAbimoHandler] resultStats::", stats);
   },
   updatePreComputedStats({ commit }, data) {
     const stats = areaCalc.calculateResultStats(data);
     commit("setPreComputedStats", stats);
-    console.log("[actionsAbimoHandler] preComputedStats::", stats);
   },
   updateAccordionSteps({ commit, state }, stepToSetActive) {
     if (!stepToSetActive) {
@@ -80,10 +76,7 @@ const actions = {
     commit("setNewGreenRoof", stats.newGreenRoof);
     commit("setNewUnpvd", stats.newUnpvd);
     commit("setNewToSwale", stats.newToSwale);
-
-    console.log("[actionsAbimoHandler] updateMeasureStats::", stats);
   },
-  // New action to check if a measure can be added
   async canAddMeasure({ state }, { tempMeasure, measureType }) {
     const tempMeasures = [...state.selectedMeasures, tempMeasure];
 
@@ -111,7 +104,7 @@ const actions = {
         if (statsWithNewMeasure.Aet > statsWithNewMeasure.Ae_max) {
           canAdd = false;
           message =
-            "Entsiegelung: die verfügbare unbebaute abflusswirksame Fläche wurde überschritten.";
+            "Entsiegelung: die verfügbare unbebaute Fläche wurde überschritten (Gebäudeflächen können nicht entsiegelt werden).";
         }
         break;
       case "swale":

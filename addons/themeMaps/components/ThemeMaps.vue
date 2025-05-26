@@ -132,11 +132,15 @@ export default {
       });
     },
     openInfo(info) {
-      this.showInfo = {
-        title: info.name,
-        description: info.description,
-        legend: info.legend,
-      };
+      if (this.showInfo && this.showInfo.title === info.name) {
+        this.showInfo = null;
+      } else {
+        this.showInfo = {
+          title: info.name,
+          description: info.description,
+          legend: info.legend,
+        };
+      }
     },
     hideInfo() {
       this.showInfo = null;

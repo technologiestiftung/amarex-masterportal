@@ -26,7 +26,6 @@ export default {
                 // { label: 'X. Eigene Notizen', component: 'draw_old' },
                 { label: 'ESB Tool', component: 'toolDownloader', id: 'esb-tool' },
                 { label: 'RWB+ Tool', component: 'toolDownloader', id: 'rwb-tool' },
-                // { label: 'Report', component: 'print' },
                 // { label: 'X. Multikriterien Analyse', component: 'multiCriteria' },
                 // { label: 'X. Projekt speichern/exportieren', component: 'projectDownloader' }
             ],

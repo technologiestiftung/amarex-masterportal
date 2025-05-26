@@ -18,6 +18,13 @@ const fs = require("fs-extra"),
  * @returns {void}
  */
 function buildSinglePortal (allPortalPaths) {
+
+    // add redirects
+    const redirectsContent = "/    /amarex    ";
+    const redirectsPath = path.resolve(__dirname, "../../dist/_redirects");
+
+    fs.writeFileSync(redirectsPath, redirectsContent);
+
     let sourcePortalPath = [];
 
     if (allPortalPaths.length === 0) {

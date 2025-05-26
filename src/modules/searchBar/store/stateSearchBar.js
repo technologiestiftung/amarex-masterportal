@@ -47,6 +47,7 @@ const state = {
     searchInterfaceInstances: [],
     searchSuggestions: [],
     searchResults: [],
+    searchError: null,
     selectedSearchResults: [],
     showAllResults: false,
     showAllResultsSearchInterfaceInstance: "elasticSearch_0",

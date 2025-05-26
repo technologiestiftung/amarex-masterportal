@@ -3,9 +3,7 @@
     text { font-family: Arial, sans-serif; font-size: 12px; }
     .title { font-size: 16px; font-weight: bold; }
   </style>
-  
-  <text x="10" y="20" class="title">∆W in %</text>   
-  <g transform="translate(10, 40)">
+  <g transform="translate(10, 5)">
     <rect x="0" y="0" width="30" height="20" fill="rgba(36,65,209,1)" />
     <text x="35" y="15">0 bis 20</text>
     
@@ -23,6 +21,7 @@
   </g>
   
   <!-- Erklärung -->
-  <text x="10" y="180">Hinweis: ∆W bezeichnet die Abweichung vom</text>
-  <text x="10" y="195">natürlichen Wasserhaushalt in Prozent.</text>
+  <text x="10" y="150">Einheit: %</text>
+  <text x="10" y="170">Hinweis: ∆W bezeichnet die Abweichung vom</text>
+  <text x="10" y="185">natürlichen Wasserhaushalt in Prozent.</text>
 </svg>

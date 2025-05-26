@@ -23,8 +23,8 @@ export default {
       content: {
         greenRoof: {
           title: "Dachbegrünung",
-          description: (area = "XXXX", percentage = "XX") => {
-            // @Luise: Please input the correct area and percentage for greenRoof
+          description: (area, percentage) => {
+            // @Luise: Please input the correct area and percentage for greenRoof -> @jakob they are already included
             if (!area || !percentage)
               return "Welchen Anteil möchten Sie begrünen?";
             return `Bei den von Ihnen gewählten Flächen stehen ${area} m² (${percentage}%) Dachflächen zur Verfügung.<br><br>Welchen Anteil möchten Sie begrünen?`;
@@ -33,20 +33,20 @@ export default {
         unsealed: {
           title: "Unversiegelte Flächen",
           subTitle: "unversiegelte Fläche",
-          description: (area = "XXXX", percentage = "XX") => {
-            // @Luise: Please input the correct area and percentage for unsealed
+          description: (area, percentage) => {
+            // @Luise: Please input the correct area and percentage for unsealed -> @jakob they are already included
             if (!area || !percentage)
               return "Möchten Sie den Anteil unversiegelter Flächen variieren?";
-            return `Bei den von Ihnen gewählten Flächen stehen ${area} m² (${percentage}%) unbebaute Fläche zur Verfügung.<br><br>Möchten Sie diesen Anteil variieren?`;
+            return `Bei den von Ihnen gewählten Flächen stehen ${area} m² (${percentage}%) unbebaute Fläche zur Verfügung.<br><br>Möchten Sie den Anteil unversiegelter Flächen variieren?`;
           },
         },
         swaleConnected: {
           title: "Mulde",
-          description: (area = "XXXX", percentage = "XX") => {
-            // @Luise: Please input the correct area and percentage for swaleConnected
+          description: (area, percentage) => {
+            // @Luise: Please input the correct area and percentage for swaleConnected -> @jakob they are already included
             if (!area || !percentage)
               return "Welchen Anteil möchten Sie an Mulden anschliessen?";
-            return `Bei den von Ihnen gewählten Flächen stehen ${area} m² (${percentage}%) unbebaut versiegelte Fläche zur Verfügung.`;
+            return `Bei den von Ihnen gewählten Flächen stehen ${area} m² (${percentage}%) versiegelte Fläche zur Verfügung."`;
           },
         },
       },
