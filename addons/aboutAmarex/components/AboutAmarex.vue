@@ -11,47 +11,47 @@ export default {
       logos: [
         {
           src: "./resources/logos/RPTU.svg",
-          alt: "Logo",
+          alt: "Rheinland-Pfälzische Technische Universität Logo",
           link: "",
         },
         {
           src: "./resources/logos/KWB_logo_M_blau_211014.png",
-          alt: "Logo",
+          alt: "KWB Logo",
           link: "",
         },
         {
           src: "./resources/logos/EI_logo_RGB_300ppi.png",
-          alt: "Logo",
+          alt: "Eco Logic Logo",
           link: "",
         },
         {
           src: "./resources/logos/Uni_Stuttgart.png",
-          alt: "Logo",
+          alt: "Universität Stuttgart Logo",
           link: "",
         },
         {
           src: "./resources/logos/bwb-logo-farbig.svg",
-          alt: "Logo",
+          alt: "Berliner Wasserbetriebe Logo",
           link: "",
         },
         {
           src: "./resources/logos/tsb.svg",
-          alt: "Logo",
+          alt: "Technologiestiftung Berlin Logo",
           link: "",
         },
         {
           src: "./resources/logos/StEB_Koeln_logo.svg",
-          alt: "Logo",
+          alt: "SteB Köln Logo",
           link: "",
         },
         {
           src: "./resources/logos/HELIX_Logo.png",
-          alt: "Logo",
+          alt: "Helix Logo",
           link: "",
         },
         {
           src: "./resources/logos/Logo_Stadt_Köln.png",
-          alt: "Logo",
+          alt: "Stadt Köln Logo",
           link: "",
         },
       ],
@@ -75,12 +75,12 @@ export default {
       senStadtLogos: [
         {
           src: "./resources/logos/B_SEN_SBW_Logo_DE_H_PW_RGB.png",
-          alt: "Berlin Senat Logo",
+          alt: "Berlin Senatsverwaltung für Stadtentwicklung, Bauen und Wohnen Logo",
           link: "",
         },
         {
           src: "./resources/logos/B_SEN_UMVK_Logo_DE_H_PW_RGB.png",
-          alt: "Berlin Senat Logo",
+          alt: "Berlin Senatsverwaltung für Umwelt, Mobilität, Verbraucher- und Klimaschutz Logo",
           link: "",
         },
       ],
