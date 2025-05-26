@@ -15,6 +15,7 @@ import SpinnerItem from "../../../shared/modules/spinner/components/SpinnerItem.
 import colors from "../../../shared/js/utils/amarex-colors.json";
 import { Info as InfoIcon, FileDown, LoaderCircle } from "lucide-vue-next";
 import { getReport } from "../api/getReport";
+import areaCalculations from "../../../../addons/abimoHandler/utils/areaCalculations";
 
 /**
  * Tool to print a part of the map
@@ -47,6 +48,8 @@ export default {
             },
             reportLoading: false,
             warning: null,
+            areaCalculations,
+            showTestingBTN: false
         };
     },
     computed: {
@@ -81,7 +84,10 @@ export default {
             "areaTypesData",
             "accumulatedAbimoStats",
             "selectedFeatures",
-            "resultAbimoStats"
+            "resultAbimoStats",
+            "preComputedStats",
+            "isMeasurePlanning",
+            "newUnpvd"
         ]),
         currentScale: {
             get () {
@@ -421,21 +427,37 @@ export default {
             // Versiegelte Fläche "V" => 1.1 - U - D
             const versiegelteFläche = this.mathRoundAndToFixed(gesamtFläche - unversiegelteFläche - dachFläche)
 
+            // Maßnahmenplanung
+            const stats = this.areaCalculations.calculateAllStats(this.selectedFeatures, this.newUnpvd)
+            console.log('stats :>> ', stats);
+            const an_mulde_angeschlossene_fläche = this.isMeasurePlanning ? this.fullPercentage(stats?.meanSwaleConnected || 0) : this.accumulatedAbimoStats.targetValueSwaleConnected || 0; /// getMeanSwaleConnected 
+            const dachbegrünung_prozente = this.isMeasurePlanning ? this.fullPercentage(stats?.meanGreenRoof || 0) : this.accumulatedAbimoStats.targetValueGreenRoof || 0; // getMeanGreenRoof 
+            const entsiegelung_prozente = this.isMeasurePlanning ? "XX" : this.accumulatedAbimoStats.targetValueUnsealed || 0; // getMeanUnsealed 
+
             const abimo_result_runoff = this.mathRoundAndToFixed(this.resultAbimoStats.runoff)
             const abimo_result_infiltration = this.mathRoundAndToFixed(this.resultAbimoStats.infiltration)
             const abimo_result_evaporation = this.mathRoundAndToFixed(this.resultAbimoStats.evaporation)
             const abimo_results_added = abimo_result_runoff + abimo_result_infiltration + abimo_result_evaporation
+            
+            // Status Quo Analyse
+            const oberflächenabflussStatusQuo = this.mathRoundAndToFixed(this.preComputedStats.runoff);
+            const infiltrationStatusQuo = this.mathRoundAndToFixed(this.preComputedStats.infiltration);
+            const verdunstungStatusQuo = this.mathRoundAndToFixed(this.preComputedStats.evaporation);
+            const status_quo_added = oberflächenabflussStatusQuo + infiltrationStatusQuo + verdunstungStatusQuo
 
             const makePercentageForAbimo = (value) => {
                 return this.mathRoundAndToFixed((100 / abimo_results_added) * value)
             }
-            
+            const makeWasserhaushaltStatusQuoPercentage = (value) => {
+                return this.mathRoundAndToFixed((100 / status_quo_added) * value)
+            }
+
             const payload = {
                 title: this.report.title,
                 description: this.report.description,
                 date: this.report.date,
-                // @Luise: please add in isMeasurePlanning value from store
-                isMeasurePlanning: null,
+                // please add in isMeasurePlanning value from store
+                isMeasurePlanning: this.isMeasurePlanning,
                 downloadURL,
                 // 1.1 * 1.3 => m² | 1.3 => % 
                 flächenanteile_dachfläche: `${dachFläche} m² (${this.fullPercentage(bebautVersiegelt)}) %`,
@@ -452,19 +474,19 @@ export default {
                 // "U" => m² | 3.1 => % 
                 flächenanteile_unversiegelte_flächen_simulation: `${unversiegelteFläche} m² (${zielwertUnversiegelt}) %`,
                 // gesetzte Maßnahmen
-                an_mulde_angeschlossene_fläche: this.accumulatedAbimoStats.targetValueSwaleConnected || 0,
-                dachbegrünung_prozente: this.accumulatedAbimoStats.targetValueGreenRoof || 0,
-                entsiegelung_prozente: this.accumulatedAbimoStats.targetValueUnsealed || 0,
-                // @Luise: please add in the 4 "Status Quo Analyse" values for page 3 of the report
-                oberflächenabfluss_status_quo: "XX",
-                infiltration_status_quo: "XX",
-                verdunstung_status_quo: "XX",
-                delta_w_status_quo: "XX",
-                // @Luise: please add in the 8 "Status Quo Analyse" values for page 5 of the report
-                wasserhaushalt_oberflächenabfluss_status_quo: `${"XX"} mm/a (${"XX"} %)`,
-                wasserhaushalt_infiltration_status_quo: `${"XX"} mm/a (${"XX"} %)`,
-                wasserhaushalt_verdunstung_status_quo: `${"XX"} mm/a (${"XX"} %)`,
-                wasserhaushalt_delta_w_status_quo: `${"XX"} mm/a (${"XX"} %)`,
+                betrachteteblockteilflaechen: this.accumulatedAbimoStats.featuresSelected || 0,
+                an_mulde_angeschlossene_fläche: an_mulde_angeschlossene_fläche,
+                dachbegrünung_prozente: dachbegrünung_prozente,
+                entsiegelung_prozente: entsiegelung_prozente,
+                // please add in the 4 "Status Quo Analyse" values for page 3 of the report
+                oberflächenabfluss_status_quo: oberflächenabflussStatusQuo, 
+                infiltration_status_quo: infiltrationStatusQuo,
+                verdunstung_status_quo: verdunstungStatusQuo, 
+                delta_w_status_quo: this.mathRoundAndToFixed(this.preComputedStats.deltaW), 
+                // please add in the 8 "Status Quo Analyse" values for page 5 of the report
+                wasserhaushalt_oberflächenabfluss_status_quo: `${oberflächenabflussStatusQuo} mm/a (${makeWasserhaushaltStatusQuoPercentage(oberflächenabflussStatusQuo)} %)`,
+                wasserhaushalt_infiltration_status_quo: `${infiltrationStatusQuo} mm/a (${makeWasserhaushaltStatusQuoPercentage(infiltrationStatusQuo)} %)`,
+                wasserhaushalt_verdunstung_status_quo: `${verdunstungStatusQuo} mm/a (${makeWasserhaushaltStatusQuoPercentage(verdunstungStatusQuo)} %)`,
                 // Abimo Result
                 abimo_result: {
                     runoff: abimo_result_runoff,
@@ -502,6 +524,10 @@ export default {
             this.setFileDownloads([]);
             this.togglePostrenderListener(false);
             this.shownLayoutList = [];
+        },
+        testing() {
+            console.log("Testing console log");
+            console.log("calculateAllStats", this.areaCalculations.calculateAllStats(this.selectedFeatures, this.newUnpvd));
         }
     }
 };
@@ -545,6 +571,13 @@ export default {
         >
             {{ warning }}
         </p>
+        <button
+            class="amarex-btn-primary accent full-with-icon"
+            v-if="showTestingBTN"
+            @click="testing"
+        >
+            <p>TESTING CONSOLE LOG</p>
+        </button>
         <button
             class="amarex-btn-primary accent full-with-icon"
             v-if="!reportLoading"
