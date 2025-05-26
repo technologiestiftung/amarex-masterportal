@@ -61,16 +61,15 @@ export default {
           alt: "BMBF Logo",
           link: "https://www.bmbf.de/bmbf/de/home/home_node.html",
         },
-        // TODO: update logo
-        {
-          src: "https://www.amarex-projekt.de/media/site/e232a797db-1745413939/waxo.png",
-          alt: "WAX Logo",
-          link: "https://www.bmbf-wax.de/",
-        },
         {
           src: "./resources/logos/BMBF_FONA_Logo_rgb.svg",
           alt: "Logo FONA",
           link: "https://www.fona.de/de/",
+        },
+        {
+          src: "https://www.amarex-projekt.de/media/site/e232a797db-1745413939/waxo.png",
+          alt: "WAX Logo",
+          link: "https://www.bmbf-wax.de/",
         },
       ],
       senStadtLogos: [
