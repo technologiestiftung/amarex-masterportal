@@ -328,7 +328,12 @@ export default {
         <!-- Masterportal origin: added empty states for user to input text to be able to search -->
         <p v-if="!searchInputValue.length && currentComponentSide === 'searchbar'" class="p-3">Bitte gib eine Adresse ein, die du suchen willst...</p>
         <p v-else-if="!!searchInputValue.length && searchInputValue.length < minCharacters && currentComponentSide === 'searchbar'" class="p-3">Bitte gib min. {{ minCharacters }} Zeichen ein...</p>
-        <div v-else-if="searchError && currentComponentSide === 'searchbar'" class="p-3 flex flex-col gap-2 error"><span>{{ searchError.message}}</span><p> Leider ist die Suche fehlgeschlagen. Bitte versuche es später erneut.</p></div>
+        <div v-else-if="searchError && currentComponentSide === 'searchbar'" class="p-3 flex flex-col gap-2 error">
+            <span>
+                Netzwerkfehler
+            </span>
+            <p>Leider ist die Suche fehlgeschlagen. Bitte versuchen Sie es später erneut.</p>
+        </div>
     </div>
 </template>
 
