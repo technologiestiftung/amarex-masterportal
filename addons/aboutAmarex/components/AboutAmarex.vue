@@ -10,6 +10,53 @@ export default {
     return {
       logos: [
         {
+          src: "./resources/logos/RPTU.svg",
+          alt: "Logo",
+          link: "",
+        },
+        {
+          src: "./resources/logos/KWB_logo_M_blau_211014.png",
+          alt: "Logo",
+          link: "",
+        },
+        {
+          src: "./resources/logos/EI_logo_RGB_300ppi.png",
+          alt: "Logo",
+          link: "",
+        },
+        {
+          src: "./resources/logos/Uni_Stuttgart.png",
+          alt: "Logo",
+          link: "",
+        },
+        {
+          src: "./resources/logos/bwb-logo-farbig.svg",
+          alt: "Logo",
+          link: "",
+        },
+        {
+          src: "./resources/logos/tsb.svg",
+          alt: "Logo",
+          link: "",
+        },
+        {
+          src: "./resources/logos/StEB_Koeln_logo.svg",
+          alt: "Logo",
+          link: "",
+        },
+        {
+          src: "./resources/logos/HELIX_Logotype_CMYK_ 100-0-90-10 1.png",
+          alt: "Logo",
+          link: "",
+        },
+        {
+          src: "./resources/logos/Logo_Stadt_Köln.png",
+          alt: "Logo",
+          link: "",
+        },
+      ],
+      logosBottom: [
+        {
           src: "./resources/logos/BMBF_gefoerdert_deutsch.jpg",
           alt: "BMBF Logo",
           link: "https://www.bmbf.de/bmbf/de/home/home_node.html",
@@ -24,6 +71,18 @@ export default {
           src: "./resources/logos/BMBF_FONA_Logo_rgb.svg",
           alt: "Logo FONA",
           link: "https://www.fona.de/de/",
+        },
+      ],
+      senStadtLogos: [
+        {
+          src: "./resources/logos/B_SEN_SBW_Logo_DE_H_PW_RGB.png",
+          alt: "Berlin Senat Logo",
+          link: "",
+        },
+        {
+          src: "./resources/logos/B_SEN_UMVK_Logo_DE_H_PW_RGB 1.png",
+          alt: "Berlin Senat Logo",
+          link: "",
         },
       ],
     };
@@ -51,11 +110,48 @@ export default {
       <p class="mb-4">Beteiligte Partner*innen:</p>
 
       <div class="mb-4">
-        <ul class="">
+        <ul class="mb-4">
           <li
             v-for="(logo, index) in logos"
             :key="index"
-            class=""
+          >
+            <a
+              class="logo"
+              :href="logo.link ? logo.link : '#'"
+              :target="logo.link ? '_blank' : '_self'"
+            >
+              <img
+                v-if="logo.src"
+                :src="logo.src"
+                :alt="logo.alt"
+              />
+            </a>
+          </li>
+        </ul>
+
+        <div class="mb-4 senStadtLogos">
+          <div
+            v-for="(logo, index) in senStadtLogos"
+            :key="index"
+          >
+            <a
+              class="logo"
+              :href="logo.link ? logo.link : '#'"
+              :target="logo.link ? '_blank' : '_self'"
+            >
+              <img
+                v-if="logo.src"
+                :src="logo.src"
+                :alt="logo.alt"
+              />
+            </a>
+          </div>
+        </div>
+
+        <ul class="mb-4">
+          <li
+            v-for="(logo, index) in logosBottom"
+            :key="index"
           >
             <a
               class="logo"
@@ -95,6 +191,7 @@ ul {
   gap: 16px;
   flex-wrap: wrap;
   align-items: center;
+  justify-content: space-between;
 }
 
 ul li {
@@ -102,9 +199,22 @@ ul li {
 }
 
 ul li a img {
-  width: 120px;
+  width: 130px;
   height: auto;
   max-height: 60px;
+  object-fit: contain;
+  display: block;
+}
+
+.senStadtLogos {
+  display: flex;
+  gap: 16px;
+  width: 100%;
+}
+.senStadtLogos a img {
+  height: 100%;
+  max-height: 60px;
+  width: 100%;
   object-fit: contain;
   display: block;
 }
