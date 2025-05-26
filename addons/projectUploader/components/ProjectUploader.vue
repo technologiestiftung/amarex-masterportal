@@ -1,11 +1,10 @@
 <script>
 import { mapActions, mapGetters, mapMutations } from "vuex";
-import IconButton from "../../../src/shared/modules/buttons/components/IconButton.vue";
 import FileUpload from "../../../src/shared/modules/inputs/components/FileUpload.vue";
 import JSZip from "jszip";
 import layerCollection from "../../../src/core/layers/js/layerCollection.js";
 import colors from "../../../src/shared/js/utils/amarex-colors.json";
-import { FileIcon, LoaderCircle } from "lucide-vue-next";
+import { FileIcon, LoaderCircle, Trash2 } from "lucide-vue-next";
 
 // TODO:
 // add locals
@@ -18,9 +17,9 @@ export default {
   name: "ProjectUploader",
   components: {
     FileUpload,
-    IconButton,
     FileIcon,
     LoaderCircle,
+    Trash2,
   },
   data() {
     return {
@@ -201,8 +200,7 @@ export default {
      */
     removeFile(file) {
       if (this.filesToUpload.includes(file)) {
-        const index = this.importedFileNames[file];
-
+        const index = this.filesToUpload.indexOf(file);
         this.filesToUpload.splice(index, 1);
         if (this.filesToUpload.length === 0) {
           this.fileUploaded = false;
@@ -431,7 +429,7 @@ export default {
         class="description"
         v-html="
           $t(
-            'Laden Sie hier Ihr Projekt hoch, dass Sie im Amarex Webtool erstellt haben. Es können Projektdateien (.zip), und Config-Dateien (.json) importiert werden.',
+            'Laden Sie hier Ihr Projekt hoch, dass Sie im Amarex Webtool erstellt haben. Es können Projektdateien (.zip) und Konfigurationsdateien (.json) importiert werden.',
           )
         "
       />
@@ -443,7 +441,7 @@ export default {
       >
         <div
           v-if="fileUploaded"
-          class="mt-4"
+          class="mt-2"
         >
           <div
             v-for="file in filesToUpload"
@@ -451,12 +449,15 @@ export default {
             :class="enableZoomToExtend ? 'hasZoom' : ''"
             class="d-flex flex-nowrap align-items-center gap-1 mb-2"
           >
-            <IconButton
-              :aria="$t('common:modules.fileImport.removeAttachment')"
-              :icon="'bi-trash'"
-              :interaction="() => removeFile(file)"
-              class="remove-btn flex-shrink-0"
-            />
+            <div
+              @click="() => removeFile(file)"
+              class="remove-btn"
+            >
+              <Trash2
+                :color="colors.secondary"
+                :size="20"
+              />
+            </div>
             <p
               class="text-truncate text-start mb-0"
               style="
@@ -539,6 +540,8 @@ export default {
 .remove-btn {
   z-index: 20;
   position: relative;
+  cursor: pointer;
+  flex-shrink: 0;
 }
 
 input[type="file"] {
