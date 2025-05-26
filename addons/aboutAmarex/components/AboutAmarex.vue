@@ -79,7 +79,7 @@ export default {
           link: "",
         },
         {
-          src: "./resources/logos/B_SEN_UMVK_Logo_DE_H_PW_RGB 1.png",
+          src: "./resources/logos/B_SEN_UMVK_Logo_DE_H_PW_RGB.png",
           alt: "Berlin Senat Logo",
           link: "",
         },
