@@ -19,7 +19,7 @@
       content="yes"
     />
 
-    <!-- Favicon for browsers -->
+    <!-- Favicon und App-Icons -->
     <link
       rel="icon"
       type="image/x-icon"
@@ -30,8 +30,6 @@
       type="image/svg+xml"
       href="./favicon/favicon.svg"
     />
-
-    <!-- PNG Favicons -->
     <link
       rel="icon"
       type="image/png"
@@ -50,37 +48,53 @@
       sizes="512x512"
       href="./favicon/amarex-manifest-512x512.png"
     />
-
-    <!-- Apple Touch Icon -->
     <link
       rel="apple-touch-icon"
       sizes="180x180"
       href="./favicon/apple-touch-icon.png"
     />
-
-    <!-- Web App Manifest -->
     <link
       rel="manifest"
       href="./favicon/site.webmanifest"
     />
 
     <title>Amarex Webtool</title>
-    <!-- enter your own Portal Title for the website at this -->
+
+    <!-- Preload CSS -->
+    <link
+      rel="preload"
+      href="../../build/css/masterportal.css"
+      as="style"
+    />
+
+    <!-- Non-blocking CSS -->
     <link
       rel="stylesheet"
       href="../../build/css/masterportal.css"
+      media="print"
+      onload="this.media='all'"
     />
+    <noscript
+      ><link
+        rel="stylesheet"
+        href="../../build/css/masterportal.css"
+    /></noscript>
+
+    <!-- Preload JavaScript -->
     <link
-      rel="stylesheet"
-      href=""
+      rel="preload"
+      href="../../build/js/masterportal.js"
+      as="script"
     />
-    <!-- Here you can configure your own fonts as url -->
+
+    <!-- Defer JS for faster rendering -->
+    <script
+      src="../../build/js/masterportal.js"
+      defer
+    ></script>
   </head>
   <body>
     <div id="masterportal-root"></div>
-    <script
-      type="text/javascript"
-      src="../../build/js/masterportal.js"
-    ></script>
   </body>
 </html>
+

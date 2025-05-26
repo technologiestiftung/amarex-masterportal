@@ -86,6 +86,8 @@ export default {
           title: "Untersuchungsgebiet wählen",
           description:
             "Wählen Sie in der Karte die zu untersuchenden Blockteilflächen via Mausklick aus.",
+          mnplDescription:
+            "Wählen Sie in der Karte die zu untersuchende Blockteilfläche via Mausklick aus.",
           buttons: [
             {
               text: "Zurück",
@@ -266,6 +268,50 @@ export default {
       }
     },
   },
+  mounted() {
+    this.allLayerConfigs
+      .filter(
+        (layer) =>
+          layer.id === "rabimo_input_2025" ||
+          layer.id === "planung_abimo" ||
+          layer.id === "abimo_measures" ||
+          layer.id === "abimo_result_infiltration" ||
+          layer.id === "abimo_result_evaporation" ||
+          layer.id === "abimo_result_surface_run_off" ||
+          layer.id === "abimo_result_delta_w" ||
+          layer.id === "abimo_2025_wfs:preCompute" ||
+          layer.id === "delta_w_2025_wfs:preCompute",
+      )
+      .forEach((layer) => {
+        const isLayerVisible = layer.visibility;
+        if (!isLayerVisible) {
+          this.changeVisibility({ layerId: layer.id, value: true });
+        }
+      });
+  },
+  unmounted() {
+    if (this.selectedFeatures.length === 0) {
+      this.allLayerConfigs
+        .filter(
+          (layer) =>
+            layer.id === "rabimo_input_2025" ||
+            layer.id === "planung_abimo" ||
+            layer.id === "abimo_measures" ||
+            layer.id === "abimo_result_infiltration" ||
+            layer.id === "abimo_result_evaporation" ||
+            layer.id === "abimo_result_surface_run_off" ||
+            layer.id === "abimo_result_delta_w" ||
+            layer.id === "abimo_2025_wfs:preCompute" ||
+            layer.id === "delta_w_2025_wfs:preCompute",
+        )
+        .forEach((layer) => {
+          const isLayerVisible = layer.visibility;
+          if (isLayerVisible) {
+            this.changeVisibility({ layerId: layer.id, value: false });
+          }
+        });
+    }
+  },
   methods: {
     ...mapActions("Maps", {
       addInteractionToMap: "addInteraction",
@@ -301,10 +347,15 @@ export default {
       return false;
     },
     openInfo(info) {
-      this.showInfo = {
-        title: info.name,
-        legend: info.legend,
-      };
+      if (this.showInfo && this.showInfo.title === info.name) {
+        this.showInfo = null;
+      } else {
+        this.showInfo = {
+          title: info.name,
+          description: info.description,
+          legend: info.legend,
+        };
+      }
     },
     hideInfo() {
       this.showInfo = null;
@@ -441,8 +492,14 @@ export default {
       >
         {{ steps[activeStep]?.title }}
       </p>
+
       <p
-        v-if="steps[activeStep]?.description"
+        v-if="steps[activeStep]?.mnplDescription && isMeasurePlanning"
+        v-html="steps[activeStep]?.mnplDescription"
+        class="description"
+      ></p>
+      <p
+        v-else-if="steps[activeStep]?.description"
         v-html="steps[activeStep]?.description"
         class="description"
       ></p>

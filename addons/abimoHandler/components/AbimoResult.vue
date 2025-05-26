@@ -119,7 +119,7 @@ export default {
       class="stats-container d-flex justify-content-between w-100 align-items-center last"
     >
       <p class="description">∆W</p>
-      <p class="description">{{ this.resultAbimoStats.deltaW.toFixed(0) }} %</p>
+      <p class="description">{{ this.resultAbimoStats.deltaW.toFixed(2) }} %</p>
     </div>
     <span class="line"></span>
     <p
@@ -137,8 +137,11 @@ export default {
       <p class="description">
         Sie können nun die verschiedenen Ergebnislayer Ihrer Ansicht hinzufügen.
       </p>
-      <span v-if="resultLayers.length > 0">
-        <span
+      <div
+        v-if="resultLayers.length > 0"
+        class="d-flex flex-column-reverse"
+      >
+        <div
           v-for="(themeMap, themeMapIndex) in resultLayers"
           :key="themeMapIndex"
         >
@@ -205,8 +208,8 @@ export default {
               :interaction="updateTransparencyOfSelectedThemeMap"
             />
           </div>
-        </span>
-      </span>
+        </div>
+      </div>
     </div>
   </div>
 </template>
