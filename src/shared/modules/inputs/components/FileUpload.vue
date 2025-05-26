@@ -123,7 +123,7 @@ input[type="file"] {
         background-color: $white;
         border-radius: 12px;
         border: 2px dashed $dark_blue;
-        padding:16px 24px;
+        padding: 8px 24px;
         transition: background 0.25s, border-color 0.25s;
 
         &.dzReady {
