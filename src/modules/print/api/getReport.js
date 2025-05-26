@@ -338,7 +338,7 @@ async function writePDF(payload, savingType, blob) {
   // vertical += mm(20);
 
   text({
-    text: `Betrachtete Blockteilflächen: ${payload.seite_4_gebietsbetrachtung_betrachteteblockteilflaechen}`,
+    text: `Betrachtete Blockteilflächen: ${payload.betrachteteblockteilflaechen}`,
     extraMarginBottom: 14,
   });
   text({
@@ -420,7 +420,7 @@ async function writePDF(payload, savingType, blob) {
 
   text({
     text: "Link zu Maßnahmenkatalog",
-    url: "https://amarex-projekt.de/media/pages/news/rwb-rwb-n-steckbriefe/a9cf3eab08-1715671445/massnahmenkatalog-mit-steckbriefen.pdf",
+    url: "https://www.amarex-projekt.de/media/pages/news/rwb-rwb-n-steckbriefe/9f6c71ac56-1745413966/massnahmenkatalog-mit-steckbriefen.pdf",
   });
 
   // 5. Page
@@ -545,7 +545,7 @@ async function writePDF(payload, savingType, blob) {
     x: paddingVertical + pageInnerWidth / 2,
   });
   text({
-    text: `     ${payload.oberflächenabfluss_status_quo}`,
+    text: `     ${payload.wasserhaushalt_oberflächenabfluss_status_quo}`,
     noLineBreak: true
   });
   text({
