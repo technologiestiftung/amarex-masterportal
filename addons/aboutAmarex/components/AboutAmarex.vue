@@ -45,7 +45,7 @@ export default {
           link: "",
         },
         {
-          src: "./resources/logos/HELIX_Logotype_CMYK_ 100-0-90-10 1.png",
+          src: "./resources/logos/HELIX_Logo.png",
           alt: "Logo",
           link: "",
         },
