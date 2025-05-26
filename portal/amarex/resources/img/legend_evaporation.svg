@@ -1,14 +1,11 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 600">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 430">
   <style>
     text { font-family: Arial, sans-serif; font-size: 12px; }
     .title { font-size: 16px; font-weight: bold; }
   </style>
   
-  <!-- Titel -->
-  <text x="10" y="20" class="title">Legende: Evaporationswerte</text>
-  
   <!-- Farbbalken und Beschriftungen -->
-  <g transform="translate(10, 40)">
+  <g transform="translate(10, 5)">
     <rect x="0" y="0" width="30" height="20" fill="rgb(255,255,255)" />
     <text x="35" y="15">0 bis 50</text>
     
@@ -56,5 +53,5 @@
   </g>
   
   <!-- Einheit -->
-  <text x="10" y="430">Einheit: mm/Jahr</text>
+  <text x="10" y="400">Einheit: mm/Jahr</text>
 </svg>
