@@ -203,16 +203,16 @@
     "baselayer": {
       "elements": [
         {
-          "id": "basemap_default_grau",
-          "visibility": true
+          "id": "truedop_2024",
+          "visibility": false
         },
         {
           "id": "basemap_raster_color",
           "visibility": false
         },
         {
-          "id": "truedop_2024",
-          "visibility": false
+          "id": "basemap_default_grau",
+          "visibility": true
         }
       ]
     },
@@ -499,17 +499,17 @@
               "description": "Grünversorgung",
               "elements": [
                 {
-                  "id": "k06_05gruenversorg2020:0",
+                  "id": "ua_versorggruen_2020:versorggruen_oeff_2020",
                   "visibility": false,
                   "showInLayerTree": false
                 },
                 {
-                  "id": "k06_05gruenversorg2020:1",
+                  "id": "ua_versorggruen_2020:versorggruen_wald_2020",
                   "visibility": false,
                   "showInLayerTree": false
                 },
                 {
-                  "id": "k06_05gruenversorg2020:2",
+                  "id": "ua_versorggruen_2020:versorggruen_2020",
                   "visibility": false,
                   "showInLayerTree": false
                 }
@@ -682,6 +682,23 @@
                   "showInLayerTree": false
                 }
               ]
+            },
+            {
+              "name": "Potentiale der dezentralen Regenwasserbewirtschaftung",
+              "type": "folder",
+              "description": "Potentiale der dezentralen Regenwasserbewirtschaftung",
+              "elements": [
+                {
+                  "id": "potenziale_regenwasserbewirtschaftung:bb_abkopplungspotenzial_gp",
+                  "visibility": false,
+                  "showInLayerTree": false
+                },
+                {
+                  "id": "potenziale_regenwasserbewirtschaftung:ab_versickerungspotenzial_gp",
+                  "visibility": false,
+                  "showInLayerTree": false
+                }
+              ]
             }
           ]
         },
@@ -692,66 +709,66 @@
             {
               "id": "abimo_2025_wfs:evaporatio",
               "visibility": false,
-              "showInLayerTree": true
+              "showInLayerTree": false
             },
             {
               "id": "abimo_2025_wfs:surface_ru",
               "visibility": false,
-              "showInLayerTree": true
+              "showInLayerTree": false
             },
             {
               "id": "abimo_2025_wfs:infiltrati",
               "visibility": false,
-              "showInLayerTree": true
+              "showInLayerTree": false
             },
             {
               "id": "delta_w_2025_wfs",
               "visibility": false,
-              "showInLayerTree": true
+              "showInLayerTree": false
             },
             {
               "id": "abimo_2025_wfs:preCompute",
-              "visibility": true,
-              "showInLayerTree": true
+              "visibility": false,
+              "showInLayerTree": false
             },
             {
               "id": "delta_w_2025_wfs:preCompute",
-              "visibility": true,
-              "showInLayerTree": true
+              "visibility": false,
+              "showInLayerTree": false
             },
             {
               "id": "abimo_result_evaporation",
-              "visibility": true,
-              "showInLayerTree": true
+              "visibility": false,
+              "showInLayerTree": false
             },
             {
               "id": "abimo_result_surface_run_off",
-              "visibility": true,
-              "showInLayerTree": true
+              "visibility": false,
+              "showInLayerTree": false
             },
             {
               "id": "abimo_result_infiltration",
-              "visibility": true,
-              "showInLayerTree": true
+              "visibility": false,
+              "showInLayerTree": false
             },
             {
               "id": "abimo_result_delta_w",
-              "visibility": true,
-              "showInLayerTree": true
+              "visibility": false,
+              "showInLayerTree": false
             },
             {
               "id": "planung_abimo",
-              "visibility": true,
+              "visibility": false,
               "showInLayerTree": false
             },
             {
               "id": "rabimo_input_2025",
-              "visibility": true,
-              "showInLayerTree": true
+              "visibility": false,
+              "showInLayerTree": false
             },
             {
               "id": "abimo_measures",
-              "visibility": true,
+              "visibility": false,
               "showInLayerTree": false
             }
           ]
@@ -760,4 +777,3 @@
     }
   }
 }
-

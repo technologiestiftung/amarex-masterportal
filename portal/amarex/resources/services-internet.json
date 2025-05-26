@@ -1737,68 +1737,6 @@
     "maxScale": "25000"
   },
   {
-    "id": "abimo_2020_wfs:evaporatio",
-    "styleId": "abimo_evapor",
-    "name": "Verdunstung 2020",
-    "crs": "EPSG:25833",
-    "url": "https://geoserver.ionos.ds-apps.tsb-berlin.de/geoserver/amarex/wfs",
-    "typ": "WFS",
-    "featureType": "amarex:rabimo_results_2020",
-    "featureNS": "http://geoserver.org",
-    "datasets": false,
-    "layers": "evapor",
-    "gfiAttributes": "showAll",
-    "maxScale": "25000",
-    "legend": "./resources/img/legend_evaporation.svg"
-  },
-  {
-    "id": "abimo_2020_wfs:surface_ru",
-    "styleId": "abimo_runoff",
-    "name": "Oberflächenabfluss 2020",
-    "crs": "EPSG:25833",
-    "url": "https://geoserver.ionos.ds-apps.tsb-berlin.de/geoserver/amarex/wfs",
-    "typ": "WFS",
-    "featureType": "amarex:rabimo_results_2020",
-    "featureNS": "http://geoserver.org",
-    "datasets": false,
-    "layers": "runoff",
-    "gfiAttributes": "showAll",
-    "maxScale": "25000",
-    "legend": "./resources/img/legend_surface_runoff.svg"
-  },
-  {
-    "id": "abimo_2020_wfs:infiltrati",
-    "name": "Infiltration 2020",
-    "styleId": "abimo_infiltr",
-    "crs": "EPSG:25833",
-    "url": "https://geoserver.ionos.ds-apps.tsb-berlin.de/geoserver/amarex/wfs",
-    "typ": "WFS",
-    "featureType": "amarex:rabimo_results_2020",
-    "featureNS": "http://geoserver.org",
-    "datasets": false,
-    "layers": "infiltr",
-    "gfiAttributes": "showAll",
-    "maxScale": "25000",
-    "legend": "./resources/img/legend_infiltration.svg"
-  },
-  {
-    "id": "delta_w_2020_wfs",
-    "styleId": "delta_w",
-    "name": "∆W - Abweichung vom natürlichen Wasserhaushalt 2020",
-    "crs": "EPSG:25833",
-    "url": "https://geoserver.ionos.ds-apps.tsb-berlin.de/geoserver/amarex/wfs",
-    "typ": "WFS",
-    "featureType": "amarex:deltaw_2020",
-    "featureNS": "http://geoserver.org",
-    "datasets": false,
-    "gfiAttributes": "showAll",
-    "maxScale": "25000",
-    "legend": "./resources/img/legend_delta_w.svg"
-  },
-  {
-    "id": "abimo_layer_2025_start:"
-  },
-  {
     "id": "rabimo_input_2025",
     "styleId": "abimo_input",
     "name": "Abimo Input 2025",
@@ -4668,91 +4606,278 @@
     "gfiAttributes": "showAll"
   },
   {
-    "id": "k06_05gruenversorg2020:0",
-    "name": "Versorgungsgrad mit \u00f6ffentlichen, wohnungsnahen Gr\u00fcnanlagen",
-    "name_lang": "Versorgungsgrad mit \u00f6ffentlichen, wohnungsnahen Gr\u00fcnanlagen (Versorgung mit \u00f6ffentlichen, wohnungsnahen Gr\u00fcnanlagen 2020 (Umweltatlas))",
+    "id": "ua_versorggruen_2020:versorggruen_2020",
+    "name": "Versorgungsgrad mit öffentlichen, wohnungsnahen Grünanlagen",
+    "name_lang": "Versorgungsgrad mit öffentlichen, wohnungsnahen Grünanlagen (Versorgung mit öffentlichen, wohnungsnahen Grünanlagen 2020 (Umweltatlas))",
     "crs": "EPSG:25833",
-    "url": "https://fbinter.stadt-berlin.de/fb/wms/senstadt/k06_05gruenversorg2020",
+    "url": "https://gdi.berlin.de/services/wms/ua_versorggruen_2020",
     "typ": "WMS",
-    "gfiAttributes": "ignore",
-    "layers": "0",
-    "legend": "https://fbinter.stadt-berlin.de/fb_daten/legenden/umweltatlas/leg_06_05_gruenversorg2020_versorg.png",
+    "gfiAttributes": "showAll",
+    "layers": "versorggruen_2020",
+    "legend": "https://gdi.berlin.de/services/wms/ua_versorggruen_2020?service=WMS&version=1.3.0&request=GetLegendGraphic&format=image%2Fpng&width=482&height=317&layer=versorggruen_2020",
     "datasets": [
       {
-        "md_name": "Versorgung mit \u00f6ffentlichen, wohnungsnahen Gr\u00fcnanlagen 2020 (Umweltatlas)",
-        "md_id": "e7419261-f29e-403d-a235-41f53fa540f0",
-        "rs_id": "https://registry.gdi-de.org/id/de.be.csw/be9f12f5-5f4f-34ac-9725-7690b644f01c",
+        "md_name": "Versorgung mit öffentlichen, wohnungsnahen Grünanlagen 2020 (Umweltatlas)",
+        "md_id": "f09ec55a-3ee5-469b-9821-8265ed4171fd",
+        "rs_id": "https://registry.gdi-de.org/id/de.be.csw/2ca09ee6-3073-3774-a18e-0af49675d95a",
         "csw_url": "https://gdi.berlin.de/geonetwork/srv/ger/csw"
       }
     ],
-    "minScale": "600",
-    "maxScale": "250000",
     "format": "image/png",
     "version": "1.3.0",
     "featureCount": "5",
     "gfiTheme": "default",
     "transparent": true,
     "singleTile": true,
-    "layerAttribution": "F\u00fcr die Nutzung der Daten ist die  Datenlizenz Deutschland - Namensnennung - Version 2.0 anzuwenden. Die Lizenz ist \u00fcber https://www.govdata.de/dl-de/by-2-0 abrufbar. Der Quellenvermerk gem\u00e4\u00df (2) der Lizenz lautet \"Umweltatlas Berlin / [Titel des Datensatzes]\".",
-    "displayLayerAlert": false
+    "infoFormat": "application/json",
+    "layerAttribution": "Für die Nutzung der Daten ist die Datenlizenz Deutschland - Zero - Version 2.0 anzuwenden. Die Lizenz ist über https://www.govdata.de/dl-de/zero-2-0 abrufbar."
   },
   {
-    "id": "k06_05gruenversorg2020:1",
-    "name": "Wald (\u00fcberwiegend f\u00fcr die Erholung nutzbar)",
-    "name_lang": "Wald (\u00fcberwiegend f\u00fcr die Erholung nutzbar) (Versorgung mit \u00f6ffentlichen, wohnungsnahen Gr\u00fcnanlagen 2020 (Umweltatlas))",
+    "id": "ua_versorggruen_2020:versorggruen_oeff_2020",
+    "name": "Öffentliche Grünanlage (Erfüllung bestimmter Mindestanforderungen)",
+    "name_lang": "Öffentliche Grünanlage (Erfüllung bestimmter Mindestanforderungen) (Versorgung mit öffentlichen, wohnungsnahen Grünanlagen 2020 (Umweltatlas))",
     "crs": "EPSG:25833",
-    "url": "https://fbinter.stadt-berlin.de/fb/wms/senstadt/k06_05gruenversorg2020",
+    "url": "https://gdi.berlin.de/services/wms/ua_versorggruen_2020",
     "typ": "WMS",
-    "gfiAttributes": "ignore",
-    "layers": "1",
-    "legend": "https://fbinter.stadt-berlin.de/fb_daten/legenden/umweltatlas/leg_06_05gruenversorg2020_wald.png",
+    "gfiAttributes": "showAll",
+    "layers": "versorggruen_oeff_2020",
+    "legend": "https://gdi.berlin.de/services/wms/ua_versorggruen_2020?service=WMS&version=1.3.0&request=GetLegendGraphic&format=image%2Fpng&width=482&height=97&layer=versorggruen_oeff_2020",
     "datasets": [
       {
-        "md_name": "Versorgung mit \u00f6ffentlichen, wohnungsnahen Gr\u00fcnanlagen 2020 (Umweltatlas)",
-        "md_id": "e7419261-f29e-403d-a235-41f53fa540f0",
-        "rs_id": "https://registry.gdi-de.org/id/de.be.csw/be9f12f5-5f4f-34ac-9725-7690b644f01c",
+        "md_name": "Versorgung mit öffentlichen, wohnungsnahen Grünanlagen 2020 (Umweltatlas)",
+        "md_id": "f09ec55a-3ee5-469b-9821-8265ed4171fd",
+        "rs_id": "https://registry.gdi-de.org/id/de.be.csw/2ca09ee6-3073-3774-a18e-0af49675d95a",
         "csw_url": "https://gdi.berlin.de/geonetwork/srv/ger/csw"
       }
     ],
-    "minScale": "600",
-    "maxScale": "250000",
     "format": "image/png",
     "version": "1.3.0",
     "featureCount": "5",
     "gfiTheme": "default",
     "transparent": true,
     "singleTile": true,
-    "layerAttribution": "F\u00fcr die Nutzung der Daten ist die  Datenlizenz Deutschland - Namensnennung - Version 2.0 anzuwenden. Die Lizenz ist \u00fcber https://www.govdata.de/dl-de/by-2-0 abrufbar. Der Quellenvermerk gem\u00e4\u00df (2) der Lizenz lautet \"Umweltatlas Berlin / [Titel des Datensatzes]\".",
-    "displayLayerAlert": false
+    "infoFormat": "application/json",
+    "layerAttribution": "Für die Nutzung der Daten ist die Datenlizenz Deutschland - Zero - Version 2.0 anzuwenden. Die Lizenz ist über https://www.govdata.de/dl-de/zero-2-0 abrufbar."
   },
   {
-    "id": "k06_05gruenversorg2020:2",
-    "name": "\u00d6ffentliche Gr\u00fcnanlage (Erf\u00fcllung bestimmter Mindestanforderungen)",
-    "name_lang": "\u00d6ffentliche Gr\u00fcnanlage (Erf\u00fcllung bestimmter Mindestanforderungen) (Versorgung mit \u00f6ffentlichen, wohnungsnahen Gr\u00fcnanlagen 2020 (Umweltatlas))",
+    "id": "ua_versorggruen_2020:versorggruen_wald_2020",
+    "name": "Wald (überwiegend für die Erholung nutzbar)",
+    "name_lang": "Wald (überwiegend für die Erholung nutzbar) (Versorgung mit öffentlichen, wohnungsnahen Grünanlagen 2020 (Umweltatlas))",
     "crs": "EPSG:25833",
-    "url": "https://fbinter.stadt-berlin.de/fb/wms/senstadt/k06_05gruenversorg2020",
+    "url": "https://gdi.berlin.de/services/wms/ua_versorggruen_2020",
     "typ": "WMS",
-    "gfiAttributes": "ignore",
-    "layers": "2",
-    "legend": "https://fbinter.stadt-berlin.de/fb_daten/legenden/umweltatlas/leg_06_05gruenversorg2020_oeffgruen.png",
+    "gfiAttributes": "showAll",
+    "layers": "versorggruen_wald_2020",
+    "legend": "https://gdi.berlin.de/services/wms/ua_versorggruen_2020?service=WMS&version=1.3.0&request=GetLegendGraphic&format=image%2Fpng&width=487&height=74&layer=versorggruen_wald_2020",
     "datasets": [
       {
-        "md_name": "Versorgung mit \u00f6ffentlichen, wohnungsnahen Gr\u00fcnanlagen 2020 (Umweltatlas)",
-        "md_id": "e7419261-f29e-403d-a235-41f53fa540f0",
-        "rs_id": "https://registry.gdi-de.org/id/de.be.csw/be9f12f5-5f4f-34ac-9725-7690b644f01c",
+        "md_name": "Versorgung mit öffentlichen, wohnungsnahen Grünanlagen 2020 (Umweltatlas)",
+        "md_id": "f09ec55a-3ee5-469b-9821-8265ed4171fd",
+        "rs_id": "https://registry.gdi-de.org/id/de.be.csw/2ca09ee6-3073-3774-a18e-0af49675d95a",
         "csw_url": "https://gdi.berlin.de/geonetwork/srv/ger/csw"
       }
     ],
-    "minScale": "600",
-    "maxScale": "250000",
     "format": "image/png",
     "version": "1.3.0",
     "featureCount": "5",
     "gfiTheme": "default",
     "transparent": true,
     "singleTile": true,
-    "layerAttribution": "F\u00fcr die Nutzung der Daten ist die  Datenlizenz Deutschland - Namensnennung - Version 2.0 anzuwenden. Die Lizenz ist \u00fcber https://www.govdata.de/dl-de/by-2-0 abrufbar. Der Quellenvermerk gem\u00e4\u00df (2) der Lizenz lautet \"Umweltatlas Berlin / [Titel des Datensatzes]\".",
-    "displayLayerAlert": false
+    "infoFormat": "application/json",
+    "layerAttribution": "Für die Nutzung der Daten ist die Datenlizenz Deutschland - Zero - Version 2.0 anzuwenden. Die Lizenz ist über https://www.govdata.de/dl-de/zero-2-0 abrufbar."
+  },
+  {
+    "id": "potenziale_regenwasserbewirtschaftung:aa_versickerungspotenzial_eu",
+    "name": "Versickerungspotenzial: Szenario „Einfache Umsetzung“",
+    "name_lang": "Versickerungspotenzial: Szenario „Einfache Umsetzung“ (Potenziale der dezentralen Regenwasserbewirtschaftung)",
+    "crs": "EPSG:25833",
+    "url": "https://gdi.berlin.de/services/wms/potenziale_regenwasserbewirtschaftung",
+    "typ": "WMS",
+    "gfiAttributes": "showAll",
+    "layers": "aa_versickerungspotenzial_eu",
+    "legend": true,
+    "datasets": [
+      {
+        "md_name": "Potenziale der dezentralen Regenwasserbewirtschaftung",
+        "md_id": "4b84fdbc-ac77-48ef-a1ec-4f7c75c777d3",
+        "rs_id": "https://registry.gdi-de.org/id/de.be.csw/d69e4c33-2334-37a9-8644-cfe963807a33",
+        "csw_url": "https://gdi.berlin.de/geonetwork/srv/ger/csw"
+      }
+    ],
+    "maxScale": "2500.0",
+    "format": "image/png",
+    "version": "1.3.0",
+    "featureCount": "5",
+    "gfiTheme": "default",
+    "transparent": true,
+    "singleTile": true,
+    "infoFormat": "application/json",
+    "layerAttribution": "Der Datenbestand wird unter der Lizenz CC-BY-4.0-Namensnennung International Public License veröffentlicht (vgl. https://creativecommons.org/licenses/by/4.0/legalcode.de). Der Quellenvermerk gemäß Abschnitt 3a der Lizenz lautet \"Berliner Regenwasseragentur/ Potenziale der dezentralen Regenwasserbewirtschaftung\"."
+  },
+  {
+    "id": "potenziale_regenwasserbewirtschaftung:ab_versickerungspotenzial_gp",
+    "name": "Versickerungspotenzial: Szenario „Gängige Praxis“",
+    "name_lang": "Versickerungspotenzial: Szenario „Gängige Praxis“ (Potenziale der dezentralen Regenwasserbewirtschaftung)",
+    "crs": "EPSG:25833",
+    "url": "https://gdi.berlin.de/services/wms/potenziale_regenwasserbewirtschaftung",
+    "typ": "WMS",
+    "gfiAttributes": "showAll",
+    "layers": "ab_versickerungspotenzial_gp",
+    "legend": "https://gdi.berlin.de/services/wms/potenziale_regenwasserbewirtschaftung?service=WMS&version=1.3.0&request=GetLegendGraphic&format=image%2Fpng&width=499&height=397&layer=ab_versickerungspotenzial_gp",
+    "datasets": [
+      {
+        "md_name": "Potenziale der dezentralen Regenwasserbewirtschaftung",
+        "md_id": "4b84fdbc-ac77-48ef-a1ec-4f7c75c777d3",
+        "rs_id": "https://registry.gdi-de.org/id/de.be.csw/d69e4c33-2334-37a9-8644-cfe963807a33",
+        "csw_url": "https://gdi.berlin.de/geonetwork/srv/ger/csw"
+      }
+    ],
+    "maxScale": "2500.0",
+    "format": "image/png",
+    "version": "1.3.0",
+    "featureCount": "5",
+    "gfiTheme": "default",
+    "transparent": true,
+    "singleTile": true,
+    "infoFormat": "application/json",
+    "layerAttribution": "Der Datenbestand wird unter der Lizenz CC-BY-4.0-Namensnennung International Public License veröffentlicht (vgl. https://creativecommons.org/licenses/by/4.0/legalcode.de). Der Quellenvermerk gemäß Abschnitt 3a der Lizenz lautet \"Berliner Regenwasseragentur/ Potenziale der dezentralen Regenwasserbewirtschaftung\"."
+  },
+  {
+    "id": "potenziale_regenwasserbewirtschaftung:ac_versickerungspotenzial_au",
+    "name": "Versickerungspotenzial: Szenario „Aufwendige Umsetzung“",
+    "name_lang": "Versickerungspotenzial: Szenario „Aufwendige Umsetzung“ (Potenziale der dezentralen Regenwasserbewirtschaftung)",
+    "crs": "EPSG:25833",
+    "url": "https://gdi.berlin.de/services/wms/potenziale_regenwasserbewirtschaftung",
+    "typ": "WMS",
+    "gfiAttributes": "showAll",
+    "layers": "ac_versickerungspotenzial_au",
+    "legend": true,
+    "datasets": [
+      {
+        "md_name": "Potenziale der dezentralen Regenwasserbewirtschaftung",
+        "md_id": "4b84fdbc-ac77-48ef-a1ec-4f7c75c777d3",
+        "rs_id": "https://registry.gdi-de.org/id/de.be.csw/d69e4c33-2334-37a9-8644-cfe963807a33",
+        "csw_url": "https://gdi.berlin.de/geonetwork/srv/ger/csw"
+      }
+    ],
+    "maxScale": "2500.0",
+    "format": "image/png",
+    "version": "1.3.0",
+    "featureCount": "5",
+    "gfiTheme": "default",
+    "transparent": true,
+    "singleTile": true,
+    "infoFormat": "application/json",
+    "layerAttribution": "Der Datenbestand wird unter der Lizenz CC-BY-4.0-Namensnennung International Public License veröffentlicht (vgl. https://creativecommons.org/licenses/by/4.0/legalcode.de). Der Quellenvermerk gemäß Abschnitt 3a der Lizenz lautet \"Berliner Regenwasseragentur/ Potenziale der dezentralen Regenwasserbewirtschaftung\"."
+  },
+  {
+    "id": "potenziale_regenwasserbewirtschaftung:ba_abkopplungspotenzial_eu",
+    "name": "Abkopplungspotenzial: Szenario „Einfache Umsetzung“",
+    "name_lang": "Abkopplungspotenzial: Szenario „Einfache Umsetzung“ (Potenziale der dezentralen Regenwasserbewirtschaftung)",
+    "crs": "EPSG:25833",
+    "url": "https://gdi.berlin.de/services/wms/potenziale_regenwasserbewirtschaftung",
+    "typ": "WMS",
+    "gfiAttributes": "showAll",
+    "layers": "ba_abkopplungspotenzial_eu",
+    "legend": true,
+    "datasets": [
+      {
+        "md_name": "Potenziale der dezentralen Regenwasserbewirtschaftung",
+        "md_id": "4b84fdbc-ac77-48ef-a1ec-4f7c75c777d3",
+        "rs_id": "https://registry.gdi-de.org/id/de.be.csw/d69e4c33-2334-37a9-8644-cfe963807a33",
+        "csw_url": "https://gdi.berlin.de/geonetwork/srv/ger/csw"
+      }
+    ],
+    "format": "image/png",
+    "version": "1.3.0",
+    "featureCount": "5",
+    "gfiTheme": "default",
+    "transparent": true,
+    "singleTile": true,
+    "infoFormat": "application/json",
+    "layerAttribution": "Der Datenbestand wird unter der Lizenz CC-BY-4.0-Namensnennung International Public License veröffentlicht (vgl. https://creativecommons.org/licenses/by/4.0/legalcode.de). Der Quellenvermerk gemäß Abschnitt 3a der Lizenz lautet \"Berliner Regenwasseragentur/ Potenziale der dezentralen Regenwasserbewirtschaftung\"."
+  },
+  {
+    "id": "potenziale_regenwasserbewirtschaftung:bb_abkopplungspotenzial_gp",
+    "name": "Abkopplungspotenzial: Szenario „Gängige Praxis“",
+    "name_lang": "Abkopplungspotenzial: Szenario „Gängige Praxis“ (Potenziale der dezentralen Regenwasserbewirtschaftung)",
+    "crs": "EPSG:25833",
+    "url": "https://gdi.berlin.de/services/wms/potenziale_regenwasserbewirtschaftung",
+    "typ": "WMS",
+    "gfiAttributes": "showAll",
+    "layers": "bb_abkopplungspotenzial_gp",
+    "legend": "https://gdi.berlin.de/services/wms/potenziale_regenwasserbewirtschaftung?service=WMS&version=1.3.0&request=GetLegendGraphic&format=image%2Fpng&width=499&height=499&layer=bb_abkopplungspotenzial_gp",
+    "datasets": [
+      {
+        "md_name": "Potenziale der dezentralen Regenwasserbewirtschaftung",
+        "md_id": "4b84fdbc-ac77-48ef-a1ec-4f7c75c777d3",
+        "rs_id": "https://registry.gdi-de.org/id/de.be.csw/d69e4c33-2334-37a9-8644-cfe963807a33",
+        "csw_url": "https://gdi.berlin.de/geonetwork/srv/ger/csw"
+      }
+    ],
+    "format": "image/png",
+    "version": "1.3.0",
+    "featureCount": "5",
+    "gfiTheme": "default",
+    "transparent": true,
+    "singleTile": true,
+    "infoFormat": "application/json",
+    "layerAttribution": "Der Datenbestand wird unter der Lizenz CC-BY-4.0-Namensnennung International Public License veröffentlicht (vgl. https://creativecommons.org/licenses/by/4.0/legalcode.de). Der Quellenvermerk gemäß Abschnitt 3a der Lizenz lautet \"Berliner Regenwasseragentur/ Potenziale der dezentralen Regenwasserbewirtschaftung\"."
+  },
+  {
+    "id": "potenziale_regenwasserbewirtschaftung:bc_abkopplungspotenzial_au",
+    "name": "Abkopplungspotenzial: Szenario „Aufwendige Umsetzung“",
+    "name_lang": "Abkopplungspotenzial: Szenario „Aufwendige Umsetzung“ (Potenziale der dezentralen Regenwasserbewirtschaftung)",
+    "crs": "EPSG:25833",
+    "url": "https://gdi.berlin.de/services/wms/potenziale_regenwasserbewirtschaftung",
+    "typ": "WMS",
+    "gfiAttributes": "showAll",
+    "layers": "bc_abkopplungspotenzial_au",
+    "legend": true,
+    "datasets": [
+      {
+        "md_name": "Potenziale der dezentralen Regenwasserbewirtschaftung",
+        "md_id": "4b84fdbc-ac77-48ef-a1ec-4f7c75c777d3",
+        "rs_id": "https://registry.gdi-de.org/id/de.be.csw/d69e4c33-2334-37a9-8644-cfe963807a33",
+        "csw_url": "https://gdi.berlin.de/geonetwork/srv/ger/csw"
+      }
+    ],
+    "format": "image/png",
+    "version": "1.3.0",
+    "featureCount": "5",
+    "gfiTheme": "default",
+    "transparent": true,
+    "singleTile": true,
+    "infoFormat": "application/json",
+    "layerAttribution": "Der Datenbestand wird unter der Lizenz CC-BY-4.0-Namensnennung International Public License veröffentlicht (vgl. https://creativecommons.org/licenses/by/4.0/legalcode.de). Der Quellenvermerk gemäß Abschnitt 3a der Lizenz lautet \"Berliner Regenwasseragentur/ Potenziale der dezentralen Regenwasserbewirtschaftung\"."
+  },
+  {
+    "id": "potenziale_regenwasserbewirtschaftung:ca_dachbegruenungspotenzial",
+    "name": "Dachbegrünungspotenzial",
+    "name_lang": "Dachbegrünungspotenzial (Potenziale der dezentralen Regenwasserbewirtschaftung)",
+    "crs": "EPSG:25833",
+    "url": "https://gdi.berlin.de/services/wms/potenziale_regenwasserbewirtschaftung",
+    "typ": "WMS",
+    "gfiAttributes": "showAll",
+    "layers": "ca_dachbegruenungspotenzial",
+    "legend": true,
+    "datasets": [
+      {
+        "md_name": "Potenziale der dezentralen Regenwasserbewirtschaftung",
+        "md_id": "4b84fdbc-ac77-48ef-a1ec-4f7c75c777d3",
+        "rs_id": "https://registry.gdi-de.org/id/de.be.csw/d69e4c33-2334-37a9-8644-cfe963807a33",
+        "csw_url": "https://gdi.berlin.de/geonetwork/srv/ger/csw"
+      }
+    ],
+    "maxScale": "2500.0",
+    "format": "image/png",
+    "version": "1.3.0",
+    "featureCount": "5",
+    "gfiTheme": "default",
+    "transparent": true,
+    "singleTile": true,
+    "infoFormat": "application/json",
+    "layerAttribution": "Der Datenbestand wird unter der Lizenz CC-BY-4.0-Namensnennung International Public License veröffentlicht (vgl. https://creativecommons.org/licenses/by/4.0/legalcode.de). Der Quellenvermerk gemäß Abschnitt 3a der Lizenz lautet \"Berliner Regenwasseragentur/ Potenziale der dezentralen Regenwasserbewirtschaftung\"."
   }
 ]
 

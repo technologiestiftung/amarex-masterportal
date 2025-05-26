@@ -46,7 +46,7 @@ export default {
             // @Luise: Please input the correct area and percentage for swaleConnected
             if (!area || !percentage)
               return "Welchen Anteil möchten Sie an Mulden anschliessen?";
-            return `Bei den von Ihnen gewählten Flächen stehen ${area} m² (${percentage}%) unbebaut versiegelte Fläche zur Verfügung.`;
+            return `Bei den von Ihnen gewählten Flächen stehen ${area} m² (${percentage}%) versiegelte Fläche zur Verfügung."`;
           },
         },
       },

@@ -104,7 +104,7 @@ const actions = {
         if (statsWithNewMeasure.Aet > statsWithNewMeasure.Ae_max) {
           canAdd = false;
           message =
-            "Entsiegelung: die verfügbare unbebaute abflusswirksame Fläche wurde überschritten.";
+            "Entsiegelung: die verfügbare unbebaute Fläche wurde überschritten (Gebäudeflächen können nicht entsiegelt werden).";
         }
         break;
       case "swale":
