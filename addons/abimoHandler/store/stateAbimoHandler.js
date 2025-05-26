@@ -66,10 +66,16 @@ export default {
   preComputedModelsShown: false,
   preComputedModels: [],
   preComputedModelsAdded: false,
+  preComputedStats: {
+    deltaW: 0,
+    evaporation: 0,
+    runoff: 0,
+    infiltration: 0,
+  },
 
-  newGreenRoof: 0,
-  newUnpvd: 0,
-  newToSwale: 0,
+  newGreenRoof: null,
+  newUnpvd: null,
+  newToSwale: null,
 
   resultLayers: [],
   selectedThemeMap: null,
@@ -78,6 +84,25 @@ export default {
     evaporation: 0,
     runoff: 0,
     infiltration: 0,
+  },
+
+  // Measure Planning
+  isMeasurePlanning: false,
+  isMeasureDrawing: false,
+  selectedMeasures: [],
+  readyForCalculation: false,
+  selectedBTF: null,
+  hasMeasures: false,
+
+  accumulatedMeasureStats: {
+    greenRoofMeasuresAmount: 0,
+    unpavedMeasuresAmount: 0,
+    swaleMeasuresAmount: 0,
+    totalGreenRoofArea: 0,
+    totalUnpavedArea: 0,
+    totalSwaleArea: 0,
+    totalSwaleVolume: 0,
+    totalSwaleConnectedArea: 0,
   },
 };
 

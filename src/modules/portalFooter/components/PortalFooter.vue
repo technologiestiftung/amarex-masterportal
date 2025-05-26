@@ -90,7 +90,7 @@ export default {
 <template lang="html">
     <footer
         id="module-portal-footer"
-        class="portal-footer d-flex px-2 py-1"
+        class="portal-footer d-flex px-3 py-1"
     >
         <a
             v-if="aboutModuleSide"

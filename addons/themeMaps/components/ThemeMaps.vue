@@ -132,11 +132,15 @@ export default {
       });
     },
     openInfo(info) {
-      this.showInfo = {
-        title: info.name,
-        description: info.description,
-        legend: info.legend,
-      };
+      if (this.showInfo && this.showInfo.title === info.name) {
+        this.showInfo = null;
+      } else {
+        this.showInfo = {
+          title: info.name,
+          description: info.description,
+          legend: info.legend,
+        };
+      }
     },
     hideInfo() {
       this.showInfo = null;
@@ -348,9 +352,8 @@ export default {
       <p
         v-if="showInfo?.description"
         class="description"
-      >
-        {{ showInfo?.description }}
-      </p>
+        v-html="showInfo?.description"
+      ></p>
       <p
         v-if="showInfo?.legend"
         class="description"

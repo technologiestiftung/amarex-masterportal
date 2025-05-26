@@ -12,6 +12,18 @@
     ]
   },
   {
+    "styleId": "preCompute",
+    "rules": [
+      {
+        "style": {
+          "polygonStrokeWidth": 0,
+          "polygonStrokeColor": [0, 0, 0, 0],
+          "polygonFillColor": [0, 0, 0, 0]
+        }
+      }
+    ]
+  },
+  {
     "styleId": "abimo_input",
     "rules": [
       {
@@ -33,9 +45,7 @@
           }
         },
         "style": {
-          "polygonStrokeWidth": 3,
-          "polygonStrokeColor": [36, 65, 209, 1],
-          "polygonFillColor": [36, 65, 209, 0.1]
+          "polygonFillColor": [36, 65, 209, 1]
         }
       },
       {
@@ -45,9 +55,7 @@
           }
         },
         "style": {
-          "polygonStrokeWidth": 3,
-          "polygonStrokeColor": [127, 148, 247, 1],
-          "polygonFillColor": [127, 148, 247, 0.1]
+          "polygonFillColor": [127, 148, 247, 1]
         }
       },
       {
@@ -57,9 +65,7 @@
           }
         },
         "style": {
-          "polygonStrokeWidth": 3,
-          "polygonStrokeColor": [240, 151, 130, 1],
-          "polygonFillColor": [240, 151, 130, 0.1]
+          "polygonFillColor": [240, 151, 130, 1]
         }
       },
       {
@@ -69,9 +75,7 @@
           }
         },
         "style": {
-          "polygonStrokeWidth": 3,
-          "polygonStrokeColor": [203, 78, 90, 1],
-          "polygonFillColor": [203, 78, 90, 0.1]
+          "polygonFillColor": [203, 78, 90, 1]
         }
       },
       {
@@ -81,9 +85,7 @@
           }
         },
         "style": {
-          "polygonStrokeWidth": 3,
-          "polygonStrokeColor": [138, 26, 39, 1],
-          "polygonFillColor": [138, 26, 39, 0.1]
+          "polygonFillColor": [138, 26, 39, 1]
         }
       }
     ]
@@ -584,3 +586,4 @@
     ]
   }
 ]
+

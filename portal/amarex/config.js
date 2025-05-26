@@ -43,12 +43,9 @@ const Config = {
   layerConf: "./resources/services-internet.json",
   restConf: "./resources/rest-services-internet.json",
   styleConf: "./resources/style_v3.json",
-  // external IMG-Dateien
-  // wfsImgPath: "https://geodienste.hamburg.de/lgv-config/img/",
   wfsImgPath: "./resources/img/",
   cesiumLibrary:
     "https://geoportal-hamburg.de/mastercode/cesium/1_95/Cesium.js",
-
   portalLanguage: {
     enabled: true,
     debug: false,
@@ -75,5 +72,7 @@ const Config = {
     "projectStarter",
     "baseMaps",
     "themeMaps",
+    "toolDownloader",
   ],
 };
+

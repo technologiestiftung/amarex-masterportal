@@ -19,6 +19,10 @@ export default {
       type: Function,
       required: true,
     },
+    nextStepMnpl: {
+      type: Function,
+      required: true,
+    },
   },
 };
 </script>
@@ -35,7 +39,7 @@ export default {
       </p>
       <button
         class="amarex-btn-primary full accent"
-        @click="nextStep('quarter')"
+        @click="nextStep()"
       >
         <p>Zur Gebietsplanung</p>
       </button>
@@ -48,10 +52,10 @@ export default {
         einer Blockteilfläche verorten.
       </p>
       <button
-        class="amarex-btn-primary full accent deactivated"
-        @click="console.log('Zum Massnahmentool')"
+        class="amarex-btn-primary full accent"
+        @click="nextStepMnpl()"
       >
-        <p>Zum Massnahmentool</p>
+        <p>Zum Maßnahmentool</p>
       </button>
     </div>
   </div>

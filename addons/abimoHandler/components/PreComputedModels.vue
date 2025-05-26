@@ -80,10 +80,10 @@ export default {
       this.setPreComputedModels(
         this.allLayerConfigs.filter(
           (layer) =>
-            layer.id === "delta_w_wfs" ||
-            layer.id === "abimo_2020_wfs:evaporatio" ||
-            layer.id === "abimo_2020_wfs:surface_ru" ||
-            layer.id === "abimo_2020_wfs:infiltrati",
+            layer.id === "delta_w_2025_wfs" ||
+            layer.id === "abimo_2025_wfs:evaporatio" ||
+            layer.id === "abimo_2025_wfs:surface_ru" ||
+            layer.id === "abimo_2025_wfs:infiltrati",
         ),
       );
       this.preComputedModels.forEach((layer) => {
@@ -92,6 +92,9 @@ export default {
           this.changeVisibility({ layerId: layer.id, value: true });
         }
       });
+      // this.preComputedModels.find(
+      //   (layer) => layer.id === "delta_w_2025_wfs",
+      // ).visibility = true;
     }
   },
 };
@@ -110,8 +113,11 @@ export default {
         :size="20"
       />
     </div>
-    <span v-if="preComputedModels.length > 0 && preComputedModelsShown">
-      <span
+    <div
+      v-if="preComputedModels.length > 0 && preComputedModelsShown"
+      class="d-flex flex-column-reverse"
+    >
+      <div
         v-for="(themeMap, themeMapIndex) in preComputedModels"
         :key="themeMapIndex"
       >
@@ -176,8 +182,8 @@ export default {
             :interaction="updateTransparencyOfSelectedThemeMap"
           />
         </div>
-      </span>
-    </span>
+      </div>
+    </div>
   </div>
 </template>
 

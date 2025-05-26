@@ -121,9 +121,9 @@ export default {
       let payload = {
         features: [],
         targets: {
-          new_green_roof: this.newGreenRoof,
-          new_to_swale: this.newToSwale,
-          new_unpaved: this.newUnpvd,
+          new_green_roof: this.newGreenRoof || 0,
+          new_to_swale: this.newToSwale || 0,
+          new_unpaved: this.newUnpvd || 0,
         },
       };
 

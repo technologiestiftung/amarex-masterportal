@@ -78,7 +78,23 @@
       "startingMapMode": "2D"
     },
     "portalFooter": {
-      "urls": []
+      "urls": [
+        {
+          "url": "https://www.technologiestiftung-berlin.de/impressum/",
+          "alias": "Impressum",
+          "alias_mobile": "Impressum"
+        },
+        {
+          "url": "https://www.technologiestiftung-berlin.de/datenschutz/",
+          "alias": "Datenschutz",
+          "alias_mobile": "Datenschutz"
+        },
+        {
+          "url": "https://github.com/technologiestiftung/amarex-masterportal",
+          "alias": "Code on Github",
+          "alias_mobile": "Code on Github"
+        }
+      ]
     },
     "tree": {
       "addLayerButton": {
@@ -142,22 +158,61 @@
           }
         ]
       ]
+    },
+    "addons": {
+      "sections": [
+        {
+          "toolDownloader": {
+            "id": "esb-tool",
+            "title": "ESB Tool",
+            "content": "Das ESB Tool ist ein in Excel umgesetzter Zisternenrechner. Er ermöglicht die Berechnung des erforderlichen Speichernutzvolumens einer Zisterne und ist anwendbar für die Standorte Berlin und Köln.<br><br>Sie können im ESB Tool verschiedene Auffangflächen und deren spezifische Ertragsbeiwerte als Eingabedaten eingeben, um den Speicherzulauf zu berechnen. Zusätzlich können Sie Bewässerungsflächen mit spezifischen Wasserbedarfen definieren, um die Entnahme aus dem Speicher zu berechnen.<br><br>Weitere Informationen zum ESB Tool finden Sie in der Excel-Datei und der Anleitung.<br><br>Über die Download-Buttons können Sie sich die Excel-Datei und die zugehörige Anleitung herunterladen.",
+            "top-btn": {
+              "src": "./resources/tools/esb-tool/ESB-Tool.xlsx",
+              "text": "ESB Tool herunterladen",
+              "alt": "ESB Tool herunterladen"
+            },
+            "bottom-btn": {
+              "src": "./resources/tools/esb-tool/Anleitung-ESB-Tool.pdf",
+              "text": "Anleitung ESB Tool herunterladen",
+              "alt": "Anleitung ESB Tool herunterladen"
+            }
+          }
+        },
+        {
+          "toolDownloader": {
+            "id": "rwb-tool",
+            "title": "RWB+ Tool",
+            "description": "Tool Downloader",
+            "content": "Das RWB+ Tool ist ein Excel-Tool mit dem Sie für Ihr eigenes Untersuchungsgebiet abschätzen können, welchen Effekt Regenwasserbewirtschaftungsanlagen (RWBA) auf die Überflutungsminderung haben.<br><br>Als Eingangsdaten werden die Gesamtgebietsgröße, die Größe der Dachflächen und das Potenzial für die Umsetzung von RWBA im Gebiet benötigt.<br><br>Weitere Informationen zum RWB+ Tool finden Sie in der Excel-Datei und der dazugehörigen Anleitung.<br><br>Über die Download-Buttons können Sie die Excel-Datei und die zugehörige Anleitung herunterladen.",
+            "top-btn": {
+              "src": "./resources/tools/rwb-tool/RWB-Tool.xlsm",
+              "text": "RWB+ Tool herunterladen",
+              "alt": "RWB+ Tool herunterladen"
+            },
+            "bottom-btn": {
+              "src": "./resources/tools/rwb-tool/Anleitung-RWB-Tool.pdf",
+              "text": "Anleitung RWB+ Tool herunterladen",
+              "alt": "Anleitung RWB+ Tool herunterladen"
+            }
+          }
+        }
+      ]
     }
   },
   "layerConfig": {
     "baselayer": {
       "elements": [
         {
-          "id": "basemap_default_grau",
-          "visibility": true
+          "id": "truedop_2024",
+          "visibility": false
         },
         {
           "id": "basemap_raster_color",
           "visibility": false
         },
         {
-          "id": "truedop_2024",
-          "visibility": false
+          "id": "basemap_default_grau",
+          "visibility": true
         }
       ]
     },
@@ -444,17 +499,17 @@
               "description": "Grünversorgung",
               "elements": [
                 {
-                  "id": "k06_05gruenversorg2020:0",
+                  "id": "ua_versorggruen_2020:versorggruen_oeff_2020",
                   "visibility": false,
                   "showInLayerTree": false
                 },
                 {
-                  "id": "k06_05gruenversorg2020:1",
+                  "id": "ua_versorggruen_2020:versorggruen_wald_2020",
                   "visibility": false,
                   "showInLayerTree": false
                 },
                 {
-                  "id": "k06_05gruenversorg2020:2",
+                  "id": "ua_versorggruen_2020:versorggruen_2020",
                   "visibility": false,
                   "showInLayerTree": false
                 }
@@ -610,6 +665,40 @@
                   "showInLayerTree": false
                 }
               ]
+            },
+            {
+              "name": "Überflutungskarten",
+              "type": "folder",
+              "description": "Maximale Wasserstände infolge eines 100-jährlichen Niederschlagsereignisses.<br> Referenzmodell: Keine Berücksichtigung von Regenwasserbewirtschaftungsanlagen.<br> Mulden 100 a: Alle Dachflächen an Mulden (dimensioniert auf T = 100 a) angeschlossen.",
+              "elements": [
+                {
+                  "id": "flooding_wms:flooding_reference_100a_60min",
+                  "visibility": false,
+                  "showInLayerTree": false
+                },
+                {
+                  "id": "flooding_wms:flooding_swale_100a_60min_100",
+                  "visibility": false,
+                  "showInLayerTree": false
+                }
+              ]
+            },
+            {
+              "name": "Potentiale der dezentralen Regenwasserbewirtschaftung",
+              "type": "folder",
+              "description": "Potentiale der dezentralen Regenwasserbewirtschaftung",
+              "elements": [
+                {
+                  "id": "potenziale_regenwasserbewirtschaftung:bb_abkopplungspotenzial_gp",
+                  "visibility": false,
+                  "showInLayerTree": false
+                },
+                {
+                  "id": "potenziale_regenwasserbewirtschaftung:ab_versickerungspotenzial_gp",
+                  "visibility": false,
+                  "showInLayerTree": false
+                }
+              ]
             }
           ]
         },
@@ -618,54 +707,69 @@
           "type": "folder",
           "elements": [
             {
-              "id": "abimo_2020_wfs:evaporatio",
+              "id": "abimo_2025_wfs:evaporatio",
               "visibility": false,
-              "showInLayerTree": true
-            },
-            {
-              "id": "abimo_2020_wfs:surface_ru",
-              "visibility": false,
-              "showInLayerTree": true
-            },
-            {
-              "id": "abimo_2020_wfs:infiltrati",
-              "visibility": false,
-              "showInLayerTree": true
-            },
-            {
-              "id": "delta_w_wfs",
-              "visibility": false,
-              "showInLayerTree": true
-            },
-            {
-              "id": "abimo_result_evaporation",
-              "visibility": true,
-              "showInLayerTree": true
-            },
-            {
-              "id": "abimo_result_surface_run_off",
-              "visibility": true,
-              "showInLayerTree": true
-            },
-            {
-              "id": "abimo_result_infiltration",
-              "visibility": true,
-              "showInLayerTree": true
-            },
-            {
-              "id": "abimo_result_delta_w",
-              "visibility": true,
-              "showInLayerTree": true
-            },
-            {
-              "id": "planung_abimo",
-              "visibility": true,
               "showInLayerTree": false
             },
             {
-              "id": "rabimo_input_2020",
-              "visibility": true,
-              "showInLayerTree": true
+              "id": "abimo_2025_wfs:surface_ru",
+              "visibility": false,
+              "showInLayerTree": false
+            },
+            {
+              "id": "abimo_2025_wfs:infiltrati",
+              "visibility": false,
+              "showInLayerTree": false
+            },
+            {
+              "id": "delta_w_2025_wfs",
+              "visibility": false,
+              "showInLayerTree": false
+            },
+            {
+              "id": "abimo_2025_wfs:preCompute",
+              "visibility": false,
+              "showInLayerTree": false
+            },
+            {
+              "id": "delta_w_2025_wfs:preCompute",
+              "visibility": false,
+              "showInLayerTree": false
+            },
+            {
+              "id": "abimo_result_evaporation",
+              "visibility": false,
+              "showInLayerTree": false
+            },
+            {
+              "id": "abimo_result_surface_run_off",
+              "visibility": false,
+              "showInLayerTree": false
+            },
+            {
+              "id": "abimo_result_infiltration",
+              "visibility": false,
+              "showInLayerTree": false
+            },
+            {
+              "id": "abimo_result_delta_w",
+              "visibility": false,
+              "showInLayerTree": false
+            },
+            {
+              "id": "planung_abimo",
+              "visibility": false,
+              "showInLayerTree": false
+            },
+            {
+              "id": "rabimo_input_2025",
+              "visibility": false,
+              "showInLayerTree": false
+            },
+            {
+              "id": "abimo_measures",
+              "visibility": false,
+              "showInLayerTree": false
             }
           ]
         }
@@ -673,4 +777,3 @@
     }
   }
 }
-

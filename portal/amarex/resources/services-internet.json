@@ -14,6 +14,7 @@
       "https://sgx.geodatenzentrum.de/wms_basemapde?format=image/png&layer=de_basemapde_web_raster_grau&sld_version=1.1.0&request=GetLegendGraphic&service=WMS&version=1.1.1&styles="
     ],
     "layerAttribution": "© basemap.de / BKG (Monat) (Jahr)",
+    "displayLayerAlert": false,
     "datasets": [
       {
         "md_id": "FE1D2837-ABE0-46B5-9821-BB11BAF22531",
@@ -53,6 +54,7 @@
     ],
     "coordinateSystem": "EPSG:25833",
     "layerAttribution": "Geoportal Berlin / Digitale farbige TrueOrthophotos 2024 (DOP20RGBI)",
+    "displayLayerAlert": false,
     "legend": "https://fbinter.stadt-berlin.de/fb_daten/legenden/keine_legende.png",
     "matrixSizes": [
       [2, 2],
@@ -99,6 +101,7 @@
     "crs": "http://www.opengis.net/def/crs/EPSG/0/25833",
     "legend": "https://sgx.geodatenzentrum.de/wms_basemapde?format=image%2Fpng&layer=de_basemapde_web_raster_farbe&sld_version=1.1.0&request=GetLegendGraphic&service=WMS&version=1.1.1&styles=",
     "layerAttribution": "© basemap.de / BKG (Monat) (Jahr)",
+    "displayLayerAlert": false,
     "datasets": [
       {
         "md_id": "FE1D2837-ABE0-46B5-9821-BB11BAF22531",
@@ -143,6 +146,8 @@
     "gfiTheme": "default",
     "gfiComplex": false,
     "layerAttribution": "© GeoBasis-DE/LGB, dl-de/by-2-0; © Geoportal Berlin, dl-de/by-2-0 (Daten geändert)",
+    "displayLayerAlert": false,
+
     "cache": false,
     "featureCount": 1,
     "datasets": [
@@ -196,6 +201,7 @@
       "https://sgx.geodatenzentrum.de/wms_basemapde?format=image%2Fpng&layer=de_basemapde_web_raster_farbe&sld_version=1.1.0&request=GetLegendGraphic&service=WMS&version=1.1.1&styles="
     ],
     "layerAttribution": "© basemap.de / BKG (Monat) (Jahr)",
+    "displayLayerAlert": false,
     "datasets": [
       {
         "md_id": "FE1D2837-ABE0-46B5-9821-BB11BAF22531",
@@ -233,6 +239,7 @@
     ],
     "optionsFromCapabilities": true,
     "layerAttribution": "Für die Nutzung der Daten ist die Datenlizenz Deutschland - Namensnennung - Version 2.0 anzuwenden. Die Lizenz ist über https://www.govdata.de/dl-de/by-2-0 abrufbar. Der Quellenvermerk gemäß (2) der Lizenz lautet \"Geoportal Berlin / [Titel des Datensatzes]\"",
+    "displayLayerAlert": false,
     "preview": {
       "src": "./resources/img/backgroundCanvas.jpeg",
       "abstract": "Farbiges TrueDOP-Mosaik, lagetreu und schattenfrei",
@@ -257,6 +264,7 @@
     ],
     "optionsFromCapabilities": true,
     "layerAttribution": "Für die Nutzung der Daten ist die Datenlizenz Deutschland - Namensnennung - Version 2.0 anzuwenden. Die Lizenz ist über https://www.govdata.de/dl-de/by-2-0 abrufbar. Der Quellenvermerk gemäß (2) der Lizenz lautet \"Geoportal Berlin / [Titel des Datensatzes]\"",
+    "displayLayerAlert": false,
     "preview": {
       "src": "./resources/img/backgroundCanvas.jpeg",
       "abstract": "Landeskartenwerk mit administrativen Grenzen und ALKIS",
@@ -281,6 +289,7 @@
     ],
     "optionsFromCapabilities": true,
     "layerAttribution": "Für die Nutzung der Daten ist die Datenlizenz Deutschland - Namensnennung - Version 2.0 anzuwenden. Die Lizenz ist über https://www.govdata.de/dl-de/by-2-0 abrufbar. Der Quellenvermerk gemäß (2) der Lizenz lautet \"Geoportal Berlin / [Titel des Datensatzes]\"",
+    "displayLayerAlert": false,
     "preview": {
       "src": "./resources/img/backgroundCanvas.jpeg",
       "abstract": "Landeskartenwerk mit administrativen Grenzen (ALKIS)",
@@ -315,6 +324,7 @@
     "transparent": true,
     "singleTile": true,
     "infoFormat": "application/json",
+    "displayLayerAlert": false,
     "layerAttribution": "Für die Nutzung der Daten ist die Datenlizenz Deutschland - Namensnennung - Version 2.0 anzuwenden. Die Lizenz ist über https://www.govdata.de/dl-de/by-2-0 abrufbar. Der Quellenvermerk gemäß (2) der Lizenz lautet \"Geoportal Berlin / [Titel des Datensatzes]\"."
   },
   {
@@ -343,6 +353,7 @@
     "gfiTheme": "default",
     "transparent": true,
     "singleTile": true,
+    "displayLayerAlert": false,
     "layerAttribution": "Für die Nutzung der Daten ist die  Datenlizenz Deutschland - Namensnennung - Version 2.0 anzuwenden. Die Lizenz ist über https://www.govdata.de/dl-de/by-2-0 abrufbar. Der Quellenvermerk gemäß (2) der Lizenz lautet \"Geoportal Berlin / [Titel des Datensatzes]\"."
   },
   {
@@ -371,6 +382,7 @@
     "gfiTheme": "default",
     "transparent": true,
     "singleTile": true,
+    "displayLayerAlert": false,
     "layerAttribution": "Für die Nutzung der Daten ist die  Datenlizenz Deutschland - Namensnennung - Version 2.0 anzuwenden. Die Lizenz ist über https://www.govdata.de/dl-de/by-2-0 abrufbar. Der Quellenvermerk gemäß (2) der Lizenz lautet \"Geoportal Berlin / [Titel des Datensatzes]\"."
   },
   {
@@ -399,6 +411,7 @@
     "gfiTheme": "default",
     "transparent": true,
     "singleTile": true,
+    "displayLayerAlert": false,
     "layerAttribution": "Für die Nutzung der Daten ist die  Datenlizenz Deutschland - Namensnennung - Version 2.0 anzuwenden. Die Lizenz ist über https://www.govdata.de/dl-de/by-2-0 abrufbar. Der Quellenvermerk gemäß (2) der Lizenz lautet \"Geoportal Berlin / [Titel des Datensatzes]\"."
   },
   {
@@ -427,6 +440,7 @@
     "gfiTheme": "default",
     "transparent": true,
     "singleTile": true,
+    "displayLayerAlert": false,
     "layerAttribution": "Für die Nutzung der Daten ist die  Datenlizenz Deutschland - Namensnennung - Version 2.0 anzuwenden. Die Lizenz ist über https://www.govdata.de/dl-de/by-2-0 abrufbar. Der Quellenvermerk gemäß (2) der Lizenz lautet \"Geoportal Berlin / [Titel des Datensatzes]\"."
   },
   {
@@ -455,6 +469,7 @@
     "gfiTheme": "default",
     "transparent": true,
     "singleTile": true,
+    "displayLayerAlert": false,
     "layerAttribution": "Für die Nutzung der Daten ist die  Datenlizenz Deutschland - Namensnennung - Version 2.0 anzuwenden. Die Lizenz ist über https://www.govdata.de/dl-de/by-2-0 abrufbar. Der Quellenvermerk gemäß (2) der Lizenz lautet \"Geoportal Berlin / [Titel des Datensatzes]\"."
   },
   {
@@ -483,6 +498,7 @@
     "gfiTheme": "default",
     "transparent": true,
     "singleTile": true,
+    "displayLayerAlert": false,
     "layerAttribution": "Für die Nutzung der Daten ist die  Datenlizenz Deutschland - Namensnennung - Version 2.0 anzuwenden. Die Lizenz ist über https://www.govdata.de/dl-de/by-2-0 abrufbar. Der Quellenvermerk gemäß (2) der Lizenz lautet \"Geoportal Berlin / [Titel des Datensatzes]\"."
   },
   {
@@ -511,6 +527,7 @@
     "gfiTheme": "default",
     "transparent": true,
     "singleTile": true,
+    "displayLayerAlert": false,
     "layerAttribution": "Für die Nutzung der Daten ist die  Datenlizenz Deutschland - Namensnennung - Version 2.0 anzuwenden. Die Lizenz ist über https://www.govdata.de/dl-de/by-2-0 abrufbar. Der Quellenvermerk gemäß (2) der Lizenz lautet \"Geoportal Berlin / [Titel des Datensatzes]\"."
   },
   {
@@ -539,6 +556,7 @@
     "gfiTheme": "default",
     "transparent": true,
     "singleTile": true,
+    "displayLayerAlert": false,
     "layerAttribution": "Für die Nutzung der Daten ist die  Datenlizenz Deutschland - Namensnennung - Version 2.0 anzuwenden. Die Lizenz ist über https://www.govdata.de/dl-de/by-2-0 abrufbar. Der Quellenvermerk gemäß (2) der Lizenz lautet \"Geoportal Berlin / [Titel des Datensatzes]\"."
   },
   {
@@ -567,6 +585,7 @@
     "gfiTheme": "default",
     "transparent": true,
     "singleTile": true,
+    "displayLayerAlert": false,
     "layerAttribution": "Für die Nutzung der Daten ist die  Datenlizenz Deutschland - Namensnennung - Version 2.0 anzuwenden. Die Lizenz ist über https://www.govdata.de/dl-de/by-2-0 abrufbar. Der Quellenvermerk gemäß (2) der Lizenz lautet \"Geoportal Berlin / [Titel des Datensatzes]\"."
   },
   {
@@ -595,6 +614,7 @@
     "gfiTheme": "default",
     "transparent": true,
     "singleTile": true,
+    "displayLayerAlert": false,
     "layerAttribution": "Für die Nutzung der Daten ist die  Datenlizenz Deutschland - Namensnennung - Version 2.0 anzuwenden. Die Lizenz ist über https://www.govdata.de/dl-de/by-2-0 abrufbar. Der Quellenvermerk gemäß (2) der Lizenz lautet \"Geoportal Berlin / [Titel des Datensatzes]\"."
   },
   {
@@ -623,6 +643,7 @@
     "gfiTheme": "default",
     "transparent": true,
     "singleTile": true,
+    "displayLayerAlert": false,
     "layerAttribution": "Für die Nutzung der Daten ist die  Datenlizenz Deutschland - Namensnennung - Version 2.0 anzuwenden. Die Lizenz ist über https://www.govdata.de/dl-de/by-2-0 abrufbar. Der Quellenvermerk gemäß (2) der Lizenz lautet \"Geoportal Berlin / [Titel des Datensatzes]\"."
   },
   {
@@ -651,6 +672,7 @@
     "gfiTheme": "default",
     "transparent": true,
     "singleTile": true,
+    "displayLayerAlert": false,
     "layerAttribution": "Für die Nutzung der Daten ist die  Datenlizenz Deutschland - Namensnennung - Version 2.0 anzuwenden. Die Lizenz ist über https://www.govdata.de/dl-de/by-2-0 abrufbar. Der Quellenvermerk gemäß (2) der Lizenz lautet \"Geoportal Berlin / [Titel des Datensatzes]\"."
   },
   {
@@ -679,6 +701,7 @@
     "gfiTheme": "default",
     "transparent": true,
     "singleTile": true,
+    "displayLayerAlert": false,
     "layerAttribution": "Für die Nutzung der Daten ist die  Datenlizenz Deutschland - Namensnennung - Version 2.0 anzuwenden. Die Lizenz ist über https://www.govdata.de/dl-de/by-2-0 abrufbar. Der Quellenvermerk gemäß (2) der Lizenz lautet \"Geoportal Berlin / [Titel des Datensatzes]\"."
   },
   {
@@ -707,6 +730,7 @@
     "gfiTheme": "default",
     "transparent": true,
     "singleTile": true,
+    "displayLayerAlert": false,
     "layerAttribution": "Für die Nutzung der Daten ist die  Datenlizenz Deutschland - Namensnennung - Version 2.0 anzuwenden. Die Lizenz ist über https://www.govdata.de/dl-de/by-2-0 abrufbar. Der Quellenvermerk gemäß (2) der Lizenz lautet \"Geoportal Berlin / [Titel des Datensatzes]\"."
   },
   {
@@ -735,6 +759,7 @@
     "gfiTheme": "default",
     "transparent": true,
     "singleTile": true,
+    "displayLayerAlert": false,
     "layerAttribution": "Für die Nutzung der Daten ist die  Datenlizenz Deutschland - Namensnennung - Version 2.0 anzuwenden. Die Lizenz ist über https://www.govdata.de/dl-de/by-2-0 abrufbar. Der Quellenvermerk gemäß (2) der Lizenz lautet \"Geoportal Berlin / [Titel des Datensatzes]\"."
   },
   {
@@ -763,6 +788,7 @@
     "gfiTheme": "default",
     "transparent": true,
     "singleTile": true,
+    "displayLayerAlert": false,
     "layerAttribution": "Für die Nutzung der Daten ist die  Datenlizenz Deutschland - Namensnennung - Version 2.0 anzuwenden. Die Lizenz ist über https://www.govdata.de/dl-de/by-2-0 abrufbar. Der Quellenvermerk gemäß (2) der Lizenz lautet \"Geoportal Berlin / [Titel des Datensatzes]\"."
   },
   {
@@ -791,6 +817,7 @@
     "gfiTheme": "default",
     "transparent": true,
     "singleTile": true,
+    "displayLayerAlert": false,
     "layerAttribution": "Für die Nutzung der Daten ist die  Datenlizenz Deutschland - Namensnennung - Version 2.0 anzuwenden. Die Lizenz ist über https://www.govdata.de/dl-de/by-2-0 abrufbar. Der Quellenvermerk gemäß (2) der Lizenz lautet \"Geoportal Berlin / [Titel des Datensatzes]\"."
   },
   {
@@ -819,6 +846,7 @@
     "gfiTheme": "default",
     "transparent": true,
     "singleTile": true,
+    "displayLayerAlert": false,
     "layerAttribution": "Für die Nutzung der Daten ist die  Datenlizenz Deutschland - Namensnennung - Version 2.0 anzuwenden. Die Lizenz ist über https://www.govdata.de/dl-de/by-2-0 abrufbar. Der Quellenvermerk gemäß (2) der Lizenz lautet \"Geoportal Berlin / [Titel des Datensatzes]\"."
   },
   {
@@ -847,6 +875,7 @@
     "gfiTheme": "default",
     "transparent": true,
     "singleTile": true,
+    "displayLayerAlert": false,
     "layerAttribution": "Für die Nutzung der Daten ist die  Datenlizenz Deutschland - Namensnennung - Version 2.0 anzuwenden. Die Lizenz ist über https://www.govdata.de/dl-de/by-2-0 abrufbar. Der Quellenvermerk gemäß (2) der Lizenz lautet \"Geoportal Berlin / [Titel des Datensatzes]\"."
   },
   {
@@ -875,6 +904,7 @@
     "gfiTheme": "default",
     "transparent": true,
     "singleTile": true,
+    "displayLayerAlert": false,
     "layerAttribution": "Für die Nutzung der Daten ist die  Datenlizenz Deutschland - Namensnennung - Version 2.0 anzuwenden. Die Lizenz ist über https://www.govdata.de/dl-de/by-2-0 abrufbar. Der Quellenvermerk gemäß (2) der Lizenz lautet \"Geoportal Berlin / [Titel des Datensatzes]\"."
   },
   {
@@ -903,6 +933,7 @@
     "gfiTheme": "default",
     "transparent": true,
     "singleTile": true,
+    "displayLayerAlert": false,
     "layerAttribution": "Für die Nutzung der Daten ist die  Datenlizenz Deutschland - Namensnennung - Version 2.0 anzuwenden. Die Lizenz ist über https://www.govdata.de/dl-de/by-2-0 abrufbar. Der Quellenvermerk gemäß (2) der Lizenz lautet \"Geoportal Berlin / [Titel des Datensatzes]\"."
   },
   {
@@ -931,6 +962,7 @@
     "gfiTheme": "default",
     "transparent": true,
     "singleTile": true,
+    "displayLayerAlert": false,
     "layerAttribution": "Für die Nutzung der Daten ist die  Datenlizenz Deutschland - Namensnennung - Version 2.0 anzuwenden. Die Lizenz ist über https://www.govdata.de/dl-de/by-2-0 abrufbar. Der Quellenvermerk gemäß (2) der Lizenz lautet \"Geoportal Berlin / [Titel des Datensatzes]\"."
   },
   {
@@ -959,6 +991,7 @@
     "gfiTheme": "default",
     "transparent": true,
     "singleTile": true,
+    "displayLayerAlert": false,
     "layerAttribution": "Für die Nutzung der Daten ist die  Datenlizenz Deutschland - Namensnennung - Version 2.0 anzuwenden. Die Lizenz ist über https://www.govdata.de/dl-de/by-2-0 abrufbar. Der Quellenvermerk gemäß (2) der Lizenz lautet \"Geoportal Berlin / [Titel des Datensatzes]\"."
   },
   {
@@ -987,6 +1020,7 @@
     "gfiTheme": "default",
     "transparent": true,
     "singleTile": true,
+    "displayLayerAlert": false,
     "layerAttribution": "Für die Nutzung der Daten ist die  Datenlizenz Deutschland - Namensnennung - Version 2.0 anzuwenden. Die Lizenz ist über https://www.govdata.de/dl-de/by-2-0 abrufbar. Der Quellenvermerk gemäß (2) der Lizenz lautet \"Geoportal Berlin / [Titel des Datensatzes]\"."
   },
 
@@ -1016,6 +1050,7 @@
     "gfiTheme": "default",
     "transparent": true,
     "singleTile": true,
+    "displayLayerAlert": false,
     "layerAttribution": "Für die Nutzung der Daten ist die  Datenlizenz Deutschland - Namensnennung - Version 2.0 anzuwenden. Die Lizenz ist über https://www.govdata.de/dl-de/by-2-0 abrufbar. Der Quellenvermerk gemäß (2) der Lizenz lautet \"Geoportal Berlin / [Titel des Datensatzes]\"."
   },
   {
@@ -1044,6 +1079,7 @@
     "gfiTheme": "default",
     "transparent": true,
     "singleTile": true,
+    "displayLayerAlert": false,
     "layerAttribution": "Für die Nutzung der Daten ist die  Datenlizenz Deutschland - Namensnennung - Version 2.0 anzuwenden. Die Lizenz ist über https://www.govdata.de/dl-de/by-2-0 abrufbar. Der Quellenvermerk gemäß (2) der Lizenz lautet \"Geoportal Berlin / [Titel des Datensatzes]\"."
   },
   {
@@ -1072,6 +1108,7 @@
     "gfiTheme": "default",
     "transparent": true,
     "singleTile": true,
+    "displayLayerAlert": false,
     "layerAttribution": "Für die Nutzung der Daten ist die  Datenlizenz Deutschland - Namensnennung - Version 2.0 anzuwenden. Die Lizenz ist über https://www.govdata.de/dl-de/by-2-0 abrufbar. Der Quellenvermerk gemäß (2) der Lizenz lautet \"Geoportal Berlin / [Titel des Datensatzes]\"."
   },
   {
@@ -1100,6 +1137,7 @@
     "gfiTheme": "default",
     "transparent": true,
     "singleTile": true,
+    "displayLayerAlert": false,
     "layerAttribution": "Für die Nutzung der Daten ist die  Datenlizenz Deutschland - Namensnennung - Version 2.0 anzuwenden. Die Lizenz ist über https://www.govdata.de/dl-de/by-2-0 abrufbar. Der Quellenvermerk gemäß (2) der Lizenz lautet \"Geoportal Berlin / [Titel des Datensatzes]\"."
   },
   {
@@ -1128,6 +1166,7 @@
     "gfiTheme": "default",
     "transparent": true,
     "singleTile": true,
+    "displayLayerAlert": false,
     "layerAttribution": "Für die Nutzung der Daten ist die  Datenlizenz Deutschland - Namensnennung - Version 2.0 anzuwenden. Die Lizenz ist über https://www.govdata.de/dl-de/by-2-0 abrufbar. Der Quellenvermerk gemäß (2) der Lizenz lautet \"Geoportal Berlin / [Titel des Datensatzes]\"."
   },
   {
@@ -1156,6 +1195,7 @@
     "gfiTheme": "default",
     "transparent": true,
     "singleTile": true,
+    "displayLayerAlert": false,
     "layerAttribution": "Für die Nutzung der Daten ist die  Datenlizenz Deutschland - Namensnennung - Version 2.0 anzuwenden. Die Lizenz ist über https://www.govdata.de/dl-de/by-2-0 abrufbar. Der Quellenvermerk gemäß (2) der Lizenz lautet \"Geoportal Berlin / [Titel des Datensatzes]\"."
   },
   {
@@ -1184,6 +1224,7 @@
     "gfiTheme": "default",
     "transparent": true,
     "singleTile": true,
+    "displayLayerAlert": false,
     "layerAttribution": "Für die Nutzung der Daten ist die  Datenlizenz Deutschland - Namensnennung - Version 2.0 anzuwenden. Die Lizenz ist über https://www.govdata.de/dl-de/by-2-0 abrufbar. Der Quellenvermerk gemäß (2) der Lizenz lautet \"Geoportal Berlin / [Titel des Datensatzes]\"."
   },
   {
@@ -1212,6 +1253,7 @@
     "gfiTheme": "default",
     "transparent": true,
     "singleTile": true,
+    "displayLayerAlert": false,
     "layerAttribution": "Für die Nutzung der Daten ist die  Datenlizenz Deutschland - Namensnennung - Version 2.0 anzuwenden. Die Lizenz ist über https://www.govdata.de/dl-de/by-2-0 abrufbar. Der Quellenvermerk gemäß (2) der Lizenz lautet \"Geoportal Berlin / [Titel des Datensatzes]\"."
   },
   {
@@ -1240,6 +1282,7 @@
     "gfiTheme": "default",
     "transparent": true,
     "singleTile": true,
+    "displayLayerAlert": false,
     "layerAttribution": "Für die Nutzung der Daten ist die  Datenlizenz Deutschland - Namensnennung - Version 2.0 anzuwenden. Die Lizenz ist über https://www.govdata.de/dl-de/by-2-0 abrufbar. Der Quellenvermerk gemäß (2) der Lizenz lautet \"Geoportal Berlin / [Titel des Datensatzes]\"."
   },
   {
@@ -1268,6 +1311,7 @@
     "gfiTheme": "default",
     "transparent": true,
     "singleTile": true,
+    "displayLayerAlert": false,
     "layerAttribution": "Für die Nutzung der Daten ist die  Datenlizenz Deutschland - Namensnennung - Version 2.0 anzuwenden. Die Lizenz ist über https://www.govdata.de/dl-de/by-2-0 abrufbar. Der Quellenvermerk gemäß (2) der Lizenz lautet \"Geoportal Berlin / [Titel des Datensatzes]\"."
   },
   {
@@ -1296,6 +1340,7 @@
     "gfiTheme": "default",
     "transparent": true,
     "singleTile": true,
+    "displayLayerAlert": false,
     "layerAttribution": "Für die Nutzung der Daten ist die  Datenlizenz Deutschland - Namensnennung - Version 2.0 anzuwenden. Die Lizenz ist über https://www.govdata.de/dl-de/by-2-0 abrufbar. Der Quellenvermerk gemäß (2) der Lizenz lautet \"Geoportal Berlin / [Titel des Datensatzes]\"."
   },
   {
@@ -1324,6 +1369,7 @@
     "gfiTheme": "default",
     "transparent": true,
     "singleTile": true,
+    "displayLayerAlert": false,
     "layerAttribution": "Für die Nutzung der Daten ist die  Datenlizenz Deutschland - Namensnennung - Version 2.0 anzuwenden. Die Lizenz ist über https://www.govdata.de/dl-de/by-2-0 abrufbar. Der Quellenvermerk gemäß (2) der Lizenz lautet \"Geoportal Berlin / [Titel des Datensatzes]\"."
   },
   {
@@ -1352,6 +1398,7 @@
     "gfiTheme": "default",
     "transparent": true,
     "singleTile": true,
+    "displayLayerAlert": false,
     "layerAttribution": "Für die Nutzung der Daten ist die  Datenlizenz Deutschland - Namensnennung - Version 2.0 anzuwenden. Die Lizenz ist über https://www.govdata.de/dl-de/by-2-0 abrufbar. Der Quellenvermerk gemäß (2) der Lizenz lautet \"Geoportal Berlin / [Titel des Datensatzes]\"."
   },
   {
@@ -1380,6 +1427,7 @@
     "gfiTheme": "default",
     "transparent": true,
     "singleTile": true,
+    "displayLayerAlert": false,
     "layerAttribution": "Für die Nutzung der Daten ist die  Datenlizenz Deutschland - Namensnennung - Version 2.0 anzuwenden. Die Lizenz ist über https://www.govdata.de/dl-de/by-2-0 abrufbar. Der Quellenvermerk gemäß (2) der Lizenz lautet \"Geoportal Berlin / [Titel des Datensatzes]\"."
   },
   {
@@ -1408,6 +1456,7 @@
     "gfiTheme": "default",
     "transparent": true,
     "singleTile": true,
+    "displayLayerAlert": false,
     "layerAttribution": "Für die Nutzung der Daten ist die  Datenlizenz Deutschland - Namensnennung - Version 2.0 anzuwenden. Die Lizenz ist über https://www.govdata.de/dl-de/by-2-0 abrufbar. Der Quellenvermerk gemäß (2) der Lizenz lautet \"Geoportal Berlin / [Titel des Datensatzes]\"."
   },
   {
@@ -1436,6 +1485,7 @@
     "gfiTheme": "default",
     "transparent": true,
     "singleTile": true,
+    "displayLayerAlert": false,
     "layerAttribution": "Für die Nutzung der Daten ist die  Datenlizenz Deutschland - Namensnennung - Version 2.0 anzuwenden. Die Lizenz ist über https://www.govdata.de/dl-de/by-2-0 abrufbar. Der Quellenvermerk gemäß (2) der Lizenz lautet \"Geoportal Berlin / [Titel des Datensatzes]\"."
   },
   {
@@ -1464,6 +1514,7 @@
     "gfiTheme": "default",
     "transparent": true,
     "singleTile": true,
+    "displayLayerAlert": false,
     "layerAttribution": "Für die Nutzung der Daten ist die  Datenlizenz Deutschland - Namensnennung - Version 2.0 anzuwenden. Die Lizenz ist über https://www.govdata.de/dl-de/by-2-0 abrufbar. Der Quellenvermerk gemäß (2) der Lizenz lautet \"Geoportal Berlin / [Titel des Datensatzes]\"."
   },
   {
@@ -1492,6 +1543,7 @@
     "gfiTheme": "default",
     "transparent": true,
     "singleTile": true,
+    "displayLayerAlert": false,
     "layerAttribution": "Für die Nutzung der Daten ist die  Datenlizenz Deutschland - Namensnennung - Version 2.0 anzuwenden. Die Lizenz ist über https://www.govdata.de/dl-de/by-2-0 abrufbar. Der Quellenvermerk gemäß (2) der Lizenz lautet \"Geoportal Berlin / [Titel des Datensatzes]\"."
   },
   {
@@ -1520,6 +1572,7 @@
     "gfiTheme": "default",
     "transparent": true,
     "singleTile": true,
+    "displayLayerAlert": false,
     "layerAttribution": "Für die Nutzung der Daten ist die  Datenlizenz Deutschland - Namensnennung - Version 2.0 anzuwenden. Die Lizenz ist über https://www.govdata.de/dl-de/by-2-0 abrufbar. Der Quellenvermerk gemäß (2) der Lizenz lautet \"Geoportal Berlin / [Titel des Datensatzes]\"."
   },
   {
@@ -1548,6 +1601,7 @@
     "gfiTheme": "default",
     "transparent": true,
     "singleTile": true,
+    "displayLayerAlert": false,
     "layerAttribution": "Für die Nutzung der Daten ist die  Datenlizenz Deutschland - Namensnennung - Version 2.0 anzuwenden. Die Lizenz ist über https://www.govdata.de/dl-de/by-2-0 abrufbar. Der Quellenvermerk gemäß (2) der Lizenz lautet \"Geoportal Berlin / [Titel des Datensatzes]\"."
   },
   {
@@ -1576,6 +1630,7 @@
     "gfiTheme": "default",
     "transparent": true,
     "singleTile": true,
+    "displayLayerAlert": false,
     "layerAttribution": "Für die Nutzung der Daten ist die  Datenlizenz Deutschland - Namensnennung - Version 2.0 anzuwenden. Die Lizenz ist über https://www.govdata.de/dl-de/by-2-0 abrufbar. Der Quellenvermerk gemäß (2) der Lizenz lautet \"Geoportal Berlin / [Titel des Datensatzes]\"."
   },
   {
@@ -1604,6 +1659,7 @@
     "gfiTheme": "default",
     "transparent": true,
     "singleTile": true,
+    "displayLayerAlert": false,
     "layerAttribution": "Für die Nutzung der Daten ist die  Datenlizenz Deutschland - Namensnennung - Version 2.0 anzuwenden. Die Lizenz ist über https://www.govdata.de/dl-de/by-2-0 abrufbar. Der Quellenvermerk gemäß (2) der Lizenz lautet \"Geoportal Berlin / [Titel des Datensatzes]\"."
   },
   {
@@ -1632,6 +1688,7 @@
     "gfiTheme": "default",
     "transparent": true,
     "singleTile": true,
+    "displayLayerAlert": false,
     "layerAttribution": "Für die Nutzung der Daten ist die  Datenlizenz Deutschland - Namensnennung - Version 2.0 anzuwenden. Die Lizenz ist über https://www.govdata.de/dl-de/by-2-0 abrufbar. Der Quellenvermerk gemäß (2) der Lizenz lautet \"Geoportal Berlin / [Titel des Datensatzes]\"."
   },
   {
@@ -1660,6 +1717,7 @@
     "gfiTheme": "default",
     "transparent": true,
     "singleTile": true,
+    "displayLayerAlert": false,
     "layerAttribution": "Für die Nutzung der Daten ist die  Datenlizenz Deutschland - Namensnennung - Version 2.0 anzuwenden. Die Lizenz ist über https://www.govdata.de/dl-de/by-2-0 abrufbar. Der Quellenvermerk gemäß (2) der Lizenz lautet \"Geoportal Berlin / [Titel des Datensatzes]\"."
   },
   {
@@ -1679,13 +1737,26 @@
     "maxScale": "25000"
   },
   {
-    "id": "abimo_2020_wfs:evaporatio",
-    "styleId": "abimo_evapor",
-    "name": "Verdunstung 2020",
+    "id": "rabimo_input_2025",
+    "styleId": "abimo_input",
+    "name": "Abimo Input 2025",
     "crs": "EPSG:25833",
     "url": "https://geoserver.ionos.ds-apps.tsb-berlin.de/geoserver/amarex/wfs",
     "typ": "WFS",
-    "featureType": "amarex:rabimo_results_2020",
+    "featureType": "amarex:rabimo_input_2025",
+    "featureNS": "http://geoserver.org",
+    "datasets": false,
+    "gfiAttributes": "showAll",
+    "maxScale": "25000"
+  },
+  {
+    "id": "abimo_2025_wfs:evaporatio",
+    "styleId": "abimo_evapor",
+    "name": "Verdunstung",
+    "crs": "EPSG:25833",
+    "url": "https://geoserver.ionos.ds-apps.tsb-berlin.de/geoserver/amarex/wfs",
+    "typ": "WFS",
+    "featureType": "amarex:rabimo_results_2025",
     "featureNS": "http://geoserver.org",
     "datasets": false,
     "layers": "evapor",
@@ -1694,13 +1765,13 @@
     "legend": "./resources/img/legend_evaporation.svg"
   },
   {
-    "id": "abimo_2020_wfs:surface_ru",
+    "id": "abimo_2025_wfs:surface_ru",
     "styleId": "abimo_runoff",
-    "name": "Oberflächenabfluss 2020",
+    "name": "Oberflächenabfluss",
     "crs": "EPSG:25833",
     "url": "https://geoserver.ionos.ds-apps.tsb-berlin.de/geoserver/amarex/wfs",
     "typ": "WFS",
-    "featureType": "amarex:rabimo_results_2020",
+    "featureType": "amarex:rabimo_results_2025",
     "featureNS": "http://geoserver.org",
     "datasets": false,
     "layers": "runoff",
@@ -1709,13 +1780,13 @@
     "legend": "./resources/img/legend_surface_runoff.svg"
   },
   {
-    "id": "abimo_2020_wfs:infiltrati",
-    "name": "Infiltration 2020",
+    "id": "abimo_2025_wfs:infiltrati",
+    "name": "Infiltration",
     "styleId": "abimo_infiltr",
     "crs": "EPSG:25833",
     "url": "https://geoserver.ionos.ds-apps.tsb-berlin.de/geoserver/amarex/wfs",
     "typ": "WFS",
-    "featureType": "amarex:rabimo_results_2020",
+    "featureType": "amarex:rabimo_results_2025",
     "featureNS": "http://geoserver.org",
     "datasets": false,
     "layers": "infiltr",
@@ -1724,13 +1795,41 @@
     "legend": "./resources/img/legend_infiltration.svg"
   },
   {
-    "id": "delta_w_wfs",
+    "id": "delta_w_2025_wfs",
     "styleId": "delta_w",
-    "name": "∆W - Abweichung vom natürlichen Wasserhaushalt 2020",
+    "name": "∆W - Abweichung vom natürlichen Wasserhaushalt",
     "crs": "EPSG:25833",
     "url": "https://geoserver.ionos.ds-apps.tsb-berlin.de/geoserver/amarex/wfs",
     "typ": "WFS",
-    "featureType": "amarex:deltaw_2020",
+    "featureType": "amarex:deltaw_2025",
+    "featureNS": "http://geoserver.org",
+    "datasets": false,
+    "gfiAttributes": "showAll",
+    "maxScale": "25000",
+    "legend": "./resources/img/legend_delta_w.svg"
+  },
+  {
+    "id": "abimo_2025_wfs:preCompute",
+    "styleId": "preCompute",
+    "name": "Verdunstung",
+    "crs": "EPSG:25833",
+    "url": "https://geoserver.ionos.ds-apps.tsb-berlin.de/geoserver/amarex/wfs",
+    "typ": "WFS",
+    "featureType": "amarex:rabimo_results_2025",
+    "featureNS": "http://geoserver.org",
+    "datasets": false,
+    "gfiAttributes": "showAll",
+    "maxScale": "25000",
+    "legend": "./resources/img/legend_evaporation.svg"
+  },
+  {
+    "id": "delta_w_2025_wfs:preCompute",
+    "styleId": "preCompute",
+    "name": "∆W - Abweichung vom natürlichen Wasserhaushalt 2025",
+    "crs": "EPSG:25833",
+    "url": "https://geoserver.ionos.ds-apps.tsb-berlin.de/geoserver/amarex/wfs",
+    "typ": "WFS",
+    "featureType": "amarex:deltaw_2025",
     "featureNS": "http://geoserver.org",
     "datasets": false,
     "gfiAttributes": "showAll",
@@ -1741,6 +1840,15 @@
     "id": "planung_abimo",
     "styleId": "abimo_selected",
     "name": "Abimo ausgewählte Flächen",
+    "crs": "urn:ogc:def:crs:EPSG::25833",
+    "typ": "GEOJSON",
+    "gfiAttributes": "showAll",
+    "maxScale": "25000"
+  },
+  {
+    "id": "abimo_measures",
+    "styleId": "default",
+    "name": "Abimo gesetzte Maßnahmen",
     "crs": "urn:ogc:def:crs:EPSG::25833",
     "typ": "GEOJSON",
     "gfiAttributes": "showAll",
@@ -1788,6 +1896,35 @@
     "searchField": "delta_w"
   },
   {
+    "id": "Überflutungskarten"
+  },
+  {
+    "id": "flooding_wms:flooding_reference_100a_60min",
+    "name": "Referenzmodell ohne RWBA, Regenbelastung T = 100 a, D = 60 min",
+    "crs": "EPSG:25833",
+    "url": "https://geoserver.ionos.ds-apps.tsb-berlin.de/geoserver/amarex/wms",
+    "capabilitiesUrl": "https://geoserver.ionos.ds-apps.tsb-berlin.de/geoserver/amarex/wms?service=wms&request=GetCapabilities",
+    "typ": "WMS",
+    "format": "image/png",
+    "layers": "amarex:flooding_reference_100a_60min",
+    "gfiAttributes": "ignore",
+    "maxScale": "25000",
+    "legend": "./resources/img/legend_flooding.svg"
+  },
+  {
+    "id": "flooding_wms:flooding_swale_100a_60min_100",
+    "name": "Mulden 100 a, Implementierungsgrad 100 %, Regenbelastung T = 100 a, D = 60 min.",
+    "crs": "EPSG:25833",
+    "url": "https://geoserver.ionos.ds-apps.tsb-berlin.de/geoserver/amarex/wms",
+    "capabilitiesUrl": "https://geoserver.ionos.ds-apps.tsb-berlin.de/geoserver/amarex/wms?service=wms&request=GetCapabilities",
+    "typ": "WMS",
+    "format": "image/png",
+    "layers": "amarex:flooding_swale_100a_60min_100",
+    "gfiAttributes": "ignore",
+    "maxScale": "25000",
+    "legend": "./resources/img/legend_flooding.svg"
+  },
+  {
     "id": "Themenkarten:"
   },
   {
@@ -1816,6 +1953,7 @@
     "gfiTheme": "default",
     "transparent": true,
     "singleTile": true,
+    "displayLayerAlert": false,
     "layerAttribution": "Für die Nutzung der Daten ist die  Datenlizenz Deutschland - Namensnennung - Version 2.0 anzuwenden. Die Lizenz ist über https://www.govdata.de/dl-de/by-2-0 abrufbar. Der Quellenvermerk gemäß (2) der Lizenz lautet \"Umweltatlas Berlin / [Titel des Datensatzes]\"."
   },
   {
@@ -1844,6 +1982,7 @@
     "gfiTheme": "default",
     "transparent": true,
     "singleTile": true,
+    "displayLayerAlert": false,
     "layerAttribution": "Für die Nutzung der Daten ist die  Datenlizenz Deutschland - Namensnennung - Version 2.0 anzuwenden. Die Lizenz ist über https://www.govdata.de/dl-de/by-2-0 abrufbar. Der Quellenvermerk gemäß (2) der Lizenz lautet \"Umweltatlas Berlin / [Titel des Datensatzes]\"."
   },
   {
@@ -1872,6 +2011,7 @@
     "gfiTheme": "default",
     "transparent": true,
     "singleTile": true,
+    "displayLayerAlert": false,
     "layerAttribution": "Für die Nutzung der Daten ist die  Datenlizenz Deutschland - Namensnennung - Version 2.0 anzuwenden. Die Lizenz ist über https://www.govdata.de/dl-de/by-2-0 abrufbar. Der Quellenvermerk gemäß (2) der Lizenz lautet \"Umweltatlas Berlin / [Titel des Datensatzes]\"."
   },
   {
@@ -1900,6 +2040,7 @@
     "gfiTheme": "default",
     "transparent": true,
     "singleTile": true,
+    "displayLayerAlert": false,
     "layerAttribution": "Für die Nutzung der Daten ist die  Datenlizenz Deutschland - Namensnennung - Version 2.0 anzuwenden. Die Lizenz ist über https://www.govdata.de/dl-de/by-2-0 abrufbar. Der Quellenvermerk gemäß (2) der Lizenz lautet \"Umweltatlas Berlin / [Titel des Datensatzes]\"."
   },
   {
@@ -1928,6 +2069,7 @@
     "gfiTheme": "default",
     "transparent": true,
     "singleTile": true,
+    "displayLayerAlert": false,
     "layerAttribution": "Für die Nutzung der Daten ist die  Datenlizenz Deutschland - Namensnennung - Version 2.0 anzuwenden. Die Lizenz ist über https://www.govdata.de/dl-de/by-2-0 abrufbar. Der Quellenvermerk gemäß (2) der Lizenz lautet \"Umweltatlas Berlin / [Titel des Datensatzes]\"."
   },
   {
@@ -1956,6 +2098,7 @@
     "gfiTheme": "default",
     "transparent": true,
     "singleTile": true,
+    "displayLayerAlert": false,
     "layerAttribution": "Für die Nutzung der Daten ist die  Datenlizenz Deutschland - Namensnennung - Version 2.0 anzuwenden. Die Lizenz ist über https://www.govdata.de/dl-de/by-2-0 abrufbar. Der Quellenvermerk gemäß (2) der Lizenz lautet \"Umweltatlas Berlin / [Titel des Datensatzes]\"."
   },
   {
@@ -1983,6 +2126,7 @@
     "transparent": true,
     "singleTile": true,
     "infoFormat": "application/json",
+    "displayLayerAlert": false,
     "layerAttribution": "Gebiet Obersee: Für die Nutzung der Daten ist die Datenlizenz Deutschland - Namensnennung - Version 2.0 anzuwenden. Die Lizenz ist über https://www.govdata.de/dl-de/by-2-0 abrufbar. Der Quellenvermerk gemäß (2) der Lizenz lautet \"Umweltatlas Berlin / Starkregengefahrenkarte, Gebiet Obersee\". Gebiete Moabit, Flughafensee: Der Datenbestand wird unter der Lizenz CC-BY-4.0-Namensnennung International Public License veröffentlicht (vgl. https://creativecommons.org/licenses/by/4.0/legalcode.de). Der Quellenvermerk gemäß Abschnitt 3a der Lizenz lautet \"Berliner Wasserbetriebe / Starkregengefahrenkarte, Gebiete Moabit, Flughafensee \"."
   },
   {
@@ -2011,6 +2155,7 @@
     "transparent": true,
     "singleTile": true,
     "infoFormat": "application/json",
+    "displayLayerAlert": false,
     "layerAttribution": "Gebiet Obersee: Für die Nutzung der Daten ist die Datenlizenz Deutschland - Namensnennung - Version 2.0 anzuwenden. Die Lizenz ist über https://www.govdata.de/dl-de/by-2-0 abrufbar. Der Quellenvermerk gemäß (2) der Lizenz lautet \"Umweltatlas Berlin / Starkregengefahrenkarte, Gebiet Obersee\". Gebiete Moabit, Flughafensee: Der Datenbestand wird unter der Lizenz CC-BY-4.0-Namensnennung International Public License veröffentlicht (vgl. https://creativecommons.org/licenses/by/4.0/legalcode.de). Der Quellenvermerk gemäß Abschnitt 3a der Lizenz lautet \"Berliner Wasserbetriebe / Starkregengefahrenkarte, Gebiete Moabit, Flughafensee \"."
   },
   {
@@ -2039,6 +2184,7 @@
     "transparent": true,
     "singleTile": true,
     "infoFormat": "application/json",
+    "displayLayerAlert": false,
     "layerAttribution": "Gebiet Obersee: Für die Nutzung der Daten ist die Datenlizenz Deutschland - Namensnennung - Version 2.0 anzuwenden. Die Lizenz ist über https://www.govdata.de/dl-de/by-2-0 abrufbar. Der Quellenvermerk gemäß (2) der Lizenz lautet \"Umweltatlas Berlin / Starkregengefahrenkarte, Gebiet Obersee\". Gebiete Moabit, Flughafensee: Der Datenbestand wird unter der Lizenz CC-BY-4.0-Namensnennung International Public License veröffentlicht (vgl. https://creativecommons.org/licenses/by/4.0/legalcode.de). Der Quellenvermerk gemäß Abschnitt 3a der Lizenz lautet \"Berliner Wasserbetriebe / Starkregengefahrenkarte, Gebiete Moabit, Flughafensee \"."
   },
   {
@@ -2067,6 +2213,7 @@
     "transparent": true,
     "singleTile": true,
     "infoFormat": "application/json",
+    "displayLayerAlert": false,
     "layerAttribution": "Gebiet Obersee: Für die Nutzung der Daten ist die Datenlizenz Deutschland - Namensnennung - Version 2.0 anzuwenden. Die Lizenz ist über https://www.govdata.de/dl-de/by-2-0 abrufbar. Der Quellenvermerk gemäß (2) der Lizenz lautet \"Umweltatlas Berlin / Starkregengefahrenkarte, Gebiet Obersee\". Gebiete Moabit, Flughafensee: Der Datenbestand wird unter der Lizenz CC-BY-4.0-Namensnennung International Public License veröffentlicht (vgl. https://creativecommons.org/licenses/by/4.0/legalcode.de). Der Quellenvermerk gemäß Abschnitt 3a der Lizenz lautet \"Berliner Wasserbetriebe / Starkregengefahrenkarte, Gebiete Moabit, Flughafensee \"."
   },
   {
@@ -2094,6 +2241,7 @@
     "transparent": true,
     "singleTile": true,
     "infoFormat": "application/json",
+    "displayLayerAlert": false,
     "layerAttribution": "Gebiet Obersee: Für die Nutzung der Daten ist die Datenlizenz Deutschland - Namensnennung - Version 2.0 anzuwenden. Die Lizenz ist über https://www.govdata.de/dl-de/by-2-0 abrufbar. Der Quellenvermerk gemäß (2) der Lizenz lautet \"Umweltatlas Berlin / Starkregengefahrenkarte, Gebiet Obersee\". Gebiete Moabit, Flughafensee: Der Datenbestand wird unter der Lizenz CC-BY-4.0-Namensnennung International Public License veröffentlicht (vgl. https://creativecommons.org/licenses/by/4.0/legalcode.de). Der Quellenvermerk gemäß Abschnitt 3a der Lizenz lautet \"Berliner Wasserbetriebe / Starkregengefahrenkarte, Gebiete Moabit, Flughafensee \"."
   },
   {
@@ -2121,6 +2269,7 @@
     "transparent": true,
     "singleTile": true,
     "infoFormat": "application/json",
+    "displayLayerAlert": false,
     "layerAttribution": "Gebiet Obersee: Für die Nutzung der Daten ist die Datenlizenz Deutschland - Namensnennung - Version 2.0 anzuwenden. Die Lizenz ist über https://www.govdata.de/dl-de/by-2-0 abrufbar. Der Quellenvermerk gemäß (2) der Lizenz lautet \"Umweltatlas Berlin / Starkregengefahrenkarte, Gebiet Obersee\". Gebiete Moabit, Flughafensee: Der Datenbestand wird unter der Lizenz CC-BY-4.0-Namensnennung International Public License veröffentlicht (vgl. https://creativecommons.org/licenses/by/4.0/legalcode.de). Der Quellenvermerk gemäß Abschnitt 3a der Lizenz lautet \"Berliner Wasserbetriebe / Starkregengefahrenkarte, Gebiete Moabit, Flughafensee \"."
   },
   {
@@ -2148,6 +2297,7 @@
     "transparent": true,
     "singleTile": true,
     "infoFormat": "application/json",
+    "displayLayerAlert": false,
     "layerAttribution": "Gebiet Obersee: Für die Nutzung der Daten ist die Datenlizenz Deutschland - Namensnennung - Version 2.0 anzuwenden. Die Lizenz ist über https://www.govdata.de/dl-de/by-2-0 abrufbar. Der Quellenvermerk gemäß (2) der Lizenz lautet \"Umweltatlas Berlin / Starkregengefahrenkarte, Gebiet Obersee\". Gebiete Moabit, Flughafensee: Der Datenbestand wird unter der Lizenz CC-BY-4.0-Namensnennung International Public License veröffentlicht (vgl. https://creativecommons.org/licenses/by/4.0/legalcode.de). Der Quellenvermerk gemäß Abschnitt 3a der Lizenz lautet \"Berliner Wasserbetriebe / Starkregengefahrenkarte, Gebiete Moabit, Flughafensee \"."
   },
   {
@@ -2176,6 +2326,7 @@
     "transparent": true,
     "singleTile": true,
     "infoFormat": "application/json",
+    "displayLayerAlert": false,
     "layerAttribution": "Gebiet Obersee: Für die Nutzung der Daten ist die Datenlizenz Deutschland - Namensnennung - Version 2.0 anzuwenden. Die Lizenz ist über https://www.govdata.de/dl-de/by-2-0 abrufbar. Der Quellenvermerk gemäß (2) der Lizenz lautet \"Umweltatlas Berlin / Starkregengefahrenkarte, Gebiet Obersee\". Gebiete Moabit, Flughafensee: Der Datenbestand wird unter der Lizenz CC-BY-4.0-Namensnennung International Public License veröffentlicht (vgl. https://creativecommons.org/licenses/by/4.0/legalcode.de). Der Quellenvermerk gemäß Abschnitt 3a der Lizenz lautet \"Berliner Wasserbetriebe / Starkregengefahrenkarte, Gebiete Moabit, Flughafensee \"."
   },
   {
@@ -2204,6 +2355,7 @@
     "transparent": true,
     "singleTile": true,
     "infoFormat": "application/json",
+    "displayLayerAlert": false,
     "layerAttribution": "Gebiet Obersee: Für die Nutzung der Daten ist die Datenlizenz Deutschland - Namensnennung - Version 2.0 anzuwenden. Die Lizenz ist über https://www.govdata.de/dl-de/by-2-0 abrufbar. Der Quellenvermerk gemäß (2) der Lizenz lautet \"Umweltatlas Berlin / Starkregengefahrenkarte, Gebiet Obersee\". Gebiete Moabit, Flughafensee: Der Datenbestand wird unter der Lizenz CC-BY-4.0-Namensnennung International Public License veröffentlicht (vgl. https://creativecommons.org/licenses/by/4.0/legalcode.de). Der Quellenvermerk gemäß Abschnitt 3a der Lizenz lautet \"Berliner Wasserbetriebe / Starkregengefahrenkarte, Gebiete Moabit, Flughafensee \"."
   },
   {
@@ -2232,6 +2384,7 @@
     "transparent": true,
     "singleTile": true,
     "infoFormat": "application/json",
+    "displayLayerAlert": false,
     "layerAttribution": "Gebiet Obersee: Für die Nutzung der Daten ist die Datenlizenz Deutschland - Namensnennung - Version 2.0 anzuwenden. Die Lizenz ist über https://www.govdata.de/dl-de/by-2-0 abrufbar. Der Quellenvermerk gemäß (2) der Lizenz lautet \"Umweltatlas Berlin / Starkregengefahrenkarte, Gebiet Obersee\". Gebiete Moabit, Flughafensee: Der Datenbestand wird unter der Lizenz CC-BY-4.0-Namensnennung International Public License veröffentlicht (vgl. https://creativecommons.org/licenses/by/4.0/legalcode.de). Der Quellenvermerk gemäß Abschnitt 3a der Lizenz lautet \"Berliner Wasserbetriebe / Starkregengefahrenkarte, Gebiete Moabit, Flughafensee \"."
   },
   {
@@ -2260,6 +2413,7 @@
     "transparent": true,
     "singleTile": true,
     "infoFormat": "application/json",
+    "displayLayerAlert": false,
     "layerAttribution": "Gebiet Obersee: Für die Nutzung der Daten ist die Datenlizenz Deutschland - Namensnennung - Version 2.0 anzuwenden. Die Lizenz ist über https://www.govdata.de/dl-de/by-2-0 abrufbar. Der Quellenvermerk gemäß (2) der Lizenz lautet \"Umweltatlas Berlin / Starkregengefahrenkarte, Gebiet Obersee\". Gebiete Moabit, Flughafensee: Der Datenbestand wird unter der Lizenz CC-BY-4.0-Namensnennung International Public License veröffentlicht (vgl. https://creativecommons.org/licenses/by/4.0/legalcode.de). Der Quellenvermerk gemäß Abschnitt 3a der Lizenz lautet \"Berliner Wasserbetriebe / Starkregengefahrenkarte, Gebiete Moabit, Flughafensee \"."
   },
   {
@@ -2288,6 +2442,7 @@
     "transparent": true,
     "singleTile": true,
     "infoFormat": "application/json",
+    "displayLayerAlert": false,
     "layerAttribution": "Gebiet Obersee: Für die Nutzung der Daten ist die Datenlizenz Deutschland - Namensnennung - Version 2.0 anzuwenden. Die Lizenz ist über https://www.govdata.de/dl-de/by-2-0 abrufbar. Der Quellenvermerk gemäß (2) der Lizenz lautet \"Umweltatlas Berlin / Starkregengefahrenkarte, Gebiet Obersee\". Gebiete Moabit, Flughafensee: Der Datenbestand wird unter der Lizenz CC-BY-4.0-Namensnennung International Public License veröffentlicht (vgl. https://creativecommons.org/licenses/by/4.0/legalcode.de). Der Quellenvermerk gemäß Abschnitt 3a der Lizenz lautet \"Berliner Wasserbetriebe / Starkregengefahrenkarte, Gebiete Moabit, Flughafensee \"."
   },
   {
@@ -2316,6 +2471,7 @@
     "transparent": true,
     "singleTile": true,
     "infoFormat": "application/json",
+    "displayLayerAlert": false,
     "layerAttribution": "Gebiet Obersee: Für die Nutzung der Daten ist die Datenlizenz Deutschland - Namensnennung - Version 2.0 anzuwenden. Die Lizenz ist über https://www.govdata.de/dl-de/by-2-0 abrufbar. Der Quellenvermerk gemäß (2) der Lizenz lautet \"Umweltatlas Berlin / Starkregengefahrenkarte, Gebiet Obersee\". Gebiete Moabit, Flughafensee: Der Datenbestand wird unter der Lizenz CC-BY-4.0-Namensnennung International Public License veröffentlicht (vgl. https://creativecommons.org/licenses/by/4.0/legalcode.de). Der Quellenvermerk gemäß Abschnitt 3a der Lizenz lautet \"Berliner Wasserbetriebe / Starkregengefahrenkarte, Gebiete Moabit, Flughafensee \"."
   },
   {
@@ -2344,6 +2500,7 @@
     "transparent": true,
     "singleTile": true,
     "infoFormat": "application/json",
+    "displayLayerAlert": false,
     "layerAttribution": "Gebiet Obersee: Für die Nutzung der Daten ist die Datenlizenz Deutschland - Namensnennung - Version 2.0 anzuwenden. Die Lizenz ist über https://www.govdata.de/dl-de/by-2-0 abrufbar. Der Quellenvermerk gemäß (2) der Lizenz lautet \"Umweltatlas Berlin / Starkregengefahrenkarte, Gebiet Obersee\". Gebiete Moabit, Flughafensee: Der Datenbestand wird unter der Lizenz CC-BY-4.0-Namensnennung International Public License veröffentlicht (vgl. https://creativecommons.org/licenses/by/4.0/legalcode.de). Der Quellenvermerk gemäß Abschnitt 3a der Lizenz lautet \"Berliner Wasserbetriebe / Starkregengefahrenkarte, Gebiete Moabit, Flughafensee \"."
   },
   {
@@ -2372,6 +2529,7 @@
     "transparent": true,
     "singleTile": true,
     "infoFormat": "application/json",
+    "displayLayerAlert": false,
     "layerAttribution": "Gebiet Obersee: Für die Nutzung der Daten ist die Datenlizenz Deutschland - Namensnennung - Version 2.0 anzuwenden. Die Lizenz ist über https://www.govdata.de/dl-de/by-2-0 abrufbar. Der Quellenvermerk gemäß (2) der Lizenz lautet \"Umweltatlas Berlin / Starkregengefahrenkarte, Gebiet Obersee\". Gebiete Moabit, Flughafensee: Der Datenbestand wird unter der Lizenz CC-BY-4.0-Namensnennung International Public License veröffentlicht (vgl. https://creativecommons.org/licenses/by/4.0/legalcode.de). Der Quellenvermerk gemäß Abschnitt 3a der Lizenz lautet \"Berliner Wasserbetriebe / Starkregengefahrenkarte, Gebiete Moabit, Flughafensee \"."
   },
   {
@@ -2400,6 +2558,7 @@
     "transparent": true,
     "singleTile": true,
     "infoFormat": "application/json",
+    "displayLayerAlert": false,
     "layerAttribution": "Gebiet Obersee: Für die Nutzung der Daten ist die Datenlizenz Deutschland - Namensnennung - Version 2.0 anzuwenden. Die Lizenz ist über https://www.govdata.de/dl-de/by-2-0 abrufbar. Der Quellenvermerk gemäß (2) der Lizenz lautet \"Umweltatlas Berlin / Starkregengefahrenkarte, Gebiet Obersee\". Gebiete Moabit, Flughafensee: Der Datenbestand wird unter der Lizenz CC-BY-4.0-Namensnennung International Public License veröffentlicht (vgl. https://creativecommons.org/licenses/by/4.0/legalcode.de). Der Quellenvermerk gemäß Abschnitt 3a der Lizenz lautet \"Berliner Wasserbetriebe / Starkregengefahrenkarte, Gebiete Moabit, Flughafensee \"."
   },
   {
@@ -2428,6 +2587,7 @@
     "transparent": true,
     "singleTile": true,
     "infoFormat": "application/json",
+    "displayLayerAlert": false,
     "layerAttribution": "Gebiet Obersee: Für die Nutzung der Daten ist die Datenlizenz Deutschland - Namensnennung - Version 2.0 anzuwenden. Die Lizenz ist über https://www.govdata.de/dl-de/by-2-0 abrufbar. Der Quellenvermerk gemäß (2) der Lizenz lautet \"Umweltatlas Berlin / Starkregengefahrenkarte, Gebiet Obersee\". Gebiete Moabit, Flughafensee: Der Datenbestand wird unter der Lizenz CC-BY-4.0-Namensnennung International Public License veröffentlicht (vgl. https://creativecommons.org/licenses/by/4.0/legalcode.de). Der Quellenvermerk gemäß Abschnitt 3a der Lizenz lautet \"Berliner Wasserbetriebe / Starkregengefahrenkarte, Gebiete Moabit, Flughafensee \"."
   },
   {
@@ -2456,6 +2616,7 @@
     "transparent": true,
     "singleTile": true,
     "infoFormat": "application/json",
+    "displayLayerAlert": false,
     "layerAttribution": "Gebiet Obersee: Für die Nutzung der Daten ist die Datenlizenz Deutschland - Namensnennung - Version 2.0 anzuwenden. Die Lizenz ist über https://www.govdata.de/dl-de/by-2-0 abrufbar. Der Quellenvermerk gemäß (2) der Lizenz lautet \"Umweltatlas Berlin / Starkregengefahrenkarte, Gebiet Obersee\". Gebiete Moabit, Flughafensee: Der Datenbestand wird unter der Lizenz CC-BY-4.0-Namensnennung International Public License veröffentlicht (vgl. https://creativecommons.org/licenses/by/4.0/legalcode.de). Der Quellenvermerk gemäß Abschnitt 3a der Lizenz lautet \"Berliner Wasserbetriebe / Starkregengefahrenkarte, Gebiete Moabit, Flughafensee \"."
   },
   {
@@ -2483,6 +2644,7 @@
     "transparent": true,
     "singleTile": true,
     "infoFormat": "application/json",
+    "displayLayerAlert": false,
     "layerAttribution": "Für die Nutzung der Daten ist die Datenlizenz Deutschland - Namensnennung - Version 2.0 anzuwenden. Die Lizenz ist über https://www.govdata.de/dl-de/by-2-0 abrufbar. Der Quellenvermerk gemäß (2) der Lizenz lautet \"Umweltatlas Berlin / [Titel des Datensatzes]\"."
   },
   {
@@ -2510,6 +2672,7 @@
     "transparent": true,
     "singleTile": true,
     "infoFormat": "application/json",
+    "displayLayerAlert": false,
     "layerAttribution": "Für die Nutzung der Daten ist die Datenlizenz Deutschland - Namensnennung - Version 2.0 anzuwenden. Die Lizenz ist über https://www.govdata.de/dl-de/by-2-0 abrufbar. Der Quellenvermerk gemäß (2) der Lizenz lautet \"Umweltatlas Berlin / [Titel des Datensatzes]\"."
   },
   {
@@ -2537,6 +2700,7 @@
     "transparent": true,
     "singleTile": true,
     "infoFormat": "application/json",
+    "displayLayerAlert": false,
     "layerAttribution": "Für die Nutzung der Daten ist die Datenlizenz Deutschland - Namensnennung - Version 2.0 anzuwenden. Die Lizenz ist über https://www.govdata.de/dl-de/by-2-0 abrufbar. Der Quellenvermerk gemäß (2) der Lizenz lautet \"Umweltatlas Berlin / [Titel des Datensatzes]\"."
   },
   {
@@ -2564,6 +2728,7 @@
     "transparent": true,
     "singleTile": true,
     "infoFormat": "application/json",
+    "displayLayerAlert": false,
     "layerAttribution": "Für die Nutzung der Daten ist die Datenlizenz Deutschland - Namensnennung - Version 2.0 anzuwenden. Die Lizenz ist über https://www.govdata.de/dl-de/by-2-0 abrufbar. Der Quellenvermerk gemäß (2) der Lizenz lautet \"Umweltatlas Berlin / [Titel des Datensatzes]\"."
   },
   {
@@ -2591,6 +2756,7 @@
     "transparent": true,
     "singleTile": true,
     "infoFormat": "application/json",
+    "displayLayerAlert": false,
     "layerAttribution": "Für die Nutzung der Daten ist die Datenlizenz Deutschland - Namensnennung - Version 2.0 anzuwenden. Die Lizenz ist über https://www.govdata.de/dl-de/by-2-0 abrufbar. Der Quellenvermerk gemäß (2) der Lizenz lautet \"Umweltatlas Berlin / [Titel des Datensatzes]\"."
   },
   {
@@ -3287,6 +3453,7 @@
     "transparent": true,
     "singleTile": true,
     "infoFormat": "application/json",
+    "displayLayerAlert": false,
     "layerAttribution": "F\u00fcr die Nutzung der Daten ist die Datenlizenz Deutschland - Namensnennung - Version 2.0 anzuwenden. Die Lizenz ist \u00fcber https://www.govdata.de/dl-de/by-2-0 abrufbar. Der Quellenvermerk gem\u00e4\u00df (2) der Lizenz lautet \"Umweltatlas Berlin / [Titel des Datensatzes]\"."
   },
   {
@@ -3315,6 +3482,7 @@
     "transparent": true,
     "singleTile": true,
     "infoFormat": "application/json",
+    "displayLayerAlert": false,
     "layerAttribution": "F\u00fcr die Nutzung der Daten ist die Datenlizenz Deutschland - Namensnennung - Version 2.0 anzuwenden. Die Lizenz ist \u00fcber https://www.govdata.de/dl-de/by-2-0 abrufbar. Der Quellenvermerk gem\u00e4\u00df (2) der Lizenz lautet \"Umweltatlas Berlin / [Titel des Datensatzes]\"."
   },
   {
@@ -3342,6 +3510,7 @@
     "transparent": true,
     "singleTile": true,
     "infoFormat": "application/json",
+    "displayLayerAlert": false,
     "layerAttribution": "F\u00fcr die Nutzung der Daten ist die Datenlizenz Deutschland - Namensnennung - Version 2.0 anzuwenden. Die Lizenz ist \u00fcber https://www.govdata.de/dl-de/by-2-0 abrufbar. Der Quellenvermerk gem\u00e4\u00df (2) der Lizenz lautet \"Umweltatlas Berlin / [Titel des Datensatzes]\"."
   },
   {
@@ -3369,6 +3538,7 @@
     "transparent": true,
     "singleTile": true,
     "infoFormat": "application/json",
+    "displayLayerAlert": false,
     "layerAttribution": "F\u00fcr die Nutzung der Daten ist die Datenlizenz Deutschland - Namensnennung - Version 2.0 anzuwenden. Die Lizenz ist \u00fcber https://www.govdata.de/dl-de/by-2-0 abrufbar. Der Quellenvermerk gem\u00e4\u00df (2) der Lizenz lautet \"Umweltatlas Berlin / [Titel des Datensatzes]\"."
   },
   {
@@ -3396,6 +3566,7 @@
     "transparent": true,
     "singleTile": true,
     "infoFormat": "application/json",
+    "displayLayerAlert": false,
     "layerAttribution": "F\u00fcr die Nutzung der Daten ist die Datenlizenz Deutschland - Namensnennung - Version 2.0 anzuwenden. Die Lizenz ist \u00fcber https://www.govdata.de/dl-de/by-2-0 abrufbar. Der Quellenvermerk gem\u00e4\u00df (2) der Lizenz lautet \"Umweltatlas Berlin / [Titel des Datensatzes]\"."
   },
   {
@@ -3423,6 +3594,7 @@
     "transparent": true,
     "singleTile": true,
     "infoFormat": "application/json",
+    "displayLayerAlert": false,
     "layerAttribution": "F\u00fcr die Nutzung der Daten ist die Datenlizenz Deutschland - Namensnennung - Version 2.0 anzuwenden. Die Lizenz ist \u00fcber https://www.govdata.de/dl-de/by-2-0 abrufbar. Der Quellenvermerk gem\u00e4\u00df (2) der Lizenz lautet \"Umweltatlas Berlin / [Titel des Datensatzes]\"."
   },
   {
@@ -3450,6 +3622,7 @@
     "transparent": true,
     "singleTile": true,
     "infoFormat": "application/json",
+    "displayLayerAlert": false,
     "layerAttribution": "F\u00fcr die Nutzung der Daten ist die Datenlizenz Deutschland - Namensnennung - Version 2.0 anzuwenden. Die Lizenz ist \u00fcber https://www.govdata.de/dl-de/by-2-0 abrufbar. Der Quellenvermerk gem\u00e4\u00df (2) der Lizenz lautet \"Umweltatlas Berlin / [Titel des Datensatzes]\"."
   },
   {
@@ -3477,6 +3650,7 @@
     "transparent": true,
     "singleTile": true,
     "infoFormat": "application/json",
+    "displayLayerAlert": false,
     "layerAttribution": "F\u00fcr die Nutzung der Daten ist die Datenlizenz Deutschland - Namensnennung - Version 2.0 anzuwenden. Die Lizenz ist \u00fcber https://www.govdata.de/dl-de/by-2-0 abrufbar. Der Quellenvermerk gem\u00e4\u00df (2) der Lizenz lautet \"Umweltatlas Berlin / [Titel des Datensatzes]\"."
   },
   {
@@ -3504,6 +3678,7 @@
     "transparent": true,
     "singleTile": true,
     "infoFormat": "application/json",
+    "displayLayerAlert": false,
     "layerAttribution": "F\u00fcr die Nutzung der Daten ist die Datenlizenz Deutschland - Namensnennung - Version 2.0 anzuwenden. Die Lizenz ist \u00fcber https://www.govdata.de/dl-de/by-2-0 abrufbar. Der Quellenvermerk gem\u00e4\u00df (2) der Lizenz lautet \"Umweltatlas Berlin / [Titel des Datensatzes]\"."
   },
   {
@@ -3531,6 +3706,7 @@
     "transparent": true,
     "singleTile": true,
     "infoFormat": "application/json",
+    "displayLayerAlert": false,
     "layerAttribution": "F\u00fcr die Nutzung der Daten ist die Datenlizenz Deutschland - Namensnennung - Version 2.0 anzuwenden. Die Lizenz ist \u00fcber https://www.govdata.de/dl-de/by-2-0 abrufbar. Der Quellenvermerk gem\u00e4\u00df (2) der Lizenz lautet \"Umweltatlas Berlin / [Titel des Datensatzes]\"."
   },
   {
@@ -3558,6 +3734,7 @@
     "transparent": true,
     "singleTile": true,
     "infoFormat": "application/json",
+    "displayLayerAlert": false,
     "layerAttribution": "F\u00fcr die Nutzung der Daten ist die Datenlizenz Deutschland - Namensnennung - Version 2.0 anzuwenden. Die Lizenz ist \u00fcber https://www.govdata.de/dl-de/by-2-0 abrufbar. Der Quellenvermerk gem\u00e4\u00df (2) der Lizenz lautet \"Umweltatlas Berlin / [Titel des Datensatzes]\"."
   },
   {
@@ -3585,6 +3762,7 @@
     "transparent": true,
     "singleTile": true,
     "infoFormat": "application/json",
+    "displayLayerAlert": false,
     "layerAttribution": "F\u00fcr die Nutzung der Daten ist die Datenlizenz Deutschland - Namensnennung - Version 2.0 anzuwenden. Die Lizenz ist \u00fcber https://www.govdata.de/dl-de/by-2-0 abrufbar. Der Quellenvermerk gem\u00e4\u00df (2) der Lizenz lautet \"Umweltatlas Berlin / [Titel des Datensatzes]\"."
   },
   {
@@ -3612,6 +3790,7 @@
     "transparent": true,
     "singleTile": true,
     "infoFormat": "application/json",
+    "displayLayerAlert": false,
     "layerAttribution": "F\u00fcr die Nutzung der Daten ist die Datenlizenz Deutschland - Namensnennung - Version 2.0 anzuwenden. Die Lizenz ist \u00fcber https://www.govdata.de/dl-de/by-2-0 abrufbar. Der Quellenvermerk gem\u00e4\u00df (2) der Lizenz lautet \"Umweltatlas Berlin / [Titel des Datensatzes]\"."
   },
   {
@@ -3639,6 +3818,7 @@
     "transparent": true,
     "singleTile": true,
     "infoFormat": "application/json",
+    "displayLayerAlert": false,
     "layerAttribution": "F\u00fcr die Nutzung der Daten ist die Datenlizenz Deutschland - Namensnennung - Version 2.0 anzuwenden. Die Lizenz ist \u00fcber https://www.govdata.de/dl-de/by-2-0 abrufbar. Der Quellenvermerk gem\u00e4\u00df (2) der Lizenz lautet \"Umweltatlas Berlin / [Titel des Datensatzes]\"."
   },
   {
@@ -3666,6 +3846,7 @@
     "transparent": true,
     "singleTile": true,
     "infoFormat": "application/json",
+    "displayLayerAlert": false,
     "layerAttribution": "F\u00fcr die Nutzung der Daten ist die Datenlizenz Deutschland - Namensnennung - Version 2.0 anzuwenden. Die Lizenz ist \u00fcber https://www.govdata.de/dl-de/by-2-0 abrufbar. Der Quellenvermerk gem\u00e4\u00df (2) der Lizenz lautet \"Umweltatlas Berlin / [Titel des Datensatzes]\"."
   },
   {
@@ -3693,6 +3874,7 @@
     "transparent": true,
     "singleTile": true,
     "infoFormat": "application/json",
+    "displayLayerAlert": false,
     "layerAttribution": "F\u00fcr die Nutzung der Daten ist die Datenlizenz Deutschland - Namensnennung - Version 2.0 anzuwenden. Die Lizenz ist \u00fcber https://www.govdata.de/dl-de/by-2-0 abrufbar. Der Quellenvermerk gem\u00e4\u00df (2) der Lizenz lautet \"Umweltatlas Berlin / [Titel des Datensatzes]\"."
   },
   {
@@ -3720,6 +3902,7 @@
     "transparent": true,
     "singleTile": true,
     "infoFormat": "application/json",
+    "displayLayerAlert": false,
     "layerAttribution": "F\u00fcr die Nutzung der Daten ist die Datenlizenz Deutschland - Namensnennung - Version 2.0 anzuwenden. Die Lizenz ist \u00fcber https://www.govdata.de/dl-de/by-2-0 abrufbar. Der Quellenvermerk gem\u00e4\u00df (2) der Lizenz lautet \"Umweltatlas Berlin / [Titel des Datensatzes]\"."
   },
   {
@@ -3747,6 +3930,7 @@
     "transparent": true,
     "singleTile": true,
     "infoFormat": "application/json",
+    "displayLayerAlert": false,
     "layerAttribution": "F\u00fcr die Nutzung der Daten ist die Datenlizenz Deutschland - Namensnennung - Version 2.0 anzuwenden. Die Lizenz ist \u00fcber https://www.govdata.de/dl-de/by-2-0 abrufbar. Der Quellenvermerk gem\u00e4\u00df (2) der Lizenz lautet \"Umweltatlas Berlin / [Titel des Datensatzes]\"."
   },
   {
@@ -3774,6 +3958,7 @@
     "transparent": true,
     "singleTile": true,
     "infoFormat": "application/json",
+    "displayLayerAlert": false,
     "layerAttribution": "F\u00fcr die Nutzung der Daten ist die Datenlizenz Deutschland - Namensnennung - Version 2.0 anzuwenden. Die Lizenz ist \u00fcber https://www.govdata.de/dl-de/by-2-0 abrufbar. Der Quellenvermerk gem\u00e4\u00df (2) der Lizenz lautet \"Umweltatlas Berlin / [Titel des Datensatzes]\"."
   },
   {
@@ -3801,6 +3986,7 @@
     "transparent": true,
     "singleTile": true,
     "infoFormat": "application/json",
+    "displayLayerAlert": false,
     "layerAttribution": "F\u00fcr die Nutzung der Daten ist die Datenlizenz Deutschland - Namensnennung - Version 2.0 anzuwenden. Die Lizenz ist \u00fcber https://www.govdata.de/dl-de/by-2-0 abrufbar. Der Quellenvermerk gem\u00e4\u00df (2) der Lizenz lautet \"Umweltatlas Berlin / [Titel des Datensatzes]\"."
   },
   {
@@ -3828,6 +4014,7 @@
     "transparent": true,
     "singleTile": true,
     "infoFormat": "application/json",
+    "displayLayerAlert": false,
     "layerAttribution": "F\u00fcr die Nutzung der Daten ist die Datenlizenz Deutschland - Namensnennung - Version 2.0 anzuwenden. Die Lizenz ist \u00fcber https://www.govdata.de/dl-de/by-2-0 abrufbar. Der Quellenvermerk gem\u00e4\u00df (2) der Lizenz lautet \"Umweltatlas Berlin / [Titel des Datensatzes]\"."
   },
   {
@@ -3855,6 +4042,7 @@
     "transparent": true,
     "singleTile": true,
     "infoFormat": "application/json",
+    "displayLayerAlert": false,
     "layerAttribution": "F\u00fcr die Nutzung der Daten ist die Datenlizenz Deutschland - Namensnennung - Version 2.0 anzuwenden. Die Lizenz ist \u00fcber https://www.govdata.de/dl-de/by-2-0 abrufbar. Der Quellenvermerk gem\u00e4\u00df (2) der Lizenz lautet \"Umweltatlas Berlin / [Titel des Datensatzes]\"."
   },
   {
@@ -3882,6 +4070,7 @@
     "transparent": true,
     "singleTile": true,
     "infoFormat": "application/json",
+    "displayLayerAlert": false,
     "layerAttribution": "F\u00fcr die Nutzung der Daten ist die Datenlizenz Deutschland - Namensnennung - Version 2.0 anzuwenden. Die Lizenz ist \u00fcber https://www.govdata.de/dl-de/by-2-0 abrufbar. Der Quellenvermerk gem\u00e4\u00df (2) der Lizenz lautet \"Umweltatlas Berlin / [Titel des Datensatzes]\"."
   },
   {
@@ -3909,6 +4098,7 @@
     "transparent": true,
     "singleTile": true,
     "infoFormat": "application/json",
+    "displayLayerAlert": false,
     "layerAttribution": "F\u00fcr die Nutzung der Daten ist die Datenlizenz Deutschland - Namensnennung - Version 2.0 anzuwenden. Die Lizenz ist \u00fcber https://www.govdata.de/dl-de/by-2-0 abrufbar. Der Quellenvermerk gem\u00e4\u00df (2) der Lizenz lautet \"Umweltatlas Berlin / [Titel des Datensatzes]\"."
   },
   {
@@ -3936,6 +4126,7 @@
     "transparent": true,
     "singleTile": true,
     "infoFormat": "application/json",
+    "displayLayerAlert": false,
     "layerAttribution": "F\u00fcr die Nutzung der Daten ist die Datenlizenz Deutschland - Namensnennung - Version 2.0 anzuwenden. Die Lizenz ist \u00fcber https://www.govdata.de/dl-de/by-2-0 abrufbar. Der Quellenvermerk gem\u00e4\u00df (2) der Lizenz lautet \"Umweltatlas Berlin / [Titel des Datensatzes]\"."
   },
   {
@@ -3963,6 +4154,7 @@
     "transparent": true,
     "singleTile": true,
     "infoFormat": "application/json",
+    "displayLayerAlert": false,
     "layerAttribution": "F\u00fcr die Nutzung der Daten ist die Datenlizenz Deutschland - Namensnennung - Version 2.0 anzuwenden. Die Lizenz ist \u00fcber https://www.govdata.de/dl-de/by-2-0 abrufbar. Der Quellenvermerk gem\u00e4\u00df (2) der Lizenz lautet \"Umweltatlas Berlin / [Titel des Datensatzes]\"."
   },
   {
@@ -3990,6 +4182,7 @@
     "transparent": true,
     "singleTile": true,
     "infoFormat": "application/json",
+    "displayLayerAlert": false,
     "layerAttribution": "F\u00fcr die Nutzung der Daten ist die Datenlizenz Deutschland - Namensnennung - Version 2.0 anzuwenden. Die Lizenz ist \u00fcber https://www.govdata.de/dl-de/by-2-0 abrufbar. Der Quellenvermerk gem\u00e4\u00df (2) der Lizenz lautet \"Umweltatlas Berlin / [Titel des Datensatzes]\"."
   },
   {
@@ -4017,6 +4210,7 @@
     "transparent": true,
     "singleTile": true,
     "infoFormat": "application/json",
+    "displayLayerAlert": false,
     "layerAttribution": "F\u00fcr die Nutzung der Daten ist die Datenlizenz Deutschland - Namensnennung - Version 2.0 anzuwenden. Die Lizenz ist \u00fcber https://www.govdata.de/dl-de/by-2-0 abrufbar. Der Quellenvermerk gem\u00e4\u00df (2) der Lizenz lautet \"Umweltatlas Berlin / [Titel des Datensatzes]\"."
   },
   {
@@ -4044,6 +4238,7 @@
     "transparent": true,
     "singleTile": true,
     "infoFormat": "application/json",
+    "displayLayerAlert": false,
     "layerAttribution": "F\u00fcr die Nutzung der Daten ist die Datenlizenz Deutschland - Namensnennung - Version 2.0 anzuwenden. Die Lizenz ist \u00fcber https://www.govdata.de/dl-de/by-2-0 abrufbar. Der Quellenvermerk gem\u00e4\u00df (2) der Lizenz lautet \"Umweltatlas Berlin / [Titel des Datensatzes]\"."
   },
   {
@@ -4071,6 +4266,7 @@
     "transparent": true,
     "singleTile": true,
     "infoFormat": "application/json",
+    "displayLayerAlert": false,
     "layerAttribution": "F\u00fcr die Nutzung der Daten ist die Datenlizenz Deutschland - Namensnennung - Version 2.0 anzuwenden. Die Lizenz ist \u00fcber https://www.govdata.de/dl-de/by-2-0 abrufbar. Der Quellenvermerk gem\u00e4\u00df (2) der Lizenz lautet \"Umweltatlas Berlin / [Titel des Datensatzes]\"."
   },
   {
@@ -4098,6 +4294,7 @@
     "transparent": true,
     "singleTile": true,
     "infoFormat": "application/json",
+    "displayLayerAlert": false,
     "layerAttribution": "F\u00fcr die Nutzung der Daten ist die Datenlizenz Deutschland - Namensnennung - Version 2.0 anzuwenden. Die Lizenz ist \u00fcber https://www.govdata.de/dl-de/by-2-0 abrufbar. Der Quellenvermerk gem\u00e4\u00df (2) der Lizenz lautet \"Umweltatlas Berlin / [Titel des Datensatzes]\"."
   },
   {
@@ -4125,6 +4322,7 @@
     "transparent": true,
     "singleTile": true,
     "infoFormat": "application/json",
+    "displayLayerAlert": false,
     "layerAttribution": "F\u00fcr die Nutzung der Daten ist die Datenlizenz Deutschland - Namensnennung - Version 2.0 anzuwenden. Die Lizenz ist \u00fcber https://www.govdata.de/dl-de/by-2-0 abrufbar. Der Quellenvermerk gem\u00e4\u00df (2) der Lizenz lautet \"Umweltatlas Berlin / [Titel des Datensatzes]\"."
   },
   {
@@ -4152,6 +4350,7 @@
     "transparent": true,
     "singleTile": true,
     "infoFormat": "application/json",
+    "displayLayerAlert": false,
     "layerAttribution": "F\u00fcr die Nutzung der Daten ist die Datenlizenz Deutschland - Namensnennung - Version 2.0 anzuwenden. Die Lizenz ist \u00fcber https://www.govdata.de/dl-de/by-2-0 abrufbar. Der Quellenvermerk gem\u00e4\u00df (2) der Lizenz lautet \"Umweltatlas Berlin / [Titel des Datensatzes]\"."
   },
   {
@@ -4179,6 +4378,7 @@
     "transparent": true,
     "singleTile": true,
     "infoFormat": "application/json",
+    "displayLayerAlert": false,
     "layerAttribution": "F\u00fcr die Nutzung der Daten ist die Datenlizenz Deutschland - Namensnennung - Version 2.0 anzuwenden. Die Lizenz ist \u00fcber https://www.govdata.de/dl-de/by-2-0 abrufbar. Der Quellenvermerk gem\u00e4\u00df (2) der Lizenz lautet \"Umweltatlas Berlin / [Titel des Datensatzes]\"."
   },
   {
@@ -4206,6 +4406,7 @@
     "transparent": true,
     "singleTile": true,
     "infoFormat": "application/json",
+    "displayLayerAlert": false,
     "layerAttribution": "F\u00fcr die Nutzung der Daten ist die Datenlizenz Deutschland - Namensnennung - Version 2.0 anzuwenden. Die Lizenz ist \u00fcber https://www.govdata.de/dl-de/by-2-0 abrufbar. Der Quellenvermerk gem\u00e4\u00df (2) der Lizenz lautet \"Umweltatlas Berlin / [Titel des Datensatzes]\"."
   },
   {
@@ -4233,6 +4434,7 @@
     "transparent": true,
     "singleTile": true,
     "infoFormat": "application/json",
+    "displayLayerAlert": false,
     "layerAttribution": "F\u00fcr die Nutzung der Daten ist die Datenlizenz Deutschland - Namensnennung - Version 2.0 anzuwenden. Die Lizenz ist \u00fcber https://www.govdata.de/dl-de/by-2-0 abrufbar. Der Quellenvermerk gem\u00e4\u00df (2) der Lizenz lautet \"Umweltatlas Berlin / [Titel des Datensatzes]\"."
   },
   {
@@ -4261,6 +4463,7 @@
     "transparent": true,
     "singleTile": true,
     "infoFormat": "application/json",
+    "displayLayerAlert": false,
     "layerAttribution": "F\u00fcr die Nutzung der Daten ist die Datenlizenz Deutschland - Namensnennung - Version 2.0 anzuwenden. Die Lizenz ist \u00fcber https://www.govdata.de/dl-de/by-2-0 abrufbar. Der Quellenvermerk gem\u00e4\u00df (2) der Lizenz lautet \"Umweltatlas Berlin / [Titel des Datensatzes]\"."
   },
   {
@@ -4289,6 +4492,7 @@
     "transparent": true,
     "singleTile": true,
     "infoFormat": "application/json",
+    "displayLayerAlert": false,
     "layerAttribution": "F\u00fcr die Nutzung der Daten ist die Datenlizenz Deutschland - Namensnennung - Version 2.0 anzuwenden. Die Lizenz ist \u00fcber https://www.govdata.de/dl-de/by-2-0 abrufbar. Der Quellenvermerk gem\u00e4\u00df (2) der Lizenz lautet \"Umweltatlas Berlin / [Titel des Datensatzes]\"."
   },
   {
@@ -4316,6 +4520,7 @@
     "transparent": true,
     "singleTile": true,
     "infoFormat": "application/json",
+    "displayLayerAlert": false,
     "layerAttribution": "F\u00fcr die Nutzung der Daten ist die Datenlizenz Deutschland - Namensnennung - Version 2.0 anzuwenden. Die Lizenz ist \u00fcber https://www.govdata.de/dl-de/by-2-0 abrufbar. Der Quellenvermerk gem\u00e4\u00df (2) der Lizenz lautet \"Umweltatlas Berlin / [Titel des Datensatzes]\"."
   },
   {
@@ -4361,6 +4566,7 @@
     "transparent": true,
     "singleTile": true,
     "infoFormat": "application/json",
+    "displayLayerAlert": false,
     "layerAttribution": "Für die Nutzung der Daten ist die Datenlizenz Deutschland - Namensnennung - Version 2.0 anzuwenden. Die Lizenz ist über https://www.govdata.de/dl-de/by-2-0 abrufbar. Der Quellenvermerk gemäß (2) der Lizenz lautet \"Umweltatlas Berlin / [Titel des Datensatzes]\"."
   },
   {
@@ -4400,88 +4606,278 @@
     "gfiAttributes": "showAll"
   },
   {
-    "id": "k06_05gruenversorg2020:0",
-    "name": "Versorgungsgrad mit \u00f6ffentlichen, wohnungsnahen Gr\u00fcnanlagen",
-    "name_lang": "Versorgungsgrad mit \u00f6ffentlichen, wohnungsnahen Gr\u00fcnanlagen (Versorgung mit \u00f6ffentlichen, wohnungsnahen Gr\u00fcnanlagen 2020 (Umweltatlas))",
+    "id": "ua_versorggruen_2020:versorggruen_2020",
+    "name": "Versorgungsgrad mit öffentlichen, wohnungsnahen Grünanlagen",
+    "name_lang": "Versorgungsgrad mit öffentlichen, wohnungsnahen Grünanlagen (Versorgung mit öffentlichen, wohnungsnahen Grünanlagen 2020 (Umweltatlas))",
     "crs": "EPSG:25833",
-    "url": "https://fbinter.stadt-berlin.de/fb/wms/senstadt/k06_05gruenversorg2020",
+    "url": "https://gdi.berlin.de/services/wms/ua_versorggruen_2020",
     "typ": "WMS",
-    "gfiAttributes": "ignore",
-    "layers": "0",
-    "legend": "https://fbinter.stadt-berlin.de/fb_daten/legenden/umweltatlas/leg_06_05_gruenversorg2020_versorg.png",
+    "gfiAttributes": "showAll",
+    "layers": "versorggruen_2020",
+    "legend": "https://gdi.berlin.de/services/wms/ua_versorggruen_2020?service=WMS&version=1.3.0&request=GetLegendGraphic&format=image%2Fpng&width=482&height=317&layer=versorggruen_2020",
     "datasets": [
       {
-        "md_name": "Versorgung mit \u00f6ffentlichen, wohnungsnahen Gr\u00fcnanlagen 2020 (Umweltatlas)",
-        "md_id": "e7419261-f29e-403d-a235-41f53fa540f0",
-        "rs_id": "https://registry.gdi-de.org/id/de.be.csw/be9f12f5-5f4f-34ac-9725-7690b644f01c",
+        "md_name": "Versorgung mit öffentlichen, wohnungsnahen Grünanlagen 2020 (Umweltatlas)",
+        "md_id": "f09ec55a-3ee5-469b-9821-8265ed4171fd",
+        "rs_id": "https://registry.gdi-de.org/id/de.be.csw/2ca09ee6-3073-3774-a18e-0af49675d95a",
         "csw_url": "https://gdi.berlin.de/geonetwork/srv/ger/csw"
       }
     ],
-    "minScale": "600",
-    "maxScale": "250000",
     "format": "image/png",
     "version": "1.3.0",
     "featureCount": "5",
     "gfiTheme": "default",
     "transparent": true,
     "singleTile": true,
-    "layerAttribution": "F\u00fcr die Nutzung der Daten ist die  Datenlizenz Deutschland - Namensnennung - Version 2.0 anzuwenden. Die Lizenz ist \u00fcber https://www.govdata.de/dl-de/by-2-0 abrufbar. Der Quellenvermerk gem\u00e4\u00df (2) der Lizenz lautet \"Umweltatlas Berlin / [Titel des Datensatzes]\"."
+    "infoFormat": "application/json",
+    "layerAttribution": "Für die Nutzung der Daten ist die Datenlizenz Deutschland - Zero - Version 2.0 anzuwenden. Die Lizenz ist über https://www.govdata.de/dl-de/zero-2-0 abrufbar."
   },
   {
-    "id": "k06_05gruenversorg2020:1",
-    "name": "Wald (\u00fcberwiegend f\u00fcr die Erholung nutzbar)",
-    "name_lang": "Wald (\u00fcberwiegend f\u00fcr die Erholung nutzbar) (Versorgung mit \u00f6ffentlichen, wohnungsnahen Gr\u00fcnanlagen 2020 (Umweltatlas))",
+    "id": "ua_versorggruen_2020:versorggruen_oeff_2020",
+    "name": "Öffentliche Grünanlage (Erfüllung bestimmter Mindestanforderungen)",
+    "name_lang": "Öffentliche Grünanlage (Erfüllung bestimmter Mindestanforderungen) (Versorgung mit öffentlichen, wohnungsnahen Grünanlagen 2020 (Umweltatlas))",
     "crs": "EPSG:25833",
-    "url": "https://fbinter.stadt-berlin.de/fb/wms/senstadt/k06_05gruenversorg2020",
+    "url": "https://gdi.berlin.de/services/wms/ua_versorggruen_2020",
     "typ": "WMS",
-    "gfiAttributes": "ignore",
-    "layers": "1",
-    "legend": "https://fbinter.stadt-berlin.de/fb_daten/legenden/umweltatlas/leg_06_05gruenversorg2020_wald.png",
+    "gfiAttributes": "showAll",
+    "layers": "versorggruen_oeff_2020",
+    "legend": "https://gdi.berlin.de/services/wms/ua_versorggruen_2020?service=WMS&version=1.3.0&request=GetLegendGraphic&format=image%2Fpng&width=482&height=97&layer=versorggruen_oeff_2020",
     "datasets": [
       {
-        "md_name": "Versorgung mit \u00f6ffentlichen, wohnungsnahen Gr\u00fcnanlagen 2020 (Umweltatlas)",
-        "md_id": "e7419261-f29e-403d-a235-41f53fa540f0",
-        "rs_id": "https://registry.gdi-de.org/id/de.be.csw/be9f12f5-5f4f-34ac-9725-7690b644f01c",
+        "md_name": "Versorgung mit öffentlichen, wohnungsnahen Grünanlagen 2020 (Umweltatlas)",
+        "md_id": "f09ec55a-3ee5-469b-9821-8265ed4171fd",
+        "rs_id": "https://registry.gdi-de.org/id/de.be.csw/2ca09ee6-3073-3774-a18e-0af49675d95a",
         "csw_url": "https://gdi.berlin.de/geonetwork/srv/ger/csw"
       }
     ],
-    "minScale": "600",
-    "maxScale": "250000",
     "format": "image/png",
     "version": "1.3.0",
     "featureCount": "5",
     "gfiTheme": "default",
     "transparent": true,
     "singleTile": true,
-    "layerAttribution": "F\u00fcr die Nutzung der Daten ist die  Datenlizenz Deutschland - Namensnennung - Version 2.0 anzuwenden. Die Lizenz ist \u00fcber https://www.govdata.de/dl-de/by-2-0 abrufbar. Der Quellenvermerk gem\u00e4\u00df (2) der Lizenz lautet \"Umweltatlas Berlin / [Titel des Datensatzes]\"."
+    "infoFormat": "application/json",
+    "layerAttribution": "Für die Nutzung der Daten ist die Datenlizenz Deutschland - Zero - Version 2.0 anzuwenden. Die Lizenz ist über https://www.govdata.de/dl-de/zero-2-0 abrufbar."
   },
   {
-    "id": "k06_05gruenversorg2020:2",
-    "name": "\u00d6ffentliche Gr\u00fcnanlage (Erf\u00fcllung bestimmter Mindestanforderungen)",
-    "name_lang": "\u00d6ffentliche Gr\u00fcnanlage (Erf\u00fcllung bestimmter Mindestanforderungen) (Versorgung mit \u00f6ffentlichen, wohnungsnahen Gr\u00fcnanlagen 2020 (Umweltatlas))",
+    "id": "ua_versorggruen_2020:versorggruen_wald_2020",
+    "name": "Wald (überwiegend für die Erholung nutzbar)",
+    "name_lang": "Wald (überwiegend für die Erholung nutzbar) (Versorgung mit öffentlichen, wohnungsnahen Grünanlagen 2020 (Umweltatlas))",
     "crs": "EPSG:25833",
-    "url": "https://fbinter.stadt-berlin.de/fb/wms/senstadt/k06_05gruenversorg2020",
+    "url": "https://gdi.berlin.de/services/wms/ua_versorggruen_2020",
     "typ": "WMS",
-    "gfiAttributes": "ignore",
-    "layers": "2",
-    "legend": "https://fbinter.stadt-berlin.de/fb_daten/legenden/umweltatlas/leg_06_05gruenversorg2020_oeffgruen.png",
+    "gfiAttributes": "showAll",
+    "layers": "versorggruen_wald_2020",
+    "legend": "https://gdi.berlin.de/services/wms/ua_versorggruen_2020?service=WMS&version=1.3.0&request=GetLegendGraphic&format=image%2Fpng&width=487&height=74&layer=versorggruen_wald_2020",
     "datasets": [
       {
-        "md_name": "Versorgung mit \u00f6ffentlichen, wohnungsnahen Gr\u00fcnanlagen 2020 (Umweltatlas)",
-        "md_id": "e7419261-f29e-403d-a235-41f53fa540f0",
-        "rs_id": "https://registry.gdi-de.org/id/de.be.csw/be9f12f5-5f4f-34ac-9725-7690b644f01c",
+        "md_name": "Versorgung mit öffentlichen, wohnungsnahen Grünanlagen 2020 (Umweltatlas)",
+        "md_id": "f09ec55a-3ee5-469b-9821-8265ed4171fd",
+        "rs_id": "https://registry.gdi-de.org/id/de.be.csw/2ca09ee6-3073-3774-a18e-0af49675d95a",
         "csw_url": "https://gdi.berlin.de/geonetwork/srv/ger/csw"
       }
     ],
-    "minScale": "600",
-    "maxScale": "250000",
     "format": "image/png",
     "version": "1.3.0",
     "featureCount": "5",
     "gfiTheme": "default",
     "transparent": true,
     "singleTile": true,
-    "layerAttribution": "F\u00fcr die Nutzung der Daten ist die  Datenlizenz Deutschland - Namensnennung - Version 2.0 anzuwenden. Die Lizenz ist \u00fcber https://www.govdata.de/dl-de/by-2-0 abrufbar. Der Quellenvermerk gem\u00e4\u00df (2) der Lizenz lautet \"Umweltatlas Berlin / [Titel des Datensatzes]\"."
+    "infoFormat": "application/json",
+    "layerAttribution": "Für die Nutzung der Daten ist die Datenlizenz Deutschland - Zero - Version 2.0 anzuwenden. Die Lizenz ist über https://www.govdata.de/dl-de/zero-2-0 abrufbar."
+  },
+  {
+    "id": "potenziale_regenwasserbewirtschaftung:aa_versickerungspotenzial_eu",
+    "name": "Versickerungspotenzial: Szenario „Einfache Umsetzung“",
+    "name_lang": "Versickerungspotenzial: Szenario „Einfache Umsetzung“ (Potenziale der dezentralen Regenwasserbewirtschaftung)",
+    "crs": "EPSG:25833",
+    "url": "https://gdi.berlin.de/services/wms/potenziale_regenwasserbewirtschaftung",
+    "typ": "WMS",
+    "gfiAttributes": "showAll",
+    "layers": "aa_versickerungspotenzial_eu",
+    "legend": true,
+    "datasets": [
+      {
+        "md_name": "Potenziale der dezentralen Regenwasserbewirtschaftung",
+        "md_id": "4b84fdbc-ac77-48ef-a1ec-4f7c75c777d3",
+        "rs_id": "https://registry.gdi-de.org/id/de.be.csw/d69e4c33-2334-37a9-8644-cfe963807a33",
+        "csw_url": "https://gdi.berlin.de/geonetwork/srv/ger/csw"
+      }
+    ],
+    "maxScale": "2500.0",
+    "format": "image/png",
+    "version": "1.3.0",
+    "featureCount": "5",
+    "gfiTheme": "default",
+    "transparent": true,
+    "singleTile": true,
+    "infoFormat": "application/json",
+    "layerAttribution": "Der Datenbestand wird unter der Lizenz CC-BY-4.0-Namensnennung International Public License veröffentlicht (vgl. https://creativecommons.org/licenses/by/4.0/legalcode.de). Der Quellenvermerk gemäß Abschnitt 3a der Lizenz lautet \"Berliner Regenwasseragentur/ Potenziale der dezentralen Regenwasserbewirtschaftung\"."
+  },
+  {
+    "id": "potenziale_regenwasserbewirtschaftung:ab_versickerungspotenzial_gp",
+    "name": "Versickerungspotenzial: Szenario „Gängige Praxis“",
+    "name_lang": "Versickerungspotenzial: Szenario „Gängige Praxis“ (Potenziale der dezentralen Regenwasserbewirtschaftung)",
+    "crs": "EPSG:25833",
+    "url": "https://gdi.berlin.de/services/wms/potenziale_regenwasserbewirtschaftung",
+    "typ": "WMS",
+    "gfiAttributes": "showAll",
+    "layers": "ab_versickerungspotenzial_gp",
+    "legend": "https://gdi.berlin.de/services/wms/potenziale_regenwasserbewirtschaftung?service=WMS&version=1.3.0&request=GetLegendGraphic&format=image%2Fpng&width=499&height=397&layer=ab_versickerungspotenzial_gp",
+    "datasets": [
+      {
+        "md_name": "Potenziale der dezentralen Regenwasserbewirtschaftung",
+        "md_id": "4b84fdbc-ac77-48ef-a1ec-4f7c75c777d3",
+        "rs_id": "https://registry.gdi-de.org/id/de.be.csw/d69e4c33-2334-37a9-8644-cfe963807a33",
+        "csw_url": "https://gdi.berlin.de/geonetwork/srv/ger/csw"
+      }
+    ],
+    "maxScale": "2500.0",
+    "format": "image/png",
+    "version": "1.3.0",
+    "featureCount": "5",
+    "gfiTheme": "default",
+    "transparent": true,
+    "singleTile": true,
+    "infoFormat": "application/json",
+    "layerAttribution": "Der Datenbestand wird unter der Lizenz CC-BY-4.0-Namensnennung International Public License veröffentlicht (vgl. https://creativecommons.org/licenses/by/4.0/legalcode.de). Der Quellenvermerk gemäß Abschnitt 3a der Lizenz lautet \"Berliner Regenwasseragentur/ Potenziale der dezentralen Regenwasserbewirtschaftung\"."
+  },
+  {
+    "id": "potenziale_regenwasserbewirtschaftung:ac_versickerungspotenzial_au",
+    "name": "Versickerungspotenzial: Szenario „Aufwendige Umsetzung“",
+    "name_lang": "Versickerungspotenzial: Szenario „Aufwendige Umsetzung“ (Potenziale der dezentralen Regenwasserbewirtschaftung)",
+    "crs": "EPSG:25833",
+    "url": "https://gdi.berlin.de/services/wms/potenziale_regenwasserbewirtschaftung",
+    "typ": "WMS",
+    "gfiAttributes": "showAll",
+    "layers": "ac_versickerungspotenzial_au",
+    "legend": true,
+    "datasets": [
+      {
+        "md_name": "Potenziale der dezentralen Regenwasserbewirtschaftung",
+        "md_id": "4b84fdbc-ac77-48ef-a1ec-4f7c75c777d3",
+        "rs_id": "https://registry.gdi-de.org/id/de.be.csw/d69e4c33-2334-37a9-8644-cfe963807a33",
+        "csw_url": "https://gdi.berlin.de/geonetwork/srv/ger/csw"
+      }
+    ],
+    "maxScale": "2500.0",
+    "format": "image/png",
+    "version": "1.3.0",
+    "featureCount": "5",
+    "gfiTheme": "default",
+    "transparent": true,
+    "singleTile": true,
+    "infoFormat": "application/json",
+    "layerAttribution": "Der Datenbestand wird unter der Lizenz CC-BY-4.0-Namensnennung International Public License veröffentlicht (vgl. https://creativecommons.org/licenses/by/4.0/legalcode.de). Der Quellenvermerk gemäß Abschnitt 3a der Lizenz lautet \"Berliner Regenwasseragentur/ Potenziale der dezentralen Regenwasserbewirtschaftung\"."
+  },
+  {
+    "id": "potenziale_regenwasserbewirtschaftung:ba_abkopplungspotenzial_eu",
+    "name": "Abkopplungspotenzial: Szenario „Einfache Umsetzung“",
+    "name_lang": "Abkopplungspotenzial: Szenario „Einfache Umsetzung“ (Potenziale der dezentralen Regenwasserbewirtschaftung)",
+    "crs": "EPSG:25833",
+    "url": "https://gdi.berlin.de/services/wms/potenziale_regenwasserbewirtschaftung",
+    "typ": "WMS",
+    "gfiAttributes": "showAll",
+    "layers": "ba_abkopplungspotenzial_eu",
+    "legend": true,
+    "datasets": [
+      {
+        "md_name": "Potenziale der dezentralen Regenwasserbewirtschaftung",
+        "md_id": "4b84fdbc-ac77-48ef-a1ec-4f7c75c777d3",
+        "rs_id": "https://registry.gdi-de.org/id/de.be.csw/d69e4c33-2334-37a9-8644-cfe963807a33",
+        "csw_url": "https://gdi.berlin.de/geonetwork/srv/ger/csw"
+      }
+    ],
+    "format": "image/png",
+    "version": "1.3.0",
+    "featureCount": "5",
+    "gfiTheme": "default",
+    "transparent": true,
+    "singleTile": true,
+    "infoFormat": "application/json",
+    "layerAttribution": "Der Datenbestand wird unter der Lizenz CC-BY-4.0-Namensnennung International Public License veröffentlicht (vgl. https://creativecommons.org/licenses/by/4.0/legalcode.de). Der Quellenvermerk gemäß Abschnitt 3a der Lizenz lautet \"Berliner Regenwasseragentur/ Potenziale der dezentralen Regenwasserbewirtschaftung\"."
+  },
+  {
+    "id": "potenziale_regenwasserbewirtschaftung:bb_abkopplungspotenzial_gp",
+    "name": "Abkopplungspotenzial: Szenario „Gängige Praxis“",
+    "name_lang": "Abkopplungspotenzial: Szenario „Gängige Praxis“ (Potenziale der dezentralen Regenwasserbewirtschaftung)",
+    "crs": "EPSG:25833",
+    "url": "https://gdi.berlin.de/services/wms/potenziale_regenwasserbewirtschaftung",
+    "typ": "WMS",
+    "gfiAttributes": "showAll",
+    "layers": "bb_abkopplungspotenzial_gp",
+    "legend": "https://gdi.berlin.de/services/wms/potenziale_regenwasserbewirtschaftung?service=WMS&version=1.3.0&request=GetLegendGraphic&format=image%2Fpng&width=499&height=499&layer=bb_abkopplungspotenzial_gp",
+    "datasets": [
+      {
+        "md_name": "Potenziale der dezentralen Regenwasserbewirtschaftung",
+        "md_id": "4b84fdbc-ac77-48ef-a1ec-4f7c75c777d3",
+        "rs_id": "https://registry.gdi-de.org/id/de.be.csw/d69e4c33-2334-37a9-8644-cfe963807a33",
+        "csw_url": "https://gdi.berlin.de/geonetwork/srv/ger/csw"
+      }
+    ],
+    "format": "image/png",
+    "version": "1.3.0",
+    "featureCount": "5",
+    "gfiTheme": "default",
+    "transparent": true,
+    "singleTile": true,
+    "infoFormat": "application/json",
+    "layerAttribution": "Der Datenbestand wird unter der Lizenz CC-BY-4.0-Namensnennung International Public License veröffentlicht (vgl. https://creativecommons.org/licenses/by/4.0/legalcode.de). Der Quellenvermerk gemäß Abschnitt 3a der Lizenz lautet \"Berliner Regenwasseragentur/ Potenziale der dezentralen Regenwasserbewirtschaftung\"."
+  },
+  {
+    "id": "potenziale_regenwasserbewirtschaftung:bc_abkopplungspotenzial_au",
+    "name": "Abkopplungspotenzial: Szenario „Aufwendige Umsetzung“",
+    "name_lang": "Abkopplungspotenzial: Szenario „Aufwendige Umsetzung“ (Potenziale der dezentralen Regenwasserbewirtschaftung)",
+    "crs": "EPSG:25833",
+    "url": "https://gdi.berlin.de/services/wms/potenziale_regenwasserbewirtschaftung",
+    "typ": "WMS",
+    "gfiAttributes": "showAll",
+    "layers": "bc_abkopplungspotenzial_au",
+    "legend": true,
+    "datasets": [
+      {
+        "md_name": "Potenziale der dezentralen Regenwasserbewirtschaftung",
+        "md_id": "4b84fdbc-ac77-48ef-a1ec-4f7c75c777d3",
+        "rs_id": "https://registry.gdi-de.org/id/de.be.csw/d69e4c33-2334-37a9-8644-cfe963807a33",
+        "csw_url": "https://gdi.berlin.de/geonetwork/srv/ger/csw"
+      }
+    ],
+    "format": "image/png",
+    "version": "1.3.0",
+    "featureCount": "5",
+    "gfiTheme": "default",
+    "transparent": true,
+    "singleTile": true,
+    "infoFormat": "application/json",
+    "layerAttribution": "Der Datenbestand wird unter der Lizenz CC-BY-4.0-Namensnennung International Public License veröffentlicht (vgl. https://creativecommons.org/licenses/by/4.0/legalcode.de). Der Quellenvermerk gemäß Abschnitt 3a der Lizenz lautet \"Berliner Regenwasseragentur/ Potenziale der dezentralen Regenwasserbewirtschaftung\"."
+  },
+  {
+    "id": "potenziale_regenwasserbewirtschaftung:ca_dachbegruenungspotenzial",
+    "name": "Dachbegrünungspotenzial",
+    "name_lang": "Dachbegrünungspotenzial (Potenziale der dezentralen Regenwasserbewirtschaftung)",
+    "crs": "EPSG:25833",
+    "url": "https://gdi.berlin.de/services/wms/potenziale_regenwasserbewirtschaftung",
+    "typ": "WMS",
+    "gfiAttributes": "showAll",
+    "layers": "ca_dachbegruenungspotenzial",
+    "legend": true,
+    "datasets": [
+      {
+        "md_name": "Potenziale der dezentralen Regenwasserbewirtschaftung",
+        "md_id": "4b84fdbc-ac77-48ef-a1ec-4f7c75c777d3",
+        "rs_id": "https://registry.gdi-de.org/id/de.be.csw/d69e4c33-2334-37a9-8644-cfe963807a33",
+        "csw_url": "https://gdi.berlin.de/geonetwork/srv/ger/csw"
+      }
+    ],
+    "maxScale": "2500.0",
+    "format": "image/png",
+    "version": "1.3.0",
+    "featureCount": "5",
+    "gfiTheme": "default",
+    "transparent": true,
+    "singleTile": true,
+    "infoFormat": "application/json",
+    "layerAttribution": "Der Datenbestand wird unter der Lizenz CC-BY-4.0-Namensnennung International Public License veröffentlicht (vgl. https://creativecommons.org/licenses/by/4.0/legalcode.de). Der Quellenvermerk gemäß Abschnitt 3a der Lizenz lautet \"Berliner Regenwasseragentur/ Potenziale der dezentralen Regenwasserbewirtschaftung\"."
   }
 ]
 
