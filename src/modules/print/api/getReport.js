@@ -418,9 +418,12 @@ async function writePDF(payload, savingType, blob) {
     weight: "b"
   });
 
+  const linkKatalog = '/resources/docs/massnahmenkatalog-mit-steckbriefen.pdf';
+  const absoluteLinkKatalog = `${window.location.href}${linkKatalog}`;
+
   text({
     text: "Link zu Maßnahmenkatalog",
-    url: "https://www.amarex-projekt.de/media/pages/news/rwb-rwb-n-steckbriefe/9f6c71ac56-1745413966/massnahmenkatalog-mit-steckbriefen.pdf",
+    url: absoluteLinkKatalog,
   });
 
   // 5. Page
