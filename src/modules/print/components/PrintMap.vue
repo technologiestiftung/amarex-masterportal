@@ -434,7 +434,7 @@ export default {
             // Maßnahmenplanung
             const dachbegrünung_prozente = this.isMeasurePlanning ? this.mathRoundAndToFixed(allMeasuredStats.newGreenRoofToRoof) : this.accumulatedAbimoStats.targetValueGreenRoof || 0; // getMeanGreenRoof 
             const entsiegelung_prozente = this.isMeasurePlanning ? this.fullPercentage(allMeasuredStats.newUnpvd) : this.accumulatedAbimoStats.targetValueUnsealed || 0; // getMeanUnsealed 
-            const an_mulde_angeschlossene_fläche = this.fullPercentage(this.isMeasurePlanning) ? allMeasuredStats.newToSwale : this.accumulatedAbimoStats.targetValueSwaleConnected || 0; /// getMeanSwaleConnected 
+            const an_mulde_angeschlossene_fläche = this.isMeasurePlanning ? this.fullPercentage(allMeasuredStats.newToSwale) : this.accumulatedAbimoStats.targetValueSwaleConnected || 0; /// getMeanSwaleConnected 
 
             const abimo_result_runoff = this.mathRoundAndToFixed(this.resultAbimoStats.runoff)
             const abimo_result_infiltration = this.mathRoundAndToFixed(this.resultAbimoStats.infiltration)
