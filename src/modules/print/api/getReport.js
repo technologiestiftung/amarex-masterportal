@@ -342,7 +342,7 @@ async function writePDF(payload, savingType, blob) {
     extraMarginBottom: 14,
   });
   text({
-    text: "Gewählte Maßnahmen:",
+    text: payload.isMeasurePlanning ? "Hier sehen Sie eine Auflistung der gesetzten Maßnahmen. Bitte beachten Sie, dass bereits vorhandene Maßnahmen hier nicht aufgelistet sind." : "Gewählte Maßnahmen:",
   });
 
   doc.addImage(
@@ -418,7 +418,7 @@ async function writePDF(payload, savingType, blob) {
     weight: "b"
   });
 
-  const linkKatalog = '/resources/docs/massnahmenkatalog-mit-steckbriefen.pdf';
+  const linkKatalog = 'resources/docs/massnahmenkatalog-mit-steckbriefen.pdf';
   const absoluteLinkKatalog = `${window.location.href}${linkKatalog}`;
 
   text({
@@ -430,17 +430,24 @@ async function writePDF(payload, savingType, blob) {
   makeHeader(payload.isMeasurePlanning ? "Maßnahmenplanung: Lokale Betrachtung" : "Maßnahmenplanung: Gebietsbetrachtung");
 
   text({
-    text: "Status Quo/Simulation",
+    text: "Status Quo",
+    size: 18,
+    weight: "b",
+    noLineBreak: true,
+  });
+  text({
+    text: "Simulation",
     size: 18,
     weight: "b",
     extraMarginBottom: 10,
+    x: paddingVertical + pageInnerWidth / 2,
   });
   text({
     text: "Flächenanteile:",
     noLineBreak: true,
   });
   text({
-    text: "Flächenanteile (Ihre Simulation):",
+    text: "Flächenanteile:",
     x: paddingVertical + pageInnerWidth / 2,
   });
   text({
@@ -623,7 +630,7 @@ async function writePDF(payload, savingType, blob) {
     noLineBreak: true,
   });
   text({
-    text: "Link zum Rechner",
+    text: "Link zum Rechner => TDB...?!",
     url: "tbd...", // @Luise: please add the link for the Zisternenrechner
     x: paddingHorizontal + doc.getTextWidth("Zisternenrechner: "),
     extraMarginBottom: 28,
