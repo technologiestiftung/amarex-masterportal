@@ -624,17 +624,21 @@ async function writePDF(payload, savingType, blob) {
     text: "Link zum Katalog",
     url: "https://amarex-projekt.de/de/news/rwb-rwb-n-steckbriefe",
     x: paddingHorizontal + doc.getTextWidth("Maßnahmenkatalog: "),
+    extraMarginBottom: payload.zisternenrechner_link ? 0 : 28,
   });
-  text({
-    text: "Zisternenrechner:",
-    noLineBreak: true,
-  });
-  text({
-    text: "Link zum Rechner => TDB...?!",
-    url: "tbd...", // @Luise: please add the link for the Zisternenrechner
-    x: paddingHorizontal + doc.getTextWidth("Zisternenrechner: "),
-    extraMarginBottom: 28,
-  });
+
+  if (payload.zisternenrechner_link) {
+    text({
+      text: "Zisternenrechner:",
+      noLineBreak: true,
+    });
+    text({
+      text: "Link zum Rechner => TDB...?!",
+      url: "tbd...", // @Luise: please add the link for the Zisternenrechner
+      x: paddingHorizontal + doc.getTextWidth("Zisternenrechner: "),
+      extraMarginBottom: 28,
+    });
+  }
   text({
     text: "Auflistung der Maßnahmendimensionen:"
   });

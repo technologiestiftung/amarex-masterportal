@@ -502,6 +502,7 @@ export default {
                     evaporation_prozente: makePercentageForAbimo(abimo_result_evaporation),
                     deltaW: this.mathRoundAndToFixed(this.resultAbimoStats.deltaW),
                 },
+                zisternenrechner_link: null
             }
 
 
