@@ -4,6 +4,7 @@ import mapCollection from "../../../src/core/maps/js/mapCollection";
 import AbimoSlider from "./AbimoSlider.vue";
 import Feature from "ol/Feature";
 import { Select } from "ol/interaction";
+import { Style, Fill, Stroke } from "ol/style";
 import { singleClick, never } from "ol/events/condition.js";
 
 /**
@@ -12,6 +13,12 @@ import { singleClick, never } from "ol/events/condition.js";
  */
 export default {
   name: "AbimoBlockAreaSelector",
+  data() {
+    return {
+      hoveredFeature: null, // Track the currently hovered feature
+      testingCode: "",
+    };
+  },
   components: {
     AbimoSlider,
   },
@@ -40,6 +47,9 @@ export default {
     if (this.preselectedFeatures.length > 0) {
       this.createPreselectSelection();
     }
+    if (!this.blockAreaConfirmed) {
+      this.initHoverEffect();
+    }
   },
   methods: {
     ...mapActions("Maps", {
@@ -57,7 +67,83 @@ export default {
       "setSelectedCount",
       "setPreselectedFeatures",
     ]),
+    removeHoverEffect() {
+      if (this.hoverListenerKey) {
+        const map = mapCollection.getMap("2D");
+        map.un("pointermove", this.hoverListenerKey);
+        this.hoverListenerKey = null;
+
+        // Reset any currently hovered features
+        map
+          .getLayers()
+          .getArray()
+          .forEach((layer) => {
+            if (layer && layer.get("id") === "rabimo_input_2025") {
+              const features = layer.getSource().getFeatures();
+              features.forEach((feature) => {
+                if (
+                  !this.selectInteraction
+                    ?.getFeatures()
+                    ?.getArray()
+                    ?.includes(feature)
+                ) {
+                  feature.setStyle(undefined);
+                }
+              });
+            }
+          });
+      }
+    },
+    initHoverEffect() {
+      if (this.hoverListenerKey) {
+        this.removeHoverEffect();
+      }
+
+      const map = mapCollection.getMap("2D");
+
+      const hoverStyle = new Style({
+        stroke: new Stroke({
+          color: "#ffcc33",
+          width: 2,
+        }),
+        fill: new Fill({
+          color: "rgba(255, 255, 0, 0.3)",
+        }),
+      });
+
+      // let hoveredFeature = null;
+
+      this.hoverListenerKey = (event) => {
+        const selectedFeatures =
+          this.selectInteraction?.getFeatures()?.getArray?.() || [];
+
+        if (
+          this.hoveredFeature &&
+          !selectedFeatures.includes(this.hoveredFeature)
+        ) {
+          this.hoveredFeature.setStyle(undefined);
+          this.hoveredFeature = null;
+        }
+
+        map.forEachFeatureAtPixel(event.pixel, (feature, layer) => {
+          if (
+            layer &&
+            layer.get("id") === "rabimo_input_2025" &&
+            !selectedFeatures.includes(feature)
+          ) {
+            if (this.hoveredFeature !== feature) {
+              this.hoveredFeature = feature;
+              this.hoveredFeature.setStyle(hoverStyle);
+            }
+            return true;
+          }
+        });
+      };
+
+      map.on("pointermove", this.hoverListenerKey);
+    },
     createPreselectSelection() {
+      console.log("🚀🚀🚀 createPreselectSelection");
       this.setSelectedFeatures([]);
       const selectedFeatures = this.selectInteraction.getFeatures();
       selectedFeatures.clear();
@@ -92,7 +178,32 @@ export default {
       this.setPreselectedFeatures([]);
       this.updateAccumulatedStats();
     },
+    testing() {
+      if (!this.testingCode) {
+        console.error("Code is required to remove a feature");
+        return;
+      }
+      const currentFeatures = [...this.selectedFeatures];
+      currentFeatures.forEach(() => {
+        const featureCode = this.testingCode;
+        const layer = mapCollection
+          .getMap("2D")
+          .getLayers()
+          .getArray()
+          .find((layer) => layer.get("id") === "rabimo_input_2025");
+
+        if (layer) {
+          const layerFeature = layer
+            .getSource()
+            .getFeatures()
+            .find((feat) => feat.values_.code === featureCode);
+
+          selectInteraction.getFeatures().remove(layerFeature);
+        }
+      });
+    },
     createInteractions: function () {
+      console.log("🚀🚀🚀 createInteractions");
       // From open layers we imported the Select class. This adds the possibility to add "blocks" to our feature layer. For further info check OpenLayers Docs
       const selectInteraction = new Select({
         multi: !this.isMeasurePlanning,
@@ -112,6 +223,7 @@ export default {
       selectInteraction.on("select", (event) => {
         if (this.isMeasurePlanning && event.selected.length > 0) {
           const currentFeatures = [...this.selectedFeatures];
+
           currentFeatures.forEach((feature) => {
             const featureCode = feature.values_.code;
             const layer = mapCollection
@@ -142,6 +254,7 @@ export default {
             ...feature.getProperties(),
           });
           const featureCode = feature.values_.code;
+          console.log("featureCode :>> ", featureCode);
           const index = this.selectedFeatures.findIndex(
             (f) => f.values_.code === featureCode,
           );
@@ -176,6 +289,7 @@ export default {
       this.addInteractionToMap(selectInteraction);
     },
     addSelectedFeatures() {
+      console.log("🚀🚀🚀 addSelectedFeatures");
       const olFeatures = this.selectedFeatures.map((featureData) => {
         return new Feature({
           ...featureData.values_,
@@ -188,6 +302,7 @@ export default {
       this.setBlockAreaConfirmed(true);
     },
     updatePreComputed() {
+      console.log("🚀🚀🚀 updatePreComputed");
       const selectedFeatures = this.layer_abimo_calculated
         .getSource()
         .getFeatures()
@@ -256,6 +371,7 @@ export default {
       this.updatePreComputedStats(preComputedData);
     },
     handleBlockAreaConfirm() {
+      console.log("🚀🚀🚀 handleBlockAreaConfirm");
       if (this.blockAreaConfirmed) {
         this.setBlockAreaConfirmed(false);
       } else {
@@ -263,11 +379,22 @@ export default {
       }
     },
   },
+  beforeUnmount() {
+    // Clean up event listeners when component is destroyed
+    this.removeHoverEffect();
+  },
 };
 </script>
 
 <template lang="html">
   <div class="block-selector-container w-100 d-flex flex-column">
+    <input
+      id="myInput"
+      type="text"
+      v-model="testingCode"
+    />
+    <p>You typed: {{ testingCode }}</p>
+    <h1 @click="testing">TESTING HOVER REMOVE</h1>
     <span>
       <p class="title">Status Quo</p>
       <p class="description">
