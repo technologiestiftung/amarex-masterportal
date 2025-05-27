@@ -15,7 +15,7 @@ import SpinnerItem from "../../../shared/modules/spinner/components/SpinnerItem.
 import colors from "../../../shared/js/utils/amarex-colors.json";
 import { Info as InfoIcon, FileDown, LoaderCircle } from "lucide-vue-next";
 import { getReport } from "../api/getReport";
-import areaCalculations from "../../../../addons/abimoHandler/utils/areaCalculations";
+import measureCalculations from "../../../../addons/abimoHandler/utils/measureCalculations";
 
 /**
  * Tool to print a part of the map
@@ -48,7 +48,7 @@ export default {
             },
             reportLoading: false,
             warning: null,
-            areaCalculations,
+            measureCalculations,
             showTestingBTN: false
         };
     },
@@ -87,7 +87,8 @@ export default {
             "resultAbimoStats",
             "preComputedStats",
             "isMeasurePlanning",
-            "newUnpvd"
+            "accumulatedMeasureStats",
+            "selectedMeasures"
         ]),
         currentScale: {
             get () {
@@ -427,12 +428,13 @@ export default {
             // Versiegelte Fläche "V" => 1.1 - U - D
             const versiegelteFläche = this.mathRoundAndToFixed(gesamtFläche - unversiegelteFläche - dachFläche)
 
+            // Lokale Betrachtung
+            const allMeasuredStats = this.measureCalculations.calculateAllMeasureStats(this.selectedFeatures, this.selectedMeasures)
+           
             // Maßnahmenplanung
-            const stats = this.areaCalculations.calculateAllStats(this.selectedFeatures, this.newUnpvd)
-            console.log('stats :>> ', stats);
-            const an_mulde_angeschlossene_fläche = this.isMeasurePlanning ? this.fullPercentage(stats?.meanSwaleConnected || 0) : this.accumulatedAbimoStats.targetValueSwaleConnected || 0; /// getMeanSwaleConnected 
-            const dachbegrünung_prozente = this.isMeasurePlanning ? this.fullPercentage(stats?.meanGreenRoof || 0) : this.accumulatedAbimoStats.targetValueGreenRoof || 0; // getMeanGreenRoof 
-            const entsiegelung_prozente = this.isMeasurePlanning ? "XX" : this.accumulatedAbimoStats.targetValueUnsealed || 0; // getMeanUnsealed 
+            const dachbegrünung_prozente = this.isMeasurePlanning ? this.mathRoundAndToFixed(allMeasuredStats.newGreenRoofToRoof) : this.accumulatedAbimoStats.targetValueGreenRoof || 0; // getMeanGreenRoof 
+            const entsiegelung_prozente = this.isMeasurePlanning ? this.fullPercentage(allMeasuredStats.newUnpvd) : this.accumulatedAbimoStats.targetValueUnsealed || 0; // getMeanUnsealed 
+            const an_mulde_angeschlossene_fläche = this.fullPercentage(this.isMeasurePlanning) ? allMeasuredStats.newToSwale : this.accumulatedAbimoStats.targetValueSwaleConnected || 0; /// getMeanSwaleConnected 
 
             const abimo_result_runoff = this.mathRoundAndToFixed(this.resultAbimoStats.runoff)
             const abimo_result_infiltration = this.mathRoundAndToFixed(this.resultAbimoStats.infiltration)
@@ -443,7 +445,11 @@ export default {
             const oberflächenabflussStatusQuo = this.mathRoundAndToFixed(this.preComputedStats.runoff);
             const infiltrationStatusQuo = this.mathRoundAndToFixed(this.preComputedStats.infiltration);
             const verdunstungStatusQuo = this.mathRoundAndToFixed(this.preComputedStats.evaporation);
-            const status_quo_added = oberflächenabflussStatusQuo + infiltrationStatusQuo + verdunstungStatusQuo
+            const status_quo_added = oberflächenabflussStatusQuo + infiltrationStatusQuo + verdunstungStatusQuo;
+
+            const flächenanteile_davon_begrünt_simulation = `${this.isMeasurePlanning ? this.mathRoundAndToFixed(allMeasuredStats.Ag_neu) : this.mathRoundAndToFixed(gesamtFläche * (zielwertDachbegrünung / 100))} m² (${this.isMeasurePlanning ? this.mathRoundAndToFixed(allMeasuredStats.newGreenRoofToRoof) : this.fullPercentage((zielwertDachbegrünung / 100) / bebautVersiegelt)} %)`
+            const flächenanteile_unbebaut_versiegelte_flächen_simulation = `${this.isMeasurePlanning ? this.mathRoundAndToFixed(allMeasuredStats.pvd_neu_area)  : versiegelteFläche} m² (${this.isMeasurePlanning ? this.mathRoundAndToFixed(allMeasuredStats.newPvdToTotalArea) : this.fullPercentage(versiegelteFläche / gesamtFläche)} %)`
+            const flächenanteile_unversiegelte_flächen_simulation = `${this.isMeasurePlanning ? this.mathRoundAndToFixed(allMeasuredStats.Ae_neu)  : unversiegelteFläche} m² (${this.isMeasurePlanning ? this.mathRoundAndToFixed(allMeasuredStats.totalUnpavedToTotalArea) :  zielwertUnversiegelt} %)`
 
             const makePercentageForAbimo = (value) => {
                 return this.mathRoundAndToFixed((100 / abimo_results_added) * value)
@@ -456,23 +462,22 @@ export default {
                 title: this.report.title,
                 description: this.report.description,
                 date: this.report.date,
-                // please add in isMeasurePlanning value from store
                 isMeasurePlanning: this.isMeasurePlanning,
                 downloadURL,
                 // 1.1 * 1.3 => m² | 1.3 => % 
-                flächenanteile_dachfläche: `${dachFläche} m² (${this.fullPercentage(bebautVersiegelt)}) %`,
+                flächenanteile_dachfläche: `${dachFläche} m² (${this.fullPercentage(bebautVersiegelt)} %)`,
                 // 1.5 * dachFläche "D" => m² | 1.5 => %
-                flächenanteile_davon_begrünt_status_quo: `${this.mathRoundAndToFixed(dachFläche * begrünteDachfläche)} m² (${this.fullPercentage(begrünteDachfläche)}) %`,
+                flächenanteile_davon_begrünt_status_quo: `${this.mathRoundAndToFixed(dachFläche * begrünteDachfläche)} m² (${this.fullPercentage(begrünteDachfläche)} %)`,
                 // 2.1 * 1.1 => m² | 2.1 / 1.3 => % 
-                flächenanteile_davon_begrünt_simulation: `${this.mathRoundAndToFixed(gesamtFläche * (zielwertDachbegrünung / 100))} m² (${this.fullPercentage((zielwertDachbegrünung / 100) / bebautVersiegelt)}) %`,
+                flächenanteile_davon_begrünt_simulation,
                 // 1.4 * 1.1 => m² | 1.4 => %
-                flächenanteile_unbebaut_versiegelte_flächen_status_quo: `${this.mathRoundAndToFixed(gesamtFläche * unbebautVersiegelt)} m² (${this.fullPercentage(unbebautVersiegelt)}) %`,
+                flächenanteile_unbebaut_versiegelte_flächen_status_quo: `${this.mathRoundAndToFixed(gesamtFläche * unbebautVersiegelt)} m² (${this.fullPercentage(unbebautVersiegelt)} %)`,
                 // "V" => m² | V / 1.1 => %
-                flächenanteile_unbebaut_versiegelte_flächen_simulation: `${versiegelteFläche} m² (${this.fullPercentage(versiegelteFläche / gesamtFläche)}) %`,
+                flächenanteile_unbebaut_versiegelte_flächen_simulation,
                 // 1.2 * 1.1 => m² | 1.2 => %
-                flächenanteile_unversiegelte_flächen_status_quo: `${this.mathRoundAndToFixed(gesamtFläche * unversiegelt)} m² (${this.fullPercentage(unversiegelt)}) %`,
+                flächenanteile_unversiegelte_flächen_status_quo: `${this.mathRoundAndToFixed(gesamtFläche * unversiegelt)} m² (${this.fullPercentage(unversiegelt)} %)`,
                 // "U" => m² | 3.1 => % 
-                flächenanteile_unversiegelte_flächen_simulation: `${unversiegelteFläche} m² (${zielwertUnversiegelt}) %`,
+                flächenanteile_unversiegelte_flächen_simulation,
                 // gesetzte Maßnahmen
                 betrachteteblockteilflaechen: this.accumulatedAbimoStats.featuresSelected || 0,
                 an_mulde_angeschlossene_fläche: an_mulde_angeschlossene_fläche,
@@ -524,10 +529,6 @@ export default {
             this.setFileDownloads([]);
             this.togglePostrenderListener(false);
             this.shownLayoutList = [];
-        },
-        testing() {
-            console.log("Testing console log");
-            console.log("calculateAllStats", this.areaCalculations.calculateAllStats(this.selectedFeatures, this.newUnpvd));
         }
     }
 };
@@ -571,13 +572,6 @@ export default {
         >
             {{ warning }}
         </p>
-        <button
-            class="amarex-btn-primary accent full-with-icon"
-            v-if="showTestingBTN"
-            @click="testing"
-        >
-            <p>TESTING CONSOLE LOG</p>
-        </button>
         <button
             class="amarex-btn-primary accent full-with-icon"
             v-if="!reportLoading"
