@@ -13,12 +13,6 @@ import { singleClick, never } from "ol/events/condition.js";
  */
 export default {
   name: "AbimoBlockAreaSelector",
-  data() {
-    return {
-      hoveredFeature: null, // Track the currently hovered feature
-      testingCode: "",
-    };
-  },
   components: {
     AbimoSlider,
   },
@@ -32,7 +26,6 @@ export default {
       "preselectedFeatures",
       "selectedCount",
       "isMeasurePlanning",
-      "preComputedStats",
     ]),
   },
   mounted() {
@@ -47,9 +40,19 @@ export default {
     if (this.preselectedFeatures.length > 0) {
       this.createPreselectSelection();
     }
-    if (!this.blockAreaConfirmed) {
+    if (
+      !this.blockAreaConfirmed ||
+      (!this.isMeasurePlanning && this.blockAreaConfirmed)
+    ) {
       this.initHoverEffect();
     }
+  },
+  watch: {
+    selectedFeatures(newVal) {
+      if (this.isMeasurePlanning && newVal.length > 0) {
+        this.removeCurrentlyHoveredFeature();
+      }
+    },
   },
   methods: {
     ...mapActions("Maps", {
@@ -111,18 +114,15 @@ export default {
         }),
       });
 
-      // let hoveredFeature = null;
+      hoveredFeature = null;
 
       this.hoverListenerKey = (event) => {
         const selectedFeatures =
           this.selectInteraction?.getFeatures()?.getArray?.() || [];
 
-        if (
-          this.hoveredFeature &&
-          !selectedFeatures.includes(this.hoveredFeature)
-        ) {
-          this.hoveredFeature.setStyle(undefined);
-          this.hoveredFeature = null;
+        if (hoveredFeature && !selectedFeatures.includes(hoveredFeature)) {
+          hoveredFeature.setStyle(undefined);
+          hoveredFeature = null;
         }
 
         map.forEachFeatureAtPixel(event.pixel, (feature, layer) => {
@@ -131,9 +131,9 @@ export default {
             layer.get("id") === "rabimo_input_2025" &&
             !selectedFeatures.includes(feature)
           ) {
-            if (this.hoveredFeature !== feature) {
-              this.hoveredFeature = feature;
-              this.hoveredFeature.setStyle(hoverStyle);
+            if (hoveredFeature !== feature) {
+              hoveredFeature = feature;
+              hoveredFeature.setStyle(hoverStyle);
             }
             return true;
           }
@@ -143,7 +143,6 @@ export default {
       map.on("pointermove", this.hoverListenerKey);
     },
     createPreselectSelection() {
-      console.log("🚀🚀🚀 createPreselectSelection");
       this.setSelectedFeatures([]);
       const selectedFeatures = this.selectInteraction.getFeatures();
       selectedFeatures.clear();
@@ -178,32 +177,28 @@ export default {
       this.setPreselectedFeatures([]);
       this.updateAccumulatedStats();
     },
-    testing() {
-      if (!this.testingCode) {
-        console.error("Code is required to remove a feature");
-        return;
-      }
-      const currentFeatures = [...this.selectedFeatures];
-      currentFeatures.forEach(() => {
-        const featureCode = this.testingCode;
-        const layer = mapCollection
-          .getMap("2D")
-          .getLayers()
-          .getArray()
-          .find((layer) => layer.get("id") === "rabimo_input_2025");
-
-        if (layer) {
-          const layerFeature = layer
-            .getSource()
-            .getFeatures()
-            .find((feat) => feat.values_.code === featureCode);
-
-          selectInteraction.getFeatures().remove(layerFeature);
-        }
-      });
+    removeCurrentlyHoveredFeature() {
+      const map = mapCollection.getMap("2D");
+      map
+        .getLayers()
+        .getArray()
+        .forEach((layer) => {
+          if (layer && layer.get("id") === "rabimo_input_2025") {
+            const features = layer.getSource().getFeatures();
+            features.forEach((feature) => {
+              if (
+                !this.selectInteraction
+                  ?.getFeatures()
+                  ?.getArray()
+                  ?.includes(feature)
+              ) {
+                feature.setStyle(undefined);
+              }
+            });
+          }
+        });
     },
     createInteractions: function () {
-      console.log("🚀🚀🚀 createInteractions");
       // From open layers we imported the Select class. This adds the possibility to add "blocks" to our feature layer. For further info check OpenLayers Docs
       const selectInteraction = new Select({
         multi: !this.isMeasurePlanning,
@@ -254,7 +249,6 @@ export default {
             ...feature.getProperties(),
           });
           const featureCode = feature.values_.code;
-          console.log("featureCode :>> ", featureCode);
           const index = this.selectedFeatures.findIndex(
             (f) => f.values_.code === featureCode,
           );
@@ -289,7 +283,6 @@ export default {
       this.addInteractionToMap(selectInteraction);
     },
     addSelectedFeatures() {
-      console.log("🚀🚀🚀 addSelectedFeatures");
       const olFeatures = this.selectedFeatures.map((featureData) => {
         return new Feature({
           ...featureData.values_,
@@ -302,7 +295,6 @@ export default {
       this.setBlockAreaConfirmed(true);
     },
     updatePreComputed() {
-      console.log("🚀🚀🚀 updatePreComputed");
       const selectedFeatures = this.layer_abimo_calculated
         .getSource()
         .getFeatures()
@@ -371,7 +363,6 @@ export default {
       this.updatePreComputedStats(preComputedData);
     },
     handleBlockAreaConfirm() {
-      console.log("🚀🚀🚀 handleBlockAreaConfirm");
       if (this.blockAreaConfirmed) {
         this.setBlockAreaConfirmed(false);
       } else {
@@ -388,13 +379,6 @@ export default {
 
 <template lang="html">
   <div class="block-selector-container w-100 d-flex flex-column">
-    <input
-      id="myInput"
-      type="text"
-      v-model="testingCode"
-    />
-    <p>You typed: {{ testingCode }}</p>
-    <h1 @click="testing">TESTING HOVER REMOVE</h1>
     <span>
       <p class="title">Status Quo</p>
       <p class="description">
