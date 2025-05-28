@@ -114,7 +114,7 @@ export default {
         }),
       });
 
-      hoveredFeature = null;
+      let hoveredFeature = null;
 
       this.hoverListenerKey = (event) => {
         const selectedFeatures =
