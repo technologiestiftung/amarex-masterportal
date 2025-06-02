@@ -69,6 +69,8 @@ async function writePDF(payload, savingType, blob) {
   const pageInnerWidth = 515 * pixelsToMM;
   const pageInnerHeight = 782 * pixelsToMM;
   const iconSizes = 28 * pixelsToMM;
+  const leftHalfOfThePage = pageInnerWidth / 2 - mm(24);
+  const rightHalfOfThePage = paddingVertical + pageInnerWidth / 2
 
   let vertical = paddingVertical;
   let pageCounter = 0;
@@ -102,7 +104,7 @@ async function writePDF(payload, savingType, blob) {
     const setSize = size ?? 14;
     const setLineHeight = 24;
     const setlineHeightFactor = setLineHeight / setSize;
-    const setMaxWidth = maxWidth ?? pageInnerWidth;
+    const setMaxWidth = maxWidth ? leftHalfOfThePage : pageInnerWidth;
 
     doc.setFontSize(setSize);
 
@@ -188,6 +190,9 @@ async function writePDF(payload, savingType, blob) {
     drawLine();
     vertical += mm(40);
   }
+  function getMarginLeft(text) {
+    return paddingHorizontal + doc.getTextWidth(text);
+  }
 
   doc.addFileToVFS("Arial.ttf", ArialNormal);
   doc.addFont("Arial.ttf", "Arial", "normal");
@@ -212,7 +217,7 @@ async function writePDF(payload, savingType, blob) {
   text({
     text: payload.title,
     weight: "b",
-    x: paddingHorizontal + doc.getTextWidth("Name des Projekts: "),
+    x: getMarginLeft("Name des Projekts: "),
     extraMarginBottom: 10,
   });
   if (payload.description) {
@@ -242,7 +247,7 @@ async function writePDF(payload, savingType, blob) {
   });
   text({
     text: payload.flächenanteile_dachfläche,
-    x: paddingHorizontal + doc.getTextWidth(" • Dachfläche: "),
+    x: getMarginLeft(" • Dachfläche: "),
   });
   text({
     text: " • Davon begrünt: ",
@@ -250,7 +255,7 @@ async function writePDF(payload, savingType, blob) {
   });
   text({
     text: ` ${payload.flächenanteile_davon_begrünt_status_quo}`,
-    x: paddingHorizontal + doc.getTextWidth(" • Davon begrünt: "),
+    x: getMarginLeft(" • Davon begrünt: ")
   });
   text({
     text: " • Unbebaut Versiegelte Fläche: ",
@@ -258,7 +263,7 @@ async function writePDF(payload, savingType, blob) {
   });
   text({
     text: payload.flächenanteile_unbebaut_versiegelte_flächen_status_quo,
-    x: paddingHorizontal + doc.getTextWidth(" • Unbebaut Versiegelte Fläche: "),
+    x: getMarginLeft(" • Unbebaut Versiegelte Fläche: ")
   });
   text({
     text: " • Unversiegelte Fläche: ",
@@ -266,7 +271,7 @@ async function writePDF(payload, savingType, blob) {
   });
   text({
     text: payload.flächenanteile_unversiegelte_flächen_status_quo,
-    x: paddingHorizontal + doc.getTextWidth(" • Unversiegelte Fläche: "),
+    x: getMarginLeft(" • Unversiegelte Fläche: "),
     extraMarginBottom: 28,
   });
 
@@ -329,13 +334,12 @@ async function writePDF(payload, savingType, blob) {
   });
   text({
     text: `${payload.delta_w_status_quo} %`,
-    x: paddingHorizontal + doc.getTextWidth("Für Ihr ausgewähltes Untersuchungsgebiet liegt Delta-W bei "),
+    x: getMarginLeft("Für Ihr ausgewähltes Untersuchungsgebiet liegt Delta-W bei "),
     weight: "b",
   });
 
   // 4. Page
   makeHeader(payload.isMeasurePlanning ? "Maßnahmenplanung: Lokale Betrachtung" : "Maßnahmenplanung: Gebietsbetrachtung");
-  // vertical += mm(20);
 
   text({
     text: `Betrachtete Blockteilflächen: ${payload.betrachteteblockteilflaechen}`,
@@ -440,7 +444,7 @@ async function writePDF(payload, savingType, blob) {
     size: 18,
     weight: "b",
     extraMarginBottom: 10,
-    x: paddingVertical + pageInnerWidth / 2,
+    x: rightHalfOfThePage,
   });
   text({
     text: "Flächenanteile:",
@@ -448,7 +452,7 @@ async function writePDF(payload, savingType, blob) {
   });
   text({
     text: "Flächenanteile:",
-    x: paddingVertical + pageInnerWidth / 2,
+    x: rightHalfOfThePage,
   });
   text({
     text: ` • Dachfläche:`,
@@ -456,7 +460,7 @@ async function writePDF(payload, savingType, blob) {
   });
   text({
     text: ` • Dachfläche:`,
-    x: paddingVertical + pageInnerWidth / 2,
+    x: rightHalfOfThePage,
   });
   text({
     text: `     ${payload.flächenanteile_dachfläche}`,
@@ -464,67 +468,67 @@ async function writePDF(payload, savingType, blob) {
   });
   text({
     text: `     ${payload.flächenanteile_dachfläche}`,
-    x: paddingVertical + pageInnerWidth / 2,
+    x: rightHalfOfThePage,
   });
   text({
     text: ` • Davon begrünt:`,
     noLineBreak: true,
-    maxWidth: pageInnerWidth / 2 - mm(24),
+    maxWidth: true,
   });
   text({
     text: ` • Davon begrünt:`,
-    x: paddingVertical + pageInnerWidth / 2,
-    maxWidth: pageInnerWidth / 2 - mm(24),
+    x: rightHalfOfThePage,
+    maxWidth: true,
   });
   text({
     text: `     ${payload.flächenanteile_davon_begrünt_status_quo}`,
     noLineBreak: true,
-    maxWidth: pageInnerWidth / 2 - mm(24),
+    maxWidth: true,
   });
   text({
     text: `     ${payload.flächenanteile_davon_begrünt_simulation}`,
-    x: paddingVertical + pageInnerWidth / 2,
-    maxWidth: pageInnerWidth / 2 - mm(24),
+    x: rightHalfOfThePage,
+    maxWidth: true,
   });
   text({
     text: ` • Unbebaut Versiegelte Fläche:`,
     noLineBreak: true,
-    maxWidth: pageInnerWidth / 2 - mm(24),
+    maxWidth: true,
   });
   text({
     text: ` • Unbebaut Versiegelte Fläche:`,
-    x: paddingVertical + pageInnerWidth / 2,
-    maxWidth: pageInnerWidth / 2 - mm(24),
+    x: rightHalfOfThePage,
+    maxWidth: true,
   });
   text({
     text: `     ${payload.flächenanteile_unbebaut_versiegelte_flächen_status_quo}`,
     noLineBreak: true,
-    maxWidth: pageInnerWidth / 2 - mm(24),
+    maxWidth: true,
   });
   text({
     text: `     ${payload.flächenanteile_unbebaut_versiegelte_flächen_simulation}`,
-    x: paddingVertical + pageInnerWidth / 2,
-    maxWidth: pageInnerWidth / 2 - mm(24),
+    x: rightHalfOfThePage,
+    maxWidth: true,
   });
   text({
     text: ` • Unversiegelte Fläche:`,
     noLineBreak: true,
-    maxWidth: pageInnerWidth / 2 - mm(24),
+    maxWidth: true,
   });
   text({
     text: ` • Unversiegelte Fläche:`,
-    x: paddingVertical + pageInnerWidth / 2,
-    maxWidth: pageInnerWidth / 2 - mm(24),
+    x: rightHalfOfThePage,
+    maxWidth: true,
   });
   text({
     text: `     ${payload.flächenanteile_unversiegelte_flächen_status_quo}`,
     noLineBreak: true,
-    maxWidth: pageInnerWidth / 2 - mm(24),
+    maxWidth: true,
   });
   text({
     text: `     ${payload.flächenanteile_unversiegelte_flächen_simulation}`,
-    x: paddingVertical + pageInnerWidth / 2,
-    maxWidth: pageInnerWidth / 2 - mm(24),
+    x: rightHalfOfThePage,
+    maxWidth: true,
     extraMarginBottom: 28,
   });
   text({
@@ -543,16 +547,16 @@ async function writePDF(payload, savingType, blob) {
   });
   text({
     text: "Ihre Simulation:",
-    x: paddingVertical + pageInnerWidth / 2,
+    x: rightHalfOfThePage,
   });
   text({
     text: ` • Oberflächenabfluss:`,
     noLineBreak: true,
-    maxWidth: pageInnerWidth / 2 - mm(24),
+    maxWidth: true,
   });
   text({
     text: ` • Oberflächenabfluss: `,
-    x: paddingVertical + pageInnerWidth / 2,
+    x: rightHalfOfThePage,
   });
   text({
     text: `     ${payload.wasserhaushalt_oberflächenabfluss_status_quo}`,
@@ -560,16 +564,16 @@ async function writePDF(payload, savingType, blob) {
   });
   text({
     text: `     ${payload.abimo_result.runoff} mm/a (${payload.abimo_result.runoff_prozente} %)`,
-    x: paddingVertical + pageInnerWidth / 2,
+    x: rightHalfOfThePage,
   });
   text({
     text: ` • Infiltration:`,
     noLineBreak: true,
-    maxWidth: pageInnerWidth / 2 - mm(24),
+    maxWidth: true,
   });
   text({
     text: ` • Infiltration:`,
-    x: paddingVertical + pageInnerWidth / 2,
+    x: rightHalfOfThePage,
   });
   text({
     text: `     ${payload.wasserhaushalt_infiltration_status_quo}`,
@@ -577,16 +581,16 @@ async function writePDF(payload, savingType, blob) {
   });
   text({
     text: `     ${payload.abimo_result.infiltration} mm/a (${payload.abimo_result.infiltration_prozente} %)`,
-    x: paddingVertical + pageInnerWidth / 2,
+    x: rightHalfOfThePage,
   });
   text({
     text: ` • Verdunstung:`,
     noLineBreak: true,
-    maxWidth: pageInnerWidth / 2 - mm(24),
+    maxWidth: true,
   });
   text({
     text: ` • Verdunstung:`,
-    x: paddingVertical + pageInnerWidth / 2,
+    x: rightHalfOfThePage,
   });
   text({
     text: `     ${payload.wasserhaushalt_verdunstung_status_quo}`,
@@ -594,7 +598,7 @@ async function writePDF(payload, savingType, blob) {
   });
   text({
     text: `     ${payload.abimo_result.evaporation} mm/a (${payload.abimo_result.evaporation_prozente} %)`,
-    x: paddingVertical + pageInnerWidth / 2,
+    x: rightHalfOfThePage,
   });
   text({
     text: ` • Delta W: ${payload.delta_w_status_quo} %`,
@@ -602,7 +606,7 @@ async function writePDF(payload, savingType, blob) {
   });
   text({
     text: ` • Delta W: ${payload.abimo_result.deltaW} %`,
-    x: paddingVertical + pageInnerWidth / 2,
+    x: rightHalfOfThePage,
   });
 
   // 8. Page
@@ -614,7 +618,7 @@ async function writePDF(payload, savingType, blob) {
   text({
     text: "Website-Link",
     url: "https://amarex-projekt.de/de",
-    x: paddingHorizontal + doc.getTextWidth("AMAREX: "),
+    x: getMarginLeft("AMAREX: ")
   });
   text({
     text: "Maßnahmenkatalog:",
@@ -623,7 +627,7 @@ async function writePDF(payload, savingType, blob) {
   text({
     text: "Link zum Katalog",
     url: "https://amarex-projekt.de/de/news/rwb-rwb-n-steckbriefe",
-    x: paddingHorizontal + doc.getTextWidth("Maßnahmenkatalog: "),
+    x: getMarginLeft("Maßnahmenkatalog: "),
     extraMarginBottom: payload.zisternenrechner_link ? 0 : 28,
   });
 
@@ -633,9 +637,9 @@ async function writePDF(payload, savingType, blob) {
       noLineBreak: true,
     });
     text({
-      text: "Link zum Rechner => TDB...?!",
-      url: "tbd...", // @Luise: please add the link for the Zisternenrechner
-      x: paddingHorizontal + doc.getTextWidth("Zisternenrechner: "),
+      text: "Link zum Rechner",
+      url: payload.zisternenrechner_link,
+      x: getMarginLeft("Zisternenrechner: "),
       extraMarginBottom: 28,
     });
   }
@@ -743,5 +747,5 @@ async function getReport(payload, download) {
   }
 }
 
-export { getReport, writePDF };
+export { getReport };
 
