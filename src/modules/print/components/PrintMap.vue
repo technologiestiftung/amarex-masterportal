@@ -57,6 +57,7 @@ export default {
             "projectTitle",
             "projectDescription",
         ]),
+        ...mapGetters(["allLayerConfigs"]),
         ...mapGetters("Modules/Print", [
             "capabilitiesFilter",
             "currentLayout",
@@ -218,6 +219,21 @@ export default {
         this.report.description = this.projectDescription;
     },
     mounted () {
+
+        this.allLayerConfigs
+            .filter(
+            (layer) =>
+                layer.id === "rabimo_input_2025" ||
+                layer.id === "planung_abimo" ||
+                layer.id === "abimo_2025_wfs:preCompute" ||
+                layer.id === "delta_w_2025_wfs:preCompute"
+            ).forEach((layer) => {
+            const isLayerVisible = layer.visibility;
+            if (isLayerVisible) {
+                this.changeVisibility({ layerId: layer.id, value: false });
+            }
+            });
+
         if (this.mode === "3D") {
             this.setIs3d(true);
         }
@@ -251,6 +267,7 @@ export default {
             "update3DResolutionScale"
         ]),
         ...mapActions("Alerting", ["addSingleAlert"]),
+        ...mapActions("Modules/LayerSelection", ["changeVisibility"]),
 
         /**
          * Waits until the features of Vector layers are loaded and then renders the canvas again.
