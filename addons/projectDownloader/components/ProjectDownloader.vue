@@ -187,7 +187,7 @@ export default {
         :color="colors.secondary"
         :size="16"
       />
-      <p>Herunterladen</p>
+      <p>Projekt herunterladen</p>
     </button>
     <div
       v-else
@@ -202,7 +202,7 @@ export default {
           :color="colors.secondary"
           :size="16"
         />
-        <p>Herunterladen</p>
+        <p>Projekt herunterladen</p>
       </div>
       <p class="description">
         Laden Sie hier Ihr Projekt als ZIP-Datei herunter, um sie später erneut
