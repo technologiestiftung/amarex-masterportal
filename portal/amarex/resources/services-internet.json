@@ -2620,34 +2620,6 @@
     "layerAttribution": "Gebiet Obersee: Für die Nutzung der Daten ist die Datenlizenz Deutschland - Namensnennung - Version 2.0 anzuwenden. Die Lizenz ist über https://www.govdata.de/dl-de/by-2-0 abrufbar. Der Quellenvermerk gemäß (2) der Lizenz lautet \"Umweltatlas Berlin / Starkregengefahrenkarte, Gebiet Obersee\". Gebiete Moabit, Flughafensee: Der Datenbestand wird unter der Lizenz CC-BY-4.0-Namensnennung International Public License veröffentlicht (vgl. https://creativecommons.org/licenses/by/4.0/legalcode.de). Der Quellenvermerk gemäß Abschnitt 3a der Lizenz lautet \"Berliner Wasserbetriebe / Starkregengefahrenkarte, Gebiete Moabit, Flughafensee \"."
   },
   {
-    "id": "ua_srhk:a_srhk_starkregengefahrenkarten_vorhanden",
-    "name": "Starkregenhinweiskarte",
-    "name_lang": "Starkregengefahrenkarten (Starkregenhinweiskarte)",
-    "crs": "EPSG:25833",
-    "url": "https://gdi.berlin.de/services/wms/ua_srhk",
-    "typ": "WMS",
-    "gfiAttributes": "showAll",
-    "layers": "a_srhk_starkregengefahrenkarten_vorhanden",
-    "legend": "https://gdi.berlin.de/services/wms/ua_srhk?service=WMS&version=1.3.0&request=GetLegendGraphic&format=image%2Fpng&width=500&height=106&layer=a_srhk_starkregengefahrenkarten_vorhanden",
-    "datasets": [
-      {
-        "md_name": "Starkregenhinweiskarte",
-        "md_id": "fb5bcb65-6dcc-475b-8a37-c023ce19203b",
-        "rs_id": "https://registry.gdi-de.org/id/de.be.csw/a0dd801e-4933-3e91-a210-310f372c172b",
-        "csw_url": "https://gdi.berlin.de/geonetwork/srv/ger/csw"
-      }
-    ],
-    "format": "image/png",
-    "version": "1.3.0",
-    "featureCount": "5",
-    "gfiTheme": "default",
-    "transparent": true,
-    "singleTile": true,
-    "infoFormat": "application/json",
-    "displayLayerAlert": false,
-    "layerAttribution": "Für die Nutzung der Daten ist die Datenlizenz Deutschland - Namensnennung - Version 2.0 anzuwenden. Die Lizenz ist über https://www.govdata.de/dl-de/by-2-0 abrufbar. Der Quellenvermerk gemäß (2) der Lizenz lautet \"Umweltatlas Berlin / [Titel des Datensatzes]\"."
-  },
-  {
     "id": "ua_versiegelung_2021:versieg2021",
     "name": "Versiegelung der Block- und Blockteilflächen 2021",
     "name_lang": "Versiegelung der Block- und Blockteilflächen 2021 (Versiegelung 2021 (Umweltatlas))",
@@ -4878,6 +4850,368 @@
     "singleTile": true,
     "infoFormat": "application/json",
     "layerAttribution": "Der Datenbestand wird unter der Lizenz CC-BY-4.0-Namensnennung International Public License veröffentlicht (vgl. https://creativecommons.org/licenses/by/4.0/legalcode.de). Der Quellenvermerk gemäß Abschnitt 3a der Lizenz lautet \"Berliner Regenwasseragentur/ Potenziale der dezentralen Regenwasserbewirtschaftung\"."
+  },
+  {
+    "id": "Starkregenhinweiskarte start:"
+  },
+  {
+    "id": "ua_srhk:da_fr_aussergewoehnlich",
+    "name": "Flie\u00dfrichtung (au\u00dfergew\u00f6hnliches Ereignis)",
+    "name_lang": "Flie\u00dfrichtung (au\u00dfergew\u00f6hnliches Ereignis) (Starkregenhinweiskarte)",
+    "crs": "EPSG:25833",
+    "url": "https://gdi.berlin.de/services/wms/ua_srhk",
+    "typ": "WMS",
+    "gfiAttributes": "showAll",
+    "layers": "da_fr_aussergewoehnlich",
+    "legend": "https://gdi.berlin.de/services/wms/ua_srhk?service=WMS&version=1.3.0&request=GetLegendGraphic&format=image%2Fpng&width=202&height=31&layer=da_fr_aussergewoehnlich",
+    "datasets": [
+      {
+        "md_name": "Starkregenhinweiskarte",
+        "md_id": "fb5bcb65-6dcc-475b-8a37-c023ce19203b",
+        "rs_id": "https://registry.gdi-de.org/id/de.be.csw/a0dd801e-4933-3e91-a210-310f372c172b",
+        "csw_url": "https://gdi.berlin.de/geonetwork/srv/ger/csw"
+      }
+    ],
+    "maxScale": "2501.0",
+    "format": "image/png",
+    "version": "1.3.0",
+    "featureCount": "5",
+    "gfiTheme": "default",
+    "transparent": true,
+    "singleTile": true,
+    "infoFormat": "application/json",
+    "layerAttribution": "F\u00fcr die Nutzung der Daten ist die Datenlizenz Deutschland - Zero - Version 2.0 anzuwenden. Die Lizenz ist \u00fcber https://www.govdata.de/dl-de/zero-2-0 abrufbar."
+  },
+  {
+    "id": "ua_srhk:db_fliessgeschw_aussergew_kostra",
+    "name": "Flie\u00dfgeschwindigkeit (au\u00dfergew\u00f6hnliches Ereignis)",
+    "name_lang": "Flie\u00dfgeschwindigkeit (au\u00dfergew\u00f6hnliches Ereignis) (Starkregenhinweiskarte)",
+    "crs": "EPSG:25833",
+    "url": "https://gdi.berlin.de/services/wms/ua_srhk",
+    "typ": "WMS",
+    "gfiAttributes": "showAll",
+    "layers": "db_fliessgeschw_aussergew_kostra",
+    "legend": "https://gdi.berlin.de/services/wms/ua_srhk?service=WMS&version=1.3.0&request=GetLegendGraphic&format=image%2Fpng&width=500&height=257&layer=db_fliessgeschw_aussergew_kostra",
+    "datasets": [
+      {
+        "md_name": "Starkregenhinweiskarte",
+        "md_id": "fb5bcb65-6dcc-475b-8a37-c023ce19203b",
+        "rs_id": "https://registry.gdi-de.org/id/de.be.csw/a0dd801e-4933-3e91-a210-310f372c172b",
+        "csw_url": "https://gdi.berlin.de/geonetwork/srv/ger/csw"
+      }
+    ],
+    "maxScale": "50001.0",
+    "format": "image/png",
+    "version": "1.3.0",
+    "featureCount": "5",
+    "gfiTheme": "default",
+    "transparent": true,
+    "singleTile": true,
+    "infoFormat": "application/json",
+    "layerAttribution": "F\u00fcr die Nutzung der Daten ist die Datenlizenz Deutschland - Zero - Version 2.0 anzuwenden. Die Lizenz ist \u00fcber https://www.govdata.de/dl-de/zero-2-0 abrufbar."
+  },
+  {
+    "id": "ua_srhk:dc_wasserstand_aussergew_kostra",
+    "name": "Wasserstand (au\u00dfergew\u00f6hnliches Ereignis)",
+    "name_lang": "Wasserstand (au\u00dfergew\u00f6hnliches Ereignis) (Starkregenhinweiskarte)",
+    "crs": "EPSG:25833",
+    "url": "https://gdi.berlin.de/services/wms/ua_srhk",
+    "typ": "WMS",
+    "gfiAttributes": "showAll",
+    "layers": "dc_wasserstand_aussergew_kostra",
+    "legend": "https://gdi.berlin.de/services/wms/ua_srhk?service=WMS&version=1.3.0&request=GetLegendGraphic&format=image%2Fpng&width=500&height=258&layer=dc_wasserstand_aussergew_kostra",
+    "datasets": [
+      {
+        "md_name": "Starkregenhinweiskarte",
+        "md_id": "fb5bcb65-6dcc-475b-8a37-c023ce19203b",
+        "rs_id": "https://registry.gdi-de.org/id/de.be.csw/a0dd801e-4933-3e91-a210-310f372c172b",
+        "csw_url": "https://gdi.berlin.de/geonetwork/srv/ger/csw"
+      }
+    ],
+    "maxScale": "50001.0",
+    "format": "image/png",
+    "version": "1.3.0",
+    "featureCount": "5",
+    "gfiTheme": "default",
+    "transparent": true,
+    "singleTile": true,
+    "infoFormat": "application/json",
+    "layerAttribution": "F\u00fcr die Nutzung der Daten ist die Datenlizenz Deutschland - Zero - Version 2.0 anzuwenden. Die Lizenz ist \u00fcber https://www.govdata.de/dl-de/zero-2-0 abrufbar."
+  },
+  {
+    "id": "ua_srhk:ea_fr_extrem_max100mm",
+    "name": "Flie\u00dfrichtung (extremes Ereignis)",
+    "name_lang": "Flie\u00dfrichtung (extremes Ereignis) (Starkregenhinweiskarte)",
+    "crs": "EPSG:25833",
+    "url": "https://gdi.berlin.de/services/wms/ua_srhk",
+    "typ": "WMS",
+    "gfiAttributes": "showAll",
+    "layers": "ea_fr_extrem_max100mm",
+    "legend": "https://gdi.berlin.de/services/wms/ua_srhk?service=WMS&version=1.3.0&request=GetLegendGraphic&format=image%2Fpng&width=202&height=31&layer=ea_fr_extrem_max100mm",
+    "datasets": [
+      {
+        "md_name": "Starkregenhinweiskarte",
+        "md_id": "fb5bcb65-6dcc-475b-8a37-c023ce19203b",
+        "rs_id": "https://registry.gdi-de.org/id/de.be.csw/a0dd801e-4933-3e91-a210-310f372c172b",
+        "csw_url": "https://gdi.berlin.de/geonetwork/srv/ger/csw"
+      }
+    ],
+    "maxScale": "2501.0",
+    "format": "image/png",
+    "version": "1.3.0",
+    "featureCount": "5",
+    "gfiTheme": "default",
+    "transparent": true,
+    "singleTile": true,
+    "infoFormat": "application/json",
+    "layerAttribution": "F\u00fcr die Nutzung der Daten ist die Datenlizenz Deutschland - Zero - Version 2.0 anzuwenden. Die Lizenz ist \u00fcber https://www.govdata.de/dl-de/zero-2-0 abrufbar."
+  },
+  {
+    "id": "ua_srhk:eb_fliessgeschw_extrem_max100mm",
+    "name": "Flie\u00dfgeschwindigkeit (extremes Ereignis)",
+    "name_lang": "Flie\u00dfgeschwindigkeit (extremes Ereignis) (Starkregenhinweiskarte)",
+    "crs": "EPSG:25833",
+    "url": "https://gdi.berlin.de/services/wms/ua_srhk",
+    "typ": "WMS",
+    "gfiAttributes": "showAll",
+    "layers": "eb_fliessgeschw_extrem_max100mm",
+    "legend": "https://gdi.berlin.de/services/wms/ua_srhk?service=WMS&version=1.3.0&request=GetLegendGraphic&format=image%2Fpng&width=500&height=257&layer=eb_fliessgeschw_extrem_max100mm",
+    "datasets": [
+      {
+        "md_name": "Starkregenhinweiskarte",
+        "md_id": "fb5bcb65-6dcc-475b-8a37-c023ce19203b",
+        "rs_id": "https://registry.gdi-de.org/id/de.be.csw/a0dd801e-4933-3e91-a210-310f372c172b",
+        "csw_url": "https://gdi.berlin.de/geonetwork/srv/ger/csw"
+      }
+    ],
+    "maxScale": "50001.0",
+    "format": "image/png",
+    "version": "1.3.0",
+    "featureCount": "5",
+    "gfiTheme": "default",
+    "transparent": true,
+    "singleTile": true,
+    "infoFormat": "application/json",
+    "layerAttribution": "F\u00fcr die Nutzung der Daten ist die Datenlizenz Deutschland - Zero - Version 2.0 anzuwenden. Die Lizenz ist \u00fcber https://www.govdata.de/dl-de/zero-2-0 abrufbar."
+  },
+  {
+    "id": "ua_srhk:ec_wasserstand_extrem_max100mm",
+    "name": "Wasserstand (extremes Ereignis)",
+    "name_lang": "Wasserstand (extremes Ereignis) (Starkregenhinweiskarte)",
+    "crs": "EPSG:25833",
+    "url": "https://gdi.berlin.de/services/wms/ua_srhk",
+    "typ": "WMS",
+    "gfiAttributes": "showAll",
+    "layers": "ec_wasserstand_extrem_max100mm",
+    "legend": "https://gdi.berlin.de/services/wms/ua_srhk?service=WMS&version=1.3.0&request=GetLegendGraphic&format=image%2Fpng&width=500&height=258&layer=ec_wasserstand_extrem_max100mm",
+    "datasets": [
+      {
+        "md_name": "Starkregenhinweiskarte",
+        "md_id": "fb5bcb65-6dcc-475b-8a37-c023ce19203b",
+        "rs_id": "https://registry.gdi-de.org/id/de.be.csw/a0dd801e-4933-3e91-a210-310f372c172b",
+        "csw_url": "https://gdi.berlin.de/geonetwork/srv/ger/csw"
+      }
+    ],
+    "maxScale": "50001.0",
+    "format": "image/png",
+    "version": "1.3.0",
+    "featureCount": "5",
+    "gfiTheme": "default",
+    "transparent": true,
+    "singleTile": true,
+    "infoFormat": "application/json",
+    "layerAttribution": "F\u00fcr die Nutzung der Daten ist die Datenlizenz Deutschland - Zero - Version 2.0 anzuwenden. Die Lizenz ist \u00fcber https://www.govdata.de/dl-de/zero-2-0 abrufbar."
+  },
+  {
+    "id": "ua_srhk:a_srhk_starkregengefahrenkarten_vorhanden",
+    "name": "Starkregengefahrenkarten",
+    "name_lang": "Starkregengefahrenkarten (Starkregenhinweiskarte)",
+    "crs": "EPSG:25833",
+    "url": "https://gdi.berlin.de/services/wms/ua_srhk",
+    "typ": "WMS",
+    "gfiAttributes": "showAll",
+    "layers": "a_srhk_starkregengefahrenkarten_vorhanden",
+    "legend": true,
+    "datasets": [
+      {
+        "md_name": "Starkregenhinweiskarte",
+        "md_id": "fb5bcb65-6dcc-475b-8a37-c023ce19203b",
+        "rs_id": "https://registry.gdi-de.org/id/de.be.csw/a0dd801e-4933-3e91-a210-310f372c172b",
+        "csw_url": "https://gdi.berlin.de/geonetwork/srv/ger/csw"
+      }
+    ],
+    "format": "image/png",
+    "version": "1.3.0",
+    "featureCount": "5",
+    "gfiTheme": "default",
+    "transparent": true,
+    "singleTile": true,
+    "infoFormat": "application/json",
+    "layerAttribution": "F\u00fcr die Nutzung der Daten ist die Datenlizenz Deutschland - Zero - Version 2.0 anzuwenden. Die Lizenz ist \u00fcber https://www.govdata.de/dl-de/zero-2-0 abrufbar."
+  },
+  {
+    "id": "ua_srhk:b_srhk_feuerwehreinsaetze_pkt",
+    "name": "Feuerwehreins\u00e4tze (Punkte)",
+    "name_lang": "Feuerwehreins\u00e4tze (Punkte) (Starkregenhinweiskarte)",
+    "crs": "EPSG:25833",
+    "url": "https://gdi.berlin.de/services/wms/ua_srhk",
+    "typ": "WMS",
+    "gfiAttributes": "showAll",
+    "layers": "b_srhk_feuerwehreinsaetze_pkt",
+    "legend": "https://gdi.berlin.de/services/wms/ua_srhk?service=WMS&version=1.3.0&request=GetLegendGraphic&format=image%2Fpng&width=339&height=96&layer=b_srhk_feuerwehreinsaetze_pkt",
+    "datasets": [
+      {
+        "md_name": "Starkregenhinweiskarte",
+        "md_id": "fb5bcb65-6dcc-475b-8a37-c023ce19203b",
+        "rs_id": "https://registry.gdi-de.org/id/de.be.csw/a0dd801e-4933-3e91-a210-310f372c172b",
+        "csw_url": "https://gdi.berlin.de/geonetwork/srv/ger/csw"
+      }
+    ],
+    "maxScale": "25000.0",
+    "format": "image/png",
+    "version": "1.3.0",
+    "featureCount": "5",
+    "gfiTheme": "default",
+    "transparent": true,
+    "singleTile": true,
+    "infoFormat": "application/json",
+    "layerAttribution": "F\u00fcr die Nutzung der Daten ist die Datenlizenz Deutschland - Zero - Version 2.0 anzuwenden. Die Lizenz ist \u00fcber https://www.govdata.de/dl-de/zero-2-0 abrufbar."
+  },
+  {
+    "id": "ua_srhk:c_alkis_gebaeude",
+    "name": "Geb\u00e4udeumringe",
+    "name_lang": "Geb\u00e4udeumringe (Starkregenhinweiskarte)",
+    "crs": "EPSG:25833",
+    "url": "https://gdi.berlin.de/services/wms/ua_srhk",
+    "typ": "WMS",
+    "gfiAttributes": "ignore",
+    "layers": "c_alkis_gebaeude",
+    "legend": "https://gdi.berlin.de/services/wms/ua_srhk?service=WMS&version=1.3.0&request=GetLegendGraphic&format=image%2Fpng&width=236&height=66&layer=c_alkis_gebaeude",
+    "datasets": [
+      {
+        "md_name": "Starkregenhinweiskarte",
+        "md_id": "fb5bcb65-6dcc-475b-8a37-c023ce19203b",
+        "rs_id": "https://registry.gdi-de.org/id/de.be.csw/a0dd801e-4933-3e91-a210-310f372c172b",
+        "csw_url": "https://gdi.berlin.de/geonetwork/srv/ger/csw"
+      }
+    ],
+    "maxScale": "10000.0",
+    "format": "image/png",
+    "version": "1.3.0",
+    "featureCount": "5",
+    "gfiTheme": "default",
+    "transparent": true,
+    "singleTile": true,
+    "infoFormat": "application/json",
+    "layerAttribution": "F\u00fcr die Nutzung der Daten ist die Datenlizenz Deutschland - Zero - Version 2.0 anzuwenden. Die Lizenz ist \u00fcber https://www.govdata.de/dl-de/zero-2-0 abrufbar."
+  },
+  {
+    "id": "ua_srhk:f_srhk_gewaesser",
+    "name": "Gew\u00e4sser",
+    "name_lang": "Gew\u00e4sser (Starkregenhinweiskarte)",
+    "crs": "EPSG:25833",
+    "url": "https://gdi.berlin.de/services/wms/ua_srhk",
+    "typ": "WMS",
+    "gfiAttributes": "ignore",
+    "layers": "f_srhk_gewaesser",
+    "legend": "https://gdi.berlin.de/services/wms/ua_srhk?service=WMS&version=1.3.0&request=GetLegendGraphic&format=image%2Fpng&width=500&height=79&layer=f_srhk_gewaesser",
+    "datasets": [
+      {
+        "md_name": "Starkregenhinweiskarte",
+        "md_id": "fb5bcb65-6dcc-475b-8a37-c023ce19203b",
+        "rs_id": "https://registry.gdi-de.org/id/de.be.csw/a0dd801e-4933-3e91-a210-310f372c172b",
+        "csw_url": "https://gdi.berlin.de/geonetwork/srv/ger/csw"
+      }
+    ],
+    "format": "image/png",
+    "version": "1.3.0",
+    "featureCount": "5",
+    "gfiTheme": "default",
+    "transparent": true,
+    "singleTile": true,
+    "infoFormat": "application/json",
+    "layerAttribution": "F\u00fcr die Nutzung der Daten ist die Datenlizenz Deutschland - Zero - Version 2.0 anzuwenden. Die Lizenz ist \u00fcber https://www.govdata.de/dl-de/zero-2-0 abrufbar."
+  },
+  {
+    "id": "ua_srhk:g_srhk_feuerwehreinsaetze",
+    "name": "Feuerwehreins\u00e4tze",
+    "name_lang": "Feuerwehreins\u00e4tze (Starkregenhinweiskarte)",
+    "crs": "EPSG:25833",
+    "url": "https://gdi.berlin.de/services/wms/ua_srhk",
+    "typ": "WMS",
+    "gfiAttributes": "showAll",
+    "layers": "g_srhk_feuerwehreinsaetze",
+    "legend": "https://gdi.berlin.de/services/wms/ua_srhk?service=WMS&version=1.3.0&request=GetLegendGraphic&format=image%2Fpng&width=500&height=262&layer=g_srhk_feuerwehreinsaetze",
+    "datasets": [
+      {
+        "md_name": "Starkregenhinweiskarte",
+        "md_id": "fb5bcb65-6dcc-475b-8a37-c023ce19203b",
+        "rs_id": "https://registry.gdi-de.org/id/de.be.csw/a0dd801e-4933-3e91-a210-310f372c172b",
+        "csw_url": "https://gdi.berlin.de/geonetwork/srv/ger/csw"
+      }
+    ],
+    "format": "image/png",
+    "version": "1.3.0",
+    "featureCount": "5",
+    "gfiTheme": "default",
+    "transparent": true,
+    "singleTile": true,
+    "infoFormat": "application/json",
+    "layerAttribution": "F\u00fcr die Nutzung der Daten ist die Datenlizenz Deutschland - Zero - Version 2.0 anzuwenden. Die Lizenz ist \u00fcber https://www.govdata.de/dl-de/zero-2-0 abrufbar."
+  },
+  {
+    "id": "ua_srhk:l_srhk_senken",
+    "name": "Topographische Senkenanalyse",
+    "name_lang": "Topographische Senkenanalyse (Starkregenhinweiskarte)",
+    "crs": "EPSG:25833",
+    "url": "https://gdi.berlin.de/services/wms/ua_srhk",
+    "typ": "WMS",
+    "gfiAttributes": "showAll",
+    "layers": "l_srhk_senken",
+    "legend": "https://gdi.berlin.de/services/wms/ua_srhk?service=WMS&version=1.3.0&request=GetLegendGraphic&format=image%2Fpng&width=314&height=54&layer=l_srhk_senken",
+    "datasets": [
+      {
+        "md_name": "Starkregenhinweiskarte",
+        "md_id": "fb5bcb65-6dcc-475b-8a37-c023ce19203b",
+        "rs_id": "https://registry.gdi-de.org/id/de.be.csw/a0dd801e-4933-3e91-a210-310f372c172b",
+        "csw_url": "https://gdi.berlin.de/geonetwork/srv/ger/csw"
+      }
+    ],
+    "format": "image/png",
+    "version": "1.3.0",
+    "featureCount": "5",
+    "gfiTheme": "default",
+    "transparent": true,
+    "singleTile": true,
+    "infoFormat": "application/json",
+    "layerAttribution": "F\u00fcr die Nutzung der Daten ist die Datenlizenz Deutschland - Zero - Version 2.0 anzuwenden. Die Lizenz ist \u00fcber https://www.govdata.de/dl-de/zero-2-0 abrufbar."
+  },
+  {
+    "id": "ua_srhk:m_hwgklow",
+    "name": "Hochwassergefahrenkarte f\u00fcr Hochwasser mit niedriger Wahrscheinlichkeit",
+    "name_lang": "Hochwassergefahrenkarte f\u00fcr Hochwasser mit niedriger Wahrscheinlichkeit (Starkregenhinweiskarte)",
+    "crs": "EPSG:25833",
+    "url": "https://gdi.berlin.de/services/wms/ua_srhk",
+    "typ": "WMS",
+    "gfiAttributes": "showAll",
+    "layers": "m_hwgklow",
+    "legend": true,
+    "datasets": [
+      {
+        "md_name": "Starkregenhinweiskarte",
+        "md_id": "fb5bcb65-6dcc-475b-8a37-c023ce19203b",
+        "rs_id": "https://registry.gdi-de.org/id/de.be.csw/a0dd801e-4933-3e91-a210-310f372c172b",
+        "csw_url": "https://gdi.berlin.de/geonetwork/srv/ger/csw"
+      }
+    ],
+    "format": "image/png",
+    "version": "1.3.0",
+    "featureCount": "5",
+    "gfiTheme": "default",
+    "transparent": true,
+    "singleTile": true,
+    "infoFormat": "application/json",
+    "layerAttribution": "F\u00fcr die Nutzung der Daten ist die Datenlizenz Deutschland - Zero - Version 2.0 anzuwenden. Die Lizenz ist \u00fcber https://www.govdata.de/dl-de/zero-2-0 abrufbar."
   }
 ]
 
