@@ -214,7 +214,7 @@ export default {
     },
     created () {
         this.setServiceId(this.printServiceId);
-        this.report.title = this.projectTitle;
+        this.report.title = this.projectTitle || "Amarex Report";
         this.report.description = this.projectDescription;
     },
     mounted () {
@@ -285,7 +285,7 @@ export default {
          */
         print () {
             const currentPrintLength = this.fileDownloads.filter(file => file.finishState === false).length;
-
+            
             if (currentPrintLength <= 10) {
                 const index = this.fileDownloads.length,
                     layoutAttributes = this.getLayoutAttributes(this.currentLayout, ["subtitle", "textField", "author", "overviewMap", "source"]);
@@ -527,16 +527,6 @@ export default {
                 this.warning = "Bitte führen Sie eine Wasserhaushaltsberechnung durch, um einen Report zu erstellen.";
                 return;
             }
-            /* console.log("triggerGenerate", {
-                areaTypesData: this.areaTypesData,
-                accumulatedAbimoStats: this.accumulatedAbimoStats,
-                selectedFeatures: this.selectedFeatures,
-                resultAbimoStats: this.resultAbimoStats,
-                preComputedStats: this.preComputedStats,
-                isMeasurePlanning: this.isMeasurePlanning,
-                accumulatedMeasureStats: this.accumulatedMeasureStats,
-                selectedMeasures: this.selectedMeasures
-            }); */
             this.reportLoading = true;
             this.print()
         },
