@@ -9,7 +9,6 @@ import omit from "../../../shared/js/utils/omit";
 import changeCase from "../../../shared/js/utils/changeCase";
 import {takeScreenshot} from "olcs/lib/olcs/print/takeCesiumScreenshot.js";
 import {computeRectangle} from "olcs/lib/olcs/print/computeRectangle.js";
-// import {trackMatomo} from "../../../plugins/matomo";
 
 const actions = {
     ...actionsPrintInitialization,
@@ -32,15 +31,6 @@ const actions = {
             }
             dispatch(String(serviceRequest.onSuccess), response.data);
         });
-    },
-
-    /**
-     * sets the printStarted to activie for the Add Ons
-     * @param {Object} param.commit the commit
-     * @returns {void}
-     */
-    activatePrintStarted: function ({commit}) {
-        commit("setPrintStarted", true);
     },
 
     /**
@@ -168,8 +158,6 @@ const actions = {
     startPrint: async function ({state, getters, dispatch, commit}, print) {
         layerProvider.getVisibleLayer(state.printMapMarker);
 
-        console.log('state.currentMapScale :>> ', state.currentMapScale);
-
         const visibleLayerList = [...getters.visibleLayerList, ...getters.activeAdditionalLayers],
             attr = {
                 "layout": state.currentLayoutName,
@@ -177,9 +165,6 @@ const actions = {
                 "outputFormat": state.currentFormat,
                 "attributes": {
                     "title": state.title,
-
-                    // NOTE: Masterportal origin more attributes can be added here, it is very important, 
-                    // that the attributes match the attributes on the mapfish config
                     "subtitle": print.layoutAttributes.subtitle,
                     "map": {
                         "dpi": state.dpiForPdf,
@@ -189,8 +174,6 @@ const actions = {
                     }
                 }
             };
-
-            console.log('visibleLayerList :>> ', visibleLayerList);
 
         let spec = BuildSpec,
             printJob = {};
@@ -205,7 +188,7 @@ const actions = {
         if (state.isScaleAvailable) {
             spec.buildScale(state.currentScale);
         }
-        await spec.buildLayers(visibleLayerList);
+        spec.buildLayers(visibleLayerList);
 
         if (state.isGfiAvailable) {
             dispatch("getGfiForPrint");
@@ -343,7 +326,7 @@ const actions = {
             }
             response = await printJob.getResponse(url, printJob.payload);
         }
-
+        
         if ("getURL" in response.data) {
             await commit("setPlotserviceIndex", state.plotserviceIndex + 1);
             dispatch("downloadFile", {
@@ -351,17 +334,10 @@ const actions = {
                 "index": state.plotserviceIndex,
                 "filename": filename
             });
-        }
-        else {
+        } else {
+            
             response.data.index = printJob.index;
             dispatch("waitForPrintJob", response.data);
-        }
-
-        if (printJob.payload.attributes.is3dMode) {
-            // trackMatomo("Print", "3D printjob created ", "Layout: " + printJob.payload.layout);
-        }
-        else {
-            // trackMatomo("Print", "2D printjob created ", "Layout: " + printJob.payload.layout);
         }
     },
 
@@ -504,9 +480,7 @@ const actions = {
     downloadFile: function ({commit}, fileSpecs) {
         const fileUrl = fileSpecs.fileUrl;
 
-        commit("setPrintStarted", false);
         commit("setPrintFileReady", true);
-
         commit("setFileDownloadUrl", fileUrl);
         commit("setFilename", fileSpecs.filename);
 

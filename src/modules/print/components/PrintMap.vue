@@ -227,7 +227,6 @@ export default {
         this.$nextTick(() => {
             if (this.shownLayoutList.length === 0) {
                 this.retrieveCapabilites();
-                this.setCurrentMapScale(this.scale);
                 this.togglePostrenderListener();
                 this.updateCanvasByFeaturesLoadend(this.visibleLayerList);
                 this.setIsScaleSelectedManually(false);
@@ -299,7 +298,6 @@ export default {
                     outputFormat: this.outputFormat
                 });
 
-                this.setPrintStarted(true);
                 if (this.is3d) {
                     this.startPrint3d({
                         index,
@@ -313,7 +311,12 @@ export default {
                     this.startPrint({
                         index,
                         getResponse: async (url, payload) => {
-                            return axios.post(url, payload);
+                            return axios.post(url, payload).catch(error => {
+                                console.error('startPrint axios error :>> ', error);
+                                this.reportLoading = false;
+                                this.setFileDownloads([]);
+                                this.warning = "Fehler beim Erstellen des Reports. Bitte versuchen Sie es nochmal.";
+                            });
                         },
                         layoutAttributes
                     });
