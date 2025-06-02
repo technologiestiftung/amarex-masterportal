@@ -523,6 +523,20 @@ export default {
                 this.warning = "Bitte einen Titel eingeben";
                 return;
             }
+            if (this.accumulatedAbimoStats.featuresSelected === 0 || this.accumulatedAbimoStats.totalArea === 0) {
+                this.warning = "Bitte führen Sie eine Wasserhaushaltsberechnung durch, um einen Report zu erstellen.";
+                return;
+            }
+            /* console.log("triggerGenerate", {
+                areaTypesData: this.areaTypesData,
+                accumulatedAbimoStats: this.accumulatedAbimoStats,
+                selectedFeatures: this.selectedFeatures,
+                resultAbimoStats: this.resultAbimoStats,
+                preComputedStats: this.preComputedStats,
+                isMeasurePlanning: this.isMeasurePlanning,
+                accumulatedMeasureStats: this.accumulatedMeasureStats,
+                selectedMeasures: this.selectedMeasures
+            }); */
             this.reportLoading = true;
             this.print()
         },
