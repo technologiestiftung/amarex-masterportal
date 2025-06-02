@@ -43,7 +43,7 @@ export default {
           description: (area, percentage) => {
             if (!area || !percentage)
               return "Welchen Anteil möchten Sie an Mulden anschliessen?";
-            return `Bei den von Ihnen gewählten Flächen stehen ${area} m² (${percentage}%) versiegelte Fläche zur Verfügung."`;
+            return `Bei den von Ihnen gewählten Flächen stehen ${area} m² (${percentage}%) versiegelte Fläche zur Verfügung.`;
           },
         },
       },

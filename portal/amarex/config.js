@@ -72,6 +72,7 @@ const Config = {
     "baseMaps",
     "themeMaps",
     "toolDownloader",
+    "aboutAmarex",
   ],
 };
 

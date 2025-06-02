@@ -1,6 +1,7 @@
 import getters from "./gettersAddons";
 
 import AbimoHandler from "../abimoHandler/store/indexAbimoHandler";
+import AboutAmarex from "../aboutAmarex/store/indexAboutAmarex";
 import BaseMaps from "../baseMaps/store/indexBaseMaps";
 import FileImporter from "../fileImporter/store/indexFileImporter";
 import ProjectDownloader from "../projectDownloader/store/indexProjectDownloader";
@@ -22,6 +23,7 @@ export default {
     BaseMaps: { ...BaseMaps },
     ThemeMaps: { ...ThemeMaps },
     ToolDownloader: { ...ToolDownloader },
+    AboutAmarex: { ...AboutAmarex },
   },
 };
 
