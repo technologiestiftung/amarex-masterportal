@@ -472,14 +472,16 @@ export default {
         ),
       };
     }
-    dispatch(
-      "Alerting/addSingleAlert",
-      {
-        category: alertingMessage.category,
-        content: alertingMessage.content,
-      },
-      { root: true },
-    );
+    if (alertingMessage.category === "error") {
+      dispatch(
+        "Alerting/addSingleAlert",
+        {
+          category: alertingMessage.category,
+          content: alertingMessage.content,
+        },
+        { root: true },
+      );
+    }
 
     dispatch("addImportedFilename", fileName);
 
@@ -554,7 +556,10 @@ export default {
       return;
     }
 
-    if (!Array.isArray(features) || features.length === 0) {
+    if (
+      (!Array.isArray(features) || features.length === 0) &&
+      fileName !== "planung_abimo.geojson"
+    ) {
       alertingMessage = {
         category: "error",
         content: i18next.t(
@@ -641,15 +646,16 @@ export default {
       );
     }
 
-    alertingMessage = {
+    // Disable Confirm Alert
+
+    /* alertingMessage = {
       category: "success",
       content: i18next.t(
         "common:modules.appFileImport.alertingMessages.success",
         { filename: fileName },
       ),
     };
-
-    dispatch("Alerting/addSingleAlert", alertingMessage, { root: true });
+    dispatch("Alerting/addSingleAlert", alertingMessage, { root: true }); */
     dispatch("addImportedFilename", fileName);
 
     if (state.enableZoomToExtend && features.length) {
@@ -759,3 +765,4 @@ export default {
     dispatch("extendLayers", null, { root: true });
   },
 };
+
