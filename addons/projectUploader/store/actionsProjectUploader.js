@@ -600,20 +600,6 @@ export default {
     features = checkIsVisibleSetting(features);
 
     features.forEach((feature) => {
-      if (features.length > 1) {
-        console.log("single imported feature :>> ", {
-          // feature,
-          geometry: feature.getGeometry(),
-          geometryTypeof: typeof feature.getGeometry(),
-          values: feature.values_,
-          getValues: feature.get("values"),
-          attributes: feature.get("attributes"),
-          getGeometryIsNull: feature.getGeometry() === null,
-          isGeoCircle: feature.get("isGeoCircle"),
-          getGeometryType: feature.getGeometry().getType(),
-        });
-      }
-
       if (isObject(feature.get("attributes"))) {
         Object.keys(feature.get("attributes")).forEach((key) => {
           gfiAttributes[key] = key;
@@ -650,8 +636,6 @@ export default {
           geometries = [feature.getGeometry()];
         }
 
-        console.log("geometries :>> ", geometries);
-
         geometries.forEach((geometry) => {
           const mappedCrsPropName = getMappedCrsPropName(crsPropName);
 
@@ -663,10 +647,10 @@ export default {
           }
 
           const iconUrl = feature.get("iconUrl");
-          const size = feature.get("size");
-          const { circleRadius, iconScale } = getIconSizes(size);
 
           if (iconUrl) {
+            const size = feature.get("size");
+            const { circleRadius, iconScale } = getIconSizes(size);
             const iconStyle = new Style({
               image: new Icon({
                 src: iconUrl,
