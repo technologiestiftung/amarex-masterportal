@@ -556,10 +556,7 @@ export default {
       return;
     }
 
-    if (
-      (!Array.isArray(features) || features.length === 0) &&
-      fileName !== "planung_abimo.geojson"
-    ) {
+    if (!Array.isArray(features) || features.length === 0) {
       alertingMessage = {
         category: "error",
         content: i18next.t(
