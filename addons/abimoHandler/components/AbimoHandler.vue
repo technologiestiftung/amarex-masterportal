@@ -91,12 +91,7 @@ export default {
           buttons: [
             {
               text: "Zurück",
-              action: () => {
-                this.resetAbimoCalculation();
-                this.setPreselectedFeatures([]);
-                this.setActiveStep(1);
-                this.setIsMeasurePlanning(false);
-              },
+              action: () => this.resetBlockAreaSelector(),
             },
             {
               text: "Bestätigen",
@@ -290,6 +285,9 @@ export default {
       });
   },
   unmounted() {
+    if (this.activeStep === 2) {
+      this.resetBlockAreaSelector();
+    }
     if (this.selectedFeatures.length === 0) {
       this.allLayerConfigs
         .filter(
@@ -457,6 +455,12 @@ export default {
       await this.resetPreComputedModels();
       this.calcState = null;
       this.setActiveStep(0);
+    },
+    resetBlockAreaSelector() {
+      this.resetAbimoCalculation();
+      this.setPreselectedFeatures([]);
+      this.setActiveStep(1);
+      this.setIsMeasurePlanning(false);
     },
   },
 };
