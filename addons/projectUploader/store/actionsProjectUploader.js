@@ -229,6 +229,30 @@ function getParsedCustomAttributes(feature) {
   return attributes;
 }
 
+function getIconSizes(size) {
+  let circleRadius, iconScale;
+
+  switch (size) {
+    case "small":
+      circleRadius = 20;
+      iconScale = 0.8;
+      break;
+    case "medium":
+      circleRadius = 30;
+      iconScale = 1.0;
+      break;
+    case "large":
+      circleRadius = 40;
+      iconScale = 1.0;
+      break;
+    default:
+      circleRadius = 20;
+      iconScale = 0.8;
+  }
+
+  return { circleRadius, iconScale };
+}
+
 export default {
   /**
    * Sets the featureExtents
@@ -576,6 +600,20 @@ export default {
     features = checkIsVisibleSetting(features);
 
     features.forEach((feature) => {
+      if (features.length > 1) {
+        console.log("single imported feature :>> ", {
+          // feature,
+          geometry: feature.getGeometry(),
+          geometryTypeof: typeof feature.getGeometry(),
+          values: feature.values_,
+          getValues: feature.get("values"),
+          attributes: feature.get("attributes"),
+          getGeometryIsNull: feature.getGeometry() === null,
+          isGeoCircle: feature.get("isGeoCircle"),
+          getGeometryType: feature.getGeometry().getType(),
+        });
+      }
+
       if (isObject(feature.get("attributes"))) {
         Object.keys(feature.get("attributes")).forEach((key) => {
           gfiAttributes[key] = key;
@@ -612,6 +650,8 @@ export default {
           geometries = [feature.getGeometry()];
         }
 
+        console.log("geometries :>> ", geometries);
+
         geometries.forEach((geometry) => {
           const mappedCrsPropName = getMappedCrsPropName(crsPropName);
 
@@ -620,6 +660,35 @@ export default {
               mappedCrsPropName,
               rootGetters["Maps/projectionCode"],
             );
+          }
+
+          const iconUrl = feature.get("iconUrl");
+          const size = feature.get("size");
+          const { circleRadius, iconScale } = getIconSizes(size);
+
+          if (iconUrl) {
+            const iconStyle = new Style({
+              image: new Icon({
+                src: iconUrl,
+                scale: iconScale,
+                anchor: [0.5, 0.5],
+                anchorXUnits: "fraction",
+                anchorYUnits: "fraction",
+              }),
+              zIndex: 10,
+            });
+
+            const circleStyle = new Style({
+              image: new CircleStyle({
+                radius: circleRadius,
+                fill: new Fill({
+                  color: "rgba(255, 255, 255, 0.75)",
+                }),
+              }),
+              zIndex: 5,
+            });
+
+            feature.setStyle([circleStyle, iconStyle]);
           }
 
           feature.set("source", fileName);
