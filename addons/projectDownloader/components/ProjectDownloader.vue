@@ -77,16 +77,35 @@ export default {
             return;
           }
 
+          const excludeGEOJSONFilesFromExport = [
+            "abimo_2025_wfs:preCompute",
+            "delta_w_2025_wfs:preCompute",
+            "planung_abimo",
+            "rabimo_input_2025",
+          ];
+          const getLayerID = layer.get("id");
+          const exportThisFile =
+            !excludeGEOJSONFilesFromExport.includes(getLayerID);
+
           if (
             layer.layer instanceof VectorLayer &&
-            (layer.attributes.typ !== "WFS" || "WMS")
+            (layer.attributes.typ !== "WFS" || "WMS") &&
+            exportThisFile
           ) {
             const geoJSONData = exportLayerAsGeoJSON(
               layer.layer,
               projectionCode,
             );
 
-            if (geoJSONData) {
+            let excludeAbimoMeasuresFile = false;
+            if (getLayerID === "abimo_measures") {
+              const abimoMeasures = JSON.parse(geoJSONData);
+              if (abimoMeasures?.features?.length === 0) {
+                excludeAbimoMeasuresFile = true;
+              }
+            }
+
+            if (geoJSONData && !excludeAbimoMeasuresFile) {
               this.fileSources.push({
                 title: `${layer.attributes.id}.geojson`,
                 src: URL.createObjectURL(
@@ -113,7 +132,7 @@ export default {
           link.click();
           window.URL.revokeObjectURL(url);
         })
-        .catch((error) => console.log(error));
+        .catch((error) => console.error(error));
     },
     async downloadWithFetch(zipName) {
       await this.prepareConfigForDownload();
