@@ -1847,7 +1847,7 @@
   },
   {
     "id": "abimo_measures",
-    "styleId": "default",
+    "styleId": "measure_placements",
     "name": "Abimo gesetzte Maßnahmen",
     "crs": "urn:ogc:def:crs:EPSG::25833",
     "typ": "GEOJSON",
@@ -4575,7 +4575,8 @@
         "csw_url": "https://gdi.berlin.de/geonetwork/srv/ger/csw"
       }
     ],
-    "gfiAttributes": "showAll"
+    "gfiAttributes": "showAll",
+    "displayLayerAlert": false
   },
   {
     "id": "ua_versorggruen_2020:versorggruen_2020",

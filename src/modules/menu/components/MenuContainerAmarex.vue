@@ -201,14 +201,14 @@ export default {
                     :color="colors.secondary"
                     :size="16"
                 />
-                <p>Neues Projekt</p>
+                <p>Projekt öffnen</p>
             </button> 
             <button class="amarex-btn-primary">
                 <SaveIcon
                     :color="colors.secondary"
                     :size="16"
                 />
-                <p>Herunterladen</p>
+                <p>Projekt herunterladen</p>
             </button>
         </div>
         <ResizeHandle

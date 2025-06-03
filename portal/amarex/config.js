@@ -66,7 +66,6 @@ const Config = {
   addons: [
     "projectDownloader",
     "projectUploader",
-    "reportPrinter",
     "fileImporter",
     "abimoHandler",
     "projectStarter",

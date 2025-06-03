@@ -74,6 +74,7 @@ function calculateAllMeasureStats(selectedFeatures, selectedMeasures) {
   let pvd = parseFloat(stats.pvd);
   let to_swale = parseFloat(stats.to_swale);
 
+  const roof_area = areaCalc.getTotalRoofArea(selectedFeatures);
   // NOTE: GREEN ROOF
   // 1. Calculate Green Roof first
   // 1.1. Calculate total area of each measure type in m²
@@ -86,8 +87,14 @@ function calculateAllMeasureStats(selectedFeatures, selectedMeasures) {
   // max possible area of green roofs in m²
   const Ag_max = areaCalc.calculatePrecisely(roof * main_frac * total_area);
 
-  // 1.3. Calculate maximum possible area of green roofs in m²
+  // 1.3. Calculate new green roof area limited to the max possible of green roofs in m²
+  // für Report
   const Ag_neu = Math.min(totalGreenRoofArea + Ag_0, Ag_max);
+
+  // für Report
+  const newGreenRoofToRoof = areaCalc.calculatePrecisely(
+    (Ag_neu / roof_area) * 100,
+  );
 
   // 1.4. Calculate new area of green roofs in m²
   const newGreenRoof = areaCalc.calculatePrecisely(Ag_neu / total_area);
@@ -96,6 +103,9 @@ function calculateAllMeasureStats(selectedFeatures, selectedMeasures) {
 
   // NOTE: ENTSIEGELUNG
   // 2. Calculate Entsiegelung/Unpaved second
+  // unbebaut versiegelt -> pvd (kein dach aber versiegelt)
+  // bebaut versiegelt -> roof (dach)
+  // unpvd -> was weder dach noch versiegelt ist
 
   // 2.1. Calculate total area of each measure type in m²
   const totalUnpavedArea = calculateTotalMeasureArea(unpavedMeasures); // Ae = Ae_1 + Ae_2 + ...
@@ -112,13 +122,21 @@ function calculateAllMeasureStats(selectedFeatures, selectedMeasures) {
   );
 
   // 2.4. Calculate new area of unpaved areas in m²
+  // Unversiegelte Fläche für Report in m²
   const Ae_neu = Math.min(totalUnpavedArea + Ae_0, Ae_max);
 
   // 2.5. Calculate new area of unpaved areas in m²
   const unpaved = areaCalc.calculatePrecisely(Ae_neu / total_area);
+  // Unversiegelte Fläche für Report in %
+  const totalUnpavedToTotalArea = areaCalc.calculatePrecisely(unpaved * 100);
 
   // 2.6. Calculate new area of unpaved areas in m²
+  // unbebaut versiegelt für Report in m²
   const pvd_neu = areaCalc.calculatePrecisely(1 - unpaved - roof);
+  const pvd_neu_area = pvd_neu * total_area;
+
+  // Report unbebaut versiegelt für Report %
+  const newPvdToTotalArea = areaCalc.calculatePrecisely(pvd_neu * 100);
 
   const Aet = areaCalc.calculatePrecisely(totalUnpavedArea + Ae_0);
 
@@ -161,8 +179,14 @@ function calculateAllMeasureStats(selectedFeatures, selectedMeasures) {
 
     // Final calculated fractions
     newGreenRoof,
+    newGreenRoofToRoof,
     newUnpvd: unpaved,
     newToSwale,
+
+    pvd_neu,
+    pvd_neu_area,
+    newPvdToTotalArea,
+    totalUnpavedToTotalArea,
 
     // TODO: remove when done checking calculations
     Ag_0,
