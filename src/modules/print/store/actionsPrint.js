@@ -64,7 +64,6 @@ const actions = {
      * @returns {void}
      */
     startPrint3d: async function ({state, dispatch, commit}, print) {
-        commit("setProgressWidth", "width: 25%");
         const ol3d = mapCollection.getMap("3D"),
             ol2d = ol3d.getOlMap(),
             view = ol2d.getView(),
@@ -167,7 +166,6 @@ const actions = {
      * @returns {void}
      */
     startPrint: async function ({state, getters, dispatch, commit}, print) {
-        commit("setProgressWidth", "width: 25%");
         layerProvider.getVisibleLayer(state.printMapMarker);
 
         const visibleLayerList = [...getters.visibleLayerList, ...getters.activeAdditionalLayers],
@@ -335,7 +333,6 @@ const actions = {
 
         url = state.printService === "plotservice" ? serviceUrlDefinition + "/create.json" : serviceUrlDefinition + printId + "/report." + printFormat;
 
-        commit("setProgressWidth", "width: 50%");
         if (typeof printJob.getResponse === "function") {
             if (state.printService === "plotservice") {
                 printJob.payload = await dispatch("migratePayload", printJob.payload);
@@ -447,7 +444,6 @@ const actions = {
                 "onSuccess": "waitForPrintJobSuccess"
             };
 
-        commit("setProgressWidth", "width: 75%");
         dispatch("sendRequest", serviceRequest);
     },
 
@@ -467,7 +463,6 @@ const actions = {
             console.error("Error: " + response.error);
         }
         else if (response.done) {
-            commit("setProgressWidth", "width: 100%");
             const index = response.downloadURL.lastIndexOf("/"),
                 fileId = response.downloadURL.substr(index),
                 fileSpecs = {
@@ -479,7 +474,6 @@ const actions = {
             dispatch("downloadFile", fileSpecs);
         }
         else {
-            commit("setProgressWidth", "width: 80%");
             // The report is not ready yet. Check again in 2s.
             setTimeout(() => {
                 const index = response.downloadURL.lastIndexOf("/"),
