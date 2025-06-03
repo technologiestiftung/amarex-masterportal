@@ -76,7 +76,6 @@ export default {
         map.un("pointermove", this.hoverListenerKey);
         this.hoverListenerKey = null;
 
-        // Reset any currently hovered features
         map
           .getLayers()
           .getArray()
@@ -104,13 +103,47 @@ export default {
 
       const map = mapCollection.getMap("2D");
 
+      const setOpacity = "0.3";
+      const selectedColor = "deep_pink";
+
+      const hoverColors = {
+        medium: {
+          full: "rgb(147, 112, 219)",
+          opacity: `rgba(147, 112, 219, ${setOpacity})`,
+        },
+        regular: {
+          full: "rgb(128, 0, 128)",
+          opacity: `rgba(128, 0, 128, ${setOpacity})`,
+        },
+        rebecca: {
+          full: "rgb(102, 51, 153)",
+          opacity: `rgba(102, 51, 153, ${setOpacity})`,
+        },
+        deep_pink: {
+          full: "rgb(255, 20, 147)",
+          opacity: `rgba(255, 20, 147, ${setOpacity})`,
+        },
+        hot_pink: {
+          full: "rgb(255, 105, 180)",
+          opacity: `rgba(255, 105, 180, ${setOpacity})`,
+        },
+        light_pink: {
+          full: "rgb(255, 182, 193)",
+          opacity: `rgba(255, 182, 193, ${setOpacity})`,
+        },
+        pink: {
+          full: "rgb(255, 192, 203)",
+          opacity: `rgba(255, 192, 203, ${setOpacity})`,
+        },
+      };
+
       const hoverStyle = new Style({
         stroke: new Stroke({
-          color: "#ffcc33",
+          color: hoverColors[selectedColor].full,
           width: 2,
         }),
         fill: new Fill({
-          color: "rgba(255, 255, 0, 0.3)",
+          color: hoverColors[selectedColor].opacity,
         }),
       });
 
@@ -194,6 +227,20 @@ export default {
               ) {
                 feature.setStyle(undefined);
               }
+            });
+          }
+        });
+    },
+    removeHardCurrentlyHoveredFeature() {
+      const map = mapCollection.getMap("2D");
+      map
+        .getLayers()
+        .getArray()
+        .forEach((layer) => {
+          if (layer && layer.get("id") === "rabimo_input_2025") {
+            const features = layer.getSource().getFeatures();
+            features.forEach((feature) => {
+              feature.setStyle(undefined);
             });
           }
         });
@@ -370,9 +417,11 @@ export default {
       }
     },
   },
-  beforeUnmount() {
-    // Clean up event listeners when component is destroyed
+  unmounted() {
     this.removeHoverEffect();
+    setTimeout(() => {
+      this.removeHardCurrentlyHoveredFeature();
+    }, 100);
   },
 };
 </script>
