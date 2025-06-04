@@ -1811,7 +1811,7 @@
   {
     "id": "abimo_2025_wfs:preCompute",
     "styleId": "preCompute",
-    "name": "Verdunstung",
+    "name": "Vorberechnete Abimo Ergebnisse 2025",
     "crs": "EPSG:25833",
     "url": "https://geoserver.ionos.ds-apps.tsb-berlin.de/geoserver/amarex/wfs",
     "typ": "WFS",
