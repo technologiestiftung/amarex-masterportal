@@ -643,86 +643,90 @@ async function writePDF(payload, savingType, blob) {
       extraMarginBottom: 28,
     });
   }
-  text({
-    text: "Auflistung der Maßnahmendimensionen:"
-  });
+  if (payload.isMeasurePlanning) {
+    
+    text({
+      text: "Auflistung der Maßnahmendimensionen:"
+    });
 
-  const tableStyle = {
-    theme: "grid",
-    headStyles: {
-      fillColor: [220, 220, 220],
-      textColor: 0,
-      fontSize: 12,
-      cellPadding: 2,
-      font: "Arial",
-      fontStyle: "bold",
-      lineColor: 0,
-      lineWidth: 0.5,
-    },
-    styles: {
-      fontSize: 12,
-      cellPadding: 2,
-      textColor: 0,
-      font: "Arial",
-      fontStyle: "normal",
-      lineColor: 0,
-      lineWidth: 0.5,
-    },
-    columnStyles: {
-      0: { cellWidth: 70 },
-      1: { cellWidth: 37 },
-      2: { cellWidth: 37 },
-      3: { cellWidth: 37 },
-    },
-    didParseCell: function (data) {
-      if (data.column.index === 0) {
-        data.cell.styles.fillColor = [230, 230, 230];
-        data.cell.styles.fontStyle = "bold";
-      }
-      data.cell.styles.textColor = 0;
-    },
-  };
+    const tableStyle = {
+      theme: "grid",
+      headStyles: {
+        fillColor: [220, 220, 220],
+        textColor: 0,
+        fontSize: 12,
+        cellPadding: 2,
+        font: "Arial",
+        fontStyle: "bold",
+        lineColor: 0,
+        lineWidth: 0.5,
+      },
+      styles: {
+        fontSize: 12,
+        cellPadding: 2,
+        textColor: 0,
+        font: "Arial",
+        fontStyle: "normal",
+        lineColor: 0,
+        lineWidth: 0.5,
+      },
+      columnStyles: {
+        0: { cellWidth: 70 },
+        1: { cellWidth: 37 },
+        2: { cellWidth: 37 },
+        3: { cellWidth: 37 },
+      },
+      didParseCell: function (data) {
+        if (data.column.index === 0) {
+          data.cell.styles.fillColor = [230, 230, 230];
+          data.cell.styles.fontStyle = "bold";
+        }
+        data.cell.styles.textColor = 0;
+      },
+    };
 
-  autoTable(doc, {
-    ...tableStyle,
-    startY: vertical,
-    head: [["Mulde", "klein", "mittel", "groß"]],
-    body: [
-      ["Länge", "10 m", "10 m", "20 m"],
-      ["Breite", "1 m", "5 m", "10 m"],
-      ["Tiefe", "0,3 m", "0,3 m", "0,3 m"],
-      ["Oberfläche", "10 m²", "50 m²", "200 m²"],
-      ["Volumen", "3 m³", "30 m³", "150 m³"],
-      ["angeschlossene Fläche", "50 m²", "250 m²", "1000 m²"],
-    ],
-  });
+    autoTable(doc, {
+      ...tableStyle,
+      startY: vertical,
+      head: [["Mulde", "klein", "mittel", "groß"]],
+      body: [
+        ["Länge", "10 m", "10 m", "20 m"],
+        ["Breite", "1 m", "5 m", "10 m"],
+        ["Tiefe", "0,3 m", "0,3 m", "0,3 m"],
+        ["Oberfläche", "10 m²", "50 m²", "200 m²"],
+        ["Volumen", "3 m³", "30 m³", "150 m³"],
+        ["angeschlossene Fläche", "50 m²", "250 m²", "1000 m²"],
+      ],
+    });
 
-  vertical += 70;
+    vertical += 70;
 
-  autoTable(doc, {
-    ...tableStyle,
-    startY: vertical,
-    head: [["Entsiegelung", "klein", "mittel", "groß"]],
-    body: [
-      ["Länge", "2 m", "25 m", "50 m"],
-      ["Breite", "5 m", "2 m", "10 m"],
-      ["Oberfläche", "10 m²", "50 m²", "500 m²"],
-    ],
-  });
+    autoTable(doc, {
+      ...tableStyle,
+      startY: vertical,
+      head: [["Entsiegelung", "klein", "mittel", "groß"]],
+      body: [
+        ["Länge", "2 m", "25 m", "50 m"],
+        ["Breite", "5 m", "2 m", "10 m"],
+        ["Oberfläche", "10 m²", "50 m²", "500 m²"],
+      ],
+    });
 
-  vertical += 45;
+    vertical += 45;
 
-  autoTable(doc, {
-    ...tableStyle,
-    startY: vertical,
-    head: [["Dachbegrünung", "klein", "mittel", "groß"]],
-    body: [
-      ["Länge", "5 m", "12,5 m", "25 m"],
-      ["Breite", "4 m", "8 m", "10 m"],
-      ["Höhe", "0,1 m", "0,1 m", "0,1 m"],
-      ["Oberfläche", "20 m²", "100 m²", "250 m²"],
-    ],
-  });
+    autoTable(doc, {
+      ...tableStyle,
+      startY: vertical,
+      head: [["Dachbegrünung", "klein", "mittel", "groß"]],
+      body: [
+        ["Länge", "5 m", "12,5 m", "25 m"],
+        ["Breite", "4 m", "8 m", "10 m"],
+        ["Höhe", "0,1 m", "0,1 m", "0,1 m"],
+        ["Oberfläche", "20 m²", "100 m²", "250 m²"],
+      ],
+    });
+
+  }
 
   // save the PDF
   if (savingType === "_blank") {
