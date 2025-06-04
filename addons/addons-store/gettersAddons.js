@@ -4,7 +4,6 @@ import FileImporter from "../fileImporter/components/FileImporter.vue";
 import ProjectDownloader from "../projectDownloader/components/ProjectDownloader.vue";
 import ProjectStarter from "../projectStarter/components/ProjectStarter.vue";
 import ProjectUploader from "../projectUploader/components/ProjectUploader.vue";
-import ReportPrinter from "../reportPrinter/components/ReportPrinter.vue";
 import ThemeMaps from "../themeMaps/components/ThemeMaps.vue";
 import ToolDownloader from "../toolDownloader/components/ToolDownloader.vue";
 
@@ -13,7 +12,6 @@ const getters = {
     const coreModules = {
       projectUploader: ProjectUploader,
       projectDownloader: ProjectDownloader,
-      reportPrinter: ReportPrinter,
       fileImporter: FileImporter,
       abimoHandler: AbimoHandler,
       projectStarter: ProjectStarter,

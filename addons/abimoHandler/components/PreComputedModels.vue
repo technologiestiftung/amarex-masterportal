@@ -86,15 +86,7 @@ export default {
             layer.id === "abimo_2025_wfs:infiltrati",
         ),
       );
-      this.preComputedModels.forEach((layer) => {
-        const isLayerVisible = layer.visibility;
-        if (!isLayerVisible) {
-          this.changeVisibility({ layerId: layer.id, value: true });
-        }
-      });
-      // this.preComputedModels.find(
-      //   (layer) => layer.id === "delta_w_2025_wfs",
-      // ).visibility = true;
+      this.changeVisibility({ layerId: "delta_w_2025_wfs", value: true });
     }
   },
 };
