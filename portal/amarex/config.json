@@ -709,22 +709,22 @@
           "type": "folder",
           "elements": [
             {
-              "id": "abimo_2025_wfs:evaporatio",
+              "id": "abimo_2025_wms:evaporatio",
               "visibility": false,
               "showInLayerTree": false
             },
             {
-              "id": "abimo_2025_wfs:surface_ru",
+              "id": "abimo_2025_wms:surface_ru",
               "visibility": false,
               "showInLayerTree": false
             },
             {
-              "id": "abimo_2025_wfs:infiltrati",
+              "id": "abimo_2025_wms:infiltrati",
               "visibility": false,
               "showInLayerTree": false
             },
             {
-              "id": "delta_w_2025_wfs",
+              "id": "delta_w_2025_wms",
               "visibility": false,
               "showInLayerTree": false
             },
@@ -779,3 +779,4 @@
     }
   }
 }
+
