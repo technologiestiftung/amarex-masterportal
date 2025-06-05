@@ -489,7 +489,7 @@ async function writePDF(payload, savingType, blob) {
       ],
       columnStyles: columnStylesForPageFive
     });
-    vertical += 65;
+    vertical += 57;
     text({
       text: "Alle Prozentangaben in Klammern beziehen sich auf die Gesamtfläche.",
       size: 12,
