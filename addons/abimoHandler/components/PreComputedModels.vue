@@ -80,13 +80,13 @@ export default {
       this.setPreComputedModels(
         this.allLayerConfigs.filter(
           (layer) =>
-            layer.id === "delta_w_2025_wfs" ||
-            layer.id === "abimo_2025_wfs:evaporatio" ||
-            layer.id === "abimo_2025_wfs:surface_ru" ||
-            layer.id === "abimo_2025_wfs:infiltrati",
+            layer.id === "delta_w_2025_wms" ||
+            layer.id === "abimo_2025_wms:evaporatio" ||
+            layer.id === "abimo_2025_wms:surface_ru" ||
+            layer.id === "abimo_2025_wms:infiltrati",
         ),
       );
-      this.changeVisibility({ layerId: "delta_w_2025_wfs", value: true });
+      this.changeVisibility({ layerId: "delta_w_2025_wms", value: true });
     }
   },
 };
