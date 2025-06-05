@@ -5,8 +5,6 @@ import JSZip from "jszip";
 import layerCollection from "../../../src/core/layers/js/layerCollection.js";
 import colors from "../../../src/shared/js/utils/amarex-colors.json";
 import { FileIcon, LoaderCircle, Trash2 } from "lucide-vue-next";
-import Feature from "ol/Feature";
-import Point from "ol/geom/Point";
 
 /**
  * Project Uploader
@@ -74,37 +72,6 @@ export default {
     ...mapActions("Alerting", ["addSingleAlert"]),
     ...mapMutations("Modules/ProjectUploader", ["setFeatureExtents"]),
     ...mapActions("Menu", ["changeCurrentComponent", "toggleMenu"]),
-    ...mapActions("Modules/AbimoHandler", [
-      "updateAccumulatedStats",
-      "updatePreComputedStats",
-      "updateMeasureStats",
-      "updateResultStats",
-      "updateMaxSwaleConnected",
-      "storeTargetSliderValue",
-      "storeInitalTargetSliderValue",
-      "canAddMeasure",
-    ]),
-    ...mapMutations("Modules/AbimoHandler", [
-      "setSelectedFeatures",
-      "setSelectInteraction",
-      "setBlockAreaConfirmed",
-      "setSelectedCount",
-      "setPreselectedFeatures",
-      "setNewGreenRoof",
-      "setNewUnpvd",
-      "setNewToSwale",
-      "setResetTargetValues",
-      "setPreComputedModelsShown",
-      "setPreComputedModels",
-      "setActiveStep",
-      "setResultLayers",
-      "setPreComputedModelsAdded",
-      "setIsMeasurePlanning",
-      "setSelectedMeasures",
-      "setHasMeasures",
-      "setIsMeasureDrawing",
-      "setSelectedThemeMap",
-    ]),
 
     /**
      * Sets the focus to the first control
@@ -116,79 +83,6 @@ export default {
           this.$refs["upload-label"].focus();
         }
       });
-    },
-
-    deserializeFeatures(serialized) {
-      return serialized
-        .map((f) => {
-          let geometry;
-          switch (f.geometryType) {
-            case "Point":
-              geometry = new Point(f.geometry);
-              break;
-            // Add more geometry types here as needed
-            default:
-              return null;
-          }
-
-          const feature = new Feature(
-            geometry.transform("EPSG:4326", "EPSG:3857"),
-          );
-          feature.setProperties(f);
-          feature.unset("geometry");
-          return feature;
-        })
-        .filter(Boolean);
-    },
-
-    /**
-     * Unzip file
-     * @param {abimoConfigFileContent} content of the abimo config file
-     * @returns {void}
-     */
-    async handleAbimoConfigFile(abimoConfigFileContent) {
-      const abimoConfig = JSON.parse(abimoConfigFileContent);
-
-      // 🔄 Restore simple state via mutations
-      this.setBlockAreaConfirmed(abimoConfig.blockAreaConfirmed);
-      this.setSelectedCount(abimoConfig.selectedCount);
-      this.setIsMeasurePlanning(abimoConfig.isMeasurePlanning);
-      this.setNewGreenRoof(abimoConfig.newGreenRoof);
-      this.setNewUnpvd(abimoConfig.newUnpvd);
-      this.setNewToSwale(abimoConfig.newToSwale);
-      this.setActiveStep(abimoConfig.activeStep);
-      this.setPreComputedModelsShown(abimoConfig.preComputedModelsShown);
-      this.setPreComputedModelsAdded(abimoConfig.preComputedModelsAdded);
-      this.setHasMeasures(abimoConfig.hasMeasures);
-      this.setIsMeasureDrawing(abimoConfig.isMeasureDrawing);
-
-      // ✅ Mutations that match state
-      this.setSelectedFeatures(
-        this.deserializeFeatures(abimoConfig.selectedFeatures),
-      );
-      this.setPreselectedFeatures(
-        this.deserializeFeatures(abimoConfig.preselectedFeatures),
-      );
-      this.setSelectedMeasures(
-        this.deserializeFeatures(abimoConfig.selectedMeasures),
-      );
-
-      // ⚠️ Actions — use actions when side effects or async logic may apply
-      this.updateAccumulatedStats(abimoConfig.accumulatedAbimoStats);
-      // this.updatePreComputedStats(abimoConfig.preComputedStats);
-      this.updateMeasureStats(abimoConfig.accumulatedMeasureStats);
-
-      // ❓ Not directly mapped yet — consider adding support if needed:
-      // - resultAbimoStats
-      // - areaTypesData
-
-      console.warn(
-        "No mutation/action found for these fields (consider implementing them):",
-        {
-          resultAbimoStats: abimoConfig.resultAbimoStats,
-          areaTypesData: abimoConfig.areaTypesData,
-        },
-      );
     },
 
     /**
@@ -372,17 +266,6 @@ export default {
     async addFiles() {
       this.filesToUpload.forEach(async (file) => {
         if (!this.checkValid(file)) {
-          return;
-        }
-
-        // Check for a specific filename first
-        if (file.name === "abimo-config.json") {
-          const reader = new FileReader();
-          reader.onload = async (event) => {
-            const configContent = event.target.result;
-            this.handleAbimoConfigFile(configContent);
-          };
-          reader.readAsText(file);
           return;
         }
 

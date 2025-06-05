@@ -19,7 +19,6 @@ export default {
   data() {
     return {
       configToExport: null,
-      abimoConfigToExport: null,
       fileSources: [],
       projectTitle: "",
       colors,
@@ -36,30 +35,6 @@ export default {
       "Maps/projectionCode",
       "layerConfig",
       "portalConfig",
-    ]),
-    ...mapGetters("Modules/AbimoHandler", [
-      "selectedFeatures",
-      "accumulatedAbimoStats",
-      "areaTypesData",
-      "selectInteraction",
-      "blockAreaConfirmed",
-      "preselectedFeatures",
-      "selectedCount",
-      "isMeasurePlanning",
-      "preComputedStats",
-      "newGreenRoof",
-      "newUnpvd",
-      "newToSwale",
-      "preComputedModels",
-      "activeStep",
-      "preComputedModelsShown",
-      "preComputedModelsAdded",
-      "selectedMeasures",
-      "hasMeasures",
-      "resultAbimoStats",
-      "resultLayers",
-      "isMeasureDrawing",
-      "accumulatedMeasureStats",
     ]),
   },
   methods: {
@@ -144,57 +119,6 @@ export default {
         console.error(error);
       }
     },
-
-    serializeFeatures(features) {
-      return features.map((f) => ({
-        ...f.getProperties(),
-        geometry: f
-          .getGeometry()
-          .clone()
-          .transform("EPSG:3857", "EPSG:4326")
-          .getCoordinates(), // OR GeoJSON
-        geometryType: f.getGeometry().getType(),
-      }));
-    },
-    /**
-     * Prepare abimo-config.json for download
-     * @function prepareAbimoConfigForDownload
-     * @returns {Promise}
-     */
-    prepareAbimoConfigForDownload() {
-      const abimoState = {
-        accumulatedAbimoStats: this.accumulatedAbimoStats,
-        areaTypesData: this.areaTypesData,
-        blockAreaConfirmed: this.blockAreaConfirmed,
-        selectedCount: this.selectedCount,
-        isMeasurePlanning: this.isMeasurePlanning,
-        preComputedStats: this.preComputedStats,
-        newGreenRoof: this.newGreenRoof,
-        newUnpvd: this.newUnpvd,
-        newToSwale: this.newToSwale,
-        activeStep: this.activeStep,
-        preComputedModelsShown: this.preComputedModelsShown,
-        preComputedModelsAdded: this.preComputedModelsAdded,
-        hasMeasures: this.hasMeasures,
-        resultAbimoStats: this.resultAbimoStats,
-        isMeasureDrawing: this.isMeasureDrawing,
-        accumulatedMeasureStats: this.accumulatedMeasureStats,
-        //
-        // Features that need to be serialized
-        //
-        selectedFeatures: this.serializeFeatures(this.selectedFeatures),
-        preselectedFeatures: this.serializeFeatures(this.preselectedFeatures),
-        selectedMeasures: this.serializeFeatures(this.selectedMeasures),
-        //
-        // Features that are not serializable
-        //
-        // selectInteraction: this.selectInteraction,
-        // preComputedModels: this.preComputedModels,
-        // resultLayers: this.resultLayers,
-      };
-      console.log("abimoState :>> ", abimoState);
-      this.abimoConfigToExport = abimoState;
-    },
     forceFileDownload(zip, zipName) {
       zip
         .generateAsync({ type: "blob" })
@@ -211,7 +135,6 @@ export default {
         .catch((error) => console.error(error));
     },
     async downloadWithFetch(zipName) {
-      this.prepareAbimoConfigForDownload();
       await this.prepareConfigForDownload();
       await this.prepareVectorLayerForDownload();
       const zip = new JSZip(),
@@ -219,12 +142,6 @@ export default {
         configJson = JSON.stringify(this.configToExport);
 
       zip.file("config.json", configJson);
-
-      if (this.abimoConfigToExport) {
-        // Create abimo-config.json
-        const abimoConfigJson = JSON.stringify(this.abimoConfigToExport);
-        zip.file("abimo-config.json", abimoConfigJson);
-      }
 
       const fetchPromises = this.fileSources.map(async (file) => {
         const response = await fetch(file.src),
