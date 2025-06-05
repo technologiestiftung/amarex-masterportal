@@ -206,12 +206,6 @@ async function writePDF(payload, savingType, blob) {
   makeHeader("Report");
 
   text({
-    text: "Allgemein",
-    size: 18,
-    weight: "b",
-    extraMarginBottom: 10,
-  });
-  text({
     text: "Name des Projekts: ",
     noLineBreak: true,
   });
@@ -240,7 +234,11 @@ async function writePDF(payload, savingType, blob) {
     extraMarginBottom: 14,
   });
   text({
-    text: payload.isMeasurePlanning || payload.betrachteteblockteilflaechen === 1 ? "Flächenanteile von der Gesamtfläche der ausgewählten Blockteilfläche:" : `Flächenanteile von der Gesamtfläche der ausgewählten ${payload.betrachteteblockteilflaechen} Blockteilflächen:`,
+    text: payload.isMeasurePlanning || payload.betrachteteblockteilflaechen === 1 ? `Gesamtfläche der ausgewählten Blockteilfläche: ${payload.totalArea.toFixed(0)} m²` : `Gesamtfläche der ausgewählten ${payload.betrachteteblockteilflaechen} Blockteilflächen: ${payload.totalArea.toFixed(0)} m²`,
+    extraMarginBottom: 14,
+  });
+  text({
+    text: "Flächenanteile:",
   });
   text({
     text: " • Dachfläche: ",
@@ -603,7 +601,7 @@ async function writePDF(payload, savingType, blob) {
     extraMarginBottom: 10,
   });
   text({
-    text: "Durch die Variierung der Parameter für die Maßnahmen der Regenwasserbewirtschaftung haben Sie den Wasserhaushalt beeinflusst. Die Ergebnisse Ihrer Simulation sind im Folgenden dem Wasserhaushalt des Status Quo für das Untersuchungsgebiet gegenübergestellt. Die Prozente in den Klammern beziehen sich auf den Jahresniederschlag.",
+    text: "Durch die Variierung der Parameter für die Maßnahmen der Regenwasserbewirtschaftung haben Sie den Wasserhaushalt beeinflusst. Die Ergebnisse Ihrer Simulation sind im Folgenden dem Wasserhaushalt des Status Quo für das Untersuchungsgebiet gegenübergestellt.",
     extraMarginBottom: 10,
   });
   if (showTableOnPageFive) {
@@ -619,6 +617,12 @@ async function writePDF(payload, savingType, blob) {
         ["Delta W", `${payload.delta_w_status_quo} %`, `${payload.abimo_result.deltaW} %`],
       ],
       columnStyles: columnStylesForPageFive
+    });
+    vertical += 53;
+    text({
+      text: "Die Prozente in den Klammern beziehen sich auf den Jahresniederschlag.",
+      size: 12,
+      extraMarginBottom: 36,
     });
   } else {
     text({

@@ -413,13 +413,15 @@ export default {
         },
 
         mathRoundAndToFixedTwoAfterComma(num) {
-            return Number(num.toFixed(2));
+            return Number(num.toFixed(1));
         },
         mathRoundAndToFixed(num) {
             return Number(Math.round(num).toFixed(0))
         },
         fullPercentage(num) {
-            return Math.floor(num * 10000) / 100;
+            // return (Math.floor(num * 1000) / 100).toFixed(1);
+            const value = Math.floor(num * 1000) / 10;
+            return value % 1 === 0 ? String(value.toFixed(0)) : String(value.toFixed(1));
         },
 
         /* Report PDF Amarex */
@@ -485,6 +487,7 @@ export default {
                 date: this.report.date,
                 isMeasurePlanning: this.isMeasurePlanning,
                 downloadURL,
+                totalArea: gesamtFläche,
                 // 1.1 * 1.3 => m² | 1.3 => % 
                 flächenanteile_dachfläche: `${dachFläche} m² (${this.fullPercentage(bebautVersiegelt)} %)`,
                 // 1.5 * dachFläche "D" => m² | 1.5 => %
