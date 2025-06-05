@@ -146,7 +146,7 @@ export default {
       <p
         class="description"
         v-html="
-          `Durch die von Ihnen vorgenommenen Planungsmaßnahmen würde sich der Wert ∆W von <strong>${this.preComputedStats.deltaW.toFixed(2)}%</strong> auf <strong>${this.resultAbimoStats.deltaW.toFixed(2)}% </strong> verändern,`
+          `Durch die von Ihnen vorgenommenen Planungsmaßnahmen würde sich der Wert ∆W von <strong>${this.preComputedStats.deltaW.toFixed(2)}%</strong> auf <strong>${this.resultAbimoStats.deltaW.toFixed(2)}% </strong> verändern.`
         "
       ></p>
     </div>
