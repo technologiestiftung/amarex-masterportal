@@ -147,13 +147,7 @@ export default {
             if (excludeIfEmptyLayers.includes(layerID)) {
               const parsedData = JSON.parse(geoJSONData);
               const hasFeatures = parsedData?.features?.length > 0;
-
-              if (!hasFeatures) {
-                console.log(
-                  `[ProjectDownloader] Excluding empty layer: ${layerID}`,
-                );
-                return;
-              }
+              if (!hasFeatures) return;
             }
 
             // Add layer to file sources
