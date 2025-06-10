@@ -91,60 +91,86 @@ export default {
      * @returns {Promise}
      */
     async prepareVectorLayerForDownload() {
-      const layerCollectionData = layerCollection.getLayers(),
-        projectionCode = this.$store.getters["Maps/projectionCode"];
+      const layerCollectionData = layerCollection.getLayers();
+      const projectionCode = this.$store.getters["Maps/projectionCode"];
 
       this.fileSources = []; // Reset the fileSources array
 
+      // Define layers to exclude from export
+      const excludeGEOJSONFilesFromExport = [
+        "abimo_2025_wfs:preCompute",
+        "delta_w_2025_wfs:preCompute",
+        "planung_abimo",
+        "rabimo_input_2025",
+      ];
+
+      // Define layers to exclude if they have no features
+      const excludeIfEmptyLayers = [
+        "abimo_result_delta_w",
+        "abimo_result_evaporation",
+        "abimo_result_infiltration",
+        "abimo_result_surface_run_off",
+        "abimo_measures",
+      ];
+
       try {
         layerCollectionData.forEach((layer) => {
+
+          // Skip layers not shown in layer tree
           if (!layer.attributes.showInLayerTree) {
             return;
           }
 
-          const excludeGEOJSONFilesFromExport = [
-            "abimo_2025_wfs:preCompute",
-            "delta_w_2025_wfs:preCompute",
-            "planung_abimo",
-            "rabimo_input_2025",
-          ];
-          const getLayerID = layer.get("id");
-          const exportThisFile =
-            !excludeGEOJSONFilesFromExport.includes(getLayerID);
+          const layerID = layer.get("id");
 
+          // Skip layers in the exclusion list
+          if (excludeGEOJSONFilesFromExport.includes(layerID)) {
+            return;
+          }
+
+          // Only process vector layers with correct type
           if (
             layer.layer instanceof VectorLayer &&
-            (layer.attributes.typ !== "WFS" || "WMS") &&
-            exportThisFile
+            (layer.attributes.typ !== "WFS" || "WMS")
           ) {
             const geoJSONData = exportLayerAsGeoJSON(
               layer.layer,
               projectionCode,
             );
 
-            let excludeAbimoMeasuresFile = false;
-            if (getLayerID === "abimo_measures") {
-              const abimoMeasures = JSON.parse(geoJSONData);
-              if (abimoMeasures?.features?.length === 0) {
-                excludeAbimoMeasuresFile = true;
+            if (!geoJSONData) {
+              return;
+            }
+
+            // Check if layer should be excluded when empty
+            if (excludeIfEmptyLayers.includes(layerID)) {
+              const parsedData = JSON.parse(geoJSONData);
+              const hasFeatures = parsedData?.features?.length > 0;
+
+              if (!hasFeatures) {
+                console.log(
+                  `[ProjectDownloader] Excluding empty layer: ${layerID}`,
+                );
+                return;
               }
             }
 
-            if (geoJSONData && !excludeAbimoMeasuresFile) {
-              this.fileSources.push({
-                title: `${layer.attributes.id}.geojson`,
-                src: URL.createObjectURL(
-                  new Blob([geoJSONData], { type: "application/json" }),
-                ),
-              });
-            }
+            // Add layer to file sources
+            this.fileSources.push({
+              title: `${layer.attributes.id}.geojson`,
+              src: URL.createObjectURL(
+                new Blob([geoJSONData], { type: "application/json" }),
+              ),
+            });
           }
         });
       } catch (error) {
-        console.error(error);
+        console.error(
+          "[ProjectDownloader] Error preparing vector layers:",
+          error,
+        );
       }
     },
-
     serializeFeatures(features) {
       return features.map((f) => ({
         ...f.getProperties(),
