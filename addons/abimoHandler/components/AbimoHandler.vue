@@ -307,11 +307,12 @@ export default {
           (layer) =>
             layer.id === "rabimo_input_2025" ||
             layer.id === "planung_abimo" ||
-            layer.id === "abimo_measures" ||
-            layer.id === "abimo_result_infiltration" ||
-            layer.id === "abimo_result_evaporation" ||
-            layer.id === "abimo_result_surface_run_off" ||
-            layer.id === "abimo_result_delta_w" ||
+            // FIXME: question: should result layers be visible when changing steps
+            // layer.id === "abimo_measures" ||
+            // layer.id === "abimo_result_infiltration" ||
+            // layer.id === "abimo_result_evaporation" ||
+            // layer.id === "abimo_result_surface_run_off" ||
+            // layer.id === "abimo_result_delta_w" ||
             layer.id === "abimo_2025_wfs:preCompute" ||
             layer.id === "delta_w_2025_wfs:preCompute",
         )
