@@ -71,11 +71,11 @@ export default {
       "preComputedModels",
       "preComputedModelsShown",
       "selectedThemeMap",
+      "visiblePreComputedModelIDs",
     ]),
   },
   mounted() {
     this.setPreComputedModelsShown(true);
-
     if (this.preComputedModels.length === 0) {
       this.setPreComputedModels(
         this.allLayerConfigs.filter(
@@ -86,7 +86,16 @@ export default {
             layer.id === "abimo_2025_wms:infiltrati",
         ),
       );
-      this.changeVisibility({ layerId: "delta_w_2025_wms", value: true });
+      if (
+        this.visiblePreComputedModelIDs &&
+        this.visiblePreComputedModelIDs.length > 0
+      ) {
+        this.visiblePreComputedModelIDs.forEach((model) => {
+          this.changeVisibility({ layerId: model, value: true });
+        });
+      } else {
+        this.changeVisibility({ layerId: "delta_w_2025_wms", value: true });
+      }
     }
   },
 };
