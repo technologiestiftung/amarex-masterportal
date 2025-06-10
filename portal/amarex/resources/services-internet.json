@@ -1737,7 +1737,7 @@
     "maxScale": "25000"
   },
   {
-    "id": "rabimo_input_2025",
+    "id": "rabimo_input_2025_live",
     "styleId": "abimo_input",
     "name": "Abimo Input 2025",
     "crs": "EPSG:25833",
@@ -1748,6 +1748,30 @@
     "datasets": false,
     "gfiAttributes": "showAll",
     "maxScale": "25000"
+  },
+  {
+    "id": "rabimo_input_2025",
+    "name": "Rabimo Input 2025 (VTL)",
+    "typ": "VectorTile",
+    "url": "https://geoserver.ionos.ds-apps.tsb-berlin.de/geoserver/gwc/service/tms/1.0.0/amarex:rabimo_input_2025@EPSG25833_Abimo@pbf/{z}/{y}/{x}.pbf",
+    "epsg": "EPSG:25833",
+    "tileSize": 256,
+    "extent": [370001, 5799520, 415785, 5837259],
+    "vtStyles": [
+      {
+        "id": "abimo_style",
+        "name": "Standardansicht",
+        "url": "resources/styles/rabimo_style.json",
+        "defaultStyle": true
+      }
+    ],
+    "visibility": true,
+    "transparency": 0,
+    "minZoom": 0,
+    "maxZoom": 8,
+    "gfiAttributes": "showAll",
+    "gfiTheme": "default",
+    "legend": false
   },
   {
     "id": "abimo_2025_wfs:evaporatio",

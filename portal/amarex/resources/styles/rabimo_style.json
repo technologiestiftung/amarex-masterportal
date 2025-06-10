@@ -1,0 +1,42 @@
+{
+  "name": "abimo_styles",
+  "version": 8,
+  "sources": {
+    "amarex-source": {
+      "type": "vector",
+      "attribution": "© 2025 basemap.de / BKG | Datenquellen: © GeoBasis-DE",
+      "url": "https://geoserver.ionos.ds-apps.tsb-berlin.de/geoserver/gwc/service/tms/1.0.0/amarex:rabimo_input_2025@EPSG25833_Abimo@pbf/{z}/{y}/{x}.pbf",
+      "scheme": "xyz",
+      "tileSize": 256
+    }
+  },
+  "layers": [
+    {
+      "id": "green_roof-layer",
+      "type": "fill",
+      "source": "amarex-source",
+      "source-layer": "rabimo_input_2025",
+      "layout": { "visibility": "visible" },
+      "paint": {
+        "fill-color": [
+          "interpolate",
+          ["linear"],
+          ["get", "green_roof"],
+          0,
+          "rgba(240, 240, 240, 1)",
+          0.25,
+          "rgba(200, 220, 200, 1)",
+          0.5,
+          "rgba(150, 200, 150, 1)",
+          0.75,
+          "rgba(100, 180, 100, 1)",
+          1,
+          "rgba(50, 150, 50, 1)"
+        ],
+        "fill-opacity": 1,
+        "fill-outline-color": "rgba(255, 180, 180, 1)"
+      }
+    }
+  ]
+}
+
