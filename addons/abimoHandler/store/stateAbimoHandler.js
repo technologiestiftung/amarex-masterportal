@@ -73,6 +73,7 @@ export default {
   ],
   preComputedModelsShown: false,
   preComputedModels: [],
+  visiblePreComputedModelIDs: [],
   preComputedModelsAdded: false,
   preComputedStats: {
     deltaW: 0,
@@ -112,5 +113,7 @@ export default {
     totalSwaleVolume: 0,
     totalSwaleConnectedArea: 0,
   },
+  dataResultCalc: [],
+  dataPreComputedCalc: [],
 };
 
