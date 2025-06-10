@@ -60,6 +60,8 @@ export default {
       "resultLayers",
       "isMeasureDrawing",
       "accumulatedMeasureStats",
+      "dataResultCalc",
+      "dataPreComputedCalc",
     ]),
   },
   methods: {
@@ -115,7 +117,6 @@ export default {
 
       try {
         layerCollectionData.forEach((layer) => {
-
           // Skip layers not shown in layer tree
           if (!layer.attributes.showInLayerTree) {
             return;
@@ -188,38 +189,43 @@ export default {
      * @returns {Promise}
      */
     prepareAbimoConfigForDownload() {
-      const abimoState = {
-        accumulatedAbimoStats: this.accumulatedAbimoStats,
-        areaTypesData: this.areaTypesData,
-        blockAreaConfirmed: this.blockAreaConfirmed,
-        selectedCount: this.selectedCount,
-        isMeasurePlanning: this.isMeasurePlanning,
-        preComputedStats: this.preComputedStats,
-        newGreenRoof: this.newGreenRoof,
-        newUnpvd: this.newUnpvd,
-        newToSwale: this.newToSwale,
-        activeStep: this.activeStep,
-        preComputedModelsShown: this.preComputedModelsShown,
-        preComputedModelsAdded: this.preComputedModelsAdded,
-        hasMeasures: this.hasMeasures,
-        resultAbimoStats: this.resultAbimoStats,
-        isMeasureDrawing: this.isMeasureDrawing,
-        accumulatedMeasureStats: this.accumulatedMeasureStats,
-        //
-        // Features that need to be serialized
-        //
-        selectedFeatures: this.serializeFeatures(this.selectedFeatures),
-        preselectedFeatures: this.serializeFeatures(this.preselectedFeatures),
-        selectedMeasures: this.serializeFeatures(this.selectedMeasures),
-        //
-        // Features that are not serializable
-        //
-        // selectInteraction: this.selectInteraction,
-        // preComputedModels: this.preComputedModels,
-        // resultLayers: this.resultLayers,
-      };
-      console.log("abimoState :>> ", abimoState);
-      this.abimoConfigToExport = abimoState;
+
+      // if preComputedModelsAdded is false, we don't need to export the abimo config
+      if (this.activeStep === 0 && !this.preComputedModelsAdded) {
+        return;
+      }
+      if (this.activeStep === 7) {
+        let abimoState = {
+          activeStep: this.activeStep,
+          selectedCount: this.selectedCount,
+        };
+
+        if (this.preComputedModelsAdded) {
+          const visiblePreComputedModelsIDs = [];
+          this.preComputedModels.forEach((model) => {
+            if (model.visibility) {
+              visiblePreComputedModelsIDs.push(model.id);
+            }
+          });
+
+          abimoState = {
+            ...abimoState,
+            visiblePreComputedModelIDs: visiblePreComputedModelsIDs,
+            preComputedModelsAdded: this.preComputedModelsAdded,
+          };
+        }
+
+        abimoState = {
+          ...abimoState,
+          dataResultCalc: this.dataResultCalc,
+          dataPreComputedCalc: this.dataPreComputedCalc,
+          accumulatedAbimoStats: this.accumulatedAbimoStats,
+          accumulatedMeasureStats: this.accumulatedMeasureStats,
+          areaTypesData: this.areaTypesData,
+        };
+
+        this.abimoConfigToExport = abimoState;
+      }
     },
     forceFileDownload(zip, zipName) {
       zip
