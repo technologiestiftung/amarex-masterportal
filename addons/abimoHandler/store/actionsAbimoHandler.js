@@ -25,11 +25,13 @@ const actions = {
     });
   },
   updateResultStats({ commit }, data) {
+    commit("setDataResultCalc", data);
     const stats = areaCalc.calculateResultStats(data);
     commit("setResultAbimoStats", stats);
   },
   updatePreComputedStats({ commit }, data) {
     const stats = areaCalc.calculateResultStats(data);
+    commit("setDataPreComputedCalc", data);
     commit("setPreComputedStats", stats);
   },
   updateAccordionSteps({ commit, state }, stepToSetActive) {
