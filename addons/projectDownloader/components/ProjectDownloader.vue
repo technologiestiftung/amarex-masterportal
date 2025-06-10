@@ -183,7 +183,6 @@ export default {
      * @returns {Promise}
      */
     prepareAbimoConfigForDownload() {
-
       // if preComputedModelsAdded is false, we don't need to export the abimo config
       if (this.activeStep === 0 && !this.preComputedModelsAdded) {
         return;
@@ -206,6 +205,7 @@ export default {
             ...abimoState,
             visiblePreComputedModelIDs: visiblePreComputedModelsIDs,
             preComputedModelsAdded: this.preComputedModelsAdded,
+            preComputedModelsShown: this.preComputedModelsShown,
           };
         }
 
