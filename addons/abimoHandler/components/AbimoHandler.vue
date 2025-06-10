@@ -348,11 +348,13 @@ export default {
       "setPreComputedModels",
       "setActiveStep",
       "setResultLayers",
-      "setPreComputedModels",
       "setPreComputedModelsAdded",
       "setIsMeasurePlanning",
       "setSelectedMeasures",
       "setHasMeasures",
+      "setVisiblePreComputedModelIDs",
+      "setDataPreComputedCalc",
+      "setDataResultCalc",
     ]),
     setDisabled() {
       if (this.activeStep === 2) return this.selectedFeatures.length === 0;
@@ -439,6 +441,9 @@ export default {
       this.updateMeasureStats();
       this.setHasMeasures(false);
       this.updatePreComputedStats([]);
+      this.setVisiblePreComputedModelIDs([]);
+      this.setDataResultCalc([]);
+      this.setDataPreComputedCalc([]);
     },
     async resetBlockArea() {
       if (this.blockAreaConfirmed) {
