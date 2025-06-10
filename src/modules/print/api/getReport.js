@@ -1,12 +1,12 @@
 import { jsPDF } from "jspdf";
-import ArialNormal from "./assets/arial-normal";
+import autoTable from "jspdf-autotable";
+import logo from "./assets/amarex_logo_webtool.png";
 import ArialBold from "./assets/arial-bold";
 import ArialItalic from "./assets/arial-italic";
-import logo from "./assets/amarex_logo_webtool.png";
+import ArialNormal from "./assets/arial-normal";
 import EntsiegelungIcon from "./assets/EntsiegelungIcon.jpg";
 import GruendachIcon from "./assets/GruendachIcon.jpg";
 import MuldeIcon from "./assets/MuldeIcon.jpg";
-import autoTable from "jspdf-autotable";
 
 function toFileSlug(str) {
   return str
