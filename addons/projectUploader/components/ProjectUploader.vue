@@ -101,8 +101,10 @@ export default {
       });
     },
 
-    deserializeFeatures(serialized) {
-      return serialized
+    deserializeFeatures(features) {
+      if (!features) return;
+
+      return features
         .map((f) => {
           let geometry;
           switch (f.geometryType) {
@@ -132,46 +134,21 @@ export default {
     async handleAbimoConfigFile(abimoConfigFileContent) {
       const abimoConfig = JSON.parse(abimoConfigFileContent);
 
-      // 🔄 Restore simple state via mutations
-      this.setBlockAreaConfirmed(abimoConfig.blockAreaConfirmed);
+      if (abimoConfig.preComputedModelsAdded) {
+        this.setPreComputedModelsAdded(abimoConfig.preComputedModelsAdded);
+        this.setVisiblePreComputedModelIDs(
+          abimoConfig.visiblePreComputedModelIDs,
+        );
+      }
+
+      // run actions
+      await this.updateAccumulatedStats(abimoConfig.accumulatedAbimoStats);
+      await this.updateResultStats(abimoConfig.dataResultCalc);
+      await this.updatePreComputedStats(abimoConfig.dataPreComputedCalc);
+
       this.setSelectedCount(abimoConfig.selectedCount);
-      this.setIsMeasurePlanning(abimoConfig.isMeasurePlanning);
-      this.setNewGreenRoof(abimoConfig.newGreenRoof);
-      this.setNewUnpvd(abimoConfig.newUnpvd);
-      this.setNewToSwale(abimoConfig.newToSwale);
-      this.setActiveStep(abimoConfig.activeStep);
       this.setPreComputedModelsShown(abimoConfig.preComputedModelsShown);
-      this.setPreComputedModelsAdded(abimoConfig.preComputedModelsAdded);
-      this.setHasMeasures(abimoConfig.hasMeasures);
-      this.setIsMeasureDrawing(abimoConfig.isMeasureDrawing);
-
-      // ✅ Mutations that match state
-      this.setSelectedFeatures(
-        this.deserializeFeatures(abimoConfig.selectedFeatures),
-      );
-      this.setPreselectedFeatures(
-        this.deserializeFeatures(abimoConfig.preselectedFeatures),
-      );
-      this.setSelectedMeasures(
-        this.deserializeFeatures(abimoConfig.selectedMeasures),
-      );
-
-      // ⚠️ Actions — use actions when side effects or async logic may apply
-      this.updateAccumulatedStats(abimoConfig.accumulatedAbimoStats);
-      // this.updatePreComputedStats(abimoConfig.preComputedStats);
-      this.updateMeasureStats(abimoConfig.accumulatedMeasureStats);
-
-      // ❓ Not directly mapped yet — consider adding support if needed:
-      // - resultAbimoStats
-      // - areaTypesData
-
-      console.warn(
-        "No mutation/action found for these fields (consider implementing them):",
-        {
-          resultAbimoStats: abimoConfig.resultAbimoStats,
-          areaTypesData: abimoConfig.areaTypesData,
-        },
-      );
+      this.setActiveStep(abimoConfig.activeStep);
     },
 
     /**
