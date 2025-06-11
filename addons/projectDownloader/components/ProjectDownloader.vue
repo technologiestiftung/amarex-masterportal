@@ -216,6 +216,7 @@ export default {
           accumulatedAbimoStats: this.accumulatedAbimoStats,
           accumulatedMeasureStats: this.accumulatedMeasureStats,
           areaTypesData: this.areaTypesData,
+          isMeasurePlanning: this.isMeasurePlanning,
         };
 
         this.abimoConfigToExport = abimoState;
