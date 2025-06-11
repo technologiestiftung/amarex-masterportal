@@ -71,6 +71,7 @@ async function writePDF(payload, savingType, blob) {
   const iconSizes = 28 * pixelsToMM;
   const leftHalfOfThePage = pageInnerWidth / 2 - mm(24);
   const rightHalfOfThePage = paddingVertical + pageInnerWidth / 2
+  const showTableOnPageFive = true
 
   let vertical = paddingVertical;
   let pageCounter = 0;
@@ -205,12 +206,6 @@ async function writePDF(payload, savingType, blob) {
   makeHeader("Report");
 
   text({
-    text: "Allgemein",
-    size: 18,
-    weight: "b",
-    extraMarginBottom: 10,
-  });
-  text({
     text: "Name des Projekts: ",
     noLineBreak: true,
   });
@@ -239,6 +234,10 @@ async function writePDF(payload, savingType, blob) {
     extraMarginBottom: 14,
   });
   text({
+    text: payload.isMeasurePlanning || payload.betrachteteblockteilflaechen === 1 ? `Gesamtfläche der ausgewählten Blockteilfläche: ${payload.totalArea.toFixed(0)} m²` : `Gesamtfläche der ausgewählten ${payload.betrachteteblockteilflaechen} Blockteilflächen: ${payload.totalArea.toFixed(0)} m²`,
+    extraMarginBottom: 14,
+  });
+  text({
     text: "Flächenanteile:",
   });
   text({
@@ -250,20 +249,20 @@ async function writePDF(payload, savingType, blob) {
     x: getMarginLeft(" • Dachfläche: "),
   });
   text({
-    text: " • Davon begrünt: ",
+    text: "      • Davon begrünt: ",
     noLineBreak: true,
   });
   text({
     text: ` ${payload.flächenanteile_davon_begrünt_status_quo}`,
-    x: getMarginLeft(" • Davon begrünt: ")
+    x: getMarginLeft("      • Davon begrünt: ")
   });
   text({
-    text: " • Unbebaut Versiegelte Fläche: ",
+    text: " • Unbebaut versiegelte Fläche: ",
     noLineBreak: true,
   });
   text({
     text: payload.flächenanteile_unbebaut_versiegelte_flächen_status_quo,
-    x: getMarginLeft(" • Unbebaut Versiegelte Fläche: ")
+    x: getMarginLeft(" • Unbebaut versiegelte Fläche: ")
   });
   text({
     text: " • Unversiegelte Fläche: ",
@@ -311,13 +310,13 @@ async function writePDF(payload, savingType, blob) {
     extraMarginBottom: 14,
   });
   text({
-    text: `Oberflächenabfluss: ${payload.oberflächenabfluss_status_quo} mm`,
+    text: `Oberflächenabfluss: ${payload.oberflächenabfluss_status_quo} mm/Jahr`,
   });
   text({
-    text: `Infiltration: ${payload.infiltration_status_quo} mm`,
+    text: `Infiltration: ${payload.infiltration_status_quo} mm/Jahr`,
   });
   text({
-    text: `Verdunstung: ${payload.verdunstung_status_quo} mm`,
+    text: `Verdunstung: ${payload.verdunstung_status_quo} mm/Jahr`,
     extraMarginBottom: 14,
   });
   text({
@@ -333,7 +332,7 @@ async function writePDF(payload, savingType, blob) {
     noLineBreak: true,
   });
   text({
-    text: `${payload.delta_w_status_quo} %`,
+    text: `${payload.delta_w_status_quo} %.`,
     x: getMarginLeft("Für Ihr ausgewähltes Untersuchungsgebiet liegt Delta-W bei "),
     weight: "b",
   });
@@ -346,7 +345,7 @@ async function writePDF(payload, savingType, blob) {
     extraMarginBottom: 14,
   });
   text({
-    text: payload.isMeasurePlanning ? "Hier sehen Sie eine Auflistung der gesetzten Maßnahmen. Bitte beachten Sie, dass bereits vorhandene Maßnahmen hier nicht aufgelistet sind." : "Gewählte Maßnahmen:",
+    text: payload.isMeasurePlanning ? "Hier sehen Sie eine Auflistung der von Ihnen gesetzten Maßnahmen. Bitte beachten Sie, dass bereits vorhandene Maßnahmen hier nicht aufgelistet sind." : "Gewählte Maßnahmen:",
   });
 
   doc.addImage(
@@ -433,220 +432,6 @@ async function writePDF(payload, savingType, blob) {
   // 5. Page
   makeHeader(payload.isMeasurePlanning ? "Maßnahmenplanung: Lokale Betrachtung" : "Maßnahmenplanung: Gebietsbetrachtung");
 
-  text({
-    text: "Status Quo",
-    size: 18,
-    weight: "b",
-    noLineBreak: true,
-  });
-  text({
-    text: "Simulation",
-    size: 18,
-    weight: "b",
-    extraMarginBottom: 10,
-    x: rightHalfOfThePage,
-  });
-  text({
-    text: "Flächenanteile:",
-    noLineBreak: true,
-  });
-  text({
-    text: "Flächenanteile:",
-    x: rightHalfOfThePage,
-  });
-  text({
-    text: ` • Dachfläche:`,
-    noLineBreak: true,
-  });
-  text({
-    text: ` • Dachfläche:`,
-    x: rightHalfOfThePage,
-  });
-  text({
-    text: `     ${payload.flächenanteile_dachfläche}`,
-    noLineBreak: true,
-  });
-  text({
-    text: `     ${payload.flächenanteile_dachfläche}`,
-    x: rightHalfOfThePage,
-  });
-  text({
-    text: ` • Davon begrünt:`,
-    noLineBreak: true,
-    maxWidth: true,
-  });
-  text({
-    text: ` • Davon begrünt:`,
-    x: rightHalfOfThePage,
-    maxWidth: true,
-  });
-  text({
-    text: `     ${payload.flächenanteile_davon_begrünt_status_quo}`,
-    noLineBreak: true,
-    maxWidth: true,
-  });
-  text({
-    text: `     ${payload.flächenanteile_davon_begrünt_simulation}`,
-    x: rightHalfOfThePage,
-    maxWidth: true,
-  });
-  text({
-    text: ` • Unbebaut Versiegelte Fläche:`,
-    noLineBreak: true,
-    maxWidth: true,
-  });
-  text({
-    text: ` • Unbebaut Versiegelte Fläche:`,
-    x: rightHalfOfThePage,
-    maxWidth: true,
-  });
-  text({
-    text: `     ${payload.flächenanteile_unbebaut_versiegelte_flächen_status_quo}`,
-    noLineBreak: true,
-    maxWidth: true,
-  });
-  text({
-    text: `     ${payload.flächenanteile_unbebaut_versiegelte_flächen_simulation}`,
-    x: rightHalfOfThePage,
-    maxWidth: true,
-  });
-  text({
-    text: ` • Unversiegelte Fläche:`,
-    noLineBreak: true,
-    maxWidth: true,
-  });
-  text({
-    text: ` • Unversiegelte Fläche:`,
-    x: rightHalfOfThePage,
-    maxWidth: true,
-  });
-  text({
-    text: `     ${payload.flächenanteile_unversiegelte_flächen_status_quo}`,
-    noLineBreak: true,
-    maxWidth: true,
-  });
-  text({
-    text: `     ${payload.flächenanteile_unversiegelte_flächen_simulation}`,
-    x: rightHalfOfThePage,
-    maxWidth: true,
-    extraMarginBottom: 28,
-  });
-  text({
-    text: "Wasserhaushalt",
-    size: 18,
-    weight: "b",
-    extraMarginBottom: 10,
-  });
-  text({
-    text: "Durch die Variierung der Parameter für die Regenwasserbewirtschaftungsmaßnahmen haben Sie den Wasserhaushalt beeinflusst. Die Ergebnisse Ihrer Simulation sind im Folgenden dem Status Quo Wasserhaushalt für das Untersuchungsgebiet gegenübergestellt.",
-    extraMarginBottom: 10,
-  });
-  text({
-    text: "Status Quo-Szenario:",
-    noLineBreak: true,
-  });
-  text({
-    text: "Ihre Simulation:",
-    x: rightHalfOfThePage,
-  });
-  text({
-    text: ` • Oberflächenabfluss:`,
-    noLineBreak: true,
-    maxWidth: true,
-  });
-  text({
-    text: ` • Oberflächenabfluss: `,
-    x: rightHalfOfThePage,
-  });
-  text({
-    text: `     ${payload.wasserhaushalt_oberflächenabfluss_status_quo}`,
-    noLineBreak: true
-  });
-  text({
-    text: `     ${payload.abimo_result.runoff} mm/a (${payload.abimo_result.runoff_prozente} %)`,
-    x: rightHalfOfThePage,
-  });
-  text({
-    text: ` • Infiltration:`,
-    noLineBreak: true,
-    maxWidth: true,
-  });
-  text({
-    text: ` • Infiltration:`,
-    x: rightHalfOfThePage,
-  });
-  text({
-    text: `     ${payload.wasserhaushalt_infiltration_status_quo}`,
-    noLineBreak: true
-  });
-  text({
-    text: `     ${payload.abimo_result.infiltration} mm/a (${payload.abimo_result.infiltration_prozente} %)`,
-    x: rightHalfOfThePage,
-  });
-  text({
-    text: ` • Verdunstung:`,
-    noLineBreak: true,
-    maxWidth: true,
-  });
-  text({
-    text: ` • Verdunstung:`,
-    x: rightHalfOfThePage,
-  });
-  text({
-    text: `     ${payload.wasserhaushalt_verdunstung_status_quo}`,
-    noLineBreak: true
-  });
-  text({
-    text: `     ${payload.abimo_result.evaporation} mm/a (${payload.abimo_result.evaporation_prozente} %)`,
-    x: rightHalfOfThePage,
-  });
-  text({
-    text: ` • Delta W: ${payload.delta_w_status_quo} %`,
-    noLineBreak: true,
-  });
-  text({
-    text: ` • Delta W: ${payload.abimo_result.deltaW} %`,
-    x: rightHalfOfThePage,
-  });
-
-  // 8. Page
-  makeHeader("Anlage");
-  text({
-    text: "AMAREX:",
-    noLineBreak: true,
-  });
-  text({
-    text: "Website-Link",
-    url: "https://amarex-projekt.de/de",
-    x: getMarginLeft("AMAREX: ")
-  });
-  text({
-    text: "Maßnahmenkatalog:",
-    noLineBreak: true,
-  });
-  text({
-    text: "Link zum Katalog",
-    url: "https://amarex-projekt.de/de/news/rwb-rwb-n-steckbriefe",
-    x: getMarginLeft("Maßnahmenkatalog: "),
-    extraMarginBottom: payload.zisternenrechner_link ? 0 : 28,
-  });
-
-  if (payload.zisternenrechner_link) {
-    text({
-      text: "Zisternenrechner:",
-      noLineBreak: true,
-    });
-    text({
-      text: "Link zum Rechner",
-      url: payload.zisternenrechner_link,
-      x: getMarginLeft("Zisternenrechner: "),
-      extraMarginBottom: 28,
-    });
-  }
-  text({
-    text: "Auflistung der Maßnahmendimensionen:"
-  });
-
   const tableStyle = {
     theme: "grid",
     headStyles: {
@@ -683,46 +468,314 @@ async function writePDF(payload, savingType, blob) {
     },
   };
 
-  autoTable(doc, {
-    ...tableStyle,
-    startY: vertical,
-    head: [["Mulde", "klein", "mittel", "groß"]],
-    body: [
-      ["Länge", "10 m", "10 m", "20 m"],
-      ["Breite", "1 m", "5 m", "10 m"],
-      ["Tiefe", "0,3 m", "0,3 m", "0,3 m"],
-      ["Oberfläche", "10 m²", "50 m²", "200 m²"],
-      ["Volumen", "3 m³", "30 m³", "150 m³"],
-      ["angeschlossene Fläche", "50 m²", "250 m²", "1000 m²"],
-    ],
+  const columnStylesForPageFive = {
+    0: { cellWidth: 50 },
+    1: { cellWidth: 65 },
+    2: { cellWidth: 65 },
+  }
+
+  if (showTableOnPageFive) {
+    autoTable(doc, {
+      ...tableStyle,
+      startY: vertical,
+      head: [["", "Status Quo", "Simulation"]],
+      body: [
+        ["Dachfläche", payload.flächenanteile_dachfläche, payload.flächenanteile_dachfläche],
+        ["- davon begrünt", payload.flächenanteile_davon_begrünt_status_quo, payload.flächenanteile_davon_begrünt_simulation],
+        ["Unbebaut versiegelte Fläche", payload.flächenanteile_unbebaut_versiegelte_flächen_status_quo, payload.flächenanteile_unbebaut_versiegelte_flächen_simulation],
+        ["Unversiegelte Fläche", payload.flächenanteile_unversiegelte_flächen_status_quo, payload.flächenanteile_unversiegelte_flächen_simulation],
+      ],
+      columnStyles: columnStylesForPageFive
+    });
+    vertical += 57;
+    text({
+      text: "Alle Prozentangaben in Klammern beziehen sich auf die Gesamtfläche.",
+      size: 12,
+      extraMarginBottom: 36,
+    });
+  } else {
+    text({
+      text: "Status Quo",
+      size: 18,
+      weight: "b",
+      noLineBreak: true,
+    });
+    text({
+      text: "Simulation",
+      size: 18,
+      weight: "b",
+      extraMarginBottom: 10,
+      x: rightHalfOfThePage,
+    });
+    text({
+      text: "Flächenanteile:",
+      noLineBreak: true,
+    });
+    text({
+      text: "Flächenanteile:",
+      x: rightHalfOfThePage,
+    });
+    text({
+      text: ` • Dachfläche:`,
+      noLineBreak: true,
+    });
+    text({
+      text: ` • Dachfläche:`,
+      x: rightHalfOfThePage,
+    });
+    text({
+      text: `     ${payload.flächenanteile_dachfläche}`,
+      noLineBreak: true,
+    });
+    text({
+      text: `     ${payload.flächenanteile_dachfläche}`,
+      x: rightHalfOfThePage,
+    });
+    text({
+      text: ` • Davon begrünt:`,
+      noLineBreak: true,
+      maxWidth: true,
+    });
+    text({
+      text: ` • Davon begrünt:`,
+      x: rightHalfOfThePage,
+      maxWidth: true,
+    });
+    text({
+      text: `     ${payload.flächenanteile_davon_begrünt_status_quo}`,
+      noLineBreak: true,
+      maxWidth: true,
+    });
+    text({
+      text: `     ${payload.flächenanteile_davon_begrünt_simulation}`,
+      x: rightHalfOfThePage,
+      maxWidth: true,
+    });
+    text({
+      text: ` • Unbebaut versiegelte Fläche:`,
+      noLineBreak: true,
+      maxWidth: true,
+    });
+    text({
+      text: ` • Unbebaut versiegelte Fläche:`,
+      x: rightHalfOfThePage,
+      maxWidth: true,
+    });
+    text({
+      text: `     ${payload.flächenanteile_unbebaut_versiegelte_flächen_status_quo}`,
+      noLineBreak: true,
+      maxWidth: true,
+    });
+    text({
+      text: `     ${payload.flächenanteile_unbebaut_versiegelte_flächen_simulation}`,
+      x: rightHalfOfThePage,
+      maxWidth: true,
+    });
+    text({
+      text: ` • Unversiegelte Fläche:`,
+      noLineBreak: true,
+      maxWidth: true,
+    });
+    text({
+      text: ` • Unversiegelte Fläche:`,
+      x: rightHalfOfThePage,
+      maxWidth: true,
+    });
+    text({
+      text: `     ${payload.flächenanteile_unversiegelte_flächen_status_quo}`,
+      noLineBreak: true,
+      maxWidth: true,
+    });
+    text({
+      text: `     ${payload.flächenanteile_unversiegelte_flächen_simulation}`,
+      x: rightHalfOfThePage,
+      maxWidth: true,
+      extraMarginBottom: 28,
+    });
+  }
+
+  text({
+    text: "Wasserhaushalt",
+    size: 18,
+    weight: "b",
+    extraMarginBottom: 10,
+  });
+  text({
+    text: "Durch die Variierung der Parameter für die Maßnahmen der Regenwasserbewirtschaftung haben Sie den Wasserhaushalt beeinflusst. Die Ergebnisse Ihrer Simulation sind im Folgenden dem Wasserhaushalt des Status Quo für das Untersuchungsgebiet gegenübergestellt.",
+    extraMarginBottom: 10,
+  });
+  if (showTableOnPageFive) {
+    autoTable(doc, {
+      ...tableStyle,
+      startY: vertical,
+      head: [["", "Status Quo", "Simulation"]],
+      // head: [["", "Status Quo-Szenario:", "Ihre Simulation:"]],
+      body: [
+        ["Oberflächenabfluss", payload.wasserhaushalt_oberflächenabfluss_status_quo, `${payload.abimo_result.runoff} mm/Jahr (${payload.abimo_result.runoff_prozente} %)`],
+        ["Infiltration", payload.wasserhaushalt_infiltration_status_quo, `${payload.abimo_result.infiltration} mm/Jahr (${payload.abimo_result.infiltration_prozente} %)`],
+        ["Verdunstung", payload.wasserhaushalt_verdunstung_status_quo, `${payload.abimo_result.evaporation} mm/Jahr (${payload.abimo_result.evaporation_prozente} %)`],
+        ["Delta W", `${payload.delta_w_status_quo} %`, `${payload.abimo_result.deltaW} %`],
+      ],
+      columnStyles: columnStylesForPageFive
+    });
+    vertical += 53;
+    text({
+      text: "Die Prozente in den Klammern beziehen sich auf den Jahresniederschlag.",
+      size: 12,
+      extraMarginBottom: 36,
+    });
+  } else {
+    text({
+      text: "Status Quo-Szenario:",
+      noLineBreak: true,
+    });
+    text({
+      text: "Ihre Simulation:",
+      x: rightHalfOfThePage,
+    });
+    text({
+      text: ` • Oberflächenabfluss:`,
+      noLineBreak: true,
+      maxWidth: true,
+    });
+    text({
+      text: ` • Oberflächenabfluss: `,
+      x: rightHalfOfThePage,
+    });
+    text({
+      text: `     ${payload.wasserhaushalt_oberflächenabfluss_status_quo}`,
+      noLineBreak: true
+    });
+    text({
+      text: `     ${payload.abimo_result.runoff} mm/Jahr (${payload.abimo_result.runoff_prozente} %)`,
+      x: rightHalfOfThePage,
+    });
+    text({
+      text: ` • Infiltration:`,
+      noLineBreak: true,
+      maxWidth: true,
+    });
+    text({
+      text: ` • Infiltration:`,
+      x: rightHalfOfThePage,
+    });
+    text({
+      text: `     ${payload.wasserhaushalt_infiltration_status_quo}`,
+      noLineBreak: true
+    });
+    text({
+      text: `     ${payload.abimo_result.infiltration} mm/Jahr (${payload.abimo_result.infiltration_prozente} %)`,
+      x: rightHalfOfThePage,
+    });
+    text({
+      text: ` • Verdunstung:`,
+      noLineBreak: true,
+      maxWidth: true,
+    });
+    text({
+      text: ` • Verdunstung:`,
+      x: rightHalfOfThePage,
+    });
+    text({
+      text: `     ${payload.wasserhaushalt_verdunstung_status_quo}`,
+      noLineBreak: true
+    });
+    text({
+      text: `     ${payload.abimo_result.evaporation} mm/Jahr (${payload.abimo_result.evaporation_prozente} %)`,
+      x: rightHalfOfThePage,
+    });
+    text({
+      text: ` • Delta W: ${payload.delta_w_status_quo} %`,
+      noLineBreak: true,
+    });
+    text({
+      text: ` • Delta W: ${payload.abimo_result.deltaW} %`,
+      x: rightHalfOfThePage,
+    });
+  }
+
+  // 8. Page
+  makeHeader("Anlage");
+  text({
+    text: "AMAREX:",
+    noLineBreak: true,
+  });
+  text({
+    text: "Website-Link",
+    url: "https://amarex-projekt.de/de",
+    x: getMarginLeft("AMAREX: ")
+  });
+  text({
+    text: "Maßnahmenkatalog:",
+    noLineBreak: true,
+  });
+  text({
+    text: "Link zum Katalog",
+    url: absoluteLinkKatalog,
+    x: getMarginLeft("Maßnahmenkatalog: "),
+    extraMarginBottom: payload.zisternenrechner_link ? 0 : 28,
   });
 
-  vertical += 70;
+  if (payload.zisternenrechner_link) {
+    text({
+      text: "Zisternenrechner:",
+      noLineBreak: true,
+    });
+    text({
+      text: "Link zum Rechner",
+      url: payload.zisternenrechner_link,
+      x: getMarginLeft("Zisternenrechner: "),
+      extraMarginBottom: 28,
+    });
+  }
+  if (payload.isMeasurePlanning) {
+    
+    text({
+      text: "Auflistung der Maßnahmendimensionen:"
+    });
 
-  autoTable(doc, {
-    ...tableStyle,
-    startY: vertical,
-    head: [["Entsiegelung", "klein", "mittel", "groß"]],
-    body: [
-      ["Länge", "2 m", "25 m", "50 m"],
-      ["Breite", "5 m", "2 m", "10 m"],
-      ["Oberfläche", "10 m²", "50 m²", "500 m²"],
-    ],
-  });
+    autoTable(doc, {
+      ...tableStyle,
+      startY: vertical,
+      head: [["Mulde", "klein", "mittel", "groß"]],
+      body: [
+        ["Länge", "10 m", "10 m", "20 m"],
+        ["Breite", "1 m", "5 m", "10 m"],
+        ["Tiefe", "0,3 m", "0,3 m", "0,3 m"],
+        ["Oberfläche", "10 m²", "50 m²", "200 m²"],
+        ["Volumen", "3 m³", "30 m³", "150 m³"],
+        ["angeschlossene Fläche", "50 m²", "250 m²", "1000 m²"],
+      ],
+    });
 
-  vertical += 45;
+    vertical += 70;
 
-  autoTable(doc, {
-    ...tableStyle,
-    startY: vertical,
-    head: [["Dachbegrünung", "klein", "mittel", "groß"]],
-    body: [
-      ["Länge", "5 m", "12,5 m", "25 m"],
-      ["Breite", "4 m", "8 m", "10 m"],
-      ["Höhe", "0,1 m", "0,1 m", "0,1 m"],
-      ["Oberfläche", "20 m²", "100 m²", "250 m²"],
-    ],
-  });
+    autoTable(doc, {
+      ...tableStyle,
+      startY: vertical,
+      head: [["Entsiegelung", "klein", "mittel", "groß"]],
+      body: [
+        ["Länge", "2 m", "25 m", "50 m"],
+        ["Breite", "5 m", "2 m", "10 m"],
+        ["Oberfläche", "10 m²", "50 m²", "500 m²"],
+      ],
+    });
+
+    vertical += 45;
+
+    autoTable(doc, {
+      ...tableStyle,
+      startY: vertical,
+      head: [["Dachbegrünung", "klein", "mittel", "groß"]],
+      body: [
+        ["Länge", "5 m", "12,5 m", "25 m"],
+        ["Breite", "4 m", "8 m", "10 m"],
+        ["Höhe", "0,1 m", "0,1 m", "0,1 m"],
+        ["Oberfläche", "20 m²", "100 m²", "250 m²"],
+      ],
+    });
+
+  }
 
   // save the PDF
   if (savingType === "_blank") {

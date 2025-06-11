@@ -103,10 +103,10 @@ export default {
       <div class="comparison-row">
         <div class="metric-label">∆W</div>
         <div class="status-quo-value">
-          {{ this.preComputedStats.deltaW.toFixed(2) }} %
+          {{ this.preComputedStats.deltaW.toFixed(1) }} %
         </div>
         <div class="berechnung-value">
-          {{ this.resultAbimoStats.deltaW.toFixed(2) }} %
+          {{ this.resultAbimoStats.deltaW.toFixed(1) }} %
         </div>
       </div>
 
@@ -146,7 +146,7 @@ export default {
       <p
         class="description"
         v-html="
-          `Durch die von Ihnen vorgenommenen Planungsmaßnahmen würde sich der Wert ∆W von <strong>${this.preComputedStats.deltaW.toFixed(2)}%</strong> auf <strong>${this.resultAbimoStats.deltaW.toFixed(2)}% </strong> verändern,`
+          `Durch die von Ihnen vorgenommenen Planungsmaßnahmen würde sich der Wert ∆W von <strong>${this.preComputedStats.deltaW.toFixed(1)}%</strong> auf <strong>${this.resultAbimoStats.deltaW.toFixed(1)}% </strong> verändern.`
         "
       ></p>
     </div>
