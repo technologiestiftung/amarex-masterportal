@@ -100,8 +100,7 @@ export default {
           :href="'https://www.amarex-projekt.de/de'"
           :target="'_blank'"
           >Projekt AMAREX</a
-        >
-        , kurz für "Anpassung des Managements von Regenwasser an
+        >, kurz für "Anpassung des Managements von Regenwasser an
         Extremereignisse", untersucht Möglichkeiten zur Anpassung des
         Regenwassermanagements an die zunehmenden Extrembelastungen Starkregen
         und Trockenheit als Schlüsselbeitrag zur Klimafolgenanpassung.
