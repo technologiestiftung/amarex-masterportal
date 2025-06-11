@@ -37,7 +37,7 @@ export default {
           id: "PreComputedModels",
           title: "Vorberechnete Modelle",
           description:
-            "Zur Status Quo Analyse können Sie mit den vorberechneten Karten aus dem Kartenkatalog starten.<br><br>Möchten Sie diese Ihrer Bearbeitung hinzufügen?",
+            "Zur Analyse Ihres Gebiets können Sie den Status Quo der Wasserhaushaltsgrößen aus dem Kartenkatalog anzeigen lassen.<br><br>Möchten Sie diese Kenngrößen zu Ihrer Bearbeitung hinzufügen?",
           continueDescription:
             "Sie haben jetzt die vorberechneten Modelle Delta W und Abimo hinzugefügt.",
           buttons: [
@@ -67,7 +67,7 @@ export default {
           },
           title: "Betrachtungsraum wählen",
           description:
-            "Mit unserem Wasserhaushaltsmodell können Sie auf verschiedene Arten Ihr Szenario zusammenstellen.",
+            "Mit dem Wasserhaushaltsmodell können Sie auf verschiedene Arten Ihr Szenario zusammenstellen.",
           buttons: [
             {
               text: "Zurück",
