@@ -492,6 +492,36 @@ export default {
       ref="contentContainerRef"
       @click="handleParentClick"
     >
+      <div
+        v-if="
+          activeStep === 0 &&
+          (!preComputedModelsAdded || !preComputedModelsShown)
+        "
+        :style="{
+          marginBottom: '48px',
+        }"
+      >
+        <p class="title">Informationen zum Modell</p>
+        <p
+          class="description"
+          :style="{
+            marginBottom: '24px',
+          }"
+        >
+          Weitere Information zum Wasserhaushaltsmodell finden Sie im
+          Umweltatlas Berlin.
+        </p>
+        <a
+          href="https://www.berlin.de/umweltatlas/wasser/wasserhaushalt/2022/zusammenfassung/"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <button class="amarex-btn-primary full accent">
+            <p>Informationen zum Wasserhaushaltsmodell</p>
+          </button>
+        </a>
+      </div>
+
       <span
         v-if="
           (preComputedModelsAdded || preComputedModelsShown) && activeStep === 0
