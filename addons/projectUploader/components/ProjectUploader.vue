@@ -87,6 +87,7 @@ export default {
       "setActiveStep",
       "setPreComputedModelsAdded",
       "setVisiblePreComputedModelIDs",
+      "setAccumulatedAbimoStats",
     ]),
 
     /**
@@ -142,9 +143,10 @@ export default {
       }
 
       // run actions
-      await this.updateAccumulatedStats(abimoConfig.accumulatedAbimoStats);
+      await this.setAccumulatedAbimoStats(abimoConfig.accumulatedAbimoStats);
       await this.updateResultStats(abimoConfig.dataResultCalc);
       await this.updatePreComputedStats(abimoConfig.dataPreComputedCalc);
+      await this.updateMeasureStats(abimoConfig.accumulatedMeasureStats);
 
       this.setSelectedCount(abimoConfig.selectedCount);
       this.setPreComputedModelsShown(abimoConfig.preComputedModelsShown);
