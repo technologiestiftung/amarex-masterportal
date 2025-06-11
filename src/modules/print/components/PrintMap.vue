@@ -411,11 +411,17 @@ export default {
             }
             return defaultLayerId;
         },
+
+        mathRoundAndToFixedTwoAfterComma(num) {
+            return Number(num.toFixed(1));
+        },
         mathRoundAndToFixed(num) {
             return Number(Math.round(num).toFixed(0))
         },
         fullPercentage(num) {
-            return Number(Math.round(num * 100).toFixed(0))
+            // return (Math.floor(num * 1000) / 100).toFixed(1);
+            const value = Math.floor(num * 1000) / 10;
+            return value % 1 === 0 ? String(value.toFixed(0)) : String(value.toFixed(1));
         },
 
         /* Report PDF Amarex */
@@ -449,9 +455,9 @@ export default {
             const allMeasuredStats = this.measureCalculations.calculateAllMeasureStats(this.selectedFeatures, this.selectedMeasures)
            
             // Maßnahmenplanung
-            const dachbegrünung_prozente = this.isMeasurePlanning ? this.mathRoundAndToFixed(allMeasuredStats.newGreenRoofToRoof) : this.accumulatedAbimoStats.targetValueGreenRoof || 0; // getMeanGreenRoof 
-            const entsiegelung_prozente = this.isMeasurePlanning ? this.fullPercentage(allMeasuredStats.newUnpvd) : this.accumulatedAbimoStats.targetValueUnsealed || 0; // getMeanUnsealed 
-            const an_mulde_angeschlossene_fläche = this.isMeasurePlanning ? this.fullPercentage(allMeasuredStats.newToSwale) : this.accumulatedAbimoStats.targetValueSwaleConnected || 0; /// getMeanSwaleConnected 
+            const dachbegrünung_prozente = this.isMeasurePlanning ? this.fullPercentage(allMeasuredStats.newGreenRoof) : this.accumulatedAbimoStats.targetValueGreenRoof || 0;
+            const entsiegelung_prozente = this.isMeasurePlanning ? this.fullPercentage(allMeasuredStats.newUnpvd) : this.accumulatedAbimoStats.targetValueUnsealed || 0;
+            const an_mulde_angeschlossene_fläche = this.isMeasurePlanning ? this.fullPercentage(allMeasuredStats.newToSwale) : this.accumulatedAbimoStats.targetValueSwaleConnected || 0;
 
             const abimo_result_runoff = this.mathRoundAndToFixed(this.resultAbimoStats.runoff)
             const abimo_result_infiltration = this.mathRoundAndToFixed(this.resultAbimoStats.infiltration)
@@ -464,15 +470,15 @@ export default {
             const verdunstungStatusQuo = this.mathRoundAndToFixed(this.preComputedStats.evaporation);
             const status_quo_added = oberflächenabflussStatusQuo + infiltrationStatusQuo + verdunstungStatusQuo;
 
-            const flächenanteile_davon_begrünt_simulation = `${this.isMeasurePlanning ? this.mathRoundAndToFixed(allMeasuredStats.Ag_neu) : this.mathRoundAndToFixed(gesamtFläche * (zielwertDachbegrünung / 100))} m² (${this.isMeasurePlanning ? this.mathRoundAndToFixed(allMeasuredStats.newGreenRoofToRoof) : this.fullPercentage((zielwertDachbegrünung / 100) / bebautVersiegelt)} %)`
-            const flächenanteile_unbebaut_versiegelte_flächen_simulation = `${this.isMeasurePlanning ? this.mathRoundAndToFixed(allMeasuredStats.pvd_neu_area)  : versiegelteFläche} m² (${this.isMeasurePlanning ? this.mathRoundAndToFixed(allMeasuredStats.newPvdToTotalArea) : this.fullPercentage(versiegelteFläche / gesamtFläche)} %)`
-            const flächenanteile_unversiegelte_flächen_simulation = `${this.isMeasurePlanning ? this.mathRoundAndToFixed(allMeasuredStats.Ae_neu)  : unversiegelteFläche} m² (${this.isMeasurePlanning ? this.mathRoundAndToFixed(allMeasuredStats.totalUnpavedToTotalArea) :  zielwertUnversiegelt} %)`
+            const flächenanteile_davon_begrünt_simulation = `${this.isMeasurePlanning ? this.fullPercentage(allMeasuredStats.newGreenRoof) : this.fullPercentage((zielwertDachbegrünung / 100) / bebautVersiegelt)} % (${this.isMeasurePlanning ? this.mathRoundAndToFixed(allMeasuredStats.Ag_neu) : this.mathRoundAndToFixed(gesamtFläche * (zielwertDachbegrünung / 100))} m²)`
+            const flächenanteile_unbebaut_versiegelte_flächen_simulation = `${this.isMeasurePlanning ? this.mathRoundAndToFixed(allMeasuredStats.pvd_neu_area)  : versiegelteFläche} m² (${this.isMeasurePlanning ? this.mathRoundAndToFixedTwoAfterComma(allMeasuredStats.newPvdToTotalArea) : this.fullPercentage(versiegelteFläche / gesamtFläche)} %)`
+            const flächenanteile_unversiegelte_flächen_simulation = `${this.isMeasurePlanning ? this.mathRoundAndToFixed(allMeasuredStats.Ae_neu)  : unversiegelteFläche} m² (${this.isMeasurePlanning ? this.mathRoundAndToFixedTwoAfterComma(allMeasuredStats.totalUnpavedToTotalArea) :  zielwertUnversiegelt} %)`
 
             const makePercentageForAbimo = (value) => {
-                return this.mathRoundAndToFixed((100 / abimo_results_added) * value)
+                return this.mathRoundAndToFixedTwoAfterComma((100 / abimo_results_added) * value)
             }
             const makeWasserhaushaltStatusQuoPercentage = (value) => {
-                return this.mathRoundAndToFixed((100 / status_quo_added) * value)
+                return this.mathRoundAndToFixedTwoAfterComma((100 / status_quo_added) * value)
             }
 
             const payload = {
@@ -481,10 +487,11 @@ export default {
                 date: this.report.date,
                 isMeasurePlanning: this.isMeasurePlanning,
                 downloadURL,
+                totalArea: gesamtFläche,
                 // 1.1 * 1.3 => m² | 1.3 => % 
                 flächenanteile_dachfläche: `${dachFläche} m² (${this.fullPercentage(bebautVersiegelt)} %)`,
                 // 1.5 * dachFläche "D" => m² | 1.5 => %
-                flächenanteile_davon_begrünt_status_quo: `${this.mathRoundAndToFixed(dachFläche * begrünteDachfläche)} m² (${this.fullPercentage(begrünteDachfläche)} %)`,
+                flächenanteile_davon_begrünt_status_quo: `${this.fullPercentage(begrünteDachfläche)} % (${this.mathRoundAndToFixed(dachFläche * begrünteDachfläche)} m²)`,
                 // 2.1 * 1.1 => m² | 2.1 / 1.3 => % 
                 flächenanteile_davon_begrünt_simulation,
                 // 1.4 * 1.1 => m² | 1.4 => %
@@ -497,14 +504,14 @@ export default {
                 flächenanteile_unversiegelte_flächen_simulation,
                 // gesetzte Maßnahmen
                 betrachteteblockteilflaechen: this.accumulatedAbimoStats.featuresSelected || 0,
-                an_mulde_angeschlossene_fläche: an_mulde_angeschlossene_fläche,
-                dachbegrünung_prozente: dachbegrünung_prozente,
-                entsiegelung_prozente: entsiegelung_prozente,
+                an_mulde_angeschlossene_fläche,
+                dachbegrünung_prozente,
+                entsiegelung_prozente,
                 // please add in the 4 "Status Quo Analyse" values for page 3 of the report
                 oberflächenabfluss_status_quo: oberflächenabflussStatusQuo, 
                 infiltration_status_quo: infiltrationStatusQuo,
                 verdunstung_status_quo: verdunstungStatusQuo, 
-                delta_w_status_quo: this.mathRoundAndToFixed(this.preComputedStats.deltaW), 
+                delta_w_status_quo: this.mathRoundAndToFixedTwoAfterComma(this.preComputedStats.deltaW), 
                 // please add in the 8 "Status Quo Analyse" values for page 5 of the report
                 wasserhaushalt_oberflächenabfluss_status_quo: `${oberflächenabflussStatusQuo} mm/a (${makeWasserhaushaltStatusQuoPercentage(oberflächenabflussStatusQuo)} %)`,
                 wasserhaushalt_infiltration_status_quo: `${infiltrationStatusQuo} mm/a (${makeWasserhaushaltStatusQuoPercentage(infiltrationStatusQuo)} %)`,
@@ -517,7 +524,7 @@ export default {
                     infiltration_prozente: makePercentageForAbimo(abimo_result_infiltration),
                     evaporation: abimo_result_evaporation,
                     evaporation_prozente: makePercentageForAbimo(abimo_result_evaporation),
-                    deltaW: this.mathRoundAndToFixed(this.resultAbimoStats.deltaW),
+                    deltaW: this.mathRoundAndToFixedTwoAfterComma(this.resultAbimoStats.deltaW),
                 },
                 zisternenrechner_link: null
             }
