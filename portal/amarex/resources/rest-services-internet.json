@@ -6,6 +6,12 @@
     "typ": "WFS"
   },
   {
+    "id": "10",
+    "name": "OSM Suche",
+    "url": "https://nominatim.openstreetmap.org/search?",
+    "typ": "WFS"
+  },
+  {
     "id": "mapfish_printservice_id",
     "name": "Mapfish Print Service",
     "url": "https://mapfish.ds-apps.tsb-berlin.de/",

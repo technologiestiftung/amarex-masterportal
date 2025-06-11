@@ -117,6 +117,8 @@
         "toolTip": "Anpassung des Managements von Regenwasser an Extremereignisse"
       },
       "searchBar": {
+        "minCharacters": 3,
+        "timeout": 10000,
         "searchInterfaces": [
           {
             "type": "komootPhoton",
@@ -129,9 +131,19 @@
             "bbox": "13.0883,52.3382,13.7611,52.6755"
           },
           {
+            "type": "osmNominatim",
+            "serviceId": "10",
+            "limit": 5,
+            "states": "Berlin",
+            "classes": "place,highway,building,shop,historic,leisure,city,county,street",
+            "resultEvents": {
+              "onClick": ["setMarker", "zoomToResult"]
+            }
+          },
+          {
             "type": "visibleVector",
             "resultEvents": {
-              "onHover": ["setMarker"]
+              "onClick": ["openGetFeatureInfo", "setMarker", "zoomToResult"]
             }
           },
           {
@@ -140,6 +152,7 @@
           }
         ]
       },
+
       "sections": [[]]
     },
     "secondaryMenu": {
