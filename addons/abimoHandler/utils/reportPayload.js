@@ -1,89 +1,329 @@
-import areaCalc from "./areaCalculations.js";
-import measureCalc from "./measureCalculations.js";
+/**
+ * Utility functions for calculations and formatting
+ */
+const utils = {
+  mathRoundAndToFixed: (value, decimals = 0) => {
+    return Number(Math.round(value).toFixed(decimals));
+  },
 
-function getReportPayload() {
-  console.log("[reportPayload] areaCalc::", areaCalc);
-  console.log("[reportPayload] measureCalc::", measureCalc);
+  mathRoundAndToFixedTwoAfterComma: (value) => {
+    return Number(value.toFixed(2));
+  },
 
-  // old payload structure
-  const payload = {
-    flächenanteile_dachfläche: 0,
-    flächenanteile_davon_begrünt_status_quo: 0,
-    flächenanteile_davon_begrünt_simulation: 0,
-    flächenanteile_unbebaut_versiegelte_flächen_status_quo: 0,
-    flächenanteile_unbebaut_versiegelte_flächen_simulation: 0,
-    flächenanteile_unversiegelte_flächen_status_quo: 0,
-    flächenanteile_unversiegelte_flächen_simulation: 0,
+  fullPercentage: (ratio) => {
+    return utils.mathRoundAndToFixedTwoAfterComma(ratio * 100);
+  },
 
-    // gesetzte Maßnahmen
-    betrachteteblockteilflaechen: 0,
-    an_mulde_angeschlossene_fläche: 0,
-    dachbegrünung_prozente: 0,
-    entsiegelung_prozente: 0,
-    oberflächenabfluss_status_quo: 0,
-    infiltration_status_quo: 0,
-    verdunstung_status_quo: 0,
-    delta_w_status_quo: 0,
-    wasserhaushalt_oberflächenabfluss_status_quo: 0,
-    wasserhaushalt_infiltration_status_quo: 0,
-    wasserhaushalt_verdunstung_status_quo: 0,
+  formatAreaWithPercentage: (area, percentage) => {
+    return `${utils.mathRoundAndToFixed(area)} m² (${utils.fullPercentage(percentage)} %)`;
+  },
 
-    // Abimo Result
-    abimo_result: {
-      runoff: 0,
-      runoff_prozente: 0,
-      infiltration: 0,
-      infiltration_prozente: 0,
-      evaporation: 0,
-      evaporation_prozente: 0,
-      deltaW: 0,
+  formatPercentageWithArea: (percentage, area) => {
+    return `${utils.fullPercentage(percentage)} % (${utils.mathRoundAndToFixed(area)} m²)`;
+  },
+
+  formatWaterBalanceValue: (value, totalValue) => {
+    const percentage = utils.mathRoundAndToFixedTwoAfterComma(
+      (100 / totalValue) * value,
+    );
+    return `${utils.mathRoundAndToFixed(value)} mm/a (${percentage} %)`;
+  },
+};
+
+/**
+ * Calculate basic area values from the data
+ */
+function calculateBaseAreas(accumulatedAbimoStats, areaTypesData) {
+  const totalArea = accumulatedAbimoStats.totalArea;
+
+  // Get area type ratios
+  const unpavedRatio =
+    areaTypesData.find((type) => type.id === "unpvd")?.max || 0;
+  const roofRatio = areaTypesData.find((type) => type.id === "roof")?.max || 0;
+  const pavedRatio = areaTypesData.find((type) => type.id === "pvd")?.max || 0;
+
+  // Target values
+  const targetGreenRoofPct = accumulatedAbimoStats.targetValueGreenRoof || 0;
+  const targetUnpavedPct = accumulatedAbimoStats.targetValueUnsealed || 0;
+  const greenRoofToRoofRatio = accumulatedAbimoStats.maxGreenRoofToRoof || 0;
+
+  return {
+    totalArea,
+    unpavedRatio,
+    roofRatio,
+    pavedRatio,
+    targetGreenRoofPct,
+    targetUnpavedPct,
+    greenRoofToRoofRatio,
+
+    // Calculated areas
+    roofArea: utils.mathRoundAndToFixed(totalArea * roofRatio),
+    targetUnpavedArea: utils.mathRoundAndToFixed(
+      totalArea * (targetUnpavedPct / 100),
+    ),
+    get targetPavedArea() {
+      return utils.mathRoundAndToFixed(
+        totalArea - this.targetUnpavedArea - this.roofArea,
+      );
     },
-    zisternenrechner_link: null,
+  };
+}
+
+/**
+ * Calculate measure planning values
+ */
+function calculateMeasurePlanningValues(
+  isMeasurePlanning,
+  allMeasuredStats,
+  baseAreas,
+) {
+  if (!isMeasurePlanning) {
+    return {
+      greenRoofPct: baseAreas.targetGreenRoofPct,
+      unpavedPct: baseAreas.targetUnpavedPct,
+      swaleConnectedPct: 0, // accumulatedAbimoStats.targetValueSwaleConnected || 0
+    };
+  }
+
+  return {
+    greenRoofPct: utils.fullPercentage(allMeasuredStats.newGreenRoof || 0),
+    unpavedPct: utils.fullPercentage(allMeasuredStats.newUnpvd || 0),
+    swaleConnectedPct: utils.fullPercentage(allMeasuredStats.newToSwale || 0),
+  };
+}
+
+/**
+ * Calculate Abimo statistics
+ */
+function calculateAbimoValues(resultAbimoStats, preComputedStats) {
+  // Result stats (simulation)
+  const resultRunoff = utils.mathRoundAndToFixed(resultAbimoStats.runoff);
+  const resultInfiltration = utils.mathRoundAndToFixed(
+    resultAbimoStats.infiltration,
+  );
+  const resultEvaporation = utils.mathRoundAndToFixed(
+    resultAbimoStats.evaporation,
+  );
+  const resultTotal = resultRunoff + resultInfiltration + resultEvaporation;
+
+  // Status quo stats
+  const statusQuoRunoff = utils.mathRoundAndToFixed(preComputedStats.runoff);
+  const statusQuoInfiltration = utils.mathRoundAndToFixed(
+    preComputedStats.infiltration,
+  );
+  const statusQuoEvaporation = utils.mathRoundAndToFixed(
+    preComputedStats.evaporation,
+  );
+  const statusQuoTotal =
+    statusQuoRunoff + statusQuoInfiltration + statusQuoEvaporation;
+
+  return {
+    result: {
+      runoff: resultRunoff,
+      infiltration: resultInfiltration,
+      evaporation: resultEvaporation,
+      total: resultTotal,
+      deltaW: utils.mathRoundAndToFixedTwoAfterComma(resultAbimoStats.deltaW),
+      runoffPct: utils.mathRoundAndToFixedTwoAfterComma(
+        (100 / resultTotal) * resultRunoff,
+      ),
+      infiltrationPct: utils.mathRoundAndToFixedTwoAfterComma(
+        (100 / resultTotal) * resultInfiltration,
+      ),
+      evaporationPct: utils.mathRoundAndToFixedTwoAfterComma(
+        (100 / resultTotal) * resultEvaporation,
+      ),
+    },
+    statusQuo: {
+      runoff: statusQuoRunoff,
+      infiltration: statusQuoInfiltration,
+      evaporation: statusQuoEvaporation,
+      total: statusQuoTotal,
+      deltaW: utils.mathRoundAndToFixedTwoAfterComma(preComputedStats.deltaW),
+      runoffFormatted: utils.formatWaterBalanceValue(
+        statusQuoRunoff,
+        statusQuoTotal,
+      ),
+      infiltrationFormatted: utils.formatWaterBalanceValue(
+        statusQuoInfiltration,
+        statusQuoTotal,
+      ),
+      evaporationFormatted: utils.formatWaterBalanceValue(
+        statusQuoEvaporation,
+        statusQuoTotal,
+      ),
+    },
+  };
+}
+
+/**
+ * Format surface area data for the report
+ */
+function formatSurfaceAreas(baseAreas, isMeasurePlanning, allMeasuredStats) {
+  const {
+    totalArea,
+    roofArea,
+    roofRatio,
+    unpavedRatio,
+    pavedRatio,
+    greenRoofToRoofRatio,
+  } = baseAreas;
+
+  // Status quo values
+  const statusQuo = {
+    roof: utils.formatAreaWithPercentage(roofArea, roofRatio),
+    greenRoof: utils.formatPercentageWithArea(
+      greenRoofToRoofRatio,
+      roofArea * greenRoofToRoofRatio,
+    ),
+    unpaved: utils.formatAreaWithPercentage(
+      totalArea * unpavedRatio,
+      unpavedRatio,
+    ),
+    paved: utils.formatAreaWithPercentage(totalArea * pavedRatio, pavedRatio),
   };
 
-  //  pct = percentage, area = area, ratio, amount, count
-  const _payload = {
-    // Surface area proportions
-    roofAreaProportion: 0,
-    greenRoofToRoofStatusQuo: 0,
-    greenRoofToRoofSimulation: 0,
-    pvdToTotalAreaStatusQuo: 0,
-    pvdToTotalAreaSimulation: 0,
-    unpvdToTotalAreaStatusQuo: 0,
-    unpvdToTotalAreaSimulation: 0,
+  // Simulation values
+  let simulation;
+  if (isMeasurePlanning && allMeasuredStats) {
+    simulation = {
+      greenRoof: utils.formatPercentageWithArea(
+        utils.fullPercentage(allMeasuredStats.newGreenRoof || 0),
+        utils.mathRoundAndToFixed(allMeasuredStats.Ag_neu || 0),
+      ),
+      paved: utils.formatAreaWithPercentage(
+        utils.mathRoundAndToFixed(allMeasuredStats.pvd_neu_area || 0),
+        utils.mathRoundAndToFixedTwoAfterComma(
+          allMeasuredStats.newPvdToTotalArea || 0,
+        ) / 100,
+      ),
+      unpaved: utils.formatAreaWithPercentage(
+        utils.mathRoundAndToFixed(allMeasuredStats.Ae_neu || 0),
+        utils.mathRoundAndToFixedTwoAfterComma(
+          allMeasuredStats.totalUnpavedToTotalArea || 0,
+        ) / 100,
+      ),
+    };
+  } else {
+    simulation = {
+      greenRoof: utils.formatPercentageWithArea(
+        utils.fullPercentage(baseAreas.targetGreenRoofPct / 100 / roofRatio),
+        utils.mathRoundAndToFixed(
+          totalArea * (baseAreas.targetGreenRoofPct / 100),
+        ),
+      ),
+      paved: utils.formatAreaWithPercentage(
+        baseAreas.targetPavedArea,
+        utils.fullPercentage(baseAreas.targetPavedArea / totalArea),
+      ),
+      unpaved: utils.formatAreaWithPercentage(
+        baseAreas.targetUnpavedArea,
+        baseAreas.targetUnpavedPct / 100,
+      ),
+    };
+  }
+
+  return { statusQuo, simulation };
+}
+
+/**
+ * Main function to generate report payload
+ *
+ * @param {Object} accumulatedAbimoStats - Accumulated ABIMO statistics
+ * @param {Array} areaTypesData - Area types data with id, name, and max values
+ * @param {Object} accumulatedMeasureStats - Accumulated measure statistics
+ * @param {Object} resultAbimoStats - ABIMO simulation results
+ * @param {Object} preComputedStats - Pre-computed status quo statistics
+ * @param {Object} options - Additional options
+ * @param {boolean} options.isMeasurePlanning - Whether in measure planning mode
+ * @param {Object} options.allMeasuredStats - All measured statistics (required if isMeasurePlanning is true)
+ * @returns {Object} Formatted payload for report generation
+ */
+function getReportPayload(
+  accumulatedAbimoStats,
+  areaTypesData,
+  accumulatedMeasureStats,
+  resultAbimoStats,
+  preComputedStats,
+  options = {},
+) {
+  // Extract options
+  const { isMeasurePlanning = false, allMeasuredStats = null } = options;
+
+  // Calculate base values
+  const baseAreas = calculateBaseAreas(accumulatedAbimoStats, areaTypesData);
+  const measureValues = calculateMeasurePlanningValues(
+    isMeasurePlanning,
+    allMeasuredStats,
+    baseAreas,
+  );
+  const waterBalance = calculateAbimoValues(resultAbimoStats, preComputedStats);
+  const surfaceAreas = formatSurfaceAreas(
+    baseAreas,
+    measureValues,
+    isMeasurePlanning,
+    allMeasuredStats,
+  );
+
+  const payload = {
+    // Basic info
+    totalArea: baseAreas.totalArea,
+    isMeasurePlanning,
+
+    // Surface area proportions - formatted strings ready for display
+    surfaceAreas: {
+      roof: surfaceAreas.statusQuo.roof,
+      greenRoofStatusQuo: surfaceAreas.statusQuo.greenRoof,
+      greenRoofSimulation: surfaceAreas.simulation.greenRoof,
+      unpavedStatusQuo: surfaceAreas.statusQuo.unpaved,
+      unpavedSimulation: surfaceAreas.simulation.unpaved,
+      pavedStatusQuo: surfaceAreas.statusQuo.paved,
+      pavedSimulation: surfaceAreas.simulation.paved,
+    },
 
     // Applied measures
-    selectedFeaturesCount: 0,
-    areaConnectedToSwalePct: 0,
-    greenRoofPct: 0,
-    unpvdPct: 0,
-    surfaceRunoffStatusQuo: 0,
-    infiltrationStatusQuo: 0,
-    evaporationStatusQuo: 0,
-    deltaWStatusQuo: 0,
-    abimoSurfaceRunoffStatusQuo: 0,
-    abimoInfiltrationStatusQuo: 0,
-    abimoEvaporationStatusQuo: 0,
-
-    // ABIMO Result
-    abimoResult: {
-      runoff: 0,
-      runoffPct: 0,
-      infiltration: 0,
-      infiltrationPct: 0,
-      evaporation: 0,
-      evaporationPct: 0,
-      deltaW: 0,
+    measures: {
+      selectedFeaturesCount: accumulatedAbimoStats.featuresSelected || 0,
+      swaleConnectedPct: measureValues.swaleConnectedPct,
+      greenRoofPct: measureValues.greenRoofPct,
+      unpavedPct: measureValues.unpavedPct,
     },
+
+    // Water balance - Status Quo
+    waterBalanceStatusQuo: {
+      runoff: waterBalance.statusQuo.runoff,
+      infiltration: waterBalance.statusQuo.infiltration,
+      evaporation: waterBalance.statusQuo.evaporation,
+      deltaW: waterBalance.statusQuo.deltaW,
+      // Formatted versions for display
+      runoffFormatted: waterBalance.statusQuo.runoffFormatted,
+      infiltrationFormatted: waterBalance.statusQuo.infiltrationFormatted,
+      evaporationFormatted: waterBalance.statusQuo.evaporationFormatted,
+    },
+
+    // ABIMO simulation results
+    abimoResult: {
+      runoff: waterBalance.result.runoff,
+      runoffPct: waterBalance.result.runoffPct,
+      infiltration: waterBalance.result.infiltration,
+      infiltrationPct: waterBalance.result.infiltrationPct,
+      evaporation: waterBalance.result.evaporation,
+      evaporationPct: waterBalance.result.evaporationPct,
+      deltaW: waterBalance.result.deltaW,
+    },
+
+    // Additional
     cisternCalculatorLink: null,
   };
-
-  console.log("[reportPayload] _payload::", _payload);
 
   return payload;
 }
 
 export default {
   getReportPayload,
+  // Export utilities for testing
+  utils,
+  calculateBaseAreas,
+  calculateAbimoValues,
 };
 
