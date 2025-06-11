@@ -88,6 +88,7 @@ export default {
       "setPreComputedModelsAdded",
       "setVisiblePreComputedModelIDs",
       "setAccumulatedAbimoStats",
+      "setAreaTypesData",
     ]),
 
     /**
@@ -148,6 +149,7 @@ export default {
       await this.updatePreComputedStats(abimoConfig.dataPreComputedCalc);
       await this.updateMeasureStats(abimoConfig.accumulatedMeasureStats);
 
+      this.setAreaTypesData(abimoConfig.areaTypesData);
       this.setSelectedCount(abimoConfig.selectedCount);
       this.setPreComputedModelsShown(abimoConfig.preComputedModelsShown);
       this.setActiveStep(abimoConfig.activeStep);
