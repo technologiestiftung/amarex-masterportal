@@ -143,6 +143,15 @@ export default {
 
     <span class="line"></span>
     <div>
+      <p
+        class="description"
+        v-html="
+          `Durch die von Ihnen vorgenommenen Planungsmaßnahmen würde sich der Wert ∆W von <strong>${this.preComputedStats.deltaW.toFixed(1)}%</strong> auf <strong>${this.resultAbimoStats.deltaW.toFixed(1)}% </strong> verändern.`
+        "
+      ></p>
+    </div>
+
+    <div>
       <p class="description">
         <strong>∆W</strong> bezeichnet die Abweichung vom natürlichen
         Wasserhaushalt in Prozent.
