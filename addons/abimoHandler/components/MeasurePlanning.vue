@@ -41,7 +41,7 @@ export default {
       <p class="title">Maßnahmen setzen</p>
       <p class="subtitle">
         Nun können Sie mittels Ihres Mouse-Cursers Maßnahmen frei in der
-        gewählten Blockteilfläche platzieren.
+        gewählten Blockteil- oder Straßenfläche platzieren.
       </p>
       <img
         :src="src2"
@@ -49,7 +49,7 @@ export default {
       />
       <p class="description">
         Bitte beachten Sie, dass die Maßnahmeneffekte auf die gesamte
-        Einzelblockteilfläche heruntergerechnet werden. Daher sind
+        Einzelblockteil- oder Einzelstraßenfläche heruntergerechnet werden. Daher sind
         Überschneidungen mit nicht geeigneten Flächen irrelevant für die
         Effektberechnung.
       </p>

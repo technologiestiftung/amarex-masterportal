@@ -43,7 +43,7 @@ export default {
           description: (area, percentage) => {
             if (!area || !percentage)
               return "Welchen Anteil möchten Sie an Mulden anschliessen?";
-            return `Bei den von Ihnen gewählten Flächen stehen ${area} m² (${percentage}%) versiegelte Fläche zur Verfügung.`;
+            return `Bei den von Ihnen gewählten Flächen stehen ${area} m² (${percentage}%) versiegelte/abflusswirksame Fläche zur Verfügung.`;
           },
         },
       },
@@ -401,7 +401,7 @@ export default {
     >
       <div class="color-indicator unsealed"></div>
       <p class="description-with-smaller-lineheight flex-fill">
-        <strong>Nicht bebaut</strong><br />unversiegelt und unbebaut
+        <strong>Nicht bebaut</strong><br />unversiegelt und unbebaut versiegelt
       </p>
       <p class="description-with-smaller-lineheight">
         {{ currentBaseData.toFixed(0) }} %
@@ -427,7 +427,7 @@ export default {
     >
       <div class="color-indicator swaleConnected"></div>
       <p class="description-with-smaller-lineheight flex-fill">
-        <strong>Versiegelt</strong><br />unbebaut und bebaut
+        <strong>Versiegelt/Abflusswirksam</strong><br />unbebaut und bebaut
       </p>
       <p class="description-with-smaller-lineheight">
         {{ currentBaseData.toFixed(0) }} %

@@ -57,9 +57,9 @@ export default {
       ],
       logosBottom: [
         {
-          src: "./resources/logos/BMBF_gefoerdert_deutsch.jpg",
-          alt: "BMBF Logo",
-          link: "https://www.bmbf.de/bmbf/de/home/home_node.html",
+          src: "./resources/logos/BMFTR_de_Web_RGB_gef_durch.jpg",
+          alt: "BMFTR Logo",
+          link: "",
         },
         {
           src: "./resources/logos/BMBF_FONA_Logo_rgb.svg",
@@ -100,8 +100,7 @@ export default {
           :href="'https://www.amarex-projekt.de/de'"
           :target="'_blank'"
           >Projekt AMAREX</a
-        >
-        , kurz für "Anpassung des Managements von Regenwasser an
+        >, kurz für "Anpassung des Managements von Regenwasser an
         Extremereignisse", untersucht Möglichkeiten zur Anpassung des
         Regenwassermanagements an die zunehmenden Extrembelastungen Starkregen
         und Trockenheit als Schlüsselbeitrag zur Klimafolgenanpassung.
@@ -134,7 +133,7 @@ export default {
           </li>
         </ul>
 
-        <div class="mb-4 senStadtLogos">
+        <div class="senStadtLogos">
           <div
             v-for="(logo, index) in senStadtLogos"
             :key="index"
@@ -153,7 +152,7 @@ export default {
           </div>
         </div>
 
-        <ul class="mb-4">
+        <ul class="mb-4 logosBottom">
           <li
             v-for="(logo, index) in logosBottom"
             :key="index"
@@ -173,7 +172,7 @@ export default {
         </ul>
       </div>
 
-      <p class="mb-4">Förderkennzeichen: 02WEE1624</p>
+      <p class="mb-4">Förderkennzeichen: 02WEE1624A-H</p>
     </div>
   </div>
 </template>
@@ -215,6 +214,7 @@ ul li a img {
   display: flex;
   gap: 16px;
   width: 100%;
+  margin-bottom: 36px;
 }
 .senStadtLogos a img {
   height: 100%;
@@ -222,6 +222,24 @@ ul li a img {
   width: 100%;
   object-fit: contain;
   display: block;
+}
+
+.logosBottom {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  gap: 0;
+}
+.logosBottom a img {
+  height: 100%;
+  max-height: 200px;
+  max-width: 200px;
+  width: 100%;
+  object-fit: contain;
+  display: block;
+}
+.logosBottom li:last-child a img {
+  max-width: 125px;
 }
 
 .title {
