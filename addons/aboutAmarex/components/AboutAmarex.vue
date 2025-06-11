@@ -133,7 +133,7 @@ export default {
           </li>
         </ul>
 
-        <div class="mb-4 senStadtLogos">
+        <div class="senStadtLogos">
           <div
             v-for="(logo, index) in senStadtLogos"
             :key="index"
@@ -152,7 +152,7 @@ export default {
           </div>
         </div>
 
-        <ul class="mb-4">
+        <ul class="mb-4 logosBottom">
           <li
             v-for="(logo, index) in logosBottom"
             :key="index"
@@ -214,6 +214,7 @@ ul li a img {
   display: flex;
   gap: 16px;
   width: 100%;
+  margin-bottom: 36px;
 }
 .senStadtLogos a img {
   height: 100%;
@@ -221,6 +222,24 @@ ul li a img {
   width: 100%;
   object-fit: contain;
   display: block;
+}
+
+.logosBottom {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  gap: 0;
+}
+.logosBottom a img {
+  height: 100%;
+  max-height: 200px;
+  max-width: 200px;
+  width: 100%;
+  object-fit: contain;
+  display: block;
+}
+.logosBottom li:last-child a img {
+  max-width: 125px;
 }
 
 .title {
