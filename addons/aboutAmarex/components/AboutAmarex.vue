@@ -173,7 +173,7 @@ export default {
         </ul>
       </div>
 
-      <p class="mb-4">Förderkennzeichen: 02WEE1624</p>
+      <p class="mb-4">Förderkennzeichen: 02WEE1624A-H</p>
     </div>
   </div>
 </template>
