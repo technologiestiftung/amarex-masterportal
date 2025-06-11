@@ -129,26 +129,6 @@
             "lat": 52.52,
             "lon": 13.405,
             "bbox": "13.0883,52.3382,13.7611,52.6755"
-          },
-          {
-            "type": "osmNominatim",
-            "serviceId": "10",
-            "limit": 5,
-            "states": "Berlin",
-            "classes": "place,highway,building,shop,historic,leisure,city,county,street",
-            "resultEvents": {
-              "onClick": ["setMarker", "zoomToResult"]
-            }
-          },
-          {
-            "type": "visibleVector",
-            "resultEvents": {
-              "onClick": ["openGetFeatureInfo", "setMarker", "zoomToResult"]
-            }
-          },
-          {
-            "type": "topicTree",
-            "hitTemplate": "layer"
           }
         ]
       },
