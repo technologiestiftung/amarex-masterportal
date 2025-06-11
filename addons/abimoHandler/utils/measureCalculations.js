@@ -32,8 +32,14 @@ function calculateAllMeasureStats(selectedFeatures, selectedMeasures) {
       totalSwaleConnectedArea: 0,
 
       newGreenRoof: null,
+      newGreenRoofToRoof: null,
       newUnpvd: null,
       newToSwale: null,
+
+      pvd_neu: null,
+      pvd_neu_area: null,
+      newPvdToTotalArea: null,
+      totalUnpavedToTotalArea: null,
     };
   }
 
