@@ -326,14 +326,14 @@ export default {
             :limited-sorted-search-results="limitedSortedSearchResults"
         />
         <!-- Masterportal origin: added empty states for user to input text to be able to search -->
-        <p v-if="!searchInputValue.length && currentComponentSide === 'searchbar'" class="p-3">Bitte gib eine Adresse ein, die du suchen willst...</p>
+        <p v-if="!searchInputValue.length && currentComponentSide === 'searchbar'" class="p-3">Bitte gib eine Adresse oder eine Layerebene ein, die du suchen willst.</p>
         <p v-else-if="!!searchInputValue.length && searchInputValue.length < minCharacters && currentComponentSide === 'searchbar'" class="p-3">Bitte gib min. {{ minCharacters }} Zeichen ein...</p>
-        <div v-else-if="searchError && currentComponentSide === 'searchbar'" class="p-3 flex flex-col gap-2 error">
+        <!-- <div v-else-if="searchError && currentComponentSide === 'searchbar'" class="p-3 flex flex-col gap-2 error">
             <span>
                 Netzwerkfehler
             </span>
             <p>Leider ist die Suche fehlgeschlagen. Bitte versuchen Sie es später erneut.</p>
-        </div>
+        </div> -->
     </div>
 </template>
 

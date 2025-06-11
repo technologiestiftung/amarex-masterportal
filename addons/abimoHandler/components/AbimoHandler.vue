@@ -37,7 +37,7 @@ export default {
           id: "PreComputedModels",
           title: "Vorberechnete Modelle",
           description:
-            "Zur Status Quo Analyse können Sie mit den vorberechneten Karten aus dem Kartenkatalog starten.<br><br>Möchten Sie diese Ihrer Bearbeitung hinzufügen?",
+            "Zur Analyse Ihres Gebiets können Sie den Status Quo der Wasserhaushaltsgrößen aus dem Kartenkatalog anzeigen lassen.<br><br>Möchten Sie diese Kenngrößen zu Ihrer Bearbeitung hinzufügen?",
           continueDescription:
             "Sie haben jetzt die vorberechneten Modelle Delta W und Abimo hinzugefügt.",
           buttons: [
@@ -67,7 +67,7 @@ export default {
           },
           title: "Betrachtungsraum wählen",
           description:
-            "Mit unserem Wasserhaushaltsmodell können Sie auf verschiedene Arten Ihr Szenario zusammenstellen.",
+            "Mit dem Wasserhaushaltsmodell können Sie auf verschiedene Arten Ihr Szenario zusammenstellen.",
           buttons: [
             {
               text: "Zurück",
@@ -85,9 +85,9 @@ export default {
           component: markRaw(AbimoBlockAreaSelector),
           title: "Untersuchungsgebiet wählen",
           description:
-            "Wählen Sie in der Karte die zu untersuchenden Blockteilflächen via Mausklick aus.",
+            "Wählen Sie in der Karte die zu untersuchenden Blockteil- und Straßenflächen via Mausklick aus.",
           mnplDescription:
-            "Wählen Sie in der Karte die zu untersuchende Blockteilfläche via Mausklick aus.",
+            "Wählen Sie in der Karte die zu untersuchende Blockteil- oder Straßenfläche via Mausklick aus.",
           buttons: [
             {
               text: "Zurück",
@@ -492,6 +492,36 @@ export default {
       ref="contentContainerRef"
       @click="handleParentClick"
     >
+      <div
+        v-if="
+          activeStep === 0 &&
+          (!preComputedModelsAdded || !preComputedModelsShown)
+        "
+        :style="{
+          marginBottom: '48px',
+        }"
+      >
+        <p class="title">Informationen zum Modell</p>
+        <p
+          class="description"
+          :style="{
+            marginBottom: '24px',
+          }"
+        >
+          Weitere Information zum Wasserhaushaltsmodell finden Sie im
+          Umweltatlas Berlin.
+        </p>
+        <a
+          href="https://www.berlin.de/umweltatlas/wasser/wasserhaushalt/2022/zusammenfassung/"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <button class="amarex-btn-primary full accent">
+            <p>Informationen zum Wasserhaushaltsmodell</p>
+          </button>
+        </a>
+      </div>
+
       <span
         v-if="
           (preComputedModelsAdded || preComputedModelsShown) && activeStep === 0
