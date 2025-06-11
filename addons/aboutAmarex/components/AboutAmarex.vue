@@ -57,9 +57,9 @@ export default {
       ],
       logosBottom: [
         {
-          src: "./resources/logos/BMBF_gefoerdert_deutsch.jpg",
-          alt: "BMBF Logo",
-          link: "https://www.bmbf.de/bmbf/de/home/home_node.html",
+          src: "./resources/logos/BMFTR_de_Web_RGB_gef_durch.jpg",
+          alt: "BMFTR Logo",
+          link: "",
         },
         {
           src: "./resources/logos/BMBF_FONA_Logo_rgb.svg",
