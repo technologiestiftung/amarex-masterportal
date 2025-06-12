@@ -606,18 +606,12 @@ export default {
         });
       }
 
-      const uniqueId = "measure-" + Date.now() + "-" + Math.random();
+      const uniqueId = "-" + Date.now() + "-" + Math.random();
       feature.setId(uniqueId);
       feature.set("styleId", styleId + uniqueId);
 
       const measureType = feature.get("measureType");
       const size = feature.get("size");
-
-      console.log(
-        "[actionsProjectUploader] measureType, size::",
-        measureType,
-        size,
-      );
 
       if (measureType && size) {
         feature.set("style", `${measureType}_${size}`);
@@ -689,8 +683,6 @@ export default {
           }
 
           feature.set("source", fileName);
-
-          console.log("[actionsProjectUploader] feature::", feature);
 
           vectorLayer.getSource().addFeature(feature);
         });
