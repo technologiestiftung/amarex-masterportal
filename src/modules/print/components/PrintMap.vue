@@ -471,8 +471,8 @@ export default {
             const status_quo_added = oberflächenabflussStatusQuo + infiltrationStatusQuo + verdunstungStatusQuo;
 
             const flächenanteile_davon_begrünt_simulation = `${this.isMeasurePlanning ? this.fullPercentage(allMeasuredStats.newGreenRoof) : this.fullPercentage((zielwertDachbegrünung / 100) / bebautVersiegelt)} % (${this.isMeasurePlanning ? this.mathRoundAndToFixed(allMeasuredStats.Ag_neu) : this.mathRoundAndToFixed(gesamtFläche * (zielwertDachbegrünung / 100))} m²)`
-            const flächenanteile_unbebaut_versiegelte_flächen_simulation = `${this.isMeasurePlanning ? this.mathRoundAndToFixed(allMeasuredStats.pvd_neu_area)  : versiegelteFläche} m² (${this.isMeasurePlanning ? this.mathRoundAndToFixedTwoAfterComma(allMeasuredStats.newPvdToTotalArea) : this.fullPercentage(versiegelteFläche / gesamtFläche)} %)`
-            const flächenanteile_unversiegelte_flächen_simulation = `${this.isMeasurePlanning ? this.mathRoundAndToFixed(allMeasuredStats.Ae_neu)  : unversiegelteFläche} m² (${this.isMeasurePlanning ? this.mathRoundAndToFixedTwoAfterComma(allMeasuredStats.totalUnpavedToTotalArea) :  zielwertUnversiegelt} %)`
+            const flächenanteile_unbebaut_versiegelte_flächen_simulation = `${this.isMeasurePlanning ? this.mathRoundAndToFixed(allMeasuredStats.pvd_neu_area)  : versiegelteFläche} m² (${this.isMeasurePlanning ? this.mathRoundAndToFixedTwoAfterComma(allMeasuredStats.newPvdToTotalArea || 0) : this.fullPercentage(versiegelteFläche / gesamtFläche)} %)`
+            const flächenanteile_unversiegelte_flächen_simulation = `${this.isMeasurePlanning ? this.mathRoundAndToFixed(allMeasuredStats.Ae_neu)  : unversiegelteFläche} m² (${this.isMeasurePlanning ? this.mathRoundAndToFixedTwoAfterComma(allMeasuredStats.totalUnpavedToTotalArea || 0) :  zielwertUnversiegelt} %)`
 
             const makePercentageForAbimo = (value) => {
                 return this.mathRoundAndToFixedTwoAfterComma((100 / abimo_results_added) * value)
@@ -511,7 +511,7 @@ export default {
                 oberflächenabfluss_status_quo: oberflächenabflussStatusQuo, 
                 infiltration_status_quo: infiltrationStatusQuo,
                 verdunstung_status_quo: verdunstungStatusQuo, 
-                delta_w_status_quo: this.mathRoundAndToFixedTwoAfterComma(this.preComputedStats.deltaW), 
+                delta_w_status_quo: this.mathRoundAndToFixedTwoAfterComma(this.preComputedStats.deltaW || 0), 
                 // please add in the 8 "Status Quo Analyse" values for page 5 of the report
                 wasserhaushalt_oberflächenabfluss_status_quo: `${oberflächenabflussStatusQuo} mm/a (${makeWasserhaushaltStatusQuoPercentage(oberflächenabflussStatusQuo)} %)`,
                 wasserhaushalt_infiltration_status_quo: `${infiltrationStatusQuo} mm/a (${makeWasserhaushaltStatusQuoPercentage(infiltrationStatusQuo)} %)`,
@@ -524,7 +524,7 @@ export default {
                     infiltration_prozente: makePercentageForAbimo(abimo_result_infiltration),
                     evaporation: abimo_result_evaporation,
                     evaporation_prozente: makePercentageForAbimo(abimo_result_evaporation),
-                    deltaW: this.mathRoundAndToFixedTwoAfterComma(this.resultAbimoStats.deltaW),
+                    deltaW: this.mathRoundAndToFixedTwoAfterComma(this.resultAbimoStats.deltaW || 0),
                 },
                 zisternenrechner_link: null
             }

@@ -27,20 +27,17 @@ export default {
       colors,
       measures: [
         {
-          // FIXME: add final static icons
-          icon: "https://sprint-release--amarex-staging.netlify.app/amarex/resources/img/measure-swale.svg",
+          icon: "https://amarex-webtool.technologiestiftung-berlin.de/amarex/resources/img/measure-swale.svg",
           title: "Muldenversickerung",
           type: "swale",
         },
         {
-          // FIXME: add final static icons
-          icon: "https://sprint-release--amarex-staging.netlify.app/amarex/resources/img/measure-unpvd.svg",
+          icon: "https://amarex-webtool.technologiestiftung-berlin.de/amarex/resources/img/measure-unpvd.svg",
           title: "Entsiegelung",
           type: "unpaved",
         },
         {
-          // FIXME: add final static icons
-          icon: "https://sprint-release--amarex-staging.netlify.app/amarex/resources/img/measure-greenroof.svg",
+          icon: "https://amarex-webtool.technologiestiftung-berlin.de/amarex/resources/img/measure-greenroof.svg",
           title: "Dachbegrünung",
           type: "greenRoof",
         },

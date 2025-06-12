@@ -307,11 +307,12 @@ export default {
           (layer) =>
             layer.id === "rabimo_input_2025" ||
             layer.id === "planung_abimo" ||
-            layer.id === "abimo_measures" ||
-            layer.id === "abimo_result_infiltration" ||
-            layer.id === "abimo_result_evaporation" ||
-            layer.id === "abimo_result_surface_run_off" ||
-            layer.id === "abimo_result_delta_w" ||
+            // FIXME: question: should result layers be visible when changing steps
+            // layer.id === "abimo_measures" ||
+            // layer.id === "abimo_result_infiltration" ||
+            // layer.id === "abimo_result_evaporation" ||
+            // layer.id === "abimo_result_surface_run_off" ||
+            // layer.id === "abimo_result_delta_w" ||
             layer.id === "abimo_2025_wfs:preCompute" ||
             layer.id === "delta_w_2025_wfs:preCompute",
         )
@@ -347,11 +348,13 @@ export default {
       "setPreComputedModels",
       "setActiveStep",
       "setResultLayers",
-      "setPreComputedModels",
       "setPreComputedModelsAdded",
       "setIsMeasurePlanning",
       "setSelectedMeasures",
       "setHasMeasures",
+      "setVisiblePreComputedModelIDs",
+      "setDataPreComputedCalc",
+      "setDataResultCalc",
     ]),
     setDisabled() {
       if (this.activeStep === 2) return this.selectedFeatures.length === 0;
@@ -438,6 +441,9 @@ export default {
       this.updateMeasureStats();
       this.setHasMeasures(false);
       this.updatePreComputedStats([]);
+      this.setVisiblePreComputedModelIDs([]);
+      this.setDataResultCalc([]);
+      this.setDataPreComputedCalc([]);
     },
     async resetBlockArea() {
       if (this.blockAreaConfirmed) {

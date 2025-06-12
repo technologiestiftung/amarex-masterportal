@@ -229,6 +229,30 @@ function getParsedCustomAttributes(feature) {
   return attributes;
 }
 
+function getIconSizes(size) {
+  let circleRadius, iconScale;
+
+  switch (size) {
+    case "small":
+      circleRadius = 20;
+      iconScale = 0.8;
+      break;
+    case "medium":
+      circleRadius = 30;
+      iconScale = 1.0;
+      break;
+    case "large":
+      circleRadius = 40;
+      iconScale = 1.0;
+      break;
+    default:
+      circleRadius = 20;
+      iconScale = 0.8;
+  }
+
+  return { circleRadius, iconScale };
+}
+
 export default {
   /**
    * Sets the featureExtents
@@ -472,14 +496,16 @@ export default {
         ),
       };
     }
-    dispatch(
-      "Alerting/addSingleAlert",
-      {
-        category: alertingMessage.category,
-        content: alertingMessage.content,
-      },
-      { root: true },
-    );
+    if (alertingMessage.category === "error") {
+      dispatch(
+        "Alerting/addSingleAlert",
+        {
+          category: alertingMessage.category,
+          content: alertingMessage.content,
+        },
+        { root: true },
+      );
+    }
 
     dispatch("addImportedFilename", fileName);
 
@@ -580,8 +606,23 @@ export default {
         });
       }
 
-      // Set styleId for each feature
-      feature.set("styleId", styleId);
+      const uniqueId = "measure-" + Date.now() + "-" + Math.random();
+      feature.setId(uniqueId);
+      feature.set("styleId", styleId + uniqueId);
+
+      const measureType = feature.get("measureType");
+      const size = feature.get("size");
+
+      console.log(
+        "[actionsProjectUploader] measureType, size::",
+        measureType,
+        size,
+      );
+
+      if (measureType && size) {
+        feature.set("style", `${measureType}_${size}`);
+        feature.set("styleId", `${measureType}_${size}`);
+      }
 
       if (feature.get("isGeoCircle")) {
         const circleCenter = feature
@@ -620,7 +661,37 @@ export default {
             );
           }
 
+          const iconUrl = feature.get("iconUrl");
+
+          if (iconUrl) {
+            const size = feature.get("size");
+            const { circleRadius, iconScale } = getIconSizes(size);
+
+            feature.setStyle([
+              new Style({
+                image: new CircleStyle({
+                  radius: circleRadius,
+                  fill: new Fill({
+                    color: [255, 255, 255, 0.75],
+                  }),
+                }),
+              }),
+              new Style({
+                image: new Icon({
+                  src: iconUrl,
+                  scale: iconScale,
+                  anchor: [0.5, 0.5],
+                  anchorXUnits: "fraction",
+                  anchorYUnits: "fraction",
+                }),
+              }),
+            ]);
+          }
+
           feature.set("source", fileName);
+
+          console.log("[actionsProjectUploader] feature::", feature);
+
           vectorLayer.getSource().addFeature(feature);
         });
       }
@@ -641,15 +712,16 @@ export default {
       );
     }
 
-    alertingMessage = {
+    // Disable Confirm Alert
+
+    /* alertingMessage = {
       category: "success",
       content: i18next.t(
         "common:modules.appFileImport.alertingMessages.success",
         { filename: fileName },
       ),
     };
-
-    dispatch("Alerting/addSingleAlert", alertingMessage, { root: true });
+    dispatch("Alerting/addSingleAlert", alertingMessage, { root: true }); */
     dispatch("addImportedFilename", fileName);
 
     if (state.enableZoomToExtend && features.length) {
@@ -759,3 +831,4 @@ export default {
     dispatch("extendLayers", null, { root: true });
   },
 };
+
