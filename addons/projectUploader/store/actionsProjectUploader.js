@@ -606,8 +606,22 @@ export default {
         });
       }
 
-      // Set styleId for each feature
-      feature.set("styleId", styleId);
+      const uniqueId = "measure-" + Date.now() + "-" + Math.random();
+      feature.setId(uniqueId);
+      feature.set("styleId", styleId + uniqueId);
+
+      const measureType = feature.get("measureType");
+      const size = feature.get("size");
+
+      console.log(
+        "[actionsProjectUploader] measureType, size::",
+        measureType,
+        size,
+      );
+
+      if (measureType && size) {
+        feature.set("style", `${measureType}_${size}`);
+      }
 
       if (feature.get("isGeoCircle")) {
         const circleCenter = feature
@@ -651,6 +665,12 @@ export default {
           if (iconUrl) {
             const size = feature.get("size");
             const { circleRadius, iconScale } = getIconSizes(size);
+
+            console.log(
+              "[actionsProjectUploader] iconScale::",
+              iconScale,
+              circleRadius,
+            );
             const iconStyle = new Style({
               image: new Icon({
                 src: iconUrl,
@@ -666,7 +686,7 @@ export default {
               image: new CircleStyle({
                 radius: circleRadius,
                 fill: new Fill({
-                  color: "rgba(255, 255, 255, 0.75)",
+                  color: [255, 255, 255, 0.75],
                 }),
               }),
               zIndex: 5,
@@ -676,6 +696,9 @@ export default {
           }
 
           feature.set("source", fileName);
+
+          console.log("[actionsProjectUploader] feature::", feature);
+
           vectorLayer.getSource().addFeature(feature);
         });
       }
