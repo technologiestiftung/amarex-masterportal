@@ -5,8 +5,6 @@ import JSZip from "jszip";
 import layerCollection from "../../../src/core/layers/js/layerCollection.js";
 import colors from "../../../src/shared/js/utils/amarex-colors.json";
 import { FileIcon, LoaderCircle, Trash2 } from "lucide-vue-next";
-import Feature from "ol/Feature";
-import Point from "ol/geom/Point";
 
 /**
  * Project Uploader
@@ -102,31 +100,6 @@ export default {
           this.$refs["upload-label"].focus();
         }
       });
-    },
-
-    deserializeFeatures(features) {
-      if (!features) return;
-
-      return features
-        .map((f) => {
-          let geometry;
-          switch (f.geometryType) {
-            case "Point":
-              geometry = new Point(f.geometry);
-              break;
-            // Add more geometry types here as needed
-            default:
-              return null;
-          }
-
-          const feature = new Feature(
-            geometry.transform("EPSG:4326", "EPSG:3857"),
-          );
-          feature.setProperties(f);
-          feature.unset("geometry");
-          return feature;
-        })
-        .filter(Boolean);
     },
 
     /**
