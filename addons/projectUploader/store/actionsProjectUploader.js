@@ -621,6 +621,7 @@ export default {
 
       if (measureType && size) {
         feature.set("style", `${measureType}_${size}`);
+        feature.set("styleId", `${measureType}_${size}`);
       }
 
       if (feature.get("isGeoCircle")) {
@@ -666,33 +667,25 @@ export default {
             const size = feature.get("size");
             const { circleRadius, iconScale } = getIconSizes(size);
 
-            console.log(
-              "[actionsProjectUploader] iconScale::",
-              iconScale,
-              circleRadius,
-            );
-            const iconStyle = new Style({
-              image: new Icon({
-                src: iconUrl,
-                scale: iconScale,
-                anchor: [0.5, 0.5],
-                anchorXUnits: "fraction",
-                anchorYUnits: "fraction",
-              }),
-              zIndex: 10,
-            });
-
-            const circleStyle = new Style({
-              image: new CircleStyle({
-                radius: circleRadius,
-                fill: new Fill({
-                  color: [255, 255, 255, 0.75],
+            feature.setStyle([
+              new Style({
+                image: new CircleStyle({
+                  radius: circleRadius,
+                  fill: new Fill({
+                    color: [255, 255, 255, 0.75],
+                  }),
                 }),
               }),
-              zIndex: 5,
-            });
-
-            feature.setStyle([circleStyle, iconStyle]);
+              new Style({
+                image: new Icon({
+                  src: iconUrl,
+                  scale: iconScale,
+                  anchor: [0.5, 0.5],
+                  anchorXUnits: "fraction",
+                  anchorYUnits: "fraction",
+                }),
+              }),
+            ]);
           }
 
           feature.set("source", fileName);
