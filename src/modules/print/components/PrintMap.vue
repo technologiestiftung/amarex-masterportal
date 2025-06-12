@@ -6,15 +6,16 @@ import {Vector} from "ol/layer.js";
 
 import isObject from "../../../shared/js/utils/isObject";
 import mutations from "../store/mutationsPrint";
-import thousandsSeparator from "../../../shared/js/utils/thousandsSeparator";
 import layerProvider from "../js/getVisibleLayer";
-import FlatButton from "../../../shared/modules/buttons/components/FlatButton.vue";
-import InputText from "../../../shared/modules/inputs/components/InputText.vue";
-import SwitchInput from "../../../shared/modules/checkboxes/components/SwitchInput.vue";
 import rawLayerList from "@masterportal/masterportalapi/src/rawLayerList";
 import BuildSpec from "../js/buildSpec";
 import layerCollection from "../../../core/layers/js/layerCollection";
 import SpinnerItem from "../../../shared/modules/spinner/components/SpinnerItem.vue";
+
+import colors from "../../../shared/js/utils/amarex-colors.json";
+import { Info as InfoIcon, FileDown, LoaderCircle } from "lucide-vue-next";
+import { getReport } from "../api/getReport";
+import measureCalculations from "../../../../addons/abimoHandler/utils/measureCalculations";
 
 /**
  * Tool to print a part of the map
@@ -28,42 +29,49 @@ import SpinnerItem from "../../../shared/modules/spinner/components/SpinnerItem.
  */
 export default {
     name: "PrintMap",
-    components: {FlatButton, InputText, SwitchInput, SpinnerItem},
+    components: {
+        SpinnerItem, 
+        InfoIcon,
+        FileDown,
+        LoaderCircle
+    },
     data () {
         return {
-            subtitle: "",
-            textField: "",
-            author: ""
+            subtitle: "Das ist der Untertitel",
+            textField: "Das ist das Textfeld",
+            author: "Hier steht der Author",
+            colors,
+            report: {
+                title: "",
+                description: "",
+                date: new Date().toDateString(),
+            },
+            reportLoading: false,
+            warning: null,
+            measureCalculations,
+            showTestingBTN: false
         };
     },
     computed: {
+        ...mapGetters("Modules/ProjectStarter", [
+            "projectTitle",
+            "projectDescription",
+        ]),
+        ...mapGetters(["allLayerConfigs"]),
         ...mapGetters("Modules/Print", [
-            "additionalLayers",
-            "autoAdjustScale",
             "capabilitiesFilter",
-            "currentFormat",
             "currentLayout",
-            "currentLayoutName",
-            "currentMapScale",
-            "currentScaleUrlParams",
             "defaultCapabilitiesFilter",
             "fileDownloads",
             "filename",
             "formatList",
             "is3d",
-            "isGfiAvailable",
-            "isGfiSelected",
             "isIncreased3DResolutionSelected",
-            "isLegendAvailable",
-            "isLegendSelected",
-            "isScaleSelectedManually",
-            "layoutMapInfo",
             "layoutList",
             "overviewmapLayerId",
             "printMapMarker",
             "printService",
             "printServiceId",
-            "scaleList",
             "title",
             "visibleLayerList"
         ]),
@@ -73,7 +81,16 @@ export default {
             "mainMenu",
             "secondaryMenu"
         ]),
-
+        ...mapGetters("Modules/AbimoHandler", [
+            "areaTypesData",
+            "accumulatedAbimoStats",
+            "selectedFeatures",
+            "resultAbimoStats",
+            "preComputedStats",
+            "isMeasurePlanning",
+            "accumulatedMeasureStats",
+            "selectedMeasures"
+        ]),
         currentScale: {
             get () {
                 return this.$store.state.Modules.Print.currentScale;
@@ -158,6 +175,9 @@ export default {
                 this.setFilename(value);
                 this.isValid(value);
             }
+        },
+        firstFinishState() {
+            return this.fileDownloads.length > 0 ? this.fileDownloads[0].finishState : null;
         }
     },
     watch: {
@@ -180,12 +200,40 @@ export default {
         },
         isIncreased3DResolutionSelected: function (value) {
             this.update3DResolutionScale(value);
+        },
+        firstFinishState(newVal) {
+            if (newVal) {
+                const newPrintFile = this.fileDownloads[0]
+                if (newPrintFile && newPrintFile?.finishState) {
+                    const downloadURL = newPrintFile.downloadUrl
+                    if (downloadURL) {
+                        this.generateReport(downloadURL)
+                    }
+                }
+            }
         }
     },
     created () {
         this.setServiceId(this.printServiceId);
+        this.report.title = this.projectTitle || "Amarex Report";
+        this.report.description = this.projectDescription;
     },
     mounted () {
+
+        this.allLayerConfigs
+            .filter(
+            (layer) =>
+                layer.id === "rabimo_input_2025" ||
+                layer.id === "planung_abimo" ||
+                layer.id === "abimo_2025_wfs:preCompute" ||
+                layer.id === "delta_w_2025_wfs:preCompute"
+            ).forEach((layer) => {
+            const isLayerVisible = layer.visibility;
+            if (isLayerVisible) {
+                this.changeVisibility({ layerId: layer.id, value: false });
+            }
+            });
+
         if (this.mode === "3D") {
             this.setIs3d(true);
         }
@@ -203,28 +251,24 @@ export default {
                 this.setIsIncreased3DResolutionSelected(false);
             }
         });
-
+        this.setCurrentFormat("png")
         this.setCurrentMapScale(this.scale);
     },
     unmounted () {
-        this.setFileDownloads([]);
-        this.togglePostrenderListener(false);
-        this.shownLayoutList = [];
+        this.resetAll()
     },
     methods: {
         ...mapMutations("Modules/Print", Object.keys(mutations)),
         ...mapActions("Modules/Print", [
             "retrieveCapabilites",
             "togglePostrenderListener",
-            "createMapFishServiceUrl",
             "startPrint",
             "startPrint3d",
-            "getOptimalResolution",
             "updateCanvasLayer",
-            "getAttributeInLayoutByName",
             "update3DResolutionScale"
         ]),
         ...mapActions("Alerting", ["addSingleAlert"]),
+        ...mapActions("Modules/LayerSelection", ["changeVisibility"]),
 
         /**
          * Waits until the features of Vector layers are loaded and then renders the canvas again.
@@ -250,66 +294,6 @@ export default {
                     });
                 }
             });
-        },
-
-        /**
-         * returns the "beautified" scale to be shown in the dropdown box
-         * @param {Number} scale the scale to beautify
-         * @returns {String} the beautified scale
-         */
-        returnScale (scale) {
-            if (typeof scale !== "number") {
-                return "";
-            }
-            else if (scale < 10000) {
-                return String(scale);
-            }
-            return thousandsSeparator(scale, " ");
-        },
-
-        /**
-         * if Scale is changed
-         * @param {event} event the click event
-         * @returns {void}
-         */
-        async scaleChanged (event) {
-            const scale = parseInt(event.target.value, 10),
-                resolution = {
-                    "scale": scale,
-                    "mapSize": mapCollection.getMap("2D").getSize(),
-                    "printMapSize": this.layoutMapInfo
-                };
-
-            this.setIsScaleSelectedManually(true);
-            this.getOptimalResolution(resolution);
-            this.updateCanvasLayer();
-            await mapCollection.getMap("2D").render();
-        },
-
-        /**
-         * if Layout is changed
-         * @param {String} value the chosen layout
-         * @returns {void}
-         */
-        async layoutChanged (value) {
-            this.resetLayoutParameter();
-            this.setCurrentLayoutName(value);
-            this.setCurrentLayout(this.layoutList.find(layout => layout.name === value));
-            if (this.printService !== "plotservice") {
-                this.getAttributeInLayoutByName("gfi");
-                this.getAttributeInLayoutByName("legend");
-            }
-            this.updateCanvasLayer();
-            await mapCollection.getMap("2D").render();
-        },
-
-        /**
-        * resets the available attriubtes gfi and legend to the default parameters
-        * @returns {void}
-        */
-        resetLayoutParameter () {
-            this.setIsGfiAvailable(false);
-            this.setIsLegendAvailable(false);
         },
 
         /**
@@ -360,48 +344,6 @@ export default {
             }
         },
 
-        /**
-         * Downloads the pdf for print.
-         * @param {Object} button the clicked button
-         * @param {String} downloadUrl The url to the file.
-         * @param {String} filename The file name.
-         * @returns {void}
-         */
-        download (button, downloadUrl, filename) {
-            const link = document.createElement("a");
-
-            link.href = downloadUrl;
-            link.download = filename;
-            document.body.appendChild(link);
-            link.click();
-            document.body.removeChild(link);
-            if (button.classList.contains("btn-primary")) {
-                button.classList.remove("btn-primary");
-                button.classList.add("btn-secondary");
-            }
-        },
-
-        /**
-         * validates the value of the outputFileTitle input field
-         * @param {String} value - input value
-         * @returns {void}
-         */
-        isValid (value) {
-            const regex = /^[a-zA-Z\-_]+$/,
-                valid = regex.test(value);
-
-            if (!valid) {
-                document.getElementById("outputFileTitleWarning").classList.remove("active");
-                document.getElementById("outputFileTitle").classList.add("danger");
-
-                document.getElementById("printBtn").disabled = true;
-            }
-            else {
-                document.getElementById("outputFileTitleWarning").classList.add("active");
-                document.getElementById("outputFileTitle").classList.remove("danger");
-                document.getElementById("printBtn").disabled = false;
-            }
-        },
 
         /**
          * Checks if the layout has a certain attribute by its name.
@@ -470,31 +412,152 @@ export default {
             return defaultLayerId;
         },
 
-        /**
-         * Sets the subtitle to data's subtitle.
-         * @param {String} subtitle the subtitle diplayed in print under title
-         * @returns {void}
-         */
-        setSubtitle (subtitle) {
-            this.subtitle = subtitle;
+        mathRoundAndToFixedTwoAfterComma(num) {
+            return Number(num.toFixed(1));
+        },
+        mathRoundAndToFixed(num) {
+            return Number(Math.round(num).toFixed(0))
+        },
+        fullPercentage(num) {
+            // return (Math.floor(num * 1000) / 100).toFixed(1);
+            const value = Math.floor(num * 1000) / 10;
+            return value % 1 === 0 ? String(value.toFixed(0)) : String(value.toFixed(1));
         },
 
-        /**
-         * Sets the author to data's author.
-         * @param {String} author the author diplayed in print footer
-         * @returns {void}
-         */
-        setAuthor (author) {
-            this.author = author;
-        },
+        /* Report PDF Amarex */
+        async generateReport(downloadURL) {
 
-        /**
-         * Sets the textField to data's textField.
-         * @param {String} textField the textField diplayed in print under the map
-         * @returns {void}
-         */
-        setTextField (textField) {
-            this.textField = textField;
+            // 1.1 => Gesamtfläche
+            const gesamtFläche = this.accumulatedAbimoStats.totalArea;
+            // 1.2 => Unversiegelt
+            const unversiegelt = this.areaTypesData.find((areaType) => areaType.id === "unpvd").max // < 1
+            // 1.3 => Bebaut versiegelt
+            const bebautVersiegelt = this.areaTypesData.find((areaType) => areaType.id === "roof").max // < 1
+            // 1.4 => Unbebaut versiegelt
+            const unbebautVersiegelt = this.areaTypesData.find((areaType) => areaType.id === "pvd").max // < 1
+            // 1.5 => % von Dachfläche
+            const begrünteDachfläche = this.accumulatedAbimoStats.maxGreenRoofToRoof // < 1
+            // 2.1 => Zielwert Dachbegrünung
+            const zielwertDachbegrünung = this.accumulatedAbimoStats.targetValueGreenRoof || 0 // < 100
+            // 3.1 => Zielwert unversiegelte Fläche
+            const zielwertUnversiegelt = this.accumulatedAbimoStats.targetValueUnsealed || 0 // < 100
+
+            // Dachfläche "D" => 1.1 * 1.3
+            const dachFläche = this.mathRoundAndToFixed(gesamtFläche * bebautVersiegelt)
+
+            // Unversiegelte Fläche "U" => 1.1 * 3.1
+            const unversiegelteFläche = this.mathRoundAndToFixed(gesamtFläche * (zielwertUnversiegelt / 100))
+            
+            // Versiegelte Fläche "V" => 1.1 - U - D
+            const versiegelteFläche = this.mathRoundAndToFixed(gesamtFläche - unversiegelteFläche - dachFläche)
+
+            // Lokale Betrachtung
+            const allMeasuredStats = this.measureCalculations.calculateAllMeasureStats(this.selectedFeatures, this.selectedMeasures)
+           
+            // Maßnahmenplanung
+            const dachbegrünung_prozente = this.isMeasurePlanning ? this.fullPercentage(allMeasuredStats.newGreenRoof) : this.accumulatedAbimoStats.targetValueGreenRoof || 0;
+            const entsiegelung_prozente = this.isMeasurePlanning ? this.fullPercentage(allMeasuredStats.newUnpvd) : this.accumulatedAbimoStats.targetValueUnsealed || 0;
+            const an_mulde_angeschlossene_fläche = this.isMeasurePlanning ? this.fullPercentage(allMeasuredStats.newToSwale) : this.accumulatedAbimoStats.targetValueSwaleConnected || 0;
+
+            const abimo_result_runoff = this.mathRoundAndToFixed(this.resultAbimoStats.runoff)
+            const abimo_result_infiltration = this.mathRoundAndToFixed(this.resultAbimoStats.infiltration)
+            const abimo_result_evaporation = this.mathRoundAndToFixed(this.resultAbimoStats.evaporation)
+            const abimo_results_added = abimo_result_runoff + abimo_result_infiltration + abimo_result_evaporation
+            
+            // Status Quo Analyse
+            const oberflächenabflussStatusQuo = this.mathRoundAndToFixed(this.preComputedStats.runoff);
+            const infiltrationStatusQuo = this.mathRoundAndToFixed(this.preComputedStats.infiltration);
+            const verdunstungStatusQuo = this.mathRoundAndToFixed(this.preComputedStats.evaporation);
+            const status_quo_added = oberflächenabflussStatusQuo + infiltrationStatusQuo + verdunstungStatusQuo;
+
+            const flächenanteile_davon_begrünt_simulation = `${this.isMeasurePlanning ? this.fullPercentage(allMeasuredStats.newGreenRoof) : this.fullPercentage((zielwertDachbegrünung / 100) / bebautVersiegelt)} % (${this.isMeasurePlanning ? this.mathRoundAndToFixed(allMeasuredStats.Ag_neu) : this.mathRoundAndToFixed(gesamtFläche * (zielwertDachbegrünung / 100))} m²)`
+            const flächenanteile_unbebaut_versiegelte_flächen_simulation = `${this.isMeasurePlanning ? this.mathRoundAndToFixed(allMeasuredStats.pvd_neu_area)  : versiegelteFläche} m² (${this.isMeasurePlanning ? this.mathRoundAndToFixedTwoAfterComma(allMeasuredStats.newPvdToTotalArea || 0) : this.fullPercentage(versiegelteFläche / gesamtFläche)} %)`
+            const flächenanteile_unversiegelte_flächen_simulation = `${this.isMeasurePlanning ? this.mathRoundAndToFixed(allMeasuredStats.Ae_neu)  : unversiegelteFläche} m² (${this.isMeasurePlanning ? this.mathRoundAndToFixedTwoAfterComma(allMeasuredStats.totalUnpavedToTotalArea || 0) :  zielwertUnversiegelt} %)`
+
+            const makePercentageForAbimo = (value) => {
+                return this.mathRoundAndToFixedTwoAfterComma((100 / abimo_results_added) * value)
+            }
+            const makeWasserhaushaltStatusQuoPercentage = (value) => {
+                return this.mathRoundAndToFixedTwoAfterComma((100 / status_quo_added) * value)
+            }
+
+            const payload = {
+                title: this.report.title,
+                description: this.report.description,
+                date: this.report.date,
+                isMeasurePlanning: this.isMeasurePlanning,
+                downloadURL,
+                totalArea: gesamtFläche,
+                // 1.1 * 1.3 => m² | 1.3 => % 
+                flächenanteile_dachfläche: `${dachFläche} m² (${this.fullPercentage(bebautVersiegelt)} %)`,
+                // 1.5 * dachFläche "D" => m² | 1.5 => %
+                flächenanteile_davon_begrünt_status_quo: `${this.fullPercentage(begrünteDachfläche)} % (${this.mathRoundAndToFixed(dachFläche * begrünteDachfläche)} m²)`,
+                // 2.1 * 1.1 => m² | 2.1 / 1.3 => % 
+                flächenanteile_davon_begrünt_simulation,
+                // 1.4 * 1.1 => m² | 1.4 => %
+                flächenanteile_unbebaut_versiegelte_flächen_status_quo: `${this.mathRoundAndToFixed(gesamtFläche * unbebautVersiegelt)} m² (${this.fullPercentage(unbebautVersiegelt)} %)`,
+                // "V" => m² | V / 1.1 => %
+                flächenanteile_unbebaut_versiegelte_flächen_simulation,
+                // 1.2 * 1.1 => m² | 1.2 => %
+                flächenanteile_unversiegelte_flächen_status_quo: `${this.mathRoundAndToFixed(gesamtFläche * unversiegelt)} m² (${this.fullPercentage(unversiegelt)} %)`,
+                // "U" => m² | 3.1 => % 
+                flächenanteile_unversiegelte_flächen_simulation,
+                // gesetzte Maßnahmen
+                betrachteteblockteilflaechen: this.accumulatedAbimoStats.featuresSelected || 0,
+                an_mulde_angeschlossene_fläche,
+                dachbegrünung_prozente,
+                entsiegelung_prozente,
+                // please add in the 4 "Status Quo Analyse" values for page 3 of the report
+                oberflächenabfluss_status_quo: oberflächenabflussStatusQuo, 
+                infiltration_status_quo: infiltrationStatusQuo,
+                verdunstung_status_quo: verdunstungStatusQuo, 
+                delta_w_status_quo: this.mathRoundAndToFixedTwoAfterComma(this.preComputedStats.deltaW || 0), 
+                // please add in the 8 "Status Quo Analyse" values for page 5 of the report
+                wasserhaushalt_oberflächenabfluss_status_quo: `${oberflächenabflussStatusQuo} mm/a (${makeWasserhaushaltStatusQuoPercentage(oberflächenabflussStatusQuo)} %)`,
+                wasserhaushalt_infiltration_status_quo: `${infiltrationStatusQuo} mm/a (${makeWasserhaushaltStatusQuoPercentage(infiltrationStatusQuo)} %)`,
+                wasserhaushalt_verdunstung_status_quo: `${verdunstungStatusQuo} mm/a (${makeWasserhaushaltStatusQuoPercentage(verdunstungStatusQuo)} %)`,
+                // Abimo Result
+                abimo_result: {
+                    runoff: abimo_result_runoff,
+                    runoff_prozente: makePercentageForAbimo(abimo_result_runoff),
+                    infiltration: abimo_result_infiltration,
+                    infiltration_prozente: makePercentageForAbimo(abimo_result_infiltration),
+                    evaporation: abimo_result_evaporation,
+                    evaporation_prozente: makePercentageForAbimo(abimo_result_evaporation),
+                    deltaW: this.mathRoundAndToFixedTwoAfterComma(this.resultAbimoStats.deltaW || 0),
+                },
+                zisternenrechner_link: null
+            }
+
+
+            try {
+                await getReport(payload, "_blank"); // "_blank" | undefined => _blank opens the pdf in new tab | undefined downloads the pdf
+                this.reportLoading = false;
+                this.setFileDownloads([]);
+                return;
+            } catch (error) {
+                this.reportLoading = false;
+                this.warning = "Fehler beim Erstellen des Reports: " + error;
+                return;
+            }
+        },
+        async triggerGenerate() {
+            this.warning = null;
+            if (!this.report.title) {
+                this.warning = "Bitte einen Titel eingeben";
+                return;
+            }
+            if (this.accumulatedAbimoStats.featuresSelected === 0 || this.accumulatedAbimoStats.totalArea === 0) {
+                this.warning = "Bitte führen Sie eine Wasserhaushaltsberechnung durch, um einen Report zu erstellen.";
+                return;
+            }
+            this.reportLoading = true;
+            this.print()
+        },
+        resetAll() {
+            this.setFileDownloads([]);
+            this.togglePostrenderListener(false);
+            this.shownLayoutList = [];
         }
     }
 };
@@ -502,347 +565,152 @@ export default {
 
 <template lang="html">
     <div id="modules-print">
-        <form
-            id="printToolNew"
-            class="form-horizontal"
-            @submit.prevent="print"
-        >
-            <div>
-                <InputText
-                    :id="'docTitle'"
-                    :label="$t('common:modules.print.titleLabel')"
-                    :placeholder="$t('common:modules.print.titleLabel')"
-                    :value="title"
-                    :input="setTitle"
-                />
-            </div>
-            <div
-                v-if="hasLayoutAttribute(currentLayout, 'subtitle')"
-            >
-                <InputText
-                    :id="subtitle"
-                    :label="$t('common:modules.print.subtitleLabel')"
-                    :placeholder="$t('common:modules.print.subtitleLabel')"
-                    :value="subtitle"
-                    :input="setSubtitle"
-                    :max-length="'60'"
-                />
-            </div>
-            <div
-                v-if="hasLayoutAttribute(currentLayout, 'textField')"
-                class="form-floating"
-            >
-                <div
-                    class="form-floating mb-3"
-                >
-                    <textarea
-                        id="textField"
-                        type="text"
-                        class="form-control"
-                        maxLength="550"
-                        :placeholder="$t('common:modules.print.textFieldLabel')"
-                        @input="event => setTextField(event.target.value)"
-                    />
-                    <label for="textField">{{ $t("common:modules.print.textFieldLabel") }}</label>
-                </div>
-            </div>
-            <div
-                v-if="hasLayoutAttribute(currentLayout, 'author')"
-            >
-                <InputText
-                    :id="author"
-                    :label="$t('common:modules.print.authorLabel')"
-                    :placeholder="$t('common:modules.print.authorLabel')"
-                    :value="author"
-                    :input="setAuthor"
-                    :max-length="'60'"
-                />
-            </div>
-            <div class="form-floating mb-3">
-                <select
-                    id="printLayout"
-                    class="form-select"
-                    :aria-label="$t('common:modules.print.layoutLabel')"
-                    @change="layoutChanged($event.target.value)"
-                >
-                    <option
-                        v-for="(layout, i) in shownLayoutList"
-                        :key="i"
-                        :value="layout.name"
-                        :selected="layout.name === currentLayoutName"
-                    >
-                        {{ layout.name }}
-                    </option>
-                </select>
-                <label for="printLayout">
-                    {{ $t("common:modules.print.layoutLabel") }}
-                </label>
-            </div>
-            <div class="form-floating mb-3">
-                <select
-                    id="printFormat"
-                    class="form-select"
-                    @change="setCurrentFormat($event.target.value)"
-                >
-                    <option
-                        v-for="(format, i) in shownFormatList"
-                        :key="i"
-                        :value="format"
-                        :selected="format === currentFormat"
-                    >
-                        {{ format }}
-                    </option>
-                </select>
-                <label for="printFormat">
-                    {{ $t("common:modules.print.formatLabel") }}
-                </label>
-            </div>
-            <div
-                v-if="dpiList.length > 0 && !is3d"
-                class="form-floating mb-3"
-            >
-                <select
-                    id="printDpi"
-                    class="form-select"
-                    @change="setDpiForPdf($event.target.value)"
-                >
-                    <option
-                        v-for="(dpi, i) in dpiList"
-                        :key="i"
-                        :value="dpi"
-                        :selected="dpi === dpiForPdf"
-                    >
-                        {{ dpi }}
-                    </option>
-                </select>
-                <label for="printDpi">
-                    {{ $t("common:modules.print.dpiLabel") }}
-                </label>
-            </div>
-            <div
-                v-if="!is3d"
-                class="form-floating scale"
-            >
-                <select
-                    id="printScale"
-                    v-model="currentScale"
-                    class="form-select"
-                    @change="scaleChanged($event)"
-                >
-                    <option
-                        v-for="(scale, i) in scaleList"
-                        :key="i"
-                        :value="scale"
-                        :selected="scale === currentScale"
-                    >
-                        1 : {{ returnScale(scale) }}
-                    </option>
-                </select>
-                <label for="printScale">
-                    {{ $t("common:modules.print.scaleLabel") }}
-                </label>
-                <div class="row info mb-3 mt-2">
-                    <span class="col-1 info-icon d-flex align-items-center">
-                        <i class="bi-info-circle" />
-                    </span>
-                    <div class="col info-text ps-3">
-                        {{ $t("common:modules.print.hintInfoScale") }}
-                    </div>
-                </div>
-            </div>
-            <div
-                v-if="printService === 'plotservice'"
-                class="form-group form-group-sm row"
-            >
-                <InputText
-                    :id="'outputFileTitle'"
-                    v-model="outputTitle"
-                    :label="$t('common:modules.print.outputfileTitleLabel')"
-                    :placeholder="$t('common:modules.print.outputfileTitleLabel')"
-                />
-                <small
-                    id="outputFileTitleWarning"
-                    class="offset-md-5 col-md-7 active"
-                >
-                    {{ $t("common:modules.print.validationWarning") }}
-                </small>
-            </div>
-            <div
-                v-if="!is3d"
-                class="form-check form-switch mb-3 d-flex align-items-center"
-            >
-                <SwitchInput
-                    :id="'autoAdjustScale'"
-                    :aria="$t('common:modules.print.autoAdjustScale')"
-                    :interaction="($event) => setAutoAdjustScale($event.target.checked)"
-                    :label="$t('common:modules.print.autoAdjustScale')"
-                    :checked="autoAdjustScale && !isScaleSelectedManually"
-                />
-            </div>
-            <div
-                v-for="(additionalLayer, i) in additionalLayers"
-                :key="'additionalLayer_'+i"
-            >
-                <div class="form-check form-switch mb-3 d-flex align-items-center">
-                    <SwitchInput
-                        :id="'printLayer_'+additionalLayer.id"
-                        :aria="additionalLayer.label"
-                        :interaction="($event) => $event.target.checked ? setAdditionalLayerActive(additionalLayer.id) : setAdditionalLayerInactive(additionalLayer.id)"
-                        :label="additionalLayer.label"
-                        :checked="additionalLayer.active"
-                    />
-                </div>
-            </div>
-            <div
-                v-if="isLegendAvailable"
-            >
-                <div class="form-check form-switch mb-3 d-flex align-items-center">
-                    <SwitchInput
-                        :id="'printLegend'"
-                        :aria="$t('common:modules.print.withLegendLabel')"
-                        :interaction="($event) => setIsLegendSelected($event.target.checked)"
-                        :label="$t('common:modules.print.withLegendLabel')"
-                        :checked="isLegendSelected"
-                    />
-                </div>
-            </div>
-            <div
-                v-if="is3d"
-            >
-                <div class="form-check form-switch mb-3 d-flex align-items-center">
-                    <SwitchInput
-                        :id="'printBetterQuality'"
-                        :aria="$t('common:modules.print.improveResolution')"
-                        :interaction="($event) => setIsIncreased3DResolutionSelected($event.target.checked)"
-                        :label="$t('common:modules.print.improveResolution')"
-                        :checked="isIncreased3DResolutionSelected"
-                    />
-                </div>
-            </div>
-            <div
-                v-if="isGfiAvailable"
-            >
-                <div class="form-check form-switch mb-3 d-flex align-items-center">
-                    <SwitchInput
-                        :id="'printGfi'"
-                        :aria="$t('common:modules.print.withInfoLabel')"
-                        :interaction="($event) => setIsGfiSelected($event.target.checked)"
-                        :label="$t('common:modules.print.withInfoLabel')"
-                        :disabled="currentFeature === null"
-                        :checked="isGfiSelected"
-                    />
-                </div>
-            </div>
-            <div class="form-group form-group-sm row">
-                <div class="col-md-12 d-flex justify-content-center">
-                    <FlatButton
-                        id="printBtn"
-                        :aria-label="$t('common:modules.print.printLabel')"
-                        :interaction="print"
-                        :text="$t('common:modules.print.printLabel')"
-                        :icon="'bi-printer'"
-                    />
-                </div>
-            </div>
-        </form>
-        <div id="modules-print-downloads-container">
-            <div
-                v-for="file in fileDownloads"
-                id="modules-print-download-container"
-                :key="file.index"
-                class="row"
-            >
-                <div class="col-3 modules-print-download-title-container">
-                    <span
-                        v-if="printService === 'plotservice'"
-                        class="modules-print-download-title"
-                    >
-                        {{ file.filename + "." + file.outputFormat }}
-                    </span>
-                    <span
-                        v-else
-                        class="modules-print-download-title"
-                    >
-                        {{ file.title }}
-                    </span>
-                </div>
-                <div class="col-2 modules-print-download-icon-container">
-                    <SpinnerItem
-                        v-if="!file.finishState"
-                    />
-                    <div
-                        v-else
-                        class="bootstrap-icon modules-print-download-icon"
-                    >
-                        <i class="bi-check-lg" />
-                    </div>
-                </div>
-                <div class="col-7 modules-print-download-button-container">
-                    <FlatButton
-                        v-if="file.finishState"
-                        :aria-label="$t('common:modules.print.downloadFile')"
-                        :interaction="($event) => download($event.target, file.downloadUrl, file.filename)"
-                        :text="$t('common:modules.print.downloadFile')"
-                        :icon="'bi-download'"
-                    />
-                    <FlatButton
-                        v-else
-                        :aria-label="$t('common:modules.print.createDownloadFile')"
-                        :text="$t('common:modules.print.createDownloadFile')"
-                        :icon="'bi-download'"
-                        disabled
-                    />
-                </div>
-            </div>
+        <p class="title">Report erstellen</p>
+        <p class="description with-margin">
+            Hier können Sie eine Reportdatei Ihrer Ergebnisse erstellen.<br /><br />Wählen
+            Sie dafür einen Kartenausschnitt und füllen Sie die unten stehenden Felder
+            aus. Sie können im Anschluss Ihren Report als pdf-Datei herunterladen.<br /><br />Hinweis:
+            Der Report enthält keine Ergebnisse, wenn Sie keine
+            Wasserhaushalts&shy;berechnungen durchgeführt haben.
+        </p>
+        <div class="input-wrapper">
+            <p class="input-wrapper-title">Titel des Reports</p>
+            <input
+                type="text"
+                name="title"
+                id="title"
+                v-model="report.title"
+                placeholder="Hier können Sie einen Titel eingeben ..."
+                maxlength="40"
+            />
         </div>
+        <div class="input-wrapper">
+        <p class="input-wrapper-title">Kommentar (Optional)</p>
+        <textarea
+            name="title"
+            id="title"
+            rows="10"
+            v-model="report.description"
+            placeholder="Hier können Sie einen Kommentar für Ihren Report eingeben (max. 300 Zeichen) ..."
+            maxlength="300"
+        ></textarea>
+        </div>
+        <p
+            v-if="warning"
+            class="description bold mb-3 warning"
+        >
+            {{ warning }}
+        </p>
+        <button
+            class="amarex-btn-primary accent full-with-icon"
+            v-if="!reportLoading"
+            @click="triggerGenerate"
+        >
+            <FileDown
+                :color="colors.secondary"
+                :size="24"
+            />
+            <p>Datei herunterladen</p>
+        </button>
+        <span
+            v-else
+            class="loading-container d-flex flex-column align-items-center"
+        >
+            <LoaderCircle
+                :color="colors.amarex_secondary"
+                :size="24"
+            />
+            <p class="title">Ihr Report wird erstellt...</p>
+        </span>
     </div>
 </template>
 
-<style lang="scss" scoped>
-    @import "~variables";
-
-    .info {
-        max-width: fit-content;
-        .info-icon {
-            font-size: 1.5rem;
-        }
-        .info-text {
-            font-size: $font-size-sm;
-        }
+<style lang="scss">
+@import "~variables";
+#modules-print {
+  .title {
+    color: $amarex_secondary;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 32px;
+  }
+  .description {
+    color: $amarex_secondary;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 22px;
+    &.with-margin {
+      margin-bottom: 32px;
     }
-
-    .form-control:focus ~ label {
-        color: $secondary;
+    &.bold {
+      font-weight: 700;
     }
-
-    #outputFileTitle.danger {
-        border-color: red
+  }
+  .input-wrapper {
+    padding: 12px 16px;
+    border: 1px solid $amarex_grey_dark;
+    margin-bottom: 32px;
+    .input-wrapper-title {
+      color: $amarex_secondary;
+      font-size: 14px;
+      font-weight: 400;
+      line-height: 16px;
+      margin-bottom: 5px;
     }
-    #outputFileTitleWarning {
-        color: red;
+    input,
+    textarea {
+      width: 100%;
+      border: none !important;
+      color: $amarex_secondary;
+      font-size: 16px;
+      font-weight: 700;
+      line-height: 16px;
+      padding: 0 !important;
+      resize: none;
+      &:focus {
+        outline: none !important;
+        box-shadow: none !important;
+      }
+      &::placeholder {
+        color: $amarex_grey_dark;
+        font-size: 16px;
+        font-weight: 700;
+        line-height: 16px;
+      }
     }
-    #outputFileTitleWarning.active {
-        display: none;
+  }
+  .custom-gap {
+    gap: 10px;
+  }
+  .toggle-container {
+    cursor: pointer;
+  }
+  .last-form-element {
+    margin-bottom: 32px;
+  }
+  .warning {
+    color: $amarex_red;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 22px;
+  }
+  .loading-container {
+    gap: 16px;
+    margin-top: 48px;
+    svg {
+      animation: spin 1s linear infinite;
     }
-    #modules-print-downloads-container {
-        margin-top: 30px;
-
-        #modules-print-download-container {
-            padding-left: 15px;
-            margin-top: 10px;
-
-            .modules-print-download-title-container {
-                padding: 8px 0 0 0;
-            }
-
-            .modules-print-download-icon-container {
-                margin: 5px 0 0 0;
-            }
-
-            .modules-print-download-icon {
-                font-size: $font-size-lg;
-                color: darkgreen;
-            }
-        }
+    p {
+      text-align: center;
     }
+  }
+  @keyframes spin {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+}
 </style>

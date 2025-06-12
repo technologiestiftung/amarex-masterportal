@@ -485,12 +485,14 @@ const BuildSpecModel = {
      * @param {ol.extent} extent  Extent uses to filter the feature by extent.
      * @returns {Object} - style for mapfish print.
      */
-    buildStyle: function (layer, features, geojsonList, extent) {
+    buildStyle: function (layer, features, geojsonList, extent) {        
         const mapfishStyleObject = {
-                "version": "2"
+            "version": "2"
             },
             layersToNotReverse = ["measureLayer", "importDrawLayer"],
             featuresInExtent = layer.getSource() ? layer.getSource().getFeaturesInExtent(extent) : features;
+            
+        const layerOpacity = layer.get("opacity") !== undefined ? layer.get("opacity") : 1;
 
         if (!layersToNotReverse.includes(layer.values_.id)) {
             features.reverse();
@@ -504,43 +506,46 @@ const BuildSpecModel = {
                 return;
             }
 
-            let clonedFeature,
-                stylingRules,
-                stylingRulesSplit,
-                styleObject,
-                geometryType,
-                styleGeometryFunction;
-
             styles.forEach((style, index) => {
                 if (style !== null) {
+                    
                     const styleObjectFromStyleList = styleList.returnStyleObject(layer.get("styleId"));
+
                     let limiter = ",",
                         styleFromStyleList = styleObjectFromStyleList ? createStyle.getGeometryStyle(feature, styleObjectFromStyleList.rules, false, Config.wfsImgPath) : undefined;
 
                     if (Array.isArray(styleFromStyleList)) {
                         styleFromStyleList = styleFromStyleList[0];
                     }
-                    clonedFeature = feature.clone();
+                    
+                    // Clone the feature for this specific style
+                    const clonedFeature = feature.clone();
+                    
+                    // Create a unique identifier for this style
+                    const styleIdentifier = `_${index}`;
+                    
                     styleAttributes.forEach(attribute => {
                         const singleFeature = clonedFeature.get("features") ? clonedFeature.get("features")[0] : clonedFeature;
 
                         if (attribute.includes("Datastreams")) {
-                            clonedFeature.set(attribute, attribute === "default" && !singleFeature.get(attribute) ? "style" : `${singleFeature.getProperties().Datastreams[0].Observations[0].result}_${index}`);
+                            clonedFeature.set(attribute, attribute === "default" && !singleFeature.get(attribute) ? `style${styleIdentifier}` : `${singleFeature.getProperties().Datastreams[0].Observations[0].result}${styleIdentifier}`);
                         }
                         else if (style.type && style.type === "CIRCLESEGMENTS") {
                             clonedFeature.setId(`${feature.ol_uid}__${index}`);
-                            clonedFeature.set(attribute, `${style.type}_${style.scalingAttribute.replace(" | ", "_")}_${index}`);
+                            clonedFeature.set(attribute, `${style.type}_${style.scalingAttribute.replace(" | ", "_")}${styleIdentifier}`);
                         }
                         else if (style.type && style.type === "imageStyle") {
                             clonedFeature.setId(`${feature.ol_uid}__${index}`);
-                            clonedFeature.set(attribute, `${style.type}_${index}`);
+                            clonedFeature.set(attribute, `${style.type}${styleIdentifier}`);
                         }
                         else {
-                            clonedFeature.set(attribute, attribute === "default" && !singleFeature.get(attribute) ? "style" : `${singleFeature.get(attribute)}_${index}`);
+                            // Ensure each style gets a unique attribute value by appending the index
+                            clonedFeature.set(attribute, attribute === "default" && !singleFeature.get(attribute) ? `style${styleIdentifier}` : `${singleFeature.get(attribute)}${styleIdentifier}`);
                         }
                         clonedFeature.ol_uid = feature.ol_uid;
                     });
-                    geometryType = feature.getGeometry().getType();
+                    
+                    const geometryType = feature.getGeometry().getType();
 
                     // if an icon is shown, apply style offsets to geometry
                     if (geometryType === "Point" && style.getImage() instanceof Icon && style.getImage().getScale() > 0) {
@@ -555,20 +560,27 @@ const BuildSpecModel = {
                     }
 
                     // if style has geometryFunction, take geometry from style Function
-                    styleGeometryFunction = style.getGeometryFunction();
+                    const styleGeometryFunction = style.getGeometryFunction();
+                    let finalGeometryType = geometryType;
+                    
                     if (styleGeometryFunction !== null && styleGeometryFunction !== undefined) {
                         clonedFeature.setGeometry(styleGeometryFunction(clonedFeature));
-                        geometryType = styleGeometryFunction(clonedFeature).getType();
-                        if (geometryType === "Polygon") {
+                        finalGeometryType = styleGeometryFunction(clonedFeature).getType();
+                        if (finalGeometryType === "Polygon") {
                             this.checkPolygon(clonedFeature);
                         }
                     }
-                    stylingRules = this.getStylingRules(layer, clonedFeature, styleAttributes, style);
+                    
+                    // Get styling rules with the unique identifier
+                    const stylingRules = this.getStylingRules(layer, clonedFeature, styleAttributes, style);
+                    
+                    let formattedStylingRules = stylingRules;
                     if (styleFromStyleList !== undefined && styleFromStyleList.attributes?.labelField && styleFromStyleList.attributes?.labelField.length > 0) {
-                        stylingRules = stylingRules.replaceAll(limiter, " AND ");
+                        formattedStylingRules = stylingRules.replaceAll(limiter, " AND ");
                         limiter = " AND ";
                     }
-                    stylingRulesSplit = stylingRules
+                    
+                    const stylingRulesSplit = formattedStylingRules
                         .replaceAll("[", "")
                         .replaceAll("]", "")
                         .replaceAll("*", "")
@@ -583,48 +595,94 @@ const BuildSpecModel = {
                             [])
                         );
                     }
+                    
                     this.addFeatureToGeoJsonList(clonedFeature, geojsonList, style);
 
-                    // do nothing if we already have a style object for this CQL rule
-                    if (Object.prototype.hasOwnProperty.call(mapfishStyleObject, stylingRules)) {
-                        return;
-                    }
-
-                    styleObject = {
+                    // Create a style object for this style
+                    const styleObject = {
                         symbolizers: []
                     };
-                    if (geometryType === "Point" || geometryType === "MultiPoint") {
+                    
+                    if (finalGeometryType === "Point" || finalGeometryType === "MultiPoint") {
                         if (style.getImage() !== null || style.getText() !== null) {
-                            styleObject.symbolizers.push(this.buildPointStyle(style, layer));
+                            
+                            const pointStyle = this.buildPointStyle(style, layer);
+                            this.applyOpacityToSymbolizer(pointStyle, layerOpacity);
+
+                            styleObject.symbolizers.push(pointStyle);
                         }
                     }
-                    else if (geometryType === "Polygon" || geometryType === "MultiPolygon") {
-                        styleObject.symbolizers.push(this.buildPolygonStyle(style, layer));
+                    else if (finalGeometryType === "Polygon" || finalGeometryType === "MultiPolygon") {
+                        
+                        const polygonStyle = this.buildPolygonStyle(style, layer);
+                        this.applyOpacityToSymbolizer(polygonStyle, layerOpacity);
+
+                        styleObject.symbolizers.push(polygonStyle);
                     }
-                    else if (geometryType === "Circle") {
-                        styleObject.symbolizers.push(this.buildPolygonStyle(style, layer));
+                    else if (finalGeometryType === "Circle") {
+
+                        const circleStyle = this.buildPolygonStyle(style, layer);
+                        this.applyOpacityToSymbolizer(circleStyle, layerOpacity);
+                    
+                        styleObject.symbolizers.push(circleStyle);
                     }
-                    else if (geometryType === "LineString" || geometryType === "MultiLineString") {
+                    else if (finalGeometryType === "LineString" || finalGeometryType === "MultiLineString") {
                         if (layer.values_.id === "measureLayer" && style.stroke_ === null) {
                             return;
                         }
-                        styleObject.symbolizers.push(this.buildLineStringStyle(style, layer));
+
+                        const lineStyle = this.buildLineStringStyle(style, layer);
+                        this.applyOpacityToSymbolizer(lineStyle, layerOpacity);
+                        
+                        styleObject.symbolizers.push(lineStyle);
                     }
+                    
                     // label styling
                     if (style.getText() !== null && style.getText() !== undefined) {
-                        styleObject.symbolizers.push(this.buildTextStyle(style.getText()));
-                    }
-                    if (stylingRules.includes("@Datastreams")) {
-                        const newKey = stylingRules.replaceAll("@", "").replaceAll(".", "");
 
-                        stylingRules = newKey;
+                        const textStyle = this.buildTextStyle(style.getText());
+                        this.applyOpacityToSymbolizer(textStyle, layerOpacity);
+                    
+                        styleObject.symbolizers.push(textStyle);
+                    }
+                    
+                    // Handle Datastreams in styling rules
+                    let finalStylingRules = formattedStylingRules;
+                    if (finalStylingRules.includes("@Datastreams")) {
+                        const newKey = finalStylingRules.replaceAll("@", "").replaceAll(".", "");
+                        finalStylingRules = newKey;
                     }
 
-                    mapfishStyleObject[stylingRules] = styleObject;
+                    // Add the style object to the mapfish style object
+                    mapfishStyleObject[finalStylingRules] = styleObject;
                 }
             });
         });
         return mapfishStyleObject;
+    },
+    /**
+     * Applys the given layer opacity to the given symbolizer.
+     * @param {Object} symbolizer - The symbolizer to apply the opacity to.
+     * @param {number} layerOpacity - The opacity to apply.
+     * @return {Object} the modified symbolizer
+     */
+    applyOpacityToSymbolizer: function(symbolizer, layerOpacity) {
+        if (symbolizer.fillOpacity !== undefined) {
+            symbolizer.fillOpacity *= layerOpacity;
+        }
+        if (symbolizer.strokeOpacity !== undefined) {
+            symbolizer.strokeOpacity *= layerOpacity;
+        }
+        if (symbolizer.graphicOpacity !== undefined) {
+            symbolizer.graphicOpacity *= layerOpacity;
+        }
+        if (symbolizer.fontOpacity !== undefined) {
+            symbolizer.fontOpacity *= layerOpacity;
+        }
+        if (symbolizer.haloOpacity !== undefined) {
+            symbolizer.haloOpacity *= layerOpacity;
+        }
+        return symbolizer;
     },
     /**
      * @param {ol.Feature} feature -
@@ -734,8 +792,20 @@ const BuildSpecModel = {
         if (Object.prototype.hasOwnProperty.call(feature.getProperties(), "masterportal_attributes") && feature.get("masterportal_attributes").styleId) {
             feature.set("styleId", feature.get("masterportal_attributes").styleId);
         }
-
-        styleAttr = feature.get("styleId") ? "styleId" : styleAttributes;
+        
+        // Modified version that ensures consistent type handling
+        // Check if styleId exists and if it's a string or an object
+        if (feature.get("styleId")) {
+            // If styleId is an object with property field, use that property
+            if (typeof feature.get("styleId") === 'object' && feature.get("styleId").property) {
+                styleAttr = [feature.get("styleId").property];
+            } else {
+                // Otherwise use "styleId" as the attribute name
+                styleAttr = ["styleId"];
+            }
+        } else {
+            styleAttr = Array.isArray(styleAttributes) ? styleAttributes : [styleAttributes];
+        }
 
         if (styleAttr.length === 1 && styleAttr[0] === "") {
             if (feature.get("features") && feature.get("features").length === 1) {
@@ -783,7 +853,7 @@ const BuildSpecModel = {
             if ((style !== undefined && style?.getText()?.getText() !== undefined) || feature.get("features").length > 1) {
                 const value = feature.get("features")[0].get(styleAttr[0])
                     + "_"
-                    + style !== undefined && style.getText()?.getText() !== undefined ? style.getText()?.getText() : "cluster";
+                    + (style !== undefined && style.getText()?.getText() !== undefined ? style.getText()?.getText() : "cluster");
 
                 feature.set(styleAttr[0], value);
                 return `[${styleAttr[0]}='${value}']`;
@@ -809,13 +879,21 @@ const BuildSpecModel = {
             return styleAttr.reduce((acc, curr) => acc + `${curr}='${feature.get(curr)}' AND ${labelField}='${feature.get(labelField)}',`, "[").slice(0, -1)
                 + "]";
         }
-        // feature with geometry style
-        if (styleAttr instanceof Array) {
-            return styleAttr.reduce((acc, curr) => acc + `${curr}='${feature.get(curr)}',`, "[").slice(0, -1)
-            + "]";
-        }
-
-        return "[" + styleAttr + "='" + feature.get(styleAttr) + "']";
+        
+        // Build the filter expression
+        return styleAttr.reduce((acc, curr) => {
+            // Check if we need to use feature.get("styleId").property value instead of feature.get(curr)
+            let attrValue;
+            if (curr === "styleId" && typeof feature.get("styleId") === 'object' && feature.get("styleId").property) {
+                // If we're using styleId as the attribute but it's actually an object with a property field
+                const propertyName = feature.get("styleId").property;
+                attrValue = feature.get(propertyName);
+            } else {
+                attrValue = feature.get(curr);
+            }
+            
+            return acc + `${curr}='${attrValue}',`;
+        }, "[").slice(0, -1) + "]";
     },
     /**
      * Unsets all properties of type string of the given feature.

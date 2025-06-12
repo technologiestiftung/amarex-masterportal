@@ -37,7 +37,7 @@ export default {
           id: "PreComputedModels",
           title: "Vorberechnete Modelle",
           description:
-            "Zur Status Quo Analyse können Sie mit den vorberechneten Karten aus dem Kartenkatalog starten.<br><br>Möchten Sie diese ihrer Bearbeitung hinzufügen?",
+            "Zur Analyse Ihres Gebiets können Sie den Status Quo der Wasserhaushaltsgrößen aus dem Kartenkatalog anzeigen lassen.<br><br>Möchten Sie diese Kenngrößen zu Ihrer Bearbeitung hinzufügen?",
           continueDescription:
             "Sie haben jetzt die vorberechneten Modelle Delta W und Abimo hinzugefügt.",
           buttons: [
@@ -67,7 +67,7 @@ export default {
           },
           title: "Betrachtungsraum wählen",
           description:
-            "Mit unserem Wasserhaushaltsmodell können Sie auf verschiedene Arten Ihr Szenario zusammenstellen.",
+            "Mit dem Wasserhaushaltsmodell können Sie auf verschiedene Arten Ihr Szenario zusammenstellen.",
           buttons: [
             {
               text: "Zurück",
@@ -85,9 +85,9 @@ export default {
           component: markRaw(AbimoBlockAreaSelector),
           title: "Untersuchungsgebiet wählen",
           description:
-            "Wählen Sie in der Karte die zu untersuchenden Blockteilflächen via Mausklick aus.",
+            "Wählen Sie in der Karte die zu untersuchenden Blockteil- und Straßenflächen via Mausklick aus.",
           mnplDescription:
-            "Wählen Sie in der Karte die zu untersuchende Blockteilfläche via Mausklick aus.",
+            "Wählen Sie in der Karte die zu untersuchende Blockteil- oder Straßenfläche via Mausklick aus.",
           buttons: [
             {
               text: "Zurück",
@@ -199,7 +199,18 @@ export default {
           props: {
             openInfoFromResults: (info) => this.openInfo(info),
           },
+          buttonsFullWidth: true,
           buttons: [
+            {
+              text: "Report erstellen",
+              action: async () => {
+                const button = document.querySelector(".stepper-root #print");
+                if (button) {
+                  button.click();
+                }
+              },
+              accent: true,
+            },
             {
               text: "Neue Berechnung starten",
               action: async () => {
@@ -296,11 +307,12 @@ export default {
           (layer) =>
             layer.id === "rabimo_input_2025" ||
             layer.id === "planung_abimo" ||
-            layer.id === "abimo_measures" ||
-            layer.id === "abimo_result_infiltration" ||
-            layer.id === "abimo_result_evaporation" ||
-            layer.id === "abimo_result_surface_run_off" ||
-            layer.id === "abimo_result_delta_w" ||
+            // FIXME: question: should result layers be visible when changing steps
+            // layer.id === "abimo_measures" ||
+            // layer.id === "abimo_result_infiltration" ||
+            // layer.id === "abimo_result_evaporation" ||
+            // layer.id === "abimo_result_surface_run_off" ||
+            // layer.id === "abimo_result_delta_w" ||
             layer.id === "abimo_2025_wfs:preCompute" ||
             layer.id === "delta_w_2025_wfs:preCompute",
         )
@@ -336,11 +348,13 @@ export default {
       "setPreComputedModels",
       "setActiveStep",
       "setResultLayers",
-      "setPreComputedModels",
       "setPreComputedModelsAdded",
       "setIsMeasurePlanning",
       "setSelectedMeasures",
       "setHasMeasures",
+      "setVisiblePreComputedModelIDs",
+      "setDataPreComputedCalc",
+      "setDataResultCalc",
     ]),
     setDisabled() {
       if (this.activeStep === 2) return this.selectedFeatures.length === 0;
@@ -427,6 +441,9 @@ export default {
       this.updateMeasureStats();
       this.setHasMeasures(false);
       this.updatePreComputedStats([]);
+      this.setVisiblePreComputedModelIDs([]);
+      this.setDataResultCalc([]);
+      this.setDataPreComputedCalc([]);
     },
     async resetBlockArea() {
       if (this.blockAreaConfirmed) {
@@ -481,6 +498,36 @@ export default {
       ref="contentContainerRef"
       @click="handleParentClick"
     >
+      <div
+        v-if="
+          activeStep === 0 &&
+          (!preComputedModelsAdded || !preComputedModelsShown)
+        "
+        :style="{
+          marginBottom: '48px',
+        }"
+      >
+        <p class="title">Informationen zum Modell</p>
+        <p
+          class="description"
+          :style="{
+            marginBottom: '24px',
+          }"
+        >
+          Weitere Information zum Wasserhaushaltsmodell finden Sie im
+          Umweltatlas Berlin.
+        </p>
+        <a
+          href="https://www.berlin.de/umweltatlas/wasser/wasserhaushalt/2022/zusammenfassung/"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <button class="amarex-btn-primary full accent">
+            <p>Informationen zum Wasserhaushaltsmodell</p>
+          </button>
+        </a>
+      </div>
+
       <span
         v-if="
           (preComputedModelsAdded || preComputedModelsShown) && activeStep === 0
@@ -520,19 +567,31 @@ export default {
             (preComputedModelsAdded || preComputedModelsShown),
         }"
       >
-        <button
-          class="amarex-btn-primary full accent"
+        <span
           v-if="
             activeStep === 0 &&
             (preComputedModelsAdded || preComputedModelsShown)
           "
-          @click="steps[activeStep]?.buttons[1].action"
-          :style="{
-            marginBottom: '16px',
-          }"
         >
-          <p>Weiter</p>
-        </button>
+          <button
+            class="amarex-btn-primary full accent"
+            @click="steps[activeStep]?.buttons[1].action"
+            :style="{
+              marginBottom: '16px',
+            }"
+          >
+            <p>Weiter</p>
+          </button>
+          <button
+            class="amarex-btn-primary full"
+            @click="resetPreComputedModels"
+            :style="{
+              marginBottom: '16px',
+            }"
+          >
+            <p>Zurück</p>
+          </button>
+        </span>
         <span v-else>
           <button
             class="amarex-btn-primary full accent"
@@ -579,6 +638,7 @@ export default {
       <div
         v-if="!steps[activeStep]?.upperButtons"
         class="btn-container d-flex"
+        :class="{ 'flex-column': steps[activeStep]?.buttonsFullWidth }"
       >
         <span
           v-for="(btn, btnIndex) in steps[activeStep]?.buttons"

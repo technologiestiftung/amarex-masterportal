@@ -847,7 +847,7 @@
         "example": "Beispiel",
         "header": "Stapelverarbeitung",
         "isProcessing": "Stapelverarbeitung wird durchgeführt",
-        "placeFile": "Datei hier ablegen",
+        "placeFile": "Datei hierher ziehen",
         "structure": "Struktur",
         "uploadFile": "Datei hochladen"
       },
@@ -1278,7 +1278,7 @@
       "inputs": {
         "fileUpload": {
           "browse": "Datei auswählen",
-          "dropzone": "Datei hier ablegen",
+          "dropzone": "Datei hierher ziehen",
           "or": "oder "
         }
       },

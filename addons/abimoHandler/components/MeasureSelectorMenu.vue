@@ -27,17 +27,17 @@ export default {
       colors,
       measures: [
         {
-          icon: "./resources/img/measure-swale.svg",
+          icon: "https://amarex-webtool.technologiestiftung-berlin.de/amarex/resources/img/measure-swale.svg",
           title: "Muldenversickerung",
           type: "swale",
         },
         {
-          icon: "./resources/img/measure-unpvd.svg",
+          icon: "https://amarex-webtool.technologiestiftung-berlin.de/amarex/resources/img/measure-unpvd.svg",
           title: "Entsiegelung",
           type: "unpaved",
         },
         {
-          icon: "./resources/img/measure-greenroof.svg",
+          icon: "https://amarex-webtool.technologiestiftung-berlin.de/amarex/resources/img/measure-greenroof.svg",
           title: "Dachbegrünung",
           type: "greenRoof",
         },
@@ -286,7 +286,10 @@ export default {
                 <div class="size-option-main">{{ config.label }}</div>
                 <div
                   class="size-option-details"
-                  v-if="activeMeasureSize === size && selectedMeasure.type === 'swale'"
+                  v-if="
+                    activeMeasureSize === size &&
+                    selectedMeasure.type === 'swale'
+                  "
                 >
                   {{ getSizeDetails(size) }}
                 </div>

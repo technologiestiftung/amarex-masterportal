@@ -282,7 +282,7 @@ export default {
       <div class="d-flex justify-content-between area">
         <p class="description-with-bigger-lineheight">Gesamtfläche</p>
         <p class="description-with-bigger-lineheight">
-          {{ accumulatedAbimoStats.totalArea.toFixed(0) }}m²
+          {{ accumulatedAbimoStats.totalArea.toFixed(0) }} m²
         </p>
       </div>
     </span>

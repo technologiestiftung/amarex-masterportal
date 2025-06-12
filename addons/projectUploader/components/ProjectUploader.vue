@@ -1,13 +1,12 @@
 <script>
 import { mapActions, mapGetters, mapMutations } from "vuex";
-import FlatButton from "../../../src/shared/modules/buttons/components/FlatButton.vue";
-import IconButton from "../../../src/shared/modules/buttons/components/IconButton.vue";
 import FileUpload from "../../../src/shared/modules/inputs/components/FileUpload.vue";
 import JSZip from "jszip";
 import layerCollection from "../../../src/core/layers/js/layerCollection.js";
-
-// TODO:
-// add locals
+import colors from "../../../src/shared/js/utils/amarex-colors.json";
+import { FileIcon, LoaderCircle, Trash2 } from "lucide-vue-next";
+import Feature from "ol/Feature";
+import Point from "ol/geom/Point";
 
 /**
  * Project Uploader
@@ -16,16 +15,35 @@ import layerCollection from "../../../src/core/layers/js/layerCollection.js";
 export default {
   name: "ProjectUploader",
   components: {
-    FlatButton,
     FileUpload,
-    IconButton,
+    FileIcon,
+    LoaderCircle,
+    Trash2,
   },
   data() {
     return {
       fileUploaded: false,
       filesToUpload: [],
       selectedFiles: {},
+      colors,
+      projectUploaderOpen: false,
+      loading: false,
+      success: false,
     };
+  },
+  props: {
+    mainMenuWidth: {
+      type: Number,
+      required: true,
+    },
+    openProjectManagement: {
+      type: String,
+      required: true,
+    },
+    setOpenProjectManagement: {
+      type: Function,
+      required: true,
+    },
   },
   computed: {
     ...mapGetters("Modules/ProjectUploader", [
@@ -34,7 +52,7 @@ export default {
       "featureExtents",
       "addLayerConfig",
     ]),
-
+    ...mapGetters("Menu", ["currentComponent"]),
     ...mapGetters(["Maps/projectionCode", "layerConfig", "portalConfig"]),
     dropZoneAdditionalClass: function () {
       return this.dzIsDropHovering ? "dzReady" : "";
@@ -55,6 +73,24 @@ export default {
     ...mapActions("Maps", ["zoomToExtent"]),
     ...mapActions("Alerting", ["addSingleAlert"]),
     ...mapMutations("Modules/ProjectUploader", ["setFeatureExtents"]),
+    ...mapActions("Menu", ["changeCurrentComponent", "toggleMenu"]),
+    ...mapActions("Modules/AbimoHandler", [
+      "updateAccumulatedStats",
+      "updatePreComputedStats",
+      "updateMeasureStats",
+      "updateResultStats",
+    ]),
+    ...mapMutations("Modules/AbimoHandler", [
+      "setSelectedCount",
+      "setPreComputedModelsShown",
+      "setPreComputedModels",
+      "setActiveStep",
+      "setPreComputedModelsAdded",
+      "setVisiblePreComputedModelIDs",
+      "setAccumulatedAbimoStats",
+      "setAreaTypesData",
+      "setIsMeasurePlanning",
+    ]),
 
     /**
      * Sets the focus to the first control
@@ -66,6 +102,59 @@ export default {
           this.$refs["upload-label"].focus();
         }
       });
+    },
+
+    deserializeFeatures(features) {
+      if (!features) return;
+
+      return features
+        .map((f) => {
+          let geometry;
+          switch (f.geometryType) {
+            case "Point":
+              geometry = new Point(f.geometry);
+              break;
+            // Add more geometry types here as needed
+            default:
+              return null;
+          }
+
+          const feature = new Feature(
+            geometry.transform("EPSG:4326", "EPSG:3857"),
+          );
+          feature.setProperties(f);
+          feature.unset("geometry");
+          return feature;
+        })
+        .filter(Boolean);
+    },
+
+    /**
+     * Unzip file
+     * @param {abimoConfigFileContent} content of the abimo config file
+     * @returns {void}
+     */
+    async handleAbimoConfigFile(abimoConfigFileContent) {
+      const abimoConfig = JSON.parse(abimoConfigFileContent);
+
+      if (abimoConfig.preComputedModelsAdded) {
+        this.setPreComputedModelsAdded(abimoConfig.preComputedModelsAdded);
+        this.setVisiblePreComputedModelIDs(
+          abimoConfig.visiblePreComputedModelIDs,
+        );
+      }
+
+      // run actions
+      await this.setAccumulatedAbimoStats(abimoConfig.accumulatedAbimoStats);
+      await this.updateResultStats(abimoConfig.dataResultCalc);
+      await this.updatePreComputedStats(abimoConfig.dataPreComputedCalc);
+      await this.updateMeasureStats(abimoConfig.accumulatedMeasureStats);
+
+      this.setIsMeasurePlanning(abimoConfig.isMeasurePlaning);
+      this.setAreaTypesData(abimoConfig.areaTypesData);
+      this.setSelectedCount(abimoConfig.selectedCount);
+      this.setPreComputedModelsShown(abimoConfig.preComputedModelsShown);
+      this.setActiveStep(abimoConfig.activeStep);
     },
 
     /**
@@ -180,8 +269,7 @@ export default {
      */
     removeFile(file) {
       if (this.filesToUpload.includes(file)) {
-        const index = this.importedFileNames[file];
-
+        const index = this.filesToUpload.indexOf(file);
         this.filesToUpload.splice(index, 1);
         if (this.filesToUpload.length === 0) {
           this.fileUploaded = false;
@@ -194,6 +282,30 @@ export default {
      * @returns {void}
      */
     async addProject() {
+      this.loading = true;
+      this.projectUploaderOpen = false;
+      const getCurrentSecondaryMenuComponent =
+        this.currentComponent("secondaryMenu").type;
+      this.toggleMenu("secondaryMenu", false);
+      this.changeCurrentComponent({
+        type:
+          getCurrentSecondaryMenuComponent === "baseMaps"
+            ? "themeMaps"
+            : "baseMaps",
+        side: "secondaryMenu",
+      });
+      setTimeout(() => {
+        this.changeCurrentComponent({
+          type: getCurrentSecondaryMenuComponent,
+          side: "secondaryMenu",
+        });
+        this.toggleMenu("secondaryMenu", false);
+        this.loading = false;
+        this.success = true;
+        setTimeout(() => {
+          this.success = false;
+        }, 5000);
+      }, 2000);
       await this.addConfig();
       await this.addFiles();
     },
@@ -209,6 +321,7 @@ export default {
         if (!this.checkValid(configFile)) {
           return;
         }
+
         const reader = new FileReader();
 
         reader.onload = (evt) => {
@@ -225,6 +338,17 @@ export default {
     async addFiles() {
       this.filesToUpload.forEach(async (file) => {
         if (!this.checkValid(file)) {
+          return;
+        }
+
+        // Check for a specific filename first
+        if (file.name === "abimo-config.json") {
+          const reader = new FileReader();
+          reader.onload = async (event) => {
+            const configContent = event.target.result;
+            this.handleAbimoConfigFile(configContent);
+          };
+          reader.readAsText(file);
           return;
         }
 
@@ -309,54 +433,132 @@ export default {
 
       this.setFeatureExtents(modifiedFeatureExtents);
     },
+    toggleProjectUploader() {
+      this.projectUploaderOpen = !this.projectUploaderOpen;
+    },
+  },
+  watch: {
+    openProjectManagement: {
+      immediate: true,
+      handler(newValue) {
+        if (newValue !== "projectUploader") {
+          this.projectUploaderOpen = false;
+        }
+      },
+    },
+    projectUploaderOpen: {
+      immediate: true,
+      handler(newValue) {
+        if (newValue) {
+          this.setOpenProjectManagement("projectUploader");
+        }
+      },
+    },
   },
 };
 </script>
 
 <template lang="html">
-  <div id="file-import">
+  <div
+    id="file-import"
+    :style="{ width: mainMenuWidth + 'px' }"
+  >
     <p
-      class="mb-3"
-      v-html="
-        $t(
-          'Es können Projektdatein (.zip), und Config-Dateien (.json) importiert werden.',
-        )
-      "
-    />
-    <FileUpload
-      :id="'fileUpload'"
-      :keydown="(e) => triggerClickOnFileInput(e)"
-      :change="(e) => onInputChange(e)"
-      :drop="(e) => onDrop(e)"
+      v-if="success"
+      class="mb-2"
+      :style="{ fontWeight: 700 }"
     >
-      <div v-if="fileUploaded">
-        <div
-          v-for="file in filesToUpload"
-          :key="file"
-          :class="enableZoomToExtend ? 'hasZoom' : ''"
-          class="row d-flex mb-1"
-        >
-          <span class="d-flex align-items-center col">
-            {{ file.name }}
-          </span>
-          <IconButton
-            :aria="$t('common:modules.fileImport.removeAttachment')"
-            :icon="'bi-trash'"
-            :interaction="() => removeFile(file)"
-            class="remove-btn col-3"
-          />
-        </div>
-      </div>
-    </FileUpload>
-
-    <div class="d-flex justify-content-center">
-      <FlatButton
-        v-if="fileUploaded"
-        :aria-label="$t('common:modules.fileImport.importFiles')"
-        :interaction="() => addProject()"
-        :text="$t('common:modules.fileImport.importFiles')"
-        :icon="'bi-upload'"
+      Projekt erfolgreich geöffnet!
+    </p>
+    <span
+      v-if="loading"
+      class="loading-container d-flex justify-content-center w-100 mb-2"
+    >
+      <LoaderCircle
+        :color="colors.amarex_secondary"
+        :size="24"
       />
+    </span>
+    <button
+      v-if="!projectUploaderOpen"
+      class="amarex-btn-primary full-with-icon"
+      @click="toggleProjectUploader"
+    >
+      <FileIcon
+        :color="colors.secondary"
+        :size="16"
+      />
+      <p>Projekt öffnen</p>
+    </button>
+    <div
+      v-else
+      class="expanded-project-uploader"
+      id="project-uploader-expanded"
+    >
+      <div
+        class="button-overview d-flex align-items-center justify-content-center"
+        @click="toggleProjectUploader"
+      >
+        <FileIcon
+          :color="colors.secondary"
+          :size="16"
+        />
+        <p>Projekt öffnen</p>
+      </div>
+      <p
+        class="description"
+        v-html="
+          $t(
+            'Laden Sie hier Ihr Projekt hoch, dass Sie im Amarex Webtool erstellt haben. Es können Projektdateien (.zip) und Konfigurationsdateien (.json) importiert werden.',
+          )
+        "
+      />
+      <FileUpload
+        :id="'fileUpload'"
+        :keydown="(e) => triggerClickOnFileInput(e)"
+        :change="(e) => onInputChange(e)"
+        :drop="(e) => onDrop(e)"
+      >
+        <div
+          v-if="fileUploaded"
+          class="mt-2"
+        >
+          <div
+            v-for="file in filesToUpload"
+            :key="file"
+            :class="enableZoomToExtend ? 'hasZoom' : ''"
+            class="d-flex flex-nowrap align-items-center gap-1 mb-2"
+          >
+            <div
+              @click="() => removeFile(file)"
+              class="remove-btn"
+            >
+              <Trash2
+                :color="colors.secondary"
+                :size="20"
+              />
+            </div>
+            <p
+              class="text-truncate text-start mb-0"
+              style="
+                overflow: hidden;
+                white-space: nowrap;
+                text-overflow: ellipsis;
+                min-width: 0;
+              "
+            >
+              {{ file.name }}
+            </p>
+          </div>
+        </div>
+      </FileUpload>
+      <button
+        v-if="filesToUpload?.length > 0 && !loading"
+        class="amarex-btn-primary accent full-with-icon mt-3"
+        @click="addProject"
+      >
+        <p>Ausgewählte Dateien importieren</p>
+      </button>
     </div>
   </div>
 </template>
@@ -364,14 +566,62 @@ export default {
 <style lang="scss" scoped>
 @import "~variables";
 
-.h-seperator {
-  margin: 12px 0 12px 0;
-  border: 1px solid #dddddd;
+#file-import .form-floating {
+  max-height: 25vh; // 170px
+  overflow-y: scroll;
+}
+#file-import .form-floating::-webkit-scrollbar {
+  display: none;
+}
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+.loading-container {
+  svg {
+    animation: spin 1s linear infinite;
+  }
+}
+
+.expanded-project-uploader {
+  padding: 10px 16px 16px 16px;
+  background: $amarex_secondary_mid;
+  .button-overview {
+    cursor: pointer;
+    gap: 8px;
+    margin-bottom: 8px;
+  }
+  & > p {
+    margin-bottom: 16px;
+  }
+  .description {
+    overflow: hidden;
+    color: $amarex_grey_dark;
+    font-family: Arial;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 16px;
+    user-select: none;
+  }
+  .btn {
+    width: 24px !important;
+    height: 24px !important;
+    border-radius: 0 !important;
+    border: none !important;
+    padding: 0 !important;
+  }
 }
 
 .remove-btn {
   z-index: 20;
   position: relative;
+  cursor: pointer;
+  flex-shrink: 0;
 }
 
 input[type="file"] {
@@ -380,29 +630,5 @@ input[type="file"] {
 input[type="button"] {
   display: none;
 }
-
-.introDrawTool {
-  font-style: italic;
-}
-
-li {
-  &.hasZoom {
-    display: inline-block;
-    width: 100%;
-    &:not(:last-child) {
-      margin-bottom: 5px;
-    }
-    span {
-      &:first-child {
-        display: inline-block;
-        margin-top: 5px;
-        width: calc(100% - 80px);
-      }
-      &:last-child {
-        display: inline-block;
-        margin-top: 0;
-      }
-    }
-  }
-}
 </style>
+

@@ -950,7 +950,7 @@
       "inputs": {
         "fileUpload": {
           "browse": "Datei utwählen",
-          "dropzone": "Datei hier ablegen",
+          "dropzone": "Datei hierher ziehen",
           "or": ""
         }
       },

@@ -91,8 +91,8 @@
         },
         {
           "url": "https://github.com/technologiestiftung/amarex-masterportal",
-          "alias": "Code on Github",
-          "alias_mobile": "Code on Github"
+          "alias": "Github",
+          "alias_mobile": "Github"
         }
       ]
     },
@@ -117,6 +117,8 @@
         "toolTip": "Anpassung des Managements von Regenwasser an Extremereignisse"
       },
       "searchBar": {
+        "minCharacters": 3,
+        "timeout": 10000,
         "searchInterfaces": [
           {
             "type": "komootPhoton",
@@ -127,19 +129,10 @@
             "lat": 52.52,
             "lon": 13.405,
             "bbox": "13.0883,52.3382,13.7611,52.6755"
-          },
-          {
-            "type": "visibleVector",
-            "resultEvents": {
-              "onHover": ["setMarker"]
-            }
-          },
-          {
-            "type": "topicTree",
-            "hitTemplate": "layer"
           }
         ]
       },
+
       "sections": [[]]
     },
     "secondaryMenu": {
@@ -538,9 +531,9 @@
               ]
             },
             {
-              "name": "Starkregen",
+              "name": "Starkregengefahrenkarte",
               "type": "folder",
-              "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sit amet libero auctor, ultricies nunc nec, tincidunt nunc. Nullam nec nunc nec nunc ultricies tincidunt. Nullam nec nunc nec nunc ultricies",
+              "description": "Die Starkregengefahrenkarte zeigt die räumliche Ausdehnung von Überflutungen, den Überflutungstiefen und die Fließgeschwindigkeit eines Hochwassers bei verschiedenen Starkregenszenarien (seltenes, außergewöhnliches und extremes Ereignis). In Berlin wird die Starkregengefahrenkarte auf Basis eines gekoppelten 1D-Kanalnetz- und eines 2D-Oberflächenabflussmodells (1D/2D gekoppeltes Modell) durchgeführt, wobei aktuelle Daten der Topographie, des Bodens, der Gebäude, der Versiegelung und des Kanalnetzes in der Berechnung berücksichtigt werden.",
               "elements": [
                 {
                   "id": "ua_srgk:a_modellgebiete",
@@ -576,64 +569,66 @@
                   "id": "ua_srgk:cc_wassersand_extrem",
                   "visibility": false,
                   "showInLayerTree": false
-                },
+                }
+              ]
+            },
+            {
+              "name": "Starkregenhinweiskarte",
+              "type": "folder",
+              "description": "Die Starkregenhinweiskarte weist auf die potentielle Gefährdung durch Überflutung und auf dokumentierte Starkregenereignisse hin. Die Karte enthält jeweils die flächenhafte Aussagen zum Wasserstand, zur Fließgeschwindigkeit/-richtung für das außergewöhnliche und das extreme Ereignis und zur Ausdehnungen der Senken. Die starkregenbedingte Feuerwehreinsatzdaten werden sowohl punktuell (ab Maßstab 1:25.000) als auch aggregiert auf Basis von Blockteil- und Straßenflächen (ISU5 2021) dargestellt.",
+              "elements": [
                 {
-                  "id": "ua_srgk:da_baumscheibe",
+                  "id": "ua_srhk:da_fr_aussergewoehnlich",
                   "visibility": false,
                   "showInLayerTree": false
                 },
                 {
-                  "id": "ua_srgk:db_bordstein",
+                  "id": "ua_srhk:db_fliessgeschw_aussergew_kostra",
                   "visibility": false,
                   "showInLayerTree": false
                 },
                 {
-                  "id": "ua_srgk:dc_fahrbahn",
+                  "id": "ua_srhk:dc_wasserstand_aussergew_kostra",
                   "visibility": false,
                   "showInLayerTree": false
                 },
                 {
-                  "id": "ua_srgk:dd_gebaeudefunktion",
+                  "id": "ua_srhk:ea_fr_extrem_max100mm",
                   "visibility": false,
                   "showInLayerTree": false
                 },
                 {
-                  "id": "ua_srgk:de_gehweg",
+                  "id": "ua_srhk:eb_fliessgeschw_extrem_max100mm",
                   "visibility": false,
                   "showInLayerTree": false
                 },
                 {
-                  "id": "ua_srgk:df_gehwegueberfahrt",
+                  "id": "ua_srhk:ec_wasserstand_extrem_max100mm",
                   "visibility": false,
                   "showInLayerTree": false
                 },
                 {
-                  "id": "ua_srgk:dg_gleiskoerper",
+                  "id": "ua_srhk:b_srhk_feuerwehreinsaetze_pkt",
                   "visibility": false,
                   "showInLayerTree": false
                 },
                 {
-                  "id": "ua_srgk:dh_parkflaeche",
+                  "id": "ua_srhk:c_alkis_gebaeude",
                   "visibility": false,
                   "showInLayerTree": false
                 },
                 {
-                  "id": "ua_srgk:di_sonstigebefestfl",
+                  "id": "ua_srhk:f_srhk_gewaesser",
                   "visibility": false,
                   "showInLayerTree": false
                 },
                 {
-                  "id": "ua_srgk:dj_trennstreifen",
+                  "id": "ua_srhk:g_srhk_feuerwehreinsaetze",
                   "visibility": false,
                   "showInLayerTree": false
                 },
                 {
-                  "id": "ua_srgk:dk_vegetationsflaechen",
-                  "visibility": false,
-                  "showInLayerTree": false
-                },
-                {
-                  "id": "ua_srhk:a_srhk_starkregengefahrenkarten_vorhanden",
+                  "id": "ua_srhk:l_srhk_senken",
                   "visibility": false,
                   "showInLayerTree": false
                 }
@@ -707,22 +702,22 @@
           "type": "folder",
           "elements": [
             {
-              "id": "abimo_2025_wfs:evaporatio",
+              "id": "abimo_2025_wms:evaporatio",
               "visibility": false,
               "showInLayerTree": false
             },
             {
-              "id": "abimo_2025_wfs:surface_ru",
+              "id": "abimo_2025_wms:surface_ru",
               "visibility": false,
               "showInLayerTree": false
             },
             {
-              "id": "abimo_2025_wfs:infiltrati",
+              "id": "abimo_2025_wms:infiltrati",
               "visibility": false,
               "showInLayerTree": false
             },
             {
-              "id": "delta_w_2025_wfs",
+              "id": "delta_w_2025_wms",
               "visibility": false,
               "showInLayerTree": false
             },
@@ -777,3 +772,4 @@
     }
   }
 }
+

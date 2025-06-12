@@ -239,11 +239,23 @@ Layer2d.prototype.addErrorListener = function (layerSource) {
         }
     }.bind(this));
     layerSource?.on("imageloaderror", async function (evt) {
-        await this.errorHandling(await axios.get(evt.image.src_, {withCredentials: true})
-            .catch(function (error) {
-                return typeof error.toJSON === "function" ? error.toJSON().status : 0;
-            }), this.get("name"));
+    const url = evt?.image?.getImage?.()?.src || evt?.image?.src_;
+    let errorCode = 999;
+
+        if (url) {
+            errorCode = await axios.get(url, {withCredentials: true})
+                .then(() => 200)
+                .catch(function (error) {
+                    if (error.code === "ERR_NETWORK") {
+                        return "ERR_NETWORK";
+                    }
+                    return typeof error.toJSON === "function" ? error.toJSON().status : 999;
+                });
+        }
+
+        await this.errorHandling(errorCode, this.get("name"));
     }.bind(this));
+
 };
 
 /**
@@ -269,7 +281,13 @@ Layer2d.prototype.errorHandling = function (errorCode, layerName) {
             + linkMetadata;
 
         store.dispatch("Alerting/addSingleAlert", {content: alertingContent, multipleAlert: true});
-    }
+    } else if (errorCode === 999 || errorCode === "ERR_NETWORK") {
+        store.dispatch("Alerting/addSingleAlert", {
+            content: "Fehler beim Laden der Karte. Bitte versuchen Sie es später erneut.",
+            multipleAlert: true,
+            category: "error",
+        });
+    }   
     store.watch((state, getters) => getters["Alerting/showTheModal"], showTheModal => {
         store.dispatch("replaceByIdInLayerConfig", {
             layerConfigs: [{

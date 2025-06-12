@@ -51,9 +51,9 @@ export default {
 </script>
 
 <template>
-    <div class="form-floating mb-3">
+    <div class="form-floating">
         <div
-            class="vh-center-outer-wrapper drop-area-fake mb-3"
+            class="vh-center-outer-wrapper drop-area-fake"
             :class="dropZoneAdditionalClass"
         >
             <div
@@ -123,7 +123,7 @@ input[type="file"] {
         background-color: $white;
         border-radius: 12px;
         border: 2px dashed $dark_blue;
-        padding:24px;
+        padding: 8px 24px;
         transition: background 0.25s, border-color 0.25s;
 
         &.dzReady {
@@ -141,7 +141,7 @@ input[type="file"] {
             text-align:center;
             transition: color 0.35s;
             font-family: $font_family_accent;
-            font-size: $font-size-lg;
+            font-size: 1rem;
         }
     }
     .drop-area {

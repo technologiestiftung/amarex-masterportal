@@ -6,6 +6,8 @@ import { exportLayerAsGeoJSON } from "../utils/download";
 import layerCollection from "../../../src/core/layers/js/layerCollection";
 import mapCollection from "../../../src/core/maps/js/mapCollection";
 import VectorLayer from "ol/layer/Vector";
+import { Save as SaveIcon, FileDown } from "lucide-vue-next";
+import colors from "../../../src/shared/js/utils/amarex-colors.json";
 
 /**
  * ProjectDownloader
@@ -17,9 +19,16 @@ export default {
   data() {
     return {
       configToExport: null,
+      abimoConfigToExport: null,
       fileSources: [],
       projectTitle: "",
+      colors,
+      projectDownloaderOpen: false,
     };
+  },
+  components: {
+    SaveIcon,
+    FileDown,
   },
   computed: {
     ...mapGetters([
@@ -27,6 +36,32 @@ export default {
       "Maps/projectionCode",
       "layerConfig",
       "portalConfig",
+    ]),
+    ...mapGetters("Modules/AbimoHandler", [
+      "selectedFeatures",
+      "accumulatedAbimoStats",
+      "areaTypesData",
+      "selectInteraction",
+      "blockAreaConfirmed",
+      "preselectedFeatures",
+      "selectedCount",
+      "isMeasurePlanning",
+      "preComputedStats",
+      "newGreenRoof",
+      "newUnpvd",
+      "newToSwale",
+      "preComputedModels",
+      "activeStep",
+      "preComputedModelsShown",
+      "preComputedModelsAdded",
+      "selectedMeasures",
+      "hasMeasures",
+      "resultAbimoStats",
+      "resultLayers",
+      "isMeasureDrawing",
+      "accumulatedMeasureStats",
+      "dataResultCalc",
+      "dataPreComputedCalc",
     ]),
   },
   methods: {
@@ -58,17 +93,43 @@ export default {
      * @returns {Promise}
      */
     async prepareVectorLayerForDownload() {
-      const layerCollectionData = layerCollection.getLayers(),
-        projectionCode = this.$store.getters["Maps/projectionCode"];
+      const layerCollectionData = layerCollection.getLayers();
+      const projectionCode = this.$store.getters["Maps/projectionCode"];
 
       this.fileSources = []; // Reset the fileSources array
 
+      // Define layers to exclude from export
+      const excludeGEOJSONFilesFromExport = [
+        "abimo_2025_wfs:preCompute",
+        "delta_w_2025_wfs:preCompute",
+        "planung_abimo",
+        "rabimo_input_2025",
+      ];
+
+      // Define layers to exclude if they have no features
+      const excludeIfEmptyLayers = [
+        "abimo_result_delta_w",
+        "abimo_result_evaporation",
+        "abimo_result_infiltration",
+        "abimo_result_surface_run_off",
+        "abimo_measures",
+      ];
+
       try {
         layerCollectionData.forEach((layer) => {
+          // Skip layers not shown in layer tree
           if (!layer.attributes.showInLayerTree) {
             return;
           }
 
+          const layerID = layer.get("id");
+
+          // Skip layers in the exclusion list
+          if (excludeGEOJSONFilesFromExport.includes(layerID)) {
+            return;
+          }
+
+          // Only process vector layers with correct type
           if (
             layer.layer instanceof VectorLayer &&
             (layer.attributes.typ !== "WFS" || "WMS")
@@ -78,18 +139,87 @@ export default {
               projectionCode,
             );
 
-            if (geoJSONData) {
-              this.fileSources.push({
-                title: `${layer.attributes.id}.geojson`,
-                src: URL.createObjectURL(
-                  new Blob([geoJSONData], { type: "application/json" }),
-                ),
-              });
+            if (!geoJSONData) {
+              return;
             }
+
+            // Check if layer should be excluded when empty
+            if (excludeIfEmptyLayers.includes(layerID)) {
+              const parsedData = JSON.parse(geoJSONData);
+              const hasFeatures = parsedData?.features?.length > 0;
+              if (!hasFeatures) return;
+            }
+
+            // Add layer to file sources
+            this.fileSources.push({
+              title: `${layer.attributes.id}.geojson`,
+              src: URL.createObjectURL(
+                new Blob([geoJSONData], { type: "application/json" }),
+              ),
+            });
           }
         });
       } catch (error) {
-        console.error(error);
+        console.error(
+          "[ProjectDownloader] Error preparing vector layers:",
+          error,
+        );
+      }
+    },
+    serializeFeatures(features) {
+      return features.map((f) => ({
+        ...f.getProperties(),
+        geometry: f
+          .getGeometry()
+          .clone()
+          .transform("EPSG:3857", "EPSG:4326")
+          .getCoordinates(), // OR GeoJSON
+        geometryType: f.getGeometry().getType(),
+      }));
+    },
+    /**
+     * Prepare abimo-config.json for download
+     * @function prepareAbimoConfigForDownload
+     * @returns {Promise}
+     */
+    prepareAbimoConfigForDownload() {
+      // if preComputedModelsAdded is false, we don't need to export the abimo config
+      if (this.activeStep === 0 && !this.preComputedModelsAdded) {
+        return;
+      }
+      if (this.activeStep === 7) {
+        let abimoState = {
+          activeStep: this.activeStep,
+          selectedCount: this.selectedCount,
+        };
+
+        if (this.preComputedModelsAdded) {
+          const visiblePreComputedModelsIDs = [];
+          this.preComputedModels.forEach((model) => {
+            if (model.visibility) {
+              visiblePreComputedModelsIDs.push(model.id);
+            }
+          });
+
+          abimoState = {
+            ...abimoState,
+            visiblePreComputedModelIDs: visiblePreComputedModelsIDs,
+            preComputedModelsAdded: this.preComputedModelsAdded,
+            preComputedModelsShown: this.preComputedModelsShown,
+          };
+        }
+
+        abimoState = {
+          ...abimoState,
+          dataResultCalc: this.dataResultCalc,
+          dataPreComputedCalc: this.dataPreComputedCalc,
+          accumulatedAbimoStats: this.accumulatedAbimoStats,
+          accumulatedMeasureStats: this.accumulatedMeasureStats,
+          areaTypesData: this.areaTypesData,
+          isMeasurePlanning: this.isMeasurePlanning,
+        };
+
+        this.abimoConfigToExport = abimoState;
       }
     },
     forceFileDownload(zip, zipName) {
@@ -105,9 +235,10 @@ export default {
           link.click();
           window.URL.revokeObjectURL(url);
         })
-        .catch((error) => console.log(error));
+        .catch((error) => console.error(error));
     },
     async downloadWithFetch(zipName) {
+      this.prepareAbimoConfigForDownload();
       await this.prepareConfigForDownload();
       await this.prepareVectorLayerForDownload();
       const zip = new JSZip(),
@@ -115,6 +246,12 @@ export default {
         configJson = JSON.stringify(this.configToExport);
 
       zip.file("config.json", configJson);
+
+      if (this.abimoConfigToExport) {
+        // Create abimo-config.json
+        const abimoConfigJson = JSON.stringify(this.abimoConfigToExport);
+        zip.file("abimo-config.json", abimoConfigJson);
+      }
 
       const fetchPromises = this.fileSources.map(async (file) => {
         const response = await fetch(file.src),
@@ -126,42 +263,118 @@ export default {
       await Promise.all(fetchPromises);
       this.forceFileDownload(zip, sanitizeSelector(zipName));
     },
+    toggleProjectDownloader() {
+      this.projectDownloaderOpen = !this.projectDownloaderOpen;
+    },
+  },
+  props: {
+    mainMenuWidth: {
+      type: Number,
+      required: true,
+    },
+    openProjectManagement: {
+      type: String,
+      required: true,
+    },
+    setOpenProjectManagement: {
+      type: Function,
+      required: true,
+    },
+  },
+  watch: {
+    openProjectManagement: {
+      immediate: true,
+      handler(newValue) {
+        if (newValue !== "projectDownloader") {
+          this.projectDownloaderOpen = false;
+        }
+      },
+    },
+    projectDownloaderOpen: {
+      immediate: true,
+      handler(newValue) {
+        if (newValue) {
+          this.setOpenProjectManagement("projectDownloader");
+        }
+      },
+    },
   },
 };
 </script>
 
-// todo: add locals
 <template lang="html">
   <div
     id="exporter-addon"
-    class="ProjectDownloader-root mb-3"
+    :style="{ width: mainMenuWidth + 'px' }"
   >
-    <div class="d-flex flex-column gap-3">
-      <label
-        for="projectTitle"
-        class="form-label"
-        >Projekt Titel</label
-      >
-      <input
-        id="projectTitle"
-        v-model="projectTitle"
-        type="text"
-        class="form-control"
-        placeholder="Gib einen Projekttitel ein"
+    <button
+      v-if="!projectDownloaderOpen"
+      class="amarex-btn-primary full-with-icon"
+      @click="toggleProjectDownloader"
+    >
+      <SaveIcon
+        :color="colors.secondary"
+        :size="16"
       />
+      <p>Projekt herunterladen</p>
+    </button>
+    <div
+      v-else
+      class="expanded-project-downloader"
+      id="project-downloader-expanded"
+    >
+      <div
+        class="button-overview d-flex align-items-center justify-content-center"
+        @click="toggleProjectDownloader"
+      >
+        <SaveIcon
+          :color="colors.secondary"
+          :size="16"
+        />
+        <p>Projekt herunterladen</p>
+      </div>
+      <p class="description">
+        Laden Sie hier Ihr Projekt als ZIP-Datei herunter, um sie später erneut
+        im AMAREX-Webtool zu öffnen oder um einzelne Layer in einer
+        GIS-Anwendung zu laden und zu bearbeiten.
+      </p>
       <button
-        class="btn btn-primary"
+        class="amarex-btn-primary accent full-with-icon"
         @click="downloadWithFetch(projectTitle || 'amarex-download')"
       >
-        Download Project ZIP
+        <FileDown
+          :color="colors.amarex_primary"
+          :size="16"
+        />
+        <p>ZIP-Datei herunterladen</p>
       </button>
     </div>
   </div>
 </template>
 
 <style lang="scss">
-.ProjectDownloader-root {
-  width: 100%;
-  height: 100px;
+@import "~variables";
+.expanded-project-downloader {
+  padding: 10px 16px 25px 16px;
+  background: $amarex_secondary_mid;
+  .button-overview {
+    cursor: pointer;
+    gap: 8px;
+    margin-bottom: 8px;
+  }
+  & > p {
+    margin-bottom: 16px;
+  }
+  .description {
+    overflow: hidden;
+    color: $amarex_grey_dark;
+    font-family: Arial;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 16px;
+    user-select: none;
+  }
 }
 </style>
+

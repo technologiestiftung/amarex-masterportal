@@ -44,6 +44,14 @@ export default {
     maxSwaleConnected: 0,
     maxGreenRoofToRoof: 0,
     maxSwaleConnectedToPvd: 0,
+
+    targetValueGreenRoof: 0,
+    targetValueUnsealed: 0,
+    targetValueSwaleConnected: 0,
+
+    initialTargetValueGreenRoof: 0,
+    initialTargetValueUnsealed: 0,
+    initialTargetValueSwaleConnected: 0,
   },
 
   areaTypesData: [
@@ -65,6 +73,7 @@ export default {
   ],
   preComputedModelsShown: false,
   preComputedModels: [],
+  visiblePreComputedModelIDs: [],
   preComputedModelsAdded: false,
   preComputedStats: {
     deltaW: 0,
@@ -104,5 +113,7 @@ export default {
     totalSwaleVolume: 0,
     totalSwaleConnectedArea: 0,
   },
+  dataResultCalc: [],
+  dataPreComputedCalc: [],
 };
 

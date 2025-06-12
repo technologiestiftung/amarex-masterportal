@@ -71,30 +71,31 @@ export default {
       "preComputedModels",
       "preComputedModelsShown",
       "selectedThemeMap",
+      "visiblePreComputedModelIDs",
     ]),
   },
   mounted() {
     this.setPreComputedModelsShown(true);
-
     if (this.preComputedModels.length === 0) {
       this.setPreComputedModels(
         this.allLayerConfigs.filter(
           (layer) =>
-            layer.id === "delta_w_2025_wfs" ||
-            layer.id === "abimo_2025_wfs:evaporatio" ||
-            layer.id === "abimo_2025_wfs:surface_ru" ||
-            layer.id === "abimo_2025_wfs:infiltrati",
+            layer.id === "delta_w_2025_wms" ||
+            layer.id === "abimo_2025_wms:evaporatio" ||
+            layer.id === "abimo_2025_wms:surface_ru" ||
+            layer.id === "abimo_2025_wms:infiltrati",
         ),
       );
-      this.preComputedModels.forEach((layer) => {
-        const isLayerVisible = layer.visibility;
-        if (!isLayerVisible) {
-          this.changeVisibility({ layerId: layer.id, value: true });
-        }
-      });
-      // this.preComputedModels.find(
-      //   (layer) => layer.id === "delta_w_2025_wfs",
-      // ).visibility = true;
+      if (
+        this.visiblePreComputedModelIDs &&
+        this.visiblePreComputedModelIDs.length > 0
+      ) {
+        this.visiblePreComputedModelIDs.forEach((model) => {
+          this.changeVisibility({ layerId: model, value: true });
+        });
+      } else {
+        this.changeVisibility({ layerId: "delta_w_2025_wms", value: true });
+      }
     }
   },
 };

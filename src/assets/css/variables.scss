@@ -195,6 +195,12 @@ $tool_box_shadow: 0 6px 12px rgba(0, 0, 0, 0.176);
       width: 100%;
     }
   }
+  &.full-with-icon {
+    width: 100%;
+    p {
+      width: fit-content;
+    }
+  }
   &.deactivated {
     background: $amarex_grey_light !important;
     cursor: not-allowed !important;
