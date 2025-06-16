@@ -71,20 +71,58 @@ export default {
      * @returns {Promise}
      */
     async prepareConfigForDownload() {
-      const layerConfig = this.layerConfig,
-        portalConfig = this.portalConfig,
-        mapView = await mapCollection.getMapView("2D");
+      const layerConfig = JSON.parse(JSON.stringify(this.layerConfig));
+
+      const portalConfig = this.portalConfig;
+      const mapView = await mapCollection.getMapView("2D");
+
+      const layersToShowAndMakeVisible = [
+        "abimo_result_delta_w",
+        "abimo_result_evaporation",
+        "abimo_result_infiltration",
+        "abimo_result_surface_run_off",
+      ];
+
+      function updateLayerProperties(elements, targetLayerIds) {
+        if (!elements || !Array.isArray(elements)) {
+          return;
+        }
+
+        for (const element of elements) {
+          if (element.type === "layer") {
+            if (targetLayerIds.includes(element.id)) {
+              element.showInLayerTree = true;
+              element.visibility = true;
+            }
+          } else if (element.type === "folder" && element.elements) {
+            updateLayerProperties(element.elements, targetLayerIds);
+          }
+        }
+      }
 
       try {
         portalConfig.map.mapView.startZoomLevel = mapView.getZoom();
         portalConfig.map.mapView.startCenter = mapView.getCenter();
+
+        if (layerConfig.baselayer && layerConfig.baselayer.elements) {
+          updateLayerProperties(
+            layerConfig.baselayer.elements,
+            layersToShowAndMakeVisible,
+          );
+        }
+        if (layerConfig.subjectlayer && layerConfig.subjectlayer.elements) {
+          updateLayerProperties(
+            layerConfig.subjectlayer.elements,
+            layersToShowAndMakeVisible,
+          );
+        }
 
         this.configToExport = {
           portalConfig,
           layerConfig,
         };
       } catch (error) {
-        console.error(error);
+        console.error("[ProjectDownloader] Error preparing config:", error);
       }
     },
     /**
@@ -117,10 +155,6 @@ export default {
 
       try {
         layerCollectionData.forEach((layer) => {
-          // Skip layers not shown in layer tree
-          if (!layer.attributes.showInLayerTree) {
-            return;
-          }
 
           const layerID = layer.get("id");
 

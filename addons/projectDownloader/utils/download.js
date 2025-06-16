@@ -32,30 +32,37 @@ function reprojectCoordinates(coordinates, sourceProj, destProj, geometryType) {
 function getMeasureTypeFromFeature(measure) {
   if (!Array.isArray(measure?.style_)) return null;
 
-  const keywords = ["swale", "greenroof", "unpvd"];
+  const keywords = ["swale", "greenroof", "unpvd"]; // lowercase in URL
   const iconUrls = {
     swale:
       "https://amarex-webtool.technologiestiftung-berlin.de/amarex/resources/img/measure-swale.svg",
+    // URL hat lowercase
     greenroof:
       "https://amarex-webtool.technologiestiftung-berlin.de/amarex/resources/img/measure-greenroof.svg",
     unpvd:
       "https://amarex-webtool.technologiestiftung-berlin.de/amarex/resources/img/measure-unpvd.svg",
   };
 
+  // Mapping von URL-keyword zu measureType
+  const typeMapping = {
+    swale: "swale",
+    greenroof: "greenRoof", // URL hat lowercase, aber measureType ist camelCase
+    unpvd: "unpvd",
+  };
+
   for (const style of measure.style_) {
     const image = style?.image_;
     const src = image?.iconImage_?.src_;
     if (typeof src === "string") {
-      const keyword = keywords.find((k) => src.toLowerCase().includes(k));
+      const keyword = keywords.find((k) => src.includes(k));
       if (keyword)
         return {
-          measureType: keyword,
+          measureType: typeMapping[keyword], // Verwende Mapping
           iconUrl: iconUrls[keyword] || null,
           iconSize: [50, 50],
         };
     }
   }
-
   return null;
 }
 
