@@ -121,42 +121,29 @@ export default {
      */
     async handleAbimoConfigFile(abimoConfigFileContent) {
 
-      mapCollection
-        .getMap("2D")
-        .getLayers()
-        .getArray()
-        .find((layer) => layer.get("id") === "planung_abimo")
-        .values_.source.clear();
-      mapCollection
-        .getMap("2D")
-        .getLayers()
-        .getArray()
-        .find((layer) => layer.get("id") === "abimo_result_infiltration")
-        .values_.source.clear();
-      mapCollection
-        .getMap("2D")
-        .getLayers()
-        .getArray()
-        .find((layer) => layer.get("id") === "abimo_result_evaporation")
-        .values_.source.clear();
-      mapCollection
-        .getMap("2D")
-        .getLayers()
-        .getArray()
-        .find((layer) => layer.get("id") === "abimo_result_surface_run_off")
-        .values_.source.clear();
-      mapCollection
-        .getMap("2D")
-        .getLayers()
-        .getArray()
-        .find((layer) => layer.get("id") === "abimo_result_delta_w")
-        .values_.source.clear();
-      mapCollection
-        .getMap("2D")
-        .getLayers()
-        .getArray()
-        .find((layer) => layer.get("id") === "abimo_measures")
-        .values_.source.clear();
+      const layerIdsToClear = [
+        "planung_abimo",
+        "abimo_result_infiltration",
+        "abimo_result_evaporation",
+        "abimo_result_surface_run_off",
+        "abimo_result_delta_w",
+        "abimo_measures",
+      ];
+
+      const layers = mapCollection.getMap("2D").getLayers().getArray();
+
+      layerIdsToClear.forEach((id) => {
+        const layer = layers.find((l) => l.get("id") === id);
+
+        if (
+          layer &&
+          typeof layer.getSource === "function" &&
+          typeof layer.getSource().clear === "function"
+        ) {
+          layer.getSource().clear();
+        }
+      });
+
       this.setSelectedFeatures([]);
       this.setNewGreenRoof(null);
       this.setNewUnpvd(null);
