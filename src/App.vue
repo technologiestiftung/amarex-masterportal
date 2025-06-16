@@ -281,6 +281,18 @@ export default {
         flex-grow: 1;
     }
 }
+@include media-breakpoint-down(lg)  {
+    .elements-positioned-over-map {
+        z-index: 10;
+        width: 100vh;
+        *:not(footer) {
+            display: none !important;
+        }
+    }
+    #map-wrapper {
+        display: none !important;
+    }
+}
 </style>
 
 <style lang="scss">
