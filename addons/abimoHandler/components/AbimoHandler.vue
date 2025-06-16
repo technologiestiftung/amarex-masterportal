@@ -261,16 +261,32 @@ export default {
     currentStepIndex() {
       return this.currentStepSequence.indexOf(this.activeStep);
     },
+    managedLayerIds() {
+      return [
+        "rabimo_input_2025",
+        "planung_abimo",
+        "abimo_measures",
+        "abimo_result_infiltration",
+        "abimo_result_evaporation",
+        "abimo_result_surface_run_off",
+        "abimo_result_delta_w",
+        "abimo_2025_wfs:preCompute",
+        "delta_w_2025_wfs:preCompute",
+      ];
+    },
   },
   watch: {
-    activeStep() {
-      const contentContainerRef = this.$refs.contentContainerRef;
-      if (contentContainerRef) {
-        contentContainerRef.scrollTo({
-          top: 0,
-          behavior: "smooth",
-        });
-      }
+    activeStep: {
+      handler(newStep) {
+        if (newStep !== 7) {
+          this.setManagedLayersVisibility(true);
+        }
+        const contentContainerRef = this.$refs.contentContainerRef;
+        if (contentContainerRef) {
+          contentContainerRef.scrollTo({ top: 0, behavior: "smooth" });
+        }
+      },
+      immediate: true,
     },
     calcState(state) {
       if (state === "isCalculated") {
@@ -279,51 +295,9 @@ export default {
       }
     },
   },
-  mounted() {
-    if (this.activeStep !== 7) {
-      this.allLayerConfigs
-        .filter(
-          (layer) =>
-            layer.id === "rabimo_input_2025" ||
-            layer.id === "planung_abimo" ||
-            layer.id === "abimo_measures" ||
-            layer.id === "abimo_result_infiltration" ||
-            layer.id === "abimo_result_evaporation" ||
-            layer.id === "abimo_result_surface_run_off" ||
-            layer.id === "abimo_result_delta_w" ||
-            layer.id === "abimo_2025_wfs:preCompute" ||
-            layer.id === "delta_w_2025_wfs:preCompute",
-        )
-        .forEach((layer) => {
-          const isLayerVisible = layer.visibility;
-          if (!isLayerVisible) {
-            this.changeVisibility({ layerId: layer.id, value: true });
-          }
-        });
-    }
-  },
   unmounted() {
-    if (this.selectedFeatures.length === 0 || this.activeStep === 7) {
-      this.allLayerConfigs
-        .filter(
-          (layer) =>
-            layer.id === "rabimo_input_2025" ||
-            layer.id === "planung_abimo" ||
-            // FIXME: question: should result layers be visible when changing steps
-            // layer.id === "abimo_measures" ||
-            // layer.id === "abimo_result_infiltration" ||
-            // layer.id === "abimo_result_evaporation" ||
-            // layer.id === "abimo_result_surface_run_off" ||
-            // layer.id === "abimo_result_delta_w" ||
-            layer.id === "abimo_2025_wfs:preCompute" ||
-            layer.id === "delta_w_2025_wfs:preCompute",
-        )
-        .forEach((layer) => {
-          const isLayerVisible = layer.visibility;
-          if (isLayerVisible) {
-            this.changeVisibility({ layerId: layer.id, value: false });
-          }
-        });
+    if (this.activeStep !== 7) {
+      this.setManagedLayersVisibility(false);
     }
   },
   methods: {
@@ -390,6 +364,18 @@ export default {
     },
     isStepClickable(displayIndex) {
       return displayIndex < this.currentStepIndex;
+    },
+    setManagedLayersVisibility(shouldBeVisible) {
+      this.allLayerConfigs
+        .filter((layer) => this.managedLayerIds.includes(layer.id))
+        .forEach((layer) => {
+          if (layer.visibility !== shouldBeVisible) {
+            this.changeVisibility({
+              layerId: layer.id,
+              value: shouldBeVisible,
+            });
+          }
+        });
     },
     resetAbimoCalculation() {
       mapCollection
