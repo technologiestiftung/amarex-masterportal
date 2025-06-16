@@ -3,6 +3,7 @@ import { mapActions, mapGetters, mapMutations } from "vuex";
 import FileUpload from "../../../src/shared/modules/inputs/components/FileUpload.vue";
 import JSZip from "jszip";
 import layerCollection from "../../../src/core/layers/js/layerCollection.js";
+import mapCollection from "../../../src/core/maps/js/mapCollection";
 import colors from "../../../src/shared/js/utils/amarex-colors.json";
 import { FileIcon, LoaderCircle, Trash2 } from "lucide-vue-next";
 
@@ -88,6 +89,18 @@ export default {
       "setAccumulatedAbimoStats",
       "setAreaTypesData",
       "setIsMeasurePlanning",
+      "setSelectedFeatures",
+      "setNewGreenRoof",
+      "setNewUnpvd",
+      "setNewToSwale",
+      "setSelectInteraction",
+      "setResetTargetValues",
+      "setBlockAreaConfirmed",
+      "setResultLayers",
+      "setSelectedMeasures",
+      "setHasMeasures",
+      "setDataResultCalc",
+      "setDataPreComputedCalc",
     ]),
 
     /**
@@ -101,13 +114,63 @@ export default {
         }
       });
     },
-
     /**
      * Unzip file
      * @param {abimoConfigFileContent} content of the abimo config file
      * @returns {void}
      */
     async handleAbimoConfigFile(abimoConfigFileContent) {
+
+      mapCollection
+        .getMap("2D")
+        .getLayers()
+        .getArray()
+        .find((layer) => layer.get("id") === "planung_abimo")
+        .values_.source.clear();
+      mapCollection
+        .getMap("2D")
+        .getLayers()
+        .getArray()
+        .find((layer) => layer.get("id") === "abimo_result_infiltration")
+        .values_.source.clear();
+      mapCollection
+        .getMap("2D")
+        .getLayers()
+        .getArray()
+        .find((layer) => layer.get("id") === "abimo_result_evaporation")
+        .values_.source.clear();
+      mapCollection
+        .getMap("2D")
+        .getLayers()
+        .getArray()
+        .find((layer) => layer.get("id") === "abimo_result_surface_run_off")
+        .values_.source.clear();
+      mapCollection
+        .getMap("2D")
+        .getLayers()
+        .getArray()
+        .find((layer) => layer.get("id") === "abimo_result_delta_w")
+        .values_.source.clear();
+      mapCollection
+        .getMap("2D")
+        .getLayers()
+        .getArray()
+        .find((layer) => layer.get("id") === "abimo_measures")
+        .values_.source.clear();
+      this.setSelectedFeatures([]);
+      this.setNewGreenRoof(null);
+      this.setNewUnpvd(null);
+      this.setNewToSwale(null);
+      this.setSelectInteraction(null);
+      this.setResetTargetValues(true);
+      this.setBlockAreaConfirmed(false);
+      this.setResultLayers([]);
+      this.setSelectedMeasures([]);
+      this.setHasMeasures(false);
+      this.setDataResultCalc([]);
+      this.setDataPreComputedCalc([]);
+      this.setPreComputedModels([]);
+
       const abimoConfig = JSON.parse(abimoConfigFileContent);
 
       if (abimoConfig.preComputedModelsAdded) {
