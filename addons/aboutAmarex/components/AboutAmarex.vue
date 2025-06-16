@@ -92,8 +92,18 @@ export default {
 <template lang="html">
   <div class="about-amarex-container">
     <div class="about-amarex">
+      <div id="mobile-info">
+        <img
+          src="../../../portal/amarex/resources/img/amarex_logo_webtool.png"
+          alt="Anpassung des Managements von Regenwasser an Extremereignisse"
+        />
+        <h2 class="title">Mobile Version</h2>
+        <p class="mb-4">
+          Das Amarex Webtool ist nur für die Nutzung auf dem Desktop vorgesehen,
+          damit alle Funktionen vollumfänglich genutzt werden können.
+        </p>
+      </div>
       <h2 class="title">Über Amarex</h2>
-
       <p class="mb-4">
         Das
         <a
@@ -255,6 +265,21 @@ ul li a img {
   font-size: 16px;
   font-weight: 700;
   line-height: 32px;
+}
+
+#mobile-info {
+  img {
+    width: 100%;
+    max-width: 300px;
+    height: auto;
+    margin-bottom: 16px;
+  }
+}
+
+@include media-breakpoint-up(lg) {
+  #mobile-info {
+    display: none !important;
+  }
 }
 </style>
 

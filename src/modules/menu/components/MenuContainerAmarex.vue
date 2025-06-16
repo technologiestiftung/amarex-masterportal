@@ -354,4 +354,22 @@ export default {
   padding-top: 24px;
   border-top: 1px solid $amarex_grey_light;
 }
+
+@include media-breakpoint-down(lg)  {
+    .mp-mainMenu {
+        display: none !important;
+    }
+    .mp-secondaryMenu {
+      position: fixed;
+      width: 100vw !important;
+      left: 0 !important;
+      top: 0 !important;
+      height: 100vh !important;
+      max-width: 100vw !important;
+      .mp-menu-body-collapsed {
+        display: flex !important;
+      }
+    }
+}
+
 </style>
