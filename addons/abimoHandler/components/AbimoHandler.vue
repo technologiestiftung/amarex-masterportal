@@ -504,7 +504,7 @@ export default {
           (!preComputedModelsAdded || !preComputedModelsShown)
         "
         :style="{
-          marginBottom: '48px',
+          marginBottom: '32px',
         }"
       >
         <p class="title">Informationen zum Modell</p>
@@ -515,17 +515,13 @@ export default {
           }"
         >
           Weitere Information zum Wasserhaushaltsmodell finden Sie im
-          Umweltatlas Berlin.
+          <a
+            href="https://www.berlin.de/umweltatlas/wasser/wasserhaushalt/2022/zusammenfassung/"
+            target="_blank"
+            rel="noopener noreferrer"
+            >Umweltatlas Berlin.</a
+          >
         </p>
-        <a
-          href="https://www.berlin.de/umweltatlas/wasser/wasserhaushalt/2022/zusammenfassung/"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <button class="amarex-btn-primary full accent">
-            <p>Informationen zum Wasserhaushaltsmodell</p>
-          </button>
-        </a>
       </div>
 
       <span
