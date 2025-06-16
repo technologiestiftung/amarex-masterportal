@@ -284,7 +284,7 @@ export default {
 @include media-breakpoint-down(lg)  {
     .elements-positioned-over-map {
         z-index: 10;
-        width: 100vh;
+        width: 100vw;
         *:not(footer) {
             display: none !important;
         }
