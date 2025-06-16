@@ -280,28 +280,30 @@ export default {
     },
   },
   mounted() {
-    this.allLayerConfigs
-      .filter(
-        (layer) =>
-          layer.id === "rabimo_input_2025" ||
-          layer.id === "planung_abimo" ||
-          layer.id === "abimo_measures" ||
-          layer.id === "abimo_result_infiltration" ||
-          layer.id === "abimo_result_evaporation" ||
-          layer.id === "abimo_result_surface_run_off" ||
-          layer.id === "abimo_result_delta_w" ||
-          layer.id === "abimo_2025_wfs:preCompute" ||
-          layer.id === "delta_w_2025_wfs:preCompute",
-      )
-      .forEach((layer) => {
-        const isLayerVisible = layer.visibility;
-        if (!isLayerVisible) {
-          this.changeVisibility({ layerId: layer.id, value: true });
-        }
-      });
+    if (this.activeStep !== 7) {
+      this.allLayerConfigs
+        .filter(
+          (layer) =>
+            layer.id === "rabimo_input_2025" ||
+            layer.id === "planung_abimo" ||
+            layer.id === "abimo_measures" ||
+            layer.id === "abimo_result_infiltration" ||
+            layer.id === "abimo_result_evaporation" ||
+            layer.id === "abimo_result_surface_run_off" ||
+            layer.id === "abimo_result_delta_w" ||
+            layer.id === "abimo_2025_wfs:preCompute" ||
+            layer.id === "delta_w_2025_wfs:preCompute",
+        )
+        .forEach((layer) => {
+          const isLayerVisible = layer.visibility;
+          if (!isLayerVisible) {
+            this.changeVisibility({ layerId: layer.id, value: true });
+          }
+        });
+    }
   },
   unmounted() {
-    if (this.selectedFeatures.length === 0) {
+    if (this.selectedFeatures.length === 0 || this.activeStep === 7) {
       this.allLayerConfigs
         .filter(
           (layer) =>
