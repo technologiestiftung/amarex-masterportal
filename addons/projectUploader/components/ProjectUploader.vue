@@ -3,10 +3,9 @@ import { mapActions, mapGetters, mapMutations } from "vuex";
 import FileUpload from "../../../src/shared/modules/inputs/components/FileUpload.vue";
 import JSZip from "jszip";
 import layerCollection from "../../../src/core/layers/js/layerCollection.js";
+import mapCollection from "../../../src/core/maps/js/mapCollection";
 import colors from "../../../src/shared/js/utils/amarex-colors.json";
 import { FileIcon, LoaderCircle, Trash2 } from "lucide-vue-next";
-import Feature from "ol/Feature";
-import Point from "ol/geom/Point";
 
 /**
  * Project Uploader
@@ -90,6 +89,18 @@ export default {
       "setAccumulatedAbimoStats",
       "setAreaTypesData",
       "setIsMeasurePlanning",
+      "setSelectedFeatures",
+      "setNewGreenRoof",
+      "setNewUnpvd",
+      "setNewToSwale",
+      "setSelectInteraction",
+      "setResetTargetValues",
+      "setBlockAreaConfirmed",
+      "setResultLayers",
+      "setSelectedMeasures",
+      "setHasMeasures",
+      "setDataResultCalc",
+      "setDataPreComputedCalc",
     ]),
 
     /**
@@ -103,38 +114,50 @@ export default {
         }
       });
     },
-
-    deserializeFeatures(features) {
-      if (!features) return;
-
-      return features
-        .map((f) => {
-          let geometry;
-          switch (f.geometryType) {
-            case "Point":
-              geometry = new Point(f.geometry);
-              break;
-            // Add more geometry types here as needed
-            default:
-              return null;
-          }
-
-          const feature = new Feature(
-            geometry.transform("EPSG:4326", "EPSG:3857"),
-          );
-          feature.setProperties(f);
-          feature.unset("geometry");
-          return feature;
-        })
-        .filter(Boolean);
-    },
-
     /**
      * Unzip file
      * @param {abimoConfigFileContent} content of the abimo config file
      * @returns {void}
      */
     async handleAbimoConfigFile(abimoConfigFileContent) {
+
+      const layerIdsToClear = [
+        "planung_abimo",
+        "abimo_result_infiltration",
+        "abimo_result_evaporation",
+        "abimo_result_surface_run_off",
+        "abimo_result_delta_w",
+        "abimo_measures",
+      ];
+
+      const layers = mapCollection.getMap("2D").getLayers().getArray();
+
+      layerIdsToClear.forEach((id) => {
+        const layer = layers.find((l) => l.get("id") === id);
+
+        if (
+          layer &&
+          typeof layer.getSource === "function" &&
+          typeof layer.getSource().clear === "function"
+        ) {
+          layer.getSource().clear();
+        }
+      });
+
+      this.setSelectedFeatures([]);
+      this.setNewGreenRoof(null);
+      this.setNewUnpvd(null);
+      this.setNewToSwale(null);
+      this.setSelectInteraction(null);
+      this.setResetTargetValues(true);
+      this.setBlockAreaConfirmed(false);
+      this.setResultLayers([]);
+      this.setSelectedMeasures([]);
+      this.setHasMeasures(false);
+      this.setDataResultCalc([]);
+      this.setDataPreComputedCalc([]);
+      this.setPreComputedModels([]);
+
       const abimoConfig = JSON.parse(abimoConfigFileContent);
 
       if (abimoConfig.preComputedModelsAdded) {
@@ -150,7 +173,7 @@ export default {
       await this.updatePreComputedStats(abimoConfig.dataPreComputedCalc);
       await this.updateMeasureStats(abimoConfig.accumulatedMeasureStats);
 
-      this.setIsMeasurePlanning(abimoConfig.isMeasurePlaning);
+      this.setIsMeasurePlanning(abimoConfig.isMeasurePlanning);
       this.setAreaTypesData(abimoConfig.areaTypesData);
       this.setSelectedCount(abimoConfig.selectedCount);
       this.setPreComputedModelsShown(abimoConfig.preComputedModelsShown);

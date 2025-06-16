@@ -103,4 +103,10 @@ export default {
         display: none;
     }
 
+    @include media-breakpoint-down(lg)  {
+        .menu-toggle-button {
+            display: none !important;
+        }
+    }
+
 </style>

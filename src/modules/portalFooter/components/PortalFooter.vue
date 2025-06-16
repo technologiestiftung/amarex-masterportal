@@ -177,5 +177,10 @@ export default {
             width: calc( 100% + 94.5px); // zweimal den Menucollapse-Button...
         }
     }
+    @include media-breakpoint-down(lg)  {
+        .portal-footer {
+            gap: 0.5rem !important;
+        }
+    }
 
 </style>

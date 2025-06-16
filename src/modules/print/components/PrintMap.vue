@@ -13,7 +13,7 @@ import layerCollection from "../../../core/layers/js/layerCollection";
 import SpinnerItem from "../../../shared/modules/spinner/components/SpinnerItem.vue";
 
 import colors from "../../../shared/js/utils/amarex-colors.json";
-import { Info as InfoIcon, FileDown, LoaderCircle } from "lucide-vue-next";
+import { Info as InfoIcon, FileDown, LoaderCircle, Check } from "lucide-vue-next";
 import { getReport } from "../api/getReport";
 import measureCalculations from "../../../../addons/abimoHandler/utils/measureCalculations";
 
@@ -33,7 +33,8 @@ export default {
         SpinnerItem, 
         InfoIcon,
         FileDown,
-        LoaderCircle
+        LoaderCircle,
+        Check
     },
     data () {
         return {
@@ -48,6 +49,7 @@ export default {
             },
             reportLoading: false,
             warning: null,
+            downloaded: false,
             measureCalculations,
             showTestingBTN: false
         };
@@ -531,9 +533,13 @@ export default {
 
 
             try {
-                await getReport(payload, "_blank"); // "_blank" | undefined => _blank opens the pdf in new tab | undefined downloads the pdf
+                await getReport(payload); // "_blank" | undefined => _blank opens the pdf in new tab | undefined downloads the pdf
                 this.reportLoading = false;
                 this.setFileDownloads([]);
+                this.downloaded = true;
+                setTimeout(() => {
+                    this.downloaded = false;
+                }, 5000);
                 return;
             } catch (error) {
                 this.reportLoading = false;
@@ -621,6 +627,16 @@ export default {
                 :size="24"
             />
             <p class="title">Ihr Report wird erstellt...</p>
+        </span>
+        <span
+            v-if="downloaded"
+            class="d-flex align-items-center mt-2 gap-2"
+        >
+            <Check
+                :color="colors.amarex_green"
+                :size="24"
+            />
+            <p class="title">Report wurde heruntergeladen</p>
         </span>
     </div>
 </template>
