@@ -107,6 +107,14 @@ export default {
         Zusätzlich wird der beeinträchtigte urbane Wasserhaushalt als zentraler
         Bewertungsindikator für Wasserextreme überprüft.
       </p>
+      <p class="mb-4">
+        Das AMAREX-Webtool als Prototyp für Berlin unterstützt dabei, sich
+        besser auf Extremwetterereignisse wie Starkregen oder Trockenperioden
+        vorzubereiten. Es ermöglicht eine Bewertung von Maßnahmen des
+        dezentralen Regenwassermanagements im Hinblick auf ihren Einfluss auf
+        den urbanen Wasserhaushalt und liefert eine fundierte Grundlage für
+        klimaangepasste Planungsentscheidungen.
+      </p>
       <p class="mb-4">Laufzeit: Februar 2022 bis Juli 2025</p>
     </div>
 
