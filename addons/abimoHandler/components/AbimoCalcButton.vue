@@ -127,6 +127,8 @@ export default {
         },
       };
 
+      console.log("[AbimoCalcButton] payload::", payload);
+
       // add properties for each feature
       for (const feature of mapFeatures) {
         const properties = feature.getProperties();
