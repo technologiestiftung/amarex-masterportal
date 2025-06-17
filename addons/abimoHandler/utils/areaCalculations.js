@@ -65,11 +65,15 @@ const getMaxUnpaved = (areas) => calculatePrecisely(1 - getMeanRoof(areas));
 const getMaxUnpavedArea = (areas) => getMaxUnpaved(areas) * getTotalArea(areas);
 
 const getMaxSwaleConnected = (areas, newUnpvd) => {
+  const meanUnpaved = getMeanUnpaved(areas);
+
+  const pavedFromNew = calculatePrecisely(1 - newUnpvd);
+  const pavedFromMean = calculatePrecisely(1 - meanUnpaved);
+
   if (newUnpvd > 0) {
-    return calculatePrecisely(1 - newUnpvd);
-  } else {
-    return calculatePrecisely(1 - getMeanUnpaved(areas));
+    return Math.min(pavedFromNew, pavedFromMean);
   }
+  return pavedFromMean;
 };
 const getMaxSwaleConnectedArea = (areas) =>
   getMaxSwaleConnected(areas) * getTotalArea(areas);
@@ -150,7 +154,7 @@ function calculateResultStats(data) {
       infiltration: 0,
     };
   }
-  
+
   const totalArea = data.reduce((sum, item) => sum + item.area, 0);
   const getWeightedAverage = (fieldName) => {
     const weightedSum = data.reduce(
