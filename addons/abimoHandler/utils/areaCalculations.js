@@ -66,11 +66,10 @@ const getMaxUnpavedArea = (areas) => getMaxUnpaved(areas) * getTotalArea(areas);
 
 const getMaxSwaleConnected = (areas, newUnpvd) => {
   const meanUnpaved = getMeanUnpaved(areas);
-
-  const pavedFromNew = calculatePrecisely(1 - newUnpvd);
   const pavedFromMean = calculatePrecisely(1 - meanUnpaved);
 
   if (newUnpvd > 0) {
+    const pavedFromNew = calculatePrecisely(1 - newUnpvd);
     return Math.min(pavedFromNew, pavedFromMean);
   }
   return pavedFromMean;
