@@ -381,6 +381,9 @@ export default {
       }
     },
     changeCalcState(state) {
+      if (state === "loading" && this.activeStep === 5) {
+        this.$refs.componentRef?.updateAbimoData();
+      }
       this.calcState = state;
     },
     isStepActive(displayIndex) {
