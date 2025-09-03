@@ -176,11 +176,11 @@
             "id": "rwb-tool",
             "title": "RWB+ Tool",
             "description": "Tool Downloader",
-            "content": "Das RWB+ Tool ist ein Excel-Tool mit dem Sie für Ihr eigenes Untersuchungsgebiet abschätzen können, welchen Effekt Regenwasserbewirtschaftungsanlagen (RWBA) auf die Überflutungsminderung haben.<br><br>Als Eingangsdaten werden die Gesamtgebietsgröße, die Größe der Dachflächen und das Potenzial für die Umsetzung von RWBA im Gebiet benötigt.<br><br>Weitere Informationen zum RWB+ Tool finden Sie in der Excel-Datei und der dazugehörigen Anleitung.<br><br>Über die Download-Buttons können Sie die Excel-Datei und die zugehörige Anleitung herunterladen.",
+            "content": "Das RWB+ Tool ist eine Webanwendung mit der Sie für Ihr eigenes Untersuchungsgebiet abschätzen können, welchen Effekt Regenwasserbewirtschaftungsanlagen (RWBA) auf die Überflutungsminderung haben.<br><br>Als Eingangsdaten werden die Gesamtgebietsgröße, die Größe der Dachflächen und das Potenzial für die Umsetzung von RWBA im Gebiet benötigt.<br><br>Weitere Informationen zum RWB+ Tool finden Sie in der zugehörigen Anleitung.",
             "top-btn": {
-              "src": "./resources/tools/rwb-tool/RWB-Tool.xlsm",
-              "text": "RWB+ Tool herunterladen",
-              "alt": "RWB+ Tool herunterladen"
+              "src": "https://rwbplus.amarex-projekt.de/",
+              "text": "Zum RWB+ Tool",
+              "alt": "Zum RWB+ Tool"
             },
             "bottom-btn": {
               "src": "./resources/tools/rwb-tool/Anleitung-RWB-Tool.pdf",

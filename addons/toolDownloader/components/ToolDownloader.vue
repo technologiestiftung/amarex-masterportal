@@ -1,6 +1,6 @@
 <script>
 import { mapGetters } from "vuex";
-import { FileDown, BookOpen } from "lucide-vue-next";
+import { FileDown, BookOpen, ExternalLink } from "lucide-vue-next";
 import colors from "../../../src/shared/js/utils/amarex-colors.json";
 
 /**
@@ -12,6 +12,7 @@ export default {
   components: {
     FileDown,
     BookOpen,
+    ExternalLink,
   },
   data() {
     return {
@@ -88,7 +89,13 @@ export default {
           target="_blank"
           class="btn-link"
         >
+          <ExternalLink
+            v-if="currentTool.id === 'rwb-tool'"
+            :color="colors.secondary"
+            size="16"
+          />
           <FileDown
+            v-else
             :color="colors.secondary"
             size="16"
           />
