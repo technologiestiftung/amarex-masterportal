@@ -4,6 +4,7 @@ import mapCollection from "../../../src/core/maps/js/mapCollection";
 import AbimoSlider from "./AbimoSlider.vue";
 import Feature from "ol/Feature";
 import { Select } from "ol/interaction";
+import { Style, Fill, Stroke } from "ol/style";
 import { singleClick, never } from "ol/events/condition.js";
 
 /**
@@ -25,7 +26,6 @@ export default {
       "preselectedFeatures",
       "selectedCount",
       "isMeasurePlanning",
-      "preComputedStats",
     ]),
   },
   mounted() {
@@ -40,6 +40,19 @@ export default {
     if (this.preselectedFeatures.length > 0) {
       this.createPreselectSelection();
     }
+    if (
+      !this.blockAreaConfirmed ||
+      (!this.isMeasurePlanning && this.blockAreaConfirmed)
+    ) {
+      this.initHoverEffect();
+    }
+  },
+  watch: {
+    selectedFeatures(newVal) {
+      if (this.isMeasurePlanning && newVal.length > 0) {
+        this.removeCurrentlyHoveredFeature();
+      }
+    },
   },
   methods: {
     ...mapActions("Maps", {
@@ -57,6 +70,111 @@ export default {
       "setSelectedCount",
       "setPreselectedFeatures",
     ]),
+    removeHoverEffect() {
+      if (this.hoverListenerKey) {
+        const map = mapCollection.getMap("2D");
+        map.un("pointermove", this.hoverListenerKey);
+        this.hoverListenerKey = null;
+
+        map
+          .getLayers()
+          .getArray()
+          .forEach((layer) => {
+            if (layer && layer.get("id") === "rabimo_input_2025") {
+              const features = layer.getSource().getFeatures();
+              features.forEach((feature) => {
+                if (
+                  !this.selectInteraction
+                    ?.getFeatures()
+                    ?.getArray()
+                    ?.includes(feature)
+                ) {
+                  feature.setStyle(undefined);
+                }
+              });
+            }
+          });
+      }
+    },
+    initHoverEffect() {
+      if (this.hoverListenerKey) {
+        this.removeHoverEffect();
+      }
+
+      const map = mapCollection.getMap("2D");
+
+      const setOpacity = "0.3";
+      const selectedColor = "deep_pink";
+
+      const hoverColors = {
+        medium: {
+          full: "rgb(147, 112, 219)",
+          opacity: `rgba(147, 112, 219, ${setOpacity})`,
+        },
+        regular: {
+          full: "rgb(128, 0, 128)",
+          opacity: `rgba(128, 0, 128, ${setOpacity})`,
+        },
+        rebecca: {
+          full: "rgb(102, 51, 153)",
+          opacity: `rgba(102, 51, 153, ${setOpacity})`,
+        },
+        deep_pink: {
+          full: "rgb(255, 20, 147)",
+          opacity: `rgba(255, 20, 147, ${setOpacity})`,
+        },
+        hot_pink: {
+          full: "rgb(255, 105, 180)",
+          opacity: `rgba(255, 105, 180, ${setOpacity})`,
+        },
+        light_pink: {
+          full: "rgb(255, 182, 193)",
+          opacity: `rgba(255, 182, 193, ${setOpacity})`,
+        },
+        pink: {
+          full: "rgb(255, 192, 203)",
+          opacity: `rgba(255, 192, 203, ${setOpacity})`,
+        },
+      };
+
+      const hoverStyle = new Style({
+        stroke: new Stroke({
+          color: hoverColors[selectedColor].full,
+          width: 2,
+        }),
+        fill: new Fill({
+          color: hoverColors[selectedColor].opacity,
+        }),
+      });
+
+      let hoveredFeature = null;
+
+      this.hoverListenerKey = (event) => {
+        const selectedFeatures =
+          this.selectInteraction?.getFeatures()?.getArray?.() || [];
+
+        if (hoveredFeature && !selectedFeatures.includes(hoveredFeature)) {
+          hoveredFeature.setStyle(undefined);
+          hoveredFeature = null;
+        }
+
+        map.forEachFeatureAtPixel(event.pixel, (feature, layer) => {
+          if (
+            layer &&
+            layer.get("id") === "rabimo_input_2025" &&
+            !selectedFeatures.includes(feature)
+          ) {
+            if (hoveredFeature !== feature) {
+              hoveredFeature = feature;
+              hoveredFeature.setStyle(hoverStyle);
+            }
+            return true;
+          }
+        });
+      };
+
+      map.on("pointermove", this.hoverListenerKey);
+    },
     createPreselectSelection() {
       this.setSelectedFeatures([]);
       const selectedFeatures = this.selectInteraction.getFeatures();
@@ -92,6 +210,41 @@ export default {
       this.setPreselectedFeatures([]);
       this.updateAccumulatedStats();
     },
+    removeCurrentlyHoveredFeature() {
+      const map = mapCollection.getMap("2D");
+      map
+        .getLayers()
+        .getArray()
+        .forEach((layer) => {
+          if (layer && layer.get("id") === "rabimo_input_2025") {
+            const features = layer.getSource().getFeatures();
+            features.forEach((feature) => {
+              if (
+                !this.selectInteraction
+                  ?.getFeatures()
+                  ?.getArray()
+                  ?.includes(feature)
+              ) {
+                feature.setStyle(undefined);
+              }
+            });
+          }
+        });
+    },
+    removeHardCurrentlyHoveredFeature() {
+      const map = mapCollection.getMap("2D");
+      map
+        .getLayers()
+        .getArray()
+        .forEach((layer) => {
+          if (layer && layer.get("id") === "rabimo_input_2025") {
+            const features = layer.getSource().getFeatures();
+            features.forEach((feature) => {
+              feature.setStyle(undefined);
+            });
+          }
+        });
+    },
     createInteractions: function () {
       // From open layers we imported the Select class. This adds the possibility to add "blocks" to our feature layer. For further info check OpenLayers Docs
       const selectInteraction = new Select({
@@ -112,6 +265,7 @@ export default {
       selectInteraction.on("select", (event) => {
         if (this.isMeasurePlanning && event.selected.length > 0) {
           const currentFeatures = [...this.selectedFeatures];
+
           currentFeatures.forEach((feature) => {
             const featureCode = feature.values_.code;
             const layer = mapCollection
@@ -262,6 +416,12 @@ export default {
         this.addSelectedFeatures();
       }
     },
+  },
+  unmounted() {
+    this.removeHoverEffect();
+    setTimeout(() => {
+      this.removeHardCurrentlyHoveredFeature();
+    }, 100);
   },
 };
 </script>
