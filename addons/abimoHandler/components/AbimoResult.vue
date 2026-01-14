@@ -35,6 +35,7 @@ export default {
       "resultAbimoStats",
       "resultLayers",
       "preComputedStats",
+      "isMeasurePlanning",
     ]),
   },
   mounted() {
@@ -44,6 +45,7 @@ export default {
       // result layers
       let resultLayers = this.allLayerConfigs.filter(
         (layer) =>
+          (layer.id === "abimo_measures" && this.isMeasurePlanning) ||
           layer.id === "abimo_result_delta_w" ||
           layer.id === "abimo_result_surface_run_off" ||
           layer.id === "abimo_result_infiltration" ||
